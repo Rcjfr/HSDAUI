@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AlertsComponent } from "app/alerts/alerts.component";
+import { AlertDetailComponent } from "app/alert-detail/alert-detail.component";
+
+const routes: Routes = [
+  {
+    path: 'alerts', component: AlertsComponent,
+    children: []
+  },
+  {
+    path: 'alerts/:id', component: AlertDetailComponent,
+    children: []
+  },
+  { path: '', redirectTo: 'alerts', pathMatch: 'full' },
+  { path: '*', redirectTo: 'alerts', pathMatch: 'full'}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

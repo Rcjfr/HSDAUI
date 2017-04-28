@@ -1,0 +1,89 @@
+﻿@import "../../../../less/variables-aa";
+
+/*************************************************************
+// OFF-CANVAS MENU STYLES
+*************************************************************/
+@navbar-aa-height: 55px;
+@navbar-aa-icon-width: 20px;
+@zindex-navbar: 1;
+
+.aa-brand {
+  font-size: 22px;
+  height:50px;
+  width:324px;
+  background: url('../../../assets/AALogo.png');
+  background-size: 324px 50px;
+  background-repeat: no-repeat;
+  // padding-right: 590px;
+  // padding-bottom: 82px;
+  margin: 5px;
+  img {
+    display: inline;
+  }
+}
+
+.navbar-aa {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: @navbar-aa-height;
+  width: 100%;
+  z-index: @zindex-navbar;
+
+  .logo {
+    position: relative;
+    top: 5px;
+    font-weight: 400;
+    font-size: 21px;
+
+    img {
+      position: relative;
+      top: -5px;
+      left: -2px;
+      height: 30px;
+      margin-top: 5px;
+    }
+  }
+
+  .hamburger {
+    position: relative;
+    float: left;
+    padding-top: 15px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: transparent;
+  }
+
+  .icon-bar {
+    width: 22px;
+    height: 2px;
+    display: block;
+    border-radius: 1px;
+    border: 1px outset @aa-gray;
+  }
+
+  .icon-bar + .icon-bar {
+    margin-top: 4px;
+  }
+
+  ul > li > span.clock {
+    padding-top: 15px;
+    padding-left: 20px;
+    display: block;
+  }
+
+  ul > li.active {
+    border-bottom: 4px solid @aa-blue;
+    background-color: @aa-ultra-light-gray;
+    margin-bottom: -4px;
+  }
+
+  .container-fluid {
+    background-color: #fff;
+    border-bottom: 4px solid @aa-light-gray;
+  }
+}
+
+.site-content {
+  padding-top: 10px;
+}
