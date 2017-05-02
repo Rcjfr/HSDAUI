@@ -1,3 +1,103 @@
-<p>
-  alert-detail works!
-</p>
+﻿<h2>Create new SDA</h2>
+<pre>
+  {{sdaId.invalid }}
+</pre>
+<form  #alertForm="ngForm" novalidate>
+  <div class="panel panel-default">
+    <div class="panel-heading">General Information</div>
+    <div class="panel-body">
+      <div class="row form-group">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="sdrNumber">SDR Number:</label>
+            <div class="contrls col-sm-9">
+              <input #sdrNumber="ngModel" type="text" class="form-control" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>
+        <aac-checkbox [checkboxState]="lineMaintenance" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>
+            Line Maintenance
+        </label>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="sdaCreateDate">Create Date: <span class="req">*</span></label>
+            <div class="col-sm-9">
+              <div class="input-group date" data-provide="datepicker">
+                <input #sdaCreateDate="ngModel" type="text" class="form-control" name="sdaCreateDate" id="sdaCreateDate" required [(ngModel)]="alert.createDate">
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-th"></span>
+                </div>
+              </div>
+              <span *ngIf="sdaCreateDate.invalid && sdaCreateDate.dirty" class="alert alert-danger">Create Date is required.</span>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
+            <div class="col-sm-9">
+              <select #sdaAlertCode="ngModel" class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
+                <option value="">Select Alert Code</option>
+                <option>A - Significant Structure Defect</option>
+                <option>B - Significant Structure Corrosion</option>
+                <option>C - Ground Damage</option>
+                <option>Other-Bird Strike,Lightning Strike, etc</option>
+            </select>
+            <span *ngIf="sdaAlertCode.invalid && sdaAlertCode.dirty" class="error">Alert Code is required.</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="sdaId">SDA ID: <span class="req">*</span></label>
+            <div class="col-sm-9">
+              <input type="text" #sdaId="ngModel" class="form-control" name="sdaId" id="sdaId" required placeholder="" [(ngModel)]="alert.sdaId">
+            <span *ngIf="sdaId.invalid && sdaId.dirty" class="error">SDA ID is required.</span>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="ATACode1">ATA Code 1: <span class="req">*</span></label>
+            <div class="col-sm-9">
+              <select #ataCode1="ngModel" class="form-control" name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
+            <option value="">Select ATA Code 1</option>
+            <option *ngFor="let ac of ataCode1s$ | async">{{ac}}</option>
+          </select>
+            <span *ngIf="ataCode1.invalid && ataCode1.dirty" class="error">ATA Code 1 is required.</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6">
+          &nbsp;
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="ATACode2">ATA Code 2: <span class="req">*</span></label>
+            <div class="col-sm-9">
+              <select #ataCode2="ngModel" class="form-control" name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
+            <option value="">Select ATA Code 2</option>
+            <option *ngFor="let ac of ataCode2s$ | async">{{ac}}</option>
+          </select>
+          <span *ngIf="ataCode2.invalid && ataCode2.dirty" class="error">ATA Code 2 is required.</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

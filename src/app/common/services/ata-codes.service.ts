@@ -1,0 +1,17 @@
+﻿import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import { Observable } from 'rxjs/Observable';
+import { ATACode } from '../models/ata-code.model';
+
+@Injectable()
+export class ATACodesService {
+
+    constructor(private http: Http) { }
+
+    getATACodes(): Observable<Array<ATACode>> {
+        return this.http.get('src/assets/ata-codes.json')
+          .map((result) => result.json());
+    };
+}

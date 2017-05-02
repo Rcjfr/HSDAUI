@@ -9,6 +9,7 @@ import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertDetailComponent } from './alert-detail/alert-detail.component';
+import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AlertDetailComponent } from './alert-detail/alert-detail.component';
     NavBarComponent,
     HeaderComponent,
     AlertsComponent,
-    AlertDetailComponent
+    AlertDetailComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,

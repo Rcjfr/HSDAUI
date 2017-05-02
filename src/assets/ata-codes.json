@@ -1,0 +1,150 @@
+﻿[
+  {
+    "Code": "32 - Landing Gear",
+    "Description": "Includes Basic Structure which provides major support for the aircraft, while on the ground, such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.",
+    "Codes": [
+      {
+        "Code": "10 Main Gear"
+      },
+      {
+        "Code": "20 Nose Gear"
+      }
+    ]
+  },
+  {
+    "Code": "52 - Doors",
+    "Description": "Includes Basic Framework and Structure such as Angles,Formers, Ribs, Stringers, Fittings, Intercostal Brackets, etc.",
+    "Codes": [
+      {
+        "Code": "10 Cabin Entry Door"
+      },
+      {
+        "Code": "20 Emergency Exit Door/Window"
+      },
+      {
+        "Code": "30 Cargo Door"
+      },
+      {
+        "Code": "40 Service/Equipment Access Door"
+      },
+      {
+        "Code": "60 Entrance Stairs"
+      }
+    ]
+  },
+  {
+    "Code": "53 - Fuselage",
+    "Codes": [
+      {
+        "Code": "10 Primary Structure",
+        "Description": "Includes Primary Structure such as Frames, Bulkheads, Beams, Formers, Longerons, Stringers, Sills, Keel, etc."
+      },
+      {
+        "Code": "20 Auxiliary Structure",
+        "Description": "Includes Secondary Structure such as Floors, Fixed Partitions, etc."
+      },
+      {
+        "Code": "30 Plates/Skin",
+        "Description": "Includes Exterior Covering such as Skin, Access Covers,and Doublers."
+      },
+      {
+        "Code": "40 Attach Fittings",
+        "Description": "Includes Seat Tracks and Fittings or Drag Angles on Fuselage for attachment of Doors, Wings, Stabilizers, L. Gear, Engine, and Pylons."
+      },
+      {
+        "Code": "50 Aerodynamic Fairings",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "54 - Nacelles/Pylons",
+    "Codes": [
+      {
+        "Code": "10 Primary Structure",
+        "Description": "Includes Primary Skeleton of Nacelle Pylon such as Frames,Bulkheads, Firewalls, Stringers, Keel, and Frames around openings."
+      },
+      {
+        "Code": "20 Auxiliary Structure",
+        "Description": "Includes Leading Trailing Edge Structure."
+      },
+      {
+        "Code": "30 Plates/Skin",
+        "Description": "Includes Exterior Covering such as Skin, Access Covers, and Doublers."
+      }
+    ]
+  },
+  {
+    "Code": "55 - Stabilizers",
+    "Description": "Includes Basic Internal Structure such as Spars, Ribs, Stringers, Plates/Skin Access Covers, Tabs, and Support of Equipment within Stabilizer.",
+    "Codes": [
+      {
+        "Code": "10 Horizontal Stabilizer",
+        "Description": ""
+      },
+      {
+        "Code": "20 Elevator and Tab",
+        "Description": ""
+      },
+      {
+        "Code": "30 Vertical Stabilizer",
+        "Description": ""
+      },
+      {
+        "Code": "40 Rudder and Tab",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "56 - Window",
+    "Description": "Includes the Transparent Material and its Frame.",
+    "Codes": [
+      {
+        "Code": "10 Flight Compartment",
+        "Description": ""
+      },
+      {
+        "Code": "20 Passenger Cabin",
+        "Description": ""
+      },
+      {
+        "Code": "30 Door,Passenger and Service",
+        "Description": ""
+      },
+      {
+        "Code": "40 Inspection and Obsevation (Viewing Ports)",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "57 - Wings",
+    "Codes": [
+      {
+        "Code": "10 Wing Main Structure",
+        "Description": "Primary Skeleton – Includes Spars, Ribs, Upper and Lower Skin Panels, Attach Fittings, Stringers, Internal Fuel Tank Structure, Frames."
+      },
+      {
+        "Code": "30 Wing Tip",
+        "Description": ""
+      },
+      {
+        "Code": "40 Leading Edge Flap/Slat",
+        "Description": "Includes Fittings, Skins, Panels Stiffeners."
+      },
+      {
+        "Code": "50 Trailing Edge Flaps",
+        "Description": "Includes Skins, Panel and Stiffener, Ribs, Fittings, Tracks."
+      },
+      {
+        "Code": "60 Aileron and Tab",
+        "Description": ""
+      },
+      {
+        "Code": "70 Spoilers",
+        "Description": "Includes Panels and Fitting."
+      }
+    ]
+  }
+]
