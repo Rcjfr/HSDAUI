@@ -10,7 +10,7 @@ import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertDetailComponent } from './alert-detail/alert-detail.component';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
-
+import { ATACodesService } from './common/services/ata-codes.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +26,7 @@ import { CheckboxComponent } from './common/directives/checkbox/checkbox.compone
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ATACodesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

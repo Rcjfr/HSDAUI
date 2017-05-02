@@ -9,7 +9,7 @@ import { ICheckboxState } from '../common/directives/checkbox/checkbox.interface
   selector: 'app-alert-detail',
   templateUrl: './alert-detail.component.html',
   styleUrls: ['./alert-detail.component.less'],
-  providers: [ATACodesService]
+  providers: []
 })
 export class AlertDetailComponent implements OnInit {
 ataCodes$: Observable<Array<ATACode>>;
