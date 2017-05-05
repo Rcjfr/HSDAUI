@@ -6,8 +6,8 @@
       <div class="row form-group">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="sdrNumber">SDR Number:</label>
-            <div class="contrls col-sm-9">
+            <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
+            <div class="contrls col-sm-8">
               <input #sdrNumber="ngModel" type="text" class="form-control" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber">
             </div>
           </div>
@@ -22,23 +22,18 @@
       <div class="row form-group">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="sdaCreateDate">Create Date: <span class="req">*</span></label>
-            <div class="col-sm-9">
-              <div class="input-group date" data-provide="datepicker">
-                <input #sdaCreateDate="ngModel" type="text" class="form-control" name="sdaCreateDate" id="sdaCreateDate" required [(ngModel)]="alert.createDate">
-                <div class="input-group-addon">
-                  <span class="glyphicon glyphicon-th"></span>
-                </div>
-              </div>
-              <span *ngIf="sdaCreateDate.invalid && sdaCreateDate.dirty" class="alert alert-danger">Create Date is required.</span>
+            <label class="col-sm-4 control-label" for="sdaCreateDate">Create Date: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <datetime [timepicker]="false" #sdaCreateDate="ngModel" name="sdaCreateDate" id="sdaCreateDate" [(ngModel)]="alert.createDate" [required]="true" [ngModelOptions]="{standalone: true}"></datetime>
+              <span *ngIf="sdaCreateDate.invalid && sdaCreateDate.dirty" class="error">Create Date is required.</span>
             </div>
             
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
-            <div class="col-sm-9">
+            <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
+            <div class="col-sm-8">
               <select #sdaAlertCode="ngModel" class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
                 <option value="">Select Alert Code</option>
                 <option>A - Significant Structure Defect</option>
@@ -55,8 +50,8 @@
       <div class="row  form-group">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="sdaId">SDA ID: <span class="req">*</span></label>
-            <div class="col-sm-9">
+            <label class="col-sm-4 control-label" for="sdaId">SDA ID: <span class="req">*</span></label>
+            <div class="col-sm-8">
               <input type="text" #sdaId="ngModel" class="form-control" name="sdaId" id="sdaId" required placeholder="" [(ngModel)]="alert.sdaId">
             <span *ngIf="sdaId.invalid && sdaId.dirty" class="error">SDA ID is required.</span>
             </div>
@@ -65,11 +60,11 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="ATACode1">ATA Code 1: <span class="req">*</span></label>
-            <div class="col-sm-9">
+            <label class="col-sm-4 control-label" for="ATACode1">ATA Code 1: <span class="req">*</span></label>
+            <div class="col-sm-8">
               <select #ataCode1="ngModel" class="form-control" name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
             <option value="">Select ATA Code 1</option>
-            <option *ngFor="let ac of ataCode1s$ | async">{{ac}}</option>
+            <option *ngFor="let ac of ataCode1s$ | async" [value]="ac">{{ac}}</option>
           </select>
             <span *ngIf="ataCode1.invalid && ataCode1.dirty" class="error">ATA Code 1 is required.</span>
             </div>
@@ -79,21 +74,129 @@
       </div>
       <div class="row  form-group">
         <div class="col-md-6">
-          &nbsp;
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="airCraftNo">Aircraft #: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <div class="input-group">
+                <input type="text" #airCraftNo="ngModel" class="form-control" 
+                      name="airCraftNo" id="airCraftNo" 
+                      required 
+                      [(ngModel)]="alert.aircraftNo"
+                      [typeahead]="noseNumbers$"
+                      (typeaheadOnSelect)="noseNumberOnSelect($event)"
+                      (change)="populateAircraftInfo($event.target.value)"
+                      >
+                <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
+                  
+                </div>
+              </div>
+            <span *ngIf="airCraftNo.invalid && airCraftNo.dirty" class="error">Aircraft # is required.</span>
+            </div>
+            
+          </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="ATACode2">ATA Code 2: <span class="req">*</span></label>
-            <div class="col-sm-9">
+            <label class="col-sm-4 control-label" for="ATACode2">ATA Code 2: <span class="req">*</span></label>
+            <div class="col-sm-8">
               <select #ataCode2="ngModel" class="form-control" name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
             <option value="">Select ATA Code 2</option>
-            <option *ngFor="let ac of ataCode2s$ | async">{{ac}}</option>
+            <option *ngFor="let ac of ataCode2s$ | async" [value]="ac">{{ac}}</option>
           </select>
           <span *ngIf="ataCode2.invalid && ataCode2.dirty" class="error">ATA Code 2 is required.</span>
             </div>
             
           </div>
         </div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #station="ngModel" class="form-control" name="station" id="station" required placeholder="" [(ngModel)]="alert.station">
+            <span *ngIf="station.invalid && station.dirty" class="error">Station is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="department">Department: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #department="ngModel" class="form-control" name="department" id="department" required placeholder="" [(ngModel)]="alert.department">
+            <span *ngIf="department.invalid && department.dirty" class="error">Department is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #manufacturer="ngModel" class="form-control" name="manufacturer" id="manufacturer" required placeholder="" [(ngModel)]="alert.manufacturer">
+            <span *ngIf="manufacturer.invalid && manufacturer.dirty" class="error">Manufacturer is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #model="ngModel" class="form-control" name="model" id="model" required placeholder="" [(ngModel)]="alert.model">
+            <span *ngIf="model.invalid && model.dirty" class="error">Aircraft Model/Series is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #serialNo="ngModel" class="form-control" name="serialNo" id="serialNo" required placeholder="" [(ngModel)]="alert.serialNo">
+            <span *ngIf="serialNo.invalid && serialNo.dirty" class="error">Serial # is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="totalShipTime">Total Ship Time: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #totalShipTime="ngModel" class="form-control" name="totalShipTime" id="totalShipTime" required placeholder="" [(ngModel)]="alert.totalShipTime">
+            <span *ngIf="totalShipTime.invalid && totalShipTime.dirty" class="error">Total Ship Time is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #cycles="ngModel" class="form-control" name="cycles" id="cycles" required placeholder="" [(ngModel)]="alert.cycles">
+            <span *ngIf="cycles.invalid && cycles.dirty" class="error">Cycles is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6"><div class="form-group">
+            <label class="col-sm-4 control-label" for="fleet">Fleet: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" #fleet="ngModel" class="form-control" name="fleet" id="fleet" required placeholder="" [(ngModel)]="alert.fleet">
+            <span *ngIf="fleet.invalid && fleet.dirty" class="error">Fleet is required.</span>
+            </div>
+            
+          </div></div>
+        <div class="col-md-6">&nbsp;</div>
       </div>
     </div>
   </div>

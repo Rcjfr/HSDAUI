@@ -11,7 +11,7 @@ export class ATACodesService {
     constructor(private http: Http) { }
 
     getATACodes(): Observable<Array<ATACode>> {
-        return this.http.get('src/assets/ata-codes.json')
+        return this.http.get('assets/ata-codes.json')
           .map((result) => result.json());
     };
 }

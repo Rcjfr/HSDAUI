@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  aircraftServiceEndPointUrl: 'http://10.62.99.190/AircraftService/api/aircraft/'
 };

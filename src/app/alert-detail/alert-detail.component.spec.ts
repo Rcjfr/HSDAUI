@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import * as $ from 'jquery';
 import { AlertDetailComponent } from './alert-detail.component';
 import { CheckboxComponent } from '../common/directives/checkbox/checkbox.component';
 import { ATACodesService } from '../common/services/ata-codes.service';
@@ -7,7 +8,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { inject } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
-
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { TypeaheadModule } from 'ngx-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from '../common/reducers/index';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../common/reducers';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
@@ -16,10 +23,17 @@ describe('AlertDetailComponent', () => {
     TestBed.configureTestingModule({
       providers: [ATACodesService],
       declarations: [AlertDetailComponent, CheckboxComponent],
-      imports: [FormsModule, HttpModule]
+      schemas: [ NO_ERRORS_SCHEMA ],
+      imports: [
+        FormsModule,
+        HttpModule,
+        NKDatetimeModule,
+        TypeaheadModule.forRoot(),
+        StoreModule.provideStore(reducer),
+      ]
     })
       .compileComponents();
-    //http://stackoverflow.com/questions/40021366/angular2-mocking-service-in-a-component-mock-ignored
+    // http://stackoverflow.com/questions/40021366/angular2-mocking-service-in-a-component-mock-ignored
     // TestBed.overrideComponent(AlertDetailComponent, {
     //   set: {
     //     providers: [

@@ -9,14 +9,20 @@ import { AlertDetailComponent } from './alert-detail/alert-detail.component';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { APP_BASE_HREF } from '@angular/common';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { TypeaheadModule } from 'ngx-bootstrap';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        NKDatetimeModule,
+        TypeaheadModule.forRoot()
       ],
+      schemas: [ NO_ERRORS_SCHEMA ],
       declarations: [
         AppComponent,
         HeaderComponent,
