@@ -64,7 +64,7 @@
             <div class="col-sm-8">
               <select #ataCode1="ngModel" class="form-control" name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
             <option value="">Select ATA Code 1</option>
-            <option *ngFor="let ac of ataCode1s$ | async" [value]="ac">{{ac}}</option>
+            <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
           </select>
             <span *ngIf="ataCode1.invalid && ataCode1.dirty" class="error">ATA Code 1 is required.</span>
             </div>
@@ -102,7 +102,7 @@
             <div class="col-sm-8">
               <select #ataCode2="ngModel" class="form-control" name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
             <option value="">Select ATA Code 2</option>
-            <option *ngFor="let ac of ataCode2s$ | async" [value]="ac">{{ac}}</option>
+            <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
           </select>
           <span *ngIf="ataCode2.invalid && ataCode2.dirty" class="error">ATA Code 2 is required.</span>
             </div>

@@ -23,8 +23,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class AlertDetailComponent implements OnInit, OnDestroy {
 ataCodes$: Observable<Array<ATACode>>;
-ataCode1s$: Observable<Array<string>>;
-ataCode2s$: Observable<Array<string>>;
+ataCode2s$: Observable<Array<ATACode>>;
 alert: Alert;
 loading$: Observable<boolean>;
 lineMaintenance: ICheckboxState= { isChecked: false };
@@ -42,7 +41,6 @@ alertSubscription$: Subscription;
 
   ngOnInit() {
     this.ataCodes$ = this.ataCodesService.getATACodes();
-    this.ataCode1s$ = this.ataCodes$.map(d => d.map(alertCode => alertCode.Code));
     this.alertSubscription$ = this.store.select(fromRoot.getSelectedAlert).map(d => d && d.toJS()).subscribe((s: Alert) => this.alert = s);
     this.loading$ = this.store.select(fromRoot.getSelectedAlertLoading);
     this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS()[0]);
@@ -61,8 +59,8 @@ alertSubscription$: Subscription;
         this.alertSubscription$.unsubscribe();
   }
   getAlertCode2s(alertCode1: string) {
-    // console.log('alert code1', alertCode1);
-    this.ataCode2s$ = this.ataCodes$.map(a => a.find(b=> b.Code === alertCode1).Codes.map(c => c.Code));
+     console.log('alert code1', alertCode1);
+    this.ataCode2s$ = this.ataCodes$.map(a => a.find(b => b.Code === alertCode1).SecondaryCodes);
       //  this.ataCode2s$ = this.ataCodes$.map(a =>
       //  {
       //    const dd = a.filter(function(b)
