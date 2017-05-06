@@ -62,6 +62,7 @@ alertSubscription$: Subscription;
   }
   getAlertCode2s(alertCode1: string) {
      // console.log('alert code1', alertCode1);
+    this.alert.ataCode2 = '';
     this.ataCode2s$ = this.ataCodes$.map(a => a.find(b => b.Code === alertCode1).SecondaryCodes);
       //  this.ataCode2s$ = this.ataCodes$.map(a =>
       //  {

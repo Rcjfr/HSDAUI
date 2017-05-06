@@ -71,7 +71,7 @@ describe('Alerts Effect', () => {
   );
 
   it('Call Show Toastr error after any fail actions',
-      async(inject([
+      inject([
         EffectsRunner, AlertEffects, AircraftService, ToastsManager
       ],
       (_runner, _alertEffects, _aircraftService, _toaster) => {
@@ -85,7 +85,7 @@ describe('Alerts Effect', () => {
         console.log(result);
           expect(toaster.error).toHaveBeenCalledWith('Failed to load aircraft Info.', 'ERROR');
         });
-      }))
+      })
   );
 
 
