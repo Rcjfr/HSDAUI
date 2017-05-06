@@ -25,7 +25,47 @@ describe('AircraftService', () => {
     });
   });
 
-  it('should ...', inject([AircraftService], (service: AircraftService) => {
+  it('should create', inject([AircraftService], (service: AircraftService) => {
     expect(service).toBeTruthy();
   }));
+  describe('queryNoseNumbers', () => {
+    it('should return an array of NoseNumbers', async(inject(
+      [AircraftService, MockBackend], (service: AircraftService, mockBackend: MockBackend) => {
+      const mockResponse = ['A319', 'A321', 'A330'];
+      mockBackend.connections.subscribe(conn => {
+        conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
+      });
+
+      const result = service.queryNoseNumbers('A');
+
+      result.subscribe(res => {
+        expect(res.length).toEqual(3);
+        expect(res.filter(s => s.indexOf('A') > -1).length).toEqual(3);
+      });
+    })));
+  });
+  describe('getAircraftInfo', () => {
+    it('should return aircraft information by nose number', async(inject(
+      [AircraftService, MockBackend], (service: AircraftService, mockBackend: MockBackend) => {
+      const mockResponse = {
+                              'aircraftNo': 'A330',
+                              'cycles': 912,
+                              'fleet': '912',
+                              'manufacturer': 'Airbus',
+                              'model': 'A-330-200',
+                              'serialNo': '1441',
+                              'totalShipTime': 5771
+                            };
+      mockBackend.connections.subscribe(conn => {
+        conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
+      });
+
+      const result = service.getAircraftInfo('A330');
+
+      result.subscribe(res => {
+        expect(res).toBeTruthy();
+        expect(res.manufacturer).toEqual('Airbus');
+      });
+    })));
+  });
 });

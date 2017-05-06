@@ -15,10 +15,28 @@ import { reducer } from '../common/reducers/index';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../common/reducers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
-
+const mockResponse = [
+                              {
+                                'Code': '32',
+                                'Name': 'Landing Gear',
+                                'Description': `Includes Basic Structure which provides major support 
+                                                for the aircraft, while on the ground, 
+                                                such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
+                                'SecondaryCodes': [
+                                  {
+                                    'Code': '10',
+                                    'Name': 'Main Gear'
+                                  },
+                                  {
+                                    'Code': '20',
+                                    'Name': 'Nose Gear'
+                                  }
+                                ]
+                              }];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [ATACodesService],
@@ -30,6 +48,7 @@ describe('AlertDetailComponent', () => {
         NKDatetimeModule,
         TypeaheadModule.forRoot(),
         StoreModule.provideStore(reducer),
+        ToastModule.forRoot()
       ]
     })
       .compileComponents();
@@ -53,49 +72,18 @@ describe('AlertDetailComponent', () => {
 
   it('should get ATA Codes from service', ( ) => {
       const service: ATACodesService = TestBed.get(ATACodesService);
-      const mockResponse = [
-                              {
-                                'Code': '32 - Landing Gear',
-                                'Description': `Includes Basic Structure which provides major support 
-                                                                        for the aircraft, while on the ground, 
-                                                                        such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
-                                'Codes': [
-                                  {
-                                    'Code': '10 Main Gear'
-                                  },
-                                  {
-                                    'Code': '20 Nose Gear'
-                                  }
-                                ]
-                              }
-                            ];
+      
       spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
       fixture.detectChanges(); //move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
-      component.ataCode1s$.subscribe(a => {
+      component.ataCodes$.subscribe(a => {
             expect(a.length).toBe(1);
       });
   });
   it('should get ATA Codes 2 based on ATA Code 1', ( ) => {
       const service: ATACodesService = TestBed.get(ATACodesService);
-      const mockResponse = [
-                              {
-                                'Code': '32 - Landing Gear',
-                                'Description': `Includes Basic Structure which provides major support 
-                                                                        for the aircraft, while on the ground, 
-                                                                        such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
-                                'Codes': [
-                                  {
-                                    'Code': '10 Main Gear'
-                                  },
-                                  {
-                                    'Code': '20 Nose Gear'
-                                  }
-                                ]
-                              }
-                            ];
       spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
       fixture.detectChanges(); //move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
-      component.getAlertCode2s('32 - Landing Gear');
+      component.getAlertCode2s('32');
       component.ataCode2s$.subscribe(a => {
             expect(a.length).toBe(2);
       });

@@ -4,7 +4,26 @@ import { MockBackend } from '@angular/http/testing';
 import { ATACodesService } from './ata-codes.service';
 import { RouterModule } from '@angular/router';
 
-describe('SomeService (Mocked)', () => {
+describe('ATA Codes Service (Mocked)', () => {
+  const mockResponse = [
+                              {
+                                'Code': '32',
+                                'Name': 'Landing Gear',
+                                'Description': `Includes Basic Structure which provides major support 
+                                                for the aircraft, while on the ground, 
+                                                such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
+                                'SecondaryCodes': [
+                                  {
+                                    'Code': '10',
+                                    'Name': 'Main Gear'
+                                  },
+                                  {
+                                    'Code': '20',
+                                    'Name': 'Nose Gear'
+                                  }
+                                ]
+                              }];
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -31,22 +50,6 @@ describe('SomeService (Mocked)', () => {
   })));
 
   describe('getATACodes', () => {
-    const mockResponse = [
-                              {
-                                'Code': '32 - Landing Gear',
-                                'Description': `Includes Basic Structure which provides major support 
-                                                for the aircraft, while on the ground, 
-                                                such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
-                                'Codes': [
-                                  {
-                                    'Code': '10 Main Gear'
-                                  },
-                                  {
-                                    'Code': '20 Nose Gear'
-                                  }
-                                ]
-                              }];
-
     it('should return an array of ATACodes', async(inject(
       [ATACodesService, MockBackend], (service: ATACodesService, mockBackend: MockBackend) => {
 
@@ -59,8 +62,8 @@ describe('SomeService (Mocked)', () => {
       result.subscribe(res => {
         //console.log('Response:', res);
         expect(res.length).toEqual(1);
-        expect(res[0].Code).toEqual('32 - Landing Gear');
-        expect(res[0].Codes.length).toEqual(2);
+        expect(res[0].Code).toEqual('32');
+        expect(res[0].SecondaryCodes.length).toEqual(2);
       });
     })));
   });

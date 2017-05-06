@@ -20,7 +20,7 @@ import { AircraftInfo} from '../models/aircraft-info.model';
 
 @Injectable()
 export class AlertEffects {
-    constructor(private actions$: Actions, private aircraftService: AircraftService, private router: Router,
+    constructor(private actions$: Actions, private aircraftService: AircraftService,
                 private toastr: ToastsManager) {  // ,vcr: ViewContainerRef
                     // this.toastr.setRootViewContainerRef(vcr);
                 }

@@ -1,4 +1,4 @@
-export interface ICheckboxState{ 
-    isChecked:boolean,
-    isEnabled?:boolean
+export interface ICheckboxState {
+    isChecked: boolean;
+    isEnabled?: boolean;
 }

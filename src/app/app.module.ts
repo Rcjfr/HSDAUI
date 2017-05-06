@@ -19,7 +19,7 @@ import { AlertDetailComponent } from './alert-detail/alert-detail.component';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
-import { AlertEffects } from './common/effects/alerts';
+import { AlertEffects } from './common/effects/alerts.effects';
 import { reducer } from './common/reducers/index';
 @NgModule({
   declarations: [

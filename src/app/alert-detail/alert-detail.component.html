@@ -36,10 +36,10 @@
             <div class="col-sm-8">
               <select #sdaAlertCode="ngModel" class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
                 <option value="">Select Alert Code</option>
-                <option>A - Significant Structure Defect</option>
-                <option>B - Significant Structure Corrosion</option>
-                <option>C - Ground Damage</option>
-                <option>Other-Bird Strike,Lightning Strike, etc</option>
+                <option value="A">A - Significant Structure Defect</option>
+                <option value="B">B - Significant Structure Corrosion</option>
+                <option value="C">C - Ground Damage</option>
+                <option value="D">Other-Bird Strike,Lightning Strike, etc</option>
             </select>
             <span *ngIf="sdaAlertCode.invalid && sdaAlertCode.dirty" class="error">Alert Code is required.</span>
             </div>

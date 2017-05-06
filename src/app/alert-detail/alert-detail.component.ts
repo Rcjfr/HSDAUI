@@ -55,11 +55,13 @@ alertSubscription$: Subscription;
     this.store.dispatch(new selectedAlert.LoadNoseNumbersAction(''));
   }
   ngOnDestroy() {
-        this.actionsSubscription$.unsubscribe();
-        this.alertSubscription$.unsubscribe();
+        // tslint:disable-next-line:no-unused-expression
+        this.actionsSubscription$ && this.actionsSubscription$.unsubscribe();
+        // tslint:disable-next-line:no-unused-expression
+        this.alertSubscription$ && this.alertSubscription$.unsubscribe();
   }
   getAlertCode2s(alertCode1: string) {
-     console.log('alert code1', alertCode1);
+     // console.log('alert code1', alertCode1);
     this.ataCode2s$ = this.ataCodes$.map(a => a.find(b => b.Code === alertCode1).SecondaryCodes);
       //  this.ataCode2s$ = this.ataCodes$.map(a =>
       //  {

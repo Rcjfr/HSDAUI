@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  aircraftServiceEndPointUrl: 'http://10.62.99.190/AircraftService/api/aircraft/'
+  production: true,
+  aircraftServiceEndPointUrl: 'http://10.62.99.171/AircraftService/api/aircraft/'
 };

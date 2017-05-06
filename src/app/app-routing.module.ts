@@ -12,8 +12,8 @@ const routes: Routes = [
     path: 'alerts/:id', component: AlertDetailComponent,
     children: []
   },
-  { path: '', redirectTo: 'alerts', pathMatch: 'full' },
-  { path: '*', redirectTo: 'alerts', pathMatch: 'full'}
+  { path: '', redirectTo: 'alerts/new', pathMatch: 'full' },
+  { path: '*', redirectTo: 'alerts/new', pathMatch: 'full'}
 ];
 
 @NgModule({
