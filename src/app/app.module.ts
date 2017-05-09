@@ -21,6 +21,7 @@ import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { reducer } from './common/reducers/index';
+import { CheckTypesService } from './common/services/check-types.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,7 @@ import { reducer } from './common/reducers/index';
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects)
   ],
-  providers: [ATACodesService, AircraftService],
+  providers: [ATACodesService, AircraftService, CheckTypesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,7 +18,12 @@ export const alertFactory = makeTypedFactory<Alert, AlertRecord>({
     totalShipTime: '',
     cycles: '',
     fleet: '',
-    scheduledMaintenance: false
+    scheduledMaintenance: null,
+    nonRoutineNo: '',
+    micNo: '',
+    checkType: '',
+    routineNo: '',
+    unscheduledDescription: ''
 });
 
 

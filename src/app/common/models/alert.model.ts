@@ -15,6 +15,11 @@ export interface Alert {
     totalShipTime: string;
     cycles: string;
     fleet: string;
-    scheduledMaintenance: boolean;
+    scheduledMaintenance?: boolean;
+    nonRoutineNo: string;
+    micNo: string;
+    checkType: string;
+    routineNo: string;
+    unscheduledDescription: string;
 
 }

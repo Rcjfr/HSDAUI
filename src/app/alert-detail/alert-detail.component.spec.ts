@@ -20,6 +20,7 @@ import { MockStore } from '../common/store/mock-store';
 import { List } from 'immutable';
 import { alertFactory } from '../common/reducers/models/alert';
 import { aircraftInfoFactory } from '../common/reducers/models/aircraftInfo';
+import { CheckTypesService } from '../common/services/check-types.service';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
@@ -43,7 +44,7 @@ const mockResponse = [
                               }];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ATACodesService,
+      providers: [ATACodesService, CheckTypesService,
       {
         provide: Store, useValue: new MockStore({selectedAlert: {
           loading: false,

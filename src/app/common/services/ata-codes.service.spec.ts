@@ -60,7 +60,7 @@ describe('ATA Codes Service (Mocked)', () => {
       const result = service.getATACodes();
 
       result.subscribe(res => {
-        //console.log('Response:', res);
+        // console.log('Response:', res);
         expect(res.length).toEqual(1);
         expect(res[0].Code).toEqual('32');
         expect(res[0].SecondaryCodes.length).toEqual(2);

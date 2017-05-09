@@ -1,0 +1,279 @@
+[
+  {
+    "Fleet": "A319",
+    "CheckTypes": [
+      {
+        "Name": "T,SC"
+
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "P Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "A321",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "T,SC"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "P Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "B737",
+
+    "CheckTypes": [
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "B Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      },
+      {
+        "Name": "Mild or TWD Check"
+      },
+      {
+        "Name": "Heavy C Check(HC)"
+      },
+      {
+        "Name": "'AGE' Check"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "B757",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "B Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      },
+      {
+        "Name": "Mild or TWD Check"
+      },
+      {
+        "Name": "Heavy C Check(HC)"
+      },
+      {
+        "Name": "'AGE' Check"
+      },
+      {
+        "Name": "D/O Check"
+      },
+      {
+        "Name": "Weekly Check"
+      },
+      {
+        "Name": "Full 'B'"
+      },
+      {
+        "Name": "Full 'C'"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "B767",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "T,SC"
+      },
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      }
+
+    ]
+
+  },
+  {
+    "Fleet": "B777",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "T,SC"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "B787",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "T,SC"
+      },
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      }
+
+    ]
+
+  },
+  {
+    "Fleet": "MD80",
+
+    "CheckTypes": [
+      {
+        "Name": "Periodic Service"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "B Check"
+      },
+      {
+        "Name": "C Check(CC)"
+      },
+      {
+        "Name": "Heavy C Check(HC)"
+      },
+      {
+        "Name": "'AGE' Check"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "A320F",
+
+    "CheckTypes": [
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "1C Interval"
+      },
+      {
+        "Name": "2C Interval"
+      },
+      {
+        "Name": "Wet Area Inspection"
+      },
+      {
+        "Name": "Structural Interval"
+      },
+      {
+        "Name": "Periodic Service"
+      }
+    ]
+
+  },
+  {
+    "Fleet": "E190",
+
+    "CheckTypes": [
+      {
+        "Name": "D/O Check"
+      },
+      {
+        "Name": "Weekly Check"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "Intermediate Check"
+      },
+      {
+        "Name": "Full 'B'"
+      },
+      {
+        "Name": "Full 'C'"
+      },
+      {
+        "Name": "2C Interval"
+      }
+    ]
+  },
+  {
+    "Fleet": "A330",
+
+    "CheckTypes": [
+      {
+        "Name": "EPDC"
+      },
+      {
+        "Name": "D/O Check"
+      },
+      {
+        "Name": "A Check"
+      },
+      {
+        "Name": "1C Interval"
+      },
+      {
+        "Name": "2C Interval"
+      },
+      {
+        "Name": "Structural interval"
+      }
+
+    ]
+
+  }
+]

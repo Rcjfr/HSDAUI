@@ -16,6 +16,8 @@ import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { NgForm } from '@angular/forms';
+import { CheckTypesService } from '../common/services/check-types.service';
+import { FleetCheckType, CheckType } from '../common/models/check-type.model';
 @Component({
   selector: 'app-alert-detail',
   templateUrl: './alert-detail.component.html',
@@ -23,6 +25,8 @@ import { NgForm } from '@angular/forms';
   providers: []
 })
 export class AlertDetailComponent implements OnInit, OnDestroy {
+    fleetCheckTypes$: Observable<CheckType[]>;
+checkTypes$: Observable<FleetCheckType[]>;
 ataCodes$: Observable<Array<ATACode>>;
 ataCode2s$: Observable<Array<ATACode>>;
 alert: Alert;
@@ -33,15 +37,17 @@ noseNumbers$: Observable<Array<string>>;
 actionsSubscription$: Subscription;
 alertSubscription$: Subscription;
 showErrors = false;
+unscheduledFieldsInvalid = false;
+scheduledFieldsInvalid = false;
 
-
-  constructor(private ataCodesService: ATACodesService, private store: Store<AppStore>,
+  constructor(private ataCodesService: ATACodesService,private checkTypesService: CheckTypesService,  private store: Store<AppStore>,
               private vcr: ViewContainerRef, private toastr: ToastsManager) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
     this.ataCodes$ = this.ataCodesService.getATACodes();
+    this.checkTypes$ = this.checkTypesService.getCheckTypes();
     this.alertSubscription$ = this.store.select(fromRoot.getSelectedAlert).map(d => d && d.toJS()).subscribe((s: Alert) => this.alert = s);
     this.loading$ = this.store.select(fromRoot.getSelectedAlertLoading);
     this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS());
@@ -85,10 +91,17 @@ showErrors = false;
     this.store.dispatch(new selectedAlert.LoadAircraftInfoAction(noseNumber));
     }
   }
+  populateCheckTypes() {
+   this.fleetCheckTypes$ = this.checkTypes$.map(a => a.find(b => b.Fleet === this.alert.fleet).CheckTypes);
+  }
   saveAlert(form: NgForm) {
     // console.log(this.alert);
     this.showErrors = !form.valid;
-    if (!form.valid) { return; }
+    this.unscheduledFieldsInvalid = this.alert.scheduledMaintenance === false &&
+                                    (this.alert.nonRoutineNo === '' && this.alert.micNo === '');
+    this.scheduledFieldsInvalid = (this.alert.scheduledMaintenance && (this.alert.nonRoutineNo === '' && this.alert.routineNo === ''));
+    if (!form.valid || this.unscheduledFieldsInvalid || this.scheduledFieldsInvalid) { return; }
+    this.toastr.success('Details entered are valid', 'Success');
   }
 
 }
