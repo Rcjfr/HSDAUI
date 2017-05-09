@@ -42,7 +42,7 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
         case selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
         {
             const act = action as selectedAlert.LoadNoseNumbersCompleteAction;
-            return state.merge({loading: false, noseNumbers: List.of(act.payload)});
+            return state.merge({loading: false, noseNumbers: List.of(...act.payload)});
         }
         default: {
             return state;

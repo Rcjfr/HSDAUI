@@ -15,6 +15,7 @@ import '@ngrx/core/add/operator/select';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-alert-detail',
   templateUrl: './alert-detail.component.html',
@@ -31,7 +32,7 @@ lineMaintenanceLabel= 'Line Maintenance';
 noseNumbers$: Observable<Array<string>>;
 actionsSubscription$: Subscription;
 alertSubscription$: Subscription;
-
+showErrors = false;
 
 
   constructor(private ataCodesService: ATACodesService, private store: Store<AppStore>,
@@ -43,7 +44,7 @@ alertSubscription$: Subscription;
     this.ataCodes$ = this.ataCodesService.getATACodes();
     this.alertSubscription$ = this.store.select(fromRoot.getSelectedAlert).map(d => d && d.toJS()).subscribe((s: Alert) => this.alert = s);
     this.loading$ = this.store.select(fromRoot.getSelectedAlertLoading);
-    this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS()[0]);
+    this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS());
     this.actionsSubscription$ = this.store.select(fromRoot.getSelectedAlertAircraftInfo).subscribe(aircraftInfo => {
             this.alert.manufacturer = aircraftInfo.manufacturer;
             this.alert.model = aircraftInfo.model;
@@ -76,11 +77,18 @@ alertSubscription$: Subscription;
       // });
   }
   noseNumberOnSelect(e: TypeaheadMatch) {
-      console.log('Selected value: ', e.value);
+      // console.log('Selected value: ', e.value);
       this.populateAircraftInfo(e.value);
   }
   populateAircraftInfo(noseNumber: string) {
+    if (noseNumber) {
     this.store.dispatch(new selectedAlert.LoadAircraftInfoAction(noseNumber));
+    }
+  }
+  saveAlert(form: NgForm) {
+    // console.log(this.alert);
+    this.showErrors = !form.valid;
+    if (!form.valid) { return; }
   }
 
 }

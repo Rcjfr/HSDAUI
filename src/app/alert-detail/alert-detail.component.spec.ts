@@ -9,13 +9,17 @@ import 'rxjs/add/observable/of';
 import { inject } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, TypeaheadMatch } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from '../common/reducers/index';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../common/reducers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { MockStore } from '../common/store/mock-store';
+import { List } from 'immutable';
+import { alertFactory } from '../common/reducers/models/alert';
+import { aircraftInfoFactory } from '../common/reducers/models/aircraftInfo';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
@@ -39,7 +43,15 @@ const mockResponse = [
                               }];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [ATACodesService],
+      providers: [ATACodesService,
+      {
+        provide: Store, useValue: new MockStore({selectedAlert: {
+          loading: false,
+    alert: alertFactory(),
+    noseNumbers: List.of(['A312', 'A330']),
+    aircraftInfo: aircraftInfoFactory()
+        }})
+      }],
       declarations: [AlertDetailComponent, CheckboxComponent],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
@@ -47,7 +59,7 @@ const mockResponse = [
         HttpModule,
         NKDatetimeModule,
         TypeaheadModule.forRoot(),
-        StoreModule.provideStore(reducer),
+        // StoreModule.provideStore(reducer),
         ToastModule.forRoot()
       ]
     })
@@ -72,9 +84,8 @@ const mockResponse = [
 
   it('should get ATA Codes from service', ( ) => {
       const service: ATACodesService = TestBed.get(ATACodesService);
-      
       spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
-      fixture.detectChanges(); //move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
+      fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
       component.ataCodes$.subscribe(a => {
             expect(a.length).toBe(1);
       });
@@ -82,11 +93,29 @@ const mockResponse = [
   it('should get ATA Codes 2 based on ATA Code 1', ( ) => {
       const service: ATACodesService = TestBed.get(ATACodesService);
       spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
-      fixture.detectChanges(); //move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
+      fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
       component.getAlertCode2s('32');
       component.ataCode2s$.subscribe(a => {
             expect(a.length).toBe(2);
       });
+  });
+  it('should get matching nosenumbers', ( ) => {
+      const _store: any = TestBed.get(Store);
+      _store.next({selectedAlert:{
+          loading: false,
+            alert: alertFactory(),
+            noseNumbers: List.of(['A312', 'A330']),
+            aircraftInfo: aircraftInfoFactory({aircraftNo:'A330',
+            model: 'A330',
+    manufacturer: 'Airbus',
+    serialNo: '1234',
+    totalShipTime: '123',
+    cycles: '234',
+    fleet: '330'})
+                }});
+      component.noseNumberOnSelect(new TypeaheadMatch(null, 'A330'));
+      fixture.detectChanges();
+      expect(component.alert.cycles).toEqual('234');
   });
 });
 
