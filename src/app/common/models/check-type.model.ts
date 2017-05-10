@@ -1,4 +1,4 @@
-export interface CheckType {
+﻿export interface CheckType {
     Code?: string;
     Name: string;
 }
