@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ATACodesService } from '../common/services/ata-codes.service';
@@ -26,7 +26,7 @@ import { FleetCheckType, CheckType } from '../common/models/check-type.model';
 })
 export class AlertDetailComponent implements OnInit, OnDestroy {
     fleetCheckTypes$: Observable<CheckType[]>;
-checkTypes$: Observable<FleetCheckType[]>;
+    checkTypes$: Observable<FleetCheckType[]>;
 ataCodes$: Observable<Array<ATACode>>;
 ataCode2s$: Observable<Array<ATACode>>;
 alert: Alert;

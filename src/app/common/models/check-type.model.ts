@@ -1,8 +1,13 @@
-export interface CheckType {
-    Code?: string;
-    Name: string;
+﻿export interface CheckType {
+    Aircraft: string;
+    CheckTypes?: Array<CheckType>;
+    Type: string;
+
 }
+
 export interface FleetCheckType {
-    Fleet: string;
-    CheckTypes: Array<CheckType>;
+    Aircraft: string;
+    FleetCheckType?: Array<FleetCheckType>;
+    Type: string;
+
 }
