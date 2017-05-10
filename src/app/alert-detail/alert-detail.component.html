@@ -228,18 +228,21 @@
             <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
             <div class="col-sm-8">
               <input type="text" #micNo="ngModel" class="form-control" name="micNo" tabindex='18' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
-
+<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
             </div>
+            
           </div>
           <div class="form-group" [hidden]="alert.scheduledMaintenance === false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
               <input type="text" #nonRoutineNo="ngModel" class="form-control" tabindex='19' name="nonRoutineNo" id="nonRoutineNo" [required]="alert.scheduledMaintenance  && alert.routineNo.trim()==''" placeholder=""
                 [(ngModel)]="alert.nonRoutineNo">
+            <span *ngIf="alert.scheduledMaintenance && ((nonRoutineNo.invalid && (showErrors || (nonRoutineNo.dirty || nonRoutineNo.touched))) || (routineNo.invalid && (showErrors || (routineNo.dirty || routineNo.touched))))" class="error">Either Routine # or Non-Routine #  is required.</span>
             </div>
+            
+          
           </div>
-          <span *ngIf="alert.scheduledMaintenance && ((nonRoutineNo.invalid && (showErrors || (nonRoutineNo.dirty || nonRoutineNo.touched))) || (routineNo.invalid && (showErrors || (routineNo.dirty || routineNo.touched))))" class="error">Either Routine # or Non-Routine #  is required.</span>
-          <span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
+          
         </div>
       </div>
       <div class="row  form-group">
