@@ -97,10 +97,10 @@ scheduledFieldsInvalid = false;
   saveAlert(form: NgForm) {
     // console.log(this.alert);
     this.showErrors = !form.valid;
-    this.unscheduledFieldsInvalid = this.alert.scheduledMaintenance === false &&
-                                    (this.alert.nonRoutineNo === '' && this.alert.micNo === '');
-    this.scheduledFieldsInvalid = (this.alert.scheduledMaintenance && (this.alert.nonRoutineNo === '' && this.alert.routineNo === ''));
-    if (!form.valid || this.unscheduledFieldsInvalid || this.scheduledFieldsInvalid) { return; }
+    // this.unscheduledFieldsInvalid = this.alert.scheduledMaintenance === false &&
+    //                                 (this.alert.nonRoutineNo === '' && this.alert.micNo === '');
+    // this.scheduledFieldsInvalid = (this.alert.scheduledMaintenance && (this.alert.nonRoutineNo === '' && this.alert.routineNo === ''));
+    if (!form.valid) { return; }
     this.toastr.success('Details entered are valid', 'Success');
   }
 
