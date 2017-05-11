@@ -26,7 +26,7 @@
             <label class="col-sm-4 control-label" tabindex='3'>Create Date: <span class="req">*</span></label>
             <div class="col-sm-8">
               <datetime [timepicker]="false" #sdaCreateDate="ngModel" name="sdaCreateDate" id="sdaCreateDate" [(ngModel)]="alert.createDate"
-                [required]="true" [ngModelOptions]="{standalone: true}"></datetime>
+                [required]="true" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }" ></datetime>
               <span *ngIf="sdaCreateDate.invalid && (showErrors || (sdaCreateDate.dirty || sdaCreateDate.touched))" class="error">Create Date is required.</span>
             </div>
 
@@ -81,7 +81,7 @@
             <div class="col-sm-8">
               <input type="text" #station="ngModel" tabindex='4' (input)="station.value=$event.target.value.toUpperCase()"  class="form-control" name="station" id="station" pattern="[a-zA-Z]*" minlength="3" maxlength="3" required placeholder=""
                 [(ngModel)]="alert.station">
-              <span *ngIf="station.invalid && (showErrors || (station.dirty || station.touched))" class="error">Station is required and must be at least 3 characters long.</span>
+              <span *ngIf="station.invalid && (showErrors || (station.dirty || station.touched))" class="error">Station is required and must be at least 3 alphabets characters long.</span>
               <!--<span *ngIf="(station.invalid && station.errors && station.errors.minlength) && (showErrors || (station.dirty || station.touched))" class="error">Station must be at least 3 characters long.</span>-->
             </div>
           </div>
@@ -120,39 +120,16 @@
         </div>
         <div class="col-md-6">
           <h4>Defect discovered during:(Check appropriate box and describe)</h4>
-          <div class="radio">
-                <div class="row">
-                    <div class="col-md-5">
-                      <label>
-                    <input #scheduledMaintenance="ngModel" tabindex='16' 
-                            [value]="false" required type="radio" name="defectDiscovered" 
-                            [(ngModel)]="alert.scheduledMaintenance"/>
-                Unscheduled Maintenance 
-                </label>
-                    </div>
-                    <div class="col-md-7" [hidden]="alert.scheduledMaintenance !== false">
-                      <input type="text" #unscheduledDescription="ngModel" 
-                        tabindex='18' class="form-control" 
-                        name="unscheduledDescription" id="unscheduledDescription"
-                        [required]="alert.scheduledMaintenance === false" 
-                        placeholder="Description" [(ngModel)]="alert.unscheduledDescription"/>
-                        (RON,Pilot Report etc.)
-                        <span *ngIf="unscheduledDescription.invalid && (showErrors || (unscheduledDescription.dirty ||unscheduledDescription.touched))" class="error">Unscheduled description is required.</span>
-                    </div>
-                </div>
-          </div>
-          <div class="radio">
-              <label>
-                    <input #scheduledMaintenance="ngModel" tabindex='17' 
-                          [value]="true" required type="radio" 
-                          name="defectDiscovered" 
-                          [(ngModel)]="alert.scheduledMaintenance"/>
-                    Scheduled Maintenance
-              </label>
-          </div>
+
+          <label class="radio-inline">
+            <input #scheduledMaintenance="ngModel" tabindex='14' [value]="false" 
+                  required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">
+                  Unscheduled Maintenance
+                  </label>
+          <label class="radio-inline"><input #scheduledMaintenance="ngModel" tabindex='14' [value]="true" required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">Scheduled Maintenance </label>
+          
           
           <div *ngIf="scheduledMaintenance.invalid && (showErrors || (scheduledMaintenance.dirty || scheduledMaintenance.touched))" class="error">Defect Discovered is required.</div>
-          
         </div>
       </div>
       <div class="row  form-group">
@@ -181,14 +158,17 @@
         </div>
         <div class="col-md-6">
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
+            <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #unschNonRoutineNo="ngModel" class="form-control" tabindex='19' name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
-                [(ngModel)]="alert.nonRoutineNo">
+              <input type="text" #unscheduledDescription="ngModel" tabindex='15' class="form-control" name="unscheduledDescription" id="unscheduledDescription"
+                [required]="alert.scheduledMaintenance === false" placeholder="" [(ngModel)]="alert.unscheduledDescription">
+              (RON,Pilot Report etc.)
+              <div *ngIf="unscheduledDescription.invalid && (showErrors || (unscheduledDescription.dirty ||unscheduledDescription.touched))" class="error">Description is required for unscheduled maintenance.</div>
+              
             </div>
           </div>
           <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="checkType">Check Type:</label>
+            <label class="col-sm-4 control-label" for="checkType">Check Type:<span class="req">*</span></label>
             <div class="col-sm-8">
               <select #checkType="ngModel" class="form-control" tabindex='20' name="checkType" id="checkType" required [(ngModel)]="alert.checkType">
                   <option value="">Select Check Type</option>
@@ -224,13 +204,14 @@
         </div>
         <div class="col-md-6">
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
+            <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #micNo="ngModel" class="form-control" name="micNo" tabindex='21' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
-<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
+              <input type="text" #unschNonRoutineNo="ngModel" class="form-control" tabindex='16' name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
+                [(ngModel)]="alert.nonRoutineNo">
             </div>
-            
           </div>
+
+          
           
           <h5 *ngIf="alert.scheduledMaintenance">Generated By Document:</h5>
           
@@ -257,7 +238,14 @@
           </div>
         </div>
         <div class="col-md-6">
-          
+          <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
+            <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
+            <div class="col-sm-8">
+              <input type="text" #micNo="ngModel" class="form-control" name="micNo" tabindex='21' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
+<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
+            </div>
+            
+          </div>
           <div class="form-group" [hidden]="alert.scheduledMaintenance === false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
