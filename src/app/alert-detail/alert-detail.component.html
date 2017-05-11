@@ -8,14 +8,14 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
             <div class="contrls col-sm-8">
-              <span *ngIf="alert.sdrNumber">{{alert.sdrNumber}}</span>
-              <!--<input #sdrNumber="ngModel" type="text" class="form-control" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber">-->
+              <input #sdrNumber="ngModel" type="text" class="form-control" tabindex="1" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber" maxlength="20" pattern="[a-zA-Z0-9]+" >
+              <span *ngIf="sdrNumber.invalid && (showErrors || (sdrNumber.dirty || sdrNumber.touched))" class="error">SDR Number must be alphanumeric.</span>
             </div>
           </div>
         </div>
         <div class="col-md-6">
           <label>
-        <aac-checkbox [checkboxState]="lineMaintenance" tabindex="1" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>
+        <aac-checkbox [checkboxState]="lineMaintenance" tabindex="2" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>
             Line Maintenance
         </label>
         </div>
@@ -23,7 +23,7 @@
       <div class="row form-group">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="col-sm-4 control-label" tabindex='2'>Create Date: <span class="req">*</span></label>
+            <label class="col-sm-4 control-label" tabindex='3'>Create Date: <span class="req">*</span></label>
             <div class="col-sm-8">
               <datetime [timepicker]="false" #sdaCreateDate="ngModel" name="sdaCreateDate" id="sdaCreateDate" [(ngModel)]="alert.createDate"
                 [required]="true" [ngModelOptions]="{standalone: true}"></datetime>
@@ -36,7 +36,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #sdaAlertCode="ngModel" tabindex='11' class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
+              <select #sdaAlertCode="ngModel" tabindex='13' class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
                 <option value="">Select Alert Code</option>
                 <option value="A">A - Significant Structure Defect</option>
                 <option value="B">B - Significant Structure Corrosion</option>
@@ -55,7 +55,8 @@
             <label class="col-sm-4 control-label" for="sdaId">SDA ID:</label>
             <div class="col-sm-8">
 
-              <span *ngIf="alert.sdaId">{{alert.sdaId}}</span>
+              <!--<span *ngIf="alert.sdaId">{{alert.sdaId}}</span>-->
+              <input #sdaId="ngModel" type="text" class="form-control" name="sdaId" id="sdaId" readonly placeholder="" [(ngModel)]="alert.sdaId">
             </div>
 
           </div>
@@ -64,13 +65,12 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="ATACode1">ATA Code 1: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #ataCode1="ngModel" class="form-control" tabindex='12' name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
+              <select #ataCode1="ngModel" class="form-control" tabindex='14' name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
             <option value="">Select ATA Code 1</option>
             <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
           </select>
               <span *ngIf="ataCode1.invalid && (showErrors || (ataCode1.dirty || ataCode1.touched))" class="error">ATA Code 1 is required.</span>
             </div>
-
           </div>
         </div>
       </div>
@@ -79,9 +79,10 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #station="ngModel" tabindex='2' class="form-control" name="station" id="station" maxlength="3" required placeholder=""
+              <input type="text" #station="ngModel" tabindex='4' (input)="station.value=$event.target.value.toUpperCase()"  class="form-control" name="station" id="station" pattern="[a-zA-Z]*" minlength="3" maxlength="3" required placeholder=""
                 [(ngModel)]="alert.station">
-              <span *ngIf="station.invalid && (showErrors || (station.dirty || station.touched))" class="error">Station is required.</span>
+              <span *ngIf="station.invalid && (showErrors || (station.dirty || station.touched))" class="error">Station is required and must be at least 3 characters long.</span>
+              <!--<span *ngIf="(station.invalid && station.errors && station.errors.minlength) && (showErrors || (station.dirty || station.touched))" class="error">Station must be at least 3 characters long.</span>-->
             </div>
           </div>
 
@@ -91,7 +92,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="ATACode2">ATA Code 2: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #ataCode2="ngModel" class="form-control" tabindex='13' name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
+              <select #ataCode2="ngModel" class="form-control" tabindex='15' name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
             <option value="">Select ATA Code 2</option>
             <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
           </select>
@@ -106,7 +107,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="department">Department: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #department="ngModel" class="form-control" tabindex='3' name="department" id="department" required [(ngModel)]="alert.department">
+              <select #department="ngModel" class="form-control" tabindex='5' name="department" id="department" required [(ngModel)]="alert.department">
             <option value="">Select Department</option>
             <option value="engineering">Engineering</option>
             <option value="inspection">Inspection</option>
@@ -119,9 +120,39 @@
         </div>
         <div class="col-md-6">
           <h4>Defect discovered during:(Check appropriate box and describe)</h4>
-          <label class="radio-inline"><input #scheduledMaintenance="ngModel" tabindex='14' [value]="false" required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">Unscheduled Maintenance <br/>(RON,Pilot Report etc.) </label>
-          <label class="radio-inline"><input #scheduledMaintenance="ngModel" tabindex='14' [value]="true" required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">Scheduled Maintenance </label>
+          <div class="radio">
+                <div class="row">
+                    <div class="col-md-5">
+                      <label>
+                    <input #scheduledMaintenance="ngModel" tabindex='16' 
+                            [value]="false" required type="radio" name="defectDiscovered" 
+                            [(ngModel)]="alert.scheduledMaintenance"/>
+                Unscheduled Maintenance 
+                </label>
+                    </div>
+                    <div class="col-md-7" [hidden]="alert.scheduledMaintenance !== false">
+                      <input type="text" #unscheduledDescription="ngModel" 
+                        tabindex='18' class="form-control" 
+                        name="unscheduledDescription" id="unscheduledDescription"
+                        [required]="alert.scheduledMaintenance === false" 
+                        placeholder="Description" [(ngModel)]="alert.unscheduledDescription"/>
+                        (RON,Pilot Report etc.)
+                        <span *ngIf="unscheduledDescription.invalid && (showErrors || (unscheduledDescription.dirty ||unscheduledDescription.touched))" class="error">Unscheduled description is required.</span>
+                    </div>
+                </div>
+          </div>
+          <div class="radio">
+              <label>
+                    <input #scheduledMaintenance="ngModel" tabindex='17' 
+                          [value]="true" required type="radio" 
+                          name="defectDiscovered" 
+                          [(ngModel)]="alert.scheduledMaintenance"/>
+                    Scheduled Maintenance
+              </label>
+          </div>
+          
           <div *ngIf="scheduledMaintenance.invalid && (showErrors || (scheduledMaintenance.dirty || scheduledMaintenance.touched))" class="error">Defect Discovered is required.</div>
+          
         </div>
       </div>
       <div class="row  form-group">
@@ -141,7 +172,7 @@
                   <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
                 </div>
               </div>-->
-              <input type="text" #airCraftNo="ngModel" class="form-control" tabindex='4' name="airCraftNo" id="airCraftNo" required 
+              <input type="text" #airCraftNo="ngModel" class="form-control" tabindex='6' name="airCraftNo" id="airCraftNo" required 
                   [(ngModel)]="alert.aircraftNo"
                   >
               <span *ngIf="airCraftNo.invalid && (showErrors || (airCraftNo.dirty || airCraftNo.touched))" class="error">Aircraft # is required.</span>
@@ -150,19 +181,17 @@
         </div>
         <div class="col-md-6">
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="unscheduledDescription">&nbsp;</label>
+            <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #unscheduledDescription="ngModel" tabindex='15' class="form-control" name="unscheduledDescription" id="unscheduledDescription"
-                [required]="alert.scheduledMaintenance === false" placeholder="" [(ngModel)]="alert.unscheduledDescription">
-              <span *ngIf="unscheduledDescription.invalid && (showErrors || (unscheduledDescription.dirty ||unscheduledDescription.touched))" class="error">Unscheduled description is required.</span>
-              
+              <input type="text" #unschNonRoutineNo="ngModel" class="form-control" tabindex='19' name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
+                [(ngModel)]="alert.nonRoutineNo">
             </div>
           </div>
           <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="checkType">Check Type:</label>
             <div class="col-sm-8">
-              <select #checkType="ngModel" class="form-control" tabindex='15' name="checkType" id="checkType" required [(ngModel)]="alert.checkType">
-                  <option value="">Select Checktype</option>
+              <select #checkType="ngModel" class="form-control" tabindex='20' name="checkType" id="checkType" required [(ngModel)]="alert.checkType">
+                  <option value="">Select Check Type</option>
                   <!--<option *ngFor="let fc of fleetCheckTypes$ | async" [value]="fc.Name">{{fc.Name}}</option>-->
                   <option>A Check</option>
                   <option>B Check</option>
@@ -186,7 +215,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #manufacturer="ngModel" tabindex='5' class="form-control" name="manufacturer" id="manufacturer" required placeholder=""
+              <input type="text" #manufacturer="ngModel" tabindex='7' class="form-control" name="manufacturer" id="manufacturer" required placeholder=""
                 [(ngModel)]="alert.manufacturer">
               <span *ngIf="manufacturer.invalid && (showErrors || (manufacturer.dirty || manufacturer.touched))" class="error">Manufacturer is required.</span>
             </div>
@@ -195,11 +224,12 @@
         </div>
         <div class="col-md-6">
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
+            <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
             <div class="col-sm-8">
-              <input type="text" #unschNonRoutineNo="ngModel" class="form-control" tabindex='16' name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
-                [(ngModel)]="alert.nonRoutineNo">
+              <input type="text" #micNo="ngModel" class="form-control" name="micNo" tabindex='21' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
+<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
             </div>
+            
           </div>
           
           <h5 *ngIf="alert.scheduledMaintenance">Generated By Document:</h5>
@@ -207,7 +237,7 @@
           <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="routineNo">Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #routineNo="ngModel" class="form-control" tabindex='17' name="routineNo" id="routineNo" [required]="alert.scheduledMaintenance  && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.routineNo">
+              <input type="text" #routineNo="ngModel" class="form-control" tabindex='22' name="routineNo" id="routineNo" [required]="alert.scheduledMaintenance  && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.routineNo">
 
             </div>
           </div>
@@ -220,25 +250,18 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #model="ngModel" tabindex='6' class="form-control" name="model" id="model" required placeholder="" [(ngModel)]="alert.model">
+              <input type="text" #model="ngModel" tabindex='8' class="form-control" name="model" id="model" required placeholder="" [(ngModel)]="alert.model">
               <span *ngIf="model.invalid && (showErrors || (model.dirty || model.touched))" class="error">Aircraft Model/Series is required.</span>
             </div>
 
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
-            <div class="col-sm-8">
-              <input type="text" #micNo="ngModel" class="form-control" name="micNo" tabindex='18' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
-<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
-            </div>
-            
-          </div>
+          
           <div class="form-group" [hidden]="alert.scheduledMaintenance === false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #nonRoutineNo="ngModel" class="form-control" tabindex='19' name="nonRoutineNo" id="nonRoutineNo" [required]="alert.scheduledMaintenance  && alert.routineNo.trim()==''" placeholder=""
+              <input type="text" #nonRoutineNo="ngModel" class="form-control" tabindex='23' name="nonRoutineNo" id="nonRoutineNo" [required]="alert.scheduledMaintenance  && alert.routineNo.trim()==''" placeholder=""
                 [(ngModel)]="alert.nonRoutineNo">
             <span *ngIf="alert.scheduledMaintenance && ((nonRoutineNo.invalid && (showErrors || (nonRoutineNo.dirty || nonRoutineNo.touched))) || (routineNo.invalid && (showErrors || (routineNo.dirty || routineNo.touched))))" class="error">Either Routine # or Non-Routine #  is required.</span>
             </div>
@@ -253,7 +276,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #serialNo="ngModel" tabindex='7' class="form-control" name="serialNo" id="serialNo" required placeholder="" [(ngModel)]="alert.serialNo">
+              <input type="text" #serialNo="ngModel" tabindex='9' class="form-control" name="serialNo" id="serialNo" required placeholder="" [(ngModel)]="alert.serialNo">
               <span *ngIf="serialNo.invalid && (showErrors || (serialNo.dirty || serialNo.touched))" class="error">Serial # is required.</span>
             </div>
 
@@ -266,7 +289,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="totalShipTime">Total Ship Time: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #totalShipTime="ngModel" tabindex='8' class="form-control" name="totalShipTime" id="totalShipTime" required placeholder=""
+              <input type="text" #totalShipTime="ngModel" tabindex='10' class="form-control" name="totalShipTime" id="totalShipTime" required placeholder=""
                 [(ngModel)]="alert.totalShipTime">
               <span *ngIf="totalShipTime.invalid && (showErrors || (totalShipTime.dirty || totalShipTime.touched))" class="error">Total Ship Time is required.</span>
             </div>
@@ -280,7 +303,7 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #cycles="ngModel" tabindex='9' class="form-control" name="cycles" id="cycles" required placeholder="" [(ngModel)]="alert.cycles">
+              <input type="text" #cycles="ngModel" tabindex='11' class="form-control" name="cycles" id="cycles" required placeholder="" [(ngModel)]="alert.cycles">
               <span *ngIf="cycles.invalid && (showErrors || (cycles.dirty || cycles.touched))" class="error">Cycles is required.</span>
             </div>
 
@@ -297,7 +320,7 @@
                       required placeholder="" [(ngModel)]="alert.fleet"
                       (change)="populateCheckTypes()"
                       >-->
-              <input type="text" #fleet="ngModel" tabindex='10' class="form-control" name="fleet" id="fleet" 
+              <input type="text" #fleet="ngModel" tabindex='12' class="form-control" name="fleet" id="fleet" 
                       required placeholder="" [(ngModel)]="alert.fleet"
                       >
               <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required.</span>
