@@ -7,7 +7,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
-            <div class="contrls col-sm-8">
+            <div class="controls col-sm-8">
               <input #sdrNumber="ngModel"  type="text" class="form-control" tabindex="1" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber" maxlength="20" pattern="[a-zA-Z0-9]+" >
               <span *ngIf="sdrNumber.invalid && (showErrors || (sdrNumber.dirty || sdrNumber.touched))" class="error">SDR Number must be alphanumeric.</span>
             </div>
@@ -152,7 +152,7 @@
               <input type="text" #airCraftNo="ngModel" class="form-control" tabindex='6' name="airCraftNo" maxlength="5" pattern="[a-zA-Z0-9]*" id="airCraftNo" required 
                   [(ngModel)]="alert.aircraftNo"
                   >
-              <span *ngIf="airCraftNo.invalid && (showErrors || (airCraftNo.dirty || airCraftNo.touched))" class="error">Aircraft # is required  .</span>
+              <span *ngIf="airCraftNo.invalid && (showErrors || (airCraftNo.dirty || airCraftNo.touched))" class="error">Aircraft # is required and must be alphanumeric.</span>
             </div>
           </div>
         </div>
@@ -278,7 +278,7 @@
             <div class="col-sm-8">
               <input type="text" pattern="[0-9]*" maxlength="25" #totalShipTime="ngModel" tabindex='10' class="form-control" name="totalShipTime" id="totalShipTime"   required placeholder=""
                 [(ngModel)]="alert.totalShipTime">
-              <span *ngIf="totalShipTime.invalid && (showErrors || (totalShipTime.dirty || totalShipTime.touched))" class="error">Total Ship Time is required and .</span>
+              <span *ngIf="totalShipTime.invalid && (showErrors || (totalShipTime.dirty || totalShipTime.touched))" class="error">Total Ship Time is required and must be numeric.</span>
             </div>
 
           </div>
@@ -291,7 +291,7 @@
             <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
             <div class="col-sm-8">
               <input type="text" pattern="[0-9]*" maxlength="25"  #cycles="ngModel" tabindex='11' class="form-control" name="cycles" id="cycles" required placeholder="" [(ngModel)]="alert.cycles">
-              <span *ngIf="cycles.invalid && (showErrors || (cycles.dirty || cycles.touched))" class="error">Cycles is required.</span>
+              <span *ngIf="cycles.invalid && (showErrors || (cycles.dirty || cycles.touched))" class="error">Cycles is required and must be numeric.</span>
             </div>
 
           </div>
@@ -310,7 +310,7 @@
               <input type="text" #fleet="ngModel" tabindex='12' class="form-control" name="fleet" id="fleet"  pattern="[a-zA-Z]*" maxlength="20"
                       required placeholder="" [(ngModel)]="alert.fleet"
                       >
-              <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required  and must be alphabet characters long.</span>
+              <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required  and must contain only alphabet characters.</span>
             </div>
 
           </div>
