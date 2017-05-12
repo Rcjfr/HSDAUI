@@ -195,9 +195,9 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #manufacturer="ngModel" tabindex='7' class="form-control" name="manufacturer"  maxlength="100"  id="manufacturer"   required placeholder=""
+              <input type="text" #manufacturer="ngModel" tabindex='7' class="form-control" name="manufacturer" pattern="[a-zA-Z0-9]*"  maxlength="100"  id="manufacturer"   required placeholder=""
                 [(ngModel)]="alert.manufacturer">
-              <span *ngIf="manufacturer.invalid && (showErrors || (manufacturer.dirty || manufacturer.touched))" class="error">Manufacturer is required.</span>
+              <span *ngIf="manufacturer.invalid && (showErrors || (manufacturer.dirty || manufacturer.touched))" class="error">Manufacturer is required and must contain only alphanumerics.</span>
             </div>
 
           </div>
@@ -206,8 +206,9 @@
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #unschNonRoutineNo="ngModel"  maxlength="50" class="form-control" tabindex='16' name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
-                [(ngModel)]="alert.nonRoutineNo">
+                <input type="text" #unschNonRoutineNo="ngModel"  maxlength="50" class="form-control" tabindex='16' pattern="[a-zA-Z0-9]*" name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
+                       [(ngModel)]="alert.nonRoutineNo">
+              <span *ngIf="unschNonRoutineNo.invalid && unschNonRoutineNo.errors.pattern && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))" class="error">Routine # must contain only alphanumerics.</span>
             </div>
           </div>
 
@@ -218,8 +219,8 @@
           <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="routineNo">Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #routineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="routineNo" id="routineNo" [required]="alert.scheduledMaintenance  && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.routineNo">
-
+              <input type="text" #routineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="routineNo" pattern="[a-zA-Z0-9]*" id="routineNo" [required]="alert.scheduledMaintenance === true  && alert.nonRoutineNo.trim()===''" placeholder="" [(ngModel)]="alert.routineNo">
+              <span *ngIf="routineNo.invalid && routineNo.errors.pattern && (showErrors || (routineNo.dirty || routineNo.touched))" class="error">Routine # must contain only alphanumerics.</span>
             </div>
           </div>
 
@@ -231,8 +232,8 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #model="ngModel"  maxlength="15" tabindex='8' class="form-control" name="model" id="model" required placeholder="" [(ngModel)]="alert.model">
-              <span *ngIf="model.invalid && (showErrors || (model.dirty || model.touched))" class="error">Aircraft Model/Series is required.</span>
+              <input type="text" #model="ngModel"  maxlength="15" tabindex='8' class="form-control" name="model" id="model" required pattern="[a-zA-Z0-9]*" placeholder="" [(ngModel)]="alert.model">
+              <span *ngIf="model.invalid && (showErrors || (model.dirty || model.touched))" class="error">Aircraft Model/Series is required and must contain only alphanumerics.</span>
             </div>
 
           </div>
@@ -241,18 +242,22 @@
           <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
             <div class="col-sm-8">
-              <input type="text" #micNo="ngModel" maxlength="50" class="form-control" name="micNo" tabindex='21' id="micNo" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
-<span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
+              <input type="text" #micNo="ngModel" maxlength="50" class="form-control" name="micNo" tabindex='21' id="micNo" pattern="[a-zA-Z0-9]*" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
+              <span *ngIf="micNo.invalid && micNo.errors.pattern && (showErrors || (micNo.dirty || micNo.touched))" class="error">MIC # must contain only alphanumerics.</span>
+              <span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && unschNonRoutineNo.errors.required && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && micNo.errors.required && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
+              
             </div>
-            
           </div>
 
           
           <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
             <label class="col-sm-4 control-label" for="nonroutineNo">Non-Routine #:</label>
             <div class="col-sm-8">
-              <input type="text" #nonroutineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="nonroutineNo" id="nonroutineNo" [required]="alert.scheduledMaintenance  && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.nonroutineNo">
-
+              <input type="text" #nonroutineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="nonroutineNo" pattern="[a-zA-Z0-9]*" id="nonroutineNo" [required]="alert.scheduledMaintenance === true  && alert.routineNo.trim()===''" placeholder="" [(ngModel)]="alert.nonRoutineNo">
+              <span *ngIf="alert.scheduledMaintenance === true && ((nonroutineNo.invalid && nonroutineNo.errors.required && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched))) || (routineNo.invalid && routineNo.errors.required && (showErrors || (routineNo.dirty || routineNo.touched))))" class="error">Either Routine # or Non-Routine # is required.</span>
+              <span *ngIf="nonroutineNo.invalid && nonroutineNo.errors.pattern && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched))" class="error">Non Routine # must contain only alphanumerics.</span>
+                <!--{{nonroutineNo.invalid && nonroutineNo.errors.required && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched)) }}
+              {{routineNo.invalid && routineNo.errors.required && (showErrors || (routineNo.dirty || routineNo.touched))}}-->
             </div>
           </div>
           
@@ -263,8 +268,8 @@
           <div class="form-group">
             <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #serialNo="ngModel" tabindex='9' maxlength="10" class="form-control" name="serialNo" id="serialNo" required placeholder="" [(ngModel)]="alert.serialNo">
-              <span *ngIf="serialNo.invalid && (showErrors || (serialNo.dirty || serialNo.touched))" class="error">Serial # is required.</span>
+              <input type="text" #serialNo="ngModel" tabindex='9' maxlength="10" class="form-control" name="serialNo" id="serialNo" pattern="[a-zA-Z0-9]*" required placeholder="" [(ngModel)]="alert.serialNo">
+              <span *ngIf="serialNo.invalid && (showErrors || (serialNo.dirty || serialNo.touched))" class="error">Serial # is required and must contain only alphanumerics.</span>
             </div>
 
           </div>
@@ -307,10 +312,10 @@
                       required placeholder="" [(ngModel)]="alert.fleet"
                       (change)="populateCheckTypes()"
                       >-->
-              <input type="text" #fleet="ngModel" tabindex='12' class="form-control" name="fleet" id="fleet"  pattern="[a-zA-Z]*" maxlength="20"
+              <input type="text" #fleet="ngModel" tabindex='12' class="form-control" name="fleet" id="fleet"  maxlength="20"
                       required placeholder="" [(ngModel)]="alert.fleet"
                       >
-              <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required  and must contain only alphabet characters.</span>
+              <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required.</span>
             </div>
 
           </div>

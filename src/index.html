@@ -7,8 +7,31 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    /* .loading screen is visible when app is not bootstraped yet, .my-app is empty */
+    .bootstraploading {
+        opacity: 1;
+        z-index: 100;
+        background-color: #ffffff;
+    }
+    .loader-center {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+}  
+  </style>
 </head>
 <body>
-  <app-root>Loading...</app-root>
+                <app-root>
+              <div class="loader-center">
+                <div style="padding-bottom: 10px;"><img src='assets/AAFlag.png' alt="American Airlines"></div>
+                <div style="padding-bottom: 10px;">Loading ...</div>
+                <div style="padding-bottom: 10px;"><img src='assets/u993.gif'></div>
+              </div>
+                </app-root>
+              
+  
 </body>
 </html>
