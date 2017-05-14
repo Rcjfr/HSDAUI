@@ -1,49 +1,51 @@
 ﻿<h2>Create new SDA</h2>
-<form #form="ngForm" novalidate (submit)="saveAlert(form)">
+<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
   <div class="panel panel-default">
     <div class="panel-heading">General Information</div>
     <div class="panel-body">
       <div class="row form-group">
         <div class="col-md-6">
-          <div class="form-group">
+          <div class="row form-group">
             <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
             <div class="controls col-sm-8">
-              <input #sdrNumber="ngModel"  type="text" class="form-control" tabindex="1" name="sdrNumber" id="sdrNumber" placeholder="" [(ngModel)]="alert.sdrNumber" maxlength="20" pattern="[a-zA-Z0-9]+" >
-              <span *ngIf="sdrNumber.invalid && (showErrors || (sdrNumber.dirty || sdrNumber.touched))" class="error">SDR Number must be alphanumeric.</span>
+              <input type="text" class="form-control"
+                     tabindex="1" id="sdrNumber" placeholder=""
+                     formControlName="sdrNumber">
+              <span *ngIf="sdaForm.get('sdrNumber').invalid && (showErrors || (sdaForm.get('sdrNumber').dirty || sdaForm.get('sdrNumber').touched))" class="error">SDR Number must be alphanumeric.</span>
             </div>
           </div>
         </div>
         <div class="col-md-6">
           <label>
-        <aac-checkbox [checkboxState]="lineMaintenance" tabindex="2" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>
+            <aac-checkbox [checkboxState]="lineMaintenance" tabindex="2" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>
             Line Maintenance
-        </label>
+          </label>
         </div>
       </div>
       <div class="row form-group">
         <div class="col-md-6">
-          <div class="form-group">
+          <div class="row form-group">
             <label class="col-sm-4 control-label" tabindex='3'>Create Date: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <datetime [timepicker]="false" #sdaCreateDate="ngModel" name="sdaCreateDate" id="sdaCreateDate" [(ngModel)]="alert.createDate"
-                [required]="true" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }" ></datetime>
-              <span *ngIf="sdaCreateDate.invalid && (showErrors || (sdaCreateDate.dirty || sdaCreateDate.touched))" class="error">Create Date is required.</span>
+              <datetime [timepicker]="false" id="sdaCreateDate" formControlName="createDate"
+                        [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+              <span *ngIf="sdaForm.get('createDate').invalid && (showErrors || (sdaForm.get('createDate').dirty || sdaForm.get('createDate').touched))" class="error">Create Date is required.</span>
             </div>
 
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group">
+          <div class="row form-group">
             <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #sdaAlertCode="ngModel" tabindex='13' class="form-control" name="sdaAlertCode" id="sdaAlertCode" required [(ngModel)]="alert.alertCode">
+              <select tabindex='13' class="form-control" id="sdaAlertCode" formControlName="alertCode">
                 <option value="">Select Alert Code</option>
                 <option value="A">A - Significant Structure Defect</option>
                 <option value="B">B - Significant Structure Corrosion</option>
                 <option value="C">C - Ground Damage</option>
                 <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
-            </select>
-              <span *ngIf="sdaAlertCode.invalid && (showErrors || (sdaAlertCode.dirty || sdaAlertCode.touched))" class="error">Alert Code is required.</span>
+              </select>
+              <span *ngIf="sdaForm.get('alertCode').invalid && (showErrors || (sdaForm.get('alertCode').dirty || sdaForm.get('alertCode').touched))" class="error">Alert Code is required.</span>
             </div>
 
           </div>
@@ -51,52 +53,44 @@
       </div>
       <div class="row  form-group">
         <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="sdaId">SDA ID:</label>
-            <div class="col-sm-8">
+            <div class="row form-group">
+                <label class="col-sm-4 control-label" for="sdaId">SDA ID:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="sdaId" readonly placeholder="" formControlName="sdaId">
+                </div>
 
-              <!--<span *ngIf="alert.sdaId">{{alert.sdaId}}</span>-->
-              <input #sdaId="ngModel" type="text" class="form-control" name="sdaId" id="sdaId" readonly placeholder="" [(ngModel)]="alert.sdaId">
             </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="ATACode1">ATA Code 1: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <select #ataCode1="ngModel" class="form-control" tabindex='14' name="ATACode1" id="ATACode1" required [(ngModel)]="alert.ataCode1" (change)='getAlertCode2s($event.target.value)'>
-            <option value="">Select ATA Code 1</option>
-            <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
-          </select>
-              <span *ngIf="ataCode1.invalid && (showErrors || (ataCode1.dirty || ataCode1.touched))" class="error">ATA Code 1 is required.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
+          <div class="row form-group">
             <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" #station="ngModel" tabindex='4' (input)="station.value=$event.target.value.toUpperCase()"  class="form-control" name="station" id="station" pattern="[a-zA-Z]*" minlength="3" maxlength="3" required placeholder=""
-                [(ngModel)]="alert.station">
-              <span *ngIf="station.invalid && (showErrors || (station.dirty || station.touched))" class="error">Station is required and must be at least 3 alphabet characters long.</span>
-              <!--<span *ngIf="(station.invalid && station.errors && station.errors.minlength) && (showErrors || (station.dirty || station.touched))" class="error">Station must be at least 3 characters long.</span>-->
+              <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" placeholder=""
+                     formControlName="station" />
+              <span *ngIf="sdaForm.get('station').invalid && (showErrors || (sdaForm.get('station').dirty || sdaForm.get('station').touched))" class="error">
+                <span *ngIf="sdaForm.get('station').errors.required">Station is required.</span>
+                <span *ngIf="sdaForm.get('station').errors.minlength">Station must be 3 alphabet characters.</span>
+              </span>
             </div>
           </div>
-
-
         </div>
         <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="ATACode2">ATA Code 2: <span class="req">*</span></label>
+            <div class="row form-group">
+                <label class="col-sm-4 control-label" for="ataCode1">ATA Code 1: <span class="req">*</span></label>
+                <div class="col-sm-8">
+                    <select class="form-control" tabindex='14' id="ataCode1" (change)='getAlertCode2s($event.target.value)' formControlName="ataCode1">
+                        <option value="">Select ATA Code 1</option>
+                        <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
+                    </select>
+                    <span *ngIf="sdaForm.get('ataCode1').invalid && (showErrors || (sdaForm.get('ataCode1').dirty || sdaForm.get('ataCode1').touched))" class="error">ATA Code 1 is required.</span>
+                </div>
+            </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="ataCode2">ATA Code 2: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #ataCode2="ngModel" class="form-control" tabindex='15' name="ATACode2" id="ATACode2" required [(ngModel)]="alert.ataCode2">
-            <option value="">Select ATA Code 2</option>
-            <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
-          </select>
-              <span *ngIf="ataCode2.invalid && (showErrors || (ataCode2.dirty || ataCode2.touched))" class="error">ATA Code 2 is required.</span>
+              <select class="form-control" tabindex='15' id="ataCode2" required formControlName="ataCode2">
+                <option value="">Select ATA Code 2</option>
+                <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
+              </select>
+              <span *ngIf="sdaForm.get('ataCode2').invalid && (showErrors || (sdaForm.get('ataCode2').dirty || sdaForm.get('ataCode2').touched))" class="error">ATA Code 2 is required.</span>
             </div>
 
           </div>
@@ -104,223 +98,194 @@
       </div>
       <div class="row  form-group">
         <div class="col-md-6">
-          <div class="form-group">
+          
+
+
+        </div>
+        <div class="col-md-6">
+            
+
+        </div>
+      </div>
+      <div class="row  form-group">
+        <div class="col-md-6">
+          <div class="row form-group">
             <label class="col-sm-4 control-label" for="department">Department: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <select #department="ngModel" class="form-control" tabindex='5' name="department" id="department" required [(ngModel)]="alert.department">
-            <option value="">Select Department</option>
-            <option value="engineering">Engineering</option>
-            <option value="inspection">Inspection</option>
-            <option value="other">Other</option>
-          </select>
-              <span *ngIf="department.invalid && (showErrors || (department.dirty || department.touched))" class="error">Department is required.</span>
+              <select class="form-control" tabindex='5' id="department" formControlName="department">
+                <option value="">Select Department</option>
+                <option value="engineering">Engineering</option>
+                <option value="inspection">Inspection</option>
+                <option value="other">Other</option>
+              </select>
+              <span *ngIf="sdaForm.get('department').invalid && (showErrors || (sdaForm.get('department').dirty || sdaForm.get('department').touched))" class="error">Department is required.</span>
             </div>
           </div>
-
-        </div>
-        <div class="col-md-6">
-          <h4>Defect discovered during:(Check appropriate box and describe)</h4>
-
-          <label class="radio-inline">
-            <input #scheduledMaintenance="ngModel" tabindex='14' [value]="false" 
-                  required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">
-                  Unscheduled Maintenance
-                  </label>
-          <label class="radio-inline"><input #scheduledMaintenance="ngModel" tabindex='14' [value]="true" required type="radio" name="defectDiscovered" [(ngModel)]="alert.scheduledMaintenance">Scheduled Maintenance </label>
-          
-          
-          <div *ngIf="scheduledMaintenance.invalid && (showErrors || (scheduledMaintenance.dirty || scheduledMaintenance.touched))" class="error">Defect Discovered is required.</div>
-        </div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="airCraftNo">Aircraft #: <span class="req">*</span></label>
+          <!--Aircraft Info Section-->
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="aircraftNo">Aircraft #: <span class="req">*</span></label>
             <div class="col-sm-8">
               <!--<div class="input-group">
-                <input type="text" #airCraftNo="ngModel" class="form-control" name="airCraftNo" id="airCraftNo" required 
-                  [(ngModel)]="alert.aircraftNo"
-                 [typeahead]="noseNumbers$" 
-                  (typeaheadOnSelect)="noseNumberOnSelect($event)" 
-                  (change)="populateAircraftInfo($event.target.value)"
-                  >
-                  
-                <div class="input-group-addon">
-                  <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
-                </div>
+                  <input type="text" #airCraftNo="ngModel" class="form-control" name="airCraftNo" id="airCraftNo" required
+                         [(ngModel)]="alert.aircraftNo"
+                         [typeahead]="noseNumbers$"
+                         (typeaheadOnSelect)="noseNumberOnSelect($event)"
+                         (change)="populateAircraftInfo($event.target.value)">
+
+                  <div class="input-group-addon">
+                      <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
+                  </div>
               </div>-->
-              <input type="text" #airCraftNo="ngModel" class="form-control" tabindex='6' name="airCraftNo" maxlength="5" pattern="[a-zA-Z0-9]*" id="airCraftNo" required 
-                  [(ngModel)]="alert.aircraftNo"
-                  >
-              <span *ngIf="airCraftNo.invalid && (showErrors || (airCraftNo.dirty || airCraftNo.touched))" class="error">Aircraft # is required and must be alphanumeric.</span>
+              <input type="text" class="form-control" tabindex='6' id="aircraftNo"
+                     formControlName="aircraftNo" />
+              <span *ngIf="sdaForm.get('aircraftNo').invalid && (showErrors || (sdaForm.get('aircraftNo').dirty || sdaForm.get('aircraftNo').touched))" class="error">Aircraft # is required and must be alphanumeric.</span>
             </div>
           </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" tabindex='7' class="form-control" id="manufacturer" placeholder=""
+                     formControlName="manufacturer">
+              <span *ngIf="sdaForm.get('manufacturer').invalid && (showErrors || (sdaForm.get('manufacturer').dirty || sdaForm.get('manufacturer').touched))" class="error">Manufacturer is required and must contain only alphanumerics.</span>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" tabindex='8' class="form-control" id="model" placeholder="" formControlName="model">
+              <span *ngIf="sdaForm.get('model').invalid && (showErrors || (sdaForm.get('model').dirty || sdaForm.get('model').touched))" class="error">Aircraft Model/Series is required and must contain only alphanumerics.</span>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" tabindex='9' class="form-control" id="serialNo" placeholder="" formControlName="serialNo">
+              <span *ngIf="sdaForm.get('serialNo').invalid && (showErrors || (sdaForm.get('serialNo').dirty || sdaForm.get('serialNo').touched))" class="error">Serial # is required and must contain only alphanumerics.</span>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="totalShipTime">Total Ship Time: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" tabindex='10' class="form-control" id="totalShipTime" placeholder=""
+                     formControlName="totalShipTime">
+              <span *ngIf="sdaForm.get('totalShipTime').invalid && (showErrors || (sdaForm.get('totalShipTime').dirty || sdaForm.get('totalShipTime').touched))" class="error">Total Ship Time is required and must be numeric.</span>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <input type="text" tabindex='11' class="form-control" id="cycles" placeholder="" formControlName="cycles">
+              <span *ngIf="sdaForm.get('cycles').invalid && (showErrors || (sdaForm.get('cycles').dirty || sdaForm.get('cycles').touched))" class="error">Cycles is required and must be numeric.</span>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-4 control-label" for="fleet">Fleet: <span class="req">*</span></label>
+            <div class="col-sm-8">
+              <!--<input type="text" #fleet="ngModel" tabindex='10' class="form-control" name="fleet" id="fleet"
+                         required placeholder="" [(ngModel)]="alert.fleet"
+                         (change)="populateCheckTypes()">-->
+              <input type="text" tabindex='12' class="form-control" id="fleet"
+                     placeholder="" formControlName="fleet">
+              <span *ngIf="sdaForm.get('fleet').invalid && (showErrors || (sdaForm.get('fleet').dirty || sdaForm.get('fleet').touched))" class="error">Fleet is required.</span>
+            </div>
+
+          </div>
+
         </div>
         <div class="col-md-6">
-          <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" #unscheduledDescription="ngModel" tabindex='15' class="form-control" name="unscheduledDescription" id="unscheduledDescription"
-                [required]="alert.scheduledMaintenance === false" placeholder="" [(ngModel)]="alert.unscheduledDescription">
-              (RON,Pilot Report etc.)
-              <div *ngIf="unscheduledDescription.invalid && (showErrors || (unscheduledDescription.dirty ||unscheduledDescription.touched))" class="error">Description is required for unscheduled maintenance.</div>
-              
+          <div class="row form-group">
+            <h4>Defect discovered during:(Check appropriate box and describe)</h4>
+            <label class="radio-inline">
+              <input tabindex='14' value="0"
+                     type="radio" formControlName="defectDiscoveredDuring" />
+              Unscheduled Maintenance
+            </label>
+            <label class="radio-inline">
+              <input tabindex='14'
+                     value="1" type="radio"
+                     formControlName="defectDiscoveredDuring" />Scheduled Maintenance
+            </label>
+            <div *ngIf="sdaForm.get('defectDiscoveredDuring').invalid && (showErrors || (sdaForm.get('defectDiscoveredDuring').dirty || sdaForm.get('defectDiscoveredDuring').touched))" class="error">Defect Discovered during is required.</div>
+            <div *ngIf="sdaForm.get('defectDiscoveredDuring').value === '0' && sdaForm.get('unscheduledMaintenanceGroup').errors?.atleastone" class="error">Either Non-Routine # or MIC # is required.</div>
+            <div *ngIf="sdaForm.get('defectDiscoveredDuring').value === '1' && sdaForm.get('scheduledMaintenanceGroup').errors?.atleastone" class="error">Either Routine # or Non-Routine # is required.</div>
+          </div>
+          <div formGroupName="unscheduledMaintenanceGroup" [hidden]="sdaForm.get('defectDiscoveredDuring').value !== '0'">
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" tabindex='15' class="form-control" id="unscheduledDescription"
+                       placeholder="" formControlName="description">
+                (RON,Pilot Report etc.)
+                <div *ngIf="sdaForm.get('unscheduledMaintenanceGroup.description').invalid && (showErrors || (sdaForm.get('unscheduledMaintenanceGroup.description').dirty ||sdaForm.get('unscheduledMaintenanceGroup.description').touched))" class="error">Description is required for unscheduled maintenance.</div>
+
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
+              <div class="col-sm-8">
+                <input type="text" maxlength="50" class="form-control" tabindex='16' id="unschNonRoutineNo" placeholder=""
+                       formControlName="nonRoutineNo">
+                <span *ngIf="sdaForm.get('unscheduledMaintenanceGroup.nonRoutineNo').invalid && sdaForm.get('unscheduledMaintenanceGroup.nonRoutineNo').errors.pattern && (showErrors || (sdaForm.get('unscheduledMaintenanceGroup.nonRoutineNo').dirty || sdaForm.get('unscheduledMaintenanceGroup.nonRoutineNo').touched))" class="error">Non Routine # must contain only alphanumerics.</span>
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
+              <div class="col-sm-8">
+                <input type="text" maxlength="50" class="form-control" tabindex='17' id="micNo" placeholder="" formControlName="micNo">
+                <span *ngIf="sdaForm.get('unscheduledMaintenanceGroup.micNo').invalid && sdaForm.get('unscheduledMaintenanceGroup.micNo').errors.pattern && (showErrors || (sdaForm.get('unscheduledMaintenanceGroup.micNo').dirty || sdaForm.get('unscheduledMaintenanceGroup.micNo').touched))" class="error">MIC # must contain only alphanumerics.</span>
+
+
+              </div>
             </div>
           </div>
-          <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="checkType">Check Type:<span class="req">*</span></label>
-            <div class="col-sm-8">
-              <select #checkType="ngModel" class="form-control" tabindex='20' name="checkType" id="checkType" required [(ngModel)]="alert.checkType">
+          <div formGroupName="scheduledMaintenanceGroup" [hidden]="sdaForm.get('defectDiscoveredDuring').value !== '1'">
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="checkType">Check Type:<span class="req">*</span></label>
+              <div class="col-sm-8">
+                <select class="form-control" tabindex='20' id="checkType" formControlName="checkType">
                   <option value="">Select Check Type</option>
                   <!--<option *ngFor="let fc of fleetCheckTypes$ | async" [value]="fc.Name">{{fc.Name}}</option>-->
                   <option>A Check</option>
                   <option>B Check</option>
                   <option>C Check</option>
-              </select>
+                </select>
 
-              <!--<input type="text" #checkType="ngModel" class="form-control" name="checkType" id="checkType" [required]="alert.scheduledMaintenance" 
-                  [(ngModel)]="alert.checkType"
-                 [typeahead]="fleetCheckTypes$"
-                 [typeaheadOptionField]="'Name'"
-                 [typeaheadMinLength] ="0"
-                  >-->
-              <span *ngIf="checkType.invalid && (showErrors || (checkType.dirty || checkType.touched))" class="error">Check Type is required.</span>
+                <!--<input type="text" #checkType="ngModel" class="form-control" name="checkType" id="checkType" [required]="alert.scheduledMaintenance"
+                           [(ngModel)]="alert.checkType"
+                           [typeahead]="fleetCheckTypes$"
+                           [typeaheadOptionField]="'Name'"
+                           [typeaheadMinLength]="0">-->
+                <span *ngIf="sdaForm.get('scheduledMaintenanceGroup.checkType').invalid && (showErrors || (sdaForm.get('scheduledMaintenanceGroup.checkType').dirty || sdaForm.get('scheduledMaintenanceGroup.checkType').touched))" class="error">Check Type is required.</span>
+              </div>
+            </div>
+            <h5>Generated By Document:</h5>
+
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="routineNo">Routine #:</label>
+              <div class="col-sm-8">
+                <input type="text" maxlength="50" class="form-control" tabindex='21' id="routineNo" placeholder="" formControlName="routineNo">
+                <span *ngIf="sdaForm.get('scheduledMaintenanceGroup.routineNo').invalid && sdaForm.get('scheduledMaintenanceGroup.routineNo').errors.pattern && (showErrors || (sdaForm.get('scheduledMaintenanceGroup.routineNo').dirty || sdaForm.get('scheduledMaintenanceGroup.routineNo').touched))" class="error">Routine # must contain only alphanumerics.</span>
+              </div>
+            </div>
+            <div class="row form-group">
+              <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine #:</label>
+              <div class="col-sm-8">
+                <input type="text" maxlength="50" class="form-control" tabindex='22' id="nonRoutineNo" placeholder="" formControlName="nonRoutineNo" />
+
+                <span *ngIf="sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').invalid && sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').errors.pattern && (showErrors || (sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').dirty || sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').touched))" class="error">Non Routine # must contain only alphanumerics.</span>
+
+              </div>
             </div>
           </div>
 
-        </div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" #manufacturer="ngModel" tabindex='7' class="form-control" name="manufacturer" pattern="[a-zA-Z0-9]*"  maxlength="100"  id="manufacturer"   required placeholder=""
-                [(ngModel)]="alert.manufacturer">
-              <span *ngIf="manufacturer.invalid && (showErrors || (manufacturer.dirty || manufacturer.touched))" class="error">Manufacturer is required and must contain only alphanumerics.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
-            <div class="col-sm-8">
-                <input type="text" #unschNonRoutineNo="ngModel"  maxlength="50" class="form-control" tabindex='16' pattern="[a-zA-Z0-9]*" name="unschNonRoutineNo" id="unschNonRoutineNo" [required]="alert.scheduledMaintenance === false  && alert.micNo.trim()==''" placeholder=""
-                       [(ngModel)]="alert.nonRoutineNo">
-              <span *ngIf="unschNonRoutineNo.invalid && unschNonRoutineNo.errors.pattern && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))" class="error">Routine # must contain only alphanumerics.</span>
-            </div>
-          </div>
-
-          
-          
-          <h5 *ngIf="alert.scheduledMaintenance">Generated By Document:</h5>
-          
-          <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="routineNo">Routine #:</label>
-            <div class="col-sm-8">
-              <input type="text" #routineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="routineNo" pattern="[a-zA-Z0-9]*" id="routineNo" [required]="alert.scheduledMaintenance === true  && alert.nonRoutineNo.trim()===''" placeholder="" [(ngModel)]="alert.routineNo">
-              <span *ngIf="routineNo.invalid && routineNo.errors.pattern && (showErrors || (routineNo.dirty || routineNo.touched))" class="error">Routine # must contain only alphanumerics.</span>
-            </div>
-          </div>
 
 
         </div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" #model="ngModel"  maxlength="15" tabindex='8' class="form-control" name="model" id="model" required pattern="[a-zA-Z0-9]*" placeholder="" [(ngModel)]="alert.model">
-              <span *ngIf="model.invalid && (showErrors || (model.dirty || model.touched))" class="error">Aircraft Model/Series is required and must contain only alphanumerics.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group" [hidden]="alert.scheduledMaintenance === true || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
-            <div class="col-sm-8">
-              <input type="text" #micNo="ngModel" maxlength="50" class="form-control" name="micNo" tabindex='21' id="micNo" pattern="[a-zA-Z0-9]*" [required]="alert.scheduledMaintenance === false && alert.nonRoutineNo.trim()==''" placeholder="" [(ngModel)]="alert.micNo">
-              <span *ngIf="micNo.invalid && micNo.errors.pattern && (showErrors || (micNo.dirty || micNo.touched))" class="error">MIC # must contain only alphanumerics.</span>
-              <span *ngIf="alert.scheduledMaintenance === false && ((unschNonRoutineNo.invalid && unschNonRoutineNo.errors.required && (showErrors || (unschNonRoutineNo.dirty || unschNonRoutineNo.touched))) || (micNo.invalid && micNo.errors.required && (showErrors || (micNo.dirty || micNo.touched))))" class="error">Either Non-Routine # or MIC # is required.</span>
-              
-            </div>
-          </div>
-
-          
-          <div class="form-group" [hidden]="alert.scheduledMaintenance===false || alert.scheduledMaintenance == null">
-            <label class="col-sm-4 control-label" for="nonroutineNo">Non-Routine #:</label>
-            <div class="col-sm-8">
-              <input type="text" #nonroutineNo="ngModel" maxlength="50" class="form-control" tabindex='22' name="nonroutineNo" pattern="[a-zA-Z0-9]*" id="nonroutineNo" [required]="alert.scheduledMaintenance === true  && alert.routineNo.trim()===''" placeholder="" [(ngModel)]="alert.nonRoutineNo">
-              <span *ngIf="alert.scheduledMaintenance === true && ((nonroutineNo.invalid && nonroutineNo.errors.required && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched))) || (routineNo.invalid && routineNo.errors.required && (showErrors || (routineNo.dirty || routineNo.touched))))" class="error">Either Routine # or Non-Routine # is required.</span>
-              <span *ngIf="nonroutineNo.invalid && nonroutineNo.errors.pattern && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched))" class="error">Non Routine # must contain only alphanumerics.</span>
-                <!--{{nonroutineNo.invalid && nonroutineNo.errors.required && (showErrors || (nonroutineNo.dirty || nonroutineNo.touched)) }}
-              {{routineNo.invalid && routineNo.errors.required && (showErrors || (routineNo.dirty || routineNo.touched))}}-->
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" #serialNo="ngModel" tabindex='9' maxlength="10" class="form-control" name="serialNo" id="serialNo" pattern="[a-zA-Z0-9]*" required placeholder="" [(ngModel)]="alert.serialNo">
-              <span *ngIf="serialNo.invalid && (showErrors || (serialNo.dirty || serialNo.touched))" class="error">Serial # is required and must contain only alphanumerics.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">&nbsp;</div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="totalShipTime">Total Ship Time: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" pattern="[0-9]*" maxlength="25" #totalShipTime="ngModel" tabindex='10' class="form-control" name="totalShipTime" id="totalShipTime"   required placeholder=""
-                [(ngModel)]="alert.totalShipTime">
-              <span *ngIf="totalShipTime.invalid && (showErrors || (totalShipTime.dirty || totalShipTime.touched))" class="error">Total Ship Time is required and must be numeric.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">&nbsp;</div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" pattern="[0-9]*" maxlength="25"  #cycles="ngModel" tabindex='11' class="form-control" name="cycles" id="cycles" required placeholder="" [(ngModel)]="alert.cycles">
-              <span *ngIf="cycles.invalid && (showErrors || (cycles.dirty || cycles.touched))" class="error">Cycles is required and must be numeric.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">&nbsp;</div>
-      </div>
-      <div class="row  form-group">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="col-sm-4 control-label" for="fleet">Fleet: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <!--<input type="text" #fleet="ngModel" tabindex='10' class="form-control" name="fleet" id="fleet" 
-                      required placeholder="" [(ngModel)]="alert.fleet"
-                      (change)="populateCheckTypes()"
-                      >-->
-              <input type="text" #fleet="ngModel" tabindex='12' class="form-control" name="fleet" id="fleet"  maxlength="20"
-                      required placeholder="" [(ngModel)]="alert.fleet"
-                      >
-              <span *ngIf="fleet.invalid && (showErrors || (fleet.dirty || fleet.touched))" class="error">Fleet is required.</span>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-6">&nbsp;</div>
       </div>
     </div>
   </div>
@@ -332,3 +297,9 @@
     </div>
   </div>
 </form>
+<pre>{{sdaForm.errors | json}}
+
+{{sdaForm.valid}}
+{{sdaForm.get('scheduledMaintenanceGroup').errors |json}}
+{{sdaForm.get('unscheduledMaintenanceGroup').errors |json}}
+</pre>
