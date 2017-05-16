@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import * as $ from 'jquery';
 import { AlertDetailComponent } from './alert-detail.component';
 import { CheckboxComponent } from '../common/directives/checkbox/checkbox.component';
@@ -56,7 +56,7 @@ const mockResponse = [
       declarations: [AlertDetailComponent, CheckboxComponent],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
-        FormsModule,
+        ReactiveFormsModule, FormsModule,
         HttpModule,
         NKDatetimeModule,
         TypeaheadModule.forRoot(),

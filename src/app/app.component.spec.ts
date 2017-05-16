@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+﻿import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AlertsComponent } from './alerts/alerts.component';
 import { AlertDetailComponent } from './alert-detail/alert-detail.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -18,6 +18,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         AppRoutingModule,
+        ReactiveFormsModule,
         FormsModule,
         NKDatetimeModule,
         TypeaheadModule.forRoot()

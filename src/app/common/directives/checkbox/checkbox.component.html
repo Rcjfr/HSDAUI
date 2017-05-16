@@ -1,6 +1,9 @@
 ﻿<div class="customComponent">
   <div>
-    <input type="checkbox" name="{{checkboxId}}" [attr.tabindex]="tabindex" id="{{checkboxId}}" [(ngModel)]="checkboxState.isChecked" (change)="checkboxChanged()"
+    <input type="checkbox" name="{{checkboxId}}" 
+           [attr.tabindex]="tabindex" id="{{checkboxId}}" 
+           [(ngModel)]="checkboxState.isChecked" 
+           (change)="checkboxChanged()"
            [disabled]="!checkboxState.isEnabled" />
     <label class="checkboxLabel">
       <span class="control"></span>
