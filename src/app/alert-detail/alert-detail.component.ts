@@ -27,25 +27,6 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 import { of } from "rxjs/observable/of";
 
-function validateScheduledMaintenanceFields(c: AbstractControl): { [key: string]: boolean } | null {
-    const routineNoControl = c.get('routineNo');
-    const nonRoutineNoControl = c.get('nonRoutineNo');
-
-    if (nonRoutineNoControl.value || routineNoControl.value) {
-
-        return null;
-    }
-    return { 'atleastone': true };
-}
-function validateUnscheduledMaintenanceFields(c: AbstractControl): { [key: string]: boolean } | null {
-    const micNoControl = c.get('micNo');
-    const nonRoutineNoControl = c.get('nonRoutineNo');
-    if (micNoControl.value || nonRoutineNoControl.value) {
-        return null;
-    }
-    return { 'atleastone': true };
-}
-
 @Component({
     selector: 'app-alert-detail',
     templateUrl: './alert-detail.component.html',
@@ -201,13 +182,19 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
                 nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
                 routineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
             },
-                { validator: Validators.compose([CustomValidators.requiredIf(defectDiscoveredDuring, '1'),validateScheduledMaintenanceFields]) }),
+              {
+                 validator: CustomValidators.validateScheduledMaintenanceFields(defectDiscoveredDuring, '1')
+              }
+            ),
             unscheduledMaintenanceGroup: this.fb.group({
                 description: ['', [CustomValidators.requiredIf(defectDiscoveredDuring, '0')]],
                 nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
                 micNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
             },
-                { validator: Validators.compose([CustomValidators.requiredIf(defectDiscoveredDuring, '0'), validateUnscheduledMaintenanceFields]) })
+              {
+                 validator: CustomValidators.validateUnscheduledMaintenanceFields(defectDiscoveredDuring, '0')
+              }
+            )
 
 
 
@@ -268,38 +255,38 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     populateCheckTypes() {
         this.fleetCheckTypes$ = this.checkTypes$.map(a => a.find(b => b.Fleet === this.alert.fleet).CheckTypes);
     }
-    setDefectDetectedFields(defectDiscoveredDuring: number): void {
-        const scheduledGroup = this.sdaForm.get('scheduledMaintenanceGroup');
-        const unscheduledGroup = this.sdaForm.get('unscheduledMaintenanceGroup');
-        if (defectDiscoveredDuring == 1) {
-            unscheduledGroup.clearValidators();
-            unscheduledGroup.get("description").clearValidators();
-            unscheduledGroup.get("micNo").clearValidators();
-            unscheduledGroup.get("nonRoutineNo").clearValidators();
+    //setDefectDetectedFields(defectDiscoveredDuring: number): void {
+    //    const scheduledGroup = this.sdaForm.get('scheduledMaintenanceGroup');
+    //    const unscheduledGroup = this.sdaForm.get('unscheduledMaintenanceGroup');
+    //    if (defectDiscoveredDuring == 1) {
+    //        unscheduledGroup.clearValidators();
+    //        unscheduledGroup.get("description").clearValidators();
+    //        unscheduledGroup.get("micNo").clearValidators();
+    //        unscheduledGroup.get("nonRoutineNo").clearValidators();
 
-            scheduledGroup.setValidators(validateScheduledMaintenanceFields);
-            scheduledGroup.get("checkType").setValidators([Validators.required]);
-            scheduledGroup.get("routineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-            scheduledGroup.get("nonRoutineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-        } else {
-            scheduledGroup.clearValidators();
-            scheduledGroup.get('checkType').clearValidators();
-            scheduledGroup.get('routineNo').clearValidators();
-            scheduledGroup.get('nonRoutineNo').clearValidators();
-            unscheduledGroup.setValidators(validateUnscheduledMaintenanceFields);
-            unscheduledGroup.get('description').setValidators([Validators.required]);
-            unscheduledGroup.get('micNo').setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-            unscheduledGroup.get('nonRoutineNo').setValidators([Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]);
-        }
-        scheduledGroup.updateValueAndValidity();
-        unscheduledGroup.updateValueAndValidity();
-        scheduledGroup.get('checkType').updateValueAndValidity();
-        scheduledGroup.get('routineNo').updateValueAndValidity();
-        scheduledGroup.get('nonRoutineNo').updateValueAndValidity();
-        unscheduledGroup.get('description').updateValueAndValidity();
-        unscheduledGroup.get('micNo').updateValueAndValidity();
-        unscheduledGroup.get('nonRoutineNo').updateValueAndValidity();
-    }
+    //        scheduledGroup.setValidators(validateScheduledMaintenanceFields);
+    //        scheduledGroup.get("checkType").setValidators([Validators.required]);
+    //        scheduledGroup.get("routineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+    //        scheduledGroup.get("nonRoutineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+    //    } else {
+    //        scheduledGroup.clearValidators();
+    //        scheduledGroup.get('checkType').clearValidators();
+    //        scheduledGroup.get('routineNo').clearValidators();
+    //        scheduledGroup.get('nonRoutineNo').clearValidators();
+    //        unscheduledGroup.setValidators(validateUnscheduledMaintenanceFields);
+    //        unscheduledGroup.get('description').setValidators([Validators.required]);
+    //        unscheduledGroup.get('micNo').setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+    //        unscheduledGroup.get('nonRoutineNo').setValidators([Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]);
+    //    }
+    //    scheduledGroup.updateValueAndValidity();
+    //    unscheduledGroup.updateValueAndValidity();
+    //    scheduledGroup.get('checkType').updateValueAndValidity();
+    //    scheduledGroup.get('routineNo').updateValueAndValidity();
+    //    scheduledGroup.get('nonRoutineNo').updateValueAndValidity();
+    //    unscheduledGroup.get('description').updateValueAndValidity();
+    //    unscheduledGroup.get('micNo').updateValueAndValidity();
+    //    unscheduledGroup.get('nonRoutineNo').updateValueAndValidity();
+    //}
     saveAlert() {
         this.genericValidator.formSubmitted = true;
         this.displayMessage = this.genericValidator.processMessages(this.sdaForm);
