@@ -116,25 +116,28 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
                 required: 'Defect Discovered during is required.'
             },
             unscheduledMaintenanceGroup: {
-                atleastone: 'Either Non-Routine # or MIC # is required.'
+                atleastone: 'Non-Routine # or MIC # is required.'
             },
             scheduledMaintenanceGroup: {
-                atleastone: 'Either Routine # or Non-Routine # is required.'
+                atleastone: 'Routine # or Non-Routine # is required.'
             },
-            'description': {
+            'unscheduledMaintenanceGroup.description': {
                 required:'Description is required for unscheduled maintenance.'
             },
-            'nonRoutineNo': {
+            'unscheduledMaintenanceGroup.nonRoutineNo': {
                 pattern: 'Non Routine # must contain only alphanumerics.'
             },
-            'micNo': {
+            'unscheduledMaintenanceGroup.micNo': {
                 pattern: 'MIC # must contain only alphanumerics.'
             },
-            'checkType': {
+            'scheduledMaintenanceGroup.checkType': {
                 required: 'Check Type is required.'
             },
-            'routineNo': {
+            'scheduledMaintenanceGroup.routineNo': {
                 pattern: 'Routine # must contain only alphanumerics.'
+            },
+            'scheduledMaintenanceGroup.nonRoutineNo': {
+              pattern: 'Non Routine # must contain only alphanumerics.'
             }
         };
         // Define an instance of the validator for use with this form, 
@@ -144,11 +147,16 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     }
     ngAfterViewInit(): void {
         // Watch for the blur event from any input element on the form.
+      console.log(this.formInputElements.length);
         let controlBlurs: Observable<any>[] = this.formInputElements
-            .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur'));
+          .map((formControl: ElementRef) => {
+              //console.log(new Date(),formControl.nativeElement.id);
+            return Observable.fromEvent(formControl.nativeElement, 'blur');
+            }
+          );
 
         // Merge the blur event observable with the valueChanges observable
-        Observable.merge(this.sdaForm.valueChanges, ...controlBlurs)
+        Observable.merge(this.sdaForm.valueChanges.debounceTime(1000), ...controlBlurs)
             //.debounceTime(800)
             .subscribe(value => {this.displayMessage = this.genericValidator.processMessages(this.sdaForm);});
     }
@@ -156,7 +164,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
 
         const defectDiscoveredDuring = this.fb.control(null, Validators.required);
         this.sdaForm = this.fb.group({
-            sdaId: '',
+          sdaId: new FormControl({ value: '', disabled: true }),
             sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
             createDate: [new Date(), [Validators.required]],
             lineMaintenance: false,
@@ -177,30 +185,30 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             cycles: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
             fleet: ['', [Validators.required, Validators.maxLength(20)]],
             defectDiscoveredDuring: defectDiscoveredDuring,
-            scheduledMaintenanceGroup: this.fb.group({
-                checkType: ['', [CustomValidators.requiredIf(defectDiscoveredDuring, '1')]],
+          scheduledMaintenanceGroup: this.fb.group({
+                checkType: ['', []],
                 nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
                 routineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
             },
               {
-                 validator: CustomValidators.validateScheduledMaintenanceFields(defectDiscoveredDuring, '1')
+                 validator: CustomValidators.validateScheduledMaintenanceFields
               }
             ),
-            unscheduledMaintenanceGroup: this.fb.group({
-                description: ['', [CustomValidators.requiredIf(defectDiscoveredDuring, '0')]],
+          unscheduledMaintenanceGroup: this.fb.group({
+                description: ['', []],
                 nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
                 micNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
             },
               {
-                 validator: CustomValidators.validateUnscheduledMaintenanceFields(defectDiscoveredDuring, '0')
+                 validator: CustomValidators.validateUnscheduledMaintenanceFields
               }
             )
 
 
 
         });
-        //this.sdaForm.get('defectDiscoveredDuring').valueChanges
-        //    .subscribe(val => this.setDefectDetectedFields(val));
+        this.sdaForm.get('defectDiscoveredDuring').valueChanges
+            .subscribe(val => this.setDefectDetectedFields(val));
 
         this.ataCodes$ = this.ataCodesService.getATACodes();
         this.checkTypes$ = this.checkTypesService.getCheckTypes();
@@ -255,38 +263,38 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     populateCheckTypes() {
         this.fleetCheckTypes$ = this.checkTypes$.map(a => a.find(b => b.Fleet === this.alert.fleet).CheckTypes);
     }
-    //setDefectDetectedFields(defectDiscoveredDuring: number): void {
-    //    const scheduledGroup = this.sdaForm.get('scheduledMaintenanceGroup');
-    //    const unscheduledGroup = this.sdaForm.get('unscheduledMaintenanceGroup');
-    //    if (defectDiscoveredDuring == 1) {
-    //        unscheduledGroup.clearValidators();
-    //        unscheduledGroup.get("description").clearValidators();
-    //        unscheduledGroup.get("micNo").clearValidators();
-    //        unscheduledGroup.get("nonRoutineNo").clearValidators();
+    setDefectDetectedFields(defectDiscoveredDuring: number): void {
+        const scheduledGroup = this.sdaForm.get('scheduledMaintenanceGroup');
+        const unscheduledGroup = this.sdaForm.get('unscheduledMaintenanceGroup');
+        if (defectDiscoveredDuring == 1) {
+            unscheduledGroup.clearValidators();
+            unscheduledGroup.get("description").clearValidators();
+            unscheduledGroup.get("micNo").clearValidators();
+            unscheduledGroup.get("nonRoutineNo").clearValidators();
 
-    //        scheduledGroup.setValidators(validateScheduledMaintenanceFields);
-    //        scheduledGroup.get("checkType").setValidators([Validators.required]);
-    //        scheduledGroup.get("routineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-    //        scheduledGroup.get("nonRoutineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-    //    } else {
-    //        scheduledGroup.clearValidators();
-    //        scheduledGroup.get('checkType').clearValidators();
-    //        scheduledGroup.get('routineNo').clearValidators();
-    //        scheduledGroup.get('nonRoutineNo').clearValidators();
-    //        unscheduledGroup.setValidators(validateUnscheduledMaintenanceFields);
-    //        unscheduledGroup.get('description').setValidators([Validators.required]);
-    //        unscheduledGroup.get('micNo').setValidators([Validators.pattern(Expressions.Alphanumerics)]);
-    //        unscheduledGroup.get('nonRoutineNo').setValidators([Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]);
-    //    }
-    //    scheduledGroup.updateValueAndValidity();
-    //    unscheduledGroup.updateValueAndValidity();
-    //    scheduledGroup.get('checkType').updateValueAndValidity();
-    //    scheduledGroup.get('routineNo').updateValueAndValidity();
-    //    scheduledGroup.get('nonRoutineNo').updateValueAndValidity();
-    //    unscheduledGroup.get('description').updateValueAndValidity();
-    //    unscheduledGroup.get('micNo').updateValueAndValidity();
-    //    unscheduledGroup.get('nonRoutineNo').updateValueAndValidity();
-    //}
+            scheduledGroup.setValidators(CustomValidators.validateScheduledMaintenanceFields);
+            scheduledGroup.get("checkType").setValidators([Validators.required]);
+            scheduledGroup.get("routineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+            scheduledGroup.get("nonRoutineNo").setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+        } else {
+            scheduledGroup.clearValidators();
+            scheduledGroup.get('checkType').clearValidators();
+            scheduledGroup.get('routineNo').clearValidators();
+            scheduledGroup.get('nonRoutineNo').clearValidators();
+            unscheduledGroup.setValidators(CustomValidators.validateUnscheduledMaintenanceFields);
+            unscheduledGroup.get('description').setValidators([Validators.required]);
+            unscheduledGroup.get('micNo').setValidators([Validators.pattern(Expressions.Alphanumerics)]);
+            unscheduledGroup.get('nonRoutineNo').setValidators([Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]);
+        }
+        scheduledGroup.updateValueAndValidity();
+        unscheduledGroup.updateValueAndValidity();
+        scheduledGroup.get('checkType').updateValueAndValidity();
+        scheduledGroup.get('routineNo').updateValueAndValidity();
+        scheduledGroup.get('nonRoutineNo').updateValueAndValidity();
+        unscheduledGroup.get('description').updateValueAndValidity();
+        unscheduledGroup.get('micNo').updateValueAndValidity();
+        unscheduledGroup.get('nonRoutineNo').updateValueAndValidity();
+    }
     saveAlert() {
         this.genericValidator.formSubmitted = true;
         this.displayMessage = this.genericValidator.processMessages(this.sdaForm);

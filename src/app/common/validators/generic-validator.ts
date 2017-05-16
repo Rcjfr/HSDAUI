@@ -47,12 +47,16 @@ export class GenericValidator {
                     Object.assign(messages, childMessages);
                 }
                 // Only validate if there are validation messages for the control
-                if (this.validationMessages[controlKey]) {
+                //if (controlKey === "unscheduledMaintenanceGroup") {
+                //  console.log(`${path}${controlKey}`, this.validationMessages[`${path}${controlKey}`]);
+                //}
+                
+                if (this.validationMessages[`${path}${controlKey}`]) {
                     messages[`${path}${controlKey}`] = '';
                     if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {
                         Object.keys(c.errors).map(messageKey => {
-                            if (this.validationMessages[controlKey][messageKey]) {
-                                messages[`${path}${controlKey}`] += this.validationMessages[controlKey][messageKey] + ' ';
+                          if (this.validationMessages[`${path}${controlKey}`][messageKey]) {
+                            messages[`${path}${controlKey}`] += this.validationMessages[`${path}${controlKey}`][messageKey] + ' ';
                             }
                         });
                     }
