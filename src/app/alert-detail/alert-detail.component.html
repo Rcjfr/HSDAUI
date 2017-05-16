@@ -27,7 +27,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.createDate">
             <label class="col-sm-4 control-label" for="q-datepicker_1">Create Date: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <datetime [timepicker]="false" id="sdaCreateDate" tabindex='3' formControlName="createDate"
+              <datetime [timepicker]="false" id="sdaCreateDate" [tabindex]='3' formControlName="createDate"
                         [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
               <span *ngIf="displayMessage.createDate" class="help-block">{{displayMessage.createDate}}</span>
             </div>

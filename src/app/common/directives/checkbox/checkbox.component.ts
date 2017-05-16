@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ICheckboxState } from './checkbox.interfaces';
 
 @Component({
@@ -10,6 +10,7 @@ export class CheckboxComponent implements OnInit {
   @Input() checkboxLabel: any;
   @Input() checkboxState: ICheckboxState;
   @Output() onChangeNotify = new EventEmitter<boolean>();
+  @Input() tabindex: any;
 
   public checkboxId: string;
 
