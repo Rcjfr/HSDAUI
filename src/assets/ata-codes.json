@@ -1,0 +1,186 @@
+﻿[
+  {
+    "Code": "32",
+    "Name": "Landing Gear",
+    "Description": "Includes Basic Structure which provides major support for the aircraft, while on the ground, such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Main Gear"
+      },
+      {
+        "Code": "20",
+        "Name": "Nose Gear"
+      }
+    ]
+  },
+  {
+    "Code": "52",
+    "Name": "Doors",
+    "Description": "Includes Basic Framework and Structure such as Angles,Formers, Ribs, Stringers, Fittings, Intercostal Brackets, etc.",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Cabin Entry Door"
+      },
+      {
+        "Code": "20",
+        "Name": "Emergency Exit Door/Window"
+      },
+      {
+        "Code": "30",
+        "Name": "Cargo Door"
+      },
+      {
+        "Code": "40",
+        "Name": "Service/Equipment Access Door"
+      },
+      {
+        "Code": "60",
+        "Name": "Entrance Stairs"
+      }
+    ]
+  },
+  {
+    "Code": "53",
+    "Name": "Fuselage",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Primary Structure",
+        "Description": "Includes Primary Structure such as Frames, Bulkheads, Beams, Formers, Longerons, Stringers, Sills, Keel, etc."
+      },
+      {
+        "Code": "20",
+        "Name": "Auxiliary Structure",
+        "Description": "Includes Secondary Structure such as Floors, Fixed Partitions, etc."
+      },
+      {
+        "Code": "30",
+        "Name": "Plates/Skin",
+        "Description": "Includes Exterior Covering such as Skin, Access Covers,and Doublers."
+      },
+      {
+        "Code": "40",
+        "Name": "Attach Fittings",
+        "Description": "Includes Seat Tracks and Fittings or Drag Angles on Fuselage for attachment of Doors, Wings, Stabilizers, L. Gear, Engine, and Pylons."
+      },
+      {
+        "Code": "50",
+        "Name": "Aerodynamic Fairings",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "54",
+    "Name": "Nacelles/Pylons",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Primary Structure",
+        "Description": "Includes Primary Skeleton of Nacelle Pylon such as Frames,Bulkheads, Firewalls, Stringers, Keel, and Frames around openings."
+      },
+      {
+        "Code": "20",
+        "Name": "Auxiliary Structure",
+        "Description": "Includes Leading Trailing Edge Structure."
+      },
+      {
+        "Code": "30",
+        "Name": "Plates/Skin",
+        "Description": "Includes Exterior Covering such as Skin, Access Covers, and Doublers."
+      }
+    ]
+  },
+  {
+    "Code": "55",
+    "Name": "Stabilizers",
+    "Description": "Includes Basic Internal Structure such as Spars, Ribs, Stringers, Plates/Skin Access Covers, Tabs, and Support of Equipment within Stabilizer.",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Horizontal Stabilizer",
+        "Description": ""
+      },
+      {
+        "Code": "20",
+        "Name": "Elevator and Tab",
+        "Description": ""
+      },
+      {
+        "Code": "30",
+        "Name": "Vertical Stabilizer",
+        "Description": ""
+      },
+      {
+        "Code": "40",
+        "Name": "Rudder and Tab",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "56",
+    "Name": "Window",
+    "Description": "Includes the Transparent Material and its Frame.",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Flight Compartment",
+        "Description": ""
+      },
+      {
+        "Code": "20",
+        "Name": "Passenger Cabin",
+        "Description": ""
+      },
+      {
+        "Code": "30",
+        "Name": "Door,Passenger and Service",
+        "Description": ""
+      },
+      {
+        "Code": "40",
+        "Name": "Inspection and Observation (Viewing Ports)",
+        "Description": ""
+      }
+    ]
+  },
+  {
+    "Code": "57",
+    "Name": "Wings",
+    "SecondaryCodes": [
+      {
+        "Code": "10",
+        "Name": "Wing Main Structure",
+        "Description": "Primary Skeleton – Includes Spars, Ribs, Upper and Lower Skin Panels, Attach Fittings, Stringers, Internal Fuel Tank Structure, Frames."
+      },
+      {
+        "Code": "30",
+        "Name": "Wing Tip",
+        "Description": ""
+      },
+      {
+        "Code": "40",
+        "Name": "Leading Edge Flap/Slat",
+        "Description": "Includes Fittings, Skins, Panels Stiffeners."
+      },
+      {
+        "Code": "50",
+        "Name": "Trailing Edge Flaps",
+        "Description": "Includes Skins, Panel and Stiffener, Ribs, Fittings, Tracks."
+      },
+      {
+        "Code": "60",
+        "Name": "Aileron and Tab",
+        "Description": ""
+      },
+      {
+        "Code": "70",
+        "Name": "Spoilers",
+        "Description": "Includes Panels and Fitting."
+      }
+    ]
+  }
+]
