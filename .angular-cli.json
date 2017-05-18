@@ -1,8 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "hsda",
-    "ejected": true
+    "name": "hsda"
   },
   "apps": [
     {
@@ -21,9 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "app/app.css",
-        "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
-        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+         "app/app.css",
+         "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
+         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles.less"
       ],
       "scripts": [
@@ -62,7 +61,6 @@
   },
   "defaults": {
     "styleExt": "less",
-    "component": {
-    }
+    "component": {}
   }
 }
