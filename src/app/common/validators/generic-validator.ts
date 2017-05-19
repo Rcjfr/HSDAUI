@@ -3,7 +3,13 @@
 export const Expressions = {
     Alphanumerics: "[a-zA-Z0-9]+",
     Alphabets: "[a-zA-Z]+",
-    Numerics: "[0-9]+"
+    Numerics: "[0-9]+",
+    ThreeDecimalsPoints: "([0-9]{3}\.[0-9]{3} )",
+    //(([0 - 9]{3}\.[0 - 9]{3}$) | ([0 - 9]{2}\.[0- 9]{2}$)|([0 - 9]{1 } \.[0 - 9]{1 } $)|([0 - 9]{2 } \.[0 - 9]{1 } $)|([0 - 9]{2 } \.[0 - 9]{3 } $))
+    FourDecimalsPoints: new RegExp( "[0-9]{3}\.[0-9]{4}$")
+     //"^\d{0,3}(\.\d{0,3})?$",'^\\d+\\.\\d{3}$',/(d+\.\d{0,3}|\.\d{0,2})/
+    //^ ([0 - 9] | [1 - 9][0 - 9] | [1 - 9][0 - 9][0 - 9])$ |
+    
 };
 
 // Generic validator for Reactive forms

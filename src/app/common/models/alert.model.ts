@@ -1,4 +1,4 @@
-export interface Alert {
+﻿export interface Alert {
     sdaId: string;
     sdrNumber?: string;
     createDate: Date;
@@ -21,5 +21,20 @@ export interface Alert {
     checkType: string;
     routineNo: string;
     unscheduledDescription: string;
+    defectType: string;
+    defectDescription: string;
+    length: string;
+    width: string;
+    depth: string;
+    //stationLocation: string;
+    //stringer: string;
+    //wl: string;
+    //bl: string;
+    MFGpart: string;
+    partDefective: string;
+    MFGserial: string;
+    PartTT: string;
+    PartTso: string;
+    detected: string;
 
 }
