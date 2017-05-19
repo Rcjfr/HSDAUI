@@ -51,7 +51,6 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     showErrors = false;
     unscheduledFieldsInvalid = false;
     scheduledFieldsInvalid = false;
-   
     private decimalNumberMask = createNumberMask({
                           prefix:'',
                           allowDecimal: true,
