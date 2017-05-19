@@ -19,7 +19,7 @@
 .suo
 
 # IDE - VS2017
-.vs/
+.suo
 
 # IDE - VSCode
 .vscode/*

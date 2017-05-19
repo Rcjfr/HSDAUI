@@ -20,6 +20,7 @@ import { AlertDetailComponent } from './alert-detail/alert-detail.component';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
+import { StationService } from './common/services/station.service';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { reducer } from './common/reducers/index';
 import { CheckTypesService } from './common/services/check-types.service';
@@ -46,7 +47,7 @@ import { CheckTypesService } from './common/services/check-types.service';
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects)
   ],
-  providers: [ATACodesService, AircraftService, CheckTypesService],
+  providers: [ATACodesService, AircraftService, CheckTypesService, StationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
