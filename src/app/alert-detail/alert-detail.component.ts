@@ -152,6 +152,87 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             },
             'scheduledMaintenanceGroup.nonRoutineNo': {
               pattern: 'Non Routine # must contain only alphanumerics.'
+            },
+            defectType: {
+                required: 'Defect Type is required.',
+                maxlength: 'Defect Type must be not more than 250 characters.'
+            },
+            defectDescription: {
+                required: 'Defect Description is required.',
+                maxlength: 'Defect Description must be not more than 250 characters.'
+            },
+            length: {
+                required: 'Length  is required.',
+                maxlength: 'Length must be 3X3.',
+                pattern: 'Length can be till 3X3 and must be numeric .'
+            },
+            width: {
+                required: 'Width is required.',
+                maxlength: 'Width must be 3X3.',
+                pattern: 'Width can be till 3X3 and must be numeric.'
+            },
+            depth: {
+                required: 'Depth is required.',
+                maxlength: 'Depth must be 3X4.',
+                pattern: 'Depth can be till 3X3 and must be 3X4 and numeric.'
+            },
+
+
+            percisionLocationGroup: {
+                aleasttwo: 'station or stringer or wl or bl  is required.'
+            },
+           
+            'percisionLocationGroup.stationLocation': {
+
+                pattern: 'station must be alphanumeric.',
+                maxlength: 'station must not be more than 25 characters.'
+            },
+            'percisionLocationGroup.stringer': {
+
+                pattern: 'stringer must be alphanumeric.',
+                maxlength: 'stringer must not be more than 25 characters.'
+            },
+             'percisionLocationGroup.wl': {
+
+                 pattern: 'wl must be alphanumeric.',
+                 maxlength: 'wl must not be more than 25 characters.'
+            },
+             'percisionLocationGroup.bl': {
+
+                 pattern: 'bl must be alphanumeric.',
+                 maxlength: 'bl must not be more than 25 characters.'
+            }
+            ,
+            MFGpart: {
+
+                pattern: 'MFG Part must be alphanumeric.',
+                maxlength: 'MFG Part must not be more than 50 characters.'
+            }
+            ,
+            partDefective: {
+                required: 'Part Defective is required.',
+                maxlength: 'Part Defective must not be more than 50 characters.',
+                pattern: 'Part Defective must be alphanumeric.'
+            }
+            ,
+            MFGserial: {
+
+                pattern: 'MFG Serial must be alphanumeric.',
+                maxlength: 'MFG Serial must not be more than 50 characters.'
+            },
+            PartTT: {
+
+                pattern: 'Part TT must be numeric.',
+                maxlength: 'Part TT must be not more that 25 numbers.',
+            },
+            PartTso: {
+
+                pattern: 'Part TSO must be numeric.',
+                maxlength: 'Part TSO must be not more that 25 numbers.',
+            },
+            detected: {
+                required: 'How Detected is required.',
+                
             }
         };
         // Define an instance of the validator for use with this form, 
@@ -196,7 +277,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             model: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
             serialNo: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(10)]],
             totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
-            cycles: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+            cycles: ['', [Validators.required, Validators.maxLength(25)]],
             fleet: ['', [Validators.required, Validators.maxLength(20)]],
             defectDiscoveredDuring: defectDiscoveredDuring,
           scheduledMaintenanceGroup: this.fb.group({
@@ -216,9 +297,35 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
               {
                  validator: CustomValidators.validateUnscheduledMaintenanceFields
               }
-            )
+            ),
+          defectType: ['', [Validators.required, Validators.maxLength(250)]],
+          defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],
+          length: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints),  Validators.maxLength(7)]],
+          width: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints), Validators.maxLength(7)]],
+          depth: ['', [Validators.required, Validators.pattern(Expressions.FourDecimalsPoints), Validators.maxLength(8)]],
+         // stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          //stringer: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          //wl: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          //bl: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          percisionLocationGroup: this.fb.group({
+              stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+              stringer: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+              wl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+              bl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          },
 
-
+              {
+                  validator: CustomValidators.ValidatePercisionLocationGroupFields
+              }
+          
+              ),
+          MFGpart: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
+          partDefective: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
+          MFGserial: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
+          PartTT: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+          PartTso: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+          detected: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+        
 
         });
         this.sdaForm.get('defectDiscoveredDuring').valueChanges

@@ -45,4 +45,28 @@ export class CustomValidators {
 
     //return null;
   };
+
+  static ValidatePercisionLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+      const stationLocationControl = c.get('stationLocation');
+      const stringerControl = c.get('stringer');
+      const wlControl = c.get('wl');
+      const blControl = c.get('bl');
+      //if (stationLocationControl.value || stringerControl.value || wlControl.value || blControl.value) {
+      //    return null;
+      //}
+      //return { 'aleasttwo': true };
+      var filledContolCount: number;
+       filledContolCount = 0;
+      if (stationLocationControl.value) {
+          filledContolCount++;
+      }
+      if (stringerControl.value) { filledContolCount++;}
+      if (wlControl.value) { filledContolCount++; }
+      if (blControl.value) { filledContolCount++; }
+      if (filledContolCount>=2)
+      { return null; }
+
+
+      return {'aleasttwo':true};
+  };
 }
