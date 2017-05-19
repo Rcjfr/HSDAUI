@@ -9,9 +9,11 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { ATACode } from '../common/models/ata-code.model';
 import { Alert } from '../common/models/alert.model';
+import { IStation } from '../common/models/station.model';
 import { ICheckboxState } from '../common/directives/checkbox/checkbox.interfaces';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { AircraftService } from '../common/services/aircraft.service';
+import { StationService } from '../common/services/station.service';
 import * as fromRoot from '../common/reducers';
 import { AppStore } from '../common/store/app-store';
 import * as selectedAlert from '../common/actions/selected-alert';
@@ -21,11 +23,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CheckTypesService } from '../common/services/check-types.service';
 import { FleetCheckType, CheckType } from '../common/models/check-type.model';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
-
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/map';
+import '../common/rxjs-extensions';
 import { of } from "rxjs/observable/of";
 
 @Component({
@@ -39,6 +37,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     sdaForm: FormGroup;
     fleetCheckTypes$: Observable<CheckType[]>;
     checkTypes$: Observable<FleetCheckType[]>;
+    stations: IStation[];
     ataCodes$: Observable<ATACode[]>;
     ataCode2s$: Observable<ATACode[]>;
     alert: Alert;
@@ -48,6 +47,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     noseNumbers$: Observable<string[]>;
     actionsSubscription$: Subscription;
     alertSubscription$: Subscription;
+    stationsSubscription$: Subscription;
     showErrors = false;
     unscheduledFieldsInvalid = false;
     scheduledFieldsInvalid = false;
@@ -70,8 +70,13 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     private genericValidator: GenericValidator;
 
 
-    constructor(private ataCodesService: ATACodesService, private checkTypesService: CheckTypesService, private store: Store<AppStore>,
-      private vcr: ViewContainerRef, private toastr: ToastsManager, private fb: FormBuilder) {
+    constructor(private ataCodesService: ATACodesService,
+                private checkTypesService: CheckTypesService,
+                private stationService: StationService,
+                private store: Store<AppStore>,
+                private vcr: ViewContainerRef,
+                private toastr: ToastsManager,
+                private fb: FormBuilder) {
         this.toastr.setRootViewContainerRef(vcr);
         // Defines all of the validation messages for the form.
         // TODO:Move to seperate JSON file.
@@ -113,7 +118,8 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             },
             serialNo: {
                 required: 'Serial # is required.',
-                pattern: 'Serial # must be alphanumeric.'
+                pattern: 'Serial # must be alphanumeric.',
+                maxlength: 'Serial # can not be more than 10 characters.'
             },
             totalShipTime: {
                 required: 'Total Ship Time is required.',
@@ -223,15 +229,15 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             PartTT: {
 
                 pattern: 'Part TT must be numeric.',
-                maxlength: 'Part TT must be not more that 25 numbers.',
+                maxlength: 'Part TT must be not more that 25 numbers.'
             },
             PartTso: {
 
                 pattern: 'Part TSO must be numeric.',
-                maxlength: 'Part TSO must be not more that 25 numbers.',
+                maxlength: 'Part TSO must be not more that 25 numbers.'
             },
             detected: {
-                required: 'How Detected is required.',
+                required: 'How Detected is required.'
                 
             }
         };
@@ -242,7 +248,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     }
     ngAfterViewInit(): void {
         // Watch for the blur event from any input element on the form.
-      console.log(this.formInputElements.length);
+      //console.log(this.formInputElements.length);
         let controlBlurs: Observable<any>[] = this.formInputElements
           .map((formControl: ElementRef) => {
               //console.log(new Date(),formControl.nativeElement.id);
@@ -251,7 +257,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
           );
 
         // Merge the blur event observable with the valueChanges observable
-        Observable.merge(this.sdaForm.valueChanges.debounceTime(1000), ...controlBlurs)
+        Observable.merge(this.sdaForm.valueChanges.debounceTime(400), ...controlBlurs)
             //.debounceTime(800)
             .subscribe(value => {this.displayMessage = this.genericValidator.processMessages(this.sdaForm);});
     }
@@ -332,6 +338,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             .subscribe(val => this.setDefectDetectedFields(val));
 
         this.ataCodes$ = this.ataCodesService.getATACodes();
+        this.stationsSubscription$ = this.stationService.getAllStations().subscribe(data => this.stations = data);
         this.checkTypes$ = this.checkTypesService.getCheckTypes();
         this.alertSubscription$ = this.store.select(fromRoot.getSelectedAlert).map(d => d && d.toJS()).subscribe((s: Alert) => this.alert = s);
         this.loading$ = this.store.select(fromRoot.getSelectedAlertLoading);
@@ -351,6 +358,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
         this.actionsSubscription$ && this.actionsSubscription$.unsubscribe();
         // tslint:disable-next-line:no-unused-expression
         this.alertSubscription$ && this.alertSubscription$.unsubscribe();
+        this.stationsSubscription$ && this.stationsSubscription$.unsubscribe();
     }
     getAlertCode2s(alertCode1: string) {
         this.alert.ataCode2 = '';

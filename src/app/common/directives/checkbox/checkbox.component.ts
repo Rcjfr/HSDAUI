@@ -11,6 +11,7 @@ export class CheckboxComponent implements OnInit {
   @Input() checkboxState: ICheckboxState;
   @Output() onChangeNotify = new EventEmitter<boolean>();
   @Input() tabindex: any;
+  
 
   public checkboxId: string;
 
