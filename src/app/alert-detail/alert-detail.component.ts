@@ -20,6 +20,7 @@ import { List } from 'immutable';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CheckTypesService } from '../common/services/check-types.service';
 import { FleetCheckType, CheckType } from '../common/models/check-type.model';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
@@ -51,6 +52,19 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     unscheduledFieldsInvalid = false;
     scheduledFieldsInvalid = false;
    
+    private decimalNumberMask = createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 2,
+                          requireDecimal:false
+    });
+  private numberMask = createNumberMask({
+    prefix: '',
+    allowDecimal: false,
+    includeThousandsSeparator: false,
+    allowLeadingZeroes:false
+  });
     // Use with the generic validation message class
     displayMessage: { [key: string]: string } = {};
     private validationMessages: { [key: string]: { [key: string]: string } };
@@ -58,7 +72,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
 
 
     constructor(private ataCodesService: ATACodesService, private checkTypesService: CheckTypesService, private store: Store<AppStore>,
-        private vcr: ViewContainerRef, private toastr: ToastsManager, private fb: FormBuilder) {
+      private vcr: ViewContainerRef, private toastr: ToastsManager, private fb: FormBuilder) {
         this.toastr.setRootViewContainerRef(vcr);
         // Defines all of the validation messages for the form.
         // TODO:Move to seperate JSON file.
@@ -263,8 +277,8 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             manufacturer: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(100)]],
             model: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
             serialNo: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(10)]],
-            totalShipTime: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-            cycles: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+            totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
+            cycles: ['', [Validators.required, Validators.maxLength(25)]],
             fleet: ['', [Validators.required, Validators.maxLength(20)]],
             defectDiscoveredDuring: defectDiscoveredDuring,
           scheduledMaintenanceGroup: this.fb.group({
