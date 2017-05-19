@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';
-import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -40,6 +41,7 @@ import { CheckTypesService } from './common/services/check-types.service';
     HttpModule,
     AppRoutingModule,
     NKDatetimeModule,
+    TextMaskModule,
     TypeaheadModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
