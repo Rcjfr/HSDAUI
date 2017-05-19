@@ -26,10 +26,10 @@
     length: string;
     width: string;
     depth: string;
-    //stationLocation: string;
-    //stringer: string;
-    //wl: string;
-    //bl: string;
+    stationLocation: string;
+    stringer: string;
+    wl: string;
+    bl: string;
     MFGpart: string;
     partDefective: string;
     MFGserial: string;
