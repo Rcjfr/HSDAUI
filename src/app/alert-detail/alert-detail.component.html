@@ -66,7 +66,7 @@
           <div class="row form-group">
             <label class="col-sm-4 control-label" for="sdaId">SDA ID:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="sdaId" placeholder="" formControlName="sdaId">
+              <input type="text" class="form-control" id="sdaId"  formControlName="sdaId">
             </div>
 
           </div>
@@ -149,7 +149,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.manufacturer">
             <label class="col-sm-4 control-label" for="manufacturer">Aircraft Manufacturer: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='7' class="form-control" id="manufacturer" placeholder=""
+              <input type="text" tabindex='7' class="form-control" id="manufacturer" 
                      formControlName="manufacturer">
               <span *ngIf="displayMessage.manufacturer" class="help-block">{{displayMessage.manufacturer}}</span>
             </div>
@@ -158,7 +158,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.model">
             <label class="col-sm-4 control-label" for="model">Aircraft Model/Series: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='8' class="form-control" id="model" placeholder="" formControlName="model">
+              <input type="text" tabindex='8' class="form-control" id="model"  formControlName="model">
               <span *ngIf="displayMessage.model" class="help-block">{{displayMessage.model}}</span>
             </div>
 
@@ -166,7 +166,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.serialNo">
             <label class="col-sm-4 control-label" for="serialNo">Serial #: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='9' class="form-control" id="serialNo" placeholder="" formControlName="serialNo">
+              <input type="text" tabindex='9' class="form-control" id="serialNo"  formControlName="serialNo">
               <span *ngIf="displayMessage.serialNo" class="help-block">{{displayMessage.serialNo}}</span>
             </div>
 
@@ -174,7 +174,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.totalShipTime">
             <label class="col-sm-4 control-label" for="totalShipTime">Total Ship Time: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='10' class="form-control" [textMask]="{mask: decimalNumberMask}" id="totalShipTime" placeholder=""
+              <input type="text" tabindex='10' class="form-control" [textMask]="{mask: decimalNumberMask}" id="totalShipTime" 
                      formControlName="totalShipTime">
               <span *ngIf="displayMessage.totalShipTime" class="help-block">{{displayMessage.totalShipTime}}</span>
             </div>
@@ -183,7 +183,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.cycles">
             <label class="col-sm-4 control-label" for="cycles">Cycles: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='11' class="form-control" [textMask]="{mask: numberMask}" id="cycles" placeholder="" formControlName="cycles">
+              <input type="text" tabindex='11' class="form-control" [textMask]="{mask: numberMask}" id="cycles"  formControlName="cycles">
               <span *ngIf="displayMessage.cycles" class="help-block">{{displayMessage.cycles}}</span>
             </div>
 
@@ -192,10 +192,10 @@
             <label class="col-sm-4 control-label" for="fleet">Fleet: <span class="req">*</span></label>
             <div class="col-sm-8">
               <!--<input type="text" #fleet="ngModel" tabindex='10' class="form-control" name="fleet" id="fleet"
-                         required placeholder="" [(ngModel)]="alert.fleet"
+                         required  [(ngModel)]="alert.fleet"
                          (change)="populateCheckTypes()">-->
               <input type="text" tabindex='12' class="form-control" id="fleet"
-                     placeholder="" formControlName="fleet">
+                      formControlName="fleet">
               <span *ngIf="displayMessage.fleet" class="help-block">{{displayMessage.fleet}}</span>
             </div>
 
@@ -242,7 +242,7 @@
               <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
               <div class="col-sm-8">
                 <input type="text" tabindex='18' class="form-control" id="unscheduledDescription"
-                       placeholder="" formControlName="description">
+                        formControlName="description">
                 (RON,Pilot Report etc.)
                 <div *ngIf="displayMessage['unscheduledMaintenanceGroup.description']" class="help-block">{{displayMessage['unscheduledMaintenanceGroup.description']}}</div>
 
@@ -251,7 +251,7 @@
             <div class="row form-group" [class.has-error]="displayMessage['unscheduledMaintenanceGroup.nonRoutineNo']">
               <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
               <div class="col-sm-8">
-                <input type="text" maxlength="50" class="form-control" tabindex='19' id="unschNonRoutineNo" placeholder=""
+                <input type="text" maxlength="50" class="form-control" tabindex='19' id="unschNonRoutineNo" 
                        formControlName="nonRoutineNo">
                 <span *ngIf="displayMessage['unscheduledMaintenanceGroup.nonRoutineNo']" class="help-block">{{displayMessage['unscheduledMaintenanceGroup.nonRoutineNo']}}</span>
               </div>
@@ -259,7 +259,7 @@
             <div class="row form-group" [class.has-error]="displayMessage['unscheduledMaintenanceGroup.micNo']">
               <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
               <div class="col-sm-8">
-                <input type="text" maxlength="50" class="form-control" tabindex='20' id="micNo" placeholder="" formControlName="micNo">
+                <input type="text" maxlength="50" class="form-control" tabindex='20' id="micNo"  formControlName="micNo">
                 <span *ngIf="displayMessage['unscheduledMaintenanceGroup.micNo']" class="help-block">{{displayMessage['unscheduledMaintenanceGroup.micNo']}}</span>
                 <div *ngIf="displayMessage.unscheduledMaintenanceGroup &&
                             ((sdaForm.get('unscheduledMaintenanceGroup.micNo').touched || sdaForm.get('unscheduledMaintenanceGroup.micNo').dirty) &&
@@ -298,14 +298,14 @@
             <div class="row form-group" [class.has-error]="displayMessage['scheduledMaintenanceGroup.routineNo']">
               <label class="col-sm-4 control-label" for="routineNo">Routine #:</label>
               <div class="col-sm-8">
-                <input type="text" maxlength="50" class="form-control" tabindex='19' id="routineNo" placeholder="" formControlName="routineNo">
+                <input type="text" maxlength="50" class="form-control" tabindex='19' id="routineNo"  formControlName="routineNo">
                 <span *ngIf="displayMessage['scheduledMaintenanceGroup.routineNo']" class="help-block">{{displayMessage['scheduledMaintenanceGroup.routineNo']}}</span>
               </div>
             </div>
             <div class="row form-group" [class.has-error]="displayMessage['scheduledMaintenanceGroup.nonRoutineNo']">
               <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine #:</label>
               <div class="col-sm-8">
-                <input type="text" maxlength="50" class="form-control" tabindex='20' id="nonRoutineNo" placeholder="" formControlName="nonRoutineNo" />
+                <input type="text" maxlength="50" class="form-control" tabindex='20' id="nonRoutineNo"  formControlName="nonRoutineNo" />
 
                 <span *ngIf="displayMessage['scheduledMaintenanceGroup.nonRoutineNo']" class="help-block">{{displayMessage['scheduledMaintenanceGroup.nonRoutineNo']}}</span>
                 <div *ngIf="displayMessage.scheduledMaintenanceGroup &&
@@ -331,7 +331,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.defectType">
             <label class="col-sm-4 control-label" for="defectType">Defect Type: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='20' class="form-control" id="defectType" placeholder=""
+              <input type="text" tabindex='20' class="form-control" id="defectType" 
                      formControlName="defectType">
               <span *ngIf="displayMessage.defectType" class="help-block">{{displayMessage.defectType}}</span>
             </div>
@@ -341,7 +341,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.defectDescription">
             <label class="col-sm-4 control-label" for="defectDescription">Defect Description: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <textarea type="text" tabindex='21' name="Text1" cols="40" rows="5"  class="form-control" id="defectDescription" placeholder="" formControlName="defectDescription">
+              <textarea type="text" tabindex='21' name="Text1" cols="40" rows="5"  class="form-control" id="defectDescription"  formControlName="defectDescription">
               </textarea>
               <span *ngIf="displayMessage.defectDescription" class="help-block">{{displayMessage.defectDescription}}</span>
             </div>
@@ -353,7 +353,14 @@
           <div class="row form-group" [class.has-error]="displayMessage.length">
             <label class="col-sm-4 control-label" for="length">Length: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='22' class="form-control" id="length"pattern="^\d{0,3}(\.\d{0,3})?$" placeholder=""  formControlName="length">
+              <input type="text" tabindex='22' class="form-control" id="length" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 3,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="length">
               <span *ngIf="displayMessage.length" class="help-block">{{displayMessage.length}}</span>
             </div>
 
@@ -361,7 +368,14 @@
           <div class="row form-group" [class.has-error]="displayMessage.width">
             <label class="col-sm-4 control-label" for="width">Width #: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='23' class="form-control" id="width" placeholder="" pattern="^\d{0,3}(\.\d{0,3})?$" formControlName="width">
+              <input type="text" tabindex='23' class="form-control" id="width" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 3,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="width">
               <span *ngIf="displayMessage.width" class="help-block">{{displayMessage.width}}</span>
             </div>
 
@@ -369,94 +383,82 @@
           <div class="row form-group" [class.has-error]="displayMessage.depth">
             <label class="col-sm-4 control-label" for="depth">Depth #: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='24' class="form-control" id="depth" placeholder="" pattern="^\d{0,3}(\.\d{0,4})?$" formControlName="depth">
+              <input type="text" tabindex='24' class="form-control" id="depth" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 4,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="depth">
+              <span class="help-block">(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after denotes || historical data.</span>
               <span *ngIf="displayMessage.depth" class="help-block">{{displayMessage.depth}}</span>
             </div>
           </div>
-          <h5>(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after denotes || historical data.</h5>
+          
         </div>
-
-        <h4>Precise Location of Defect:</h4><h5> (Enter From/To if Applicable)</h5>
-
-      </div>
+        </div>
      
-        <!--<div class="row form-group" [class.has-error]="displayMessage['scheduledMaintenanceGroup.routineNo']">
-          <label class="col-sm-4 control-label" for="routineNo">Routine1 #:</label>
-          <div class="col-sm-8">
-            <input type="text" maxlength="50" class="form-control" tabindex='18' id="routineNo" placeholder="" formControlName="routineNo">
-            <span *ngIf="displayMessage['scheduledMaintenanceGroup.routineNo']" class="help-block">{{displayMessage['scheduledMaintenanceGroup.routineNo']}}</span>
-          </div>
-        </div>
-        <div class="row form-group" [class.has-error]="displayMessage['scheduledMaintenanceGroup.nonRoutineNo']">
-          <label class="col-sm-4 control-label" for="nonRoutineNo">Non-Routine1 #:</label>
-          <div class="col-sm-8">
-            <input type="text" maxlength="50" class="form-control" tabindex='19' id="nonRoutineNo" placeholder="" formControlName="nonRoutineNo" />
+        
+    <h4>Precise Location of Defect:</h4><h5> (Enter From/To if Applicable)</h5>
 
-            <span *ngIf="displayMessage['scheduledMaintenanceGroup.nonRoutineNo']" class="help-block">{{displayMessage['scheduledMaintenanceGroup.nonRoutineNo']}}</span>
-            <div *ngIf="displayMessage.scheduledMaintenanceGroup &&
-                            ((sdaForm.get('scheduledMaintenanceGroup.routineNo').touched || sdaForm.get('scheduledMaintenanceGroup.routineNo').dirty) &&
-                            (sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').touched || sdaForm.get('scheduledMaintenanceGroup.nonRoutineNo').dirty))
-                            " class="error">{{displayMessage.scheduledMaintenanceGroup}}</div>
-            </div>
-          </div>-->
-       
-
-        <!--<div class="row" formGroupName="percisionLocationGroup">
-          <div class="col-md-3">
-            <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.stationLocation']">
-              <label class="col-sm-4 control-label" for="stationLocation">Station:</label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='25' class="form-control" id="stationLocation" placeholder="" formControlName="stationLocation">
-                <span *ngIf="displayMessage['percisionLocationGroup.stationLocation']" class="help-block">{{displayMessage[percisionLocationGroup.stationLocation]}}</span>
+    <!--<div class="row" formGroupName="percisionLocationGroup">
+      <div class="col-md-3">
+        <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.stationLocation']">
+          <label class="col-sm-4 control-label" for="stationLocation">Station:</label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='25' class="form-control" id="stationLocation"  formControlName="stationLocation">
+            <span *ngIf="displayMessage['percisionLocationGroup.stationLocation']" class="help-block">{{displayMessage[percisionLocationGroup.stationLocation]}}</span>
 
                
-              </div>
-              <h5>(Body, Spar, Stab, etc.)</h5>
-            </div>
           </div>
-          <div class="col-md-3">
-            <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.stringer']">
-              <label class="col-sm-4 control-label" for="stringer">Stringer: </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='26' class="form-control" id="stringer" placeholder="" formControlName="stringer">
-                <span *ngIf="displayMessage['percisionLocationGroup.stringer']" class="help-block">{{displayMessage[percisionLocationGroup.stringer]}}</span>
-              </div>
+          <h5>(Body, Spar, Stab, etc.)</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.stringer']">
+          <label class="col-sm-4 control-label" for="stringer">Stringer: </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='26' class="form-control" id="stringer"  formControlName="stringer">
+            <span *ngIf="displayMessage['percisionLocationGroup.stringer']" class="help-block">{{displayMessage[percisionLocationGroup.stringer]}}</span>
+          </div>
 
-            </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.wl']">
+          <label class="col-sm-4 control-label" for="wl">WL #: </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='27' class="form-control" id="wl"  formControlName="wl">
+            <span *ngIf="displayMessage['percisionLocationGroup.wl']" class="help-block">{{displayMessage[percisionLocationGroup.wl]}}</span>
           </div>
-          <div class="col-md-3">
-            <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.wl']">
-              <label class="col-sm-4 control-label" for="wl">WL #: </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='27' class="form-control" id="wl" placeholder="" formControlName="wl">
-                <span *ngIf="displayMessage['percisionLocationGroup.wl']" class="help-block">{{displayMessage[percisionLocationGroup.wl]}}</span>
-              </div>
 
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.bl']">
-              <label class="col-sm-4 control-label" for="bl">BL #: </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='28' class="form-control" id="bl" placeholder="" formControlName="bl">
-                <span *ngIf="displayMessage['percisionLocationGroup.bl']" class="help-block">{{displayMessage[percisionLocationGroup.bl]}}</span>
-                <div *ngIf="displayMessage.percisionLocationGroup &&
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.bl']">
+          <label class="col-sm-4 control-label" for="bl">BL #: </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='28' class="form-control" id="bl"  formControlName="bl">
+            <span *ngIf="displayMessage['percisionLocationGroup.bl']" class="help-block">{{displayMessage[percisionLocationGroup.bl]}}</span>
+            <div *ngIf="displayMessage.percisionLocationGroup &&
                             ((sdaForm.get('percisionLocationGroup.stationLocation').touched || sdaForm.get('percisionLocationGroup.stationLocation').dirty) &&
                           (sdaForm.get('percisionLocationGroup.stringer').touched || sdaForm.get('percisionLocationGroup.stringer').dirty) &&
                           (sdaForm.get('percisionLocationGroup.wl').touched || sdaForm.get('percisionLocationGroup.wl').dirty) &&
                             (sdaForm.get('percisionLocationGroup.bl').touched || sdaForm.get('percisionLocationGroup.bl').dirty))
                             " class="error">{{displayMessage.percisionLocationGroup}}</div>
-              </div>
-              
-            </div>
           </div>
-        </div>-->
+              
+        </div>
+      </div>
+    </div>-->
+
         <div class="row">
           <div class="col-md-6">
             <div class="row form-group" [class.has-error]="displayMessage.MFGpart">
               <label class="col-sm-4 control-label" for="MFGpart">MFG Part # </label>
               <div class="col-sm-8">
-                <input type="text" tabindex='29' class="form-control" id="MFGpart" placeholder="" formControlName="MFGpart">
+                <input type="text" tabindex='29' class="form-control" id="MFGpart"  formControlName="MFGpart">
                 <span *ngIf="displayMessage.MFGpart" class="help-block">{{displayMessage.MFGpart}}</span>
               </div>
 
@@ -466,78 +468,82 @@
             <div class="row form-group" [class.has-error]="displayMessage.partDefective">
               <label class="col-sm-4 control-label" for="partDefective">Part Defective:<span class="req">*</span> </label>
               <div class="col-sm-8">
-                <input type="text" tabindex='30' class="form-control" id="stringer" placeholder="" formControlName="partDefective">
+                <input type="text" tabindex='30' class="form-control" id="stringer"  formControlName="partDefective">
+                <span class="help-block">(Bean, Fitting, Forgiving, etc.)</span>
                 <span *ngIf="displayMessage.partDefective" class="help-block">{{displayMessage.partDefective}}</span>
               </div>
-              <h5>(Bean, Fitting, Forgiving, etc.)</h5>
+              
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="row form-group" [class.has-error]="displayMessage.MFGserial">
-              <label class="col-sm-4 control-label" for="MFGserial">MFG Serial # </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='31' class="form-control" id="MFGserial" placeholder="" formControlName="MFGserial">
-                <span *ngIf="displayMessage.MFGserial" class="help-block">{{displayMessage.MFGserial}}</span>
-              </div>
-
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="row form-group" [class.has-error]="displayMessage.PartTT">
-              <label class="col-sm-4 control-label" for="PartTT">Part TT: </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='32' class="form-control" id="PartTT" placeholder="" formControlName="PartTT">
-                <span *ngIf="displayMessage.PartTT" class="help-block">{{displayMessage.PartTT}}</span>
-              </div>
-
-            </div>
-
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row form-group" [class.has-error]="displayMessage.MFGserial">
+          <label class="col-sm-4 control-label" for="MFGserial">MFG Serial # </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='31' class="form-control" id="MFGserial"  formControlName="MFGserial">
+            <span *ngIf="displayMessage.MFGserial" class="help-block">{{displayMessage.MFGserial}}</span>
           </div>
 
-          <div class="col-md-4">
-            <div class="row form-group" [class.has-error]="displayMessage.PartTso">
-              <label class="col-sm-4 control-label" for="PartTso">Part TSO: </label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='33' class="form-control" id="PartTso" placeholder="" formControlName="PartTso">
-                <span *ngIf="displayMessage.PartTso" class="help-block">{{displayMessage.PartTso}}</span>
-              </div>
-
-            </div>
-          </div>
         </div>
-        <div class="col-md-6">
-          <div class="row form-group" [class.has-error]="displayMessage.detected">
-            <label class="col-sm-4 control-label" for="detected">How Detected: <span class="req">*</span></label>
-            <div class="col-sm-8">
-              <select class="form-control" tabindex='34' id="detected" formControlName="detected">
+      </div>
+      <div class="col-md-4">
+        <div class="row form-group" [class.has-error]="displayMessage.PartTT">
+          <label class="col-sm-4 control-label" for="PartTT">Part TT: </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='32' class="form-control" id="PartTT"  formControlName="PartTT">
+            <span *ngIf="displayMessage.PartTT" class="help-block">{{displayMessage.PartTT}}</span>
+          </div>
 
-                <option value=""> </option>
-                <option value="unknown">UNKNOWN </option>
-                <option value="tapTest">TAP TEST</option>
-                <option value="boroscope">BOROSCOPE</option>
-                <option value="functionalCheck">FUNCTIONAL CHECK</option>
-                <option value="dyePenetrant">DYE PENETRANT</option>
-                <option value="eddyCurrent">EDDY CURRENT</option>
-                <option value="lightSource">LIGHT SOURCE</option>
-                <option value="magneticParticle">MAGNETIC PARTICLE</option>
-                <option value="other">OTHER</option>
-                <option value="thermal">THERMAL</option>
-                <option value="ultrasonic">ULTRASONIC</option>
-                <option value="visual">VISUAL</option>
-                <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
-                <option value="x-ray">X-RAY</option>
-                <option value="dyePenetration">DYE PENETRATION</option>
-                <option value="hfec">HFEC</option>
-              </select>
-              <span *ngIf="displayMessage.detected" class="help-block">{{displayMessage.detected}}</span>
-              <h5>(visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)</h5>
-            </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="row form-group" [class.has-error]="displayMessage.PartTso">
+          <label class="col-sm-4 control-label" for="PartTso">Part TSO: </label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='33' class="form-control" id="PartTso"  formControlName="PartTso">
+            <span *ngIf="displayMessage.PartTso" class="help-block">{{displayMessage.PartTso}}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row form-group" [class.has-error]="displayMessage.detected">
+          <label class="col-sm-4 control-label" for="detected">How Detected: <span class="req">*</span></label>
+          <div class="col-sm-8">
+            <select class="form-control" tabindex='34' id="detected" formControlName="detected">
+
+              <option value=""> </option>
+              <option value="unknown">UNKNOWN </option>
+              <option value="tapTest">TAP TEST</option>
+              <option value="boroscope">BOROSCOPE</option>
+              <option value="functionalCheck">FUNCTIONAL CHECK</option>
+              <option value="dyePenetrant">DYE PENETRANT</option>
+              <option value="eddyCurrent">EDDY CURRENT</option>
+              <option value="lightSource">LIGHT SOURCE</option>
+              <option value="magneticParticle">MAGNETIC PARTICLE</option>
+              <option value="other">OTHER</option>
+              <option value="thermal">THERMAL</option>
+              <option value="ultrasonic">ULTRASONIC</option>
+              <option value="visual">VISUAL</option>
+              <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
+              <option value="x-ray">X-RAY</option>
+              <option value="dyePenetration">DYE PENETRATION</option>
+              <option value="hfec">HFEC</option>
+            </select>
+            <span *ngIf="displayMessage.detected" class="help-block">{{displayMessage.detected}}</span>
+            <h5>(visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)</h5>
           </div>
         </div>
       </div>
-    <div class="panel-heading">Corrosion Prevention Control Program</div>
+    </div>
+        
+      </div>
+    <!--<div class="panel-heading">Corrosion Prevention Control Program</div>-->
     <!--<div class="panel-body">
       <div class="row form-group">
         <label class="col-sm-4 control-label" >Is this a CPCP related event?<span class="req">*</span></label>
@@ -573,7 +579,7 @@
           <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
           <div class="col-sm-8">
             <input type="text" tabindex='17' class="form-control" id="unscheduledDescription"
-                   placeholder="" formControlName="description">
+                    formControlName="description">
             (RON,Pilot Report etc.)
             <div *ngIf="displayMessage['unscheduledMaintenanceGroup.description']" class="help-block">{{displayMessage['unscheduledMaintenanceGroup.description']}}</div>
 
