@@ -151,17 +151,17 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             length: {
                 required: 'Length  is required.',
                 maxlength: 'Length must be 3X3.',
-                pattern: 'Length  must be a Decmial .'
+                pattern: 'Length  must be numeric .'
             },
             width: {
                 required: 'Width is required.',
                 maxlength: 'Width must be 3X3.',
-                pattern: 'Width must be Decmial.'
+                pattern: 'Width must be numeric.'
             },
             depth: {
                 required: 'Depth is required.',
                 maxlength: 'Depth must be 3X4.',
-                pattern: 'Depth must be numeric.'
+                pattern: 'Depth must be 3X4 and numeric.'
             },
 
 
@@ -287,9 +287,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
             ),
           defectType: ['', [Validators.required, Validators.maxLength(25)]],
           defectDescription: ['', [Validators.required,  Validators.maxLength(25)]],
-          length: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints),  Validators.maxLength(25)]],
-          width: ['', [Validators.required, Validators.maxLength(6)]],
-          depth: ['', [Validators.required, Validators.maxLength(7)]],
+          length: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints),  Validators.maxLength(7)]],
+          width: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints), Validators.maxLength(7)]],
+          depth: ['', [Validators.required, Validators.pattern(Expressions.FourDecimalsPoints), Validators.maxLength(8)]],
          // stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
           //stringer: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
           //wl: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],

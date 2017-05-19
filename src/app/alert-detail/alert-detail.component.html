@@ -304,7 +304,8 @@
           <div class="row form-group" [class.has-error]="displayMessage.defectDescription">
             <label class="col-sm-4 control-label" for="defectDescription">Defect Description: <span class="req">*</span></label>
             <div class="col-sm-8">
-              <input type="text" tabindex='21' class="form-control" id="defectDescription" placeholder="" formControlName="defectDescription">
+              <input type="text" tabindex='21' style=";width:150px;height:150px;overflow:scroll;" class="form-control" id="defectDescription" placeholder="" formControlName="defectDescription">
+              
               <span *ngIf="displayMessage.defectDescription" class="help-block">{{displayMessage.defectDescription}}</span>
             </div>
 
@@ -363,7 +364,7 @@
           </div>-->
        
 
-        <div class="row" formGroupName="percisionLocationGroup">
+        <!--<div class="row" formGroupName="percisionLocationGroup">
           <div class="col-md-3">
             <div class="row form-group" [class.has-error]="displayMessage['percisionLocationGroup.stationLocation']">
               <label class="col-sm-4 control-label" for="stationLocation">Station:</label>
@@ -412,7 +413,7 @@
               
             </div>
           </div>
-        </div>
+        </div>-->
         <div class="row">
           <div class="col-md-6">
             <div class="row form-group" [class.has-error]="displayMessage.MFGpart">
