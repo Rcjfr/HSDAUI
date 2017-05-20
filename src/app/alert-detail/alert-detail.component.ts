@@ -363,9 +363,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
         this.store.dispatch(new selectedAlert.LoadNoseNumbersAction(''));
     }
     ngOnDestroy() {
-        // tslint:disable-next-line:no-unused-expression
         this.actionsSubscription$ && this.actionsSubscription$.unsubscribe();
-        // tslint:disable-next-line:no-unused-expression
         this.alertSubscription$ && this.alertSubscription$.unsubscribe();
         this.stationsSubscription$ && this.stationsSubscription$.unsubscribe();
     }
@@ -378,16 +376,6 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
         this.sdaForm.get('ataCode2').setValue('');
 
         this.ataCode2s$ = this.ataCodes$.map(a => a.find(b => b.Code === alertCode1).SecondaryCodes);
-        //  this.ataCode2s$ = this.ataCodes$.map(a =>
-        //  {
-        //    const dd = a.filter(function(b)
-        //    {
-        //      console.log(b.Code, alertCode1,b.Code.length,alertCode1.length);
-        //      return  b.Code.trim() === alertCode1.trim();
-        //     } )[0];
-        //    console.log('filtered', dd);
-        //    return dd.Codes.map(c => c.Code);
-        // });
     }
     noseNumberOnSelect(e: TypeaheadMatch) {
         // console.log('Selected value: ', e.value);
