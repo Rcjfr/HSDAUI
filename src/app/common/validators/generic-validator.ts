@@ -7,9 +7,9 @@ export const Expressions = {
     ThreeDecimalsPoints: ("([0-9]{3}\.[0-9]{3}$)|([0-9]{3}\.[0-9]{2}$)|([0-9]{3}\.[0-9]{1}$)|([0-9]{2}\.[0-9]{3}$)|([0-9]{2}\.[0-9]{2}$)|([0-9]{2}\.[0-9]{1}$)|([0-9]{1}\.[0-9]{3}$)|([0-9]{1}\.[0-9]{2}$)|([0-9]{1}\.[0-9]{1}$)|([0-9]{3})|([0-9]{2})|([0-9]{1})"),
     //(([0 - 9]{3}\.[0 - 9]{3}$) | ([0 - 9]{2}\.[0- 9]{2}$)|([0 - 9]{1 } \.[0 - 9]{1 } $)|([0 - 9]{2 } \.[0 - 9]{1 } $)|([0 - 9]{2 } \.[0 - 9]{3 } $))
     FourDecimalsPoints: new RegExp( "([0-9]{3}\.[0-9]{4}$)|([0-9]{3}\.[0-9]{3}$)|([0-9]{3}\.[0-9]{2}$)|([0-9]{3}\.[0-9]{1}$)|([0-9]{2}\.[0-9]{4}$)|([0-9]{2}\.[0-9]{3}$)|([0-9]{2}\.[0-9]{2}$)|([0-9]{2}\.[0-9]{1}$)|([0-9]{1}\.[0-9]{4}$)|([0-9]{1}\.[0-9]{3}$)|([0-9]{1}\.[0-9]{2}$)|([0-9]{1}\.[0-9]{1}$)|([0-9]+)")
-     
-   
-    
+
+
+
 };
 
 // Generic validator for Reactive forms
@@ -42,7 +42,7 @@ export class GenericValidator {
     // Structure
     // controlName1: 'Validation Message.',
     // controlName2: 'Validation Message.'
-    processMessages(container: FormGroup,path: string= ''): { [key: string]: string } {
+    processMessages(container: FormGroup, path: string= ''): { [key: string]: string } {
         let messages = {};
         for (let controlKey in container.controls) {
             if (container.controls.hasOwnProperty(controlKey)) {
@@ -53,10 +53,6 @@ export class GenericValidator {
                     Object.assign(messages, childMessages);
                 }
                 // Only validate if there are validation messages for the control
-                //if (controlKey === "unscheduledMaintenanceGroup") {
-                //  console.log(`${path}${controlKey}`, this.validationMessages[`${path}${controlKey}`]);
-                //}
-                
                 if (this.validationMessages[`${path}${controlKey}`]) {
                     messages[`${path}${controlKey}`] = '';
                     if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {
@@ -67,9 +63,44 @@ export class GenericValidator {
                         });
                     }
                 }
-                
             }
         }
         return messages;
+  }
+  processMessages2(container: FormGroup, _validationMessages: any = null): { [key: string]: any } {
+        let messages = {};
+        if(!_validationMessages) {_validationMessages = this.validationMessages;}
+        for (const controlKey in container.controls) {
+            if (container.controls.hasOwnProperty(controlKey)) {
+                let c = container.controls[controlKey];
+                messages[controlKey] = {};
+                // If it is a FormGroup, process its child controls as well.
+                if (c instanceof FormGroup) {
+                    messages[controlKey] = this.processMessages2(c, _validationMessages[controlKey]);
+                }
+                // Only validate if there are validation messages for the control
+                if (_validationMessages[controlKey]) {
+                    messages[controlKey]['message'] = '';
+                    if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {
+                        Object.keys(c.errors).map(messageKey => {
+                          if (_validationMessages[controlKey][messageKey]) {
+                            messages[controlKey]['message'] += _validationMessages[controlKey][messageKey] + ' ';
+                            }
+                        });
+                    }
+                }
+            }
+        }
+        return messages;
+  }
+  private nestedObjectAssignmentFor (obj, propString, value) {
+    const propNames = propString.split('.'),
+        propLength = propNames.length - 1;
+     let   tmpObj = obj;
+
+    for (let i = 0; i <= propLength ; i++) {
+        tmpObj = tmpObj[propNames[i]] = i !== propLength ?  {} : value;
     }
+    return obj;
+}
 }

@@ -24,6 +24,11 @@ import { StationService } from './common/services/station.service';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { reducer } from './common/reducers/index';
 import { CheckTypesService } from './common/services/check-types.service';
+import { AlertDetailViewComponent } from './alert-detail-view/alert-detail-view.component';
+import { GeneralSectionFormComponent } from './general-section-form/general-section-form.component';
+import { AircraftInfoSectionFormComponent } from './aircraft-info-section-form/aircraft-info-section-form.component';
+import { DefectLocationSectionFormComponent } from './defect-location-section-form/defect-location-section-form.component';
+import { DefectDiscoveredDuringSectionFormComponent } from './defect-discovered-during-section-form/defect-discovered-during-section-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +36,12 @@ import { CheckTypesService } from './common/services/check-types.service';
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    AlertDetailViewComponent,
+    GeneralSectionFormComponent,
+    AircraftInfoSectionFormComponent,
+    DefectLocationSectionFormComponent,
+    DefectDiscoveredDuringSectionFormComponent
   ],
   imports: [
     BrowserModule,

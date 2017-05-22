@@ -1,0 +1,129 @@
+﻿<div class="panel-heading">General Information</div>
+<div class="panel-body" [formGroup]='generalSectionFormGroup'>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.sdrNumber?.message">
+        <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
+        <div class="controls col-sm-8">
+          <input type="text" class="form-control" tabindex="1" id="sdrNumber" formControlName="sdrNumber">
+          <span *ngIf="displayMessage.sdrNumber?.message" class="help-block">{{displayMessage.sdrNumber?.message}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="customComponent">
+        <div>
+          <input id="chk_LineMaintenance" tabindex="2" type="checkbox" formControlName="lineMaintenance">
+          <label class="checkboxLabel" for="chk_LineMaintenance">
+          <span class="control"></span>
+        </label>
+        </div>
+      </div>
+
+
+      <!--<aac-checkbox [checkboxLabel]="LineMaintenance" [checkboxState]="lineMaintenance" tabindex="2" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>-->
+      <label for="chk_LineMaintenance">
+      Line Maintenance
+    </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.createDate">
+        <label class="col-sm-4 control-label" for="q-datepicker_1">Create Date: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <datetime [timepicker]="false" id="sdaCreateDate" [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+          <span *ngIf="displayMessage.createDate" class="help-block">{{displayMessage.createDate}}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.alertCode?.message">
+        <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select tabindex='13' class="form-control" id="sdaAlertCode" formControlName="alertCode">
+          <option value="">Select Alert Code</option>
+          <option value="A">A - Significant Structure Defect</option>
+          <option value="B">B - Significant Structure Corrosion</option>
+          <option value="C">C - Ground Damage</option>
+          <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
+        </select>
+          <span *ngIf="displayMessage.alertCode?.message" class="help-block">{{displayMessage.alertCode?.message}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label" for="sdaId">SDA ID:</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="sdaId" formControlName="sdaId">
+        </div>
+
+      </div>
+      <div class="row form-group" [class.has-error]="displayMessage.station">
+        <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <ng-template #customItemTemplate let-model="item" let-index="index">
+            <span>{{model.stationDescription}}(<b>{{model.stationIATACode}}</b>)</span>
+          </ng-template>
+          <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations"
+            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10">
+          <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage['generalSectionFormGroup.ataCode1']">
+        <label class="col-sm-4 control-label" for="ataCode1">ATA Code 1: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select class="form-control" tabindex='14' id="ataCode1" (change)='getAlertCode2s($event.target.value)' formControlName="ataCode1">
+          <option value="">Select ATA Code 1</option>
+          <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
+        </select>
+          <span *ngIf="displayMessage['generalSectionFormGroup.ataCode1']" class="help-block">{{displayMessage['generalSectionFormGroup.ataCode1']}}</span>
+        </div>
+      </div>
+      <div class="row form-group" [class.has-error]="displayMessage.ataCode2">
+        <label class="col-sm-4 control-label" for="ataCode2">ATA Code 2: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select class="form-control" tabindex='15' id="ataCode2" required formControlName="ataCode2">
+          <option value="">Select ATA Code 2</option>
+          <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
+        </select>
+          <span *ngIf="displayMessage.ataCode2" class="help-block">{{displayMessage.ataCode2}}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.department">
+        <label class="col-sm-4 control-label" for="department">Department: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select class="form-control" tabindex='5' id="department" formControlName="department">
+        <option value="">Select Department</option>
+        <option value="engineering">Engineering</option>
+        <option value="inspection">Inspection</option>
+        <option value="other">Other</option>
+      </select>
+          <span *ngIf="displayMessage.department" class="help-block">{{displayMessage.department}}</span>
+        </div>
+      </div>
+      <!--Aircraft Info Section-->
+      <app-aircraft-info-section-form [parent]="generalSectionFormGroup"
+      [displayMessage]="displayMessage"
+      ></app-aircraft-info-section-form>
+    </div>
+    <div class="col-md-6">
+      <app-defect-discovered-during-section-form [parent]="generalSectionFormGroup"
+      [displayMessage]="displayMessage"
+      ></app-defect-discovered-during-section-form>
+    </div>
+  </div>
+</div>

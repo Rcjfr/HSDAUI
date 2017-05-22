@@ -8,7 +8,11 @@ const reducers = {
     selectedAlert: fromSelectedAlert.reducer
 };
 
-export const reducer: ActionReducer<AppStore> = combineReducers(reducers);
+const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
+
+export const reducer: ActionReducer<AppStore> = (state: any, action: any) => {
+    return combinedReducers(state, action);
+};
 
 // Selector Functions
 // Level 1
