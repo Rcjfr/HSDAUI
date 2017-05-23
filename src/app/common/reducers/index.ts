@@ -23,6 +23,8 @@ export const getSelectedAlert = compose(fromSelectedAlert.getSelectedAlert, getS
 export const getSelectedAlertAircraftInfo = compose(fromSelectedAlert.getSelectedAlertAircraftInfo, getSelectedAlertState);
 export const getSelectedAlertLoading = compose(fromSelectedAlert.getSelectedAlertLoading, getSelectedAlertState);
 export const getSelectedAlertNoseNumbers = compose(fromSelectedAlert.getSelectedAlertNoseNumbers, getSelectedAlertState);
+export const getSelectedAlertATACodes = compose(fromSelectedAlert.getSelectedAlertATACodes, getSelectedAlertState);
+export const getSelectedAlertStations = compose(fromSelectedAlert.getSelectedAlertStations, getSelectedAlertState);
 
 
 

@@ -18,6 +18,7 @@ import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
 import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
+import { RadioButtonComponent } from './common/directives/radiobutton/radiobutton.component';
 import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
 import { StationService } from './common/services/station.service';
@@ -32,8 +33,11 @@ import {
           DefectDiscoveredDuringSectionFormComponent
         } from './components/defect-discovered-during-section-form/defect-discovered-during-section-form.component';
 import { ScheduledMaintenanceSectionComponent } from './components/scheduled-maintenance-section/scheduled-maintenance-section.component';
-import { UnscheduledMaintenanceSectionComponent } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
+import {
+          UnscheduledMaintenanceSectionComponent
+        } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,7 @@ import { AtaCodeComponent } from './components/ata-code/ata-code.component';
     AlertsComponent,
     AlertDetailComponent,
     CheckboxComponent,
+    RadioButtonComponent,
     AlertDetailViewComponent,
     GeneralSectionFormComponent,
     AircraftInfoSectionFormComponent,

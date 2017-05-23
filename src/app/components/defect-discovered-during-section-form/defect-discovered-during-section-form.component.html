@@ -1,6 +1,7 @@
 ﻿<div [formGroup]="defectDiscoveredDuringSectionFormGroup">
   <div class="row form-group" [class.has-error]="displayMessage.defectDiscoveredDuring">
     <h4>Defect discovered during:(Check appropriate box and describe)</h4>
+    <!--<aac-radio id="unscheduledMaintenance" label="Unscheduled Maintenance" value="0" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>-->
     <div class="customComponent" style="padding-left:20px;">
       <div>
         <input type="radio" tabindex='16' id="unscheduledMaintenance" value="0" formControlName="defectDiscoveredDuring">
@@ -10,6 +11,8 @@
         </label>
       </div>
     </div>
+    <!--<aac-radio id="scheduledMaintenance" label="Scheduled Maintenance" value="1" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>-->
+
     <div class="customComponent" style="padding-left:20px;">
       <div>
         <input type="radio" tabindex='17' id="scheduledMaintenance" value="1" formControlName="defectDiscoveredDuring">

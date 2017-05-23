@@ -2,22 +2,22 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'aac-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css'],
+  selector: 'aac-radio',
+  templateUrl: './radiobutton.component.html',
+  styleUrls: ['./radiobutton.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
+      useExisting: forwardRef(() => RadioButtonComponent),
       multi: true
     }
   ]
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class RadioButtonComponent implements ControlValueAccessor {
   @Input() label = '';
-   @Input() id = 'aaCheckBox';
+   @Input() id = 'aaRadioButton';
    @Input() tabindex = '';
-  @Input('value') _value = false;
+  @Input('value') _value = '';
   onChange: any = () => { };
   onTouched: any = () => { };
   get value() {

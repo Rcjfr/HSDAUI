@@ -9,7 +9,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { ATACode } from '../../common/models/ata-code.model';
 import { Alert } from '../../common/models/alert.model';
 import { IStation } from '../../common/models/station.model';
-import { ICheckboxState } from '../../common/directives/checkbox/checkbox.interfaces';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { AircraftService } from '../../common/services/aircraft.service';
 import { StationService } from '../../common/services/station.service';
@@ -37,13 +36,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     fleetCheckTypes$: Observable<CheckType[]>;
     checkTypes$: Observable<FleetCheckType[]>;
     stations: IStation[];
-    ataCodes$: Observable<ATACode[]>;
-    ataCode2s$: Observable<ATACode[]>;
     alert$: Observable<Alert>;
     loading$: Observable<boolean>;
-    aircraftInfo$: Observable<AircraftInfo>;
-    lineMaintenance: ICheckboxState = { isChecked: false };
-    lineMaintenanceLabel = 'Line Maintenance';
+
     noseNumbers$: Observable<string[]>;
     actionsSubscription$: Subscription;
     alertSubscription$: Subscription;
@@ -89,14 +84,10 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-
-        this.ataCodes$ = this.ataCodesService.getATACodes();
-        this.stationsSubscription$ = this.stationService.getAllStations().subscribe(data => this.stations = data);
-        this.checkTypes$ = this.checkTypesService.getCheckTypes();
-        this.alert$ = this.store.select(fromRoot.getSelectedAlert).map(d => d && d.toJS());// .subscribe((s: Alert) => this.alert = s);
+        this.alert$ = this.store.select(fromRoot.getSelectedAlert); // .map(d => d && d.toJS());// .subscribe((s: Alert) => this.alert = s);
         this.loading$ = this.store.select(fromRoot.getSelectedAlertLoading);
-        this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS());
-        this.aircraftInfo$ = this.store.select(fromRoot.getSelectedAlertAircraftInfo).map(d => d && <AircraftInfo>d.toJS());
+        // this.noseNumbers$ = this.store.select(fromRoot.getSelectedAlertNoseNumbers).map(d => d && d.toJS());
+        // this.aircraftInfo$ = this.store.select(fromRoot.getSelectedAlertAircraftInfo).map(d => d && <AircraftInfo>d.toJS());
         // .subscribe(aircraftInfo => {
         //     this.alert.manufacturer = aircraftInfo.manufacturer;
         //     this.alert.model = aircraftInfo.model;
@@ -110,25 +101,8 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
 
     }
-    getAlertCode2s(alertCode1: string) {
-        // this.alert.ataCode2 = '';
-        // this.ataCode2s$ = <Observable<ATACode[]>>of([]);
-        // if (!alertCode1) {
-        //     return;
-        // }
-        // this.sdaForm.get('ataCode2').setValue('');
 
-        // this.ataCode2s$ = this.ataCodes$.map(a => a.find(b => b.Code === alertCode1).SecondaryCodes);
-    }
-    noseNumberOnSelect(e: TypeaheadMatch) {
-        // console.log('Selected value: ', e.value);
-        this.populateAircraftInfo(e.value);
-    }
-    populateAircraftInfo(noseNumber: string) {
-        if (noseNumber) {
-            this.store.dispatch(new selectedAlert.LoadAircraftInfoAction(noseNumber));
-        }
-    }
+
 
 
 

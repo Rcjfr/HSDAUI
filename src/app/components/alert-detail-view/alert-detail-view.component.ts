@@ -56,7 +56,9 @@ ngAfterContentInit(): void {
         // Merge the blur event observable with the valueChanges observable
         Observable.merge(this.sdaForm.valueChanges.debounceTime(400), ...controlBlurs)
             //.debounceTime(800)
-            .subscribe(value => {this.displayMessage = this.genericValidator.processMessages2(this.sdaForm); });
+            .subscribe(value => {
+              console.log(value);
+              this.displayMessage = this.genericValidator.processMessages(this.sdaForm); });
     }
   ngOnInit() {
         this.sdaForm = this.fb.group({});
@@ -64,7 +66,7 @@ ngAfterContentInit(): void {
   }
   saveAlert() {
         this.genericValidator.formSubmitted = true;
-        this.displayMessage = this.genericValidator.processMessages2(this.sdaForm);
+        this.displayMessage = this.genericValidator.processMessages(this.sdaForm);
         console.log(this.displayMessage);
         if (!this.sdaForm.valid) { return; }
         this.toastr.success('Details entered are valid', 'Success');

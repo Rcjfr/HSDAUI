@@ -4,7 +4,7 @@
         <div class="col-sm-8">
           <select class="form-control" tabindex='14' id="ataCode1" (change)='getAlertCode2s($event.target.value)' formControlName="ataCode1">
           <option value="">Select ATA Code 1</option>
-          <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
+          <option *ngFor="let ac of ATACodes" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
         </select>
           <span *ngIf="displayMessage.ataCode1" class="help-block">{{displayMessage.ataCode1}}</span>
         </div>
@@ -14,10 +14,11 @@
         <div class="col-sm-8">
           <select class="form-control" tabindex='15' id="ataCode2" required formControlName="ataCode2">
           <option value="">Select ATA Code 2</option>
-          <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
+          <option *ngFor="let ac of ataCode2s" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
         </select>
           <span *ngIf="displayMessage.ataCode2" class="help-block">{{displayMessage.ataCode2}}</span>
         </div>
 
       </div>
 </div>
+

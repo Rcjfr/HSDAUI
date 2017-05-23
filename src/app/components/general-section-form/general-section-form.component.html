@@ -11,6 +11,8 @@
       </div>
     </div>
     <div class="col-md-6">
+      <!--<aac-checkbox id="lineMaintenance" label="Line Maintenance" tabindex="2" formControlName="lineMaintenance" ></aac-checkbox>-->
+
       <div class="customComponent">
         <div>
           <input id="chk_LineMaintenance" tabindex="2" type="checkbox" formControlName="lineMaintenance">
@@ -19,9 +21,6 @@
         </label>
         </div>
       </div>
-
-
-      <!--<aac-checkbox [checkboxLabel]="LineMaintenance" [checkboxState]="lineMaintenance" tabindex="2" (onChangeNotify)="alert.lineMaintenance=lineMaintenance.isChecked"></aac-checkbox>-->
       <label for="chk_LineMaintenance">
       Line Maintenance
     </label>
@@ -68,11 +67,16 @@
         <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
         <div class="col-sm-8">
           <ng-template #customItemTemplate let-model="item" let-index="index">
-            <span>{{model.stationDescription}}(<b>{{model.stationIATACode}}</b>)</span>
+            <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
           </ng-template>
-          <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations"
-            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10">
+          <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" formControlName="station"
+            [typeahead]="stations$|async"
+            [typeaheadOptionField]="'stationIATACode'"
+            [typeaheadItemTemplate]="customItemTemplate"
+            (typeaheadOnSelect)="stationOnSelect($event)"
+            typeaheadOptionsLimit="10">
           <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
+
         </div>
       </div>
     </div>
@@ -80,6 +84,7 @@
         <app-ata-code
         [parent]="generalSectionFormGroup"
         [errorMessages]="displayMessage"
+        [ATACodes]="ATACodes$ | async"
         >
         </app-ata-code>
     </div>
@@ -111,3 +116,4 @@
     </div>
   </div>
 </div>
+

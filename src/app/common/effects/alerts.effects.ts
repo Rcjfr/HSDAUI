@@ -17,12 +17,18 @@ import {AircraftService } from '../services/aircraft.service';
 import * as selectedAlert from '../actions/selected-alert';
 import { Alert} from '../models/alert.model';
 import { AircraftInfo} from '../models/aircraft-info.model';
+import { ATACodesService } from '../services/ata-codes.service';
+import { ATACode } from '../models/ata-code.model';
+import { StationService } from '../../common/services/station.service';
+import { IStation } from '../../common/models/station.model';
 
 @Injectable()
 export class AlertEffects {
-    constructor(private actions$: Actions, private aircraftService: AircraftService,
-                private toastr: ToastsManager) {  // ,vcr: ViewContainerRef
-                    // this.toastr.setRootViewContainerRef(vcr);
+    constructor(private actions$: Actions,
+                private aircraftService: AircraftService,
+                private ataCodesService: ATACodesService,
+                private stationService: StationService,
+                private toastr: ToastsManager) {
                 }
     // tslint:disable-next-line:member-ordering
     @Effect()
@@ -38,6 +44,34 @@ export class AlertEffects {
                                                       return of(new selectedAlert.LoadNoseNumbersFailAction('Failed to load Nose Numbers'));
                                                     });
                                             });
+    // tslint:disable-next-line:member-ordering
+    @Effect()
+    loadATACodes$: Observable<Action> = this.actions$
+                                              .ofType(selectedAlert.ActionTypes.LOAD_ATA_CODES)
+                                              .switchMap(() => {
+                                                  return this.ataCodesService.getATACodes()
+                                                          .map((ataCodes: ATACode[]) => {
+                                                          return new selectedAlert.LoadATACodesCompleteAction(ataCodes);
+                                              })
+                                              .catch((err) => {
+                                                      return of(new selectedAlert.LoadATACodesFailAction('Failed to load ATA Codes'));
+                                                    });
+                                            });
+
+                                            // tslint:disable-next-line:member-ordering
+                                            @Effect()
+    loadStations$: Observable<Action> = this.actions$
+                                              .ofType(selectedAlert.ActionTypes.LOAD_STATIONS)
+                                              .switchMap(() => {
+                                                  return this.stationService.getAllStations()
+                                                          .map((stations: IStation[]) => {
+                                                          return new selectedAlert.LoadStationsCompleteAction(stations);
+                                              })
+                                              .catch((err) => {
+                                                      return of(new selectedAlert.LoadStationsFailAction('Failed to load Stations'));
+                                                    });
+                                            });
+
 // tslint:disable-next-line:member-ordering
     @Effect()
     loadAircraftInfo$: Observable<Action> = this.actions$
