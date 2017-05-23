@@ -1,11 +1,11 @@
 ﻿import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef, ViewChildren } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { GenericValidator, Expressions } from '../common/validators/generic-validator';
-import { CustomValidators } from '../common/validators/custom-validators';
-import { CheckType, FleetCheckType } from '../common/models/check-type.model';
-import { IStation } from '../common/models/station.model';
+import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
+import { CustomValidators } from '../../common/validators/custom-validators';
+import { CheckType, FleetCheckType } from '../../common/models/check-type.model';
+import { IStation } from '../../common/models/station.model';
+import {BaseFormComponent} from '../base-form.component';
 import { Observable } from 'rxjs/Observable';
-import {ValidationMessages} from './general-section-form.messages';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/takeWhile';
 
@@ -15,34 +15,16 @@ import 'rxjs/add/operator/takeWhile';
   styleUrls: ['./general-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GeneralSectionFormComponent implements OnInit {
-
-  @Input() parent: FormGroup;
+export class GeneralSectionFormComponent extends BaseFormComponent {
   @Input() checkTypes: FleetCheckType[];
   @Input() stations: IStation[];
-  private displayMessage: { [key: string]: any }={};
-  private _errorMessages = new BehaviorSubject<{ [key: string]: any }>({});
-  @Input()
-  set errorMessages(value) {
-    this._errorMessages.next(value);
-  }
-  get errorMessages(){
-    return this._errorMessages.getValue();
-  }
-
   generalSectionFormGroup: FormGroup;
   fleetCheckTypes: CheckType[];
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder) {
+    super('generalSectionFormGroup');
+   }
 
   ngOnInit() {
-    this._errorMessages.takeWhile(() => !this.displayMessage)
-    .subscribe(
-      x => {
-        this.displayMessage = x['generalSectionFormGroup'] || {};
-    console.log(this.displayMessage);
-    }
-    );
-
    this.generalSectionFormGroup = this.fb.group({
           sdaId: new FormControl({ value: '', disabled: true }),
             sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
@@ -60,18 +42,9 @@ export class GeneralSectionFormComponent implements OnInit {
             department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
             });
-    // Object.keys(formFields).forEach(key=>{
-    //     //this.group.addControl(key,formFields[key]);
-    // });
-this.parent.addControl('generalSectionFormGroup', this.generalSectionFormGroup);
-
-
-
-
+            this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
 }
 populateCheckTypes() {
         this.fleetCheckTypes = this.checkTypes.find(b => b.Fleet === this.generalSectionFormGroup.get('fleet').value).CheckTypes;
     }
-
-
 }

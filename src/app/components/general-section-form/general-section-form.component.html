@@ -2,11 +2,11 @@
 <div class="panel-body" [formGroup]='generalSectionFormGroup'>
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.sdrNumber?.message">
+      <div class="row form-group" [class.has-error]="displayMessage.sdrNumber">
         <label class="col-sm-4 control-label" for="sdrNumber">SDR Number:</label>
         <div class="controls col-sm-8">
           <input type="text" class="form-control" tabindex="1" id="sdrNumber" formControlName="sdrNumber">
-          <span *ngIf="displayMessage.sdrNumber?.message" class="help-block">{{displayMessage.sdrNumber?.message}}</span>
+          <span *ngIf="displayMessage.sdrNumber" class="help-block">{{displayMessage.sdrNumber}}</span>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.alertCode?.message">
+      <div class="row form-group" [class.has-error]="displayMessage.alertCode">
         <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
         <div class="col-sm-8">
           <select tabindex='13' class="form-control" id="sdaAlertCode" formControlName="alertCode">
@@ -49,7 +49,7 @@
           <option value="C">C - Ground Damage</option>
           <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
         </select>
-          <span *ngIf="displayMessage.alertCode?.message" class="help-block">{{displayMessage.alertCode?.message}}</span>
+          <span *ngIf="displayMessage.alertCode" class="help-block">{{displayMessage.alertCode}}</span>
         </div>
 
       </div>
@@ -77,27 +77,11 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage['generalSectionFormGroup.ataCode1']">
-        <label class="col-sm-4 control-label" for="ataCode1">ATA Code 1: <span class="req">*</span></label>
-        <div class="col-sm-8">
-          <select class="form-control" tabindex='14' id="ataCode1" (change)='getAlertCode2s($event.target.value)' formControlName="ataCode1">
-          <option value="">Select ATA Code 1</option>
-          <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
-        </select>
-          <span *ngIf="displayMessage['generalSectionFormGroup.ataCode1']" class="help-block">{{displayMessage['generalSectionFormGroup.ataCode1']}}</span>
-        </div>
-      </div>
-      <div class="row form-group" [class.has-error]="displayMessage.ataCode2">
-        <label class="col-sm-4 control-label" for="ataCode2">ATA Code 2: <span class="req">*</span></label>
-        <div class="col-sm-8">
-          <select class="form-control" tabindex='15' id="ataCode2" required formControlName="ataCode2">
-          <option value="">Select ATA Code 2</option>
-          <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
-        </select>
-          <span *ngIf="displayMessage.ataCode2" class="help-block">{{displayMessage.ataCode2}}</span>
-        </div>
-
-      </div>
+        <app-ata-code
+        [parent]="generalSectionFormGroup"
+        [errorMessages]="displayMessage"
+        >
+        </app-ata-code>
     </div>
   </div>
 
@@ -116,14 +100,14 @@
         </div>
       </div>
       <!--Aircraft Info Section-->
-      <app-aircraft-info-section-form [parent]="generalSectionFormGroup"
-      [displayMessage]="displayMessage"
-      ></app-aircraft-info-section-form>
+      <app-aircraft-info-section-form
+        [parent]="generalSectionFormGroup"
+        [errorMessages]="displayMessage"></app-aircraft-info-section-form>
     </div>
     <div class="col-md-6">
-      <app-defect-discovered-during-section-form [parent]="generalSectionFormGroup"
-      [displayMessage]="displayMessage"
-      ></app-defect-discovered-during-section-form>
+      <app-defect-discovered-during-section-form
+      [parent]="generalSectionFormGroup"
+      [errorMessages]="displayMessage"></app-defect-discovered-during-section-form>
     </div>
   </div>
 </div>

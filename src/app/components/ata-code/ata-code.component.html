@@ -1,0 +1,23 @@
+<div [formGroup]="ataCodesSectionFormGroup">
+        <div class="row form-group" [class.has-error]="displayMessage.ataCode1">
+        <label class="col-sm-4 control-label" for="ataCode1">ATA Code 1: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select class="form-control" tabindex='14' id="ataCode1" (change)='getAlertCode2s($event.target.value)' formControlName="ataCode1">
+          <option value="">Select ATA Code 1</option>
+          <option *ngFor="let ac of ataCodes$ | async" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
+        </select>
+          <span *ngIf="displayMessage.ataCode1" class="help-block">{{displayMessage.ataCode1}}</span>
+        </div>
+      </div>
+      <div class="row form-group" [class.has-error]="displayMessage.ataCode2">
+        <label class="col-sm-4 control-label" for="ataCode2">ATA Code 2: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select class="form-control" tabindex='15' id="ataCode2" required formControlName="ataCode2">
+          <option value="">Select ATA Code 2</option>
+          <option *ngFor="let ac of ataCode2s$ | async" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
+        </select>
+          <span *ngIf="displayMessage.ataCode2" class="help-block">{{displayMessage.ataCode2}}</span>
+        </div>
+
+      </div>
+</div>

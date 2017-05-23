@@ -16,11 +16,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       minlength: 'Station must be 3 characters.',
       pattern: 'Station must contain only alphabet characters.'
     },
-    'ataCode1': {
-      required: 'ATA Code 1 is required.'
-    },
-    'ataCode2': {
-      required: 'ATA Code 2 is required.'
+    'ataCodesSectionFormGroup': {
+      'ataCode1': {
+        required: 'ATA Code 1 is required.'
+      },
+      'ataCode2': {
+        required: 'ATA Code 2 is required.'
+      }
     },
     'department': {
       required: 'Department is required.'
@@ -61,13 +63,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       'scheduledMaintenanceGroup': {
         atleastone: 'Routine # or Non-Routine # is required.',
-        'generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.scheduledMaintenanceGroup.checkType': {
+        'checkType': {
           required: 'Check Type is required.'
         },
-        'generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.scheduledMaintenanceGroup.routineNo': {
+        'routineNo': {
           pattern: 'Routine # must contain only alphanumerics.'
         },
-        'generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.scheduledMaintenanceGroup.nonRoutineNo': {
+        'nonRoutineNo': {
           pattern: 'Non Routine # must contain only alphanumerics.'
         }
       },

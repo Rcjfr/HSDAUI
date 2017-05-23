@@ -1,0 +1,38 @@
+﻿<div [formGroup]="defectDiscoveredDuringSectionFormGroup">
+  <div class="row form-group" [class.has-error]="displayMessage.defectDiscoveredDuring">
+    <h4>Defect discovered during:(Check appropriate box and describe)</h4>
+    <div class="customComponent" style="padding-left:20px;">
+      <div>
+        <input type="radio" tabindex='16' id="unscheduledMaintenance" value="0" formControlName="defectDiscoveredDuring">
+        <label for="unscheduledMaintenance">
+          <span class="control"></span>
+          Unscheduled Maintenance
+        </label>
+      </div>
+    </div>
+    <div class="customComponent" style="padding-left:20px;">
+      <div>
+        <input type="radio" tabindex='17' id="scheduledMaintenance" value="1" formControlName="defectDiscoveredDuring">
+        <label for="scheduledMaintenance">
+          <span class="control"></span>
+          Scheduled Maintenance
+        </label>
+      </div>
+    </div>
+    <div *ngIf="displayMessage.defectDiscoveredDuring" class="error">{{displayMessage.defectDiscoveredDuring}}</div>
+  </div>
+  <app-unscheduled-maintenance-section
+    [parent]="defectDiscoveredDuringSectionFormGroup"
+    [errorMessages]="displayMessage"
+    *ngIf="defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value === '0'"
+  >
+
+  </app-unscheduled-maintenance-section>
+  <app-scheduled-maintenance-section
+    [parent]="defectDiscoveredDuringSectionFormGroup"
+    [errorMessages]="displayMessage"
+    *ngIf="defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value === '1'"
+  >
+
+  </app-scheduled-maintenance-section>
+</div>

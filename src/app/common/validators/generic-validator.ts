@@ -80,11 +80,19 @@ export class GenericValidator {
                 }
                 // Only validate if there are validation messages for the control
                 if (_validationMessages[controlKey]) {
-                    messages[controlKey]['message'] = '';
+                    if (c instanceof FormGroup) {
+                      messages[controlKey]['message'] = '';
+                    } else {
+                      messages[controlKey] = '';
+                    }
                     if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {
                         Object.keys(c.errors).map(messageKey => {
                           if (_validationMessages[controlKey][messageKey]) {
+                            if (c instanceof FormGroup) {
                             messages[controlKey]['message'] += _validationMessages[controlKey][messageKey] + ' ';
+                          } else {
+                            messages[controlKey] += _validationMessages[controlKey][messageKey] + ' ';
+                          }
                             }
                         });
                     }

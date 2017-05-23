@@ -1,16 +1,15 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Expressions } from '../common/validators/generic-validator';
+import { Expressions } from '../../common/validators/generic-validator';
+import {BaseFormComponent} from '../base-form.component';
 @Component({
   selector: 'app-aircraft-info-section-form',
   templateUrl: './aircraft-info-section-form.component.html',
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AircraftInfoSectionFormComponent implements OnInit {
-@Input() parent: FormGroup;
-@Input() displayMessage: { [key: string]: string } = {};
+export class AircraftInfoSectionFormComponent extends BaseFormComponent {
 aircraftInfoSectionFormGroup: FormGroup;
 createNumberMask = createNumberMask;
     private measurementNumberMask = createNumberMask({
@@ -35,7 +34,9 @@ createNumberMask = createNumberMask;
     allowLeadingZeroes:false
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    super('aircraftInfoSectionFormGroup');
+  }
 
   ngOnInit() {
     this.aircraftInfoSectionFormGroup = this.fb.group({
@@ -47,7 +48,7 @@ createNumberMask = createNumberMask;
             cycles:         ['', [Validators.required, Validators.maxLength(25)]],
             fleet:          ['', [Validators.required, Validators.maxLength(20)]]
     });
-    this.parent.addControl('aircraftInfoSectionFormGroup', this.aircraftInfoSectionFormGroup);
+    this.parent.addControl(this.formGroupName, this.aircraftInfoSectionFormGroup);
   }
 
 }

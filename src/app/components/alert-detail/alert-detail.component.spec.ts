@@ -2,8 +2,8 @@
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import * as $ from 'jquery';
 import { AlertDetailComponent } from './alert-detail.component';
-import { CheckboxComponent } from '../common/directives/checkbox/checkbox.component';
-import { ATACodesService } from '../common/services/ata-codes.service';
+import { CheckboxComponent } from '../../common/directives/checkbox/checkbox.component';
+import { ATACodesService } from '../../common/services/ata-codes.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { inject } from '@angular/core/testing';
@@ -11,16 +11,16 @@ import { HttpModule } from '@angular/http';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule, TypeaheadMatch } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from '../common/reducers/index';
+import { reducer } from '../../common/reducers/index';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../common/reducers';
+import * as fromRoot from '../../common/reducers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
-import { MockStore } from '../common/store/mock-store';
+import { MockStore } from '../../common/store/mock-store';
 import { List } from 'immutable';
-import { alertFactory } from '../common/reducers/models/alert';
-import { aircraftInfoFactory } from '../common/reducers/models/aircraftInfo';
-import { CheckTypesService } from '../common/services/check-types.service';
+import { alertFactory } from '../../common/reducers/models/alert';
+import { aircraftInfoFactory } from '../../common/reducers/models/aircraftInfo';
+import { CheckTypesService } from '../../common/services/check-types.service';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
@@ -28,8 +28,8 @@ const mockResponse = [
                               {
                                 'Code': '32',
                                 'Name': 'Landing Gear',
-                                'Description': `Includes Basic Structure which provides major support 
-                                                for the aircraft, while on the ground, 
+                                'Description': `Includes Basic Structure which provides major support
+                                                for the aircraft, while on the ground,
                                                 such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
                                 'SecondaryCodes': [
                                   {

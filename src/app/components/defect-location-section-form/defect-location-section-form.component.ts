@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GenericValidator, Expressions } from '../common/validators/generic-validator';
-import { CustomValidators } from '../common/validators/custom-validators';
+import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
+import { CustomValidators } from '../../common/validators/custom-validators';
 @Component({
   selector: 'app-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
