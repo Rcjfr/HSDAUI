@@ -1,4 +1,4 @@
-﻿import { Component, Input, forwardRef } from '@angular/core';
+﻿import { Component, Input, forwardRef, ElementRef, Renderer } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,9 +15,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class RadioButtonComponent implements ControlValueAccessor {
   @Input() label = '';
-   @Input() id = 'aaRadioButton';
-   @Input() tabindex = '';
-  @Input('value') _value = '';
+  @Input('id') radio_id = '';
+  @Input('name') radio_group_name = '';
+  @Input('tabindex') tindex = "0";
+  @Input('value') _value = null;
   onChange: any = () => { };
   onTouched: any = () => { };
   get value() {
@@ -28,8 +29,15 @@ set value(val) {
     this.onChange(val);
     this.onTouched();
   }
-  constructor() { }
+  constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
+  ngOnInit() {
+    this._renderer.setElementAttribute(this._elRef.nativeElement, 'tabindex', null);
+    this._renderer.setElementAttribute(this._elRef.nativeElement, 'id', null);
 
+  }
+onSelectionChange() {
+  this.writeValue(this._value);
+}
   registerOnChange(fn) {
     this.onChange = fn;
   }

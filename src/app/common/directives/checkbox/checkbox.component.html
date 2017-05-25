@@ -1,9 +1,13 @@
 ﻿<div class="customComponent">
   <div>
-    <input [attr.id]="'chk_'+ id" type="checkbox" [value]="value" [attr.checked]="value">
-    <label class="checkboxLabel" [attr.for]="'chk_'+id">
+    <input [attr.id]="checkbox_id" [attr.tabindex]="tindex"
+            [(ngModel)]="value"
+            type="checkbox"
+            [checked]="value" >
+    <label class="checkboxLabel" [attr.for]="checkbox_id">
           <span class="control"></span>
         </label>
   </div>
 </div>
-<label [attr.for]="'chk_'+id">{{label}}</label>
+<label [attr.for]="checkbox_id">{{label}}</label>
+

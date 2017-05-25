@@ -2,22 +2,30 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'aac-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css'],
+  selector: 'aac-input',
+  templateUrl: './input.component.html',
+  styleUrls: ['./input.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
+      useExisting: forwardRef(() => FormInputComponent),
       multi: true
     }
   ]
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class FormInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input('id') checkbox_id = '';
   @Input('tabindex') tindex = "0";
-  @Input('value') _value = false;
+  @Input('value') _value = "";
+  @Input() message: string;
+
+  private _required = false;
+  @Input()
+  set required(value: boolean) {
+    this._required = true;
+  }
+
   onChange: any = () => { };
   onTouched: any = () => { };
   get value() {
@@ -34,8 +42,8 @@ export class CheckboxComponent implements ControlValueAccessor {
     this._renderer.setElementAttribute(this._elRef.nativeElement, 'id', null);
 
   }
-onSelectionChange(checked: boolean) {
-  this.writeValue(checked);
+onInputChange(value: string) {
+  this.writeValue(value);
 }
   registerOnChange(fn) {
     this.onChange = fn;

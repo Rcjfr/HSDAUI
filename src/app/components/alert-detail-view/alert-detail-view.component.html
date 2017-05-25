@@ -1,9 +1,11 @@
 <form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
   <div class="panel panel-default">
+    <div class="panel-heading">General Information</div>
     <app-general-section-form
     [parent]="sdaForm"
-    [errorMessages]="displayMessage"
+    [errorMessages]="displayMessage$ | async"
     ></app-general-section-form>
+    <div class="panel-heading">Description and Location of Defects or Damage</div>
     <!--<app-defect-location-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage"

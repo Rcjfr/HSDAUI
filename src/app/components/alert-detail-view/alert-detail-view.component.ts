@@ -8,8 +8,11 @@ import { GenericValidator } from '../../common/validators/generic-validator';
 import {ValidationMessages} from './alert-detail-view.messages';
 import { FleetCheckType } from '../../common/models/check-type.model';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { IStation } from '../../common/models/station.model';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+
 
 
 @Component({
@@ -32,7 +35,7 @@ export class AlertDetailViewComponent implements OnInit {
   sdaForm: FormGroup;
 
   // Use with the generic validation message class
-  displayMessage = {};
+  displayMessage$ = new BehaviorSubject<any>({});
 
   private genericValidator: GenericValidator;
   constructor(private vcr: ViewContainerRef,
@@ -54,11 +57,15 @@ ngAfterContentInit(): void {
           );
 
         // Merge the blur event observable with the valueChanges observable
-        Observable.merge(this.sdaForm.valueChanges.debounceTime(400), ...controlBlurs)
-            //.debounceTime(800)
+        Observable.merge(this.sdaForm.valueChanges, // debounceTime(400)
+                         ...controlBlurs)
+            // .debounceTime(400)
+            .mapTo(-1)
             .subscribe(value => {
-              console.log(value);
-              this.displayMessage = this.genericValidator.processMessages(this.sdaForm); });
+              this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
+          //console.log(new Date(), value, this.displayMessage);
+          });
+
     }
   ngOnInit() {
         this.sdaForm = this.fb.group({});
@@ -66,8 +73,7 @@ ngAfterContentInit(): void {
   }
   saveAlert() {
         this.genericValidator.formSubmitted = true;
-        this.displayMessage = this.genericValidator.processMessages(this.sdaForm);
-        console.log(this.displayMessage);
+        this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
         if (!this.sdaForm.valid) { return; }
         this.toastr.success('Details entered are valid', 'Success');
     }

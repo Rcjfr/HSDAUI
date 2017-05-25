@@ -1,8 +1,8 @@
 ﻿<div [formGroup]="defectDiscoveredDuringSectionFormGroup">
   <div class="row form-group" [class.has-error]="displayMessage.defectDiscoveredDuring">
     <h4>Defect discovered during:(Check appropriate box and describe)</h4>
-    <!--<aac-radio id="unscheduledMaintenance" label="Unscheduled Maintenance" value="0" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>-->
-    <div class="customComponent" style="padding-left:20px;">
+    <aac-radio id="unscheduledMaintenance" name="defectDiscoveredDuring" label="Unscheduled Maintenance" value="0" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>
+    <!--<div class="customComponent" style="padding-left:20px;">
       <div>
         <input type="radio" tabindex='16' id="unscheduledMaintenance" value="0" formControlName="defectDiscoveredDuring">
         <label for="unscheduledMaintenance">
@@ -10,10 +10,10 @@
           Unscheduled Maintenance
         </label>
       </div>
-    </div>
-    <!--<aac-radio id="scheduledMaintenance" label="Scheduled Maintenance" value="1" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>-->
+    </div>-->
+    <aac-radio id="scheduledMaintenance" name="defectDiscoveredDuring" label="Scheduled Maintenance" value="1" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>
 
-    <div class="customComponent" style="padding-left:20px;">
+    <!--<div class="customComponent" style="padding-left:20px;">
       <div>
         <input type="radio" tabindex='17' id="scheduledMaintenance" value="1" formControlName="defectDiscoveredDuring">
         <label for="scheduledMaintenance">
@@ -21,7 +21,7 @@
           Scheduled Maintenance
         </label>
       </div>
-    </div>
+    </div>-->
     <div *ngIf="displayMessage.defectDiscoveredDuring" class="error">{{displayMessage.defectDiscoveredDuring}}</div>
   </div>
   <app-unscheduled-maintenance-section

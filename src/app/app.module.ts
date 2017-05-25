@@ -37,6 +37,8 @@ import {
           UnscheduledMaintenanceSectionComponent
         } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
+import { FormTextComponent } from './common/directives/form/input';
+import { FormSelectComponent } from './common/directives/form/select';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { AtaCodeComponent } from './components/ata-code/ata-code.component';
     DefectDiscoveredDuringSectionFormComponent,
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
-    AtaCodeComponent
+    AtaCodeComponent,
+    FormTextComponent,
+    FormSelectComponent
   ],
   imports: [
     BrowserModule,
