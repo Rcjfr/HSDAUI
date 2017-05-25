@@ -51,7 +51,6 @@ ngAfterContentInit(): void {
      // Watch for the blur event from any input element on the form.
          const controlBlurs: Observable<any>[] = formElements
           .map((formControl: any) => {
-              // console.log(new Date(),formControl.nativeElement.id);
             return Observable.fromEvent(formControl, 'blur');
             }
           );
@@ -63,7 +62,6 @@ ngAfterContentInit(): void {
             .mapTo(-1)
             .subscribe(value => {
               this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
-          //console.log(new Date(), value, this.displayMessage);
           });
 
     }
@@ -73,9 +71,20 @@ ngAfterContentInit(): void {
   }
   saveAlert() {
         this.genericValidator.formSubmitted = true;
+        this.markAsDirty(this.sdaForm);
         this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
         if (!this.sdaForm.valid) { return; }
         this.toastr.success('Details entered are valid', 'Success');
     }
+   markAsDirty (group: FormGroup | FormArray) {
+  group.markAsDirty();
+  for (let i in group.controls) {
+    if (group.controls[i] instanceof FormControl) {
+      group.controls[i].markAsDirty();
+    } else {
+      this.markAsDirty(group.controls[i]);
+    }
+   }
+ }
 
 }

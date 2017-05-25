@@ -17,8 +17,7 @@ import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
-// import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
-import { RadioButtonComponent } from './common/directives/radiobutton/radiobutton.component';
+
 import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
 import { StationService } from './common/services/station.service';
@@ -37,11 +36,7 @@ import {
           UnscheduledMaintenanceSectionComponent
         } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
-import {FormCheckBoxComponent,
-        // FormRadioComponent,
-        FormSelectComponent,
-        FormTextComponent } from './common/directives/form';
-
+import { FormControlsModule } from './common/directives/form/form-controls.module';
 
 @NgModule({
   declarations: [
@@ -50,8 +45,6 @@ import {FormCheckBoxComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
-    // CheckboxComponent,
-    RadioButtonComponent,
     AlertDetailViewComponent,
     GeneralSectionFormComponent,
     AircraftInfoSectionFormComponent,
@@ -59,17 +52,14 @@ import {FormCheckBoxComponent,
     DefectDiscoveredDuringSectionFormComponent,
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
-    AtaCodeComponent,
-    FormCheckBoxComponent,
-    //FormRadioComponent,
-    FormSelectComponent,
-    FormTextComponent
+    AtaCodeComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    FormControlsModule,
     HttpModule,
     AppRoutingModule,
     NKDatetimeModule,

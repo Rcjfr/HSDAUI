@@ -18,6 +18,7 @@ let identifier = 0;
             [(ngModel)]="value"
             type="checkbox"
             (blur)="touch()"
+            [disabled]="disabled"
             [checked]="value" >
     <label class="checkboxLabel" [attr.for]="identifier">
           <span class="control"></span>

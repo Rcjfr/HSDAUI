@@ -20,7 +20,7 @@ import { List } from 'immutable';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CheckTypesService } from '../../common/services/check-types.service';
 import { FleetCheckType, CheckType } from '../../common/models/check-type.model';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+
 import '../../common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AircraftInfo } from '../../common/models/aircraft-info.model';
@@ -46,28 +46,28 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     showErrors = false;
     unscheduledFieldsInvalid = false;
     scheduledFieldsInvalid = false;
-    createNumberMask = createNumberMask;
-    private measurementNumberMask = createNumberMask({
-      prefix: '',
-      allowDecimal: true,
-      includeThousandsSeparator: false,
-      decimalLimit: 3,
-      integerLimit: 3,
-      requireDecimal: false
-    });
-    private decimalNumberMask = createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 2,
-                          requireDecimal:false
-    });
-  private numberMask = createNumberMask({
-    prefix: '',
-    allowDecimal: false,
-    includeThousandsSeparator: false,
-    allowLeadingZeroes:false
-  });
+
+  //   private measurementNumberMask = createNumberMask({
+  //     prefix: '',
+  //     allowDecimal: true,
+  //     includeThousandsSeparator: false,
+  //     decimalLimit: 3,
+  //     integerLimit: 3,
+  //     requireDecimal: false
+  //   });
+  //   private decimalNumberMask = createNumberMask({
+  //                         prefix:'',
+  //                         allowDecimal: true,
+  //                         includeThousandsSeparator:false,
+  //                         decimalLimit: 2,
+  //                         requireDecimal:false
+  //   });
+  // private numberMask = createNumberMask({
+  //   prefix: '',
+  //   allowDecimal: false,
+  //   includeThousandsSeparator: false,
+  //   allowLeadingZeroes:false
+  // });
     constructor(private ataCodesService: ATACodesService,
                 private checkTypesService: CheckTypesService,
                 private stationService: StationService,

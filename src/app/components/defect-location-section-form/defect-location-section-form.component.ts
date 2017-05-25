@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../components/base-form.component';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 @Component({
   selector: 'app-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
@@ -10,7 +11,7 @@ import { BaseFormComponent } from '../../components/base-form.component';
 })
 export class DefectLocationSectionFormComponent extends BaseFormComponent {
   defectLocationSectionFormGroup: FormGroup;
-
+createNumberMask = createNumberMask;
     constructor( private fb: FormBuilder) {
       super('defectLocationSectionFormGroup');
     }

@@ -36,7 +36,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent {
   ngOnInit() {
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
-      sdrNumber: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
+      sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
       createDate: [new Date(), [Validators.required]],
       lineMaintenance: false,
       alertCode: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
