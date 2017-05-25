@@ -17,7 +17,7 @@ import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
-import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
+// import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { RadioButtonComponent } from './common/directives/radiobutton/radiobutton.component';
 import { ATACodesService } from './common/services/ata-codes.service';
 import { AircraftService } from './common/services/aircraft.service';
@@ -37,8 +37,11 @@ import {
           UnscheduledMaintenanceSectionComponent
         } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
-import { FormTextComponent } from './common/directives/form/input';
-import { FormSelectComponent } from './common/directives/form/select';
+import {FormCheckBoxComponent,
+        // FormRadioComponent,
+        FormSelectComponent,
+        FormTextComponent } from './common/directives/form';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +50,7 @@ import { FormSelectComponent } from './common/directives/form/select';
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
-    CheckboxComponent,
+    // CheckboxComponent,
     RadioButtonComponent,
     AlertDetailViewComponent,
     GeneralSectionFormComponent,
@@ -57,8 +60,10 @@ import { FormSelectComponent } from './common/directives/form/select';
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
-    FormTextComponent,
-    FormSelectComponent
+    FormCheckBoxComponent,
+    //FormRadioComponent,
+    FormSelectComponent,
+    FormTextComponent
   ],
   imports: [
     BrowserModule,

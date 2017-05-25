@@ -2,19 +2,21 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import { BaseFormComponent } from '../../components/base-form.component';
 @Component({
   selector: 'app-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })
-export class DefectLocationSectionFormComponent implements OnInit {
-  @Input() group: FormGroup;
+export class DefectLocationSectionFormComponent extends BaseFormComponent {
+  defectLocationSectionFormGroup: FormGroup;
 
     constructor( private fb: FormBuilder) {
+      super('defectLocationSectionFormGroup');
     }
 
   ngOnInit() {
-    this.group = this.fb.group({
+    this.defectLocationSectionFormGroup = this.fb.group({
       defectType: ['', [Validators.required, Validators.maxLength(250)]],
           defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],
           length: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints),  Validators.maxLength(7)]],
@@ -44,6 +46,7 @@ export class DefectLocationSectionFormComponent implements OnInit {
           detected: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
+    this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);
 
   }
 

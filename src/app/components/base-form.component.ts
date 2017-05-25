@@ -8,7 +8,7 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 })
 export class BaseFormComponent implements OnInit, OnDestroy {
   @Input() parent: FormGroup;
-  private displayMessage: { [key: string]: any } = {};
+  public displayMessage: any = {}; // { [key: string]: any }
   @Input()
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};

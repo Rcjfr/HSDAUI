@@ -1,4 +1,7 @@
-﻿<div class="panel-body" [formGroup]='generalSectionFormGroup'>
+﻿<!--<pre>
+  {{generalSectionFormGroup.value | json}}
+</pre>-->
+<div class="panel-body" [formGroup]='generalSectionFormGroup'>
   <div class="row">
     <div class="col-md-6">
       <!--<div class="row form-group" [class.has-error]="displayMessage.sdrNumber">
@@ -9,8 +12,8 @@
         </div>
       </div>-->
       <aac-input
-              required
               tabindex="1"
+              required
               name="hexadecimalValue"
               label="SDR Number:"
               placeholder="Enter a SDR value"
@@ -45,6 +48,7 @@
       </div>
     </div>
     <div class="col-md-6">
+
       <aac-select
               required
               tabindex="13"
@@ -56,9 +60,20 @@
           <option value="B">B - Significant Structure Corrosion</option>
           <option value="C">C - Ground Damage</option>
           <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
-
       </aac-select>
-
+      <!--<div class="row form-group" [class.has-error]="displayMessage.alertCode">
+        <label class="col-sm-4 control-label" for="sdaAlertCode">Alert Code: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select tabindex='13' class="form-control" id="sdaAlertCode" formControlName="alertCode">
+                <option value="">Select Alert Code</option>
+                <option value="A">A - Significant Structure Defect</option>
+                <option value="B">B - Significant Structure Corrosion</option>
+                <option value="C">C - Ground Damage</option>
+                <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
+              </select>
+          <span *ngIf="displayMessage.alertCode" class="help-block">{{displayMessage.alertCode}}</span>
+        </div>
+      </div>-->
 
 
     </div>
@@ -78,11 +93,8 @@
           <ng-template #customItemTemplate let-model="item" let-index="index">
             <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
           </ng-template>
-          <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" formControlName="station"
-            [typeahead]="stations$|async"
-            [typeaheadOptionField]="'stationIATACode'"
-            [typeaheadItemTemplate]="customItemTemplate"
-            (typeaheadOnSelect)="stationOnSelect($event)"
+          <input type="text" tabindex='4' class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations$|async"
+            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="stationOnSelect($event)"
             typeaheadOptionsLimit="10">
           <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
 
@@ -90,12 +102,8 @@
       </div>
     </div>
     <div class="col-md-6">
-        <app-ata-code
-        [parent]="generalSectionFormGroup"
-        [errorMessages]="displayMessage"
-        [ATACodes]="ATACodes$ | async"
-        >
-        </app-ata-code>
+      <app-ata-code [parent]="generalSectionFormGroup" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
+      </app-ata-code>
     </div>
   </div>
 
@@ -114,15 +122,9 @@
         </div>
       </div>
       <!--Aircraft Info Section-->
-      <app-aircraft-info-section-form
-        [parent]="generalSectionFormGroup"
-        [errorMessages]="displayMessage"></app-aircraft-info-section-form>
+      <app-aircraft-info-section-form [parent]="generalSectionFormGroup" [errorMessages]="displayMessage"></app-aircraft-info-section-form>
     </div>
     <div class="col-md-6">
-      <app-defect-discovered-during-section-form
-      [parent]="generalSectionFormGroup"
-      [errorMessages]="displayMessage"></app-defect-discovered-during-section-form>
+      <app-defect-discovered-during-section-form [parent]="generalSectionFormGroup" [errorMessages]="displayMessage"></app-defect-discovered-during-section-form>
     </div>
   </div>
-
-

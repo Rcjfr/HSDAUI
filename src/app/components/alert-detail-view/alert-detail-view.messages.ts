@@ -3,6 +3,7 @@
 export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   'generalSectionFormGroup': {
     'sdrNumber': {
+      required: 'SDR Number is required.',
       pattern: 'SDR Number must be alphanumeric.'
     },
     'createDate': {

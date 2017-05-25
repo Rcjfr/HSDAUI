@@ -16,7 +16,6 @@ export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
       this.changed.forEach(f => f(value));
     }
   }
-
   writeValue(value: T) {
     this.value = value;
   }

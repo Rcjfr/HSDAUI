@@ -3,6 +3,7 @@
     <input [attr.id]="checkbox_id" [attr.tabindex]="tindex"
             [(ngModel)]="value"
             type="checkbox"
+            (blur)=""
             [checked]="value" >
     <label class="checkboxLabel" [attr.for]="checkbox_id">
           <span class="control"></span>

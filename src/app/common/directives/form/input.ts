@@ -15,7 +15,7 @@ let identifier = 0;
     <div class="row form-group" [class.has-error]="message">
       <label class="col-sm-4 control-label" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
       <div class="col-sm-8">
-        <input type="text" [attr.tabindex]='tindex' class="form-control" [attr.id]="identifier"
+        <input type="text" [attr.tabindex]='tindex' (blur)="touch()" class="form-control" [attr.id]="identifier"
 [(ngModel)]="value"
                >
         <span *ngIf="message" class="help-block">{{message}}</span>
@@ -31,10 +31,6 @@ let identifier = 0;
 })
 export class FormTextComponent extends ElementBase<string> {
   public identifier = `form-text-${identifier++}`;
-
-  onInputChange(val: string){
-    super.writeValue(val);
-  }
 
 }
 
