@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
@@ -7,7 +7,8 @@ import { CustomValidators } from '../../common/validators/custom-validators';
 @Component({
   selector: 'app-scheduled-maintenance-section',
   templateUrl: './scheduled-maintenance-section.component.html',
-  styleUrls: ['./scheduled-maintenance-section.component.less']
+  styleUrls: ['./scheduled-maintenance-section.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduledMaintenanceSectionComponent extends BaseFormComponent {
   scheduledMaintenanceGroup: FormGroup;

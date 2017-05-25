@@ -19,8 +19,7 @@ import { TypeaheadMatch } from "ngx-bootstrap";
 @Component({
   selector: 'app-general-section-form',
   templateUrl: './general-section-form.component.html',
-  styleUrls: ['./general-section-form.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./general-section-form.component.less']
 })
 export class GeneralSectionFormComponent extends BaseFormComponent {
   @Input() checkTypes: FleetCheckType[];

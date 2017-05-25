@@ -20,25 +20,10 @@ createNumberMask = createNumberMask;
     this.defectLocationSectionFormGroup = this.fb.group({
       defectType: ['', [Validators.required, Validators.maxLength(250)]],
           defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],
-          length: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints),  Validators.maxLength(7)]],
-          width: ['', [Validators.required, Validators.pattern(Expressions.ThreeDecimalsPoints), Validators.maxLength(7)]],
-          depth: ['', [Validators.required, Validators.pattern(Expressions.FourDecimalsPoints), Validators.maxLength(8)]],
-         // stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-          // stringer: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-          // wl: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-          // bl: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-          percisionLocationGroup: this.fb.group({
-              stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              stringer: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              wl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              bl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-          },
+          length: ['', [Validators.required]],
+          width: ['', [Validators.required]],
+          depth: ['', [Validators.required]],
 
-              {
-                  validator: CustomValidators.ValidatePercisionLocationGroupFields
-              }
-
-              ),
           MFGpart: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
           partDefective: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
           MFGserial: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],

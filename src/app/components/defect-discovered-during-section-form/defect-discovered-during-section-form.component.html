@@ -8,14 +8,14 @@
   <app-unscheduled-maintenance-section
     [parent]="defectDiscoveredDuringSectionFormGroup"
     [errorMessages]="displayMessage"
-    *ngIf="defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value === '0'"
+    *ngIf="defectDiscovered === '0'"
   >
 
   </app-unscheduled-maintenance-section>
   <app-scheduled-maintenance-section
     [parent]="defectDiscoveredDuringSectionFormGroup"
     [errorMessages]="displayMessage"
-    *ngIf="defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value === '1'"
+    *ngIf="defectDiscovered === '1'"
   >
 
   </app-scheduled-maintenance-section>

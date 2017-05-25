@@ -13,12 +13,14 @@ export abstract class ElementBase<T> implements ControlValueAccessor {
 // tslint:disable-next-line:no-input-rename
 @Input('tabindex') tindex = '0';
 @Input() public label: string;
+@Input() helptext = '';
 @Input() public message: string;
 protected _required = false;
   @Input()
   set required(value: boolean) {
     this._required = true;
   }
+
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngOnInit() {
     this._renderer.setElementAttribute(this._elRef.nativeElement, 'tabindex', null);

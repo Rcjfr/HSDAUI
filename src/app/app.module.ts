@@ -37,6 +37,8 @@ import {
         } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
 import { FormControlsModule } from './common/directives/form/form-controls.module';
+import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
+import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { FormControlsModule } from './common/directives/form/form-controls.modul
     DefectDiscoveredDuringSectionFormComponent,
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
-    AtaCodeComponent
+    AtaCodeComponent,
+    PreciseLocationGroupComponent,
+    CpcpSectionComponent
   ],
   imports: [
     BrowserModule,

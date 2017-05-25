@@ -18,6 +18,7 @@ let identifier = 0;
         <input type="text" [attr.tabindex]='tindex' [disabled]="disabled" (blur)="touch()" class="form-control" [attr.id]="identifier"
 [(ngModel)]="value"
                >
+        <span *ngIf="helptext" class="help-block">{{helptext}}</span>
         <span *ngIf="message" class="help-block">{{message}}</span>
       </div>
 

@@ -19,6 +19,7 @@ let identifier = 0;
                   [(ngModel)]="value" class="form-control" [attr.id]="identifier">
           <ng-content></ng-content>
         </select>
+        <span *ngIf="helptext" class="help-block">{{helptext}}</span>
           <span *ngIf="message" class="help-block">{{message}}</span>
         </div>
 
