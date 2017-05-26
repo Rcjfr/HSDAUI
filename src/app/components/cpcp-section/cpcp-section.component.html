@@ -71,7 +71,7 @@
     <div class="row ">
       <div class="col-sm-6 " [class.has-error]="displayMessage.corrosionLevel">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Corrosion level:<span class="req">*</span></label>
+          <label class="col-sm-4 control-label">Corrosion Level:<span class="req">*</span></label>
           <div class="col-sm-8">
           <div class="customComponent" style="padding-left:20px;">
             <div>
@@ -185,10 +185,8 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
-
-        <div [class.has-error]="displayMessage.floorbaordCondition">
-          <label class="col-sm-4 control-label" for="floorbaordCondition" [class.has-error]="displayMessage.floorbaordCondition">
+      <div class="row form-group" [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'" [class.has-error]="displayMessage.floorbaordCondition">
+          <label class="col-sm-4 control-label" for="floorbaordCondition">
                 Floorboard condition after mat is removed:
               </label>
           <div class="col-sm-8">
@@ -198,7 +196,7 @@
                 </select>
             <!--<span *ngIf="displayMessage.floorbaordCondition" class="error">{{displayMessage.floorbaordCondition}}</span>-->
           </div>
-        </div>
+
       </div>
     </div>
   </div>

@@ -18,8 +18,8 @@
 *.sublime-workspace
 .suo
 
-# IDE - VS2017
-.suo
+#  Visual Studio 2015/2017 cache/options directory
+.vs/
 
 # IDE - VSCode
 .vscode/*

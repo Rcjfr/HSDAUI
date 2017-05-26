@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { BaseFormComponent } from '../base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
+import { AircraftInfo } from '../../common/models/aircraft-info.model';
 
 
 @Component({
@@ -14,6 +15,17 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 })
 export class AircraftInfoSectionFormComponent extends BaseFormComponent {
   @Output() onNoseNumberChange = new EventEmitter();
+  @Input()
+  set aircraftInfo(info: AircraftInfo){
+    if (this.aircraftInfoSectionFormGroup) {
+    this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
+    this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
+    this.aircraftInfoSectionFormGroup.get('serialNo').setValue(info.serialNo);
+    this.aircraftInfoSectionFormGroup.get('totalShipTime').setValue(info.totalShipTime);
+    this.aircraftInfoSectionFormGroup.get('cycles').setValue(info.cycles);
+    this.aircraftInfoSectionFormGroup.get('fleet').setValue(info.fleet);
+    }
+  }
   aircraftInfoSectionFormGroup: FormGroup;
   createNumberMask = createNumberMask;
   private measurementNumberMask = createNumberMask({

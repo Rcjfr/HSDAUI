@@ -3,7 +3,7 @@
   <label class="col-sm-4 control-label" for="aircraftNo">Aircraft #: <span class="req">*</span></label>
   <div class="col-sm-8">
     <!--<div class="input-group">
-      <input type="text" #airCraftNo="ngModel" class="form-control" name="airCraftNo" id="airCraftNo" required
+      <input type="text" #airCraftNo="ngModel" autocomplete="off" class="form-control" name="airCraftNo" id="airCraftNo" required
              [(ngModel)]="alert.aircraftNo"
              [typeahead]="noseNumbers$"
              (typeaheadOnSelect)="noseNumberOnSelect($event)"
@@ -13,7 +13,7 @@
         <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
       </div>
     </div>-->
-    <input type="text" class="form-control" maxlength="5"  tabindex='6' id="aircraftNo" formControlName="aircraftNo" />
+    <input type="text" class="form-control" autocomplete="off" maxlength="5"  tabindex='6' id="aircraftNo" formControlName="aircraftNo" />
     <span *ngIf="displayMessage.aircraftNo" class="help-block">{{displayMessage.aircraftNo}}</span>
   </div>
 </div>

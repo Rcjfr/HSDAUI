@@ -51,6 +51,15 @@ export class GeneralSectionFormComponent extends BaseFormComponent {
     this.ATACodes$ = this.store.select(fromRoot.getSelectedAlertATACodes); // .map(d => d && d.toJS());
     this.store.dispatch(new selectedAlert.LoadATACodesAction());
     this.aircraftInfo$ = this.store.select(fromRoot.getSelectedAlertAircraftInfo);
+    // this.aircraftInfo$ = Observable.interval(1000).map(i=><AircraftInfo>{
+    // aircraftNo:'aircraftNo'+i,
+    // manufacturer:'manufacturer'+i,
+    // model:'model'+i,
+    // cycles:"100",
+    // fleet:'XYZ'+i,
+    // serialNo:'serialNo'+i,
+    // totalShipTime:'434'
+    // });
     this.store.dispatch(new selectedAlert.LoadStationsAction());
     this.stations$ = this.store.select(fromRoot.getSelectedAlertStations);
   }
