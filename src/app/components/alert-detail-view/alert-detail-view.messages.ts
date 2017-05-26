@@ -36,7 +36,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       'manufacturer': {
         required: 'Manufacturer is required.',
-        pattern: 'Manufacturer must be alphanumeric.'
+        pattern: 'Manufacturer must be alphanumeric.',
+        maxlength: 'Manufacturer can not be more than 100 characters.'
       },
       'model': {
         required: 'Aircraft Model/Series is required.',
@@ -50,14 +51,17 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       'totalShipTime': {
         required: 'Total Ship Time is required.',
-        pattern: 'Total Ship Time must be numeric.'
+        pattern: 'Total Ship Time must be numeric.',
+        maxlength: 'Total Ship Time can not be more that 25 numbers.'
       },
       'cycles': {
         required: 'Cycles is required.',
-        pattern: 'Cycles must be numeric.'
+        pattern: 'Cycles must be numeric.',
+        maxlength: 'Cycles can not be more that 25 numbers.'
       },
       'fleet': {
-        required: 'Fleet is required.'
+          required: 'Fleet is required.',
+          maxlength: 'Fleet can not be more that 20 characters.'
       }
     },
     'defectDiscoveredDuringSectionFormGroup': {
@@ -190,13 +194,15 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     corrosionTask: {
       required: ' Corrosion Task required.',
       pattern: 'Corrosion Task must be alphanumeric.',
-      maxlength: 'Corrosion Task must not be more than 25 characters.'
+      maxlength: 'Corrosion Task must be not more that 25 numbers.'
+      
     },
     corrosionType: {
       required: ' Type of Corrosion  required.'
     },
     corrosionTypeText: {
-      required: ' Type of Corrosion text is  required.'
+        required: ' Description is  required.',
+        maxlength: 'Description must be not more that 250 numbers.'
     },
     floorbaordCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
