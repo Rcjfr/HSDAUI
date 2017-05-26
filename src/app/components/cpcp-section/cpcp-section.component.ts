@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../base-form.component';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
@@ -22,7 +22,7 @@ cpcpSectionGroup: FormGroup;
           corrosionLevel: ['', [Validators.required]],
           previouslyBlended: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
           corrosionType: ['', [Validators.required]],
-          corrosionTypeText: ['', [Validators.required, Validators.maxLength(250), Validators.pattern(Expressions.Alphanumerics)]],
+          corrosionTypeText: ['', [Validators.required, Validators.maxLength(250)]],
           corrosionTask: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
               isfloorboardCondition: ['', []],
               floorbaordCondition: ['', []]
