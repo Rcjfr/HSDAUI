@@ -13,8 +13,7 @@
   <aac-input tabindex="20" label="Non-Routine #:" [message]="displayMessage.nonRoutineNo" formControlName="nonRoutineNo">
   </aac-input>
   <div class="row form-group">
-    <div class="col-sm-4">&nbsp;</div>
-    <div class="col-sm-8">
+    <div class="col-md-offset-4 col-sm-8">
       <div *ngIf="displayMessage.message &&
                     (scheduledMaintenanceGroup.get('nonRoutineNo').touched ||
                     scheduledMaintenanceGroup.get('nonRoutineNo').dirty)

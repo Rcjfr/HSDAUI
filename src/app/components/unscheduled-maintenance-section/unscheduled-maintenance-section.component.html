@@ -1,34 +1,17 @@
 <div [formGroup]="unscheduledMaintenanceGroup">
-
-    <div class="row form-group" [class.has-error]="displayMessage.description">
-      <label class="col-sm-4 control-label" for="unscheduledDescription">Description:<span class="req">*</span></label>
-      <div class="col-sm-8">
-        <input type="text" tabindex='18' class="form-control" id="unscheduledDescription"
-               formControlName="description">
-        (RON,Pilot Report etc.)
-        <div *ngIf="displayMessage.description" class="help-block">{{displayMessage.description}}</div>
-
-      </div>
-    </div>
-    <div class="row form-group" [class.has-error]="displayMessage.nonRoutineNo">
-      <label class="col-sm-4 control-label" for="unschNonRoutineNo">Non-Routine #:</label>
-      <div class="col-sm-8">
-        <input type="text" maxlength="50" class="form-control" tabindex='19' id="unschNonRoutineNo"
-               formControlName="nonRoutineNo">
-        <span *ngIf="displayMessage.nonRoutineNo" class="help-block">{{displayMessage.nonRoutineNo}}</span>
-      </div>
-    </div>
-    <div class="row form-group" [class.has-error]="displayMessage.micNo">
-      <label class="col-sm-4 control-label" for="micNo">MIC #:</label>
-      <div class="col-sm-8">
-        <input type="text" maxlength="50" class="form-control" tabindex='20' id="micNo"  formControlName="micNo">
-        <span *ngIf="displayMessage.micNo" class="help-block">{{displayMessage.micNo}}</span>
-        <div *ngIf="displayMessage.message &&
-                            ((unscheduledMaintenanceGroup.get('micNo').touched || unscheduledMaintenanceGroup.get('micNo').dirty) &&
-                            (unscheduledMaintenanceGroup.get('nonRoutineNo').touched || unscheduledMaintenanceGroup.get('nonRoutineNo').dirty))
-                            " class="error">
+  <aac-input tabindex="18" required helptext="(RON,Pilot Report etc.)" label="Description:" [message]="displayMessage.description" formControlName="description">
+  </aac-input>
+  <aac-input tabindex="19" label="Non-Routine #:" [message]="displayMessage.nonRoutineNo" formControlName="nonRoutineNo">
+  </aac-input>
+  <aac-input tabindex="20" label="MIC #:" [message]="displayMessage.micNo" formControlName="micNo">
+  </aac-input>
+  <div class="row form-group">
+    <div class="col-md-offset-4 col-sm-8">
+      <span *ngIf="displayMessage.message &&
+                (unscheduledMaintenanceGroup.get('micNo').touched ||
+                unscheduledMaintenanceGroup.get('micNo').dirty)" class="error">
           {{displayMessage.message}}
-        </div>
-      </div>
+        </span>
     </div>
   </div>
+</div>
