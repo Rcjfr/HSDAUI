@@ -4,7 +4,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.defectType">
         <label class="col-sm-4 control-label" for="defectType">Defect Type: <span class="req">*</span></label>
         <div class="col-sm-8">
-          <textarea type="text" tabindex='21' cols="40" rows="5" class="form-control" id="defectType" formControlName="defectType">
+          <textarea type="text" tabindex='21' maxlength="250" cols="40" rows="5" class="form-control" id="defectType" formControlName="defectType">
               </textarea>
           <span *ngIf="displayMessage.defectType" class="help-block">{{displayMessage.defectType}}</span>
         </div>
@@ -14,7 +14,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.defectDescription">
         <label class="col-sm-4 control-label" for="defectDescription">Defect Description: <span class="req">*</span></label>
         <div class="col-sm-8">
-          <textarea type="text" tabindex='22' name="Text1" cols="40" rows="5" class="form-control" id="defectDescription" formControlName="defectDescription">
+          <textarea type="text" tabindex='22' maxlength="250" name="Text1" cols="40" rows="5" class="form-control" id="defectDescription" formControlName="defectDescription">
               </textarea>
           <span *ngIf="displayMessage.defectDescription" class="help-block">{{displayMessage.defectDescription}}</span>
         </div>
@@ -83,7 +83,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.MFGpart">
         <label class="col-sm-4 control-label" for="MFGpart">MFG Part #: </label>
         <div class="col-sm-8">
-          <input type="text" tabindex='30' class="form-control" id="MFGpart" formControlName="MFGpart">
+          <input type="text" tabindex='30' maxlength="50" class="form-control" id="MFGpart" formControlName="MFGpart">
           <span *ngIf="displayMessage.MFGpart" class="help-block">{{displayMessage.MFGpart}}</span>
         </div>
 
@@ -93,7 +93,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.partDefective">
             <label class="col-sm-4 control-label" for="partDefective">Part Defective:<span class="req">*</span> </label>
             <div class="col-sm-8">
-              <input type="text" tabindex='31' class="form-control" id="stringer" formControlName="partDefective">
+              <input type="text" tabindex='31' maxlength="50" class="form-control" id="stringer" formControlName="partDefective">
               <span class="help-block">(Bean, Fitting, Forgiving, etc.)</span>
               <span *ngIf="displayMessage.partDefective" class="help-block">{{displayMessage.partDefective}}</span>
             </div>
@@ -106,7 +106,7 @@
           <div class="row form-group" [class.has-error]="displayMessage.MFGserial">
             <label class="col-sm-4 control-label" for="MFGserial">MFG Serial #: </label>
             <div class="col-sm-8">
-              <input type="text" tabindex='32' class="form-control" id="MFGserial" formControlName="MFGserial">
+              <input type="text" tabindex='32' maxlength="50" class="form-control" id="MFGserial" formControlName="MFGserial">
               <span *ngIf="displayMessage.MFGserial" class="help-block">{{displayMessage.MFGserial}}</span>
             </div>
 
@@ -116,7 +116,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.PartTT">
         <label class="col-sm-4 control-label" for="PartTT">Part TT: </label>
         <div class="col-sm-8">
-          <input type="text" tabindex='33' class="form-control" id="PartTT" formControlName="PartTT">
+          <input type="text" tabindex='33' maxlength="25" class="form-control" id="PartTT" formControlName="PartTT">
           <span *ngIf="displayMessage.PartTT" class="help-block">{{displayMessage.PartTT}}</span>
         </div>
 
@@ -128,7 +128,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.PartTso">
         <label class="col-sm-4 control-label" for="PartTso">Part TSO: </label>
         <div class="col-sm-8">
-          <input type="text" tabindex='34' class="form-control" id="PartTso" formControlName="PartTso">
+          <input type="text" tabindex='34' maxlength="25" class="form-control" id="PartTso" formControlName="PartTso">
           <span *ngIf="displayMessage.PartTso" class="help-block">{{displayMessage.PartTso}}</span>
         </div>
 

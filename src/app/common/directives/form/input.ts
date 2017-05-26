@@ -1,5 +1,5 @@
 import {
-  Component,
+  Component, Input
 } from '@angular/core';
 
 import {
@@ -15,7 +15,9 @@ let identifier = 0;
     <div class="row form-group" [class.has-error]="message">
       <label class="col-sm-4 control-label" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
       <div class="col-sm-8">
-        <input type="text" [attr.tabindex]='tindex' [disabled]="disabled" (blur)="touch()" class="form-control" [attr.id]="identifier"
+        <input type="text" [attr.tabindex]='tindex'
+                           [attr.maxlength]="maxlength"
+                           [disabled]="disabled" (blur)="touch()" class="form-control" [attr.id]="identifier"
 [(ngModel)]="value"
                >
         <span *ngIf="helptext" class="help-block">{{helptext}}</span>
@@ -32,6 +34,7 @@ let identifier = 0;
 })
 export class FormTextComponent extends ElementBase<string> {
   public identifier = `form-text-${identifier++}`;
+  @Input() maxlength = "";
 }
 
 

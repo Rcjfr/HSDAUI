@@ -9,10 +9,12 @@ const reducers = {
 };
 
 const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
-
-export const reducer: ActionReducer<AppStore> = function(state: AppStore, action: any) {
+// export const reducer: ActionReducer<AppStore> = function(state: AppStore, action: any) {
+//     return combinedReducers(state, action);
+// };
+export function reducer(state: AppStore, action: any): AppStore {
     return combinedReducers(state, action);
-};
+}
 
 // Selector Functions
 // Level 1

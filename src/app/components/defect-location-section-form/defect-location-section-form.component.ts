@@ -27,8 +27,8 @@ createNumberMask = createNumberMask;
           MFGpart: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
           partDefective: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
           MFGserial: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
-          PartTT: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          PartTso: ['', [Validators.required, Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+          PartTT: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+          PartTso: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
           detected: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });

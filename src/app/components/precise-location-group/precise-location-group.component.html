@@ -4,7 +4,7 @@
       <div class="row form-group" [class.has-error]="displayMessage['stationLocation']">
         <label class="col-sm-1 control-label" for="stationLocation">Station:</label>
         <div class="col-sm-11">
-          <input type="text" maxlength="50" class="form-control" tabindex='26' id="stationLocation" formControlName="stationLocation">
+          <input type="text" maxlength="25" class="form-control" tabindex='26' id="stationLocation" formControlName="stationLocation">
           <span class="help-block">(Body, Spar, Stab, etc.)</span>
           <span *ngIf="displayMessage['stationLocation']" class="help-block">{{displayMessage['stationLocation']}}</span>
         </div>
@@ -14,7 +14,7 @@
       <div class="row form-group" [class.has-error]="displayMessage['stringer']">
         <label class="col-sm-1 control-label" for="stringer">Stringer: </label>
         <div class="col-sm-11">
-          <input type="text" tabindex='27' class="form-control" id="stringer" formControlName="stringer">
+          <input type="text" maxlength="25" tabindex='27' class="form-control" id="stringer" formControlName="stringer">
           <span *ngIf="displayMessage['stringer']" class="help-block">{{displayMessage['stringer']}}</span>
         </div>
 
@@ -24,7 +24,7 @@
       <div class="row form-group" [class.has-error]="displayMessage['wl']">
         <label class="col-sm-1 control-label" for="wl">WL: </label>
         <div class="col-sm-11">
-          <input type="text" tabindex='28' class="form-control" id="wl" formControlName="wl">
+          <input type="text" maxlength="25" tabindex='28' class="form-control" id="wl" formControlName="wl">
           <span *ngIf="displayMessage['wl']" class="help-block">{{displayMessage['wl']}}</span>
         </div>
 
@@ -34,21 +34,14 @@
 
       <div class="row form-group" [class.has-error]="displayMessage['bl']">
         <label class="col-sm-1 control-label" for="bl">BL: </label>
-        <div class="col-sm-11">
-          <input type="text" tabindex='29' class="form-control" id="bl" formControlName="bl">
+        <span class="col-sm-11">
+          <input type="text" maxlength="25" tabindex='29' class="form-control" id="bl" formControlName="bl">
           <span *ngIf="displayMessage['bl']" class="help-block">{{displayMessage['bl']}}</span>
-
+<span *ngIf="displayMessage.message &&
+      (preciseLocationGroup.get( 'bl').touched || preciseLocationGroup.get('bl').dirty) " class="error ">{{displayMessage.message}}</span></span>
         </div>
       </div>
     </div>
-
-
   </div>
-  <div class="row">
-    <div class=" col-md-12">
-      <div *ngIf="displayMessage.message &&
-      (preciseLocationGroup.get( 'bl').touched || preciseLocationGroup.get('bl').dirty) " class="error ">{{displayMessage.message}}</div>
 
-    </div>
-  </div>
 

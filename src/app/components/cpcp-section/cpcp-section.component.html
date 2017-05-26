@@ -147,7 +147,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.corrosionTask">
         <label class="col-sm-4 control-label" for="corrosionTask">Corrosion Task #: <span class="req">*</span></label>
         <div class="col-sm-8">
-          <input type="text" tabindex='40' class="form-control" id="corrosionTask" formControlName="corrosionTask">
+          <input type="text" tabindex='40' maxlength="25" class="form-control" id="corrosionTask" formControlName="corrosionTask">
           <span *ngIf="displayMessage.corrosionTask" class="error">{{displayMessage.corrosionTask}}</span>
         </div>
       </div>
@@ -162,11 +162,11 @@
           <select class="form-control" tabindex='41' id="corrosionType" formControlName="corrosionType">
 
                 <option value=""> </option>
-                <option value="exfoliation">  EXFOLIATION </option>
+                <option value="exfoliation">EXFOLIATION </option>
                 <option value="filiform">FILIFORM</option>
                 <option value="galvanic">GALVANIC </option>
                 <option value="intergranular">INTERGRANULAR</option>
-                <option value="Other">Other</option>
+                <option value="other">OTHER</option>
 
               </select>
           <span *ngIf="displayMessage.corrosionType" class="error">{{displayMessage.corrosionType}}</span>
@@ -174,9 +174,9 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div [hidden]="cpcpSectionGroup.get('corrosionType').value !='Other' " [class.has-error]="displayMessage.corrosionTypeText">
-        <span class="req">*</span>
-        <textarea type="text" tabindex='42' cols="40" rows="5" class="form-control" for="corrosionTypeText" id="corrosionTypeText"
+      <div [hidden]="cpcpSectionGroup.get('corrosionType').value !='other' " [class.has-error]="displayMessage.corrosionTypeText">
+        <label class="col-sm-4 control-label" for="corrosionTypeText">Description:<span class="req">*</span></label>
+        <textarea type="text" tabindex='42' maxlength="250" cols="40" rows="5" class="form-control" for="corrosionTypeText" id="corrosionTypeText"
           formControlName="corrosionTypeText">
               </textarea>
         <span *ngIf="displayMessage.corrosionTypeText" class="error">{{displayMessage.corrosionTypeText}}</span>

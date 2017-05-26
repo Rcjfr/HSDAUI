@@ -81,6 +81,9 @@ ngAfterContentInit(): void {
   for (let i in group.controls) {
     if (group.controls[i] instanceof FormControl) {
       group.controls[i].markAsDirty();
+      // if(group.controls[i].invalid){
+      //   console.log(group.controls[i]);
+      // }
     } else {
       this.markAsDirty(group.controls[i]);
     }

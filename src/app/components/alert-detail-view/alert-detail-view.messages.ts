@@ -31,7 +31,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'aircraftInfoSectionFormGroup': {
       'aircraftNo': {
         required: 'Aircraft # is required.',
-        pattern: 'Aircraft # must be alphanumeric.'
+        pattern: 'Aircraft # must be alphanumeric.',
+        maxlength: 'Aircraft # can not be more than 5 characters.'
       },
       'manufacturer': {
         required: 'Manufacturer is required.',
@@ -39,7 +40,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       'model': {
         required: 'Aircraft Model/Series is required.',
-        pattern: 'Aircraft Model/Series must be alphanumeric.'
+        pattern: 'Aircraft Model/Series must be alphanumeric.',
+        maxlength: 'Aircraft Model/Series can not be more than 15 characters.'
       },
       'serialNo': {
         required: 'Serial # is required.',
@@ -115,7 +117,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
 
 
     'preciseLocationGroup': {
-      aleasttwo: 'Station or stringer or wl or bl  is required.',
+      aleasttwo: 'At least two of the fields (Station, Stringer, WL, BL) are required.',
       'stationLocation': {
 
         pattern: 'Station must be alphanumeric.',
@@ -174,30 +176,30 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   },
   cpcpSectionGroup: {
     cpcprelated: {
-      required: ' CPCP  Required.'
+      required: ' CPCP  is required.'
     },
     wsCorrosion: {
-      required: ' Wide spread Corrosion is  Required.'
+      required: ' Widespread Corrosion is required.'
     },
     corrosionLevel: {
-      required: ' Corresion level is Required.'
+      required: ' Corresion level is required.'
     },
     previouslyBlended: {
-      required: ' Corroded Area Previously Blended  Required.'
+      required: ' Corroded Area Previously Blended  required.'
     },
     corrosionTask: {
-      required: ' Corrosion Task Required.',
+      required: ' Corrosion Task required.',
       pattern: 'Corrosion Task must be alphanumeric.',
       maxlength: 'Corrosion Task must not be more than 25 characters.'
     },
     corrosionType: {
-      required: ' Type of Corrosion  Required.'
+      required: ' Type of Corrosion  required.'
     },
     corrosionTypeText: {
-      required: ' Type of Corrosion text is  Required.'
+      required: ' Type of Corrosion text is  required.'
     },
     floorbaordCondition: {
-      //  required: ' Floorboard condition after mat is removed is  Required.',
+      //  required: ' Floorboard condition after mat is removed is  required.',
     }
   }
 };
