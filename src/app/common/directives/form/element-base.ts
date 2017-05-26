@@ -9,7 +9,7 @@ export abstract class ElementBase<T> implements ControlValueAccessor {
   public disabled = false;
   private changed = new Array<(value: T) => void>();
   private touched = new Array<() => void>();
-
+@Input() labelGridColumnWidth = 4;
 // tslint:disable-next-line:no-input-rename
 @Input('tabindex') tindex = '0';
 @Input() public label: string;
@@ -20,7 +20,12 @@ protected _required = false;
   set required(value: boolean) {
     this._required = true;
   }
-
+  get labelCssClass(){
+    return `col-sm-${this.labelGridColumnWidth} control-label`;
+  }
+  get fieldCssClass(){
+    return `col-sm-${12 - this.labelGridColumnWidth}`;
+  }
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngOnInit() {
     this._renderer.setElementAttribute(this._elRef.nativeElement, 'tabindex', null);
@@ -56,7 +61,6 @@ protected _required = false;
     this.touched.forEach(f => f());
   }
   setDisabledState(isDisabled: boolean) {
-    console.log(isDisabled);
     this.disabled = isDisabled;
     // disable other components here
   }

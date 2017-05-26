@@ -12,8 +12,8 @@ let identifier = 0;
   template: `
 
         <div class="row form-group" [class.has-error]="message">
-        <label class="col-sm-4 control-label" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
-        <div class="col-sm-8">
+        <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
+        <div class="{{fieldCssClass}}">
           <select [attr.tabindex]='tindex'
                   [disabled]="disabled" (blur)="touch()"
                   [(ngModel)]="value" class="form-control" [attr.id]="identifier">

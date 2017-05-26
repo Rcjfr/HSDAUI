@@ -1,29 +1,15 @@
 ﻿<div class="panel-body" [formGroup]='defectLocationSectionFormGroup'>
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.defectType">
-        <label class="col-sm-4 control-label" for="defectType">Defect Type: <span class="req">*</span></label>
-        <div class="col-sm-8">
-          <textarea type="text" tabindex='21'  cols="40" rows="5" class="form-control" id="defectType" formControlName="defectType">
-              </textarea>
-          <span *ngIf="displayMessage.defectType" class="help-block">{{displayMessage.defectType}}</span>
-        </div>
-
-      </div>
-
-      <div class="row form-group" [class.has-error]="displayMessage.defectDescription">
-        <label class="col-sm-4 control-label" for="defectDescription">Defect Description: <span class="req">*</span></label>
-        <div class="col-sm-8">
-          <textarea type="text" tabindex='22'  name="Text1" cols="40" rows="5" class="form-control" id="defectDescription" formControlName="defectDescription">
-              </textarea>
-          <span class="help-block">(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after || denotes historical data.</span>
-          <span *ngIf="displayMessage.defectDescription" class="help-block">{{displayMessage.defectDescription}}</span>
-        </div>
-
-      </div>
+      <aac-textarea tabindex="21" required label="Defect Type:" [message]="displayMessage.defectType" formControlName="defectType">
+      </aac-textarea>
+      <aac-textarea tabindex="22" required label="Defect Type:" [message]="displayMessage.defectDescription" helptext="(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after || denotes historical data."
+        formControlName="defectDescription">
+      </aac-textarea>
     </div>
-    <h5>Defect Size (in inches):</h5>
+
     <div class="col-md-6">
+      <h5>Defect Size (in inches):</h5>
       <div class="row form-group" [class.has-error]="displayMessage.length">
         <label class="col-sm-4 control-label" for="length">Length: <span class="req">*</span></label>
         <div class="col-sm-8">
@@ -65,7 +51,7 @@
                           integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="depth">
-          
+
           <span *ngIf="displayMessage.depth" class="help-block">{{displayMessage.depth}}</span>
         </div>
       </div>
@@ -76,91 +62,53 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.MFGpart">
-        <label class="col-sm-4 control-label" for="MFGpart">MFG Part #: </label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='30'  class="form-control" id="MFGpart" formControlName="MFGpart">
-          <span *ngIf="displayMessage.MFGpart" class="help-block">{{displayMessage.MFGpart}}</span>
-        </div>
-
-      </div>
+      <aac-input tabindex="30" label="MFG Part #:" [message]="displayMessage.MFGpart" formControlName="MFGpart">
+      </aac-input>
     </div>
     <div class="col-md-6">
-          <div class="row form-group" [class.has-error]="displayMessage.partDefective">
-            <label class="col-sm-4 control-label" for="partDefective">Part Defective:<span class="req">*</span> </label>
-            <div class="col-sm-8">
-              <input type="text" tabindex='31' class="form-control" id="stringer" formControlName="partDefective">
-              <span class="help-block">(Bean, Fitting, Forging, etc.)</span>
-              <span *ngIf="displayMessage.partDefective" class="help-block">{{displayMessage.partDefective}}</span>
-            </div>
-
-          </div>
-        </div>
+      <aac-input tabindex="31" required label="Part Defective:" [message]="displayMessage.partDefective" formControlName="partDefective">
+      </aac-input>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-          <div class="row form-group" [class.has-error]="displayMessage.MFGserial">
-            <label class="col-sm-4 control-label" for="MFGserial">MFG Serial #: </label>
-            <div class="col-sm-8">
-              <input type="text" tabindex='32'  class="form-control" id="MFGserial" formControlName="MFGserial">
-              <span *ngIf="displayMessage.MFGserial" class="help-block">{{displayMessage.MFGserial}}</span>
-            </div>
+      <aac-input tabindex="32" label="MFG Serial #:" [message]="displayMessage.MFGserial" formControlName="MFGserial">
+      </aac-input>
 
-          </div>
-        </div>
+    </div>
     <div class="col-md-4">
-      <div class="row form-group" [class.has-error]="displayMessage.PartTT">
-        <label class="col-sm-4 control-label" for="PartTT">Part TT: </label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='33'  class="form-control" id="PartTT"   formControlName="PartTT">
-          <span *ngIf="displayMessage.PartTT" class="help-block">{{displayMessage.PartTT}}</span>
-        </div>
-
-      </div>
-
+      <aac-input tabindex="33" label="MFG Serial #:" [message]="displayMessage.PartTT" formControlName="PartTT">
+      </aac-input>
     </div>
 
 
     <div class="col-md-4">
-      <div class="row form-group" [class.has-error]="displayMessage.PartTso">
-        <label class="col-sm-4 control-label" for="PartTso">Part TSO: </label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='34' class="form-control" id="PartTso"  formControlName="PartTso">
-          <span *ngIf="displayMessage.PartTso" class="help-block">{{displayMessage.PartTso}}</span>
-        </div>
-
-      </div>
+      <aac-input tabindex="34" label="Part TSO:" [message]="displayMessage.PartTso" formControlName="PartTso">
+      </aac-input>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.detected">
-        <label class="col-sm-4 control-label" for="detected">How Detected: <span class="req">*</span></label>
-        <div class="col-sm-8">
-          <select class="form-control" tabindex='35' id="detected" formControlName="detected">
-
-          <option value=""> </option>
-          <option value="unknown">UNKNOWN </option>
-          <option value="tapTest">TAP TEST</option>
-          <option value="boroscope">BOROSCOPE</option>
-          <option value="functionalCheck">FUNCTIONAL CHECK</option>
-          <option value="dyePenetrant">DYE PENETRANT</option>
-          <option value="eddyCurrent">EDDY CURRENT</option>
-          <option value="lightSource">LIGHT SOURCE</option>
-          <option value="magneticParticle">MAGNETIC PARTICLE</option>
-          <option value="other">OTHER</option>
-          <option value="thermal">THERMAL</option>
-          <option value="ultrasonic">ULTRASONIC</option>
-          <option value="visual">VISUAL</option>
-          <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
-          <option value="x-ray">X-RAY</option>
-          <option value="dyePenetration">DYE PENETRATION</option>
-          <option value="hfec">HFEC</option>
-        </select>
-          <span *ngIf="displayMessage.detected" class="help-block">{{displayMessage.detected}}</span>
-          <h5>(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)</h5>
-        </div>
-      </div>
+      <aac-select tabindex="35" required label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)"
+        [message]="displayMessage.detected" formControlName="detected">
+        <option value=""> </option>
+        <option value="unknown">UNKNOWN </option>
+        <option value="tapTest">TAP TEST</option>
+        <option value="boroscope">BOROSCOPE</option>
+        <option value="functionalCheck">FUNCTIONAL CHECK</option>
+        <option value="dyePenetrant">DYE PENETRANT</option>
+        <option value="eddyCurrent">EDDY CURRENT</option>
+        <option value="lightSource">LIGHT SOURCE</option>
+        <option value="magneticParticle">MAGNETIC PARTICLE</option>
+        <option value="other">OTHER</option>
+        <option value="thermal">THERMAL</option>
+        <option value="ultrasonic">ULTRASONIC</option>
+        <option value="visual">VISUAL</option>
+        <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
+        <option value="x-ray">X-RAY</option>
+        <option value="dyePenetration">DYE PENETRATION</option>
+        <option value="hfec">HFEC</option>
+      </aac-select>
     </div>
   </div>
 

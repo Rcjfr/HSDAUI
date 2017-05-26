@@ -3,47 +3,25 @@
   <h5>(Enter From/To if Applicable)</h5>
   <div class="row">
     <div class="col-md-3">
-      <div class="row form-group" [class.has-error]="displayMessage['stationLocation']">
-        <label class="col-sm-1 control-label" for="stationLocation">Station:</label>
-        <div class="col-sm-11">
-          <input type="text"  class="form-control" tabindex='26' id="stationLocation" formControlName="stationLocation">
-          <span class="help-block">(Body, Spar, Stab, etc.)</span>
-          <span *ngIf="displayMessage['stationLocation']" class="help-block">{{displayMessage['stationLocation']}}</span>
-        </div>
-      </div>
+      <aac-input tabindex="26" label="Station:" labelGridColumnWidth="1" helptext="(Body, Spar, Stab, etc.)" [message]="displayMessage.stationLocation"
+        formControlName="stationLocation">
+      </aac-input>
     </div>
     <div class="col-md-3">
-      <div class="row form-group" [class.has-error]="displayMessage['stringer']">
-        <label class="col-sm-1 control-label" for="stringer">Stringer: </label>
-        <div class="col-sm-11">
-          <input type="text"  tabindex='27' class="form-control" id="stringer" formControlName="stringer">
-          <span *ngIf="displayMessage['stringer']" class="help-block">{{displayMessage['stringer']}}</span>
-        </div>
-
-      </div>
+      <aac-input tabindex="27" label="Stringer:" labelGridColumnWidth="1" [message]="displayMessage.stringer" formControlName="stringer">
+      </aac-input>
     </div>
     <div class="col-md-3">
-      <div class="row form-group" [class.has-error]="displayMessage['wl']">
-        <label class="col-sm-1 control-label" for="wl">WL: </label>
-        <div class="col-sm-11">
-          <input type="text"  tabindex='28' class="form-control" id="wl" formControlName="wl">
-          <span *ngIf="displayMessage['wl']" class="help-block">{{displayMessage['wl']}}</span>
-        </div>
-
-      </div>
+      <aac-input tabindex="28" label="WL:" labelGridColumnWidth="1" [message]="displayMessage.wl" formControlName="wl">
+      </aac-input>
     </div>
     <div class="col-md-3">
-
-      <div class="row form-group" [class.has-error]="displayMessage['bl']">
-        <label class="col-sm-1 control-label" for="bl">BL: </label>
-        <span class="col-sm-11">
-          <input type="text"  tabindex='29' class="form-control" id="bl" formControlName="bl">
-          <span *ngIf="displayMessage['bl']" class="help-block">{{displayMessage['bl']}}</span>
-<span *ngIf="displayMessage.message &&
-      (preciseLocationGroup.get( 'bl').touched || preciseLocationGroup.get('bl').dirty) " class="error ">{{displayMessage.message}}</span></span>
-        </div>
-      </div>
+      <aac-input tabindex="29" label="BL:" labelGridColumnWidth="1" [message]="displayMessage.bl" formControlName="bl">
+      </aac-input>
+      <span *ngIf="displayMessage.message &&
+                  (preciseLocationGroup.get( 'bl').touched ||
+                   preciseLocationGroup.get('bl').dirty) "
+            class="error ">{{displayMessage.message}}</span>
     </div>
   </div>
-
-
+</div>

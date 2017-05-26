@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {FormCheckBoxComponent,
         //FormRadioComponent,
         FormSelectComponent,
+        FormTextAreaComponent,
         FormTextComponent} from './index';
 // import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
@@ -17,6 +18,7 @@ import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
     exports: [
         FormCheckBoxComponent,
         FormSelectComponent,
+        FormTextAreaComponent,
         // FormRadioComponent,
         FormTextComponent,
         RadioButtonComponent
@@ -24,6 +26,7 @@ import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
     declarations: [
         FormCheckBoxComponent,
         FormSelectComponent,
+        FormTextAreaComponent,
         // FormRadioComponent,
         FormTextComponent,
         RadioButtonComponent

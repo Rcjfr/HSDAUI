@@ -47,7 +47,7 @@ export class AlertDetailViewComponent implements OnInit {
    }
 ngAfterContentInit(): void {
   const frm = this.elRef.nativeElement.querySelector('form');
-  const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select'));
+  const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select,textarea'));
      // Watch for the blur event from any input element on the form.
          const controlBlurs: Observable<any>[] = formElements
           .map((formControl: any) => {

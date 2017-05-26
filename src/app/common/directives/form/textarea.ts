@@ -10,16 +10,20 @@ import { ElementBase } from './element-base';
 let identifier = 0;
 
 @Component({
-  selector: 'aac-input',
+  selector: 'aac-textarea',
   template: `
     <div class="row form-group" [class.has-error]="message">
       <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
       <div class="{{fieldCssClass}}">
-        <input type="text" [attr.tabindex]='tindex'
-                           [attr.maxlength]="maxlength"
-                           [disabled]="disabled" (blur)="touch()" class="form-control" [attr.id]="identifier"
-[(ngModel)]="value"
-               >
+        <textarea [attr.tabindex]='tindex'
+                  [attr.rows]='rows'
+                  [attr.cols]='cols'
+                  class="form-control"
+                  [disabled]="disabled"
+                  (blur)="touch()"
+                  [(ngModel)]="value"
+                  [attr.id]="identifier">
+              </textarea>
         <span *ngIf="helptext" class="help-block">{{helptext}}</span>
         <span *ngIf="message" class="help-block">{{message}}</span>
       </div>
@@ -28,13 +32,14 @@ let identifier = 0;
   `,
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: FormTextComponent,
+    useExisting: FormTextAreaComponent,
     multi: true,
   }],
 })
-export class FormTextComponent extends ElementBase<string> {
-  public identifier = `form-text-${identifier++}`;
-  @Input() maxlength = '';
+export class FormTextAreaComponent extends ElementBase<string> {
+  public identifier = `form-textarea-${identifier++}`;
+  @Input() rows = '5';
+  @Input() cols = '40';
 }
 
 
