@@ -9,10 +9,13 @@ const reducers = {
 };
 
 const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
-
-export function reducer(state: any, action: any) {
+// export const reducer: ActionReducer<AppStore> = function(state: AppStore, action: any) {
+//     return combinedReducers(state, action);
+// };
+export function reducer(state: AppStore, action: any): AppStore {
     return combinedReducers(state, action);
 }
+
 // Selector Functions
 // Level 1
 export const getSelectedAlertState = (state: AppStore) => state.selectedAlert;
@@ -22,6 +25,8 @@ export const getSelectedAlert = compose(fromSelectedAlert.getSelectedAlert, getS
 export const getSelectedAlertAircraftInfo = compose(fromSelectedAlert.getSelectedAlertAircraftInfo, getSelectedAlertState);
 export const getSelectedAlertLoading = compose(fromSelectedAlert.getSelectedAlertLoading, getSelectedAlertState);
 export const getSelectedAlertNoseNumbers = compose(fromSelectedAlert.getSelectedAlertNoseNumbers, getSelectedAlertState);
+export const getSelectedAlertATACodes = compose(fromSelectedAlert.getSelectedAlertATACodes, getSelectedAlertState);
+export const getSelectedAlertStations = compose(fromSelectedAlert.getSelectedAlertStations, getSelectedAlertState);
 
 
 

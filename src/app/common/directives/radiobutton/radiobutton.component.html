@@ -1,0 +1,12 @@
+﻿<div class="customComponent" style="padding-left:20px;">
+  <div>
+    <input type="radio" [attr.tabindex]="tindex"
+    (change)="onSelectionChange()"
+    [attr.name]="radio_group_name"
+    [attr.id]="radio_id" [value]="value">
+    <label [attr.for]="radio_id">
+          <span class="control"></span>
+          {{label}}
+        </label>
+  </div>
+</div>

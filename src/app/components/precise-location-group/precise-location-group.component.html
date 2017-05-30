@@ -1,0 +1,27 @@
+﻿<div [formGroup]="preciseLocationGroup">
+  <h4>Precise Location of Defect:</h4>
+  <h5>(Enter From/To if Applicable)</h5>
+  <div class="row">
+    <div class="col-md-3">
+      <aac-input tabindex="26" label="Station:" labelGridColumnWidth="1" helptext="(Body, Spar, Stab, etc.)" [message]="displayMessage.stationLocation"
+        formControlName="stationLocation">
+      </aac-input>
+    </div>
+    <div class="col-md-3">
+      <aac-input tabindex="27" label="Stringer:" labelGridColumnWidth="1" [message]="displayMessage.stringer" formControlName="stringer">
+      </aac-input>
+    </div>
+    <div class="col-md-3">
+      <aac-input tabindex="28" label="WL:" labelGridColumnWidth="1" [message]="displayMessage.wl" formControlName="wl">
+      </aac-input>
+    </div>
+    <div class="col-md-3">
+      <aac-input tabindex="29" label="BL:" labelGridColumnWidth="1" [message]="displayMessage.bl" formControlName="bl">
+      </aac-input>
+      <span *ngIf="displayMessage.message &&
+                  (preciseLocationGroup.get( 'bl').touched ||
+                   preciseLocationGroup.get('bl').dirty) "
+            class="error ">{{displayMessage.message}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+﻿<div class="panel-body" [formGroup]='generalSectionFormGroup'>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-input
+              tabindex="1"
+              label="SDR Number:"
+              [message]="displayMessage.sdrNumber"
+              formControlName="sdrNumber">
+      </aac-input>
+    </div>
+    <div class="col-md-6">
+      <aac-checkbox label="Line Maintenance" tabindex="2" formControlName="lineMaintenance" ></aac-checkbox>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.createDate">
+        <label class="col-sm-4 control-label" for="q-datepicker_1">Create Date: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <datetime [timepicker]="false" id="sdaCreateDate" [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+          <span *ngIf="displayMessage.createDate" class="help-block">{{displayMessage.createDate}}</span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <aac-select
+              required
+              tabindex="13"
+              label="Alert Code:"
+              [message]="displayMessage.alertCode"
+              formControlName="alertCode">
+              <option value="">Select Alert Code</option>
+          <option value="A">A - Significant Structure Defect</option>
+          <option value="B">B - Significant Structure Corrosion</option>
+          <option value="C">C - Ground Damage</option>
+          <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
+      </aac-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-input
+              label="SDA ID:"
+              formControlName="sdaId">
+      </aac-input>
+      <div class="row form-group" [class.has-error]="displayMessage.station">
+        <label class="col-sm-4 control-label" for="station">Station: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <ng-template #customItemTemplate let-model="item" let-index="index">
+            <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
+          </ng-template>
+          <input type="text" tabindex='4' autocomplete="off" class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations$ | async"
+            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="stationOnSelect($event)"
+            typeaheadOptionsLimit="10">
+          <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <app-ata-code [parent]="generalSectionFormGroup" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
+      </app-ata-code>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <aac-select
+              required
+              tabindex="5"
+              label="Department:"
+              [message]="displayMessage.department"
+              formControlName="department">
+              <option value="">Select Department</option>
+        <option value="engineering">Engineering</option>
+        <option value="inspection">Inspection</option>
+        <option value="other">Other</option>
+      </aac-select>
+      <!--Aircraft Info Section-->
+      <app-aircraft-info-section-form
+      [parent]="generalSectionFormGroup"
+      [errorMessages]="displayMessage"
+      [aircraftInfo]="aircraftInfo$ | async"
+      ></app-aircraft-info-section-form>
+    </div>
+    <div class="col-md-6">
+      <app-defect-discovered-during-section-form [parent]="generalSectionFormGroup" [errorMessages]="displayMessage"></app-defect-discovered-during-section-form>
+    </div>
+  </div>

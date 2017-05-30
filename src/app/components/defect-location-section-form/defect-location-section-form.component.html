@@ -1,0 +1,115 @@
+﻿<div class="panel-body" [formGroup]='defectLocationSectionFormGroup'>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-textarea tabindex="21" required label="Defect Type:" [message]="displayMessage.defectType" formControlName="defectType">
+      </aac-textarea>
+      <aac-textarea tabindex="22" required label="Defect Type:" [message]="displayMessage.defectDescription" helptext="(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after || denotes historical data."
+        formControlName="defectDescription">
+      </aac-textarea>
+    </div>
+
+    <div class="col-md-6">
+      <h5>Defect Size (in inches):</h5>
+      <div class="row form-group" [class.has-error]="displayMessage.length">
+        <label class="col-sm-4 control-label" for="length">Length: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='23' class="form-control" id="length" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 3,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="length">
+          <span *ngIf="displayMessage.length" class="help-block">{{displayMessage.length}}</span>
+        </div>
+
+      </div>
+      <div class="row form-group" [class.has-error]="displayMessage.width">
+        <label class="col-sm-4 control-label" for="width">Width: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='24' class="form-control" id="width" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 3,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="width">
+          <span *ngIf="displayMessage.width" class="help-block">{{displayMessage.width}}</span>
+        </div>
+
+      </div>
+      <div class="row form-group" [class.has-error]="displayMessage.depth">
+        <label class="col-sm-4 control-label" for="depth">Depth: <span class="req">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='25' class="form-control" id="depth" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                          decimalLimit: 4,
+                          integerLimit: 3,
+                          requireDecimal:false
+    })}" formControlName="depth">
+
+          <span *ngIf="displayMessage.depth" class="help-block">{{displayMessage.depth}}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <app-precise-location-group [parent]="defectLocationSectionFormGroup" [errorMessages]="displayMessage"></app-precise-location-group>
+
+  <div class="row">
+    <div class="col-md-6">
+      <aac-input tabindex="30" label="MFG Part #:" [message]="displayMessage.MFGpart" formControlName="MFGpart">
+      </aac-input>
+    </div>
+    <div class="col-md-6">
+      <aac-input tabindex="31" required label="Part Defective:" [message]="displayMessage.partDefective" formControlName="partDefective">
+      </aac-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <aac-input tabindex="32" label="MFG Serial #:" [message]="displayMessage.MFGserial" formControlName="MFGserial">
+      </aac-input>
+
+    </div>
+    <div class="col-md-4">
+      <aac-input tabindex="33" label="MFG Serial #:" [message]="displayMessage.PartTT" formControlName="PartTT">
+      </aac-input>
+    </div>
+
+
+    <div class="col-md-4">
+      <aac-input tabindex="34" label="Part TSO:" [message]="displayMessage.PartTso" formControlName="PartTso">
+      </aac-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-select tabindex="35" required label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)"
+        [message]="displayMessage.detected" formControlName="detected">
+        <option value=""> </option>
+        <option value="unknown">UNKNOWN </option>
+        <option value="tapTest">TAP TEST</option>
+        <option value="boroscope">BOROSCOPE</option>
+        <option value="functionalCheck">FUNCTIONAL CHECK</option>
+        <option value="dyePenetrant">DYE PENETRANT</option>
+        <option value="eddyCurrent">EDDY CURRENT</option>
+        <option value="lightSource">LIGHT SOURCE</option>
+        <option value="magneticParticle">MAGNETIC PARTICLE</option>
+        <option value="other">OTHER</option>
+        <option value="thermal">THERMAL</option>
+        <option value="ultrasonic">ULTRASONIC</option>
+        <option value="visual">VISUAL</option>
+        <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
+        <option value="x-ray">X-RAY</option>
+        <option value="dyePenetration">DYE PENETRATION</option>
+        <option value="hfec">HFEC</option>
+      </aac-select>
+    </div>
+  </div>
+
+</div>

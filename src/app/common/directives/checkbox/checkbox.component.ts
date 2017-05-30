@@ -1,34 +1,52 @@
-﻿import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { ICheckboxState } from './checkbox.interfaces';
+﻿import { Component, Input, forwardRef, ElementRef, Renderer } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'aac-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css']
-})
-export class CheckboxComponent implements OnInit {
-  @Input() checkboxLabel: any;
-  @Input() checkboxState: ICheckboxState;
-  @Output() onChangeNotify = new EventEmitter<boolean>();
-  @Input() tabindex: any;
-
-  public checkboxId: string;
-
-  constructor() { }
-
-  ngOnInit() {
-        const chkId = this.checkboxId = `chk_${this.checkboxLabel}`; //create unique Id
-
-         if(!this.checkboxState){
-             //improper use of directive with no state management
-         }
-         else if(!this.checkboxState.isEnabled){
-            //assume a default of enabled
-            this.checkboxState.isEnabled = true;
-        }
+  styleUrls: ['./checkbox.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CheckboxComponent),
+      multi: true
     }
+  ]
+})
+export class CheckboxComponent implements ControlValueAccessor {
+  @Input() label = '';
+  @Input('id') checkbox_id = '';
+  @Input('tabindex') tindex = "0";
+  @Input('value') _value = false;
+  onChange: any = () => { };
+  onTouched: any = () => { };
+  get value() {
+    return this._value;
+  }
+  set value(val) {
+    this._value = val;
+    this.onChange(val);
+    this.onTouched();
+  }
+  constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
+  ngOnInit() {
+    this._renderer.setElementAttribute(this._elRef.nativeElement, 'tabindex', null);
+    this._renderer.setElementAttribute(this._elRef.nativeElement, 'id', null);
 
-   private checkboxChanged() {
-     this.onChangeNotify.emit(this.checkboxState.isChecked);
-   }
+  }
+onSelectionChange(checked: boolean) {
+  this.writeValue(checked);
+}
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
+
+  writeValue(value) {
+      this.value = value;
+  }
+
 }

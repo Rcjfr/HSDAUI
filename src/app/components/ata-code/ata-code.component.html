@@ -1,0 +1,12 @@
+<div [formGroup]="ataCodesSectionFormGroup">
+  <aac-select tabindex="14" required label="ATA Code 1:" (change)='getAlertCode2s($event.target.value)'
+        [message]="displayMessage.ataCode1" formControlName="ataCode1">
+          <option value="">Select ATA Code 1</option>
+          <option *ngFor="let ac of ATACodes" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
+      </aac-select>
+  <aac-select tabindex="14" required label="ATA Code 2:" 
+        [message]="displayMessage.ataCode2" formControlName="ataCode2">
+          <option value="">Select ATA Code 2</option>
+          <option *ngFor="let ac of ataCode2s" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
+      </aac-select>
+</div>

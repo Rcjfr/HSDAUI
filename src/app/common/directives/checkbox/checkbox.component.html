@@ -1,12 +1,14 @@
 ﻿<div class="customComponent">
   <div>
-    <input type="checkbox" name="{{checkboxId}}" 
-           [attr.tabindex]="tabindex" id="{{checkboxId}}" 
-           [(ngModel)]="checkboxState.isChecked" 
-           (change)="checkboxChanged()"
-           [disabled]="!checkboxState.isEnabled" />
-    <label class="checkboxLabel">
-      <span class="control"></span>
-    </label>
+    <input [attr.id]="checkbox_id" [attr.tabindex]="tindex"
+            [(ngModel)]="value"
+            type="checkbox"
+            (blur)=""
+            [checked]="value" >
+    <label class="checkboxLabel" [attr.for]="checkbox_id">
+          <span class="control"></span>
+        </label>
   </div>
 </div>
+<label [attr.for]="checkbox_id">{{label}}</label>
+

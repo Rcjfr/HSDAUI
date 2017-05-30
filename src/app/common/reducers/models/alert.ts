@@ -23,7 +23,23 @@ export const alertFactory = makeTypedFactory<Alert, AlertRecord>({
     micNo: '',
     checkType: '',
     routineNo: '',
-    unscheduledDescription: ''
+    unscheduledDescription: '',
+    defectType: '',
+    defectDescription: '',
+    length: '',
+    width: '',
+    depth: '',
+    stationLocation: '',
+    stringer: '',
+    wl: '',
+    bl: '',
+    MFGpart: '',
+    partDefective: '',
+    MFGserial: '',
+    PartTT: '',
+    PartTso: '',
+    detected: ''
+
 });
 
 
