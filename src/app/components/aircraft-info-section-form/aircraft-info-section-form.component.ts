@@ -57,9 +57,9 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent {
   ngOnInit() {
     this.aircraftInfoSectionFormGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
-      manufacturer: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(100)]],
-      model: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
-      serialNo: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(10)]],
+      manufacturer: ['', [Validators.required, Validators.maxLength(100)]],
+      model: ['', [Validators.required, Validators.maxLength(15)]],
+      serialNo: ['', [Validators.required, Validators.maxLength(10)]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
       cycles: ['', [Validators.required, Validators.maxLength(25)]],
       fleet: ['', [Validators.required, Validators.maxLength(20)]]
