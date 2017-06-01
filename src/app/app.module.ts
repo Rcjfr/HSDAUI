@@ -17,13 +17,20 @@ import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
-
-import { ATACodesService } from './common/services/ata-codes.service';
-import { AircraftService } from './common/services/aircraft.service';
-import { StationService } from './common/services/station.service';
+import {
+  AircraftService,
+  AlertCodeService,
+  AppStateService,
+  ATACodesService,
+  CheckTypesService,
+  CorrosionLevelService,
+  CorrosionTypeService,
+  DepartmentService,
+  DetectionMethodService,
+  StationService
+} from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { reducer } from './common/reducers/index';
-import { CheckTypesService } from './common/services/check-types.service';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 import { GeneralSectionFormComponent } from './components/general-section-form/general-section-form.component';
 import { AircraftInfoSectionFormComponent } from './components/aircraft-info-section-form/aircraft-info-section-form.component';
@@ -73,7 +80,18 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects)
   ],
-  providers: [ATACodesService, AircraftService, CheckTypesService, StationService],
+  providers: [
+    AircraftService,
+    AlertCodeService,
+    AppStateService,
+    ATACodesService,
+    CheckTypesService,
+    CorrosionLevelService,
+    CorrosionTypeService,
+    DepartmentService,
+    DetectionMethodService,
+    StationService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

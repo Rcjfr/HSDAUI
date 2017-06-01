@@ -5,6 +5,10 @@ import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/toPromise';
 
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/skip';
+import 'rxjs/add/operator/takeUntil';
+
 
 // Observable operators
 import 'rxjs/add/operator/catch';

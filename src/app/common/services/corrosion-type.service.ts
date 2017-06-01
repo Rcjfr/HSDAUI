@@ -2,20 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import { ICheckType } from '../models/check-type.model';
+import { ICorrosionType } from '../models/corrosion-type.model';
 import '../rxjs-extensions';
 
-
 @Injectable()
-export class CheckTypesService {
+export class CorrosionTypeService {
 
-  private endPointUrl = `${environment.hsdaApiBaseUrl}fleettypes`;
+  private endPointUrl = `${environment.hsdaApiBaseUrl}corrosiontypes`;
   constructor(private http: Http) { }
 
-    getAllCheckTypes(fleetType: string): Observable<ICheckType[]> {
-      return this.http.get(`${this.endPointUrl}/${fleetType}/check_types`)
+    getAllCorrosionTypes(): Observable<ICorrosionType[]> {
+      return this.http.get(this.endPointUrl)
                     .map((result) => result.json());
     };
-
 
 }

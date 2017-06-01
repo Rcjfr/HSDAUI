@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { BaseFormComponent } from '../base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
-import { AircraftInfo } from '../../common/models/aircraft-info.model';
+import { IAircraftInfo } from '../../common/models/aircraft-info.model';
 
 
 @Component({
@@ -13,10 +13,10 @@ import { AircraftInfo } from '../../common/models/aircraft-info.model';
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AircraftInfoSectionFormComponent extends BaseFormComponent {
+export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit {
   @Output() onNoseNumberChange = new EventEmitter();
   @Input()
-  set aircraftInfo(info: AircraftInfo){
+  set aircraftInfo(info: IAircraftInfo){
     if (this.aircraftInfoSectionFormGroup) {
     this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
     this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
@@ -54,7 +54,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent {
     super('aircraftInfoSectionFormGroup');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.aircraftInfoSectionFormGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
       manufacturer: ['', [Validators.required, Validators.maxLength(100)]],

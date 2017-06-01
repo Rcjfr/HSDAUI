@@ -1,4 +1,4 @@
-export interface AircraftInfo {
+export interface IAircraftInfo {
     aircraftNo: string;
     manufacturer: string;
     model: string;
