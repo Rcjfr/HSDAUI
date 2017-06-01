@@ -39,6 +39,10 @@ import { AtaCodeComponent } from './components/ata-code/ata-code.component';
 import { FormControlsModule } from './common/directives/form/form-controls.module';
 import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
+import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';
+import {    DeferredSectionFormComponent} from './components/deferred-section/deferred-section.component';
+import { correctiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
+//import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/correction-action-repair-description.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
     PreciseLocationGroupComponent,
-    CpcpSectionComponent
+    CpcpSectionComponent,
+      CauseOfDamageGroupComponent,
+      DeferredSectionFormComponent,
+      correctiveActionFormGroupComponent,
+     // CorrectiveActionRepairDescriptionComponent
   ],
   imports: [
     BrowserModule,

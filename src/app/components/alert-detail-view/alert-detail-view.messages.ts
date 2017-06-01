@@ -142,10 +142,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         pattern: 'bl must be alphanumeric.',
         maxlength: 'bl must not be more than 25 characters.'
       }
-    }
-
-
-    ,
+    },
     'MFGpart': {
 
       pattern: 'MFG Part must be alphanumeric.',
@@ -206,6 +203,42 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     floorbaordCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
+    },
+    causeOfDamageGroup: {
+      atleastone:
+    'atleast one should be selected',
+
+
+    'damageOther': {
+
+        required: 'damageOther must be alphanumeric.',
+
     }
+  },
+  },
+  
+  'deferredSectionFormGroup': {
+      'deferredSectionOptions': {
+          
+      },
+  'correctiveActionFormGroup': {
+      
+      'deferralCode': {
+          required: 'deferralCode during is required.',
+          pattern: 'deferralCode must contain only alphabet characters.',
+          maxlength: 'deferralCode must be not more that 3 characters.'
+      },
+      'deferral': {
+          required: 'deferral during is required.',
+          pattern: 'deferral must must be alphanumeric..',
+          maxlength: 'deferral must be not more that 15 characters.'
+      },
+      'repairDescription': {
+          
+          maxlength: 'repairDescription must be not more that 250 characters.'
+      }
+      },
   }
+      
+  
 };

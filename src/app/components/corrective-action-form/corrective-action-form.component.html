@@ -1,0 +1,40 @@
+﻿  <div  [formGroup]="correctiveActionFormGroup">
+    <div class="row form-group">
+
+      <div class="col-md-5">
+        <aac-input tabindex="19" required label="Entered SCEPTER Deferralcode (MON, SAD, ROB, etc):"  maxlength="3" [message]="displayMessage.deferralCode" formControlName="deferralCode">
+        </aac-input>
+        
+      </div>
+
+      <div class="col-md-5">
+        <aac-input tabindex="19" required label="Deferral #:" [message]="displayMessage.deferral" formControlName="deferral">
+        </aac-input>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-offset-4 col-sm-8">
+          <div *ngIf="displayMessage.message &&
+                    (correctiveActionFormGroup.get('deferral').touched ||
+                    correctiveActionFormGroup.get('deferral').dirty)
+                  " class="error">{{displayMessage.message}}</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--<app-corrective-action-repair-description [parent]="correctiveActionFormGroup"
+                           [errorMessages]="displayMessage$ | async"></app-corrective-action-repair-description>-->
+
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <aac-textarea tabindex="22" label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+                      [message]="displayMessage.defectDescription" formControlName="repairDescription">
+        </aac-textarea>
+      </div>
+
+
+    </div>
+  </div>
+
