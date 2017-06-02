@@ -3,18 +3,26 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { BaseFormComponent } from '../base-form.component';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import { AppStateService } from '../../common/services';
+import { Observable } from 'rxjs/Observable';
+import { List } from 'immutable';
+import { ICorrosionLevel, ICorrosionType } from '../../common/models';
 
 @Component({
   selector: 'app-cpcp-section-form',
   templateUrl: './cpcp-section.component.html',
   styleUrls: ['./cpcp-section.component.less']
 })
-export class CpcpSectionComponent extends BaseFormComponent {
-cpcpSectionGroup: FormGroup;
-  constructor(private fb: FormBuilder) {
+export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
+  corrosionTypes$: Observable<List<ICorrosionType>>;
+  corrosionLevels$: Observable<List<ICorrosionLevel>>;
+  cpcpSectionGroup: FormGroup;
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
    }
   ngOnInit() {
+    this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
+    this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     const cpcp: FormControl = this.fb.control(null, Validators.required);
     this.cpcpSectionGroup = this.fb.group({
               cpcprelated: cpcp,
@@ -34,8 +42,8 @@ cpcpSectionGroup: FormGroup;
         this.cpcpSectionGroup.get('corrosionType').valueChanges
             .subscribe(val => this.setCorrosionTypeFields(val));
   }
-setCorrosionTypeFields(corrosionType: string): void{
-if (corrosionType != "other") {
+setCorrosionTypeFields(corrosionType: string): void {
+if (corrosionType != '5') {
             this.cpcpSectionGroup.get('corrosionTypeText').clearValidators();
         } else {
             this.cpcpSectionGroup.get('corrosionTypeText').setValidators([Validators.required,

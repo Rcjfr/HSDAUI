@@ -1,10 +1,11 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { BaseFormComponent } from '../base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { IAircraftInfo } from '../../common/models/aircraft-info.model';
+import { AppStateService } from '../../common/services';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { IAircraftInfo } from '../../common/models/aircraft-info.model';
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit {
+export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy {
   @Output() onNoseNumberChange = new EventEmitter();
   @Input()
   set aircraftInfo(info: IAircraftInfo){
@@ -50,7 +51,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     allowLeadingZeroes: false
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public appStateService: AppStateService) {
     super('aircraftInfoSectionFormGroup');
   }
 
@@ -65,6 +66,9 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
       fleet: ['', [Validators.required, Validators.maxLength(20)]]
     });
     this.parent.addControl(this.formGroupName, this.aircraftInfoSectionFormGroup);
+    // this.aircraftInfoSectionFormGroup.get('fleet')
+    //                                  .valueChanges.debounceTime(500)
+    //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
 
   }
   noseNumberOnSelect(e: TypeaheadMatch) {

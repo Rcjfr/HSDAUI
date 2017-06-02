@@ -1,4 +1,4 @@
 export interface IBaseLookUp {
     id: number;
-    code: string;
+    description: string;
 }

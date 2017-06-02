@@ -42,6 +42,8 @@
 </div>
 <!--<aac-input required tabindex="12" label="Fleet:" (change)="populateCheckTypes()" [message]="displayMessage.fleet" formControlName="fleet">
       </aac-input>-->
-<aac-input required tabindex="12" label="Fleet:" [message]="displayMessage.fleet" formControlName="fleet">
+<aac-input required tabindex="12" label="Fleet:" [message]="displayMessage.fleet" formControlName="fleet"
+(change)="appStateService.loadCheckTypes($event.target.value)"
+>
       </aac-input>
 </div>

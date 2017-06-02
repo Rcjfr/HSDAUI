@@ -9,7 +9,7 @@ export interface State {
   ATACodes: List<models.IATACode>;
   checkTypes: List<models.ICheckType>;
   corrosionLevels: List<models.ICorrosionLevel>;
-  corrossionTypes: List<models.ICorrosionType>;
+  corrosionTypes: List<models.ICorrosionType>;
   departments: List<models.IDepartment>;
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
@@ -22,7 +22,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   ATACodes: <List<models.IATACode>>List.of(),
   checkTypes: <List<models.ICheckType>>List.of(),
   corrosionLevels: <List<models.ICorrosionLevel>>List.of(),
-  corrossionTypes: <List<models.ICorrosionType>>List.of(),
+  corrosionTypes: <List<models.ICorrosionType>>List.of(),
   departments: <List<models.IDepartment>>List.of(),
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
@@ -97,7 +97,7 @@ export const getLoading = (state: State) => state.loading;
 export const getATACodes = (state: State) => state.ATACodes;
 export const getCheckTypes = (state: State) => state.checkTypes;
 export const getCorrosionLevels = (state: State) => state.corrosionLevels;
-export const getCorrosionTypes = (state: State) => state.corrossionTypes;
+export const getCorrosionTypes = (state: State) => state.corrosionTypes;
 export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
