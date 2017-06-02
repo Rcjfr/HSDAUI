@@ -19,12 +19,12 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./general-section-form.component.less']
 })
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit {
-  stations$: Observable<models.IStation[]>;
+  departments$: Observable<List<models.IDepartment>>;
+  stations$: Observable<List<models.IStation>>;
   generalSectionFormGroup: FormGroup;
   aircraftInfo$: Observable<models.IAircraftInfo>;
-  alertCodes$: Observable<models.IAlertCode[]>;
-  ATACodes$: Observable<models.IATACode[]>;
-
+  alertCodes$: Observable<List<models.IAlertCode>>;
+  ATACodes$: Observable<List<models.IATACode>>;
   constructor(private fb: FormBuilder, private store: Store<AppStore>) {
     super('generalSectionFormGroup');
   }
@@ -45,8 +45,9 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
     });
     this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
-    this.alertCodes$ = this.store.select(fromRoot.getAlertCodes);
-    this.ATACodes$ = this.store.select(fromRoot.getATACodes); // .map(d => d && d.toJS());
+    this.alertCodes$ = this.store.select(fromRoot.getAlertCodes); // .map(d => d && d.toJS());
+    this.ATACodes$ = this.store.select(fromRoot.getATACodes).map(d => d && d.toJS());
+    this.departments$ = this.store.select(fromRoot.getDepartments);
 
     this.aircraftInfo$ = this.store.select(fromRoot.getAircraftInfo);
     // this.aircraftInfo$ = Observable.interval(1000).map(i=><AircraftInfo>{

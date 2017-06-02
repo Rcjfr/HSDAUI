@@ -8,3 +8,4 @@ export * from './corrosion-type.model';
 export * from './department.model';
 export * from './detection-method.model'
 export * from './station.model';
+export * from './base-lookup.model';

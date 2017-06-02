@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';
@@ -30,6 +31,7 @@ import {
   StationService
 } from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
+import { LookupDataEffects } from './common/effects/lookup-data.effects';
 import { reducer } from './common/reducers/index';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 import { GeneralSectionFormComponent } from './components/general-section-form/general-section-form.component';
@@ -75,10 +77,12 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
     AppRoutingModule,
     NKDatetimeModule,
     TextMaskModule,
+    NgPipesModule,
     TypeaheadModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
-    EffectsModule.run(AlertEffects)
+    EffectsModule.run(AlertEffects),
+    EffectsModule.run(LookupDataEffects)
   ],
   providers: [
     AircraftService,

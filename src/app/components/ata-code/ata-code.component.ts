@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { BaseFormComponent } from '../base-form.component';
 import { List } from 'immutable';
 import * as models from '../../common/models';
-
+import {FilterByPipe} from 'ng-pipes';
 @Component({
   selector: 'app-ata-code',
   templateUrl: './ata-code.component.html',
@@ -11,6 +11,8 @@ import * as models from '../../common/models';
 })
 export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDestroy {
   @Input() ATACodes: models.IATACode[];
+  ataCodes2: models.IATACode[];
+  pipe = new FilterByPipe();
   ataCodesSectionFormGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('ataCodesSectionFormGroup');
@@ -22,7 +24,10 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
       ataCode2: ['', Validators.required]
     });
     this.parent.addControl(this.formGroupName, this.ataCodesSectionFormGroup);
-  }
+    // this.ataCodes1 = this.ATACodes.map( a=> {
+    //   return {code: a.primaryCode, description: a.primaryCodeDescription}}
+    //   ).filter()
+              }
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
 
@@ -31,5 +36,6 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.ataCodesSectionFormGroup.get('ataCode2').setValue('');
     this.ataCodesSectionFormGroup.get('ataCode2').markAsPristine();
     this.ataCodesSectionFormGroup.get('ataCode2').markAsUntouched();
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
   }
 }
