@@ -32,7 +32,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
       }
     );
     this.parent.addControl(this.formGroupName, this.scheduledMaintenanceGroup);
-    this.checkTypes$ = this.appStateService.getCheckTypes();
+    this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
 ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);

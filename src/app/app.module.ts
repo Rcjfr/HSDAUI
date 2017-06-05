@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { AccordionModule, TypeaheadModule } from 'ngx-bootstrap';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
@@ -48,6 +48,9 @@ import { AtaCodeComponent } from './components/ata-code/ata-code.component';
 import { FormControlsModule } from './common/directives/form/form-controls.module';
 import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
+import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
+import { SearchByDateRangeComponent } from './components/search/search-by-date-range/search-by-date-range.component';
+import { SearchBySdaFormComponent } from './components/search/search-by-sda-form/search-by-sda-form.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
     PreciseLocationGroupComponent,
-    CpcpSectionComponent
+    CpcpSectionComponent,
+    AlertsSearchComponent,
+    SearchByDateRangeComponent,
+    SearchBySdaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +85,7 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
+    AccordionModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects),

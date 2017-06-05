@@ -9,11 +9,16 @@ import '../rxjs-extensions';
 @Injectable()
 export class CheckTypesService {
 
-  private endPointUrl = `${environment.hsdaApiBaseUrl}fleettypes`;
+  private fleetTypesEndPointUrl = `${environment.hsdaApiBaseUrl}fleettypes`;
+  private checkTypesEndPointUrl = `${environment.hsdaApiBaseUrl}checktypes`;
   constructor(private http: Http) { }
 
-    getAllCheckTypes(fleetType: string): Observable<ICheckType[]> {
-      return this.http.get(`${this.endPointUrl}/${fleetType}/check_types`)
+    getAllCheckTypes(): Observable<ICheckType[]> {
+      return this.http.get(this.checkTypesEndPointUrl)
+                    .map((result) => result.json());
+    };
+ getFleetCheckTypes(fleetType: string): Observable<ICheckType[]> {
+      return this.http.get(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`)
                     .map((result) => result.json());
     };
 

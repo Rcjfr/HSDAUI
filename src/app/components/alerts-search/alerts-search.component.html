@@ -1,0 +1,40 @@
+<h1>Search Filters
+  <h5 class="pull-right">
+    <a href="" (click)="expandCollapseAll(true)">Expland All</a>
+    <a href="" (click)="expandCollapseAll(false)">Collapse All</a>
+  </h5>
+</h1>
+<form novalidate (submit)="searchAlerts()" [formGroup]="sdaSearchForm">
+<accordion>
+  <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Date Range
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-date-range></app-search-by-date-range>
+  </accordion-group>
+  <accordion-group #sdaFormGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by SDA Form
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-sda-form>
+
+    </app-search-by-sda-form>
+  </accordion-group>
+  <accordion-group #aircraftGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Aircraft
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
+    </div>
+    This is just some content to illustrate fancy headings.
+  </accordion-group>
+  <accordion-group #corrosionGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Corrosion
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
+    </div>
+    This is just some content to illustrate fancy headings.
+  </accordion-group>
+</accordion>
+</form>

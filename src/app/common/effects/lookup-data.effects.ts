@@ -20,6 +20,7 @@ export class LookupDataEffects {
                                                 Observable.from([
                                                 new lookupData.LoadAlertCodesAction(),
                                                 new lookupData.LoadATACodesAction(),
+                                                new lookupData.LoadCheckTypesAction(),
                                                 new lookupData.LoadCorrosionLevelsAction(),
                                                 new lookupData.LoadCorrosionTypesAction(),
                                                 new lookupData.LoadDepartmentsAction(),
@@ -55,13 +56,26 @@ export class LookupDataEffects {
     loadCheckTypes$: Observable<Action> = this.actions$
                                               .ofType(lookupData.ActionTypes.LOAD_CHECK_TYPES)
                                               .map((action: lookupData.LoadCheckTypesAction) => action.payload)
-                                              .switchMap((fleetType: string) => {
-                                                  return this.checkTypesService.getAllCheckTypes(fleetType)
+                                              .switchMap(() => {
+                                                  return this.checkTypesService.getAllCheckTypes()
                                                           .map((response: models.ICheckType[]) => {
                                                           return new lookupData.LoadCheckTypesCompleteAction(response);
                                               })
                                               .catch((err) => {
                                                       return of(new lookupData.LoadCheckTypesFailAction('Failed to load Check Types'));
+                                                    });
+                                            });
+@Effect()
+    loadFleetCheckTypes$: Observable<Action> = this.actions$
+                                              .ofType(lookupData.ActionTypes.LOAD_CHECK_TYPES)
+                                              .map((action: lookupData.LoadFleetCheckTypesAction) => action.payload)
+                                              .switchMap((fleetType: string) => {
+                                                  return this.checkTypesService.getFleetCheckTypes(fleetType)
+                                                          .map((response: models.ICheckType[]) => {
+                                                          return new lookupData.LoadFleetCheckTypesCompleteAction(response);
+                                              })
+                                              .catch((err) => {
+                                                      return of(new lookupData.LoadFleetCheckTypesFailAction('Failed to load Fleet Check Types'));
                                                     });
                                             });
 @Effect()
