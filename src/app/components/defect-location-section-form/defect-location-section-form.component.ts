@@ -4,19 +4,25 @@ import { GenericValidator, Expressions } from '../../common/validators/generic-v
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../components/base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { AppStateService } from '../../common/services';
+import { Observable } from 'rxjs/Observable';
+import { List } from 'immutable';
+import { IDetectionMethod } from '../../common/models';
 @Component({
   selector: 'app-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })
-export class DefectLocationSectionFormComponent extends BaseFormComponent {
+export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit {
+  detectionMethods$: Observable<List<IDetectionMethod>>;
   defectLocationSectionFormGroup: FormGroup;
 createNumberMask = createNumberMask;
-    constructor( private fb: FormBuilder) {
+    constructor( private fb: FormBuilder, private appStateService: AppStateService) {
       super('defectLocationSectionFormGroup');
     }
 
   ngOnInit() {
+    this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.defectLocationSectionFormGroup = this.fb.group({
       defectType: ['', [Validators.required, Validators.maxLength(250)]],
           defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],

@@ -7,7 +7,7 @@ import '../rxjs-extensions';
 
 @Injectable()
 export class StationService {
-  private endPointUrl: string = `${environment.hsdaApiBaseUrl}${environment.stationsEndPoint}`;
+  private endPointUrl = `${environment.hsdaApiBaseUrl}stations`;
   constructor(private http: Http) { }
 
     getAllStations(): Observable<IStation[]> {

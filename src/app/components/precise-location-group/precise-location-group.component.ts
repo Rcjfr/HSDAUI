@@ -8,7 +8,7 @@ import { CustomValidators } from '../../common/validators/custom-validators';
   templateUrl: './precise-location-group.component.html',
   styleUrls: ['./precise-location-group.component.less']
 })
-export class PreciseLocationGroupComponent extends BaseFormComponent {
+export class PreciseLocationGroupComponent extends BaseFormComponent implements OnInit {
   preciseLocationGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('preciseLocationGroup');

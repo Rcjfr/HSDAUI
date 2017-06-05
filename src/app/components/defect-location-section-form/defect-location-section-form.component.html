@@ -91,7 +91,8 @@
     <div class="col-md-6">
       <aac-select tabindex="35" required label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)"
         [message]="displayMessage.detected" formControlName="detected">
-        <option value=""> </option>
+        <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
+        <!--<option value=""> </option>
         <option value="unknown">UNKNOWN </option>
         <option value="tapTest">TAP TEST</option>
         <option value="boroscope">BOROSCOPE</option>
@@ -107,7 +108,7 @@
         <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
         <option value="x-ray">X-RAY</option>
         <option value="dyePenetration">DYE PENETRATION</option>
-        <option value="hfec">HFEC</option>
+        <option value="hfec">HFEC</option>-->
       </aac-select>
     </div>
   </div>
