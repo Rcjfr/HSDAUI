@@ -1,6 +1,6 @@
 ﻿import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
-import { combineReducers } from '@ngrx/store';
+import { combineReducers, Action } from '@ngrx/store';
 import * as fromSelectedAlert from './selected-alert';
 import {AppStore} from '../store/app-store';
 
@@ -12,7 +12,7 @@ const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
 // export const reducer: ActionReducer<AppStore> = function(state: AppStore, action: any) {
 //     return combinedReducers(state, action);
 // };
-export function reducer(state: AppStore, action: any): AppStore {
+export function reducer(state: AppStore, action: Action): AppStore {
     return combinedReducers(state, action);
 }
 

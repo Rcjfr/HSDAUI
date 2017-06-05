@@ -3,7 +3,7 @@
   <h5>(Enter From/To if Applicable)</h5>
   <div class="row">
     <div class="col-md-3">
-      <aac-input tabindex="26" label="Station:" labelGridColumnWidth="1" helptext="(Body, Spar, Stab, etc.)" [message]="displayMessage.stationLocation"
+      <aac-input tabindex="26" label="Station:" labelGridColumnWidth="1" helptext="(Body, Spar, Stab, Frame, etc.)" [message]="displayMessage.stationLocation"
         formControlName="stationLocation">
       </aac-input>
     </div>
@@ -21,7 +21,7 @@
       <span *ngIf="displayMessage.message &&
                   (preciseLocationGroup.get( 'bl').touched ||
                    preciseLocationGroup.get('bl').dirty) "
-            class="error ">{{displayMessage.message}}</span>
+            class="error">{{displayMessage.message}}</span>
     </div>
   </div>
 </div>

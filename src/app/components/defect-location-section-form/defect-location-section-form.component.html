@@ -51,7 +51,7 @@
                           integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="depth">
-
+          <span class="help-block">(If Length, Width, Depth is Null, enter 0.)</span>
           <span *ngIf="displayMessage.depth" class="help-block">{{displayMessage.depth}}</span>
         </div>
       </div>
@@ -66,7 +66,7 @@
       </aac-input>
     </div>
     <div class="col-md-6">
-      <aac-input tabindex="31" required label="Part Defective:" [message]="displayMessage.partDefective" formControlName="partDefective">
+      <aac-input tabindex="31" required label="Part Defective:" helptext="(Beam, Fitting, Forging, etc.)" [message]="displayMessage.partDefective" formControlName="partDefective">
       </aac-input>
     </div>
   </div>

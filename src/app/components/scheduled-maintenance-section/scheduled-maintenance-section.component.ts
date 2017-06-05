@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
@@ -19,8 +19,8 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent {
   ngOnInit() {
     this.scheduledMaintenanceGroup = this.fb.group({
       checkType: ['', [Validators.required]],
-      nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
-      routineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
+      nonRoutineNo: ['', []],
+      routineNo: ['', []]
     },
       {
         validator: CustomValidators.validateScheduledMaintenanceFields
