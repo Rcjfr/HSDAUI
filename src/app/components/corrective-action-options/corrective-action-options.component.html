@@ -1,0 +1,29 @@
+﻿<div [formGroup]="correctiveActionOptionFormGroup">
+  <div class="row form-group">
+   <!-- <aac-radio id="choose" name="correctiveActionOptions" label="Choose " checked="checked" formControlName="correctiveActionOptions"></aac-radio>-->
+    <aac-radio id="defectivepart" name="correctiveActionOptions"  label="Defective Part Replaced With Identical Part #" value="1" tabindex="17" formControlName="correctiveActionOptions"></aac-radio>
+    <aac-radio id="modifiedpart" name="correctiveActionOptions" label="Modified Part # Installed " value="2" tabindex="17" formControlName="correctiveActionOptions"></aac-radio>
+    <aac-radio id="repairDescribe" name="correctiveActionOptions" label="Repaired (Describe)" value="3" tabindex="17" formControlName="correctiveActionOptions"></aac-radio>
+    
+  </div>
+<!--  {{correctiveActionOptionFormGroup.get('correctiveActionOptions').value}}-->
+  <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=3">
+    <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
+                                              [errorMessages]="displayMessage">
+
+    </app-corrective-action-repair-description>
+  </div>
+
+  <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=2">
+    <div class="col-md-6">
+      <aac-input tabindex="20"  required label="Description:"  [message]="displayMessage.modifiedpartDescription" formControlName="modifiedpartDescription">
+      </aac-input>
+    </div>
+    </div>
+    <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value != 1">
+      <div class="col-md-6">
+        <aac-input tabindex="20" required label="Description:"  [message]="displayMessage.defectivePartDescription" formControlName="defectivePartDescription">
+        </aac-input>
+      </div>
+    </div>
+</div>

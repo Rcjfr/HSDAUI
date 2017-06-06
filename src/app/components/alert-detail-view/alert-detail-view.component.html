@@ -1,6 +1,6 @@
 ﻿<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
   <div class="panel panel-default">
-    <div class="panel-heading">General Information</div>
+  <div class="panel-heading">General Information</div>
     <app-general-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
@@ -16,13 +16,10 @@
     [errorMessages]="displayMessage$ | async"
     ></app-cpcp-section-form>
     <div class="panel-heading">Corrective Action</div>
-    <app-deferred-section [parent]="sdaForm"
+    <app-corrective-action-form [parent]="sdaForm"
      [errorMessages]="displayMessage$ | async">
-    </app-deferred-section>
-    <!--<app-corrective-action-repair-description [parent]="sdaForm"
-                        [errorMessages]="displayMessage$ | async"></app-corrective-action-repair-description>-->
-
-   
+    </app-corrective-action-form>
+    <!--<app-corrective-action-options [parent]="sdaForm" [errorMessages]="displayMessage$ | async"></app-corrective-action-options>-->
 
   </div>
   <div class="row">
@@ -32,7 +29,7 @@
       </div>
     </div>
   </div>
-  <!--<pre>
+  <pre>
     {{displayMessage$ | async | json}}
 
   </pre>
@@ -41,5 +38,5 @@
   </PRE>
   <PRE>
     {{sdaForm.valid | json}}
-  </PRE>-->
+  </PRE>
 </form>
