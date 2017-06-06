@@ -3,8 +3,8 @@
     <input type="radio" [attr.tabindex]="tindex"
     (change)="onSelectionChange()"
     [attr.name]="radio_group_name"
-    [attr.id]="radio_id" [value]="value">
-    <label [attr.for]="radio_id">
+    [attr.id]="identifier" [value]="value">
+    <label [attr.for]="identifier">
           <span class="control"></span>
           {{label}}
         </label>

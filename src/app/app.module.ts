@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';
@@ -17,13 +18,21 @@ import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/directives/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
-
-import { ATACodesService } from './common/services/ata-codes.service';
-import { AircraftService } from './common/services/aircraft.service';
-import { StationService } from './common/services/station.service';
+import {
+  AircraftService,
+  AlertCodeService,
+  AppStateService,
+  ATACodesService,
+  CheckTypesService,
+  CorrosionLevelService,
+  CorrosionTypeService,
+  DepartmentService,
+  DetectionMethodService,
+  StationService
+} from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
+import { LookupDataEffects } from './common/effects/lookup-data.effects';
 import { reducer } from './common/reducers/index';
-import { CheckTypesService } from './common/services/check-types.service';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 import { GeneralSectionFormComponent } from './components/general-section-form/general-section-form.component';
 import { AircraftInfoSectionFormComponent } from './components/aircraft-info-section-form/aircraft-info-section-form.component';
@@ -78,12 +87,25 @@ import { CorrectiveActionRepairDescriptionComponent } from './components/correct
     AppRoutingModule,
     NKDatetimeModule,
     TextMaskModule,
+    NgPipesModule,
     TypeaheadModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
-    EffectsModule.run(AlertEffects)
+    EffectsModule.run(AlertEffects),
+    EffectsModule.run(LookupDataEffects)
   ],
-  providers: [ATACodesService, AircraftService, CheckTypesService, StationService],
+  providers: [
+    AircraftService,
+    AlertCodeService,
+    AppStateService,
+    ATACodesService,
+    CheckTypesService,
+    CorrosionLevelService,
+    CorrosionTypeService,
+    DepartmentService,
+    DetectionMethodService,
+    StationService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

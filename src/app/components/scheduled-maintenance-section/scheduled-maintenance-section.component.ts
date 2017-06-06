@@ -1,8 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import { AppStateService } from '../../common/services';
+import { Observable } from 'rxjs/Observable';
+import { List } from 'immutable';
+import { ICheckType } from '../../common/models';
 
 @Component({
   selector: 'app-scheduled-maintenance-section',
@@ -10,27 +14,27 @@ import { CustomValidators } from '../../common/validators/custom-validators';
   styleUrls: ['./scheduled-maintenance-section.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScheduledMaintenanceSectionComponent extends BaseFormComponent {
+export class ScheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
+  checkTypes$: Observable<List<ICheckType>>;
   scheduledMaintenanceGroup: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private appStateService: AppStateService) {
     super('scheduledMaintenanceGroup');
   }
 
   ngOnInit() {
     this.scheduledMaintenanceGroup = this.fb.group({
       checkType: ['', [Validators.required]],
-      nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
-      routineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
+      nonRoutineNo: ['', []],
+      routineNo: ['', []]
     },
       {
         validator: CustomValidators.validateScheduledMaintenanceFields
       }
     );
     this.parent.addControl(this.formGroupName, this.scheduledMaintenanceGroup);
+    this.checkTypes$ = this.appStateService.getCheckTypes();
   }
 ngOnDestroy() {
-    // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
     this.parent.removeControl(this.formGroupName);
   }
 }

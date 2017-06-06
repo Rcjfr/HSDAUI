@@ -51,7 +51,7 @@
                           integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="depth">
-
+          <span class="help-block">(If Length, Width, Depth is Null, enter 0.)</span>
           <span *ngIf="displayMessage.depth" class="help-block">{{displayMessage.depth}}</span>
         </div>
       </div>
@@ -66,7 +66,7 @@
       </aac-input>
     </div>
     <div class="col-md-6">
-      <aac-input tabindex="31" required label="Part Defective:" [message]="displayMessage.partDefective" formControlName="partDefective">
+      <aac-input tabindex="31" required label="Part Defective:" helptext="(Beam, Fitting, Forging, etc.)" [message]="displayMessage.partDefective" formControlName="partDefective">
       </aac-input>
     </div>
   </div>
@@ -91,7 +91,8 @@
     <div class="col-md-6">
       <aac-select tabindex="35" required label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)"
         [message]="displayMessage.detected" formControlName="detected">
-        <option value=""> </option>
+        <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
+        <!--<option value=""> </option>
         <option value="unknown">UNKNOWN </option>
         <option value="tapTest">TAP TEST</option>
         <option value="boroscope">BOROSCOPE</option>
@@ -107,7 +108,7 @@
         <option value="magnifiedVisual">MAGNIFIED VISUAL</option>
         <option value="x-ray">X-RAY</option>
         <option value="dyePenetration">DYE PENETRATION</option>
-        <option value="hfec">HFEC</option>
+        <option value="hfec">HFEC</option>-->
       </aac-select>
     </div>
   </div>
