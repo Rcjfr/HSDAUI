@@ -51,6 +51,8 @@ import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.com
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { SearchByDateRangeComponent } from './components/search/search-by-date-range/search-by-date-range.component';
 import { SearchBySdaFormComponent } from './components/search/search-by-sda-form/search-by-sda-form.component';
+import { SearchByAircraftComponent } from './components/search/search-by-aircraft/search-by-aircraft.component';
+import { SearchByCorrosionComponent } from './components/search/search-by-corrosion/search-by-corrosion.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { SearchBySdaFormComponent } from './components/search/search-by-sda-form
     CpcpSectionComponent,
     AlertsSearchComponent,
     SearchByDateRangeComponent,
-    SearchBySdaFormComponent
+    SearchBySdaFormComponent,
+    SearchByAircraftComponent,
+    SearchByCorrosionComponent
   ],
   imports: [
     BrowserModule,

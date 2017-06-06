@@ -27,14 +27,14 @@
       Search by Aircraft
       <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
     </div>
-    This is just some content to illustrate fancy headings.
+    <app-search-by-aircraft></app-search-by-aircraft>
   </accordion-group>
   <accordion-group #corrosionGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by Corrosion
       <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
     </div>
-    This is just some content to illustrate fancy headings.
+    <app-search-by-corrosion></app-search-by-corrosion>
   </accordion-group>
 </accordion>
 </form>

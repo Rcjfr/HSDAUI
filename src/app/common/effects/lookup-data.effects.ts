@@ -67,7 +67,7 @@ export class LookupDataEffects {
                                             });
 @Effect()
     loadFleetCheckTypes$: Observable<Action> = this.actions$
-                                              .ofType(lookupData.ActionTypes.LOAD_CHECK_TYPES)
+                                              .ofType(lookupData.ActionTypes.LOAD_FLEET_CHECK_TYPES)
                                               .map((action: lookupData.LoadFleetCheckTypesAction) => action.payload)
                                               .switchMap((fleetType: string) => {
                                                   return this.checkTypesService.getFleetCheckTypes(fleetType)
