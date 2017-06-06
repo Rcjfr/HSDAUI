@@ -46,7 +46,8 @@ export class CustomValidators {
     //return null;
   };
 
-  static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+  static ValidatePercisionLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+      
       const stationLocationControl = c.get('stationLocation');
       const stringerControl = c.get('stringer');
       const wlControl = c.get('wl');
@@ -68,5 +69,56 @@ export class CustomValidators {
 
 
       return {'aleasttwo':true};
+  };
+  static ValidateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+      //const cpcprelated = c.parent.get('cpcprelated');
+
+      const environmentControl = c.get('environment');
+      const gallySpillControl = c.get('gallySpill');
+      const blockedDrainControl = c.get('blockedDrain');
+      const chemicalSpillControl = c.get('chemicalSpill');
+      const wetinsulationBlanketControl = c.get('wetinsulationBlanket');
+      const missingFloorBoardTapeControl = c.get('missingFloorBoardTape');
+      const hardwareNotInstalledControl = c.get('hardwareNotInstalled');
+      const poorsealingPracticesControl = c.get('poorsealingPractices');
+      const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
+      const damageOtherControl = c.get('damageOther');
+
+      var filledContolCount: number;
+
+      //if (cpcprelated.value != "1") return null;
+      filledContolCount = 0;
+      if (environmentControl.value) {
+          filledContolCount++;
+      }
+      if (gallySpillControl.value) { filledContolCount++; }
+      if (blockedDrainControl.value) { filledContolCount++; }
+      if (chemicalSpillControl.value) { filledContolCount++; }
+      if (wetinsulationBlanketControl.value) { filledContolCount++; }
+      if (missingFloorBoardTapeControl.value) { filledContolCount++; }
+      if (hardwareNotInstalledControl.value) { filledContolCount++; }
+      if (poorsealingPracticesControl.value) { filledContolCount++; }
+      if (missingCorrosionInhibitorControl.value) { filledContolCount++; }
+      if (damageOtherControl.value) { filledContolCount++; }
+
+      //if (cpcprelated.value != "1")
+      //    return null;
+      if (filledContolCount >= 1)
+      { return null; }
+
+
+      return { 'atleastone': true };
+  };
+  static validateCorrectiveActionFormFields(c: AbstractControl): { [key: string]: boolean } | null {
+
+      const deferralCodeControl = c.get('deferralCode');
+      const deferralControl = c.get('deferral');
+
+      if (deferralCodeControl.value || deferralCodeControl.value) {
+
+          return null;
+      }
+      return { 'atleastone': true };
+      
   };
 }

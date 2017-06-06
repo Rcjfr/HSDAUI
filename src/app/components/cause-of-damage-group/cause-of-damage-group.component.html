@@ -1,0 +1,61 @@
+﻿<div [formGroup]="causeOfDamageGroup">
+  <div class="row" [class.has-error]="displayMessage.causeOfDamage" >
+    <div class="col-md-4">
+      <aac-checkbox label="Environment" tabindex="2"name="causeOfDamage" formControlName="environment" ></aac-checkbox>
+      </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Lav/Galley spill" tabindex="2"   formControlName="gallySpill" ></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Blocked Drain" tabindex="2" formControlName="blockedDrain"></aac-checkbox>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-4">
+      <aac-checkbox label="Chemical Spill" tabindex="2" formControlName="chemicalSpill"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Wet Insulation Blanket" tabindex="2" formControlName="wetinsulationBlanket"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Missing/Deteriorated Floorboard Tape" tabindex="2" formControlName="missingFloorBoardTape"></aac-checkbox>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-4">
+      <aac-checkbox label="Correct Harware Not Installed" tabindex="2" formControlName="hardwareNotInstalled"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Deteriorated/Poor Sealing Practices" tabindex="2" formControlName="poorsealingPractices"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Missing Corrosion Inhibitor" tabindex="2" formControlName="missingCorrosionInhibitor"></aac-checkbox>
+    </div>
+
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <aac-checkbox label="Other" tabindex="2" formControlName="damageOther"  [message]="displayMessage.damageOther"></aac-checkbox>
+      <span *ngIf="displayMessage.message &&
+                  (causeOfDamageGroup.get( 'damageOther').touched ||
+                   causeOfDamageGroup.get('damageOther').dirty) "
+            class="error ">{{displayMessage.message}}</span>
+     
+    </div>
+  
+  
+ 
+  </div>
+
+</div>
+
+<!--<div class="row form-group" [class.has-error]="displayMessage.description">
+       <label class="col-sm-3 control-label" for="description">Description: <span class="req">*</span></label>
+       <div class="col-sm-6">
+         <textarea type="text" tabindex='40' class="form-control" id="description" formControlName="damageOther"></textarea>
+         <span *ngIf="displayMessage.description" class="error">{{displayMessage.description}}</span>
+       </div>
+     </div>-->

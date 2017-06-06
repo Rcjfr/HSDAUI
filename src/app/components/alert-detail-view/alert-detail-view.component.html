@@ -15,6 +15,15 @@
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
     ></app-cpcp-section-form>
+    <div class="panel-heading">Corrective Action</div>
+    <app-deferred-section [parent]="sdaForm"
+     [errorMessages]="displayMessage$ | async">
+    </app-deferred-section>
+    <!--<app-corrective-action-repair-description [parent]="sdaForm"
+                        [errorMessages]="displayMessage$ | async"></app-corrective-action-repair-description>-->
+
+   
+
   </div>
   <div class="row">
     <div class="col-md-12">

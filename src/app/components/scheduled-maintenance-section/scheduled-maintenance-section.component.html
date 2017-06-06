@@ -1,4 +1,4 @@
-<div [formGroup]="scheduledMaintenanceGroup">
+﻿<div [formGroup]="scheduledMaintenanceGroup">
   <aac-select required tabindex="18" label="Check Type:" [message]="displayMessage.checkType" formControlName="checkType">
     <option value="">Select Check Type</option>
     <option *ngFor="let fc of checkTypes$ | async" [value]="fc.id">{{fc.description}}</option>
