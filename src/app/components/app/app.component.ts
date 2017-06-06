@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppStateService } from '../../common/services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent {
-  
+export class AppComponent implements OnInit {
+  constructor(private appStateService: AppStateService) { }
+  ngOnInit(): void {
+    this.appStateService.loadLookupData();
+  }
 }

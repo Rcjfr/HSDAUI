@@ -15,9 +15,9 @@
   <div class="row">
     <div class="col-md-6">
       <div class="row form-group" [class.has-error]="displayMessage.createDate">
-        <label class="col-sm-4 control-label" for="q-datepicker_1">Create Date: <span class="req">*</span></label>
+        <label class="col-sm-4 control-label" [attr.for]="sdaCreateDate.idDatePicker">Create Date: <span class="req">*</span></label>
         <div class="col-sm-8">
-          <datetime [timepicker]="false" id="sdaCreateDate" [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+          <datetime [timepicker]="false" #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
           <span *ngIf="displayMessage.createDate" class="help-block">{{displayMessage.createDate}}</span>
         </div>
 
@@ -51,8 +51,8 @@
           <ng-template #customItemTemplate let-model="item" let-index="index">
             <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
           </ng-template>
-          <input type="text" tabindex='4' autocomplete="off" class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations$ | async"
-            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate"
+          <input type="text" tabindex='4' autocomplete="off" class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations$"
+            typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate"
             typeaheadOptionsLimit="10">
           <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
 

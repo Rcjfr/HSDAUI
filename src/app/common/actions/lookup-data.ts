@@ -15,6 +15,11 @@ export const ActionTypes = {
   LOAD_CHECK_TYPES_COMPLETE: 'Load Check Types Complete',
   LOAD_CHECK_TYPES_FAIL: 'Load Check Types Fail',
 
+  LOAD_FLEET_CHECK_TYPES: 'Load Fleet Check Types',
+  LOAD_FLEET_CHECK_TYPES_COMPLETE: 'Load Fleet Check Types Complete',
+  LOAD_FLEET_CHECK_TYPES_FAIL: 'Load Fleet Check Types Fail',
+
+
   LOAD_CORROSION_LEVELS: 'Load Corrosion Levels',
   LOAD_CORROSION_LEVELS_COMPLETE: 'Load Corrosion Levels Complete',
   LOAD_CORROSION_LEVELS_FAIL: 'Load Corrosion Levels Fail',
@@ -71,8 +76,7 @@ export class LoadATACodesFailAction implements Action {
 export class LoadCheckTypesAction implements Action {
   public type = ActionTypes.LOAD_CHECK_TYPES;
   public payload: any;
-  constructor(fleetType: string) {
-    this.payload = fleetType;
+  constructor() {
   }
 }
 export class LoadCheckTypesCompleteAction implements Action {
@@ -83,6 +87,24 @@ export class LoadCheckTypesFailAction implements Action {
   public type = ActionTypes.LOAD_CHECK_TYPES_FAIL;
   constructor(public payload: any) { }
 }
+
+export class LoadFleetCheckTypesAction implements Action {
+  public type = ActionTypes.LOAD_FLEET_CHECK_TYPES;
+  public payload: any;
+  constructor(fleetType: string) {
+    this.payload = fleetType;
+  }
+}
+export class LoadFleetCheckTypesCompleteAction implements Action {
+  public type = ActionTypes.LOAD_FLEET_CHECK_TYPES_COMPLETE;
+  constructor(public payload: models.ICheckType[]) { }
+}
+export class LoadFleetCheckTypesFailAction implements Action {
+  public type = ActionTypes.LOAD_FLEET_CHECK_TYPES_FAIL;
+  constructor(public payload: any) { }
+}
+
+
 
 // Corrosion Levels
 export class LoadCorrosionLevelsAction implements Action {

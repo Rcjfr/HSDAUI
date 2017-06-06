@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="row form-group">
+        <label class="col-sm-4 control-label" [attr.for]="fromDate.idDatePicker">Date - From:</label>
+        <div class="col-sm-8">
+          <datetime [timepicker]="false" #fromDate [tabindex]='1' [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+
+        </div>
+
+      </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row form-group">
+        <label class="col-sm-4 control-label" [attr.for]="toDate.idDatePicker">Date - To:</label>
+        <div class="col-sm-8">
+          <datetime [timepicker]="false" #toDate [tabindex]='2' [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+        </div>
+      </div>
+  </div>
+</div>

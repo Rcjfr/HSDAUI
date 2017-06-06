@@ -46,7 +46,7 @@ export class CustomValidators {
     //return null;
   };
 
-  static ValidatePercisionLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+  static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
       
       const stationLocationControl = c.get('stationLocation');
       const stringerControl = c.get('stringer');
