@@ -60,6 +60,9 @@ setCorrosionPreventionFields(isCorrosionEvent: number): void {
             this.cpcpSectionGroup.get('corrosionTask').clearValidators();
             this.cpcpSectionGroup.get('corrosionLevel').clearValidators();
             this.cpcpSectionGroup.get('corrosionType').clearValidators();
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageOther').clearValidators();
+           
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageDescription').clearValidators();
         } else {
             this.cpcpSectionGroup.get('wsCorrosion').setValidators([Validators.required]);
             this.cpcpSectionGroup.get('previouslyBlended').setValidators([Validators.required]);
@@ -68,13 +71,16 @@ setCorrosionPreventionFields(isCorrosionEvent: number): void {
                                                                     Validators.pattern(Expressions.Alphanumerics)] );
             this.cpcpSectionGroup.get('corrosionLevel').setValidators([Validators.required]);
             this.cpcpSectionGroup.get('corrosionType').setValidators([Validators.required]);
-
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageOther').setValidators([CustomValidators.ValidateCauseOfDamageGroupFields]);
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageDescription').setValidators([Validators.required]);
         }
             this.cpcpSectionGroup.get('wsCorrosion').updateValueAndValidity();
             this.cpcpSectionGroup.get('previouslyBlended').updateValueAndValidity();
             this.cpcpSectionGroup.get('corrosionTask').updateValueAndValidity();
             this.cpcpSectionGroup.get('corrosionLevel').updateValueAndValidity();
             this.cpcpSectionGroup.get('corrosionType').updateValueAndValidity();
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageOther').updateValueAndValidity(); 
+            //this.cpcpSectionGroup.get('causeOfDamageGroup').get('damageDescription').updateValueAndValidity(); 
 
     }
 
