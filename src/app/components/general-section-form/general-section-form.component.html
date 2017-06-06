@@ -24,7 +24,6 @@
       </div>
     </div>
     <div class="col-md-6">
-
       <aac-select
               required
               tabindex="13"
@@ -32,10 +31,11 @@
               [message]="displayMessage.alertCode"
               formControlName="alertCode">
               <option value="">Select Alert Code</option>
-          <option value="A">A - Significant Structure Defect</option>
+          <option *ngFor="let ac of alertCodes$ | async" [value]="ac.code">{{ac.description}}</option>
+          <!--<option value="A">A - Significant Structure Defect</option>
           <option value="B">B - Significant Structure Corrosion</option>
           <option value="C">C - Ground Damage</option>
-          <option value="D">Other - Bird Strike,Lightning Strike, etc</option>
+          <option value="D">Other - Bird Strike,Lightning Strike, etc</option>-->
       </aac-select>
     </div>
   </div>
@@ -52,7 +52,7 @@
             <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
           </ng-template>
           <input type="text" tabindex='4' autocomplete="off" class="form-control" id="station" maxlength="3" formControlName="station" [typeahead]="stations$ | async"
-            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="stationOnSelect($event)"
+            [typeaheadOptionField]="'stationIATACode'" [typeaheadItemTemplate]="customItemTemplate"
             typeaheadOptionsLimit="10">
           <span *ngIf="displayMessage.station" class="help-block">{{displayMessage.station}}</span>
 
@@ -74,15 +74,17 @@
               [message]="displayMessage.department"
               formControlName="department">
               <option value="">Select Department</option>
-        <option value="engineering">Engineering</option>
+        <option *ngFor="let d of departments$ | async" [value]="d.id">{{d.description}}</option>
+        <!--<option value="engineering">Engineering</option>
         <option value="inspection">Inspection</option>
-        <option value="other">Other</option>
+        <option value="other">Other</option>-->
       </aac-select>
       <!--Aircraft Info Section-->
       <app-aircraft-info-section-form
       [parent]="generalSectionFormGroup"
       [errorMessages]="displayMessage"
       [aircraftInfo]="aircraftInfo$ | async"
+      (onNoseNumberChange)="populateAircraftInfo($event)"
       ></app-aircraft-info-section-form>
     </div>
     <div class="col-md-6">

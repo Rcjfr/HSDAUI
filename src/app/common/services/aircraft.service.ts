@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import {AircraftInfo} from '../models/aircraft-info.model';
+import {IAircraftInfo} from '../models/aircraft-info.model';
 
 @Injectable()
 export class AircraftService {
@@ -14,7 +14,7 @@ export class AircraftService {
         return this.http.get(url)
                     .map((result) => result.json());
     };
-    getAircraftInfo(noseNumber: string): Observable<AircraftInfo> {
+    getAircraftInfo(noseNumber: string): Observable<IAircraftInfo> {
         return this.http.get(`${this.endPointUrl}${noseNumber}/hsda_attributes`)
                     .map((result) => result.json());
     };

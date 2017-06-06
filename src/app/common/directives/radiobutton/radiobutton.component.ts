@@ -1,6 +1,6 @@
 ﻿import { Component, Input, forwardRef, ElementRef, Renderer } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
+let identifier = 0;
 @Component({
   selector: 'aac-radio',
   templateUrl: './radiobutton.component.html',
@@ -15,6 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class RadioButtonComponent implements ControlValueAccessor {
   @Input() label = '';
+  public identifier = `form-radio-${identifier++}`;
   @Input('id') radio_id = '';
   @Input('name') radio_group_name = '';
   @Input('tabindex') tindex = "0";
