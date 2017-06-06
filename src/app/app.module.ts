@@ -49,8 +49,7 @@ import { FormControlsModule } from './common/directives/form/form-controls.modul
 import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';
-import { DeferredSectionFormComponent } from './components/deferred-section/deferred-section.component';
-import { correctiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
+import { CorrectiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
 //import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/correction-action-repair-description.component';
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { SearchByDateRangeComponent } from './components/search/search-by-date-range/search-by-date-range.component';
@@ -76,8 +75,7 @@ import { SearchByCorrosionComponent } from './components/search/search-by-corros
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
-    DeferredSectionFormComponent,
-    correctiveActionFormGroupComponent,
+    CorrectiveActionFormGroupComponent,
     // CorrectiveActionRepairDescriptionComponent
     AlertsSearchComponent,
     SearchByDateRangeComponent,
