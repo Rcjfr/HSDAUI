@@ -32,17 +32,17 @@ import {
           DefectDiscoveredDuringSectionFormComponent
         } from './components/defect-discovered-during-section-form/defect-discovered-during-section-form.component';
 import { ScheduledMaintenanceSectionComponent } from './components/scheduled-maintenance-section/scheduled-maintenance-section.component';
-import {
-          UnscheduledMaintenanceSectionComponent
-        } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
+import { UnscheduledMaintenanceSectionComponent } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
 import { FormControlsModule } from './common/directives/form/form-controls.module';
 import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';
-import {    DeferredSectionFormComponent} from './components/deferred-section/deferred-section.component';
+//import {    DeferredSectionFormComponent} from './components/deferred-section/deferred-section.component';
 import { correctiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
-//import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/correction-action-repair-description.component';
+import { CorrectiveActionOptionsComponent } from './components/corrective-action-options/corrective-action-options.component';
+import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/corrective-action-repair-description.component';
+ 
 
 @NgModule({
   declarations: [
@@ -62,9 +62,11 @@ import { correctiveActionFormGroupComponent } from './components/corrective-acti
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
       CauseOfDamageGroupComponent,
-      DeferredSectionFormComponent,
+     // DeferredSectionFormComponent,
       correctiveActionFormGroupComponent,
-     // CorrectiveActionRepairDescriptionComponent
+      CorrectiveActionOptionsComponent,
+      CorrectiveActionRepairDescriptionComponent,
+    
   ],
   imports: [
     BrowserModule,

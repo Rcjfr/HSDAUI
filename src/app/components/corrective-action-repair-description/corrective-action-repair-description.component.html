@@ -1,53 +1,142 @@
-﻿<!--<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
+﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <aac-select required tabindex="18" label="Description" formControlName="repairedDescribe">
 
-  <div class="row ">
-    <div class="col-sm-6 ">
+        <option value="">Select</option>
+        <option>Bonded Repair</option>
+        <option>Bore/Fastener Hole(s) Rework</option>
+        <option>Complex Repair</option>
+        <option>Double Repair,External</option>
+        <option>Double Repair, Flush</option>
+        <option>Double Repair, Internal</option>
+        <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
+        <option>Part Replacement - Entire</option>
+        <option>Replacement - Sub Assembly</option>
+        <option>Refinish - Scribe Line</option>
+        <option>Reforcing - Modification</option>
+        <option>Restore Bonded Material</option>
+        <option>Splice Repair</option>
+        <option>Part Reinforcement</option>
+        <option>Plug Reinforcement ( Nested Angles)</option>
+        <option>Plug-Fastener</option>
+        <option>Other</option>
+      </aac-select>
       <div class="row form-group">
-
-        <div class="col-md-12">
-          <div class="customComponent" style="padding-left:20px;">
-            <div>
-              <input type="radio" id="corrosionLevel" tabindex='38' name="corrosionLevel" value="1" formControlName="corrosionLevel">
-              <label for="corrosionLevel">
-                <span class="control"></span>
-                Defective Part Replaced With Identical Part #
-              
-              </label><div>
-              <aac-input tabindex="19" [message]="displayMessage.routineNo" formControlName="routineNo">
-              </aac-input>
-            </div>
-          </div>
-
-        </div>
-        <br />
-        <div class="col-sm-8">
-          <div class="customComponent" style="padding-left:20px;">
-            <div>
-              <input type="radio" id="1corrosionLevel" name="corrosionLevel" value="2" formControlName="corrosionLevel">
-              <label for="1corrosionLevel">
-                <span class="control"></span>
-                Modified Part # Installed
-              </label>
-            </div>
-          </div>
-        </div>
-        <br />
-        <div class="col-sm-8">
-          <div class="customComponent" style="padding-left:20px;">
-            <div>
-              <input type="radio" id="2corrosionLevel1" name="corrosionLevel" value="3" formControlName="corrosionLevel">
-              <label for="2corrosionLevel1">
-                <span class="control"></span>
-                Repaired (Describe)
-              </label>
-
-            </div>
-
-          </div>
-          <span *ngIf="displayMessage.corrosionLevel" class="help-block">{{displayMessage.corrosionLevel}}</span>
+        <div class="col-md-offset-4 col-sm-8">
+          <span *ngIf="displayMessage.repairedDescribe &&
+                    (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
+                    correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
+                  " class="error">{{displayMessage.repairedDescribe}}</span>
         </div>
       </div>
+     
+    </div>
+    </div>
+  
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <aac-select tabindex="18" label="Repair Document (eg. SRM, AARD,EO etc)"  formControlName="repairDocument">
+        <option value="">Select</option>
+        <option>AARD</option>
+        <option>AARD (w/supporting EA)</option>
+        <option>AMM</option>
+        <option>EA</option>
+        <option>ECO</option>
+        <option>DNF ESO</option>
+        <option>Field EA</option>
+        <option>MCM</option>
+        <option>MRB</option>
+        <option>Shop ESO</option>
+        <option>Shop ESO (w/supporting EA)</option>
+        <option>SRM (w/supporting EA)</option>
+        <option>SRM </option>
+        <option>BCSRPP</option>
+      </aac-select>
+    </div>
+ 
+    <div class="col-md-6"  *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''" >
+      <aac-input tabindex="19" required label="Chap/Fig/Repair:"   [message]="displayMessage.chap"   formControlName="chap">
+      </aac-input>
 
+      <div class="row form-group">
+        <div class="col-md-offset-4 col-sm-8">
+          <!--<span *ngIf="displayMessage.message &&
+                    (correctiveActionRepairDescriptionFormGroup.get('chap').touched ||
+                    correctiveActionRepairDescriptionFormGroup.get('chap').dirty)
+                  " class="error">{{displayMessage.message}}</span>-->
+        </div>
+      </div>
+    
     </div>
   </div>
-</div>-->
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <aac-input tabindex="20" label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" formControlName="engineeringAuthorization">
+      </aac-input>
+
+      <div class="row form-group">
+        <div class="col-md-offset-4 col-sm-8">
+          <div *ngIf="displayMessage.message &&
+                    (correctiveActionRepairDescriptionFormGroup.get('engineeringAuthorization').touched ||
+                    correctiveActionRepairDescriptionFormGroup.get('engineeringAuthorization').dirty)
+                  " class="error">{{displayMessage.message}}</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div [class.has-error]="displayMessage.externalVisible">
+        <div class="row form-group">
+          <label class="col-sm-4 control-label">Externally Visible?<span class="req">*</span></label>
+          <div class="col-sm-8">
+            <div class="customComponent" style="padding-left:20px;">
+              <div>
+                <input type="radio" id="externalVisible" name="externalVisible" tabindex='37' value="0" formControlName="externalVisible">
+                <label for="externalVisible">
+                  <span class="control"></span>
+                  Yes
+                </label>
+
+              </div>
+            </div>
+            <div class="customComponent" style="padding-left:20px;">
+              <div>
+                <input type="radio" id="noexternalVisible" name="externalVisible" value="1" formControlName="externalVisible">
+                <label for="noexternalVisible">
+                  <span class="control"></span>
+                  No
+                </label>
+              </div>
+            </div>
+            <div *ngIf="displayMessage.externalVisible" class="error">{{displayMessage.externalVisible}}</div>
+          </div>
+
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <h4>Approximate External Doubler Repair Dimensions</h4>
+        </div>
+    </div>
+        <div class="row col-md-12">
+          <div class="col-md-6">
+
+            <aac-input tabindex="33" label="Height(in inches):" (blur)="returnRoundValue(this)" [message]="displayMessage.height" formControlName="height">
+            </aac-input>
+          </div>
+
+
+          <div class="col-md-6">
+            <aac-input tabindex="34" label="Width(in inches):" [message]="displayMessage.repairWidth" formControlName="repairWidth">
+            </aac-input>
+          </div>
+        </div>
+
+
+      </div>
+    </div>

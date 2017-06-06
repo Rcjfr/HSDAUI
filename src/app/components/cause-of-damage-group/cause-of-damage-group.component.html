@@ -1,5 +1,5 @@
 ﻿<div [formGroup]="causeOfDamageGroup">
-  <div class="row" [class.has-error]="displayMessage.causeOfDamage" >
+  <div class="row"  >
     <div class="col-md-4">
       <aac-checkbox label="Environment" tabindex="2"name="causeOfDamage" formControlName="environment" ></aac-checkbox>
       </div>
@@ -25,10 +25,10 @@
   <br/>
   <div class="row">
     <div class="col-md-4">
-      <aac-checkbox label="Correct Harware Not Installed" tabindex="2" formControlName="hardwareNotInstalled"></aac-checkbox>
+      <aac-checkbox label="Correct Harware Not Installed" tabindex="2" formControlName="hardwareNotInstalled" ></aac-checkbox>
     </div>
     <div class="col-md-4">
-      <aac-checkbox label="Deteriorated/Poor Sealing Practices" tabindex="2" formControlName="poorsealingPractices"></aac-checkbox>
+      <aac-checkbox label="Deteriorated/Poor Sealing Practices" tabindex="2"  formControlName="poorsealingPractices"></aac-checkbox>
     </div>
     <div class="col-md-4">
       <aac-checkbox label="Missing Corrosion Inhibitor" tabindex="2" formControlName="missingCorrosionInhibitor"></aac-checkbox>
@@ -37,14 +37,25 @@
   </div>
   <br />
   <div class="row">
-    <div class="col-md-12">
-      <aac-checkbox label="Other" tabindex="2" formControlName="damageOther"  [message]="displayMessage.damageOther"></aac-checkbox>
+    <div class="col-md-6">
+    
+        <aac-checkbox label="Other" tabindex="2" formControlName="damageOther" [message]="displayMessage.damageOther" ></aac-checkbox> 
       <span *ngIf="displayMessage.message &&
-                  (causeOfDamageGroup.get( 'damageOther').touched ||
-                   causeOfDamageGroup.get('damageOther').dirty) "
+                  (preciseLocationGroup.get( 'damageOther').touched ||
+                   preciseLocationGroup.get('damageOther').dirty) "
             class="error ">{{displayMessage.message}}</span>
-     
-    </div>
+
+      <div *ngIf="causeOfDamageGroup.get('damageOther').value ==true">
+        <label class="col-sm-4 control-label" for="corrosionTask">damageDescription #: <span class="req">*</span></label>
+        <input type="text" tabindex='40' class="form-control" id="damageDescription" formControlName="damageDescription">
+        <span *ngIf="displayMessage.damageDescription || causeOfDamageGroup.get( 'damageOther').dirty"
+        class="error ">{{displayMessage.damageDescription    }}</span>
+      </div >
+        <span *ngIf="displayMessage.message &&
+                  causeOfDamageGroup.get( 'damageOther').touched"
+              class="error ">{{displayMessage.message}}</span>
+
+      </div>
   
   
  
