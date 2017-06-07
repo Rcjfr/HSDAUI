@@ -255,7 +255,11 @@ th {
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+       url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
+       url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+       url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -8610,7 +8614,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   margin-top: 20px;
   padding-top: 20px;
 }
-/* 
+/*
     Checkboxes, radio buttons & pillboxes from aa_core
 */
 input[type="radio"],
@@ -8872,7 +8876,7 @@ input[type="checkbox"] {
   color: #00467f;
   margin: 2px 11px 2px 1px;
 }
-/* 
+/*
     Buttons from aa_core
 */
 .btn-fullWidth {

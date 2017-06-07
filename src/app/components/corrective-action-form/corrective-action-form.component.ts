@@ -11,7 +11,7 @@ import { BaseFormComponent  } from '../base-form.component';
     styleUrls: ['./corrective-action-form.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class correctiveActionFormGroupComponent extends BaseFormComponent {
+export class CorrectiveActionFormGroupComponent extends BaseFormComponent {
     correctiveActionFormGroup: FormGroup;
     
     constructor(private fb: FormBuilder) {

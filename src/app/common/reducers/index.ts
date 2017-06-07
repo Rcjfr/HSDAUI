@@ -32,11 +32,12 @@ export const getNoseNumbers = compose(fromSelectedAlert.getNoseNumbers, getSelec
 export const getAlertCodes = compose(fromLookupData.getAlertCodes, getLookupDataState);
 export const getATACodes = compose(fromLookupData.getATACodes, getLookupDataState);
 export const getCheckTypes = compose(fromLookupData.getCheckTypes, getLookupDataState);
+export const getFleetCheckTypes = compose(fromLookupData.getFleetCheckTypes, getLookupDataState);
 export const getCorrosionLevels = compose(fromLookupData.getCorrosionLevels, getLookupDataState);
 export const getCorrosionTypes = compose(fromLookupData.getCorrosionTypes, getLookupDataState);
 export const getDepartments = compose(fromLookupData.getDepartments, getLookupDataState);
 export const getDetectionMethods = compose(fromLookupData.getDetectionMethods, getLookupDataState);
-export const getStations = compose(fromLookupData.getStations, getSelectedAlertState);
+export const getStations = compose(fromLookupData.getStations, getLookupDataState);
 
 
 
