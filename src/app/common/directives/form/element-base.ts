@@ -1,4 +1,4 @@
-import { NgModel, ControlValueAccessor } from '@angular/forms';
+﻿import { NgModel, ControlValueAccessor } from '@angular/forms';
 
 import {Observable} from 'rxjs/Observable';
 import { Input, ElementRef, Renderer, Component } from '@angular/core';
@@ -9,7 +9,8 @@ export abstract class ElementBase<T> implements ControlValueAccessor {
   public disabled = false;
   private changed = new Array<(value: T) => void>();
   private touched = new Array<() => void>();
-@Input() labelGridColumnWidth = 4;
+  @Input() labelGridColumnWidth = 4;
+  @Input() fieldGridColumnWidth = 8;
 // tslint:disable-next-line:no-input-rename
 @Input('tabindex') tindex = '0';
 @Input() public label: string;
@@ -24,7 +25,7 @@ protected _required = false;
     return `col-sm-${this.labelGridColumnWidth} control-label`;
   }
   get fieldCssClass(){
-    return `col-sm-${12 - this.labelGridColumnWidth}`;
+      return `col-sm-${this.fieldGridColumnWidth}`; //`col-sm-${12 - this.labelGridColumnWidth}`;
   }
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngOnInit() {

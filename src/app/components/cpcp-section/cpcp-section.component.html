@@ -97,7 +97,7 @@
     </div>
   </div>
   <div [hidden]="cpcpSectionGroup.get('cpcprelated').value !='1'">
-    <!--<app-cause-of-damage [parent]="cpcpSectionGroup" [errorMessages]="displayMessage"></app-cause-of-damage>-->
+    <app-cause-of-damage [parent]="cpcpSectionGroup" [errorMessages]="displayMessage"></app-cause-of-damage>
   </div>
  
 
@@ -108,7 +108,7 @@
                 Floorboard condition after mat is removed:
               </label>
         <div class="col-sm-8">
-          <select class="form-control" tabindex='43' id="floorbaordCondition" formControlName="isfloorboardCondition">
+          <select class="form-control" tabindex='54' id="floorbaordCondition" formControlName="isfloorboardCondition">
                   <option value="wet">WET</option>
                   <option value="dry">DRY</option>
                 </select>

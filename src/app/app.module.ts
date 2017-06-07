@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
@@ -89,6 +89,7 @@ import { CorrectiveActionRepairDescriptionComponent } from './components/correct
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
+    TabsModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects),

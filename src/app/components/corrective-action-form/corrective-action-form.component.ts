@@ -17,14 +17,13 @@ export class correctiveActionFormGroupComponent extends BaseFormComponent {
     constructor(private fb: FormBuilder) {
         super('correctiveActionFormGroup');
     }
-
     ngOnInit() {
         this.correctiveActionFormGroup = this.fb.group({
             deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
             deferral: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
             deferredSectionOptions: ['', []],
             majorRepairOptions: ['', []],
-            repairDescription: ['', [ Validators.maxLength(250)]],
+            repairDescription: ['', [Validators.maxLength(250)]],
         },
         //{
         //    validator: CustomValidators.validateCorrectiveActionFormFields
@@ -37,8 +36,6 @@ export class correctiveActionFormGroupComponent extends BaseFormComponent {
         this.correctiveActionFormGroup.get('majorRepairOptions').valueChanges
             .subscribe(val => this.setMajorRepairFormFields(val))
     }
-    
-   
    
     setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {
         if (isCorrectiveEvent != true) {
@@ -48,24 +45,15 @@ export class correctiveActionFormGroupComponent extends BaseFormComponent {
         } else {
             this.correctiveActionFormGroup.get('deferralCode').setValidators([Validators.required, Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]);
             this.correctiveActionFormGroup.get('deferral').setValidators([Validators.required, Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]);
-           
-
         }
         this.correctiveActionFormGroup.get('deferralCode').updateValueAndValidity();
         this.correctiveActionFormGroup.get('deferral').updateValueAndValidity();
-      
-
     }
     setMajorRepairFormFields(isMajorRepairEvent: boolean): void {
         if (isMajorRepairEvent != true) {
             this.correctiveActionFormGroup.get('repairDescription').clearValidators();
-          
-
         } else {
             this.correctiveActionFormGroup.get('repairDescription').setValidators([Validators.required, Validators.maxLength(250)]);
-           
-
-
         }
         this.correctiveActionFormGroup.get('repairDescription').updateValueAndValidity();
       

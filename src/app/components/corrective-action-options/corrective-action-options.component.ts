@@ -26,12 +26,9 @@
 //        );
 //        this.parent.addControl(this.formGroupName, this.correctiveActionOptionFormGroup);
 //    }
-//    ngOnDestroy() {
-//        //Called once, before the instance is destroyed.
-//        //Add 'implements OnDestroy' to the class.
-//        this.parent.removeControl(this.formGroupName);
+//    get correctiveAction() {
+//        return this.correctiveActionOptionFormGroup.get('correctiveActionOptions').value;
 //    }
-
 //}
 
 
