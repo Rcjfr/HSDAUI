@@ -143,8 +143,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             },
             'bl': {
 
-                pattern: 'bl must be alphanumeric.',
-                maxlength: 'bl must not be more than 25 characters.'
+                pattern: 'BL must be alphanumeric.',
+                maxlength: 'BL must not be more than 25 characters.'
             }
         },
         'MFGpart': {
@@ -210,9 +210,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         causeOfDamageGroup: {
             atleastone:
-            'atleast one should be selected',
+            'Atleast one should be selected', 
                 'damageDescription': {
-                    required: 'description required.',
+                    required: 'Description required.',
+                    maxlength: 'Description must be not more that 250 characters.'
                 }
 
         },
@@ -227,13 +228,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             maxlength: 'Deferral Code must be not more that 3 characters.'
         },
         'deferral': {
-            required: 'Deferral # is required.',
+            required: 'Deferral #  is required.',
             pattern: 'Deferral # must be alphanumeric..',
-            maxlength: 'Deferral # must be not more that 15 characters.'
+            maxlength: 'Deferral # must not be more than 15 characters. '
         },
         'repairDescription': {
             required: 'Repair Description is required.',
-            maxlength: 'Repair Description must be not more that 250 characters.'
+            maxlength: 'Repair Description must not be more than 250 characters.'
         },
         'correctiveActionOptionFormGroup': {
             'correctiveActionOptions': {
@@ -254,7 +255,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                 'correctiveActionRepairDescriptionFormGroup': {
                     atleastone: 'Repair Document or Engineeering Authorization is required.',
                     'repairedDescribe': {
-                        required: 'Repair Description is required.'
+                        required: 'Description is required.'
+                        
                     },
                     'repairDocument': {
 
@@ -265,18 +267,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                         pattern: 'Chap/Fig/Repair must be alphanumeric.'
                     },
                     'engineeringAuthorization': {
+                      
                         maxlength: 'Engineeering Authorization must not be more than 25 characters.',
                         pattern: 'Engineeering Authorization must be alphanumeric.'
 
                     },
                     'externalVisible': {
-                        required: 'External Visible during is required.'
+                        required: 'External Visible is required.'
                     },
                     'repairWidth': {
                         pattern: 'Width must be numeric.'
                     },
                     'height': {
-                        pattern: 'height must be numeric.'
+                        pattern: 'Height must be numeric.'
                     },
                 },
             },

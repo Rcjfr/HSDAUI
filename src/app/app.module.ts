@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { AccordionModule, TypeaheadModule } from 'ngx-bootstrap';
+import { AccordionModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
@@ -50,7 +50,8 @@ import { PreciseLocationGroupComponent } from './components/precise-location-gro
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';
 import { CorrectiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
-//import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/correction-action-repair-description.component';
+import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/corrective-action-repair-description.component';
+import { CorrectiveActionOptionsComponent } from './components/corrective-action-options/corrective-action-options.component';
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { SearchByDateRangeComponent } from './components/search/search-by-date-range/search-by-date-range.component';
 import { SearchBySdaFormComponent } from './components/search/search-by-sda-form/search-by-sda-form.component';
@@ -76,7 +77,8 @@ import { SearchByCorrosionComponent } from './components/search/search-by-corros
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
     CorrectiveActionFormGroupComponent,
-    // CorrectiveActionRepairDescriptionComponent
+    CorrectiveActionOptionsComponent,
+    CorrectiveActionRepairDescriptionComponent,
     AlertsSearchComponent,
     SearchByDateRangeComponent,
     SearchBySdaFormComponent,
@@ -96,6 +98,7 @@ import { SearchByCorrosionComponent } from './components/search/search-by-corros
     NgPipesModule,
     TypeaheadModule.forRoot(),
     AccordionModule.forRoot(),
+    TabsModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects),

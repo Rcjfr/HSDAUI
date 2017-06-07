@@ -28,8 +28,9 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
           hardwareNotInstalled: ['', []],
           poorsealingPractices: ['', []],
           missingCorrosionInhibitor: ['', []],
-          damageOther: ['', [Validators.required]],
-          damageDescription: ['', [Validators.required]],
+          damageOther: ['', []],
+          
+          damageDescription: ['', [Validators.maxLength(250)]],
       } ,{
               validator: CustomValidators.ValidateCauseOfDamageGroupFields
           });
@@ -42,39 +43,20 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
     
       if (isDamageCauseEvent != true) {
          
-          //this.causeOfDamageGroup.get('environment').clearValidators();
-          //this.causeOfDamageGroup.get('gallySpill').clearValidators();
-          //this.causeOfDamageGroup.get('blockedDrain').clearValidators();
-          //this.causeOfDamageGroup.get('chemicalSpill').clearValidators();
-          //this.causeOfDamageGroup.get('wetinsulationBlanket').clearValidators();
-          //this.causeOfDamageGroup.get('missingFloorBoardTape').clearValidators();
-          //this.causeOfDamageGroup.get('hardwareNotInstalled').clearValidators();
-          //this.causeOfDamageGroup.get('poorsealingPractices').clearValidators();
-          //this.causeOfDamageGroup.get('missingCorrosionInhibitor').clearValidators();
-          this.causeOfDamageGroup.get('damageOther').clearValidators();
-          this.causeOfDamageGroup.get('damageDescription').clearValidators();
-         
           
-          //this.causeOfDamageGroup.get('damageOther').markAsPristine();
+          this.causeOfDamageGroup.get('damageDescription').clearValidators();
+          
       } else {
          
-          this.causeOfDamageGroup.get('damageOther').setValidators([Validators.required]);
-          this.causeOfDamageGroup.get('damageDescription').setValidators([Validators.required]);
+         
+          this.causeOfDamageGroup.get('damageDescription').setValidators([Validators.required, Validators.maxLength(250)]);
 
          // this.causeOfDamageGroup.reset();
       }
-      //this.causeOfDamageGroup.get('environment').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('gallySpill').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('blockedDrain').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('chemicalSpill').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('wetinsulationBlanket').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('missingFloorBoardTape').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('hardwareNotInstalled').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('poorsealingPractices').updateValueAndValidity();
-      //this.causeOfDamageGroup.get('missingCorrosionInhibitor').updateValueAndValidity();
-      this.causeOfDamageGroup.get('damageOther').updateValueAndValidity();
-     
+    
       this.causeOfDamageGroup.get('damageDescription').updateValueAndValidity();
+     
+      // this.causeOfDamageGroup.updateValueAndValidity();
   }
 }
 
