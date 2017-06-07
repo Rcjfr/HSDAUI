@@ -44,7 +44,14 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-    this.stations$ = this.appStateService.getStations();
+    this.stations$ = this.appStateService.getStations().map(d => d && d.toJS());
+    // this.stations$ = Observable.create((observer:any) => {
+    //         this.appStateService.getStations(this.generalSectionFormGroup.get('station').value)
+    //         .subscribe((result : any ) => {
+    //           console.log(result);
+    //             observer.next(result);
+    //         });
+    //     });
   }
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);

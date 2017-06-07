@@ -89,7 +89,7 @@
     <div class="col-md-5">
       <div [hidden]="cpcpSectionGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeText">
         <label class="col-sm-4 control-label" for="corrosionTypeText">Description:<span class="req">*</span></label>
-        <textarea type="text" tabindex='42' cols="40" rows="5" class="form-control" for="corrosionTypeText" id="corrosionTypeText"
+        <textarea tabindex='42' cols="40" rows="5" class="form-control" id="corrosionTypeText"
           formControlName="corrosionTypeText">
               </textarea>
         <span *ngIf="displayMessage.corrosionTypeText" class="error">{{displayMessage.corrosionTypeText}}</span>

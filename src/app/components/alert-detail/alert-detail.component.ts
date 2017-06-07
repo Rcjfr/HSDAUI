@@ -27,7 +27,7 @@ export class AlertDetailComponent implements OnInit {
         this.alert$ = this.appStateService.getSelectedAlert(); // .map(d => d && d.toJS());// .subscribe((s: Alert) => this.alert = s);
         this.loading$ = this.appStateService.getSelectedAlertLoading();
         this.appStateService.loadNoseNumbers('');
-        this.appStateService.loadLookupData();
+
 
 
     }

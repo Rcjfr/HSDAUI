@@ -18,6 +18,9 @@ export class AppStateService {
   getDepartments() {
     return this.store.select(fromRoot.getDepartments);
   }
+  getFleetCheckTypes() {
+    return this.store.select(fromRoot.getFleetCheckTypes);
+  }
   getCheckTypes() {
     return this.store.select(fromRoot.getCheckTypes);
   }
@@ -52,8 +55,11 @@ export class AppStateService {
   loadNoseNumbers(filter: string = '') {
     this.store.dispatch(new selectedAlertActions.LoadNoseNumbersAction(filter));
   }
-  loadCheckTypes(fleet: string) {
-    this.store.dispatch(new lookupDataActions.LoadCheckTypesAction(fleet));
+  loadCheckTypes() {
+    this.store.dispatch(new lookupDataActions.LoadCheckTypesAction());
+  }
+  loadFleetCheckTypes(fleet: string) {
+    this.store.dispatch(new lookupDataActions.LoadFleetCheckTypesAction(fleet));
   }
   loadLookupData() {
     this.store.dispatch(new lookupDataActions.LoadLookupDataAction());
