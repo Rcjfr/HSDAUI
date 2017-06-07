@@ -24,7 +24,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
           repairedDescribe: ['', [Validators.required]],
           repairDocument: ['', []],
-          chap: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
+          chap: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
           engineeringAuthorization: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
           externalVisible: ['', [Validators.required]],
           height: ['', []],
@@ -44,19 +44,19 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
           this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
       ));
-      this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairDocument').valueChanges
-          .subscribe(val => this.setCorrectiveActionRepairDocumentFields(val)));
+      //this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairDocument').valueChanges
+      //    .subscribe(val => this.setCorrectiveActionRepairDocumentFields(val)));
   }
-  setCorrectiveActionRepairDocumentFields(repairDocument: string): void {
-      if (repairDocument != "") {
-          this.correctiveActionRepairDescriptionFormGroup.get('chap').clearValidators();
-      } else {
-          this.correctiveActionRepairDescriptionFormGroup.get('chap').setValidators([Validators.required,
-          Validators.maxLength(25),
-          Validators.pattern(Expressions.Alphanumerics)]);
-      }
-      this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
-  }
+  //setCorrectiveActionRepairDocumentFields(repairDocument: string): void {
+  //    if (repairDocument != "") {
+  //        this.correctiveActionRepairDescriptionFormGroup.get('chap').clearValidators();
+  //    } else {
+  //        this.correctiveActionRepairDescriptionFormGroup.get('chap').setValidators([Validators.required,
+  //        Validators.maxLength(25),
+  //        Validators.pattern(Expressions.Alphanumerics)]);
+  //    }
+  //    this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
+  //}
   ngOnDestroy() {
       super.ngOnDestroy();
   }

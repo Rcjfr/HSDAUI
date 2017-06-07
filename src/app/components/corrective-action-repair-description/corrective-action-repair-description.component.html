@@ -55,11 +55,17 @@
       </aac-select>
     </div>
  
-    <div class="col-md-6"  *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''" >
-      <aac-input tabindex="65" required label="Chap/Fig/Repair:"   [message]="displayMessage.chap"   formControlName="chap">
+    <div class="col-md-6" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''">
+      <aac-input tabindex="65" required label="Chap/Fig/Repair:" formControlName="chap">
       </aac-input>
+      <div class="row form-group">
+        <div class="col-md-offset-4 col-sm-8">
+
+          <span *ngIf="displayMessage.chap" class="error">{{displayMessage.chap}}</span>
+        </div>
+        </div>
+      </div>
     </div>
-  </div>
   <div class="row col-md-12">
     <div class="col-md-6">
       <aac-input tabindex="66" label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" formControlName="engineeringAuthorization">
