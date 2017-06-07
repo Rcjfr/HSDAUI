@@ -1,15 +1,15 @@
 ﻿<div class="row  form-group">
   <div class="col-md-6">
-    <aac-checkbox label="Widespread Corrosion" tabindex="1" ></aac-checkbox>
+    <aac-checkbox label="Widespread Corrosion" tabindex="13" ></aac-checkbox>
   </div>
   <div class="col-md-6">
-    <aac-checkbox label="Corrosion Previously Blended" tabindex="2" ></aac-checkbox>
+    <aac-checkbox label="Corrosion Previously Blended" tabindex="17" ></aac-checkbox>
   </div>
   </div>
   <div class="row">
   <div class="col-md-6">
     <aac-input
-              label="Corrosion Task #:"
+              label="Corrosion Task #:" tabindex="14"
               >
       </aac-input>
   </div>
@@ -18,9 +18,9 @@
           <label class="col-sm-4 control-label">Corrosion Level:</label>
           <div class="col-sm-8">
 
-            <aac-checkbox *ngFor="let ac of corrosionLevels$ | async" [value]="ac.id" [(ngModel)]="corrosionLevel" name="corrosionLevel" [label]="ac.description" 
+            <aac-checkbox *ngFor="let ac of corrosionLevels$ | async;let i=index" [tabindex]="18+i" name="corrosionLevel" [label]="ac.description" 
               ></aac-checkbox>
-            <pre>{{corrosionLevel}}</pre>
+            
           </div>
         </div>
   </div>
@@ -30,10 +30,10 @@
     <div class="row form-group">
         <label class="col-sm-4 control-label" for="corrosionType">Type of Corrosion:</label>
         <div class="col-sm-8">
-          <select class="form-control" multiple tabindex='5' id="corrosionType" [(ngModel)]="corrosionType" >
+          <select class="form-control" multiple tabindex='15' id="corrosionType" [(ngModel)]="corrosionType" >
             <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
-          <input type="text" placeholder="Enter other description" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()"/>
+          <input type="text" placeholder="Enter other description" tabindex="16" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()"/>
         </div>
       </div>
 
@@ -42,7 +42,7 @@
     <div class="row form-group">
         <label class="col-sm-4 control-label" for="causeOfDamage">Cause of Damage:</label>
         <div class="col-sm-8">
-          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='6' id="causeOfDamage">
+          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='22' id="causeOfDamage">
             <option>Environment</option>
             <option>Lav/Galley Spill</option>
             <option>Blocked Drain</option>
@@ -54,7 +54,7 @@
             <option>Missing Corrosion Inhibitor</option>
             <option value="other">Other</option>
           </select>
-          <input type="text" placeholder="Enter other description" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
+          <input type="text" placeholder="Enter other description" tabindex="23" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
         </div>
       </div>
   </div>
