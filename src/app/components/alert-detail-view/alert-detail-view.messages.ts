@@ -134,19 +134,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             },
             'wl': {
 
-                pattern: 'wl must be alphanumeric.',
-                maxlength: 'wl must not be more than 25 characters.'
+                pattern: 'WL must be alphanumeric.',
+                maxlength: 'WL must not be more than 25 characters.'
             },
             'bl': {
 
-                pattern: 'bl must be alphanumeric.',
-                maxlength: 'bl must not be more than 25 characters.'
+                pattern: 'BL must be alphanumeric.',
+                maxlength: 'BL must not be more than 25 characters.'
             }
         },
         'MFGpart': {
 
-            pattern: 'MFG Part must be alphanumeric.',
-            maxlength: 'MFG Part must not be more than 50 characters.'
+            pattern: 'MFG Part # must be alphanumeric.',
+            maxlength: 'MFG Part # must not be more than 50 characters.'
         }
         ,
         'partDefective': {
@@ -157,8 +157,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         ,
         'MFGserial': {
 
-            pattern: 'MFG Serial must be alphanumeric.',
-            maxlength: 'MFG Serial must not be more than 50 characters.'
+            pattern: 'MFG Serial # must be alphanumeric.',
+            maxlength: 'MFG Serial # must not be more than 50 characters.'
         },
         'PartTT': {
 
@@ -209,6 +209,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             'atleast one should be selected', 
                 'damageDescription': {
                     required: 'description required.',
+                    maxlength: 'description must be not more that 250 characters.'
                 }
             
         },
@@ -218,17 +219,17 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'correctiveActionFormGroup': {
 
         'deferralCode': {
-            required: 'Deferral Code during is required.',
+            required: 'Deferral Code is required.',
             pattern: 'Deferral Code must contain only alphabet characters.',
             maxlength: 'Deferral Code must be not more that 3 characters.'
         },
         'deferral': {
-            required: 'Deferral during is required.',
-            pattern: 'Deferral during must be alphanumeric..',
-            maxlength: 'Deferral during must be not more that 15 characters.'
+            required: 'Deferral #  is required.',
+            pattern: 'Deferral # must be alphanumeric..',
+            maxlength: 'Deferral # must not be more than 15 characters. '
         },
         'repairDescription': {
-            required: 'Repair Description during is required.',
+            required: 'Repair Description is required.',
             maxlength: 'Repair Description must be not more that 250 characters.'
         },
         'correctiveActionOptionFormGroup': {
@@ -250,7 +251,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                 'correctiveActionRepairDescriptionFormGroup': {
                     atleastone: 'Repair Document or Engineeering Authorization is required.',
                     'repairedDescribe': {
-                        required: 'Repair Description is required.'
+                        required: 'Repair Description must not be more than 250 characters'
+                        
                     },
                     'repairDocument': {
 
@@ -261,12 +263,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                         pattern: 'Chap/Fig/Repair must be alphanumeric.'
                     },
                     'engineeringAuthorization': {
+                      
                         maxlength: 'Engineeering Authorization must not be more than 25 characters.',
                         pattern: 'Engineeering Authorization must be alphanumeric.'
 
                     },
                     'externalVisible': {
-                        required: 'External Visible during is required.'
+                        required: 'External Visible is required.'
                     },
                     'repairWidth': {
                         pattern: 'Width must be numeric.'

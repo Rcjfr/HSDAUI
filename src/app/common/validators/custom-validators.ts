@@ -46,7 +46,7 @@ export class CustomValidators {
     //return null;
   };
 
-  static ValidatePercisionLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+  static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
       
       const stationLocationControl = c.get('stationLocation');
       const stringerControl = c.get('stringer');
@@ -108,17 +108,25 @@ export class CustomValidators {
        
         if (parent == undefined)
             return null;
-        if ((filledContolCount == 0 && cpcpRealted.value == 1) )
-        { return { 'atleastone': true }; }
-        if (filledContolCount == 0 || cpcpRealted.value == null)
+        //if ((filledContolCount == 0 && cpcpRealted.value == 1 && !damageOtherControl.touched))
+        //{ return { 'atleastone': true }; }
+        if (cpcpRealted.value != 1)
         { return null; }
+        if ((damageOtherControl.touched && damageOtherControl.value == false))
+        { return { 'atleastone': true }; }
+
+       
         if ((filledContolCount >= 1 && cpcpRealted.value == 0) || (filledContolCount >= 1 && cpcpRealted.value == 1))
         { return null; }
 
          
-        //if (filledContolCount == 0 && damageOtherControl.value !=false)
-        //    return { 'atleastone': true };
-      return { 'atleastone': true };
+        if (filledContolCount == 0 && damageOtherControl.value != false && damageOtherControl.value == "") 
+            return { 'atleastone': true };
+        if (filledContolCount ==0 && cpcpRealted.value == 1)
+            return { 'atleastone': true };
+        if (!damageOtherControl.touched)
+        { return null; }
+        return null;
   };
 
   //static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {

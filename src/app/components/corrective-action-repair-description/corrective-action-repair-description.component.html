@@ -58,16 +58,6 @@
     <div class="col-md-6"  *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''" >
       <aac-input tabindex="19" required label="Chap/Fig/Repair:"   [message]="displayMessage.chap"   formControlName="chap">
       </aac-input>
-
-      <div class="row form-group">
-        <div class="col-md-offset-4 col-sm-8">
-          <!--<span *ngIf="displayMessage.message &&
-                    (correctiveActionRepairDescriptionFormGroup.get('chap').touched ||
-                    correctiveActionRepairDescriptionFormGroup.get('chap').dirty)
-                  " class="error">{{displayMessage.message}}</span>-->
-        </div>
-      </div>
-    
     </div>
   </div>
   <div class="row col-md-12">
@@ -129,14 +119,10 @@
             <aac-input tabindex="33" label="Height(in inches):" (blur)="returnRoundValue(this)" [message]="displayMessage.height" formControlName="height">
             </aac-input>
           </div>
-
-
           <div class="col-md-6">
             <aac-input tabindex="34" label="Width(in inches):" [message]="displayMessage.repairWidth" formControlName="repairWidth">
             </aac-input>
           </div>
         </div>
-
-
       </div>
     </div>

@@ -22,7 +22,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
           repairedDescribe: ['', [Validators.required]],
           repairDocument: ['', []],
-          chap: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
+          chap: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
           engineeringAuthorization: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
           externalVisible: ['', [Validators.required]],
           height: ['', []],
@@ -49,7 +49,6 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
           Validators.pattern(Expressions.Alphanumerics)]);
       }
       this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
-
   }
   ngOnDestroy() {
   

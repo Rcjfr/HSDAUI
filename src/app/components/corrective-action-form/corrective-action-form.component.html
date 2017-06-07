@@ -1,44 +1,36 @@
-﻿  <div  [formGroup]="correctiveActionFormGroup">
+﻿  <div class="panel-body" [formGroup]="correctiveActionFormGroup">
     <div class="row form-group">
       <div class="col-md-12">
         <div class="col-md-2">
-          <aac-checkbox id="deferred" name="deferredSectionOptions" label="Deferred" value="0" tabindex="17" formControlName="deferredSectionOptions"></aac-checkbox>
+          <aac-checkbox id="deferred" name="deferredSectionOptions" label="Deferred" value="0" tabindex="55" formControlName="deferredSectionOptions"></aac-checkbox>
         </div>
         <div *ngIf="correctiveActionFormGroup.get('deferredSectionOptions').value == true">
           <div class="col-md-5">
-            <aac-input tabindex="19" required label="Entered SCEPTER Deferralcode (MON, SAD, ROB, etc):" [message]="displayMessage.deferralCode" formControlName="deferralCode">
+            <aac-input tabindex="56" required label="Entered SCEPTER Deferral code (MON, SAD, ROB, etc):" [message]="displayMessage.deferralCode" formControlName="deferralCode">
             </aac-input>
 
           </div>
 
           <div class="col-md-4">
-            <aac-input tabindex="19" required label="Deferral #:" [message]="displayMessage.deferral" formControlName="deferral">
+            <aac-input tabindex="57" required label="Deferral #:" [message]="displayMessage.deferral" formControlName="deferral">
             </aac-input>
           
-          </div>
-          <div class="row form-group">
-            <div class="col-md-offset-4 col-sm-8">
-              <div *ngIf="displayMessage.message &&
-                    (correctiveActionFormGroup.get('deferral').untouched ||
-                    correctiveActionFormGroup.get('deferral').dirty)
-                  " class="error">{{displayMessage.message}}</div>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <!--<app-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></app-corrective-action-options>-->
+  <app-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></app-corrective-action-options>
    
 
     <div class="row">
       <div class="col-md-12">
         
           <div class="col-md-2">
-            <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="17" formControlName="majorRepairOptions"></aac-checkbox>
+            <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="58" formControlName="majorRepairOptions"></aac-checkbox>
           </div>
         <div *ngIf="correctiveActionFormGroup.get('majorRepairOptions').value == true">
           <div class="col-md-5">
-            <aac-textarea tabindex="22" label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+            <aac-textarea tabindex="59" required label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
                           [message]="displayMessage.repairDescription" formControlName="repairDescription">
             </aac-textarea>
           </div>
