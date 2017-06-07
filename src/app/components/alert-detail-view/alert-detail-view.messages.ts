@@ -74,9 +74,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     required: 'Check Type is required.'
                 },
                 'routineNo': {
+                    maxlength: 'Routine # can not be more that 50 characters.',
                     pattern: 'Routine # must contain only alphanumerics.'
                 },
                 'nonRoutineNo': {
+                    maxlength: 'Non Routine # can not be more that 50 characters.',
                     pattern: 'Non Routine # must contain only alphanumerics.'
                 }
             },
@@ -86,9 +88,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     required: 'Description is required for unscheduled maintenance.'
                 },
                 'nonRoutineNo': {
+                  maxlength: 'Non Routine # can not be more that 50 characters.',
                     pattern: 'Non Routine # must contain only alphanumerics.'
                 },
                 'micNo': {
+                  maxlength: 'MIC # can not be more that 50 characters.',
                     pattern: 'MIC # must contain only alphanumerics.'
                 }
             }
@@ -134,8 +138,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             },
             'wl': {
 
-                pattern: 'wl must be alphanumeric.',
-                maxlength: 'wl must not be more than 25 characters.'
+                pattern: 'WL must be alphanumeric.',
+                maxlength: 'WL must not be more than 25 characters.'
             },
             'bl': {
 
@@ -145,8 +149,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'MFGpart': {
 
-            pattern: 'MFG Part must be alphanumeric.',
-            maxlength: 'MFG Part must not be more than 50 characters.'
+            pattern: 'MFG Part # must be alphanumeric.',
+            maxlength: 'MFG Part # must not be more than 50 characters.'
         }
         ,
         'partDefective': {
@@ -157,8 +161,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         ,
         'MFGserial': {
 
-            pattern: 'MFG Serial must be alphanumeric.',
-            maxlength: 'MFG Serial must not be more than 50 characters.'
+            pattern: 'MFG Serial # must be alphanumeric.',
+            maxlength: 'MFG Serial # must not be more than 50 characters.'
         },
         'PartTT': {
 
@@ -186,16 +190,16 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             required: ' Corresion level is required.'
         },
         previouslyBlended: {
-            required: ' Corroded Area Previously Blended  required.'
+            required: ' Corroded Area Previously Blended is required.'
         },
         corrosionTask: {
-            required: ' Corrosion Task required.',
-            pattern: 'Corrosion Task must be alphanumeric.',
-            maxlength: 'Corrosion Task must be not more that 25 numbers.'
+            required: ' Corrosion Task # is required.',
+            pattern: 'Corrosion Task # must be alphanumeric.',
+            maxlength: 'Corrosion Task # must be not more that 25 numbers.'
 
         },
         corrosionType: {
-            required: ' Type of Corrosion  required.'
+            required: ' Type of Corrosion is required.'
         },
         corrosionTypeText: {
             required: ' Description is  required.',
@@ -206,11 +210,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         causeOfDamageGroup: {
             atleastone:
-            'atleast one should be selected', 
+            'atleast one should be selected',
                 'damageDescription': {
                     required: 'description required.',
                 }
-            
+
         },
     },
 
@@ -218,17 +222,17 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'correctiveActionFormGroup': {
 
         'deferralCode': {
-            required: 'Deferral Code during is required.',
+            required: 'Deferral Code is required.',
             pattern: 'Deferral Code must contain only alphabet characters.',
             maxlength: 'Deferral Code must be not more that 3 characters.'
         },
         'deferral': {
-            required: 'Deferral during is required.',
-            pattern: 'Deferral during must be alphanumeric..',
-            maxlength: 'Deferral during must be not more that 15 characters.'
+            required: 'Deferral # is required.',
+            pattern: 'Deferral # must be alphanumeric..',
+            maxlength: 'Deferral # must be not more that 15 characters.'
         },
         'repairDescription': {
-            required: 'Repair Description during is required.',
+            required: 'Repair Description is required.',
             maxlength: 'Repair Description must be not more that 250 characters.'
         },
         'correctiveActionOptionFormGroup': {
@@ -276,11 +280,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     },
                 },
             },
-        
-         
-       
+
+
+
       },
-  
-      
-  
+
+
+
 };

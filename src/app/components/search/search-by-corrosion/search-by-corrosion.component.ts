@@ -10,8 +10,10 @@ import { ICorrosionLevel, ICorrosionType } from '../../../common/models';
 })
 export class SearchByCorrosionComponent implements OnInit {
 corrosionTypes$: Observable<List<ICorrosionType>>;
-  corrosionLevels$: Observable<List<ICorrosionLevel>>;
+corrosionLevels$: Observable<List<ICorrosionLevel>>;
+  corrosionLevel:string[]=[];
   causeOfDamage: string[] = [];
+  corrosionType:string='';
   constructor(private appStateService: AppStateService) { }
 
   ngOnInit() {
@@ -19,8 +21,10 @@ corrosionTypes$: Observable<List<ICorrosionType>>;
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     
   }
-  hideOther(){
-  return this.causeOfDamage.findIndex(d => d === 'other') < 0;
+  hideCorrosionTypeOther(){
+    return this.corrosionType != '5';
   }
-
+  hideCauseOfDamageOther() {
+    return this.causeOfDamage.findIndex(d => d === 'other') < 0;
+  }
 }

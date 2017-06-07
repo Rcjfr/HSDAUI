@@ -18,9 +18,9 @@
           <label class="col-sm-4 control-label">Corrosion Level:</label>
           <div class="col-sm-8">
 
-            <aac-checkbox *ngFor="let ac of corrosionLevels$ | async" name="corrosionLevel" [label]="ac.description" 
+            <aac-checkbox *ngFor="let ac of corrosionLevels$ | async" [value]="ac.id" [(ngModel)]="corrosionLevel" name="corrosionLevel" [label]="ac.description" 
               ></aac-checkbox>
-            
+            <pre>{{corrosionLevel}}</pre>
           </div>
         </div>
   </div>
@@ -30,10 +30,10 @@
     <div class="row form-group">
         <label class="col-sm-4 control-label" for="corrosionType">Type of Corrosion:</label>
         <div class="col-sm-8">
-          <select class="form-control" multiple tabindex='5' id="corrosionType">
-<option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
-              </select>
-          
+          <select class="form-control" multiple tabindex='5' id="corrosionType" [(ngModel)]="corrosionType" >
+            <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+          </select>
+          <input type="text" placeholder="Enter other description" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()"/>
         </div>
       </div>
 
@@ -43,24 +43,20 @@
         <label class="col-sm-4 control-label" for="causeOfDamage">Cause of Damage:</label>
         <div class="col-sm-8">
           <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='6' id="causeOfDamage">
-              <option>Environment</option>
-              <option>Lav/Galley Spill</option>
-              <option>Blocked Drain</option>
-              <option>Chemical Spill</option>
-              <option>Wet Insulation Blanket</option>
-              <option>Missing/Deteriorated Floorboard Tape</option>
-              <option>Correct Hardware Not Installed</option>
-              <option>Deteriorated/Poor Sealing Practices</option>
-              <option>Missing Corrosion Inhibitor</option>
-              <option value="other">Other</option>
-              </select>
+            <option>Environment</option>
+            <option>Lav/Galley Spill</option>
+            <option>Blocked Drain</option>
+            <option>Chemical Spill</option>
+            <option>Wet Insulation Blanket</option>
+            <option>Missing/Deteriorated Floorboard Tape</option>
+            <option>Correct Hardware Not Installed</option>
+            <option>Deteriorated/Poor Sealing Practices</option>
+            <option>Missing Corrosion Inhibitor</option>
+            <option value="other">Other</option>
+          </select>
+          <input type="text" placeholder="Enter other description" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
         </div>
       </div>
   </div>
   </div>
-  <div class="row">
-    <div class="col-md-6"></div>
-    <div class="col-md-6">
-      <textarea tabindex='7' placeholder="Enter other description" maxlength="250" cols="40" rows="5" class="form-control" *ngIf="!hideOther()"></textarea>
-    </div>
-  </div>
+  
