@@ -1,7 +1,7 @@
 ﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-select required tabindex="18" label="Description" formControlName="repairedDescribe">
+      <aac-select required tabindex="63" label="Description" formControlName="repairedDescribe">
 
         <option value="">Select</option>
         <option>Bonded Repair</option>
@@ -36,7 +36,7 @@
   
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-select tabindex="18" label="Repair Document (eg. SRM, AARD,EO etc)"  formControlName="repairDocument">
+      <aac-select tabindex="64" label="Repair Document (eg. SRM, AARD,EO etc)"  formControlName="repairDocument">
         <option value="">Select</option>
         <option>AARD</option>
         <option>AARD (w/supporting EA)</option>
@@ -56,13 +56,13 @@
     </div>
  
     <div class="col-md-6"  *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''" >
-      <aac-input tabindex="19" required label="Chap/Fig/Repair:"   [message]="displayMessage.chap"   formControlName="chap">
+      <aac-input tabindex="65" required label="Chap/Fig/Repair:"   [message]="displayMessage.chap"   formControlName="chap">
       </aac-input>
     </div>
   </div>
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-input tabindex="20" label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" formControlName="engineeringAuthorization">
+      <aac-input tabindex="66" label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" formControlName="engineeringAuthorization">
       </aac-input>
 
       <div class="row form-group">
@@ -83,7 +83,7 @@
           <div class="col-sm-8">
             <div class="customComponent" style="padding-left:20px;">
               <div>
-                <input type="radio" id="externalVisible" name="externalVisible" tabindex='37' value="0" formControlName="externalVisible">
+                <input type="radio" id="externalVisible" name="externalVisible" tabindex='67' value="0" formControlName="externalVisible">
                 <label for="externalVisible">
                   <span class="control"></span>
                   Yes
@@ -115,13 +115,36 @@
     </div>
         <div class="row col-md-12">
           <div class="col-md-6">
+            <div class="row form-group" [class.has-error]="displayMessage.height">
+              <label class="col-sm-4 control-label" for="depth">Height(in inches):</label>
+              <div class="col-sm-8">
+                <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                       decimalLimit: 6,
+                          requireDecimal:false
+    })}" formControlName="height">
+                <span *ngIf="displayMessage.height" class="help-block">{{displayMessage.height}}</span>
+              </div>
+            </div>
 
-            <aac-input tabindex="33" label="Height(in inches):" (blur)="returnRoundValue(this)" [message]="displayMessage.height" formControlName="height">
-            </aac-input>
+            
           </div>
           <div class="col-md-6">
-            <aac-input tabindex="34" label="Width(in inches):" [message]="displayMessage.repairWidth" formControlName="repairWidth">
-            </aac-input>
+            <div class="row form-group" [class.has-error]="displayMessage.repairWidth">
+              <label class="col-sm-4 control-label" for="depth">Width(in inches):</label>
+              <div class="col-sm-8">
+                <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: createNumberMask({
+                          prefix:'',
+                          allowDecimal: true,
+                          includeThousandsSeparator:false,
+                       decimalLimit: 6,
+                          requireDecimal:false
+    })}" formControlName="repairWidth">
+                <span *ngIf="displayMessage.repairWidth" class="help-block">{{displayMessage.repairWidth}}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

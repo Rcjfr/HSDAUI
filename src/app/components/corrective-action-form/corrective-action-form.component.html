@@ -6,7 +6,7 @@
         </div>
         <div *ngIf="correctiveActionFormGroup.get('deferredSectionOptions').value == true">
           <div class="col-md-5">
-            <aac-input tabindex="56" required label="Entered SCEPTER Deferral code (MON, SAD, ROB, etc):" [message]="displayMessage.deferralCode" formControlName="deferralCode">
+            <aac-input tabindex="56" required label="Entered SCEPTER Deferral code:" helptext="(MON, SAD, ROB, etc)"[message]="displayMessage.deferralCode" formControlName="deferralCode">
             </aac-input>
 
           </div>
@@ -26,11 +26,11 @@
       <div class="col-md-12">
         
           <div class="col-md-2">
-            <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="58" formControlName="majorRepairOptions"></aac-checkbox>
+            <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="70" formControlName="majorRepairOptions"></aac-checkbox>
           </div>
         <div *ngIf="correctiveActionFormGroup.get('majorRepairOptions').value == true">
           <div class="col-md-5">
-            <aac-textarea tabindex="59" required label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+            <aac-textarea tabindex="71" required label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
                           [message]="displayMessage.repairDescription" formControlName="repairDescription">
             </aac-textarea>
           </div>

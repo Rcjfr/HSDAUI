@@ -29,6 +29,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
           poorsealingPractices: ['', []],
           missingCorrosionInhibitor: ['', []],
           damageOther: ['', []],
+          
           damageDescription: ['', [Validators.maxLength(250)]],
       } ,{
               validator: CustomValidators.ValidateCauseOfDamageGroupFields

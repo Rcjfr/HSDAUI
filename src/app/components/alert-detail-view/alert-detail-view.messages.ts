@@ -206,10 +206,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         causeOfDamageGroup: {
             atleastone:
-            'atleast one should be selected', 
+            'Atleast one should be selected', 
                 'damageDescription': {
-                    required: 'description required.',
-                    maxlength: 'description must be not more that 250 characters.'
+                    required: 'Description required.',
+                    maxlength: 'Description must be not more that 250 characters.'
                 }
             
         },
@@ -230,7 +230,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'repairDescription': {
             required: 'Repair Description is required.',
-            maxlength: 'Repair Description must be not more that 250 characters.'
+            maxlength: 'Repair Description must not be more than 250 characters.'
         },
         'correctiveActionOptionFormGroup': {
             'correctiveActionOptions': {
@@ -251,7 +251,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                 'correctiveActionRepairDescriptionFormGroup': {
                     atleastone: 'Repair Document or Engineeering Authorization is required.',
                     'repairedDescribe': {
-                        required: 'Repair Description must not be more than 250 characters'
+                        required: 'Description is required.'
                         
                     },
                     'repairDocument': {
@@ -275,7 +275,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                         pattern: 'Width must be numeric.'
                     },
                     'height': {
-                        pattern: 'height must be numeric.'
+                        pattern: 'Height must be numeric.'
                     },
                 },
             },
