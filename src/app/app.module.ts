@@ -50,7 +50,8 @@ import { PreciseLocationGroupComponent } from './components/precise-location-gro
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';
 import { CorrectiveActionFormGroupComponent } from './components/corrective-action-form/corrective-action-form.component';
-//import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/correction-action-repair-description.component';
+import { CorrectiveActionRepairDescriptionComponent } from './components/corrective-action-repair-description/corrective-action-repair-description.component';
+import { CorrectiveActionOptionsComponent } from './components/corrective-action-options/corrective-action-options.component';
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { SearchByDateRangeComponent } from './components/search/search-by-date-range/search-by-date-range.component';
 import { SearchBySdaFormComponent } from './components/search/search-by-sda-form/search-by-sda-form.component';
