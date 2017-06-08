@@ -7,17 +7,17 @@
         <option>Bonded Repair</option>
         <option>Bore/Fastener Hole(s) Rework</option>
         <option>Complex Repair</option>
-        <option>Double Repair,External</option>
-        <option>Double Repair, Flush</option>
-        <option>Double Repair, Internal</option>
+        <option>Doubler Repair, External</option>
+        <option>Doubler Repair, Flush</option>
+        <option>Doubler Repair, Internal</option>
+        <option>Non-reinforcing, Repair </option>
         <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
         <option>Part Replacement - Entire</option>
         <option>Replacement - Sub Assembly</option>
         <option>Refinish - Scribe Line</option>
-        <option>Reforcing - Modification</option>
+        <option>Reinforcing - Modification</option>
         <option>Restore Bonded Material</option>
         <option>Splice Repair</option>
-        <option>Part Reinforcement</option>
         <option>Plug Reinforcement ( Nested Angles)</option>
         <option>Plug-Fastener</option>
         <option>Other</option>
@@ -54,7 +54,15 @@
         <option>BCSRPP</option>
       </aac-select>
     </div>
- 
+    <!--<div class="col-md-5">
+      <div [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value =='' " [class.has-error]="displayMessage.chap">
+        <label class="col-sm-4 control-label" for="chap">Chap/Fig/Repair:<span class="req">*</span></label>
+        <input tabindex='65'  class="form-control" id="chap"
+                  formControlName="chap">
+
+        <span *ngIf="displayMessage.chap" class="error">{{displayMessage.chap}}</span>
+      </div>
+    </div>-->
     <div class="col-md-6" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''">
       <aac-input tabindex="65" required label="Chap/Fig/Repair:" formControlName="chap">
       </aac-input>
@@ -128,7 +136,8 @@
                           prefix:'',
                           allowDecimal: true,
                           includeThousandsSeparator:false,
-                       decimalLimit: 6,
+                        decimalLimit: 1,
+                          integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="height">
                 <span *ngIf="displayMessage.height" class="help-block">{{displayMessage.height}}</span>
@@ -145,7 +154,8 @@
                           prefix:'',
                           allowDecimal: true,
                           includeThousandsSeparator:false,
-                       decimalLimit: 6,
+                        decimalLimit: 1,
+                          integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="repairWidth">
                 <span *ngIf="displayMessage.repairWidth" class="help-block">{{displayMessage.repairWidth}}</span>
