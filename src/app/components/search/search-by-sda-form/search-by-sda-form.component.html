@@ -1,6 +1,6 @@
 ﻿<div class="row">
   <div class="col-md-4">
-    <aac-input tabindex="1" label="SDA ID:">
+    <aac-input tabindex="3" label="SDA ID:">
     </aac-input>
   </div>
   <div class="col-md-4">
@@ -10,14 +10,14 @@
         <ng-template #customItemTemplate let-model="item" let-index="index">
           <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
         </ng-template>
-        <input type="text" tabindex='2' [(ngModel)]="station" autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$ | async"
+        <input type="text" tabindex='7' [(ngModel)]="station" autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$ | async"
           typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10"
         />
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <aac-select tabindex="13" label="Alert Code:">
+    <aac-select tabindex="10" label="Alert Code:">
       <option value="">Select Alert Code</option>
       <option *ngFor="let ac of alertCodes$ | async" [value]="ac.code">{{ac.description}}</option>
     </aac-select>
@@ -27,21 +27,21 @@
   <div class="col-md-4">
     <aac-input tabindex="4" label="SDR #:">
     </aac-input>
-    <aac-input tabindex="7" label="Station:">
+    <aac-input tabindex="5" label="Originator:">
     </aac-input>
   </div>
   <div class="col-md-4">
-    <aac-select tabindex="5" label="Department:">
+    <aac-select tabindex="8" label="Department:">
       <option value="">Select Department</option>
       <option *ngFor="let d of departments$ | async" [value]="d.id">{{d.description}}</option>
     </aac-select>
   </div>
   <div class="col-md-4">
-    <aac-select tabindex="6" label="ATA Code 1:" (change)='getAlertCode2s($event.target.value)'>
+    <aac-select tabindex="11" label="ATA Code 1:" (change)='getAlertCode2s($event.target.value)'>
       <option value="">Select ATA Code 1</option>
       <option *ngFor="let ac of (ATACodes | uniq:'primaryCode')" [value]="ac.primaryCode">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
     </aac-select>
-    <aac-select tabindex="8" label="ATA Code 2:">
+    <aac-select tabindex="12" label="ATA Code 2:">
       <option value="">Select ATA Code 2</option>
       <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryCode">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
     </aac-select>
@@ -49,11 +49,11 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <aac-input tabindex="9" label="Fleet:">
+    <aac-input tabindex="6" label="Fleet:">
     </aac-input>
   </div>
   <div class="col-md-4">
-    <aac-select tabindex="10" label="Check Type:">
+    <aac-select tabindex="9" label="Check Type:">
       <option value="">Select Check Type</option>
       <option *ngFor="let fc of checkTypes$ | async" [value]="fc.id">{{fc.description}}</option>
     </aac-select>

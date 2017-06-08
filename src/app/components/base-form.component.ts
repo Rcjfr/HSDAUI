@@ -8,24 +8,24 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseFormComponent implements OnInit, OnDestroy {
-    @Input() parent: FormGroup;
-    protected subscriptions: Subscription[]=[];
+  @Input() parent: FormGroup;
+  protected subscriptions: Subscription[] = [];
   public displayMessage: any = {}; // { [key: string]: any }
   @Input()
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};
   }
   constructor(public formGroupName: string) {
-      this.subscriptions = [];
+    this.subscriptions = [];
   }
   ngOnDestroy() {
-      this.parent.removeControl(this.formGroupName);
-      this.subscriptions.forEach(s => {
-          console.log(s);
-          s && s.unsubscribe();
-      });
+    this.parent.removeControl(this.formGroupName);
+    this.subscriptions.forEach(s => {
+      console.log(s);
+      s && s.unsubscribe();
+    });
   }
   ngOnInit() {
-     
+
   }
 }

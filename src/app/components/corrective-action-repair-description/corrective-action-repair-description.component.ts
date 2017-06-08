@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import createNumberMask  from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
     selector: 'app-corrective-action-repair-description',

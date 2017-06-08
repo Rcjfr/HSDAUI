@@ -191,7 +191,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             required: ' Corresion level is required.'
         },
         previouslyBlended: {
-            required: ' Corroded Area Previously Blended  required.'
+            required: ' Corroded Area Previously Blended is required.'
         },
         corrosionTask: {
             required: ' Corrosion Task required.',
@@ -200,7 +200,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
 
         },
         corrosionType: {
-            required: ' Type of Corrosion  required.'
+            required: ' Type of Corrosion is required.'
         },
         corrosionTypeText: {
             required: ' Description is  required.',
@@ -216,7 +216,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     required: 'Description required.',
                     maxlength: 'Description must not be more that 250 characters.'
                 }
-            
+
         },
     },
 
@@ -286,11 +286,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     },
                 },
             },
-        
-         
-       
+
+
+
       },
-  
-      
-  
+
+
+
 };
