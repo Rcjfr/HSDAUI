@@ -24,8 +24,8 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
   ngOnInit() {
     this.scheduledMaintenanceGroup = this.fb.group({
       checkType: ['', [Validators.required]],
-      nonRoutineNo: ['', [Validators.maxLength(50)]],
-      routineNo: ['', [Validators.maxLength(50)]]
+      nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
+      routineNo: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]]
     },
       {
         validator: CustomValidators.validateScheduledMaintenanceFields

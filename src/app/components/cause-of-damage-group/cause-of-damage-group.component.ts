@@ -37,7 +37,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
       this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
 
       this.causeOfDamageGroup.get('damageOther').valueChanges
-          .subscribe(val => this.setCorrosionPreventionFields(val))
+          .subscribe(val => this.setCorrosionPreventionFields(val));
   }
   setCorrosionPreventionFields(isDamageCauseEvent: boolean): void {
     
@@ -58,6 +58,9 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
      
       // this.causeOfDamageGroup.updateValueAndValidity();
   }
+
+ 
+
 }
 
 

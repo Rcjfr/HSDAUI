@@ -6,9 +6,8 @@
         </div>
         <div *ngIf="correctiveActionFormGroup.get('deferredSectionOptions').value == true">
           <div class="col-md-5">
-            <aac-input tabindex="56" required label="Entered SCEPTER Deferral code:" helptext="(MON, SAD, ROB, etc)"[message]="displayMessage.deferralCode" formControlName="deferralCode">
+            <aac-input tabindex="56" required label="Enter SCEPTRE Deferral Code:" helptext="(MON, SAD, ROB, etc)"[message]="displayMessage.deferralCode" formControlName="deferralCode">
             </aac-input>
-
           </div>
 
           <div class="col-md-4">
@@ -33,8 +32,11 @@
             <aac-textarea tabindex="71" required label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
                           [message]="displayMessage.repairDescription" formControlName="repairDescription">
             </aac-textarea>
+            <!--{{displayMessage.repairDescription}}
+            {{correctiveActionFormGroup.get( 'repairDescription').dirty}}
+            {{correctiveActionFormGroup.get( 'repairDescription').touched}}-->
+            
           </div>
-         
           </div>
         </div>
   </div>
