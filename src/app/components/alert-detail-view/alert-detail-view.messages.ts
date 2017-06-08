@@ -78,8 +78,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     pattern: 'Routine # must contain only alphanumerics.'
                 },
                 'nonRoutineNo': {
-                    maxlength: 'Non Routine # can not be more that 50 characters.',
-                    pattern: 'Non Routine # must contain only alphanumerics.'
+                    maxlength: 'Non-Routine # can not be more that 50 characters.',
+                    pattern: 'Non-Routine # must contain only alphanumerics.'
                 }
             },
             'unscheduledMaintenanceGroup': {
@@ -88,8 +88,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                     required: 'Description is required for unscheduled maintenance.'
                 },
                 'nonRoutineNo': {
-                  maxlength: 'Non Routine # can not be more that 50 characters.',
-                    pattern: 'Non Routine # must contain only alphanumerics.'
+                  maxlength: 'Non-Routine # can not be more that 50 characters.',
+                    pattern: 'Non-Routine # must contain only alphanumerics.'
                 },
                 'micNo': {
                   maxlength: 'MIC # can not be more that 50 characters.',

@@ -11,7 +11,7 @@ import { ICorrosionLevel, ICorrosionType } from '../../../common/models';
 export class SearchByCorrosionComponent implements OnInit {
 corrosionTypes$: Observable<List<ICorrosionType>>;
 corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  corrosionLevel:string[]=[];
+  corrosionLevels:string[]=[];
   causeOfDamage: string[] = [];
   corrosionType:string='';
   constructor(private appStateService: AppStateService) { }
@@ -26,5 +26,12 @@ corrosionLevels$: Observable<List<ICorrosionLevel>>;
   }
   hideCauseOfDamageOther() {
     return this.causeOfDamage.findIndex(d => d === 'other') < 0;
+  }
+  onChangeCorrosionLevel(evnt) {
+    if (evnt.target.checked) {
+      this.corrosionLevels.push(evnt.target.value);
+    } else {
+      this.corrosionLevels.splice(this.corrosionLevels.indexOf(evnt.target.value), 1);
+    }
   }
 }
