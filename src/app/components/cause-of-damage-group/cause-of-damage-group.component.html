@@ -50,12 +50,15 @@
     <div class="col-md-4">
       <div *ngIf="causeOfDamageGroup.get('damageOther').value ==true">
         <label class="col-sm-7 control-label" for="damageDescription">damageDescription #: <span class="req">*</span></label>
-        <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription" formControlName="damageDescription">
+        <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription " (ngBlur)="updateValidator()" formControlName="damageDescription">
       </textarea>
         <span *ngIf="displayMessage.damageDescription && 
               (causeOfDamageGroup.get( 'damageDescription').dirty ||
               causeOfDamageGroup.get( 'damageDescription').touched)"
               class="error ">{{displayMessage.damageDescription    }}</span>
+        {{displayMessage.damageDescription}}
+        {{causeOfDamageGroup.get( 'damageDescription').dirty}}
+        {{causeOfDamageGroup.get( 'damageDescription').touched}}
       </div>
       <!--<span *ngIf="displayMessage.message &&
           causeOfDamageGroup.get( 'damageOther').touched"
