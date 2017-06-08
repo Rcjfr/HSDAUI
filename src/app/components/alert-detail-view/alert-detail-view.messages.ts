@@ -32,36 +32,36 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             'aircraftNo': {
                 required: 'Aircraft # is required.',
                 pattern: 'Aircraft # must be alphanumeric.',
-                maxlength: 'Aircraft # can not be more than 5 characters.'
+                maxlength: 'Aircraft # must not be more than 5 characters.'
             },
             'manufacturer': {
                 required: 'Manufacturer is required.',
                 pattern: 'Manufacturer must be alphanumeric.',
-                maxlength: 'Manufacturer can not be more than 100 characters.'
+                maxlength: 'Manufacturer must not be more than 100 characters.'
             },
             'model': {
                 required: 'Aircraft Model/Series is required.',
                 pattern: 'Aircraft Model/Series must be alphanumeric.',
-                maxlength: 'Aircraft Model/Series can not be more than 15 characters.'
+                maxlength: 'Aircraft Model/Series must not be more than 15 characters.'
             },
             'serialNo': {
                 required: 'Serial # is required.',
                 pattern: 'Serial # must be alphanumeric.',
-                maxlength: 'Serial # can not be more than 10 characters.'
+                maxlength: 'Serial # must not be more than 10 characters.'
             },
             'totalShipTime': {
                 required: 'Total Ship Time is required.',
                 pattern: 'Total Ship Time must be numeric.',
-                maxlength: 'Total Ship Time can not be more that 25 numbers.'
+                maxlength: 'Total Ship Time must not be more that 25 numbers.'
             },
             'cycles': {
                 required: 'Cycles is required.',
                 pattern: 'Cycles must be numeric.',
-                maxlength: 'Cycles can not be more that 25 numbers.'
+                maxlength: 'Cycles must not be more that 25 numbers.'
             },
             'fleet': {
                 required: 'Fleet is required.',
-                maxlength: 'Fleet can not be more that 20 characters.'
+                maxlength: 'Fleet must not be more that 20 characters.'
             }
         },
         'defectDiscoveredDuringSectionFormGroup': {
@@ -75,26 +75,26 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
                 },
                 'routineNo': {
                     pattern: 'Routine # must contain only alphanumerics.',
-                    maxlength: 'Routine # cannot be more than 50 characters.  '
+                    maxlength: 'Routine # must not be more than 50 characters.  '
                 },
                 'nonRoutineNo': {
-                    pattern: 'Non Routine # must contain only alphanumerics.',
-                    maxlength: 'Non-Routine # cannot be more than 50 characters. '
+                    pattern: 'Non-Routine # must contain only alphanumerics.',
+                    maxlength: 'Non-Routine # must not be more than 50 characters. '
                 }
             },
             'unscheduledMaintenanceGroup': {
                 atleastone: 'Non-Routine # or MIC # is required.',
                 'description': {
-                    required: 'Description is required for unscheduled maintenance.'
+                    required: 'Description is required.'
                 },
                 'nonRoutineNo': {
-                    pattern: 'Non Routine # must contain only alphanumerics.',
-                    maxlength: 'Non-Routine # cannot be more than 50 characters. '
+                    pattern: 'Non-Routine # must contain only alphanumerics.',
+                    maxlength: 'Non-Routine # must not be more than 50 characters. '
 
                 },
                 'micNo': {
                     pattern: 'MIC # must contain only alphanumerics.',
-                     maxlength: 'MIC # cannot be more than 50 characters. '
+                     maxlength: 'MIC # must not be more than 50 characters. '
                 }
             }
         }
@@ -194,9 +194,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             required: ' Corroded Area Previously Blended is required.'
         },
         corrosionTask: {
-            required: ' Corrosion Task required.',
-            pattern: 'Corrosion Task must be alphanumeric.',
-            maxlength: 'Corrosion Task must not be more that 25 numbers.'
+            required: ' Corrosion Task # required.',
+            pattern: 'Corrosion Task # must be alphanumeric.',
+            maxlength: 'Corrosion Task # must not be more that 25 numbers.'
 
         },
         corrosionType: {
@@ -213,7 +213,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
             atleastone:
             'Atleast one should be selected', 
                 'damageDescription': {
-                    required: 'Description required.',
+                    required: 'Description is required.',
                     maxlength: 'Description must not be more that 250 characters.'
                 }
 
