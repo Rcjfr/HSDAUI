@@ -6,23 +6,9 @@ import { RouterModule } from '@angular/router';
 
 describe('ATA Codes Service (Mocked)', () => {
   const mockResponse = [
-                              {
-                                'Code': '32',
-                                'Name': 'Landing Gear',
-                                'Description': `Includes Basic Structure which provides major support 
-                                                for the aircraft, while on the ground, 
-                                                such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
-                                'SecondaryCodes': [
-                                  {
-                                    'Code': '10',
-                                    'Name': 'Main Gear'
-                                  },
-                                  {
-                                    'Code': '20',
-                                    'Name': 'Nose Gear'
-                                  }
-                                ]
-                              }];
+                         {id: 79, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "00", secondaryCodeDescription:"GENERAL"},
+                         {id: 40, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "10", secondaryCodeDescription:"MAIN GEAR"}
+                        ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -50,7 +36,7 @@ describe('ATA Codes Service (Mocked)', () => {
   })));
 
   describe('getATACodes', () => {
-    it('should return an array of ATACodes', async(inject(
+    it('should return all ATACodes', async(inject(
       [ATACodesService, MockBackend], (service: ATACodesService, mockBackend: MockBackend) => {
 
       mockBackend.connections.subscribe(conn => {
@@ -60,10 +46,11 @@ describe('ATA Codes Service (Mocked)', () => {
       const result = service.getATACodes();
 
       result.subscribe(res => {
-        // console.log('Response:', res);
-        expect(res.length).toEqual(1);
-        expect(res[0].Code).toEqual('32');
-        expect(res[0].SecondaryCodes.length).toEqual(2);
+         console.log('Response:', res);
+        expect(res.length).toEqual(2);
+        
+        console.log('code:', res[0].primaryCode);
+        expect(res[0].primaryCode).toEqual('32');
       });
     })));
   });
