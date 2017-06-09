@@ -15,6 +15,7 @@ import { AppStateService } from '../../common/services';
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit {
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<List<models.IStation>>;
+  stations: Array<models.IStation>;
   generalSectionFormGroup: FormGroup;
   aircraftInfo$: Observable<models.IAircraftInfo>;
   alertCodes$: Observable<List<models.IAlertCode>>;
@@ -44,7 +45,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-    this.stations$ = this.appStateService.getStations().map(d => d && d.toJS());
+    //this.stations$ = this.appStateService.getStations().map(d => d && d.toJS());
+    this.appStateService.getStations().map(d => d && d.toJS()).subscribe(s => this.stations = s); //TODO
     // this.stations$ = Observable.create((observer:any) => {
     //         this.appStateService.getStations(this.generalSectionFormGroup.get('station').value)
     //         .subscribe((result : any ) => {

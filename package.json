@@ -30,6 +30,7 @@
     "bootstrap-timepicker": "^0.5.2",
     "core-js": "^2.4.1",
     "immutable": "^3.8.1",
+    "jQuery-QueryBuilder": "^2.4.3",
     "jquery": "^3.2.1",
     "ng-pipes": "^0.1.2",
     "ng2-datetime": "^1.4.0",

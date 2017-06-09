@@ -52,16 +52,16 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'totalShipTime': {
         required: 'Total Ship Time is required.',
         pattern: 'Total Ship Time must be numeric.',
-        maxlength: 'Total Ship Time must not be more that 25 numbers.'
+        maxlength: 'Total Ship Time must not be more than 25 numbers.'
       },
       'cycles': {
         required: 'Cycles is required.',
         pattern: 'Cycles must be numeric.',
-        maxlength: 'Cycles must not be more that 25 numbers.'
+        maxlength: 'Cycles must not be more than 25 numbers.'
       },
       'fleet': {
         required: 'Fleet is required.',
-        maxlength: 'Fleet must not be more that 20 characters.'
+        maxlength: 'Fleet must not be more than 20 characters.'
       }
     },
     'defectDiscoveredDuringSectionFormGroup': {
@@ -182,38 +182,38 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   },
   cpcpSectionGroup: {
     cpcprelated: {
-      required: ' CPCP  is required.'
+      required: 'CPCP  is required.'
     },
     wsCorrosion: {
-      required: ' Widespread Corrosion is required.'
+      required: 'Widespread Corrosion is required.'
     },
     corrosionLevel: {
-      required: ' Corresion level is required.'
+      required: 'Corrosion level is required.'
     },
     previouslyBlended: {
-      required: ' Corroded Area Previously Blended is required.'
+      required: 'Corroded Area Previously Blended is required.'
     },
     corrosionTask: {
-      required: ' Corrosion Task # required.',
+      required: 'Corrosion Task # required.',
       pattern: 'Corrosion Task # must be alphanumeric.',
-      maxlength: 'Corrosion Task # must not be more that 25 numbers.'
+      maxlength: 'Corrosion Task # must not be more than 25 numbers.'
 
     },
     corrosionType: {
-      required: ' Type of Corrosion is required.'
+      required: 'Type of Corrosion is required.'
     },
     corrosionTypeText: {
-      required: ' Description is  required.',
-      maxlength: 'Description must be not more that 250 numbers.'
+      required: 'Description is  required.',
+      maxlength: 'Description must be not more than 250 numbers.'
     },
     floorbaordCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
     },
     causeOfDamageGroup: {
-      atleastone: 'Atleast one should be selected',
+      atleastone: 'At least one cause of damage must be selected',
       'damageDescription': {
         required: 'Description is required.',
-        maxlength: 'Description must not be more that 250 characters.'
+        maxlength: 'Description must not be more than 250 characters.'
       }
 
     }
@@ -273,23 +273,17 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
 
         },
         'externalVisible': {
-          required: 'External Visible is required.'
+          required: 'Externally Visible is required.'
         },
         'repairWidth': {
           pattern: 'Width must be numeric.',
-          maxlength: 'Width must not be more that 3 numbers.'
+          maxlength: 'Width must not be more than 3 digits.'
         },
         'height': {
           pattern: 'Height must be numeric.',
-          maxlength: 'Height must not be more that 3 numbers.'
-        },
-      },
-    },
-
-
-
-  },
-
-
-
+          maxlength: 'Height must not be more than 3 digits.'
+        }
+      }
+    }
+  }
 };

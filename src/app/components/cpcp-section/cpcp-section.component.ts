@@ -31,7 +31,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
           previouslyBlended: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
           corrosionType: ['', [Validators.required]],
           corrosionTypeText: ['', [Validators.required, Validators.maxLength(250)]],
-          corrosionTask: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+          corrosionTask: ['', [Validators.required, Validators.maxLength(25)]],
               isfloorboardCondition: ['', []],
               floorbaordCondition: ['', []]
               }
@@ -67,8 +67,8 @@ setCorrosionPreventionFields(isCorrosionEvent: number): void {
             this.cpcpSectionGroup.get('wsCorrosion').setValidators([Validators.required]);
             this.cpcpSectionGroup.get('previouslyBlended').setValidators([Validators.required]);
             this.cpcpSectionGroup.get('corrosionTask').setValidators([Validators.required,
-                                                                    Validators.maxLength(25),
-                                                                    Validators.pattern(Expressions.Alphanumerics)] );
+                                                                    Validators.maxLength(25)
+                                                                    ] );
             this.cpcpSectionGroup.get('corrosionLevel').setValidators([Validators.required]);
             this.cpcpSectionGroup.get('corrosionType').setValidators([Validators.required]);
 

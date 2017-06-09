@@ -6,7 +6,7 @@ IF "%1" == "QA" (
 	@REM ECHO "DEPLOY TO QA"
 	)
 IF "%1" == "DEV" (
-    ng build --output-hashing=all
+    ng build -e dev_env --output-hashing=all
 	robocopy dist \\MEAPND08.QCORPAA.AA.COM\D$\HSDA\HSDA.UI /E *.* /PURGE
 	@REM ECHO "DEPLOY TO DEV"
 	)

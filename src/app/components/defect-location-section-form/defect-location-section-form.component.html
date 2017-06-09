@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <aac-textarea tabindex="21" required label="Defect Type:" [message]="displayMessage.defectType" formControlName="defectType">
       </aac-textarea>
-      <aac-textarea tabindex="22" required label="Defect Type:" [message]="displayMessage.defectDescription" helptext="(Example: 6inch Crack: 3X4 Inch Corroded Area,etc.)Any comments after || denotes historical data."
+      <aac-textarea tabindex="22" required label="Defect Type:" [message]="displayMessage.defectDescription" helptext="(Example: 6 inch Crack: 3X4 inch Corroded Area,etc.)Any comments after || denotes historical data."
         formControlName="defectDescription">
       </aac-textarea>
     </div>
@@ -90,7 +90,8 @@
   <div class="row">
     <div class="col-md-6">
       <aac-select tabindex="35" required label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)"
-        [message]="displayMessage.detected" formControlName="detected">
+                  [message]="displayMessage.detected" formControlName="detected">
+        <option value=""> </option>
         <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
         <!--<option value=""> </option>
         <option value="unknown">UNKNOWN </option>
