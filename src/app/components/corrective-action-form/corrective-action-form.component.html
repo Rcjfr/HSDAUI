@@ -6,14 +6,28 @@
         </div>
         <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
           <div class="col-md-5">
-            <aac-input tabindex="56" required label="Enter SCEPTRE Deferral Code:" helptext="(MON, SAD, ROB, etc)"[message]="displayMessage.deferralCode" formControlName="deferralCode">
-            </aac-input>
+            <div class="row form-group" [class.has-error]="displayMessage.deferralCode">
+              <label class="col-sm-4 control-label" for="deferralCode">Enter SCEPTRE Deferral Code:<span class="req">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" tabindex='56' class="form-control" id="deferralCode" formControlName="deferralCode">
+                <span class="help-block">(MON, SAD, ROB, etc)</span>
+                <span *ngIf="displayMessage.deferralCode" class="help-block">{{displayMessage.deferralCode}}</span>
+              </div>
+            </div>
+
+            
           </div>
 
           <div class="col-md-4">
-            <aac-input tabindex="57" required label="Deferral #:" [message]="displayMessage.deferral" formControlName="deferral">
-            </aac-input>
-          
+            <div class="row form-group" [class.has-error]="displayMessage.deferral">
+              <label class="col-sm-4 control-label" for="deferral">Deferral #:<span class="req">*</span></label>
+              <div class="col-sm-8">
+                <input type="text" tabindex='57' class="form-control" id="deferral" formControlName="deferral">
+                <span *ngIf="displayMessage.deferral" class="help-block">{{displayMessage.deferral}}</span>
+              </div>
+            </div>
+            
+
           </div>
         </div>
       </div>
@@ -29,9 +43,18 @@
           </div>
         <div [hidden]="correctiveActionFormGroup.get('majorRepairOptions').value != true">
           <div class="col-md-5">
-            <aac-textarea tabindex="71" required label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
-                          [message]="displayMessage.repairDescription" formControlName="repairDescription">
-            </aac-textarea>
+            
+            <div class="row form-group" [class.has-error]="displayMessage.repairDescription">
+              <label class="col-sm-4 control-label" for="repairDescription">Description:<span class="req">*</span></label>
+              <div class="col-sm-8">
+                <textarea tabindex='71' class="form-control" id="repairDescription" formControlName="repairDescription"></textarea>
+                <span class="help-block">If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary.</span>
+                <span *ngIf="displayMessage.repairDescription" class="help-block">{{displayMessage.repairDescription}}</span>
+              </div>
+            </div>
+            
+
+            
           </div>
           </div>
         </div>

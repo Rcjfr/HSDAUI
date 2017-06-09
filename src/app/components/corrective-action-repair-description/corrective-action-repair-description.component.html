@@ -1,58 +1,71 @@
 ﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-select required tabindex="63" label="Description" formControlName="repairedDescribe">
-
-        <option value="">Select</option>
-        <option>Bonded Repair</option>
-        <option>Bore/Fastener Hole(s) Rework</option>
-        <option>Complex Repair</option>
-        <option>Doubler Repair, External</option>
-        <option>Doubler Repair, Flush</option>
-        <option>Doubler Repair, Internal</option>
-        <option>Non-reinforcing, Repair </option>
-        <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
-        <option>Part Replacement - Entire</option>
-        <option>Replacement - Sub Assembly</option>
-        <option>Refinish - Scribe Line</option>
-        <option>Reinforcing - Modification</option>
-        <option>Restore Bonded Material</option>
-        <option>Splice Repair</option>
-        <option>Plug Reinforcement ( Nested Angles)</option>
-        <option>Plug-Fastener</option>
-        <option>Other</option>
-      </aac-select>
-      <div class="row form-group">
-        <div class="col-md-offset-4 col-sm-8">
+      
+      <div class="row form-group" [class.has-error]="displayMessage.repairedDescribe">
+        <label class="col-sm-4 control-label" for="repairedDescribe">Description:<span class="req">*</span></label>
+        <div class="col-sm-8">
+          <select tabindex='63' class="form-control" id="repairedDescribe" formControlName="repairedDescribe">
+            <option value="">Select</option>
+            <option>Bonded Repair</option>
+            <option>Bore/Fastener Hole(s) Rework</option>
+            <option>Complex Repair</option>
+            <option>Doubler Repair, External</option>
+            <option>Doubler Repair, Flush</option>
+            <option>Doubler Repair, Internal</option>
+            <option>Non-reinforcing, Repair </option>
+            <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
+            <option>Part Replacement - Entire</option>
+            <option>Replacement - Sub Assembly</option>
+            <option>Refinish - Scribe Line</option>
+            <option>Reinforcing - Modification</option>
+            <option>Restore Bonded Material</option>
+            <option>Splice Repair</option>
+            <option>Plug Reinforcement ( Nested Angles)</option>
+            <option>Plug-Fastener</option>
+            <option>Other</option>
+          </select>
+          
           <span *ngIf="displayMessage.repairedDescribe &&
                     (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
                     correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
                   " class="error">{{displayMessage.repairedDescribe}}</span>
         </div>
       </div>
-     
-    </div>
+      </div>
     </div>
   
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-select tabindex="64" label="Repair Document (eg. SRM, AARD,EO etc)"  formControlName="repairDocument">
-        <option value="">Select</option>
-        <option>AARD</option>
-        <option>AARD (w/supporting EA)</option>
-        <option>AMM</option>
-        <option>EA</option>
-        <option>ECO</option>
-        <option>DNF ESO</option>
-        <option>Field EA</option>
-        <option>MCM</option>
-        <option>MRB</option>
-        <option>Shop ESO</option>
-        <option>Shop ESO (w/supporting EA)</option>
-        <option>SRM (w/supporting EA)</option>
-        <option>SRM </option>
-        <option>BCSRPP</option>
-      </aac-select>
+      
+      <div class="row form-group" [class.has-error]="displayMessage.repairDocument">
+        <label class="col-sm-4 control-label" for="repairDocument">Repair Document (eg. SRM, AARD,EO etc):</label>
+        <div class="col-sm-8">
+          <select tabindex='64' class="form-control" id="repairDocument" formControlName="repairDocument">
+            <option value="">Select</option>
+            <option>AARD</option>
+            <option>AARD (w/supporting EA)</option>
+            <option>AMM</option>
+            <option>EA</option>
+            <option>ECO</option>
+            <option>DNF ESO</option>
+            <option>Field EA</option>
+            <option>MCM</option>
+            <option>MRB</option>
+            <option>Shop ESO</option>
+            <option>Shop ESO (w/supporting EA)</option>
+            <option>SRM (w/supporting EA)</option>
+            <option>SRM </option>
+            <option>BCSRPP</option>
+          </select>
+          </div>
+      </div>
+      
+      
+
+      
+
+      
     </div>
     <!--<div class="col-md-5">
       <div [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value =='' " [class.has-error]="displayMessage.chap">
@@ -64,21 +77,28 @@
       </div>
     </div>-->
     <div class="col-md-6" [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value==''">
-      <aac-input tabindex="65" required label="Chap/Fig/Repair:" formControlName="chap">
-      </aac-input>
-      <div class="row form-group">
-        <div class="col-md-offset-4 col-sm-8">
+      <div class="row form-group" [class.has-error]="displayMessage.chap">
+        <label class="col-sm-4 control-label" for="chap">Chap/Fig/Repair:<span class="req">*</span></label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='65' class="form-control" id="chap" formControlName="chap">
+          <span *ngIf="displayMessage.chap" class="help-block">{{displayMessage.chap}}</span>
+        </div>
+      </div>
+      
 
-          <span *ngIf="displayMessage.chap" class="error">{{displayMessage.chap}}</span>
-        </div>
-        </div>
+      
+      
       </div>
     </div>
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-input tabindex="66" label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" formControlName="engineeringAuthorization">
-      </aac-input>
-
+      <div class="row form-group" [class.has-error]="displayMessage.engineeringAuthorization">
+        <label class="col-sm-4 control-label" for="engineeringAuthorization">Engineering Authorization (EA):</label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='66' class="form-control" id="engineeringAuthorization" formControlName="engineeringAuthorization">
+          <span *ngIf="displayMessage.engineeringAuthorization" class="help-block">{{displayMessage.engineeringAuthorization}}</span>
+        </div>
+      </div>
       <div class="row form-group">
         <div class="col-md-offset-4 col-sm-8">
           <div *ngIf="displayMessage.message &&
@@ -130,7 +150,7 @@
         <div class="row col-md-12">
           <div class="col-md-6">
             <div class="row form-group" [class.has-error]="displayMessage.height">
-              <label class="col-sm-4 control-label" for="depth">Height(in inches):</label>
+              <label class="col-sm-4 control-label" for="height">Height(in inches):</label>
               <div class="col-sm-8">
                 <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: createNumberMask({
                           prefix:'',
@@ -148,7 +168,7 @@
           </div>
           <div class="col-md-6">
             <div class="row form-group" [class.has-error]="displayMessage.repairWidth">
-              <label class="col-sm-4 control-label" for="depth">Width(in inches):</label>
+              <label class="col-sm-4 control-label" for="repairWidth">Width(in inches):</label>
               <div class="col-sm-8">
                 <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: createNumberMask({
                           prefix:'',

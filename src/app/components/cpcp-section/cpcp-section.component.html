@@ -2,7 +2,7 @@
   <div class="row ">
     <div class="col-md-6">
       <div class="row form-group" [class.has-error]="displayMessage.cpcprelated">
-        <label class="col-sm-4 control-label">Is this a CPCP related event?</label>
+        <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio name="cpcprelated" label="Yes" value="1" tabindex="36" formControlName="cpcprelated"></aac-radio>
           <aac-radio name="cpcprelated" label="No" value="0" tabindex="36" formControlName="cpcprelated"></aac-radio>
@@ -49,7 +49,7 @@
       <div class="row form-group" [class.has-error]="displayMessage.previouslyBlended">
         <label class="col-sm-4 control-label">Corroded Area Previously Blended:<span class="req">*</span></label>
         <div class="col-sm-8">
-          <aac-radio name="previouslyBlended" label="No" value="0" tabindex="39" formControlName="previouslyBlended"></aac-radio>
+          <aac-radio name="previouslyBlended" label="Yes" value="0" tabindex="39" formControlName="previouslyBlended"></aac-radio>
           <aac-radio name="previouslyBlended" label="No" value="1" tabindex="39" formControlName="previouslyBlended"></aac-radio>
           <div *ngIf="displayMessage.previouslyBlended" class="error">{{displayMessage.previouslyBlended}}</div>
         </div>
@@ -73,15 +73,16 @@
         <label class="col-sm-4 control-label" for="corrosionType">Type of Corrosion:<span class="req">*</span></label>
         <div class="col-sm-8">
           <select class="form-control" tabindex='41' id="corrosionType" formControlName="corrosionType">
-<option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
-                <!--<option value=""> </option>
-                <option value="exfoliation">EXFOLIATION </option>
-                <option value="filiform">FILIFORM</option>
-                <option value="galvanic">GALVANIC </option>
-                <option value="intergranular">INTERGRANULAR</option>
-                <option value="other">OTHER</option>-->
+            <option value=""> </option>
+            <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+            <!--<option value=""> </option>
+            <option value="exfoliation">EXFOLIATION </option>
+            <option value="filiform">FILIFORM</option>
+            <option value="galvanic">GALVANIC </option>
+            <option value="intergranular">INTERGRANULAR</option>
+            <option value="other">OTHER</option>-->
 
-              </select>
+          </select>
           <span *ngIf="displayMessage.corrosionType" class="error">{{displayMessage.corrosionType}}</span>
         </div>
       </div>

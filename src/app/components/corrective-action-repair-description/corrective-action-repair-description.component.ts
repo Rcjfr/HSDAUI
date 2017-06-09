@@ -22,13 +22,13 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   }
   ngOnInit() {
       this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-          repairedDescribe: ['', [Validators.required]],
+          repairedDescribe: ['', []],
           repairDocument: ['', []],
-          chap: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(30)]],
+          chap: ['', [Validators.maxLength(30)]],
           engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-          externalVisible: ['', [Validators.required]],
+          externalVisible: ['', []],
           height: ['', []],
-          repairWidth: ['', []],
+          repairWidth: ['', []]
        
       }, 
           {
@@ -44,19 +44,19 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
           this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
       ));
-      //this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairDocument').valueChanges
-      //    .subscribe(val => this.setCorrectiveActionRepairDocumentFields(val)));
+      this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairDocument').valueChanges
+          .subscribe(val => this.setCorrectiveActionRepairDocumentFields(val)));
   }
-  //setCorrectiveActionRepairDocumentFields(repairDocument: string): void {
-  //    if (repairDocument != "") {
-  //        this.correctiveActionRepairDescriptionFormGroup.get('chap').clearValidators();
-  //    } else {
-  //        this.correctiveActionRepairDescriptionFormGroup.get('chap').setValidators([Validators.required,
-  //        Validators.maxLength(25),
-  //        Validators.pattern(Expressions.Alphanumerics)]);
-  //    }
-  //    this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
-  //}
+  setCorrectiveActionRepairDocumentFields(repairDocument: string): void {
+      if (repairDocument != "") {
+        this.correctiveActionRepairDescriptionFormGroup.get('chap').clearValidators();
+      } else {
+          this.correctiveActionRepairDescriptionFormGroup.get('chap').setValidators([Validators.required,
+          Validators.maxLength(25),
+          Validators.pattern(Expressions.Alphanumerics)]);
+      }
+      this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
+  }
   ngOnDestroy() {
       super.ngOnDestroy();
   }

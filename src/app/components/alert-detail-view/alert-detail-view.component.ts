@@ -78,9 +78,27 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     this.genericValidator.formSubmitted = true;
     this.markAsDirty(this.sdaForm);
     this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
-    if (!this.sdaForm.valid) { return; }
+    if (!this.sdaForm.valid) {
+      this.logErrors(this.sdaForm);
+      return;
+    }
     this.toastr.success('Details entered are valid', 'Success');
   }
+
+  logErrors(group: FormGroup | FormArray) {
+    
+    for (const i in group.controls) {
+      if (group.controls[i] instanceof FormControl) {
+        if (group.controls[i].errors) { console.log(i,group.controls[i].errors);}
+        // if(group.controls[i].invalid){
+        //   console.log(group.controls[i]);
+        // }
+      } else {
+        this.logErrors(group.controls[i]);
+      }
+    }
+  }
+
   markAsDirty(group: FormGroup | FormArray) {
     group.markAsDirty();
     for (const i in group.controls) {

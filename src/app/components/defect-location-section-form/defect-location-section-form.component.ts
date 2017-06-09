@@ -31,7 +31,7 @@ createNumberMask = createNumberMask;
           depth: ['', [Validators.required]],
 
           MFGpart: ['', [Validators.maxLength(50)]],
-          partDefective: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
+          partDefective: ['', [Validators.required, Validators.maxLength(50)]],
           MFGserial: ['', [Validators.maxLength(50)]],
           PartTT: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
           PartTso: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
