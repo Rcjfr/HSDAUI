@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component, Input
 } from '@angular/core';
 
@@ -13,7 +13,7 @@ let identifier = 0;
   selector: 'aac-input',
   template: `
     <div class="row form-group" [class.has-error]="message">
-      <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
+      <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}} <span class="req" *ngIf="_required">*</span></label>
       <div class="{{fieldCssClass}}">
         <input type="text" [attr.tabindex]='tindex'
                            [attr.maxlength]="maxlength"

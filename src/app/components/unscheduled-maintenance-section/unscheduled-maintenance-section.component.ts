@@ -19,8 +19,8 @@ unscheduledMaintenanceGroup: FormGroup;
   ngOnInit() {
     this.unscheduledMaintenanceGroup = this.fb.group({
           description: ['', [Validators.required]],
-          nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]],
-          micNo: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(50)]]
+          nonRoutineNo: ['', [Validators.maxLength(50)]],
+          micNo: ['', [Validators.maxLength(50)]]
         },
         {
           validator: CustomValidators.validateUnscheduledMaintenanceFields

@@ -17,7 +17,7 @@ export class PreciseLocationGroupComponent extends BaseFormComponent implements 
 
   ngOnInit() {
     this.preciseLocationGroup = this.fb.group({
-              stationLocation: ['', [Validators.maxLength(25)]],
+              stationLocation: ['', [Validators.maxLength(50)]],
               stringer: ['', [Validators.maxLength(25)]],
               wl: ['', [Validators.maxLength(25)]],
               bl: ['', [Validators.maxLength(25)]]

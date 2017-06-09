@@ -130,7 +130,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'stationLocation': {
 
         pattern: 'Station must be alphanumeric.',
-        maxlength: 'Station must not be more than 25 characters.'
+        maxlength: 'Station must not be more than 50 characters.'
       },
       'stringer': {
 
@@ -211,11 +211,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     causeOfDamageGroup: {
       atleastone: 'At least one cause of damage must be selected',
-      'damageDescription': {
-        required: 'Description is required.',
-        maxlength: 'Description must not be more than 250 characters.'
+      causeOfDamageDescriptionGroup: {
+        'damageDescription': {
+          required: 'Description is required.',
+          maxlength: 'Description must not be more than 250 characters.'
+        }
       }
-
     }
   },
 

@@ -57,6 +57,7 @@ import { SearchByDateRangeComponent } from './components/search/search-by-date-r
 import { SearchBySdaFormComponent } from './components/search/search-by-sda-form/search-by-sda-form.component';
 import { SearchByAircraftComponent } from './components/search/search-by-aircraft/search-by-aircraft.component';
 import { SearchByCorrosionComponent } from './components/search/search-by-corrosion/search-by-corrosion.component';
+import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-description/cause-of-damage-description.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { SearchByCorrosionComponent } from './components/search/search-by-corros
     SearchByDateRangeComponent,
     SearchBySdaFormComponent,
     SearchByAircraftComponent,
-    SearchByCorrosionComponent
+    SearchByCorrosionComponent,
+    CauseOfDamageDescriptionComponent
   ],
   imports: [
     BrowserModule,
