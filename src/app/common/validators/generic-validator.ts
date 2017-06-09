@@ -61,7 +61,7 @@ private _formSubmitted = false;
                       messages[controlKey]['message'] = '';
                     } else {
                       messages[controlKey] = '';
-                    }
+                  }
                     if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {
                         Object.keys(c.errors).map(messageKey => {
                           if (_validationMessages[controlKey][messageKey]) {

@@ -63,7 +63,7 @@
         <span *ngIf="displayMessage.chap" class="error">{{displayMessage.chap}}</span>
       </div>
     </div>-->
-    <div class="col-md-6" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value!=''">
+    <div class="col-md-6" [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value==''">
       <aac-input tabindex="65" required label="Chap/Fig/Repair:" formControlName="chap">
       </aac-input>
       <div class="row form-group">

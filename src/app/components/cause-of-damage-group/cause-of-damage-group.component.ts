@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
@@ -11,7 +11,8 @@ import { BaseFormComponent } from '../base-form.component';
   styleUrls: ['./cause-of-damage-group.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CauseOfDamageGroupComponent extends BaseFormComponent {
+export class CauseOfDamageGroupComponent extends BaseFormComponent implements OnDestroy
+{
     causeOfDamageGroup: FormGroup;
   constructor( private fb: FormBuilder) {
       super('causeOfDamageGroup');
@@ -30,15 +31,20 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent {
           missingCorrosionInhibitor: ['', []],
           damageOther: ['', []],
           
-          damageDescription: ['', [Validators.maxLength(250)]],
+          damageDescription: ['', [Validators.maxLength(250)]]
       } ,{
               validator: CustomValidators.ValidateCauseOfDamageGroupFields
           });
       this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
 
-      this.causeOfDamageGroup.get('damageOther').valueChanges
-          .subscribe(val => this.setCorrosionPreventionFields(val));
+      this.subscriptions.push(this.causeOfDamageGroup.get('damageOther').valueChanges
+          .subscribe(val => this.setCorrosionPreventionFields(val)));
   }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
+
   setCorrosionPreventionFields(isDamageCauseEvent: boolean): void {
     
       if (isDamageCauseEvent != true) {

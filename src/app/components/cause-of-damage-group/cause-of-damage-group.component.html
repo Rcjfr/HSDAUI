@@ -44,26 +44,18 @@
         <span *ngIf="displayMessage.message &&
                   (causeOfDamageGroup.get( 'damageOther').touched ||
                    causeOfDamageGroup.get('damageOther').dirty) "
-              class="error ">{{displayMessage.message}}</span>
+              class="error">{{displayMessage.message}}</span>
       </div> 
     </div>
     <div class="col-md-4">
-      <div *ngIf="causeOfDamageGroup.get('damageOther').value ==true">
-        <label class="col-sm-7 control-label" for="damageDescription">damageDescription #: <span class="req">*</span></label>
-        <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription " (ngBlur)="updateValidator()" formControlName="damageDescription">
+      <div [hidden]="causeOfDamageGroup.get('damageOther').value !=true">
+        <label class="col-sm-7 control-label" for="damageDescription">Description:<span class="req">*</span></label>
+        <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription" formControlName="damageDescription">
       </textarea>
-        <span *ngIf="displayMessage.damageDescription && 
-              (causeOfDamageGroup.get( 'damageDescription').dirty ||
-              causeOfDamageGroup.get( 'damageDescription').touched)"
-              class="error ">{{displayMessage.damageDescription    }}</span>
-        {{displayMessage.damageDescription}}
-        {{causeOfDamageGroup.get( 'damageDescription').dirty}}
-        {{causeOfDamageGroup.get( 'damageDescription').touched}}
+        
+        <span *ngIf="displayMessage.damageDescription"
+              class="error">{{displayMessage.damageDescription    }}</span>
       </div>
-      <!--<span *ngIf="displayMessage.message &&
-          causeOfDamageGroup.get( 'damageOther').touched"
-      class="error ">{{displayMessage.message}}</span>-->
-
     </div>
 
   </div>
