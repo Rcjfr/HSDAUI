@@ -56,18 +56,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       );
 
     // Merge the blur event observable with the valueChanges observable
-    Observable.merge(this.sdaForm.valueChanges, // debounceTime(400)
-      ...controlBlurs)
-      //
-      .mapTo(-1)
-      //.throttleTime(100)
-     // .sample()
-      .subscribe(value => {
-
-        const messages = this.genericValidator.processMessages(this.sdaForm);
-        //console.log('Validating...', messages);
-        this.displayMessage$.next(messages);
-      });
+    //Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges, ...controlBlurs)
+    Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges)
+              .mapTo(1)
+              .throttleTime(500)
+              // .sample()
+              .subscribe(value => {
+                //console.log(value,new Date());
+                const messages = this.genericValidator.processMessages(this.sdaForm);
+                //console.log('Validating...', messages);
+                this.displayMessage$.next(messages);
+              });
 
   }
   ngOnInit() {

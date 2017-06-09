@@ -1,12 +1,12 @@
 ﻿<div [formGroup]="correctiveActionOptionFormGroup">
-  <div class="row form-group">
-   <!-- <aac-radio id="choose" name="correctiveActionOptions" label="Choose " checked="checked" formControlName="correctiveActionOptions"></aac-radio>-->
-    <aac-radio id="defectivepart" name="correctiveActionOptions"  label="Defective Part Replaced With Identical Part #" value="1" tabindex="58" formControlName="correctiveActionOptions"></aac-radio>
+  <div>
+    <!-- <aac-radio id="choose" name="correctiveActionOptions" label="Choose " checked="checked" formControlName="correctiveActionOptions"></aac-radio>-->
+    <aac-radio id="defectivepart" name="correctiveActionOptions" label="Defective Part Replaced With Identical Part #" value="1" tabindex="58" formControlName="correctiveActionOptions"></aac-radio>
     <aac-radio id="modifiedpart" name="correctiveActionOptions" label="Modified Part # Installed " value="2" tabindex="59" formControlName="correctiveActionOptions"></aac-radio>
     <aac-radio id="repairDescribe" name="correctiveActionOptions" label="Repaired (Describe)" value="3" tabindex="60" formControlName="correctiveActionOptions"></aac-radio>
-    
+
   </div>
-<!--  {{correctiveActionOptionFormGroup.get('correctiveActionOptions').value}}-->
+  <!--  {{correctiveActionOptionFormGroup.get('correctiveActionOptions').value}}-->
   <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=3">
     <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
                                               [errorMessages]="displayMessage">
@@ -19,25 +19,25 @@
       <div class="row form-group" [class.has-error]="displayMessage.modifiedpartDescription">
         <label class="col-sm-4 control-label" for="modifiedpartDescription">Description:</label>
         <div class="col-sm-8">
-          <input type="text" tabindex='62' class="form-control" id="modifiedpartDescription"  formControlName="modifiedpartDescription">
+          <input type="text" tabindex='62' class="form-control" id="modifiedpartDescription" formControlName="modifiedpartDescription">
           <span *ngIf="displayMessage.modifiedpartDescription" class="help-block">{{displayMessage.modifiedpartDescription}}</span>
         </div>
       </div>
 
-      
-    </div>
-    </div>
-    <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value != 1">
-      <div class="col-md-6">
-        <div class="row form-group" [class.has-error]="displayMessage.defectivePartDescription">
-          <label class="col-sm-4 control-label" for="defectivePartDescription">Description:</label>
-          <div class="col-sm-8">
-            <input type="text" tabindex='61' class="form-control" id="defectivePartDescription"  formControlName="defectivePartDescription">
-            <span *ngIf="displayMessage.defectivePartDescription" class="help-block">{{displayMessage.defectivePartDescription}}</span>
-          </div>
-        </div>
 
-        
-      </div>
     </div>
+  </div>
+  <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value != 1">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.defectivePartDescription">
+        <label class="col-sm-4 control-label" for="defectivePartDescription">Description:</label>
+        <div class="col-sm-8">
+          <input type="text" tabindex='61' class="form-control" id="defectivePartDescription" formControlName="defectivePartDescription">
+          <span *ngIf="displayMessage.defectivePartDescription" class="help-block">{{displayMessage.defectivePartDescription}}</span>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
 </div>

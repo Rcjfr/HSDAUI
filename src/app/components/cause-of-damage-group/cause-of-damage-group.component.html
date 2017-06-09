@@ -49,14 +49,12 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div [hidden]="causeOfDamageGroup.get('damageOther').value !=true">
-        <label class="col-sm-7 control-label" for="damageDescription">Description:<span class="req">*</span></label>
-        <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription" formControlName="damageDescription">
-      </textarea>
-
-        <span *ngIf="displayMessage.damageDescription"
-              class="error">{{displayMessage.damageDescription }}</span>
-      </div>
+      <app-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
+                                       [parent]="causeOfDamageGroup"
+                                       [errorMessages]="displayMessage"
+                                       >
+        
+      </app-cause-of-damage-description>
     </div>
 
   </div>

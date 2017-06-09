@@ -29,44 +29,16 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
           hardwareNotInstalled: ['', []],
           poorsealingPractices: ['', []],
           missingCorrosionInhibitor: ['', []],
-          damageOther: ['', []],
-          
-          damageDescription: ['', [Validators.maxLength(250)]]
+          damageOther: ['', []]
       } ,{
               validator: CustomValidators.ValidateCauseOfDamageGroupFields
           });
       this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
-
-      this.subscriptions.push(this.causeOfDamageGroup.get('damageOther').valueChanges
-          .subscribe(val => this.setCorrosionPreventionFields(val)));
-  }
+    }
 
   ngOnDestroy(): void {
     super.ngOnDestroy();
   }
-
-  setCorrosionPreventionFields(isDamageCauseEvent: boolean): void {
-    
-      if (isDamageCauseEvent != true) {
-         
-          
-          this.causeOfDamageGroup.get('damageDescription').clearValidators();
-          
-      } else {
-         
-         
-          this.causeOfDamageGroup.get('damageDescription').setValidators([Validators.required, Validators.maxLength(250)]);
-
-         // this.causeOfDamageGroup.reset();
-      }
-    
-      this.causeOfDamageGroup.get('damageDescription').updateValueAndValidity();
-     
-      // this.causeOfDamageGroup.updateValueAndValidity();
-  }
-
- 
-
 }
 
 
