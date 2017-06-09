@@ -168,12 +168,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'PartTT': {
 
       pattern: 'Part TT must be numeric.',
-      maxlength: 'Part TT must not be more that 25 numbers.'
+      maxlength: 'Part TT must not be more than 25 numbers.'
     },
     'PartTso': {
 
       pattern: 'Part TSO must be numeric.',
-      maxlength: 'Part TSO must not be more that 25 numbers.'
+      maxlength: 'Part TSO must not be more than 25 numbers.'
     },
     'detected': {
       required: 'How Detected is required.'
