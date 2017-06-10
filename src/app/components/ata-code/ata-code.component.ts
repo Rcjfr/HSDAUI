@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../base-form.component';
 import { List } from 'immutable';
@@ -36,6 +36,6 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.ataCodesSectionFormGroup.get('ataCode2').setValue('');
     this.ataCodesSectionFormGroup.get('ataCode2').markAsPristine();
     this.ataCodesSectionFormGroup.get('ataCode2').markAsUntouched();
-    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1,true);
   }
 }
