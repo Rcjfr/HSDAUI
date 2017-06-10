@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   aircraftServiceEndPointUrl: 'http://10.62.99.190/AircraftService/api/aircraft/',
-  hsdaApiBaseUrl: 'http://meappt54.qcorpaa.aa.com/api/'
+  hsdaApiBaseUrl: 'http://localhost/hsdaapi/api/'
 };
