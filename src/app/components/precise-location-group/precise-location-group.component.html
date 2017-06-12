@@ -3,21 +3,24 @@
   <h5>(Enter From/To if Applicable)</h5>
   <div class="row">
     <div class="col-md-3">
-      <aac-input tabindex="26" label="Aircraft Station:" labelGridColumnWidth="6" fieldGridColumnWidth="11" helptext="(Body, Spar, Stab, Frame, etc.)" [message]="displayMessage.stationLocation"
-        formControlName="stationLocation">
-      </aac-input>
+      <aac-field-container label="Aircraft Station:" [message]="displayMessage.stationLocation"  helptext="(Body, Spar, Stab, Frame, etc.)"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
+        <input type="text" tabindex='26' class="form-control" formControlName="stationLocation"  >
+      </aac-field-container>
     </div>
     <div class="col-md-3">
-      <aac-input tabindex="27" label="Stringer:" labelGridColumnWidth="6" fieldGridColumnWidth="11" [message]="displayMessage.stringer" formControlName="stringer">
-      </aac-input>
+      <aac-field-container label="Stringer:" [message]="displayMessage.stringer"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
+        <input type="text" tabindex='27' class="form-control" formControlName="stringer" >
+      </aac-field-container>
     </div>
     <div class="col-md-3">
-      <aac-input tabindex="28" label="WL:" labelGridColumnWidth="6" fieldGridColumnWidth="11" [message]="displayMessage.wl" formControlName="wl">
-      </aac-input>
+      <aac-field-container label="WL:" [message]="displayMessage.wl" labelGridColumnWidth="6" fieldGridColumnWidth="11">
+        <input type="text" tabindex='28' class="form-control" formControlName="wl"  >
+      </aac-field-container>
     </div>
     <div class="col-md-3">
-      <aac-input tabindex="29" label="BL:" labelGridColumnWidth="6" fieldGridColumnWidth="11" [message]="displayMessage.bl" formControlName="bl">
-      </aac-input>
+      <aac-field-container label="BL:" [message]="displayMessage.bl" labelGridColumnWidth="6" fieldGridColumnWidth="11">
+        <input type="text" tabindex='28' class="form-control" formControlName="bl" >
+      </aac-field-container>
       <span *ngIf="displayMessage.message &&
                   (preciseLocationGroup.get( 'bl').touched ||
                    preciseLocationGroup.get('bl').dirty) "

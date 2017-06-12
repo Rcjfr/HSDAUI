@@ -1,11 +1,9 @@
 ﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
   <div class="row col-md-12">
     <div class="col-md-6">
-      
-      <div class="row form-group" [class.has-error]="displayMessage.repairedDescribe">
-        <label class="col-sm-4 control-label" for="repairedDescribe">Description:<span class="req">*</span></label>
-        <div class="col-sm-8">
-          <select tabindex='63' class="form-control" id="repairedDescribe" formControlName="repairedDescribe">
+      <div >
+        <aac-field-container required="true" label="Description:" [message]="displayMessage.repairedDescribe">
+          <select class="form-control" tabindex='63' id="repairedDescribe" formControlName="repairedDescribe">
             <option value="">Select</option>
             <option>Bonded Repair</option>
             <option>Bore/Fastener Hole(s) Rework</option>
@@ -25,80 +23,54 @@
             <option>Plug-Fastener</option>
             <option>Other</option>
           </select>
-          
           <span *ngIf="displayMessage.repairedDescribe &&
                     (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
                     correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
                   " class="error">{{displayMessage.repairedDescribe}}</span>
-        </div>
-      </div>
+        </aac-field-container>
       </div>
     </div>
-  
+  </div>
+
   <div class="row col-md-12">
     <div class="col-md-6">
-      
-      <div class="row form-group" [class.has-error]="displayMessage.repairDocument">
-        <label class="col-sm-4 control-label" for="repairDocument">Repair Document (eg. SRM, AARD,EO etc):</label>
-        <div class="col-sm-8">
-          <select tabindex='64' class="form-control" id="repairDocument" formControlName="repairDocument">
-            <option value="">Select</option>
-            <option>AARD</option>
-            <option>AARD (w/supporting EA)</option>
-            <option>AMM</option>
-            <option>EA</option>
-            <option>ECO</option>
-            <option>DNF ESO</option>
-            <option>Field EA</option>
-            <option>MCM</option>
-            <option>MRB</option>
-            <option>Shop ESO</option>
-            <option>Shop ESO (w/supporting EA)</option>
-            <option>SRM (w/supporting EA)</option>
-            <option>SRM </option>
-            <option>BCSRPP</option>
-          </select>
-          </div>
-      </div>
-      
-      
-
-      
-
-      
+      <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocument">
+        <select class="form-control" tabindex='64' id="repairDocument" formControlName="repairDocument">
+          <option value="">Select</option>
+          <option>AARD</option>
+          <option>AARD (w/supporting EA)</option>
+          <option>AMM</option>
+          <option>EA</option>
+          <option>ECO</option>
+          <option>DNF ESO</option>
+          <option>Field EA</option>
+          <option>MCM</option>
+          <option>MRB</option>
+          <option>Shop ESO</option>
+          <option>Shop ESO (w/supporting EA)</option>
+          <option>SRM (w/supporting EA)</option>
+          <option>SRM </option>
+          <option>BCSRPP</option>
+        </select>
+        <span *ngIf="displayMessage.repairedDescribe &&
+                    (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
+                    correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
+                  " class="error">{{displayMessage.repairedDescribe}}</span>
+      </aac-field-container>
     </div>
-    <!--<div class="col-md-5">
-      <div [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value =='' " [class.has-error]="displayMessage.chap">
-        <label class="col-sm-4 control-label" for="chap">Chap/Fig/Repair:<span class="req">*</span></label>
-        <input tabindex='65'  class="form-control" id="chap"
-                  formControlName="chap">
+    <div class="col-md-5">
+      <aac-field-container label="Chap/Fig/Repair:" [message]="displayMessage.chap" [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value==''">
+        <input tabindex='65' class="form-control" id="chap"
+               formControlName="chap">
+      </aac-field-container>
 
-        <span *ngIf="displayMessage.chap" class="error">{{displayMessage.chap}}</span>
-      </div>
-    </div>-->
-    <div class="col-md-6" [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value==''">
-      <div class="row form-group" [class.has-error]="displayMessage.chap">
-        <label class="col-sm-4 control-label" for="chap">Chap/Fig/Repair:<span class="req">*</span></label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='65' class="form-control" id="chap" formControlName="chap">
-          <span *ngIf="displayMessage.chap" class="help-block">{{displayMessage.chap}}</span>
-        </div>
-      </div>
-      
-
-      
-      
       </div>
     </div>
   <div class="row col-md-12">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.engineeringAuthorization">
-        <label class="col-sm-4 control-label" for="engineeringAuthorization">Engineering Authorization (EA):</label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='66' class="form-control" id="engineeringAuthorization" formControlName="engineeringAuthorization">
-          <span *ngIf="displayMessage.engineeringAuthorization" class="help-block">{{displayMessage.engineeringAuthorization}}</span>
-        </div>
-      </div>
+      <aac-field-container label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" >
+        <input type="text" tabindex='66' class="form-control" formControlName="engineeringAuthorization">
+      </aac-field-container>
       <div class="row form-group">
         <div class="col-md-offset-4 col-sm-8">
           <div *ngIf="displayMessage.message &&
@@ -145,43 +117,33 @@
     <div class="row col-md-12">
       <div class="col-md-6">
         <h4>Approximate External Doubler Repair Dimensions</h4>
-        </div>
+      </div>
     </div>
-        <div class="row col-md-12">
-          <div class="col-md-6">
-            <div class="row form-group" [class.has-error]="displayMessage.height">
-              <label class="col-sm-4 control-label" for="height">Height(in inches):</label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: createNumberMask({
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <aac-field-container label="Height(in inches):" [message]="displayMessage.height" >
+          <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: createNumberMask({
                           prefix:'',
                           allowDecimal: true,
                           includeThousandsSeparator:false,
-                        decimalLimit: 1,
+                          decimalLimit: 1,
                           integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="height">
-                <span *ngIf="displayMessage.height" class="help-block">{{displayMessage.height}}</span>
-              </div>
-            </div>
-
-            
-          </div>
-          <div class="col-md-6">
-            <div class="row form-group" [class.has-error]="displayMessage.repairWidth">
-              <label class="col-sm-4 control-label" for="repairWidth">Width(in inches):</label>
-              <div class="col-sm-8">
-                <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: createNumberMask({
+        </aac-field-container>
+      </div>
+      <div class="col-md-6">
+        <aac-field-container label="Width(in inches):" [message]="displayMessage.repairWidth" >
+          <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: createNumberMask({
                           prefix:'',
                           allowDecimal: true,
                           includeThousandsSeparator:false,
-                        decimalLimit: 1,
+                          decimalLimit: 1,
                           integerLimit: 3,
                           requireDecimal:false
     })}" formControlName="repairWidth">
-                <span *ngIf="displayMessage.repairWidth" class="help-block">{{displayMessage.repairWidth}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        </aac-field-container>
       </div>
     </div>
+  </div>
+</div>

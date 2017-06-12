@@ -26,36 +26,38 @@
   </div>
   <div class="row  form-group">
   <div class="col-md-6">
-    <div class="row form-group">
-        <label class="col-sm-4 control-label" for="corrosionType">Type of Corrosion:</label>
-        <div class="col-sm-8">
-          <select class="form-control" multiple tabindex='15' id="corrosionType" [(ngModel)]="corrosionType" >
-            <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
-          </select>
-          <input type="text" placeholder="Enter other description" tabindex="16" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()"/>
-        </div>
+    <div >
+      <aac-field-container label="Type of Corrosion:" for="corrosionType">
+        <select class="form-control" multiple tabindex='15' id="corrosionType" [(ngModel)]="corrosionType">
+          <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
+        <input type="text" placeholder="Enter other description" tabindex="16" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()" />
+      </aac-field-container>
       </div>
 
   </div>
   <div class="col-md-6">
-    <div class="row form-group">
-        <label class="col-sm-4 control-label" for="causeOfDamage">Cause of Damage:</label>
-        <div class="col-sm-8">
-          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='22' id="causeOfDamage">
-            <option>Environment</option>
-            <option>Lav/Galley Spill</option>
-            <option>Blocked Drain</option>
-            <option>Chemical Spill</option>
-            <option>Wet Insulation Blanket</option>
-            <option>Missing/Deteriorated Floorboard Tape</option>
-            <option>Correct Hardware Not Installed</option>
-            <option>Deteriorated/Poor Sealing Practices</option>
-            <option>Missing Corrosion Inhibitor</option>
-            <option value="other">Other</option>
-          </select>
-          <input type="text" placeholder="Enter other description" tabindex="23" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
+    <div>
+      <aac-field-container label="Cause of Damage:" for="causeOfDamage">
+        <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='22' id="causeOfDamage">
+          <option>Environment</option>
+          <option>Lav/Galley Spill</option>
+          <option>Blocked Drain</option>
+          <option>Chemical Spill</option>
+          <option>Wet Insulation Blanket</option>
+          <option>Missing/Deteriorated Floorboard Tape</option>
+          <option>Correct Hardware Not Installed</option>
+          <option>Deteriorated/Poor Sealing Practices</option>
+          <option>Missing Corrosion Inhibitor</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="text" placeholder="Enter other description" tabindex="23" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
+  
+      </aac-field-container>
+
+       
         </div>
       </div>
   </div>
-  </div>
+
   
