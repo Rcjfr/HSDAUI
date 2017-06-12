@@ -14,28 +14,19 @@
 
   <div class="row form-group" [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=2">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.modifiedpartDescription">
-        <label class="col-sm-4 control-label" for="modifiedpartDescription">Description:</label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='62' class="form-control" id="modifiedpartDescription" formControlName="modifiedpartDescription">
-          <span *ngIf="displayMessage.modifiedpartDescription" class="help-block">{{displayMessage.modifiedpartDescription}}</span>
-        </div>
-      </div>
+      <aac-field-container label="Description:" [message]="displayMessage.modifiedpartDescription">
+        <input type="text" tabindex='62' class="form-control" formControlName="modifiedpartDescription">
+      </aac-field-container>
 
+      
 
     </div>
   </div>
   <div class="row form-group" [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value != 1">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.defectivePartDescription">
-        <label class="col-sm-4 control-label" for="defectivePartDescription">Description:</label>
-        <div class="col-sm-8">
-          <input type="text" tabindex='61' class="form-control" id="defectivePartDescription" formControlName="defectivePartDescription">
-          <span *ngIf="displayMessage.defectivePartDescription" class="help-block">{{displayMessage.defectivePartDescription}}</span>
-        </div>
-      </div>
-
-
+      <aac-field-container label="Description:" [message]="displayMessage.defectivePartDescription">
+        <input type="text" tabindex='61' class="form-control" formControlName="defectivePartDescription">
+      </aac-field-container>
     </div>
   </div>
 </div>
