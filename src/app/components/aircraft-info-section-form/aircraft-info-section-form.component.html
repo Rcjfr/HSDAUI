@@ -1,5 +1,5 @@
 ﻿<div [formGroup]="aircraftInfoSectionFormGroup">
-  <aac-field-container required label="Aircraft #:" [message]="displayMessage.aircraftNo">
+  <aac-field-container required="true" label="Aircraft #:" [message]="displayMessage.aircraftNo">
     <!--<div class="input-group">
       <input type="text" #airCraftNo="ngModel" autocomplete="off" class="form-control" name="airCraftNo" id="airCraftNo" required
              [(ngModel)]="alert.aircraftNo"
@@ -13,26 +13,26 @@
     </div>-->
     <input type="text" class="form-control" autocomplete="off" tabindex='6' formControlName="aircraftNo"/>
   </aac-field-container>
-  <aac-field-container required label="Aircraft Manufacturer:" [message]="displayMessage.manufacturer">
+  <aac-field-container required="true" label="Aircraft Manufacturer:" [message]="displayMessage.manufacturer">
     <input type="text" tabindex='7' class="form-control" formControlName="manufacturer">
   </aac-field-container>
 
-  <aac-field-container required label="Aircraft Model/Series:" [message]="displayMessage.model">
+  <aac-field-container required="true" label="Aircraft Model/Series:" [message]="displayMessage.model">
     <input type="text" tabindex='8' class="form-control" formControlName="model">
   </aac-field-container>
 
-  <aac-field-container required label="Serial #:" [message]="displayMessage.serialNo">
+  <aac-field-container required="true" label="Serial #:" [message]="displayMessage.serialNo">
     <input type="text" tabindex='9' class="form-control" formControlName="serialNo">
   </aac-field-container>
   
-  <aac-field-container required label="Total Ship Time:" [message]="displayMessage.totalShipTime">
+  <aac-field-container required="true" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
     <input type="text" tabindex='10' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
   </aac-field-container>
 
-  <aac-field-container required label="Cycles:" [message]="displayMessage.cycles">
+  <aac-field-container required="true" label="Cycles:" [message]="displayMessage.cycles">
     <input type="text" tabindex='11' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
   </aac-field-container>
-  <aac-field-container required label="Fleet:" [message]="displayMessage.fleet">
+  <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
     <input type="text" tabindex='12' class="form-control" formControlName="fleet" (change)="appStateService.loadFleetCheckTypes($event.target.value)">
   </aac-field-container>
 

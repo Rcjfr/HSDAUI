@@ -265,7 +265,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         'chap': {
           required: 'Chap/Fig/Repair is required.',
           maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
-          pattern: 'Chap/Fig/Repair must be alphanumeric.'
+        
         },
         'engineeringAuthorization': {
 
@@ -284,6 +284,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Height must be numeric.',
           maxlength: 'Height must not be more than 3 digits.'
         }
+        
       }
     }
   }

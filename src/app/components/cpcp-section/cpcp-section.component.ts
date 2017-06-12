@@ -28,7 +28,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
       cpcprelated: cpcp,
       wsCorrosion: ['', [Validators.required]],
       corrosionLevel: ['', [Validators.required]],
-      previouslyBlended: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
+      previouslyBlended: [null, [Validators.required]],
       corrosionType: ['', [Validators.required]],
       corrosionTypeText: ['', [Validators.required, Validators.maxLength(250)]],
       corrosionTask: ['', [Validators.required, Validators.maxLength(25)]],

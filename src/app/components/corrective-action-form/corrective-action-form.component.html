@@ -6,28 +6,15 @@
       </div>
       <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
         <div class="col-md-5">
-          <div class="row form-group" [class.has-error]="displayMessage.deferralCode">
-            <label class="col-sm-4 control-label" for="deferralCode">Enter SCEPTRE Deferral Code:<span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" tabindex='56' class="form-control" id="deferralCode" formControlName="deferralCode">
-              <span class="help-block">(MON, SAD, ROB, etc)</span>
-              <span *ngIf="displayMessage.deferralCode" class="help-block">{{displayMessage.deferralCode}}</span>
-            </div>
-          </div>
-
-
+          <aac-field-container label="Enter SCEPTRE Deferral Code:" helptext="(MON, SAD, ROB, etc)" [message]="displayMessage.deferralCode" required="true">
+            <input type="text" tabindex='56' class="form-control" formControlName="deferralCode">
+          </aac-field-container>
         </div>
 
         <div class="col-md-4">
-          <div class="row form-group" [class.has-error]="displayMessage.deferral">
-            <label class="col-sm-4 control-label" for="deferral">Deferral #:<span class="req">*</span></label>
-            <div class="col-sm-8">
-              <input type="text" tabindex='57' class="form-control" id="deferral" formControlName="deferral">
-              <span *ngIf="displayMessage.deferral" class="help-block">{{displayMessage.deferral}}</span>
-            </div>
-          </div>
-
-
+          <aac-field-container label="Deferral #:"  [message]="displayMessage.deferral" required="true">
+            <input type="text" tabindex='57' class="form-control" formControlName="deferral">
+          </aac-field-container>
         </div>
       </div>
     </div>
@@ -45,18 +32,10 @@
       </div>
       <div [hidden]="correctiveActionFormGroup.get('majorRepairOptions').value != true">
         <div class="col-md-5">
-
-          <div class="row form-group" [class.has-error]="displayMessage.repairDescription">
-            <label class="col-sm-4 control-label" for="repairDescription">Description:<span class="req">*</span></label>
-            <div class="col-sm-8">
-              <textarea tabindex='71' class="form-control" id="repairDescription" formControlName="repairDescription"></textarea>
-              <span class="help-block">If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary.</span>
-              <span *ngIf="displayMessage.repairDescription" class="help-block">{{displayMessage.repairDescription}}</span>
-            </div>
-          </div>
-
-
-
+          <aac-field-container label="Description:" helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary." 
+                               [message]="displayMessage.repairDescription" required="true">
+            <textarea type="text" tabindex='71' class="form-control" formControlName="repairDescription"></textarea>
+          </aac-field-container>
         </div>
       </div>
     </div>

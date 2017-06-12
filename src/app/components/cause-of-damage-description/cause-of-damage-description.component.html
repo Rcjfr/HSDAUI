@@ -1,8 +1,5 @@
 ﻿<div [formGroup]="causeOfDamageDescriptionGroup">
-  <label class="col-sm-7 control-label" for="damageDescription">Description:<span class="req">*</span></label>
-  <textarea type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription" formControlName="damageDescription">
-      </textarea>
-  <!--<input type="text" tabindex='53' class="form-control" id="damageDescription" name="damageDescription" formControlName="damageDescription"/>-->
-  <span *ngIf="displayMessage.damageDescription"
-        class="error">{{displayMessage.damageDescription }}</span>
+  <aac-field-container required="true" label="Description:" [message]="displayMessage.damageDescription">
+    <textarea type="text" tabindex='53' cols="40" rows="5" class="form-control" formControlName="damageDescription"></textarea>
+  </aac-field-container>
 </div>

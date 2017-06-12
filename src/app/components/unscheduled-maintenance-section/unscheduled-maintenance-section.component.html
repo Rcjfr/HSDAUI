@@ -1,12 +1,5 @@
 ﻿<div [formGroup]="unscheduledMaintenanceGroup">
-  <!--<aac-input tabindex="18" required helptext="(RON,Pilot Report etc.)" label="Description:" [message]="displayMessage.description" formControlName="description">
-  </aac-input>-->
-  <aac-field-container
-    label="Description:"
-    helptext="(RON,Pilot Report etc.)"
-    [message]="displayMessage.description"
-    required                   
-  >
+  <aac-field-container    label="Description:"    helptext="(RON,Pilot Report etc.)"    [message]="displayMessage.description"    required >
     <input type="text" tabindex='18' class="form-control" formControlName="description">
   </aac-field-container>
 
