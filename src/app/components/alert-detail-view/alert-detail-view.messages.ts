@@ -262,10 +262,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         'repairDocument': {
 
         },
+        'correctiveActionChapFormGroup':{
         'chap': {
           required: 'Chap/Fig/Repair is required.',
           maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
-        
+        }
         },
         'engineeringAuthorization': {
 

@@ -58,6 +58,8 @@ import { SearchBySdaFormComponent } from './components/search/search-by-sda-form
 import { SearchByAircraftComponent } from './components/search/search-by-aircraft/search-by-aircraft.component';
 import { SearchByCorrosionComponent } from './components/search/search-by-corrosion/search-by-corrosion.component';
 import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-description/cause-of-damage-description.component';
+import { CorrectiveActionChapComponent } from './components/corrective-action-chap/corrective-action-chap.component';
+import { SearchByMaintenanceComponent } from './components/search/search-by-maintenance/search-by-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-
     SearchBySdaFormComponent,
     SearchByAircraftComponent,
     SearchByCorrosionComponent,
-    CauseOfDamageDescriptionComponent
+    CauseOfDamageDescriptionComponent,
+    CorrectiveActionChapComponent,
+   SearchByMaintenanceComponent
   ],
   imports: [
     BrowserModule,
