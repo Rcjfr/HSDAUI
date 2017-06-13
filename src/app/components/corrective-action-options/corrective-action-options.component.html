@@ -5,7 +5,7 @@
     <aac-radio id="repairDescribe" name="correctiveActionOptions" label="Repaired (Describe)" value="3" tabindex="60" formControlName="correctiveActionOptions"></aac-radio>
 
   </div>
-  <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=3">
+  <div *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==3">
     <br/>
     <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
                                               [errorMessages]="displayMessage">

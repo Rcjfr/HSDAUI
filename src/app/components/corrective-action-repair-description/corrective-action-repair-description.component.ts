@@ -15,18 +15,17 @@ import createNumberMask  from 'text-mask-addons/dist/createNumberMask';
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy {
         correctiveActionRepairDescriptionFormGroup: FormGroup;
-        
    createNumberMask = createNumberMask;
   constructor(private fb: FormBuilder) {
       super('correctiveActionRepairDescriptionFormGroup');
   }
   ngOnInit() {
       this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-          repairedDescribe: ['', []],
+          repairedDescribe: ['', [Validators.required]],
           repairDocument: ['', []],
           chap: ['', [Validators.maxLength(30)]],
           engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-          externalVisible: ['', []],
+          externalVisible: ['', [Validators.required]],
           height: ['', []],
           repairWidth: ['', []]
        
@@ -44,19 +43,11 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
           this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
       ));
-      //this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairDocument').valueChanges
-      //    .subscribe(val => this.setCorrectiveActionRepairDocumentFields(val)));
+      
+
   }
-//  setCorrectiveActionRepairDocumentFields(repairDocument: string): void {
-//      if (repairDocument == "") {
-//          this.correctiveActionRepairDescriptionFormGroup.get('chap').clearValidators();
-//      } else {
-//          this.correctiveActionRepairDescriptionFormGroup.get('chap').setValidators([Validators.required,
-//          Validators.maxLength(30),
-//        ]);
-//      }
-//      this.correctiveActionRepairDescriptionFormGroup.get('chap').updateValueAndValidity();
-//}
+
+  
 ngOnDestroy() {
       super.ngOnDestroy();
   }

@@ -23,10 +23,6 @@
             <option>Plug-Fastener</option>
             <option>Other</option>
           </select>
-          <span *ngIf="displayMessage.repairedDescribe &&
-                    (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
-                    correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
-                  " class="error">{{displayMessage.repairedDescribe}}</span>
         </aac-field-container>
       </div>
     </div>
@@ -52,17 +48,10 @@
           <option>SRM </option>
           <option>BCSRPP</option>
         </select>
-        <span *ngIf="displayMessage.repairedDescribe &&
-                    (correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').touched ||
-                    correctiveActionRepairDescriptionFormGroup.get('repairedDescribe').dirty)
-                  " class="error">{{displayMessage.repairedDescribe}}</span>
       </aac-field-container>
     </div>
-    <div class="col-md-5">
-      <aac-field-container label="Chap/Fig/Repair:" [message]="displayMessage.chap" [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value==''">
-        <input tabindex='65' class="form-control" id="chap"
-               formControlName="chap">
-      </aac-field-container>
+    <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value !=''">
+      <app-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [errorMessages]="displayMessage" ></app-corrective-action-chap>
 
       </div>
     </div>

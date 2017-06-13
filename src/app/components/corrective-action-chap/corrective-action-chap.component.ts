@@ -17,9 +17,11 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
             chap: ['', [Validators.maxLength(30), Validators.required]]
         });
         this.parent.addControl(this.formGroupName, this.correctiveActionChapFormGroup);
+        
     }
 
+   
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        this.parent.removeControl(this.formGroupName);
     }
 }
