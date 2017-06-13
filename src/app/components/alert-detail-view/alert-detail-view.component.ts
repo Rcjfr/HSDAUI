@@ -60,9 +60,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges)
               .mapTo(1)
               .throttleTime(500)
-              // .sample()
               .subscribe(value => {
-                //console.log(value,new Date());
                 const messages = this.genericValidator.processMessages(this.sdaForm);
                 //console.log('Validating...', messages);
                 this.displayMessage$.next(messages);

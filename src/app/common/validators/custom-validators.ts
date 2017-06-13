@@ -70,17 +70,17 @@ export class CustomValidators {
 
       return {'aleasttwo':true};
   };
-  static ValidateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+  static validateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
       //const cpcprelated = c.parent.get('cpcprelated');
 
       const environmentControl = c.get('environment');
       const gallySpillControl = c.get('gallySpill');
       const blockedDrainControl = c.get('blockedDrain');
       const chemicalSpillControl = c.get('chemicalSpill');
-      const wetinsulationBlanketControl = c.get('wetinsulationBlanket');
+      const wetInsulationBlanketControl = c.get('wetInsulationBlanket');
       const missingFloorBoardTapeControl = c.get('missingFloorBoardTape');
       const hardwareNotInstalledControl = c.get('hardwareNotInstalled');
-      const poorsealingPracticesControl = c.get('poorsealingPractices');
+      const poorSealingPracticesControl = c.get('poorSealingPractices');
       const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
       const parent = c.parent;
       var cpcpRealted;
@@ -98,10 +98,10 @@ export class CustomValidators {
       if (gallySpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (blockedDrainControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (chemicalSpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (wetinsulationBlanketControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (wetInsulationBlanketControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (missingFloorBoardTapeControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
       if (hardwareNotInstalledControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
-      if (poorsealingPracticesControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
+      if (poorSealingPracticesControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
       if (missingCorrosionInhibitorControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();} 
         if (damageOtherControl.value) { filledContolCount++; }
 

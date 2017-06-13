@@ -25,7 +25,7 @@ export class LookupDataEffects {
                                                 new lookupData.LoadCorrosionTypesAction(),
                                                 new lookupData.LoadDepartmentsAction(),
                                                 new lookupData.LoadDetectionMethodsAction(),
-                                                new lookupData.LoadStationsAction(),
+                                                new lookupData.LoadStationsAction()
                                                 ]
                                               ));
     @Effect()

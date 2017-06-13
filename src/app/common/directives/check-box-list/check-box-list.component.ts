@@ -33,7 +33,7 @@ export class CheckBoxListValidators {
 @Component({
   selector: 'aac-checkbox-list',
   templateUrl: './check-box-list.component.html',
-  styleUrls: ['./check-box-list.component.css'],
+  styleUrls: ['./check-box-list.component.less'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -48,6 +48,7 @@ export class CheckBoxListComponent implements ControlValueAccessor, OnInit {
   @Input() required: false;
   @Input() colClass = '';//col-sm-4
   @Input('tabindex') _tabindex = 0;
+  private data: Array<any> = [];
   public identifier = `checkbox-${counter++}`;
 
   constructor(private el: ElementRef, private renderer: Renderer) {
@@ -58,9 +59,6 @@ export class CheckBoxListComponent implements ControlValueAccessor, OnInit {
     //to remove the blue border around the control on tab
     this.renderer.setElementAttribute(this.el.nativeElement, "tabindex", null);
   }
-
-  private data: Array<any> = [];
-
   // this is the initial value set to the component
   public writeValue(obj: any) {
     if (obj) {

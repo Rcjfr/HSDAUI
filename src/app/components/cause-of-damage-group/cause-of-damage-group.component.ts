@@ -24,14 +24,14 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
           gallySpill: ['', []],
           blockedDrain: ['', []],
           chemicalSpill: ['', []],
-          wetinsulationBlanket: ['', []],
+          wetInsulationBlanket: ['', []],
           missingFloorBoardTape: ['', []],
           hardwareNotInstalled: ['', []],
-          poorsealingPractices: ['', []],
+          poorSealingPractices: ['', []],
           missingCorrosionInhibitor: ['', []],
           damageOther: ['', []]
       } ,{
-              validator: CustomValidators.ValidateCauseOfDamageGroupFields
+              validator: CustomValidators.validateCauseOfDamageGroupFields
           });
       this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
     }

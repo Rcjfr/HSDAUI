@@ -12,19 +12,20 @@ import * as models from '../models/index';
 import '../rxjs-extensions';
 @Injectable()
 export class AlertEffects {
-    @Effect()
-    loadNoseNumbers$: Observable<Action> = this.actions$
-                                              .ofType(selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS)
-                                              .map((action: selectedAlert.LoadNoseNumbersAction) => action.payload)
-                                              .switchMap((search: string) => {
-                                                  return this.aircraftService.queryNoseNumbers(search)
-                                                          .map((noseNumbers: string[]) => {
-                                                          return new selectedAlert.LoadNoseNumbersCompleteAction(noseNumbers);
-                                              })
-                                              .catch((err) => {
-                                                      return of(new selectedAlert.LoadNoseNumbersFailAction('Failed to load Nose Numbers'));
-                                                    });
-                                            });
+    // TODO: commented till AircraftInfo Service is ready
+    //@Effect()
+    //loadNoseNumbers$: Observable<Action> = this.actions$
+    //                                          .ofType(selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS)
+    //                                          .map((action: selectedAlert.LoadNoseNumbersAction) => action.payload)
+    //                                          .switchMap((search: string) => {
+    //                                              return this.aircraftService.queryNoseNumbers(search)
+    //                                                      .map((noseNumbers: string[]) => {
+    //                                                      return new selectedAlert.LoadNoseNumbersCompleteAction(noseNumbers);
+    //                                          })
+    //                                          .catch((err) => {
+    //                                                  return of(new selectedAlert.LoadNoseNumbersFailAction('Failed to load Nose Numbers'));
+    //                                                });
+    //                                        });
     @Effect()
     loadAircraftInfo$: Observable<Action> = this.actions$
                                               .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO)
