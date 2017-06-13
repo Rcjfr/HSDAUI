@@ -5,51 +5,61 @@ import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
-import createNumberMask  from 'text-mask-addons/dist/createNumberMask';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
-    selector: 'app-corrective-action-repair-description',
-    templateUrl: './corrective-action-repair-description.component.html',
-    styleUrls: ['./corrective-action-repair-description.component.less'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-corrective-action-repair-description',
+  templateUrl: './corrective-action-repair-description.component.html',
+  styleUrls: ['./corrective-action-repair-description.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy {
-        correctiveActionRepairDescriptionFormGroup: FormGroup;
-   createNumberMask = createNumberMask;
+  correctiveActionRepairDescriptionFormGroup: FormGroup;
+  createNumberMask = createNumberMask;
+  public decimalsNumberMask(decimalLimit: number, integerLimit: number) {
+    return createNumberMask({
+      prefix: '',
+      allowDecimal: true,
+      includeThousandsSeparator: false,
+      decimalLimit: decimalLimit,
+      integerLimit: integerLimit,
+      requireDecimal: false
+    });
+  }
   constructor(private fb: FormBuilder) {
-      super('correctiveActionRepairDescriptionFormGroup');
+    super('correctiveActionRepairDescriptionFormGroup');
   }
   ngOnInit() {
-      this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-          repairedDescribe: ['', [Validators.required]],
-          repairDocument: ['', []],
-          chap: ['', [Validators.maxLength(30)]],
-          engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-          externalVisible: ['', [Validators.required]],
-          height: ['', []],
-          repairWidth: ['', []]
-       
-      }, 
-          {
-              validator: CustomValidators.validateCorrectiveActionRepairFields
-          }
-      );
-     
-       
-      this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
-      this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('height').valueChanges.debounceTime(1000).subscribe(v =>
-          this.correctiveActionRepairDescriptionFormGroup.get('height').setValue(Math.round(v))
-          ));
-      this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
-          this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
-      ));
-      
+    this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
+      repairedDescribe: ['', [Validators.required]],
+      repairDocument: ['', []],
+      chap: ['', [Validators.maxLength(30)]],
+      engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
+      externalVisible: ['', [Validators.required]],
+      height: ['', []],
+      repairWidth: ['', []]
+
+    },
+      {
+        validator: CustomValidators.validateCorrectiveActionRepairFields
+      }
+    );
+
+
+    this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
+    this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('height').valueChanges.debounceTime(1000).subscribe(v =>
+      this.correctiveActionRepairDescriptionFormGroup.get('height').setValue(Math.round(v))
+    ));
+    this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
+      this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
+    ));
+
 
   }
 
-  
-ngOnDestroy() {
-      super.ngOnDestroy();
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
-  
+
 }

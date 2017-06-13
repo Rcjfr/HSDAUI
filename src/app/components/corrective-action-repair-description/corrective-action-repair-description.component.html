@@ -111,26 +111,12 @@
     <div class="row col-md-12">
       <div class="col-md-6">
         <aac-field-container label="Height(in inches):" [message]="displayMessage.height" >
-          <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 1,
-                          integerLimit: 3,
-                          requireDecimal:false
-    })}" formControlName="height">
+          <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="height">
         </aac-field-container>
       </div>
       <div class="col-md-6">
         <aac-field-container label="Width(in inches):" [message]="displayMessage.repairWidth" >
-          <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 1,
-                          integerLimit: 3,
-                          requireDecimal:false
-    })}" formControlName="repairWidth">
+          <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairWidth">
         </aac-field-container>
       </div>
     </div>
