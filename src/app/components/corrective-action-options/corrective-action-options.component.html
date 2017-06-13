@@ -13,7 +13,7 @@
     </app-corrective-action-repair-description>
   </div>
 
-  <div  [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value !=2">
+  <div  *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==2">
     <br/>
       <div class="col-md-6">
           <aac-field-container label="Description:" [message]="displayMessage.modifiedpartDescription" required="true">
@@ -22,7 +22,7 @@
       </div>
 
   </div>
-  <div [hidden]="correctiveActionOptionFormGroup.get('correctiveActionOptions').value != 1">
+  <div *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value == 1">
     <br/>
     <div class="col-md-6">
       <aac-field-container label="Description:" [message]="displayMessage.defectivePartDescription" required="true">

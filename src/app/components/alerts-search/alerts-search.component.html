@@ -1,4 +1,4 @@
-<h1>Search Filters
+﻿<h1>Search Filters
   <h5 class="pull-right">
     <a href="" (click)="expandCollapseAll(true)">Expland All</a>
     <a href="" (click)="expandCollapseAll(false)">Collapse All</a>
@@ -35,6 +35,13 @@
       <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
     </div>
     <app-search-by-corrosion></app-search-by-corrosion>
+  </accordion-group>
+  <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Maintenance
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-maintenance></app-search-by-maintenance>
   </accordion-group>
 </accordion>
 </form>

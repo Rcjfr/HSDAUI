@@ -1,7 +1,7 @@
 ﻿<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
   <div class="panel panel-default">
   <div class="panel-heading">General Information</div>
-    <app-general-section-form
+    <!--<app-general-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
     ></app-general-section-form>
@@ -9,7 +9,7 @@
     <app-defect-location-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
-    ></app-defect-location-section-form>
+    ></app-defect-location-section-form>-->
     <div class="panel-heading">Corrosion Prevention Control Program</div>
     <app-cpcp-section-form
     [parent]="sdaForm"
