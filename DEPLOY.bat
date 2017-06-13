@@ -3,6 +3,7 @@
 IF "%1" == "QA" (
     ng build -e qa --output-hashing=all
 	robocopy dist \\MEAPPT53.QCORPAA.AA.COM\D$\HSDA\HSDA.UI /E *.* /PURGE
+    robocopy dist \\mewebt06.qcorpaa.aa.com\D$\HSDA\HSDA.UI /E *.* /PURGE
 	@REM ECHO "DEPLOY TO QA"
 	)
 IF "%1" == "DEV" (

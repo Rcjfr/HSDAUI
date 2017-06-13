@@ -16,11 +16,20 @@
   <div class="col-md-6">
     <div class="row form-group">
           <label class="col-sm-4 control-label">Corrosion Level:</label>
-          <div class="col-sm-8">
-            <aac-checkbox-container *ngFor="let ac of corrosionLevels$ | async;let i=index" [label]="ac.description">
-              <input type="checkbox" [tabindex]="18+i" [value]="ac.id" [checked]="corrosionLevels.indexOf(ac.id.toString())>-1" (change)="onChangeCorrosionLevel($event)"  />
-            </aac-checkbox-container>
-          </div>
+      <div class="col-sm-8">
+        <aac-checkbox-list 
+          [source]="corrosionLevels$ | async"
+          labelField="description"
+          valueField="id"
+          colClass="col-sm-4"
+          tabindex="18"
+        >
+        </aac-checkbox-list>
+
+        <!--<aac-checkbox-container *ngFor="let ac of corrosionLevels$ | async;let i=index" [label]="ac.description">
+          <input type="checkbox" [tabindex]="18+i" [value]="ac.id" [checked]="corrosionLevels.indexOf(ac.id.toString())>-1" (change)="onChangeCorrosionLevel($event)"/>
+        </aac-checkbox-container>-->
+      </div>
         </div>
   </div>
   </div>

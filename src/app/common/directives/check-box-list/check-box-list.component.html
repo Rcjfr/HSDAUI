@@ -1,0 +1,20 @@
+﻿<div class="row">
+  <div [attr.class]="colClass" *ngFor="let item of source;let i = index">
+    <div class="customComponent">
+      <div>
+        <input type="checkbox"
+               [value]="item[valueField]"
+               [attr.id]="identifier+'_'+ i"
+               (change)="onChange($event)"
+               (blur)="onTouch()"
+               [checked]="isChecked(item)"
+               [attr.tabindex]="_tabindex">
+
+        <label class="checkboxLabel" [attr.for]="identifier+'_'+ i">
+          <span class="control"></span>
+        </label>
+      </div>
+    </div>
+    <label [attr.for]="identifier+'_'+ i">{{item[labelField]}}</label>
+  </div>
+</div>

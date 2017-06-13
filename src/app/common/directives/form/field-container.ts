@@ -33,7 +33,14 @@ export class FieldContainer implements OnInit {
   get fieldCssClass() {
     return `col-sm-${this.fieldGridColumnWidth}`; //`col-sm-${12 - this.labelGridColumnWidth}`;
   }
-  @Input() public required: false;
+  private _required = false;
+  @Input('required')
+  set required(req:any) {
+    this._required = (req === '') ? true : req;
+  }
+  get required() {
+    return this._required;
+  }
   @ViewChild(FormControlName, { read: ElementRef }) formInputElement: ElementRef;
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngOnInit() {
