@@ -61,6 +61,8 @@ import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-
 import { CorrectiveActionChapComponent } from './components/corrective-action-chap/corrective-action-chap.component';
 import { SearchByMaintenanceComponent } from './components/search/search-by-maintenance/search-by-maintenance.component';
 import { CheckBoxListComponent } from './common/directives/check-box-list/check-box-list.component';
+import { CurrentStatusSectionComponent } from './components/current-status-section/current-status-section.component';
+
 
 @NgModule({
   declarations: [
@@ -91,7 +93,9 @@ import { CheckBoxListComponent } from './common/directives/check-box-list/check-
     CauseOfDamageDescriptionComponent,
     CorrectiveActionChapComponent,
    SearchByMaintenanceComponent,
-    CheckBoxListComponent
+    CheckBoxListComponent,
+    CurrentStatusSectionComponent
+    
   ],
   imports: [
     BrowserModule,
