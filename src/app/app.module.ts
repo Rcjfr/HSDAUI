@@ -58,6 +58,7 @@ import { SearchBySdaFormComponent } from './components/search/search-by-sda-form
 import { SearchByAircraftComponent } from './components/search/search-by-aircraft/search-by-aircraft.component';
 import { SearchByCorrosionComponent } from './components/search/search-by-corrosion/search-by-corrosion.component';
 import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-description/cause-of-damage-description.component';
+import { CheckBoxListComponent } from './common/directives/check-box-list/check-box-list.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-
     SearchBySdaFormComponent,
     SearchByAircraftComponent,
     SearchByCorrosionComponent,
-    CauseOfDamageDescriptionComponent
+    CauseOfDamageDescriptionComponent,
+    CheckBoxListComponent
   ],
   imports: [
     BrowserModule,
