@@ -5,23 +5,7 @@
         <aac-field-container required="true" label="Description:" [message]="displayMessage.repairedDescribe">
           <select class="form-control" tabindex='63' id="repairedDescribe" formControlName="repairedDescribe">
             <option value="">Select</option>
-            <option>Bonded Repair</option>
-            <option>Bore/Fastener Hole(s) Rework</option>
-            <option>Complex Repair</option>
-            <option>Doubler Repair, External</option>
-            <option>Doubler Repair, Flush</option>
-            <option>Doubler Repair, Internal</option>
-            <option>Non-reinforcing, Repair </option>
-            <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
-            <option>Part Replacement - Entire</option>
-            <option>Replacement - Sub Assembly</option>
-            <option>Refinish - Scribe Line</option>
-            <option>Reinforcing - Modification</option>
-            <option>Restore Bonded Material</option>
-            <option>Splice Repair</option>
-            <option>Plug Reinforcement ( Nested Angles)</option>
-            <option>Plug-Fastener</option>
-            <option>Other</option>
+            <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
         </aac-field-container>
       </div>
@@ -33,20 +17,7 @@
       <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocument">
         <select class="form-control" tabindex='64' id="repairDocument" formControlName="repairDocument">
           <option value="">Select</option>
-          <option>AARD</option>
-          <option>AARD (w/supporting EA)</option>
-          <option>AMM</option>
-          <option>EA</option>
-          <option>ECO</option>
-          <option>DNF ESO</option>
-          <option>Field EA</option>
-          <option>MCM</option>
-          <option>MRB</option>
-          <option>Shop ESO</option>
-          <option>Shop ESO (w/supporting EA)</option>
-          <option>SRM (w/supporting EA)</option>
-          <option>SRM </option>
-          <option>BCSRPP</option>
+          <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>
       </aac-field-container>
     </div>

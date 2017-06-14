@@ -21,7 +21,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   ngOnInit() {
       this.causeOfDamageGroup = this.fb.group({ 
           environment: ['', []],
-          gallySpill: ['', []],
+          galleySpill: ['', []],
           blockedDrain: ['', []],
           chemicalSpill: ['', []],
           wetInsulationBlanket: ['', []],
