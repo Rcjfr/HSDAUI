@@ -62,6 +62,7 @@ import { CorrectiveActionChapComponent } from './components/corrective-action-ch
 import { SearchByMaintenanceComponent } from './components/search/search-by-maintenance/search-by-maintenance.component';
 import { CheckBoxListComponent } from './common/directives/check-box-list/check-box-list.component';
 import { CurrentStatusSectionComponent } from './components/current-status-section/current-status-section.component';
+import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { CurrentStatusSectionComponent } from './components/current-status-secti
     CorrectiveActionChapComponent,
    SearchByMaintenanceComponent,
     CheckBoxListComponent,
-    CurrentStatusSectionComponent
+    CurrentStatusSectionComponent,
+    SearchByCpcpDispositionComponent
     
   ],
   imports: [
