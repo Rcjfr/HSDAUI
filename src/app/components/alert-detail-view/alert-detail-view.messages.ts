@@ -230,7 +230,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'deferral': {
       required: 'Deferral #  is required.',
-      pattern: 'Deferral # must be alphanumeric..',
+      pattern: 'Deferral # must be alphanumeric.',
       maxlength: 'Deferral # must not be more than 15 characters. '
     },
     'repairDescription': {
