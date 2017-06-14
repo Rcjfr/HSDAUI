@@ -36,8 +36,7 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
     if (this.formGroup.get('rejectReason').value == '') {
       
       this.formGroup.get('rejectReason').markAsDirty();
-      this.formGroup.get('rejectReason').setErrors({ 'required': 'required' });
-      return;
+      this.formGroup.get('rejectReason').setErrors({ 'required': true });
     }
   }
 
