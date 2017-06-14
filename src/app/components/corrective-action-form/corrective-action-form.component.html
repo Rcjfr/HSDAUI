@@ -1,0 +1,57 @@
+﻿<div class="panel-body" [formGroup]="correctiveActionFormGroup">
+  <div class="row form-group">
+
+    <div class="col-sm-2">
+      <aac-checkbox id="deferred" name="deferredSectionOptions" label="Deferred" value="0" tabindex="55" formControlName="deferredSectionOptions"></aac-checkbox>
+    </div>
+    <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
+      <div class="col-sm-6">
+        <aac-field-container label="Enter SCEPTRE Deferral Code:"
+                             helptext="(MON, SAD, ROB, etc)"
+                             [message]="displayMessage.deferralCode"
+                             required>
+          <input type="text" tabindex='56' class="form-control" formControlName="deferralCode">
+        </aac-field-container>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="row form-group" [class.has-error]="displayMessage.deferral">
+          <label class="col-sm-4 control-label" for="deferral">Deferral #:<span class="req">*</span></label>
+          <div class="col-sm-8">
+            <input type="text" tabindex='57' class="form-control" id="deferral" formControlName="deferral">
+            <span *ngIf="displayMessage.deferral" class="help-block">{{displayMessage.deferral}}</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></app-corrective-action-options>
+    </div>
+  </div>
+  <div class="row form-group">
+
+    <div class="col-sm-2">
+      <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="70" formControlName="majorRepairOptions"></aac-checkbox>
+    </div>
+    <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('majorRepairOptions').value != true">
+
+      <aac-field-container required
+                           helptext="If major, repair document must be an SRM Reference or a US Airways Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+                           label="Description:"
+                           labelGridColumnWidth="2"
+                           [message]="displayMessage.repairDescription">
+        <textarea tabindex='71' class="form-control" formControlName="repairDescription"></textarea>
+      </aac-field-container>
+
+
+
+
+    </div>
+
+  </div>
+</div>

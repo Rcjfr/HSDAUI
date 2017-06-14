@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlertDetailViewComponent } from './alert-detail-view.component';
+import { AlertDetailViewComponent } from '../alert-detail-view/alert-detail-view.component';
 
 describe('AlertDetailViewComponent', () => {
   let component: AlertDetailViewComponent;

@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component,
 } from '@angular/core';
 
@@ -12,7 +12,7 @@ let identifier = 0;
   template: `
 
         <div class="row form-group" [class.has-error]="message">
-        <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}}<span class="req" *ngIf="_required">*</span></label>
+        <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}} <span class="req" *ngIf="_required">*</span></label>
         <div class="{{fieldCssClass}}">
           <select [attr.tabindex]='tindex'
                   [disabled]="disabled" (blur)="touch()"

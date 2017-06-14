@@ -1,0 +1,61 @@
+﻿<div [formGroup]="causeOfDamageGroup">
+  <h4>Cause of Damage:</h4>
+  <div class="row form-group">
+    <div class="col-md-4">
+      <aac-checkbox label="Environment" tabindex="43" name="causeOfDamage" formControlName="environment"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Lav/Galley Spill" tabindex="44" formControlName="galleySpill"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Blocked Drain" tabindex="45" formControlName="blockedDrain"></aac-checkbox>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-4">
+      <aac-checkbox label="Chemical Spill" tabindex="46" formControlName="chemicalSpill"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Wet Insulation Blanket" tabindex="47" formControlName="wetInsulationBlanket"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Missing/Deteriorated Floorboard Tape" tabindex="48" formControlName="missingFloorBoardTape"></aac-checkbox>
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-4">
+      <aac-checkbox label="Correct Harware Not Installed" tabindex="49" formControlName="hardwareNotInstalled"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Deteriorated/Poor Sealing Practices" tabindex="50" formControlName="poorSealingPractices"></aac-checkbox>
+    </div>
+    <div class="col-md-4">
+      <aac-checkbox label="Missing Corrosion Inhibitor" tabindex="51" formControlName="missingCorrosionInhibitor"></aac-checkbox>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-md-4">
+      <aac-checkbox label="Other" tabindex="52" formControlName="damageOther" [message]="displayMessage.damageOther"></aac-checkbox>
+      <div>
+        <span *ngIf="displayMessage.message &&
+                  (causeOfDamageGroup.get( 'damageOther').touched ||
+                   causeOfDamageGroup.get('damageOther').dirty) "
+              class="error">{{displayMessage.message}}</span>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <app-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
+                                       [parent]="causeOfDamageGroup"
+                                       [errorMessages]="displayMessage"
+                                       >
+        
+      </app-cause-of-damage-description>
+    </div>
+
+  </div>
+  <br/>
+
+</div>
+

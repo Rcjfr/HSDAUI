@@ -1,0 +1,95 @@
+﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <div >
+        <aac-field-container required="true" label="Description:" [message]="displayMessage.repairedDescribe">
+          <select class="form-control" tabindex='63' id="repairedDescribe" formControlName="repairedDescribe">
+            <option value="">Select</option>
+            <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
+          </select>
+        </aac-field-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocument">
+        <select class="form-control" tabindex='64' id="repairDocument" formControlName="repairDocument">
+          <option value="">Select</option>
+          <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+    <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value !=''">
+      <app-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [errorMessages]="displayMessage" ></app-corrective-action-chap>
+
+      </div>
+    </div>
+  <div class="row col-md-12">
+    <div class="col-md-6">
+      <aac-field-container label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization" >
+        <input type="text" tabindex='66' class="form-control" formControlName="engineeringAuthorization">
+      </aac-field-container>
+      <div class="row form-group">
+        <div class="col-md-offset-4 col-sm-8">
+          <div *ngIf="displayMessage.message &&
+                    (correctiveActionRepairDescriptionFormGroup.get('engineeringAuthorization').touched ||
+                    correctiveActionRepairDescriptionFormGroup.get('engineeringAuthorization').dirty)
+                  " class="error">{{displayMessage.message}}</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div [class.has-error]="displayMessage.externalVisible">
+        <div class="row form-group">
+          <label class="col-sm-4 control-label">Externally Visible?<span class="req">*</span></label>
+          <div class="col-sm-8">
+            <div class="customComponent" style="padding-left:20px;">
+              <div>
+                <input type="radio" id="externalVisible" name="externalVisible" tabindex='67' value="0" formControlName="externalVisible">
+                <label for="externalVisible">
+                  <span class="control"></span>
+                  Yes
+                </label>
+
+              </div>
+            </div>
+            <div class="customComponent" style="padding-left:20px;">
+              <div>
+                <input type="radio" id="noexternalVisible" name="externalVisible" value="1" formControlName="externalVisible">
+                <label for="noexternalVisible">
+                  <span class="control"></span>
+                  No
+                </label>
+              </div>
+            </div>
+            <div *ngIf="displayMessage.externalVisible" class="error">{{displayMessage.externalVisible}}</div>
+          </div>
+
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <h4>Approximate External Doubler Repair Dimensions</h4>
+      </div>
+    </div>
+    <div class="row col-md-12">
+      <div class="col-md-6">
+        <aac-field-container label="Height(in inches):" [message]="displayMessage.height" >
+          <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="height">
+        </aac-field-container>
+      </div>
+      <div class="col-md-6">
+        <aac-field-container label="Width(in inches):" [message]="displayMessage.repairWidth" >
+          <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairWidth">
+        </aac-field-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,7 +46,8 @@ export class CustomValidators {
     //return null;
   };
 
-  static ValidatePercisionLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+  static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+      
       const stationLocationControl = c.get('stationLocation');
       const stringerControl = c.get('stringer');
       const wlControl = c.get('wl');
@@ -68,5 +69,100 @@ export class CustomValidators {
 
 
       return {'aleasttwo':true};
+  };
+  static validateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+      //const cpcprelated = c.parent.get('cpcprelated');
+
+      const environmentControl = c.get('environment');
+      const galleySpillControl = c.get('galleySpill');
+      const blockedDrainControl = c.get('blockedDrain');
+      const chemicalSpillControl = c.get('chemicalSpill');
+      const wetInsulationBlanketControl = c.get('wetInsulationBlanket');
+      const missingFloorBoardTapeControl = c.get('missingFloorBoardTape');
+      const hardwareNotInstalledControl = c.get('hardwareNotInstalled');
+      const poorSealingPracticesControl = c.get('poorSealingPractices');
+      const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
+      const parent = c.parent;
+      var cpcpRelated;
+      if (parent != undefined)
+       cpcpRelated = c.parent.get('cpcprelated');
+      
+      const damageOtherControl = c.get('damageOther');
+      var filledContolCount: number;
+    // var damageOtherTouched = damageOtherControl.touched;
+      //if (cpcprelated.value != "1") return null;
+      filledContolCount = 0;
+      if (environmentControl.value ) {
+          filledContolCount++; damageOtherControl.markAsUntouched();
+      }
+      if (galleySpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (blockedDrainControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (chemicalSpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (wetInsulationBlanketControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (missingFloorBoardTapeControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
+      if (hardwareNotInstalledControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
+      if (poorSealingPracticesControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();}
+      if (missingCorrosionInhibitorControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched();} 
+        if (damageOtherControl.value) { filledContolCount++; }
+
+       
+        if (parent == undefined)
+            return null;
+        //if ((filledContolCount == 0 && cpcpRealted.value == 1 && !damageOtherControl.touched))
+        //{ return { 'atleastone': true }; }
+        if (cpcpRelated.value != 1)
+        { return null; }
+        if ((damageOtherControl.touched && damageOtherControl.value == false))
+        { return { 'atleastone': true }; }
+
+       
+        if ((filledContolCount >= 1 && cpcpRelated.value == 0) || (filledContolCount >= 1 && cpcpRelated.value == 1))
+        { return null; }
+
+         
+        if (filledContolCount == 0 && damageOtherControl.value != false && damageOtherControl.value == "") 
+            return { 'atleastone': true };
+        if (filledContolCount == 0 && cpcpRelated.value == 1)
+            return { 'atleastone': true };
+        if (!damageOtherControl.touched)
+        { return null; }
+        return null;
+  };
+
+  //static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
+      
+
+  //    const repairDocument = c.get('repairDocument');
+  //    const engineeringAuthorization = c.get('engineeringAuthorization');
+  //    const parent = c.parent;
+  //    var correctiveActionOption;
+      
+  //    if (parent != undefined)
+  //        correctiveActionOption = parent.get('correctiveActionOptions');
+
+  //    if (parent == undefined)
+  //        return null;
+  //    if (repairDocument.value || engineeringAuthorization.value) {
+
+  //        return null;
+  //    }
+
+  //    if (correctiveActionOption.value == null)
+  //        return null;
+  //        if ((correctiveActionOption.value == 3) && (repairDocument.value || engineeringAuthorization.value))
+  //        return { 'atleastone': true };
+
+  //    return { 'atleastone': true };
+      
+  //};
+  static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
+
+      const repairDocumentControl = c.get('repairDocument');
+      const engineeringAuthorizationControl = c.get('engineeringAuthorization');
+      if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
+          return null;
+      }
+      return { 'atleastone': true };
+      
   };
 }

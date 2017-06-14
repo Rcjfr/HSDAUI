@@ -32,36 +32,36 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'aircraftNo': {
         required: 'Aircraft # is required.',
         pattern: 'Aircraft # must be alphanumeric.',
-        maxlength: 'Aircraft # can not be more than 5 characters.'
+        maxlength: 'Aircraft # must not be more than 5 characters.'
       },
       'manufacturer': {
         required: 'Manufacturer is required.',
         pattern: 'Manufacturer must be alphanumeric.',
-        maxlength: 'Manufacturer can not be more than 100 characters.'
+        maxlength: 'Manufacturer must not be more than 100 characters.'
       },
       'model': {
         required: 'Aircraft Model/Series is required.',
         pattern: 'Aircraft Model/Series must be alphanumeric.',
-        maxlength: 'Aircraft Model/Series can not be more than 15 characters.'
+        maxlength: 'Aircraft Model/Series must not be more than 15 characters.'
       },
       'serialNo': {
         required: 'Serial # is required.',
         pattern: 'Serial # must be alphanumeric.',
-        maxlength: 'Serial # can not be more than 10 characters.'
+        maxlength: 'Serial # must not be more than 10 characters.'
       },
       'totalShipTime': {
         required: 'Total Ship Time is required.',
         pattern: 'Total Ship Time must be numeric.',
-        maxlength: 'Total Ship Time can not be more that 25 numbers.'
+        maxlength: 'Total Ship Time must not be more than 25 numbers.'
       },
       'cycles': {
         required: 'Cycles is required.',
         pattern: 'Cycles must be numeric.',
-        maxlength: 'Cycles can not be more that 25 numbers.'
+        maxlength: 'Cycles must not be more than 25 numbers.'
       },
       'fleet': {
-          required: 'Fleet is required.',
-          maxlength: 'Fleet can not be more that 20 characters.'
+        required: 'Fleet is required.',
+        maxlength: 'Fleet must not be more than 20 characters.'
       }
     },
     'defectDiscoveredDuringSectionFormGroup': {
@@ -74,22 +74,27 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           required: 'Check Type is required.'
         },
         'routineNo': {
-          pattern: 'Routine # must contain only alphanumerics.'
+          pattern: 'Routine # must contain only alphanumerics.',
+          maxlength: 'Routine # must not be more than 50 characters.  '
         },
         'nonRoutineNo': {
-          pattern: 'Non Routine # must contain only alphanumerics.'
+          pattern: 'Non-Routine # must contain only alphanumerics.',
+          maxlength: 'Non-Routine # must not be more than 50 characters. '
         }
       },
       'unscheduledMaintenanceGroup': {
         atleastone: 'Non-Routine # or MIC # is required.',
         'description': {
-          required: 'Description is required for unscheduled maintenance.'
+          required: 'Description is required.'
         },
         'nonRoutineNo': {
-          pattern: 'Non Routine # must contain only alphanumerics.'
+          pattern: 'Non-Routine # must contain only alphanumerics.',
+          maxlength: 'Non-Routine # must not be more than 50 characters. '
+
         },
         'micNo': {
-          pattern: 'MIC # must contain only alphanumerics.'
+          pattern: 'MIC # must contain only alphanumerics.',
+          maxlength: 'MIC # must not be more than 50 characters. '
         }
       }
     }
@@ -97,11 +102,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   defectLocationSectionFormGroup: {
     'defectType': {
       required: 'Defect Type is required.',
-      maxlength: 'Defect Type must be not more than 250 characters.'
+      maxlength: 'Defect Type must not be more than 250 characters.'
     },
     'defectDescription': {
       required: 'Defect Description is required.',
-      maxlength: 'Defect Description must be not more than 250 characters.'
+      maxlength: 'Defect Description must not be more than 250 characters.'
     },
     'length': {
       required: 'Length  is required.',
@@ -125,7 +130,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'stationLocation': {
 
         pattern: 'Station must be alphanumeric.',
-        maxlength: 'Station must not be more than 25 characters.'
+        maxlength: 'Station must not be more than 50 characters.'
       },
       'stringer': {
 
@@ -134,22 +139,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       'wl': {
 
-        pattern: 'wl must be alphanumeric.',
-        maxlength: 'wl must not be more than 25 characters.'
+        pattern: 'WL must be alphanumeric.',
+        maxlength: 'WL must not be more than 25 characters.'
       },
       'bl': {
 
-        pattern: 'bl must be alphanumeric.',
-        maxlength: 'bl must not be more than 25 characters.'
+        pattern: 'BL must be alphanumeric.',
+        maxlength: 'BL must not be more than 25 characters.'
       }
-    }
-
-
-    ,
+    },
     'MFGpart': {
 
-      pattern: 'MFG Part must be alphanumeric.',
-      maxlength: 'MFG Part must not be more than 50 characters.'
+      pattern: 'MFG Part # must be alphanumeric.',
+      maxlength: 'MFG Part # must not be more than 50 characters.'
     }
     ,
     'partDefective': {
@@ -160,18 +162,18 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     ,
     'MFGserial': {
 
-      pattern: 'MFG Serial must be alphanumeric.',
-      maxlength: 'MFG Serial must not be more than 50 characters.'
+      pattern: 'MFG Serial # must be alphanumeric.',
+      maxlength: 'MFG Serial # must not be more than 50 characters.'
     },
     'PartTT': {
 
       pattern: 'Part TT must be numeric.',
-      maxlength: 'Part TT must be not more that 25 numbers.'
+      maxlength: 'Part TT must not be more than 25 numbers.'
     },
     'PartTso': {
 
       pattern: 'Part TSO must be numeric.',
-      maxlength: 'Part TSO must be not more that 25 numbers.'
+      maxlength: 'Part TSO must not be more than 25 numbers.'
     },
     'detected': {
       required: 'How Detected is required.'
@@ -180,32 +182,111 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   },
   cpcpSectionGroup: {
     cpcprelated: {
-      required: ' CPCP  is required.'
+      required: 'CPCP  is required.'
     },
     wsCorrosion: {
-      required: ' Widespread Corrosion is required.'
+      required: 'Widespread Corrosion is required.'
     },
     corrosionLevel: {
-      required: ' Corresion level is required.'
+      required: 'Corrosion level is required.'
     },
     previouslyBlended: {
-      required: ' Corroded Area Previously Blended  required.'
+      required: 'Corroded Area Previously Blended is required.'
     },
     corrosionTask: {
-      required: ' Corrosion Task required.',
-      pattern: 'Corrosion Task must be alphanumeric.',
-      maxlength: 'Corrosion Task must be not more that 25 numbers.'
-      
+      required: 'Corrosion Task # required.',
+      pattern: 'Corrosion Task # must be alphanumeric.',
+      maxlength: 'Corrosion Task # must not be more than 25 numbers.'
+
     },
     corrosionType: {
-      required: ' Type of Corrosion  required.'
+      required: 'Type of Corrosion is required.'
     },
     corrosionTypeText: {
-        required: ' Description is  required.',
-        maxlength: 'Description must be not more that 250 numbers.'
+      required: 'Description is  required.',
+      maxlength: 'Description must be not more than 250 numbers.'
     },
     floorbaordCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
+    },
+    causeOfDamageGroup: {
+      atleastone: 'At least one cause of damage must be selected',
+      causeOfDamageDescriptionGroup: {
+        'damageDescription': {
+          required: 'Description is required.',
+          maxlength: 'Description must not be more than 250 characters.'
+        }
+      }
+    }
+  },
+
+
+  'correctiveActionFormGroup': {
+
+    'deferralCode': {
+      required: 'Deferral Code is required.',
+      pattern: 'Deferral Code must contain only alphabet characters.',
+      maxlength: 'Deferral Code must not be more than 3 characters.'
+    },
+    'deferral': {
+      required: 'Deferral #  is required.',
+      pattern: 'Deferral # must be alphanumeric.',
+      maxlength: 'Deferral # must not be more than 15 characters. '
+    },
+    'repairDescription': {
+      required: 'Repair Description is required.',
+      maxlength: 'Repair Description must not be more than 250 characters.'
+    },
+    'correctiveActionOptionFormGroup': {
+      'correctiveActionOptions': {
+        required: 'Defect Discovered during is required.'
+      },
+      'modifiedpartDescription': {
+        required: 'Description is required.',
+        maxlength: 'Description must not be more than 30 characters.',
+        pattern: 'Description must be alphanumeric.'
+      },
+      'defectivePartDescription': {
+        required: 'Description is required.',
+        maxlength: 'Description must not be more than 30 characters.',
+        pattern: 'Description must be alphanumeric.'
+      },
+
+
+      'correctiveActionRepairDescriptionFormGroup': {
+        atleastone: 'Repair Document or Engineering  Authorization is required.',
+        'repairedDescribe': {
+          required: 'Description is required.'
+
+        },
+        'repairDocument': {
+
+        },
+        'correctiveActionChapFormGroup':{
+        'chap': {
+          required: 'Chap/Fig/Repair is required.',
+          maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
+        }
+        },
+        'engineeringAuthorization': {
+
+          maxlength: 'Engineering  Authorization must not be more than 25 characters.',
+          pattern: 'Engineering  Authorization must be alphanumeric.'
+
+        },
+        'externalVisible': {
+          required: 'Externally Visible is required.'
+        },
+        'repairWidth': {
+          pattern: 'Width must be numeric.',
+          maxlength: 'Width must not be more than 3 digits.'
+        },
+        'height': {
+          pattern: 'Height must be numeric.',
+          maxlength: 'Height must not be more than 3 digits.'
+        }
+        
+      }
     }
   }
 };

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
@@ -19,8 +19,8 @@ unscheduledMaintenanceGroup: FormGroup;
   ngOnInit() {
     this.unscheduledMaintenanceGroup = this.fb.group({
           description: ['', [Validators.required]],
-          nonRoutineNo: ['', [Validators.pattern(Expressions.Alphanumerics)]],
-          micNo: ['', [Validators.pattern(Expressions.Alphanumerics)]]
+          nonRoutineNo: ['', [Validators.maxLength(50)]],
+          micNo: ['', [Validators.maxLength(50)]]
         },
         {
           validator: CustomValidators.validateUnscheduledMaintenanceFields

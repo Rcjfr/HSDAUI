@@ -1,10 +1,11 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { BaseFormComponent } from '../base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
-import { AircraftInfo } from '../../common/models/aircraft-info.model';
+import { IAircraftInfo } from '../../common/models/aircraft-info.model';
+import { AppStateService } from '../../common/services';
 
 
 @Component({
@@ -13,10 +14,10 @@ import { AircraftInfo } from '../../common/models/aircraft-info.model';
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AircraftInfoSectionFormComponent extends BaseFormComponent {
+export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy {
   @Output() onNoseNumberChange = new EventEmitter();
   @Input()
-  set aircraftInfo(info: AircraftInfo){
+  set aircraftInfo(info: IAircraftInfo){
     if (this.aircraftInfoSectionFormGroup) {
     this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
     this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
@@ -50,21 +51,24 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent {
     allowLeadingZeroes: false
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public appStateService: AppStateService) {
     super('aircraftInfoSectionFormGroup');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.aircraftInfoSectionFormGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
-      manufacturer: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(100)]],
-      model: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(15)]],
-      serialNo: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(10)]],
+      manufacturer: ['', [Validators.required, Validators.maxLength(100)]],
+      model: ['', [Validators.required, Validators.maxLength(15)]],
+      serialNo: ['', [Validators.required, Validators.maxLength(10)]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
       cycles: ['', [Validators.required, Validators.maxLength(25)]],
       fleet: ['', [Validators.required, Validators.maxLength(20)]]
     });
     this.parent.addControl(this.formGroupName, this.aircraftInfoSectionFormGroup);
+    // this.aircraftInfoSectionFormGroup.get('fleet')
+    //                                  .valueChanges.debounceTime(500)
+    //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
 
   }
   noseNumberOnSelect(e: TypeaheadMatch) {

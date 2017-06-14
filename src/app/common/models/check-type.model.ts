@@ -1,8 +1,4 @@
-﻿export interface CheckType {
-    Code?: string;
-    Name: string;
+﻿import {IBaseLookUp} from './base-lookup.model';
+export interface ICheckType extends IBaseLookUp {
 }
-export interface FleetCheckType {
-    Fleet: string;
-    CheckTypes: Array<CheckType>;
-}
+

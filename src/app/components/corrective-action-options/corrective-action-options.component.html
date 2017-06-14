@@ -1,0 +1,32 @@
+﻿<div [formGroup]="correctiveActionOptionFormGroup">
+  <div class="form-group">
+    <aac-radio id="defectivepart" name="correctiveActionOptions" label="Defective Part Replaced With Identical Part #" value="1" tabindex="58" formControlName="correctiveActionOptions"></aac-radio>
+    <aac-radio id="modifiedpart" name="correctiveActionOptions" label="Modified Part # Installed " value="2" tabindex="59" formControlName="correctiveActionOptions"></aac-radio>
+    <aac-radio id="repairDescribe" name="correctiveActionOptions" label="Repaired (Describe)" value="3" tabindex="60" formControlName="correctiveActionOptions"></aac-radio>
+  </div>
+    
+  <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==3">
+    <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
+                                              [errorMessages]="displayMessage">
+
+    </app-corrective-action-repair-description>
+  </div>
+
+  <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==2">
+    <div class="col-md-6">
+      <aac-field-container label="Description:" [message]="displayMessage.modifiedpartDescription">
+        <input type="text" tabindex='62' class="form-control" formControlName="modifiedpartDescription">
+      </aac-field-container>
+
+      
+
+    </div>
+  </div>
+  <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value == 1">
+    <div class="col-md-6">
+      <aac-field-container label="Description:" [message]="displayMessage.defectivePartDescription">
+        <input type="text" tabindex='61' class="form-control" formControlName="defectivePartDescription">
+      </aac-field-container>
+    </div>
+  </div>
+</div>

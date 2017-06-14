@@ -1,12 +1,20 @@
-<div [formGroup]="ataCodesSectionFormGroup">
-  <aac-select tabindex="14" required label="ATA Code 1:" (change)='getAlertCode2s($event.target.value)'
-        [message]="displayMessage.ataCode1" formControlName="ataCode1">
-          <option value="">Select ATA Code 1</option>
-          <option *ngFor="let ac of ATACodes" [value]="ac.Code">{{ac.Code}} - {{ac.Name}}</option>
-      </aac-select>
-  <aac-select tabindex="14" required label="ATA Code 2:" 
-        [message]="displayMessage.ataCode2" formControlName="ataCode2">
-          <option value="">Select ATA Code 2</option>
-          <option *ngFor="let ac of ataCode2s" [value]="ac.Code">{{ac.Code}} {{ac.Name}}</option>
-      </aac-select>
+﻿<div [formGroup]="ataCodesSectionFormGroup">
+
+  <aac-field-container required label="ATA Code 1:" [message]="displayMessage.ataCode1">
+    <select tabindex="14" class="form-control" (change)='getAlertCode2s($event.target.value)'
+            formControlName="ataCode1">
+      <option value="">Select ATA Code 1</option>
+      <option *ngFor="let ac of (ATACodes | uniq:'primaryCode')" [value]="ac.primaryCode">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
+    </select>
+  </aac-field-container>
+
+
+  <aac-field-container required label="ATA Code 2:" [message]="displayMessage.ataCode2">
+    <select tabindex="15" class="form-control" formControlName="ataCode2">
+      <option value="">Select ATA Code 2</option>
+      <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryCode">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
+    </select>
+  </aac-field-container>
+
+
 </div>

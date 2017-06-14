@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../base-form.component';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
@@ -8,7 +8,7 @@ import { CustomValidators } from '../../common/validators/custom-validators';
   templateUrl: './precise-location-group.component.html',
   styleUrls: ['./precise-location-group.component.less']
 })
-export class PreciseLocationGroupComponent extends BaseFormComponent {
+export class PreciseLocationGroupComponent extends BaseFormComponent implements OnInit {
   preciseLocationGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('preciseLocationGroup');
@@ -17,13 +17,13 @@ export class PreciseLocationGroupComponent extends BaseFormComponent {
 
   ngOnInit() {
     this.preciseLocationGroup = this.fb.group({
-              stationLocation: ['', [Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              stringer: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              wl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
-              bl: ['', [ Validators.pattern(Expressions.Alphanumerics), Validators.maxLength(25)]],
+              stationLocation: ['', [Validators.maxLength(50)]],
+              stringer: ['', [Validators.maxLength(25)]],
+              wl: ['', [Validators.maxLength(25)]],
+              bl: ['', [Validators.maxLength(25)]]
           },
               {
-                  validator: CustomValidators.ValidatePercisionLocationGroupFields
+                  validator: CustomValidators.validatePreciseLocationGroupFields
               }
               );
               this.parent.addControl(this.formGroupName, this.preciseLocationGroup);
