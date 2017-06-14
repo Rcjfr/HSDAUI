@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
+﻿import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { ToastModule, ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 import { Observable } from 'rxjs/Observable';
@@ -22,6 +22,7 @@ describe('Alerts Effect', () => {
       { 'provide': Http, 'useValue': null }
     ]
   }));
+  
   it('Call QueryNoseNumber Success action after Query Nose Numbers',
       inject([
         EffectsRunner, AlertEffects, AircraftService
