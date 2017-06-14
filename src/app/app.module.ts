@@ -60,7 +60,6 @@ import { SearchByCorrosionComponent } from './components/search/search-by-corros
 import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-description/cause-of-damage-description.component';
 import { CorrectiveActionChapComponent } from './components/corrective-action-chap/corrective-action-chap.component';
 import { SearchByMaintenanceComponent } from './components/search/search-by-maintenance/search-by-maintenance.component';
-import { CheckBoxListComponent } from './common/directives/check-box-list/check-box-list.component';
 import { CurrentStatusSectionComponent } from './components/current-status-section/current-status-section.component';
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 
@@ -94,7 +93,6 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     CauseOfDamageDescriptionComponent,
     CorrectiveActionChapComponent,
    SearchByMaintenanceComponent,
-    CheckBoxListComponent,
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent
     

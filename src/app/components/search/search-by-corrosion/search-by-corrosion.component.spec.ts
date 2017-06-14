@@ -2,7 +2,6 @@
 import { FormsModule } from '@angular/forms';
 import { FormControlsModule } from '../../../common/directives/form/form-controls.module';
 import { SearchByCorrosionComponent } from './search-by-corrosion.component';
-import { CheckBoxListComponent } from '../../../common/directives/check-box-list/check-box-list.component';
 import { AppStateService } from '../../../common/services';
 import { MockAppStateService } from '../../../common/services/mocks/mock-app-state.service';
 describe('SearchByCorrosionComponent', () => {
@@ -11,7 +10,7 @@ describe('SearchByCorrosionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchByCorrosionComponent, CheckBoxListComponent],
+      declarations: [SearchByCorrosionComponent],
       imports: [FormsModule, FormControlsModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
