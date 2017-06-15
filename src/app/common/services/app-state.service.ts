@@ -36,9 +36,7 @@ export class AppStateService {
   getStations(query:string) {
     const queryExp = new RegExp(query, 'ig');
     return this.store.select(fromRoot.getStations)
-      .do((r) => console.log(r))
-      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)))
-      .do ((r) => console.log(r));
+      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)));
   
   }
 
