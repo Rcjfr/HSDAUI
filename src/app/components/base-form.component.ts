@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 })
 export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() parent: FormGroup;
+  formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
