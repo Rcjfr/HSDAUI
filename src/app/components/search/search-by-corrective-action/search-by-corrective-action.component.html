@@ -42,7 +42,12 @@
 
   </div>
   <div class="col-md-6">
-    <aac-field-container label="Repaired Desc:" for="repairedDesc">
+    <aac-field-container label="Repaired Desc:">
+      <select class="form-control" multiple tabindex='43'>
+        <option *ngFor="let ac of repairedDesc$ | async" [value]="ac.id">{{ac.description}}</option>
+      </select>
+    </aac-field-container>
+    <!--<aac-field-container label="Repaired Desc:" for="repairedDesc">
       <select [(ngModel)]="repairDesc" class="form-control" multiple tabindex='43' id="repairedDesc">
         <option>Bonded Repair</option>
         <option>Bore/Fastener Hole(s) Rework</option>
@@ -62,9 +67,8 @@
         <option>Plug-Fastener</option>
         <option>Other</option>
       </select>
-    </aac-field-container>
+    </aac-field-container>-->
   </div>
-
 </div>
 <div class="row">
   <div class="col-md-6">
@@ -86,7 +90,12 @@
 
   </div>
   <div class="col-md-6">
-    <aac-field-container label="Repair Document:" for="repairDocument">
+    <aac-field-container label="Repair Document:">
+      <select class="form-control" multiple tabindex='47'>
+        <option *ngFor="let ac of repairDocument$ | async" [value]="ac.id">{{ac.description}}</option>
+      </select>
+    </aac-field-container>
+    <!--<aac-field-container label="Repair Document:" for="repairDocument">
       <select [(ngModel)]="repairDocument" class="form-control" multiple tabindex='47' id="repairDocument">
         <option>AARD</option>
         <option>AARD (w/supporting EA)</option>
@@ -103,7 +112,7 @@
         <option>SRM (w/supporting EA)</option>
         <option>BCSRPP</option>
       </select>
-    </aac-field-container>
+    </aac-field-container>-->
   </div>
 
 </div>
