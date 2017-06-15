@@ -74,7 +74,7 @@ export class CustomValidators {
       //const cpcprelated = c.parent.get('cpcprelated');
 
       const environmentControl = c.get('environment');
-      const gallySpillControl = c.get('gallySpill');
+      const galleySpillControl = c.get('galleySpill');
       const blockedDrainControl = c.get('blockedDrain');
       const chemicalSpillControl = c.get('chemicalSpill');
       const wetInsulationBlanketControl = c.get('wetInsulationBlanket');
@@ -83,9 +83,9 @@ export class CustomValidators {
       const poorSealingPracticesControl = c.get('poorSealingPractices');
       const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
       const parent = c.parent;
-      var cpcpRealted;
+      var cpcpRelated;
       if (parent != undefined)
-       cpcpRealted = c.parent.get('cpcprelated');
+       cpcpRelated = c.parent.get('cpcprelated');
       
       const damageOtherControl = c.get('damageOther');
       var filledContolCount: number;
@@ -95,7 +95,7 @@ export class CustomValidators {
       if (environmentControl.value ) {
           filledContolCount++; damageOtherControl.markAsUntouched();
       }
-      if (gallySpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+      if (galleySpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (blockedDrainControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (chemicalSpillControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
       if (wetInsulationBlanketControl.value ) { filledContolCount++; damageOtherControl.markAsUntouched(); }
@@ -110,19 +110,19 @@ export class CustomValidators {
             return null;
         //if ((filledContolCount == 0 && cpcpRealted.value == 1 && !damageOtherControl.touched))
         //{ return { 'atleastone': true }; }
-        if (cpcpRealted.value != 1)
+        if (cpcpRelated.value != 1)
         { return null; }
         if ((damageOtherControl.touched && damageOtherControl.value == false))
         { return { 'atleastone': true }; }
 
        
-        if ((filledContolCount >= 1 && cpcpRealted.value == 0) || (filledContolCount >= 1 && cpcpRealted.value == 1))
+        if ((filledContolCount >= 1 && cpcpRelated.value == 0) || (filledContolCount >= 1 && cpcpRelated.value == 1))
         { return null; }
 
          
         if (filledContolCount == 0 && damageOtherControl.value != false && damageOtherControl.value == "") 
             return { 'atleastone': true };
-        if (filledContolCount ==0 && cpcpRealted.value == 1)
+        if (filledContolCount == 0 && cpcpRelated.value == 1)
             return { 'atleastone': true };
         if (!damageOtherControl.touched)
         { return null; }

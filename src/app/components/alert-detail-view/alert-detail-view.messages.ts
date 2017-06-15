@@ -230,7 +230,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'deferral': {
       required: 'Deferral #  is required.',
-      pattern: 'Deferral # must be alphanumeric..',
+      pattern: 'Deferral # must be alphanumeric.',
       maxlength: 'Deferral # must not be more than 15 characters. '
     },
     'repairDescription': {
@@ -262,11 +262,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         'repairDocument': {
 
         },
-        'correctiveActionChapFormGroup':{
-        'chap': {
-          required: 'Chap/Fig/Repair is required.',
-          maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
-        }
+        'correctiveActionChapFormGroup': {
+          'chap': {
+            required: 'Chap/Fig/Repair is required.',
+            maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
+          }
         },
         'engineeringAuthorization': {
 
@@ -285,8 +285,43 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Height must be numeric.',
           maxlength: 'Height must not be more than 3 digits.'
         }
-        
+
       }
     }
+  }
+  , 'currentStatusSectionGroup': {
+    openStatus: {},
+    completedStatus: {},
+    auditedStatus: {},
+    closedStatus: {},
+    deletedStatus: {},
+
+    inspector: {
+      required: 'Inspector is required.',
+      maxlength: 'Inspector must not be more than 50 characters.'
+    },
+    inspectionDate: {
+      required: 'Inspection Date is required.'
+    }
+    ,
+
+    manager: {
+      required: 'QC Manager/Designee is required.',
+      maxlength: 'QC Manager/Designee must not be more than 50 characters.'
+    },
+    auditDate: { required: 'Audit Date is required.' }
+    ,
+
+    rejectReason: {
+      required: 'Rejection reason is required.',
+      maxlength: 'Rejection reason must not be more than 250 characters.'
+
+    },
+
+    deleteReason: {
+      required: 'Deletion reason is required.',
+      maxlength: 'Deletion reason must not be more than 250 characters.'
+    }
+
   }
 };

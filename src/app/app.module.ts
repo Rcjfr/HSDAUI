@@ -61,9 +61,11 @@ import { CauseOfDamageDescriptionComponent } from './components/cause-of-damage-
 import { CorrectiveActionChapComponent } from './components/corrective-action-chap/corrective-action-chap.component';
 import { SearchByMaintenanceComponent } from './components/search/search-by-maintenance/search-by-maintenance.component';
 import { CheckBoxListComponent } from './common/directives/check-box-list/check-box-list.component';
+import { CurrentStatusSectionComponent } from './components/current-status-section/current-status-section.component';
 import { SearchByStatusComponent } from './components/search/search-by-status/search-by-status.component';
 import { SearchByCorrectiveActionComponent } from './components/search/search-by-corrective-action/search-by-corrective-action.component';
 import { SearchByDefectComponent } from './components/search/search-by-defect/search-by-defect.component';
+
 
 @NgModule({
   declarations: [
@@ -93,6 +95,10 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
     SearchByCorrosionComponent,
     CauseOfDamageDescriptionComponent,
     CorrectiveActionChapComponent,
+   SearchByMaintenanceComponent,
+    CheckBoxListComponent,
+    CurrentStatusSectionComponent
+    
     SearchByMaintenanceComponent,
     CheckBoxListComponent,
     SearchByStatusComponent,

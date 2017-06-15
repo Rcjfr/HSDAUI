@@ -1,6 +1,6 @@
 import * as fromSelectedAlert from './selected-alert';
 import * as selectedAlert from '../actions/selected-alert';
-import { aircraftInfoFactory } from './models/aircraftInfo';
+import { aircraftInfoFactory } from './models/aircraft-info';
 import { alertFactory } from './models/alert';
 import { List } from 'immutable';
 import { Alert } from '../models/alert.model';
@@ -48,7 +48,7 @@ it('SelectedAlert Reducer Load Nose Numbers Info Success', () => {
                                                 new selectedAlert.LoadNoseNumbersCompleteAction(['A330', 'A319']));
     expect(state.loading).toEqual(false);
    // console.log('nose numbers:', state.noseNumbers.size);
-   const noseNumbers = fromSelectedAlert.getSelectedAlertNoseNumbers(state);
+   const noseNumbers = fromSelectedAlert.getNoseNumbers(state); //changed getSelectedAlertNoseNumbers to getNoseNumbers
    expect(noseNumbers).toEqual(jasmine.any(List));
 
     expect(noseNumbers.size).toEqual(2);

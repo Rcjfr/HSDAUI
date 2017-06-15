@@ -10,7 +10,7 @@ let identifier = 0;
   selector: 'aac-field-container',
   template: `
     <div class="row form-group" [class.has-error]="message">
-      <label class="{{labelCssClass}}" [attr.for]="identifier">{{label}} <span class="req" *ngIf="required">*</span></label>
+      <label class="{{labelCssClass}}" [attr.for]="for || identifier">{{label}} <span class="req" *ngIf="required">*</span></label>
       <div class="{{fieldCssClass}}">
         <ng-content></ng-content>
         <span *ngIf="helptext" class="help-block">{{helptext}}</span>
@@ -27,6 +27,7 @@ export class FieldContainer implements OnInit {
   @Input() public message: string;
   @Input() labelGridColumnWidth = 4;
   @Input() fieldGridColumnWidth = 8;
+  @Input() for='';
   get labelCssClass() {
     return `col-sm-${this.labelGridColumnWidth} control-label`;
   }
@@ -46,6 +47,8 @@ export class FieldContainer implements OnInit {
   ngOnInit() {
     let fld = this._elRef.nativeElement.querySelector("input,textarea,select");
     this._renderer.setElementAttribute(fld, 'id', this.identifier);
+    
+
   }
 }
 
