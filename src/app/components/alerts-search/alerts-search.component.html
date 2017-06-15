@@ -43,5 +43,26 @@
     </div>
     <app-search-by-maintenance></app-search-by-maintenance>
   </accordion-group>
+  <accordion-group #statusGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Status
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-status></app-search-by-status>
+  </accordion-group>
+  <accordion-group #correctiveGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Corrective Action
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': correctiveGroup?.isOpen, 'icon-add': !correctiveGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-corrective-action></app-search-by-corrective-action>
+  </accordion-group>
+  <accordion-group #defectGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Defect
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-defect></app-search-by-defect>
+  </accordion-group>
 </accordion>
 </form>
