@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
+import { Observer } from "rxjs/Rx";
 @Component({
   selector: 'app-general-section-form',
   templateUrl: './general-section-form.component.html',
@@ -16,12 +17,14 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<List<models.IStation>>;
   stations: Array<models.IStation>;
+  station: string;
   generalSectionFormGroup: FormGroup;
   aircraftInfo$: Observable<models.IAircraftInfo>;
   alertCodes$: Observable<List<models.IAlertCode>>;
   ATACodes$: Observable<List<models.IATACode>>;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('generalSectionFormGroup');
+    
   }
 
   ngOnInit() {
@@ -45,16 +48,16 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
+    
+
     //this.stations$ = this.appStateService.getStations(this.generalSectionFormGroup.get('station').value).map(d => d && d.toJS()); //This doesnt work
-    //this.appStateService.getStations('').map(d => d && d.toJS()).subscribe(s => this.stations$ = s); //This works but trying to avoid subscriptions
-    //this.stations$ = Observable.create((observer: any) => {
-    //         this.appStateService.getStations(this.generalSectionFormGroup.get('station').value)
-    //           .subscribe((result: List<models.IStation>) => observer.next(result.toJS()));
-    //});
-    this.stations$ = this.generalSectionFormGroup.get('station')
-      .valueChanges
-      .do(d=>console.log(d))
-      .mergeMap(c => this.appStateService.getStations(c))
+    //this.appStateService.getStations('').map(d => d && d.toJS()).subscribe(s => this.stations = s); //This works but trying to avoid subscriptions
+    //TODO
+    this.stations$ = Observable.create((observer: Observer<string>) => {
+        observer.next(this.generalSectionFormGroup.get('station').value);
+      })
+      .distinctUntilChanged()
+      .switchMap(token => this.appStateService.getStations(token))
       .map(d => d && d.toJS());
 
   }

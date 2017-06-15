@@ -6,6 +6,7 @@ import * as models from '../../../common/models';
 import { AppStateService } from '../../../common/services';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
+import { Observer } from "rxjs/Rx";
 @Component({
   selector: 'app-search-by-sda-form',
   templateUrl: './search-by-sda-form.component.html',
@@ -30,10 +31,13 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
       .map(d => d && d.toJS())
       .subscribe(data => this.ATACodes = data);
     this.departments$ = this.appStateService.getDepartments();
-    this.stations$ = Observable.create((observer: any) => {
-      this.appStateService.getStations(this.station)
-        .subscribe((result: List<models.IStation>) => observer.next(result.toJS()));
-    });
+    this.stations$ = Observable.create((observer: Observer<string>) => {
+      observer.next(this.station);
+      })
+      .distinctUntilChanged()
+      .switchMap(token => this.appStateService.getStations(token))
+      .map(d => d && d.toJS());
+
     this.checkTypes$ = this.appStateService.getCheckTypes();
 
   }
