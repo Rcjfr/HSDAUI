@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AppStateService } from '../../common/services';
+﻿import { Component, OnInit } from '@angular/core';
+import { AppStateService } from '../../common/services/app-state.service';
 
 @Component({
   selector: 'app-root',

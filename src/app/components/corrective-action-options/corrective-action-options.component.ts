@@ -49,11 +49,11 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent {
         }
         else if (correctiveActionOption == 2) {
 
-           this.correctiveActionOptionFormGroup.get('defectivePartDescription').clearValidators();
+            this.correctiveActionOptionFormGroup.get('defectivePartDescription').clearValidators();
            // this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').clearValidators();
             //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('repairedDescribe').clearValidators();
             //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('externalVisible').clearValidators();
-            this.correctiveActionOptionFormGroup.get('modifiedpartDescription').setValidators([Validators.required, Validators.maxLength(30), Validators.pattern(Expressions.Alphanumerics)]);
+           this.correctiveActionOptionFormGroup.get('modifiedpartDescription').setValidators([Validators.required, Validators.maxLength(30), Validators.pattern(Expressions.Alphanumerics)]);
         }
         
         //else {

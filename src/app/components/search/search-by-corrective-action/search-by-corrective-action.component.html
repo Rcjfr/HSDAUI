@@ -1,0 +1,165 @@
+﻿
+<h4>Corrective Actions</h4>
+<div class="row">
+  <div class="col-md-6">
+    <aac-checkbox label="Deferred" tabindex="36"></aac-checkbox>
+   
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Deferral Code:">
+      <input type="text" tabindex='37'  maxlength="3">
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-checkbox label="Defective Part Replaced with Identical Part #" tabindex="38"></aac-checkbox>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Identical Part #:">
+      <input type="text" tabindex='39'>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-checkbox label="Modified Part # Installed" tabindex="40"></aac-checkbox>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Modified Part #::">
+      <input type="text" tabindex='41'>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-checkbox label="Repaired" tabindex="42"></aac-checkbox>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Repaired Desc:" for="repairedDesc">
+      <select [(ngModel)]="repairDesc" class="form-control" multiple tabindex='43' id="repairedDesc">
+        <option>Bonded Repair</option>
+        <option>Bore/Fastener Hole(s) Rework</option>
+        <option>Complex Repair</option>
+        <option>Doubler Repair, External</option>
+        <option>Doubler Repair, Flush</option>
+        <option>Doubler Repair, Internal</option>
+        <option>Non-reinforcing, Repair </option>
+        <option>Non-reinforcing-Supplemental Inspection-MINOR</option>
+        <option>Part Replacement - Entire</option>
+        <option>Replacement - Sub Assembly</option>
+        <option>Refinish - Scribe Line</option>
+        <option>Reinforcing - Modification</option>
+        <option>Restore Bonded Material</option>
+        <option>Splice Repair</option>
+        <option>Part Reinforcement ( Nested Angles)</option>
+        <option>Plug-Fastener</option>
+        <option>Other</option>
+      </select>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-checkbox label="Major Repair" tabindex="44"></aac-checkbox>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Major Repair Desc:">
+      <input type="text" tabindex='45'>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-field-container label="Completed By:">
+      <input type="text" tabindex='46'>
+    </aac-field-container>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Repair Document:" for="repairDocument">
+      <select [(ngModel)]="repairDocument" class="form-control" multiple tabindex='47' id="repairDocument">
+        <option>AARD</option>
+        <option>AARD (w/supporting EA)</option>
+        <option>AMM</option>
+        <option>EA</option>
+        <option>ECO</option>
+        <option>DNF ESO</option>
+        <option>Field EA</option>
+        <option>MCM</option>
+        <option>MRB</option>
+        <option>Shop ESO</option>
+        <option>Shop ESO (w/supporting EA)</option>
+        <option>SRM </option>
+        <option>SRM (w/supporting EA)</option>
+        <option>BCSRPP</option>
+      </select>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="row col-md-6">
+    <label class="col-sm-4 control-label">Externally Visible?</label>
+    <div class="col-sm-8">
+      <div class="customComponent" style="padding-left:20px;">
+        <div>
+          <input type="radio" id="externalVisible" name="externalVisible" tabindex='48' value="0" >
+          <label for="externalVisible">
+            <span class="control"></span>
+            Yes
+          </label>
+
+        </div>
+      </div>
+      <div class="customComponent" style="padding-left:20px;">
+        <div>
+          <input type="radio" id="noexternalVisible" name="externalVisible" value="1" >
+          <label for="noexternalVisible">
+            <span class="control"></span>
+            No
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="row ">
+  <div class="col-md-12">
+    <h4>Approximate External Doubler Repair Dimensions</h4>
+  </div>
+</div>
+<div class="row ">
+  <div class="col-md-6">
+    <aac-field-container label="Height(in inches):" >
+      <input type="text" tabindex='49' >
+    </aac-field-container>
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Width(in inches):">
+      <input type="text" tabindex='50' >
+    </aac-field-container>
+  </div>
+</div>
+<div class="row">
+  
+  <div class="col-md-6">
+    <aac-field-container label="Chap/Fig/Repair:">
+      <input type="text" tabindex='51'>
+    </aac-field-container>
+  </div>
+
+</div>
+
+
+
