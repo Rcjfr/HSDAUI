@@ -15,6 +15,7 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
 
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<List<models.IStation>>;
+  station: string;
   alertCodes$: Observable<List<models.IAlertCode>>;
   ATACodes$: Observable<List<models.IATACode>>;
   ATACodes: models.IATACode[];
@@ -29,7 +30,10 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
       .map(d => d && d.toJS())
       .subscribe(data => this.ATACodes = data);
     this.departments$ = this.appStateService.getDepartments();
-    this.stations$ = this.appStateService.getStations();
+    this.stations$ = Observable.create((observer: any) => {
+      this.appStateService.getStations(this.station)
+        .subscribe((result: List<models.IStation>) => observer.next(result.toJS()));
+    });
     this.checkTypes$ = this.appStateService.getCheckTypes();
 
   }

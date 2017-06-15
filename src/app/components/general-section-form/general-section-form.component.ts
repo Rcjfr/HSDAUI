@@ -45,15 +45,18 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-    //this.stations$ = this.appStateService.getStations().map(d => d && d.toJS());
-    this.appStateService.getStations().map(d => d && d.toJS()).subscribe(s => this.stations = s); //TODO
-    // this.stations$ = Observable.create((observer:any) => {
+    //this.stations$ = this.appStateService.getStations(this.generalSectionFormGroup.get('station').value).map(d => d && d.toJS()); //This doesnt work
+    //this.appStateService.getStations('').map(d => d && d.toJS()).subscribe(s => this.stations$ = s); //This works but trying to avoid subscriptions
+    //this.stations$ = Observable.create((observer: any) => {
     //         this.appStateService.getStations(this.generalSectionFormGroup.get('station').value)
-    //         .subscribe((result : any ) => {
-    //           console.log(result);
-    //             observer.next(result);
-    //         });
-    //     });
+    //           .subscribe((result: List<models.IStation>) => observer.next(result.toJS()));
+    //});
+    this.stations$ = this.generalSectionFormGroup.get('station')
+      .valueChanges
+      .do(d=>console.log(d))
+      .mergeMap(c => this.appStateService.getStations(c))
+      .map(d => d && d.toJS());
+
   }
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);
