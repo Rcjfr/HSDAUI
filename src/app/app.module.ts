@@ -97,8 +97,7 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
     CorrectiveActionChapComponent,
    SearchByMaintenanceComponent,
     CheckBoxListComponent,
-    CurrentStatusSectionComponent
-    
+    CurrentStatusSectionComponent,
     SearchByMaintenanceComponent,
     CheckBoxListComponent,
     SearchByStatusComponent,
