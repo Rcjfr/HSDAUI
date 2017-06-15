@@ -65,7 +65,8 @@ import { CurrentStatusSectionComponent } from './components/current-status-secti
 import { SearchByStatusComponent } from './components/search/search-by-status/search-by-status.component';
 import { SearchByCorrectiveActionComponent } from './components/search/search-by-corrective-action/search-by-corrective-action.component';
 import { SearchByDefectComponent } from './components/search/search-by-defect/search-by-defect.component';
-
+import { ModifiedPartDescriptionComponent } from './components/modified-part-description/modified-part-description.component';
+import { DefectivePartDescriptionComponent } from './components/defective-part-description/defective-part-description.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,10 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
     CheckBoxListComponent,
     SearchByStatusComponent,
       SearchByCorrectiveActionComponent,
-      SearchByDefectComponent
+      SearchByDefectComponent,
+      ModifiedPartDescriptionComponent,
+      DefectivePartDescriptionComponent
+
   ],
   imports: [
     BrowserModule,
