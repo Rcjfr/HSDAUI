@@ -4,21 +4,28 @@
       <div class="row form-group" [class.has-error]="displayMessage.cpcprelated">
         <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req">*</span></label>
         <div class="col-sm-8">
-          <aac-radio name="cpcprelated" label="Yes" value="1" tabindex="36" formControlName="cpcprelated" required></aac-radio>
-          <aac-radio name="cpcprelated" label="No" value="0" tabindex="36" formControlName="cpcprelated" required></aac-radio>
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="36" name="cpcprelated" formControlName="cpcprelated"/>
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="36" name="cpcprelated" formControlName="cpcprelated" />
+          </aac-radio-container>
           <div *ngIf="displayMessage.cpcprelated" class="error">{{displayMessage.cpcprelated}}</div>
         </div>
       </div>
     </div>
   </div>
-  <br />
   <div class="row " [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
     <div class="col-md-6" [class.has-error]="displayMessage.wsCorrosion">
       <div class="row form-group">
         <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req">*</span></label>
         <div class="col-sm-8">
-          <aac-radio name="wsCorrosion" label="Yes" value="0" tabindex="36" formControlName="wsCorrosion"></aac-radio>
-          <aac-radio name="wsCorrosion" label="No" value="1" tabindex="36" formControlName="wsCorrosion"></aac-radio>
+          <aac-radio-container label="Yes">
+            <input type="radio" value="0" tabindex="37" name="wsCorrosion" formControlName="wsCorrosion" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="1" tabindex="37" name="wsCorrosion" formControlName="wsCorrosion" />
+          </aac-radio-container>
           <div *ngIf="displayMessage.wsCorrosion" class="error">{{displayMessage.wsCorrosion}}</div>
         </div>
       </div>
@@ -28,9 +35,10 @@
         <div class="row form-group">
           <label class="col-sm-4 control-label">Corrosion Level:<span class="req">*</span></label>
           <div class="col-sm-8">
-
-            <aac-radio *ngFor="let ac of corrosionLevels$ | async" name="corrosionLevel" [label]="ac.description" [value]="ac.id" tabindex="38"
-              formControlName="corrosionLevel"></aac-radio>
+            
+            <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
+              <input type="radio" [value]="ac.id" tabindex="38" name="corrosionLevel" formControlName="corrosionLevel" />
+            </aac-radio-container>
             <span *ngIf="displayMessage.corrosionLevel" class="help-block">{{displayMessage.corrosionLevel}}</span>
           </div>
         </div>
@@ -49,8 +57,12 @@
       <div class="row form-group" [class.has-error]="displayMessage.previouslyBlended">
         <label class="col-sm-4 control-label">Corroded Area Previously Blended:<span class="req">*</span></label>
         <div class="col-sm-8">
-          <aac-radio name="previouslyBlended" label="Yes" value="0" tabindex="39" formControlName="previouslyBlended"></aac-radio>
-          <aac-radio name="previouslyBlended" label="No" value="1" tabindex="39" formControlName="previouslyBlended"></aac-radio>
+          <aac-radio-container label="Yes">
+            <input type="radio" value="0" tabindex="39" name="previouslyBlended" formControlName="previouslyBlended" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="1" tabindex="39" name="previouslyBlended" formControlName="previouslyBlended" />
+          </aac-radio-container>
           <div *ngIf="displayMessage.previouslyBlended" class="error">{{displayMessage.previouslyBlended}}</div>
         </div>
       </div>

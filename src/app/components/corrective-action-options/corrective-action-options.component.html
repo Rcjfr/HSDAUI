@@ -8,15 +8,14 @@
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==3">
     <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
                                               [errorMessages]="displayMessage">
-
     </app-corrective-action-repair-description>
   </div>
 
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==2">
     <div class="col-md-6">
-      <aac-field-container label="Description:" [message]="displayMessage.modifiedpartDescription">
-        <input type="text" tabindex='62' class="form-control" formControlName="modifiedpartDescription">
-      </aac-field-container>
+      <app-modified-part-description [parent]="correctiveActionOptionFormGroup"
+                                                [errorMessages]="displayMessage">
+      </app-modified-part-description>
 
       
 
@@ -24,9 +23,9 @@
   </div>
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value == 1">
     <div class="col-md-6">
-      <aac-field-container label="Description:" [message]="displayMessage.defectivePartDescription">
-        <input type="text" tabindex='61' class="form-control" formControlName="defectivePartDescription">
-      </aac-field-container>
+      <app-defective-part-description [parent]="correctiveActionOptionFormGroup"
+                                     [errorMessages]="displayMessage">
+      </app-defective-part-description>
     </div>
   </div>
 </div>

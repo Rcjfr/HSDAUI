@@ -12,7 +12,7 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
   }
-
+  private reliabilityApproved:any=null;
   ngOnInit() {
     this.formGroup = this.fb.group({
       openStatus: [{ value: true, disabled: true }, []],
@@ -30,14 +30,11 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
     this.parent.addControl(this.formGroupName, this.formGroup);
   }
   approve() {
-    this.formGroup.get('closedStatus').setValue(true);
+    this.reliabilityApproved = true;
   }
   reject() {
-    if (this.formGroup.get('rejectReason').value == '') {
-      
-      this.formGroup.get('rejectReason').markAsDirty();
-      this.formGroup.get('rejectReason').setErrors({ 'required': true });
-    }
+    this.reliabilityApproved = false;
+    this.displayMessage["rejectReason"] = '';
   }
 
 }

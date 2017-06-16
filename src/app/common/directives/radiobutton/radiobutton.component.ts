@@ -36,6 +36,9 @@ set value(val) {
     this._renderer.setElementAttribute(this._elRef.nativeElement, 'id', null);
 
   }
+  onBlur() {
+    this.onTouched();
+  }
 onSelectionChange() {
   this.writeValue(this._value);
 }

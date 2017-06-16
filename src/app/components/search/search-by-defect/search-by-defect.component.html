@@ -1,0 +1,53 @@
+﻿<div class="row">
+  <div class="col-md-3">
+    <aac-field-container label="Aircraft Station:" helptext="(Body, Spar, Stab, Frame, etc.)" labelGridColumnWidth="6" fieldGridColumnWidth="11">
+      <input type="text" tabindex='52' class="form-control" >
+    </aac-field-container>
+  </div>
+  <div class="col-md-3">
+    <aac-field-container label="Stringer:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
+      <input type="text" tabindex='53' class="form-control" >
+    </aac-field-container>
+  </div>
+  <div class="col-md-3">
+    <aac-field-container label="WL:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
+      <input type="text" tabindex='54' class="form-control">
+    </aac-field-container>
+  </div>
+  <div class="col-md-3">
+    <aac-field-container label="BL:"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
+      <input type="text" tabindex='55' class="form-control">
+    </aac-field-container>
+   
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <aac-field-container label="Defect Type:">
+      <input type="text" tabindex='56' class="form-control">
+    </aac-field-container>
+
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="How Detected:" for="detected" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
+      <select multiple tabindex='57' class="form-control" id="detected" [(ngModel)]="detected">
+        <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
+      </select>
+    </aac-field-container>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h5>Defect Size (in inches):</h5>
+    <aac-field-container label="Length:" >
+      <input type="text" tabindex='58' class="form-control">
+    </aac-field-container>
+    <aac-field-container label="Width:" >
+      <input type="text" tabindex='59' class="form-control">
+    </aac-field-container>
+    <aac-field-container label="Depth:"  >
+      <input type="text" tabindex='60' class="form-control">
+    </aac-field-container>
+  </div>
+  </div>

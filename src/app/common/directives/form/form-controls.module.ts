@@ -8,7 +8,8 @@ import {
   FormTextAreaComponent,
   FormTextComponent,
   FieldContainer,
-  CheckboxContainer
+  CheckboxContainer,
+  RadioContainer
 
 } from './index';
 // import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
@@ -30,6 +31,7 @@ import { CheckBoxListComponent  } from '../check-box-list/check-box-list.compone
     RadioButtonComponent,
     FieldContainer,
     CheckboxContainer,
+    RadioContainer,
     CheckBoxListComponent
   ],
   declarations: [
@@ -41,6 +43,7 @@ import { CheckBoxListComponent  } from '../check-box-list/check-box-list.compone
     RadioButtonComponent,
     FieldContainer,
     CheckboxContainer,
+    RadioContainer,
     CheckBoxListComponent
   ],
   providers: []
