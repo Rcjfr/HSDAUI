@@ -1,8 +1,10 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormControlsModule } from '../../common/directives/form/form-controls.module';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { CurrentStatusSectionComponent } from './current-status-section.component';
 import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+
 
 describe('CurrentStatusSectionComponent', () => {
   let component: CurrentStatusSectionComponent;
@@ -10,7 +12,8 @@ describe('CurrentStatusSectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestComponentWrapper, CurrentStatusSectionComponent ]
+      declarations: [TestComponentWrapper, CurrentStatusSectionComponent],
+      imports: [FormControlsModule, FormsModule, ReactiveFormsModule, NKDatetimeModule]
     })
     .compileComponents();
   }));

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import * as fromRoot from '../reducers';
@@ -33,8 +33,11 @@ export class AppStateService {
   getDetectionMethods() {
     return this.store.select(fromRoot.getDetectionMethods);
   }
-  getStations() {
-    return this.store.select(fromRoot.getStations);
+  getStations(query:string) {
+    const queryExp = new RegExp(query, 'ig');
+    return this.store.select(fromRoot.getStations)
+      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)));
+  
   }
 
   getAircraftInfo() {
