@@ -1,4 +1,4 @@
-import {
+﻿import {
   Component, Input,
 } from '@angular/core';
 
@@ -37,7 +37,7 @@ export class FormRadioComponent extends ElementBase<string> {
   // tslint:disable-next-line:no-input-rename
   @Input('name') radio_group_name = '';
   onSelectionChange(evnt) {
-    console.log(evnt)
+    console.log(evnt);
     this.touch();
    // if(evnt.target.checked){
     this.writeValue(this._value);
