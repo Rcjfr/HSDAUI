@@ -1,7 +1,8 @@
 ﻿<div class="customComponent" style="padding-right:20px;">
   <div>
     <input type="radio" [attr.tabindex]="tindex"
-    (change)="onSelectionChange()"
+           (change)="onSelectionChange()"
+           (blur)="onBlur()"
     [attr.name]="radio_group_name"
     [attr.id]="identifier" [value]="value">
     <label [attr.for]="identifier">
