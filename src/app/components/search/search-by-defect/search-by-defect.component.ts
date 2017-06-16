@@ -2,7 +2,7 @@
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { IDetectionMethod } from '../../../common/models';
+import * as models from '../../../common/models';
 
 @Component({
     selector: 'app-search-by-defect',
@@ -10,11 +10,13 @@ import { IDetectionMethod } from '../../../common/models';
     styleUrls: ['./search-by-defect.component.less']
 })
 export class SearchByDefectComponent implements OnInit {
-    detectionMethods$: Observable<List<IDetectionMethod>>;
+  detectionMethods$: Observable<List<models.IDetectionMethod>>;
+  damageTypes$: Observable<List<models.IDamageType>>;
     constructor(private appStateService: AppStateService) { }
 
     ngOnInit() {
-        this.detectionMethods$ = this.appStateService.getDetectionMethods();
+      this.detectionMethods$ = this.appStateService.getDetectionMethods();
+      this.damageTypes$ = this.appStateService.getDamageTypes();
     }
 
 }

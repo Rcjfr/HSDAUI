@@ -23,8 +23,11 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <aac-field-container label="Defect Type:">
-      <input type="text" tabindex='44' class="form-control">
+    <aac-field-container label="Damage Type:">
+      <select class="form-control" tabindex='44' multiple="">
+        <option value=""></option>
+        <option *ngFor="let ac of damageTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+      </select>
     </aac-field-container>
 
   </div>
