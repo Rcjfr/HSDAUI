@@ -97,20 +97,18 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     SearchByCorrosionComponent,
     CauseOfDamageDescriptionComponent,
     CorrectiveActionChapComponent,
-   SearchByMaintenanceComponent,
-    CheckBoxListComponent,
+    SearchByMaintenanceComponent,
     CurrentStatusSectionComponent,
     SearchByMaintenanceComponent,
-    CheckBoxListComponent,
     SearchByStatusComponent,
-      SearchByCorrectiveActionComponent,
-      SearchByDefectComponent,
-      ModifiedPartDescriptionComponent,
-      DefectivePartDescriptionComponent,
+    SearchByCorrectiveActionComponent,
+    SearchByDefectComponent,
+    ModifiedPartDescriptionComponent,
+    DefectivePartDescriptionComponent,
 
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent
-    
+
   ],
   imports: [
     BrowserModule,
