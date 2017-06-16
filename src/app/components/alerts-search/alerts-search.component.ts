@@ -13,6 +13,9 @@ export class AlertsSearchComponent implements OnInit {
   @ViewChild('aircraftGroup') aircraftGroup: AccordionPanelComponent;
   @ViewChild('corrosionGroup') corrosionGroup: AccordionPanelComponent;
   @ViewChild('maintenanceGroup') maintenanceGroup: AccordionPanelComponent;
+  @ViewChild('statusGroup') statusGroup: AccordionPanelComponent;
+  @ViewChild('correctiveGroup') correctiveGroup: AccordionPanelComponent;
+  @ViewChild('defectGroup') defectGroup: AccordionPanelComponent;
 
   sdaSearchForm: FormGroup;
   constructor(private fb: FormBuilder) {
@@ -28,6 +31,9 @@ export class AlertsSearchComponent implements OnInit {
     this.aircraftGroup.isOpen = expandAll;
     this.corrosionGroup.isOpen = expandAll;
     this.maintenanceGroup.isOpen = expandAll;
+    this.statusGroup.isOpen = expandAll;
+    this.correctiveGroup.isOpen = expandAll;
+    this.defectGroup.isOpen = expandAll;
     return false;
   }
   searchAlerts() {

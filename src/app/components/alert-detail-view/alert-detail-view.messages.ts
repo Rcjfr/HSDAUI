@@ -240,17 +240,20 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'correctiveActionOptionFormGroup': {
       'correctiveActionOptions': {
         required: 'Defect Discovered during is required.'
-      },
+        },
+        'modifiedPartDescriptionGroup':{
       'modifiedpartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',
-        pattern: 'Description must be alphanumeric.'
+            }
       },
+        'defectivePartDescriptionGroup':{
       'defectivePartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',
         pattern: 'Description must be alphanumeric.'
-      },
+            }
+        },
 
 
       'correctiveActionRepairDescriptionFormGroup': {
