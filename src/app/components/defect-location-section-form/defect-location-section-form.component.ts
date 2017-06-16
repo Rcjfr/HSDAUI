@@ -7,6 +7,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
+import { decimalsNumberMask } from '../../common/masks';
 import * as models from '../../common/models';
 @Component({
   selector: 'app-defect-location-section-form',
@@ -17,7 +18,7 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
   detectionMethods$: Observable<List<models.IDetectionMethod>>;
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
-createNumberMask = createNumberMask;
+  decimalsNumberMask = decimalsNumberMask;
     constructor( private fb: FormBuilder, private appStateService: AppStateService) {
       super('defectLocationSectionFormGroup');
     }

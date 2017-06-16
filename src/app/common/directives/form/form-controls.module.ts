@@ -14,6 +14,7 @@ import {
 } from './index';
 // import { CheckboxComponent } from './common/directives/checkbox/checkbox.component';
 import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
+import { CheckBoxListComponent  } from '../check-box-list/check-box-list.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
     RadioButtonComponent,
     FieldContainer,
     CheckboxContainer,
-    RadioContainer
+    RadioContainer,
+    CheckBoxListComponent
   ],
   declarations: [
     FormCheckBoxComponent,
@@ -41,7 +43,8 @@ import { RadioButtonComponent } from './../radiobutton/radiobutton.component';
     RadioButtonComponent,
     FieldContainer,
     CheckboxContainer,
-    RadioContainer
+    RadioContainer,
+    CheckBoxListComponent
   ],
   providers: []
 })

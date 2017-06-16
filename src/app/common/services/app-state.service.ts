@@ -33,8 +33,11 @@ export class AppStateService {
   getDetectionMethods() {
     return this.store.select(fromRoot.getDetectionMethods);
   }
-  getStations() {
-    return this.store.select(fromRoot.getStations);
+  getStations(query:string) {
+    const queryExp = new RegExp(query, 'ig');
+    return this.store.select(fromRoot.getStations)
+      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)));
+  
   }
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);

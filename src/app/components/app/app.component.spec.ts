@@ -4,14 +4,16 @@ import { NavBarComponent } from '../../common/directives/nav-bar/nav-bar.compone
 import { HeaderComponent } from '../../common/directives/header/header.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from '../../app-routing.module';
-import { AlertsComponent } from '../alerts/alerts.component';
-import { AlertDetailComponent } from '../alert-detail/alert-detail.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '../../common/directives/checkbox/checkbox.component';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormControlsModule } from '../../common/directives/form/form-controls.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { AccordionModule, TypeaheadModule } from 'ngx-bootstrap';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { AlertsSearchComponent } from '../alerts-search/alerts-search.component';
+import { AlertsComponent } from '../alerts/alerts.component';
+import { AlertDetailComponent } from '../alert-detail/alert-detail.component';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,16 +23,18 @@ describe('AppComponent', () => {
         ReactiveFormsModule,
         FormsModule,
         NKDatetimeModule,
-        TypeaheadModule.forRoot()
+        TypeaheadModule.forRoot(),
+        AccordionModule.forRoot()
       ],
       schemas: [ NO_ERRORS_SCHEMA ],
       declarations: [
         AppComponent,
         HeaderComponent,
         NavBarComponent,
+        AlertsSearchComponent,
         AlertsComponent,
-        AlertDetailComponent,
-        CheckboxComponent
+        AlertDetailComponent
+        
       ],
       providers:[{provide: APP_BASE_HREF, useValue: '/'}]
     }).compileComponents();

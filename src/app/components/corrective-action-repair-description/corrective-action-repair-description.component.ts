@@ -6,6 +6,7 @@ import { GenericValidator, Expressions } from '../../common/validators/generic-v
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import {decimalsNumberMask} from '../../common/masks';
 
 @Component({
   selector: 'app-corrective-action-repair-description',
@@ -50,17 +51,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     { id: 13, description: 'SRM' },
     { id: 14, description: 'BCSRPP' }
   ]);
-  createNumberMask = createNumberMask;
-  public decimalsNumberMask(decimalLimit: number, integerLimit: number) {
-    return createNumberMask({
-      prefix: '',
-      allowDecimal: true,
-      includeThousandsSeparator: false,
-      decimalLimit: decimalLimit,
-      integerLimit: integerLimit,
-      requireDecimal: false
-    });
-  }
+  decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
