@@ -30,8 +30,7 @@ import { CheckBoxListComponent  } from '../check-box-list/check-box-list.compone
     FormTextComponent,
     RadioButtonComponent,
     FieldContainer,
-    CheckboxContainer,
-    CheckBoxListComponent
+    CheckBoxListComponent,
     CheckboxContainer,
     RadioContainer
   ],
@@ -43,8 +42,7 @@ import { CheckBoxListComponent  } from '../check-box-list/check-box-list.compone
     FormTextComponent,
     RadioButtonComponent,
     FieldContainer,
-    CheckboxContainer,
-    CheckBoxListComponent
+    CheckBoxListComponent,
     CheckboxContainer,
     RadioContainer
   ],

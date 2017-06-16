@@ -8,12 +8,14 @@ import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormControlsModule } from '../../common/directives/form/form-controls.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { AccordionModule, TypeaheadModule } from 'ngx-bootstrap';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TypeaheadModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AlertsSearchComponent } from '../alerts-search/alerts-search.component';
 import { AlertsComponent } from '../alerts/alerts.component';
 import { AlertDetailComponent } from '../alert-detail/alert-detail.component';
-
+import { AppStateService } from '../../common/services';
+import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -26,7 +28,7 @@ describe('AppComponent', () => {
         TypeaheadModule.forRoot(),
         AccordionModule.forRoot()
       ],
-      schemas: [ NO_ERRORS_SCHEMA ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA ],
       declarations: [
         AppComponent,
         HeaderComponent,
@@ -36,7 +38,7 @@ describe('AppComponent', () => {
         AlertDetailComponent
         
       ],
-      providers:[{provide: APP_BASE_HREF, useValue: '/'}]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }, { provide: AppStateService, useClass: MockAppStateService }]
     }).compileComponents();
   }));
 
