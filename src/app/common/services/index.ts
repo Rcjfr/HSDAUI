@@ -8,3 +8,4 @@ export * from './corrosion-type.service';
 export * from './department.service';
 export * from './detection-method.service'
 export * from './station.service';
+export * from './damage-type.service';

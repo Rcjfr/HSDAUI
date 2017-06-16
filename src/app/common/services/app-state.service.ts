@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import * as fromRoot from '../reducers';
@@ -35,6 +35,9 @@ export class AppStateService {
   }
   getStations() {
     return this.store.select(fromRoot.getStations);
+  }
+  getDamageTypes() {
+    return this.store.select(fromRoot.getDamageTypes);
   }
 
   getAircraftInfo() {

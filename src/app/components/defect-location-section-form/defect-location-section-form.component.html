@@ -1,11 +1,13 @@
 ﻿<div class="panel-body" [formGroup]='defectLocationSectionFormGroup'>
   <div class="row">
     <div class="col-md-6">
-      <aac-field-container label="Defect Type:" [message]="displayMessage.defectType" required="true">
-        <textarea type="text" required tabindex='21'cols="40" rows="5" class="form-control" formControlName="defectType">
-        </textarea>
+      <aac-field-container label="Damage Type:" [message]="displayMessage.defectType" required="true">
+        <select class="form-control" tabindex='21' formControlName="defectType">
+          <option value="">Select Damage Type</option>
+          <option *ngFor="let ac of damageTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
       </aac-field-container>
-      <aac-field-container label="Defect Description:" required="true" [message]="displayMessage.defectDescription" helptext="(MON, SAD, ROB, etc)" >
+      <aac-field-container label="Damage Description:" required="true" [message]="displayMessage.defectDescription" helptext="(Example: 6 inch Crack: 3X4 inch Corroded Area,etc.)Any comments after || denotes historical data." >
         <textarea type="text" tabindex='22'cols="40" rows="5" class="form-control" formControlName="defectDescription">
         </textarea>
       </aac-field-container>
@@ -33,8 +35,10 @@
                           requireDecimal:false
     })}" formControlName="width">
       </aac-field-container>
-      <aac-field-container label="Depth:" [message]="displayMessage.depth" required="true">
-        <input type="text" tabindex='25' class="form-control" id="depth" [textMask]="{mask: createNumberMask({
+      <aac-field-container label="Depth:" helptext="(If Length, Width, Depth is Null, enter 0.)" [message]="displayMessage.depth" required="true">
+        <input type="text" tabindex='25' class="form-control"
+               
+               id="depth" [textMask]="{mask: createNumberMask({
                           prefix:'',
                           allowDecimal: true,
                           includeThousandsSeparator:false,
