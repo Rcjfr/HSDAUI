@@ -56,13 +56,14 @@ describe('GeneralSectionFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get ATA Codes from service', () => {
+  xit('should get ATA Codes from service', () => {
       //Example to use spyOn
       //const service: AppStateService = TestBed.get(AppStateService);
       //component.ATACodes$ 
       //spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
       //fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
-      component.ATACodes$.subscribe(a => {
+    component.ATACodes$.subscribe(a => {
+      console.log(a.toJS());
             expect(a.size).toBe(1);
       });
 
