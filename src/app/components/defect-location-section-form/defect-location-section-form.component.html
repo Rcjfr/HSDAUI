@@ -14,34 +14,13 @@
     <div class="col-md-6">
       <h5>Defect Size (in inches):</h5>
       <aac-field-container label="Length:" [message]="displayMessage.length" required="true">
-        <input type="text" tabindex='23' class="form-control" id="length" [textMask]="{mask: createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 3,
-                          integerLimit: 3,
-                          requireDecimal:false
-    })}" formControlName="length">
+        <input type="text" tabindex='23' class="form-control" id="length" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="length">
       </aac-field-container>
       <aac-field-container label="Width:" [message]="displayMessage.width" required="true">
-        <input type="text" tabindex='24' class="form-control" id="width" [textMask]="{mask: createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 3,
-                          integerLimit: 3,
-                          requireDecimal:false
-    })}" formControlName="width">
+        <input type="text" tabindex='24' class="form-control" id="width" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="width">
       </aac-field-container>
       <aac-field-container label="Depth:" [message]="displayMessage.depth" required="true">
-        <input type="text" tabindex='25' class="form-control" id="depth" [textMask]="{mask: createNumberMask({
-                          prefix:'',
-                          allowDecimal: true,
-                          includeThousandsSeparator:false,
-                          decimalLimit: 4,
-                          integerLimit: 3,
-                          requireDecimal:false
-    })}" formControlName="depth">
+        <input type="text" tabindex='25' class="form-control" id="depth" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depth">
       </aac-field-container>
     </div>
   </div>

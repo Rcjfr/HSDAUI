@@ -8,6 +8,7 @@ import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { IDetectionMethod } from '../../common/models';
+import { decimalsNumberMask } from '../../common/masks';
 @Component({
   selector: 'app-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
@@ -16,7 +17,7 @@ import { IDetectionMethod } from '../../common/models';
 export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit {
   detectionMethods$: Observable<List<IDetectionMethod>>;
   defectLocationSectionFormGroup: FormGroup;
-createNumberMask = createNumberMask;
+  decimalsNumberMask = decimalsNumberMask;
     constructor( private fb: FormBuilder, private appStateService: AppStateService) {
       super('defectLocationSectionFormGroup');
     }

@@ -1,11 +1,12 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from "@angular/core";
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormControlsModule } from '../../common/directives/form/form-controls.module';
 import { DefectLocationSectionFormComponent } from './defect-location-section-form.component';
-import { Component } from "@angular/core";
 import { AppStateService } from '../../common/services';
+import { TextMaskModule } from 'angular2-text-mask';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
-import {PreciseLocationGroupComponent } from "../precise-location-group/precise-location-group.component";
+import { PreciseLocationGroupComponent } from '../precise-location-group/precise-location-group.component';
 describe('DefectLocationSectionFormComponent', () => {
   let component: DefectLocationSectionFormComponent;
   let fixture: ComponentFixture<TestComponentWrapper>;
@@ -13,7 +14,7 @@ describe('DefectLocationSectionFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponentWrapper, DefectLocationSectionFormComponent, PreciseLocationGroupComponent],
-      imports: [FormControlsModule, FormsModule, ReactiveFormsModule],
+      imports: [FormControlsModule, FormsModule, ReactiveFormsModule, TextMaskModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
     .compileComponents();
