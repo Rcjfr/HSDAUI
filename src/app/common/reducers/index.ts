@@ -38,6 +38,7 @@ export const getCorrosionTypes = compose(fromLookupData.getCorrosionTypes, getLo
 export const getDepartments = compose(fromLookupData.getDepartments, getLookupDataState);
 export const getDetectionMethods = compose(fromLookupData.getDetectionMethods, getLookupDataState);
 export const getStations = compose(fromLookupData.getStations, getLookupDataState);
+export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDataState);
 
 
 

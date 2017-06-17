@@ -28,7 +28,9 @@ import {
   CorrosionTypeService,
   DepartmentService,
   DetectionMethodService,
-  StationService
+  StationService,
+  DamageTypeService
+
 } from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
@@ -139,7 +141,8 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     CorrosionTypeService,
     DepartmentService,
     DetectionMethodService,
-    StationService
+    StationService,
+    DamageTypeService
   ],
   bootstrap: [AppComponent]
 })

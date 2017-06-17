@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Create Date:" [attr.for]="sdaCreateDate.idDatePicker" [message]="displayMessage.createDate" required="true">
-        <datetime [timepicker]="false"  #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+        <datetime [timepicker]="false"  #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
      
     </div>

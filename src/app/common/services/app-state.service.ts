@@ -39,6 +39,9 @@ export class AppStateService {
       .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)));
   
   }
+  getDamageTypes() {
+    return this.store.select(fromRoot.getDamageTypes);
+  }
 
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);
