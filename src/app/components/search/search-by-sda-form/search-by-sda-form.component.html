@@ -5,7 +5,6 @@
     </aac-field-container>
   </div>
   <div class="col-md-4">
-    <div class="row form-group">
       <aac-field-container label="Station:" >
         <ng-template #customItemTemplate let-model="item" let-index="index">
           <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
@@ -13,7 +12,6 @@
         <input type="text" tabindex='7' [(ngModel)]="station" autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$ | async"
                typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10" />
       </aac-field-container>
-    </div>
   </div>
   <div class="col-md-4">
     <aac-field-container  label="Alert Code:">

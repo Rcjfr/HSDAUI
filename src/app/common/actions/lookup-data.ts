@@ -40,6 +40,12 @@ export const ActionTypes = {
   LOAD_STATIONS_COMPLETE: 'Load Stations Complete',
   LOAD_STATIONS_FAIL: 'Load Stations Fail',
 
+  LOAD_DAMAGE_TYPES: 'Load Damage Types',
+  LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
+  LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
+
+
+
   LOAD_LOOKUP_DATA: 'Load All Lookup Data'
 };
 
@@ -180,6 +186,23 @@ export class LoadStationsFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+// Damage Types
+export class LoadDamageTypesAction implements Action {
+  public type = ActionTypes.LOAD_DAMAGE_TYPES;
+  public payload: any;
+  constructor() { }
+}
+export class LoadDamageTypesCompleteAction implements Action {
+  public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+  constructor(public payload: models.IDamageType[]) { }
+}
+export class LoadDamageTypesFailAction implements Action {
+  public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+  constructor(public payload: any) { }
+}
+
+
+
 // Load Lookup Data
 export class LoadLookupDataAction implements Action {
   public type = ActionTypes.LOAD_LOOKUP_DATA;
@@ -213,5 +236,8 @@ export type Actions =
   LoadStationsAction |
   LoadStationsCompleteAction |
   LoadStationsFailAction |
+  LoadDamageTypesAction |
+  LoadDamageTypesCompleteAction |
+  LoadDamageTypesFailAction |
   LoadLookupDataAction;
 
