@@ -14,6 +14,7 @@ export interface State {
   departments: List<models.IDepartment>;
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
+  damageTypes: List<models.IDamageType>;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -28,6 +29,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   departments: <List<models.IDepartment>>List.of(),
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
+  damageTypes: <List<models.IDamageType>>List.of()
 });
 
 function makeInitialState() {
@@ -45,6 +47,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DEPARTMENTS:
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS:
     case lookupDataActions.ActionTypes.LOAD_STATIONS:
+    case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
       {
         return state.merge({ loading: true });
       }
@@ -93,6 +96,11 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
         const act = action as lookupDataActions.LoadStationsCompleteAction;
         return state.merge({ loading: false, stations: List.of(...act.payload) });
       }
+    case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE:
+    {
+      const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
+      return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
+    }
     default: {
       return state;
     }
@@ -110,3 +118,4 @@ export const getCorrosionTypes = (state: State) => state.corrosionTypes;
 export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
+export const getDamageTypes = (state: State) => state.damageTypes;

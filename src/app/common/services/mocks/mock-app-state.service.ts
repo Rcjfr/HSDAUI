@@ -17,7 +17,18 @@ export class MockAppStateService extends AppStateService {
   }
 
   getATACodes() {
-    return Observable.of(<List<models.IATACode>>List.of());
+    const mockResponse = [
+      {
+        'id': 32,
+        'primaryCode': 'Landing Gear',
+        'primaryCodeDescription': `Includes Basic Structure which provides major support
+                                                for the aircraft, while on the ground,
+                                                such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
+        'secondaryCode': '10',
+        'secondaryCodeDescription': 'Main Gear'
+      }
+    ];
+    return Observable.of(<List<models.IATACode>>List.of(...mockResponse));
     }
 
   getDepartments() {

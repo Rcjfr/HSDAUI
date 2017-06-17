@@ -29,6 +29,13 @@
     </div>
     <app-search-by-aircraft></app-search-by-aircraft>
   </accordion-group>
+  <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Maintenance Type
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-maintenance></app-search-by-maintenance>
+  </accordion-group>
   <accordion-group #corrosionGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by Corrosion
@@ -36,20 +43,22 @@
     </div>
     <app-search-by-corrosion></app-search-by-corrosion>
   </accordion-group>
-  <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
+  <accordion-group #cpcpDispositionGroup panelClass="panel-default search-panel">
     <div accordion-heading>
-      Search by Maintenance
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
+      Search by CPCP Disposition
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
     </div>
-    <app-search-by-maintenance></app-search-by-maintenance>
+    <app-search-by-cpcp-disposition></app-search-by-cpcp-disposition>
   </accordion-group>
-  <accordion-group #statusGroup panelClass="panel-default search-panel">
+  <accordion-group #defectGroup panelClass="panel-default search-panel">
     <div accordion-heading>
-      Search by Status
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
+      Search by Defect/Damage
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
     </div>
-    <app-search-by-status></app-search-by-status>
+    <app-search-by-defect></app-search-by-defect>
   </accordion-group>
+
+  
   <accordion-group #correctiveGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by Corrective Action
@@ -57,12 +66,12 @@
     </div>
     <app-search-by-corrective-action></app-search-by-corrective-action>
   </accordion-group>
-  <accordion-group #defectGroup panelClass="panel-default search-panel">
+  <accordion-group #statusGroup panelClass="panel-default search-panel">
     <div accordion-heading>
-      Search by Defect
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
+      Search by Status
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
     </div>
-    <app-search-by-defect></app-search-by-defect>
+    <app-search-by-status></app-search-by-status>
   </accordion-group>
 </accordion>
 </form>

@@ -18,7 +18,7 @@ export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponen
   }
   ngOnInit() {
     this.defectDiscoveredDuringSectionFormGroup = this.fb.group({
-      defectDiscoveredDuring: ['', [Validators.required]],
+      defectDiscoveredDuring: ['', [Validators.required]]
     });
     this.parent.addControl(this.formGroupName, this.defectDiscoveredDuringSectionFormGroup);
   }

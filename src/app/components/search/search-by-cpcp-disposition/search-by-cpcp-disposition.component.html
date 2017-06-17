@@ -1,0 +1,74 @@
+﻿<div class="row  form-group">
+  <div class="col-md-3">
+    <aac-checkbox label="Non-CPCP" tabindex="28"></aac-checkbox>
+  </div>
+  <div class="col-md-3">
+    <aac-checkbox label="Review Complete" tabindex="29"></aac-checkbox>
+  </div>
+  <div class="col-md-3">
+    <aac-checkbox label="Local Corrosion" tabindex="30"></aac-checkbox>
+  </div>
+  <div class="col-md-3">
+    <aac-checkbox label="Widespread Corrosion" tabindex="31"></aac-checkbox>
+  </div>
+</div>
+<div class="row  form-group">
+  <div class="col-md-6">
+    <div class="row form-group">
+      <label class="col-sm-4 control-label">Is CPCP Task # correct?</label>
+      <div class="col-sm-8">
+        <aac-radio name="isCpcpTaskNoCorrect" label="Yes" value="1" tabindex="32"></aac-radio>
+        <aac-radio name="isCpcpTaskNoCorrect" label="No" value="0"></aac-radio>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row form-group">
+      <label class="col-sm-4 control-label">Is Corrosion Level correct?</label>
+      <div class="col-sm-8">
+        <aac-radio name="isCorrosionLevelCorrect" label="Yes" value="1" tabindex="33"></aac-radio>
+        <aac-radio name="isCorrosionLevelCorrect" label="No" value="0"></aac-radio>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row  form-group">
+  <div class="col-md-6">
+    <div class="row form-group">
+      <label class="col-sm-4 control-label">Corrected Corrosion Level:</label>
+      <div class="col-sm-8">
+        <aac-checkbox-list [source]="corrosionLevels$ | async"
+                           labelField="description"
+                           valueField="id"
+                           colClass="col-sm-3"
+                           tabindex="34">
+        </aac-checkbox-list>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <aac-field-container label="Correct Task #:">
+      <input type="text" tabindex='35' class="form-control">
+    </aac-field-container>
+  </div>
+</div>
+<aac-field-container label="Reason For Change?:">
+  <select class="form-control" multiple tabindex='36'>
+    <option *ngFor="let ac of reasonsForChange$ | async" [value]="ac.id">{{ac.description}}</option>
+  </select>
+</aac-field-container>
+<aac-field-container label="Engineering Comments:">
+  <input type="text" tabindex='37' class="form-control">
+</aac-field-container>
+<aac-field-container label="Engineer Signature:" fieldGridColumnWidth="4">
+  <input type="text" tabindex='38' class="form-control">
+</aac-field-container>
+
+<div class="row  form-group">
+  <div class="col-md-12">Custom Searches:</div>
+  <div class="col-md-3">
+    <aac-radio name="customSearch" label="Select Custom Search" value="1" tabindex="39"></aac-radio>
+    <aac-radio name="customSearch" label="Open Dispositions" value="2" ></aac-radio>
+    <aac-radio name="customSearch" label="Closed Dispositions" value="3"></aac-radio>
+  </div>
+</div>
