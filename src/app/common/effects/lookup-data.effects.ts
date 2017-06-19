@@ -26,7 +26,8 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDepartmentsAction(),
                                                 new lookupData.LoadDetectionMethodsAction(),
                                                 new lookupData.LoadStationsAction(),
-                                                    new lookupData.LoadDamageTypesAction()
+                                                new lookupData.LoadDamageTypesAction(),
+                                                new lookupData.LoadRepairedDescribeAction()
                                                 ]
                                               ));
     @Effect()
@@ -160,7 +161,20 @@ export class LookupDataEffects {
         .catch((err) => {
           return of(new lookupData.LoadDamageTypesFailAction('Failed to load Damage Types'));
         });
-    });
+        });
+
+  @Effect()
+  loadRepairedDescribe$: Observable<Action> = this.actions$
+      .ofType(lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE)
+      .switchMap(() => {
+          return this.repairedDescribeService.getAllRepairedDescribe()
+              .map((response: models.IRepairedDescribe[]) => {
+                  return new lookupData.LoadRepairedDescribeCompleteAction(response);
+              })
+              .catch((err) => {
+                  return of(new lookupData.LoadRepairedDescribeFailAction('Failed to load Repaired Describe'));
+              });
+      });
     @Effect()
     showToastrError$: any = this.actions$
                                               .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES_FAIL,
@@ -171,9 +185,12 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DEPARTMENTS_FAIL,
                                                       lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
                                                       lookupData.ActionTypes.LOAD_STATIONS_FAIL,
-                                                      lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL
+                                                      lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
+                                                      lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE_FAIL
                                                       )
-                                              .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
+      .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
+
+
 constructor(private actions$: Actions,
                 private alertCodesService: services.AlertCodeService,
                 private ataCodesService: services.ATACodesService,
@@ -184,6 +201,7 @@ constructor(private actions$: Actions,
                 private checkTypesService: services.CheckTypesService,
                 private stationService: services.StationService,
                 private damageTypesService: services.DamageTypeService,
+                private repairedDescribeService: services.RepairedDescribeService,
                 private toastr: ToastsManager) {
                 }
 

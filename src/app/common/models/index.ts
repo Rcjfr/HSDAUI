@@ -9,4 +9,5 @@ export * from './department.model';
 export * from './detection-method.model'
 export * from './station.model';
 export * from './damage-type.model';
+export * from './repaired-describe.model';
 export * from './base-lookup.model';

@@ -15,6 +15,7 @@ export interface State {
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
   damageTypes: List<models.IDamageType>;
+  repairedDescribe: List<models.IRepairedDescribe>;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -29,7 +30,8 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   departments: <List<models.IDepartment>>List.of(),
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
-  damageTypes: <List<models.IDamageType>>List.of()
+  damageTypes: <List<models.IDamageType>>List.of(),
+  repairedDescribe: <List<models.IRepairedDescribe>>List.of()
 });
 
 function makeInitialState() {
@@ -48,6 +50,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS:
     case lookupDataActions.ActionTypes.LOAD_STATIONS:
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
+    case lookupDataActions.ActionTypes.LOAD_REPAIRED_DESCRIBE:
       {
         return state.merge({ loading: true });
       }
@@ -100,7 +103,12 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     {
       const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
       return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
-    }
+        }
+    case lookupDataActions.ActionTypes.LOAD_REPAIRED_DESCRIBE_COMPLETE:
+        {
+              const act = action as lookupDataActions.LoadRepairedDescribeCompleteAction;
+              return state.merge({ loading: false, repairedDescribe: List.of(...act.payload) });
+        }
     default: {
       return state;
     }
@@ -119,3 +127,4 @@ export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
 export const getDamageTypes = (state: State) => state.damageTypes;
+export const getRepairedDescribe = (state: State) => state.repairedDescribe;
