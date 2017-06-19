@@ -31,6 +31,7 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
   }
   approve() {
     this.reliabilityApproved = true;
+    this.formGroup.get('rejectReason').setValue('');
   }
   reject() {
     this.reliabilityApproved = false;
