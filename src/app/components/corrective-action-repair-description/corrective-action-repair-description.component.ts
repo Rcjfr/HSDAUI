@@ -1,12 +1,14 @@
 ﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-
+import { List } from 'immutable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import {decimalsNumberMask} from '../../common/masks';
+import { RepairedDescribeService, RepairDocumentService } from '../../common/services';
+import * as models from '../../common/models';
 
 @Component({
   selector: 'app-corrective-action-repair-description',
@@ -15,8 +17,9 @@ import {decimalsNumberMask} from '../../common/masks';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy {
-  correctiveActionRepairDescriptionFormGroup: FormGroup;
-  public repairDescriptions$ = Observable<List<models.IRepairedDescribe>>;
+    correctiveActionRepairDescriptionFormGroup: FormGroup;
+    repairDescriptions$: Observable<models.IRepairedDescribe[]>;
+ // repairDescriptions$ = Observable<List<IRepairedDescribe>>;
     //{ id: 1, description: 'Bonded Repair' },
     //{ id: 2, description: 'Bore/Fastener Hole(s) Rework' },
     //{ id: 3, description: 'Complex Repair' },
@@ -35,27 +38,31 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     //{ id: 16, description: 'Plug-Fastener' },
     //{ id: 17, description: 'Other' }
   //]);
-  public repairDocuments$ = Observable.of([
-    { id: 1, description: 'AARD' },
-    { id: 2, description: 'AARD (w/supporting EA)' },
-    { id: 3, description: 'AMM' },
-    { id: 4, description: 'EA' },
-    { id: 5, description: 'ECO' },
-    { id: 6, description: 'DNF ESO' },
-    { id: 7, description: 'Field EA' },
-    { id: 8, description: 'MCM' },
-    { id: 9, description: 'MRB' },
-    { id: 10, description: 'Shop ESO' },
-    { id: 11, description: 'Shop ESO (w/supporting EA)' },
-    { id: 12, description: 'SRM (w/supporting EA)' },
-    { id: 13, description: 'SRM' },
-    { id: 14, description: 'BCSRPP' }
-  ]);
+    repairDocuments$:Observable<models.IRepairDocument[]>; // Observable<List<models.IRepairDocument>>;
+  //public repairDocuments$ = Observable.of([
+    //{ id: 1, description: 'AARD' },
+    //{ id: 2, description: 'AARD (w/supporting EA)' },
+    //{ id: 3, description: 'AMM' },
+    //{ id: 4, description: 'EA' },
+    //{ id: 5, description: 'ECO' },
+    //{ id: 6, description: 'DNF ESO' },
+    //{ id: 7, description: 'Field EA' },
+    //{ id: 8, description: 'MCM' },
+    //{ id: 9, description: 'MRB' },
+    //{ id: 10, description: 'Shop ESO' },
+    //{ id: 11, description: 'Shop ESO (w/supporting EA)' },
+    //{ id: 12, description: 'SRM (w/supporting EA)' },
+    //{ id: 13, description: 'SRM' },
+    //{ id: 14, description: 'BCSRPP' }
+  //]);
   decimalsNumberMask = decimalsNumberMask;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private repairedDescribeService: RepairedDescribeService, private repairDocumentService: RepairDocumentService  ) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
+  
   ngOnInit() {
+      this.repairDescriptions$ = this.repairedDescribeService.getAllRepairedDescribe();
+      this.repairDocuments$ = this.repairDocumentService.getAllRepairDocument();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       repairedDescribe: ['', [Validators.required]],
       repairDocument: ['', []],

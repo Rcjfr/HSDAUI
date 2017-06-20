@@ -44,6 +44,10 @@ export const ActionTypes = {
   LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
   LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
 
+  LOAD_REPAIR_DOCUMENT: 'Load Damage Types',
+  LOAD_REPAIR_DOCUMENT_COMPLETE: 'Load Damage Types Complete',
+  LOAD_REPAIR_DOCUMENT_FAIL: 'Load Damage Types Fail',
+
   LOAD_REPAIRED_DESCRIBE: 'Load Repaired Describe',
   LOAD_REPAIRED_DESCRIBE_COMPLETE: 'Load Repaired Describe Complete',
   LOAD_REPAIRED_DESCRIBE_FAIL: 'Load Repaired Describe Fail',
@@ -205,6 +209,21 @@ export class LoadDamageTypesFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+// Repair Documents
+export class LoadRepairDocumentsAction implements Action {
+    public type = ActionTypes.LOAD_DAMAGE_TYPES;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDocumentsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+    constructor(public payload: models.IDamageType[]) { }
+}
+export class LoadRepairDocumentsFailAction implements Action {
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+    constructor(public payload: any) { }
+}
+
 
 //Repaired Describe
 export class LoadRepairedDescribeAction implements Action {
@@ -257,6 +276,9 @@ export type Actions =
   LoadDamageTypesAction |
   LoadDamageTypesCompleteAction |
   LoadDamageTypesFailAction |
+  LoadRepairDocumentsAction |
+  LoadRepairDocumentsCompleteAction |
+  LoadRepairDocumentsFailAction |
   LoadRepairedDescribeAction |
   LoadRepairedDescribeCompleteAction |
   LoadRepairedDescribeFailAction |

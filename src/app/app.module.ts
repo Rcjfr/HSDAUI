@@ -30,6 +30,7 @@ import {
   DetectionMethodService,
   StationService,
   DamageTypeService,
+  RepairDocumentService,
   RepairedDescribeService
 
 } from './common/services/index';
@@ -144,6 +145,7 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     DetectionMethodService,
     StationService,
       DamageTypeService,
+      RepairDocumentService,
       RepairedDescribeService
   ],
   bootstrap: [AppComponent]

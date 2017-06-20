@@ -27,6 +27,7 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDetectionMethodsAction(),
                                                 new lookupData.LoadStationsAction(),
                                                 new lookupData.LoadDamageTypesAction(),
+                                                new lookupData.LoadRepairDocumentsAction(),
                                                 new lookupData.LoadRepairedDescribeAction()
                                                 ]
                                               ));
@@ -162,7 +163,18 @@ export class LookupDataEffects {
           return of(new lookupData.LoadDamageTypesFailAction('Failed to load Damage Types'));
         });
         });
-
+  @Effect()
+  loadrepairDocuments$: Observable<Action> = this.actions$
+      .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT)
+      .switchMap(() => {
+          return this.repairDocumentService.getAllRepairDocument()
+              .map((response: models.IRepairedDescribe[]) => {
+                  return new lookupData.LoadRepairDocumentsCompleteAction(response);
+              })
+              .catch((err) => {
+                  return of(new lookupData.LoadRepairDocumentsFailAction('Failed to load Repair Document'));
+              });
+      });
   @Effect()
   loadRepairedDescribe$: Observable<Action> = this.actions$
       .ofType(lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE)
@@ -186,6 +198,7 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
                                                       lookupData.ActionTypes.LOAD_STATIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
+                                                      lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE_FAIL
                                                       )
       .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
@@ -201,6 +214,7 @@ constructor(private actions$: Actions,
                 private checkTypesService: services.CheckTypesService,
                 private stationService: services.StationService,
                 private damageTypesService: services.DamageTypeService,
+                private repairDocumentService: services.RepairDocumentService,
                 private repairedDescribeService: services.RepairedDescribeService,
                 private toastr: ToastsManager) {
                 }

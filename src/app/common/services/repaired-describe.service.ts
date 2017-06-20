@@ -1,5 +1,4 @@
-﻿/// <reference path="../models/repaired-describe.model .ts" />
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Http } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
@@ -12,7 +11,7 @@ export class RepairedDescribeService {
     private endPointUrl = `${environment.hsdaApiBaseUrl}repaireddescribe`;
   constructor(private http: Http) { }
 
-  getAllDamageTypes(): Observable<IRepairedDescribe[]> {
+  getAllRepairedDescribe(): Observable<IRepairedDescribe[]> {
     //TODO:Uncomment when lookup table is available
     //return this.http.get(this.endPointUrl)
     //  .map((result) => result.json());
