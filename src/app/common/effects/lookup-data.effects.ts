@@ -9,7 +9,7 @@ import { of } from 'rxjs/observable/of';
 import * as services from '../services/index';
 import * as lookupData from '../actions/lookup-data';
 import { ATACodesService } from '../services/ata-codes.service';
-import * as models from '../models/index';
+import * as models from '../models';
 import '../rxjs-extensions';
 @Injectable()
 export class LookupDataEffects {
@@ -25,7 +25,8 @@ export class LookupDataEffects {
                                                 new lookupData.LoadCorrosionTypesAction(),
                                                 new lookupData.LoadDepartmentsAction(),
                                                 new lookupData.LoadDetectionMethodsAction(),
-                                                new lookupData.LoadStationsAction()
+                                                new lookupData.LoadStationsAction(),
+                                                    new lookupData.LoadDamageTypesAction()
                                                 ]
                                               ));
     @Effect()
@@ -147,7 +148,19 @@ export class LookupDataEffects {
                                               .catch((err) => {
                                                       return of(new lookupData.LoadStationsFailAction('Failed to load Stations'));
                                                     });
-                                            });
+  });
+  @Effect()
+  loadDamageTypes$: Observable<Action> = this.actions$
+    .ofType(lookupData.ActionTypes.LOAD_DAMAGE_TYPES)
+    .switchMap(() => {
+      return this.damageTypesService.getAllDamageTypes()
+        .map((response: models.IDamageType[]) => {
+          return new lookupData.LoadDamageTypesCompleteAction(response);
+        })
+        .catch((err) => {
+          return of(new lookupData.LoadDamageTypesFailAction('Failed to load Damage Types'));
+        });
+    });
     @Effect()
     showToastrError$: any = this.actions$
                                               .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES_FAIL,
@@ -156,7 +169,9 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_CORROSION_LEVELS_FAIL,
                                                       lookupData.ActionTypes.LOAD_CORROSION_TYPES_FAIL,
                                                       lookupData.ActionTypes.LOAD_DEPARTMENTS_FAIL,
-                                                      lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL
+                                                      lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
+                                                      lookupData.ActionTypes.LOAD_STATIONS_FAIL,
+                                                      lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL
                                                       )
                                               .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 constructor(private actions$: Actions,
@@ -168,6 +183,7 @@ constructor(private actions$: Actions,
                 private detectionMethodService: services.DetectionMethodService,
                 private checkTypesService: services.CheckTypesService,
                 private stationService: services.StationService,
+                private damageTypesService: services.DamageTypeService,
                 private toastr: ToastsManager) {
                 }
 

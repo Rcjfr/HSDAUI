@@ -8,7 +8,7 @@
   </div>
   <div class="row form-group">
     <div class="col-md-2">
-      <aac-checkbox-container label="Completed">
+      <aac-checkbox-container label="Complete">
         <input type="checkbox" tabindex="73" formControlName="completedStatus" />
       </aac-checkbox-container>
 
@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-4">
       <aac-field-container label="Date:" [for]="inspectionDate.idDatePicker" [message]="displayMessage.inspectionDate">
-        <datetime [timepicker]="false" #inspectionDate [tabindex]='75' [required]="formGroup.get('completedStatus').value==true" formControlName="inspectionDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+        <datetime [timepicker]="false" #inspectionDate [tabindex]='75' [required]="formGroup.get('completedStatus').value==true" formControlName="inspectionDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>
@@ -40,7 +40,7 @@
     </div>
     <div class="col-md-4">
       <aac-field-container label="Date:" [for]="auditDate.idDatePicker" [message]="displayMessage.auditDate">
-        <datetime [timepicker]="false" #auditDate [tabindex]='78' formControlName="auditDate" [required]="formGroup.get('auditedStatus').value==true" [datepicker]="{ icon: 'glyphicon glyphicon-calendar' }"></datetime>
+        <datetime [timepicker]="false" #auditDate [tabindex]='78' formControlName="auditDate" [required]="formGroup.get('auditedStatus').value==true" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>
