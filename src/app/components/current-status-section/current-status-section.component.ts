@@ -31,6 +31,19 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
     this.subscriptions.push(this.formGroup.get('deletedStatus').valueChanges.subscribe(
       v => this.formGroup.get('deleteReason').setValue('')
     ));
+    this.subscriptions.push(this.formGroup.get('completedStatus').valueChanges.subscribe(
+      v => {
+        this.formGroup.get('inspector').setValue('');
+        this.formGroup.get('inspectionDate').setValue(new Date());
+      }
+    ));
+    this.subscriptions.push(this.formGroup.get('auditedStatus').valueChanges.subscribe(
+      v => {
+        this.formGroup.get('manager').setValue('');
+        this.formGroup.get('auditDate').setValue(new Date());
+        this.reliabilityApproved = false;
+      }
+    ));
 
   }
   ngOnDestroy() {
