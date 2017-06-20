@@ -74,8 +74,8 @@
       </aac-checkbox-container>
     </div>
     <div class="col-md-10">
-      <aac-field-container label="" labelGridColumnWidth="1" [message]="displayMessage.deleteReason">
-        <input type="text" tabindex="84" class="form-control" formControlName="deleteReason" [required]="formGroup.get('deletedStatus').value==true">
+      <aac-field-container label="" labelGridColumnWidth="1" [message]="displayMessage.deleteReason" [hidden]="formGroup.get('deletedStatus').value ==false">
+        <input type="text" tabindex="84" class="form-control" formControlName="deleteReason"   [required]="formGroup.get('deletedStatus').value==true">
       </aac-field-container>
     </div>
 

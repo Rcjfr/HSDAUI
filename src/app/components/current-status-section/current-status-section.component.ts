@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BaseFormComponent } from "../base-form.component";
 import { FormBuilder, Validators } from "@angular/forms";
 
@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from "@angular/forms";
   templateUrl: './current-status-section.component.html',
   styleUrls: ['./current-status-section.component.less']
 })
-export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit {
+export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit,OnDestroy {
 
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
@@ -28,9 +28,18 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
       rejectReason: ['', [Validators.maxLength(250)]]
     });
     this.parent.addControl(this.formGroupName, this.formGroup);
+    this.subscriptions.push(this.formGroup.get('deletedStatus').valueChanges.subscribe(
+      v => this.formGroup.get('deleteReason').setValue('')
+    ));
+
   }
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
+
   approve() {
     this.reliabilityApproved = true;
+    this.formGroup.get('rejectReason').setValue('');
   }
   reject() {
     this.reliabilityApproved = false;
