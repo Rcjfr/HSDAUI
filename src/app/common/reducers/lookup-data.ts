@@ -15,6 +15,9 @@ export interface State {
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
   damageTypes: List<models.IDamageType>;
+  floorboardConditions: List<models.IFloorboardCondition>;
+  repairDocuments: List<models.IRepairDocument>;
+  repairDescriptions: List<models.IRepairDescription>;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -29,7 +32,10 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   departments: <List<models.IDepartment>>List.of(),
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
-  damageTypes: <List<models.IDamageType>>List.of()
+  damageTypes: <List<models.IDamageType>>List.of(),
+  floorboardConditions: <List<models.IFloorboardCondition>>List.of(),
+  repairDocuments: <List<models.IRepairDocument>>List.of(),
+  repairDescriptions: <List<models.IRepairDescription>>List.of()
 });
 
 function makeInitialState() {
@@ -48,6 +54,9 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS:
     case lookupDataActions.ActionTypes.LOAD_STATIONS:
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS:
       {
         return state.merge({ loading: true });
       }
@@ -100,7 +109,22 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     {
       const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
       return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
-    }
+        }
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE:
+        {
+              const act = action as lookupDataActions.LoadFloorboardConditionsCompleteAction;
+              return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
+        }
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE:
+        {
+              const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
+            return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
+        }
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE:
+        {
+              const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
+              return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
+        }
     default: {
       return state;
     }
@@ -119,3 +143,6 @@ export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
 export const getDamageTypes = (state: State) => state.damageTypes;
+export const getFloorboardConditions = (state: State) => state.floorboardConditions;
+export const getRepairDocuments = (state: State) => state.repairDocuments;
+export const getRepairDescriptions = (state: State) => state.repairDescriptions;

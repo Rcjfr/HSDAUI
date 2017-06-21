@@ -6,7 +6,7 @@ import { CustomValidators } from '../../common/validators/custom-validators';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { ICorrosionLevel, ICorrosionType } from '../../common/models';
+import { ICorrosionLevel, ICorrosionType, IFloorboardCondition } from '../../common/models';
 
 @Component({
   selector: 'app-cpcp-section-form',
@@ -16,6 +16,7 @@ import { ICorrosionLevel, ICorrosionType } from '../../common/models';
 export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
+  floorboardConditions$: Observable<List<IFloorboardCondition>>;
   cpcpSectionGroup: FormGroup;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
@@ -23,6 +24,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
+    this.floorboardConditions$ = this.appStateService.getFloorboardConditions();
     const cpcp: FormControl = this.fb.control(null, Validators.required);
     this.cpcpSectionGroup = this.fb.group({
       cpcprelated: cpcp,
