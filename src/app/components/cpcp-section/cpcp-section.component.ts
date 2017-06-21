@@ -16,7 +16,7 @@ import { ICorrosionLevel, ICorrosionType, IFloorboardCondition } from '../../com
 export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  floorbaordCondition$: Observable<List<IFloorboardCondition>>;
+  floorbaordConditions$: Observable<List<IFloorboardCondition>>;
   cpcpSectionGroup: FormGroup;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
@@ -24,7 +24,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
-    this.floorbaordCondition$ = this.appStateService.getFloorboardCondition();
+    this.floorbaordConditions$ = this.appStateService.getFloorboardCondition();
     const cpcp: FormControl = this.fb.control(null, Validators.required);
     this.cpcpSectionGroup = this.fb.group({
       cpcprelated: cpcp,

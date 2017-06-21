@@ -72,7 +72,7 @@
   <div class="col-md-6">
     <aac-field-container label="Repair Document:">
       <select class="form-control" multiple tabindex='60'>
-        <option *ngFor="let ac of repairDocument$ | async" [value]="ac.id">{{ac.description}}</option>
+        <option *ngFor="let ac of repairDocuments$ | async" [value]="ac.id">{{ac.description}}</option>
       </select>
     </aac-field-container>
     

@@ -12,8 +12,8 @@ import { AppStateService } from '../../../common/services';
 export class SearchByCorrectiveActionComponent implements OnInit {
     repairDocument: string[] = [];
     repairDesc: string[] = [];
-    repairDescriptions$: Observable<List<models.IRepairedDescribe>>; 
-    repairDocument$: Observable<List<models.IRepairDocument>>; 
+    repairDescriptions$: Observable<List<models.IRepairDescription>>; 
+    repairDocuments$: Observable<List<models.IRepairDocument>>; 
 //repairDocument$: Observable<IBaseLookUp[]> = Observable.of([
 //        { id: 1, description: 'AARD' },
 //        { id: 2, description: 'AARD (w/supporting EA)' },
@@ -33,7 +33,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
 constructor(private appStateService: AppStateService) { }
     ngOnInit() {
         this.repairDescriptions$ = this.appStateService.getRepairedDescribe();
-        this.repairDocument$ = this.appStateService.getRepairDocument();
+        this.repairDocuments$ = this.appStateService.getRepairDocument();
     }
 
 }

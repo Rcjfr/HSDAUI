@@ -15,9 +15,9 @@ export interface State {
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
   damageTypes: List<models.IDamageType>;
-  floorboardCondition: List<models.IFloorboardCondition>;
-  repairDocument: List<models.IRepairDocument>;
-  repairedDescribe: List<models.IRepairedDescribe>;
+  floorboardConditions: List<models.IFloorboardCondition>;
+  repairDocuments: List<models.IRepairDocument>;
+  repairDescriptions: List<models.IRepairDescription>;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -33,9 +33,9 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
   damageTypes: <List<models.IDamageType>>List.of(),
-  floorboardCondition: <List<models.IFloorboardCondition>>List.of(),
-  repairDocument: <List<models.IRepairDocument>>List.of(),
-  repairedDescribe: <List<models.IRepairedDescribe>>List.of()
+  floorboardConditions: <List<models.IFloorboardCondition>>List.of(),
+  repairDocuments: <List<models.IRepairDocument>>List.of(),
+  repairDescriptions: <List<models.IRepairDescription>>List.of()
 });
 
 function makeInitialState() {
@@ -54,9 +54,9 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS:
     case lookupDataActions.ActionTypes.LOAD_STATIONS:
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
-    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITION:
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT:
-    case lookupDataActions.ActionTypes.LOAD_REPAIRED_DESCRIBE:
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS:
       {
         return state.merge({ loading: true });
       }
@@ -110,20 +110,20 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
       return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
         }
-    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITION_COMPLETE:
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE:
         {
-              const act = action as lookupDataActions.LoadFloorboardConditionCompleteAction;
-              return state.merge({ loading: false, floorboardCondition: List.of(...act.payload) });
+              const act = action as lookupDataActions.LoadFloorboardConditionsCompleteAction;
+              return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
         }
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT_COMPLETE:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE:
         {
               const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
-            return state.merge({ loading: false, repairDocument: List.of(...act.payload) });
+            return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
         }
-    case lookupDataActions.ActionTypes.LOAD_REPAIRED_DESCRIBE_COMPLETE:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE:
         {
-              const act = action as lookupDataActions.LoadRepairedDescribeCompleteAction;
-              return state.merge({ loading: false, repairedDescribe: List.of(...act.payload) });
+              const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
+              return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
         }
     default: {
       return state;
@@ -143,6 +143,6 @@ export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
 export const getDamageTypes = (state: State) => state.damageTypes;
-export const getFloorboardCondition = (state: State) => state.floorboardCondition;
-export const getRepairDocument = (state: State) => state.repairDocument;
-export const getRepairedDescribe = (state: State) => state.repairedDescribe;
+export const getFloorboardConditions = (state: State) => state.floorboardConditions;
+export const getRepairDocuments = (state: State) => state.repairDocuments;
+export const getRepairDescriptions = (state: State) => state.repairDescriptions;

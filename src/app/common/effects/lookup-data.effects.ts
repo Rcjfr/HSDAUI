@@ -27,9 +27,9 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDetectionMethodsAction(),
                                                 new lookupData.LoadStationsAction(),
                                                 new lookupData.LoadDamageTypesAction(),
-                                                new lookupData.LoadFloorboardConditionAction(),
+                                                new lookupData.LoadFloorboardConditionsAction(),
                                                 new lookupData.LoadRepairDocumentsAction(),
-                                                new lookupData.LoadRepairedDescribeAction()
+                                                new lookupData.LoadRepairDescriptionsAction()
                                                 ]
                                               ));
     @Effect()
@@ -166,41 +166,41 @@ export class LookupDataEffects {
   });
 
   @Effect()
-  loadfloorbaordCondition$: Observable<Action> = this.actions$
-      .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITION)
+  loadFloorBaordConditions$: Observable<Action> = this.actions$
+      .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
       .switchMap(() => {
-          return this.floorboardConditionService.getAllfloorboardCondition()
+          return this.floorboardConditionService.getAllfloorboardConditions()
               .map((response: models.IFloorboardCondition[]) => {
-                  return new lookupData.LoadFloorboardConditionCompleteAction(response);
+                  return new lookupData.LoadFloorboardConditionsCompleteAction(response);
               })
               .catch((err) => {
-                  return of(new lookupData.LoadFloorboardConditionFailAction('Failed to load Floorboard Condition'));
+                  return of(new lookupData.LoadFloorboardConditionsFailAction('Failed to load Floorboard Conditions'));
               });
       });
 
 
   @Effect()
-  loadrepairDocuments$: Observable<Action> = this.actions$
-                                              .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT)
+  loadRepairDocuments$: Observable<Action> = this.actions$
+                                              .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS)
                                               .switchMap(() => {
-                                                  return this.repairDocumentService.getAllRepairDocument()
+                                                  return this.repairDocumentService.getAllRepairDocuments()
                                                       .map((response: models.IRepairDocument[]) => {
                                                           return new lookupData.LoadRepairDocumentsCompleteAction(response);
                                                       })
                                                       .catch((err) => {
-                                                          return of(new lookupData.LoadRepairDocumentsFailAction('Failed to load Repair Document'));
+                                                          return of(new lookupData.LoadRepairDocumentsFailAction('Failed to load Repair Documents'));
                                                       });
       });
   @Effect()
-  loadRepairedDescribe$: Observable<Action> = this.actions$
-                                              .ofType(lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE)
+  loadRepairDescription$: Observable<Action> = this.actions$
+                                              .ofType(lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS)
                                               .switchMap(() => {
-                                                  return this.repairedDescribeService.getAllRepairedDescribe()
-                                                      .map((response: models.IRepairedDescribe[]) => {
-                                                          return new lookupData.LoadRepairedDescribeCompleteAction(response);
+                                                  return this.repairDescriptionService.getAllRepairDescriptions()
+                                                      .map((response: models.IRepairDescription[]) => {
+                                                          return new lookupData.LoadRepairDescriptionsCompleteAction(response);
                                                       })
                                                       .catch((err) => {
-                                                          return of(new lookupData.LoadRepairedDescribeFailAction('Failed to load Repaired Describe'));
+                                                          return of(new lookupData.LoadRepairDescriptionsFailAction('Failed to load Repaired Describe'));
                                                       });
       });
     @Effect()
@@ -214,9 +214,9 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
                                                       lookupData.ActionTypes.LOAD_STATIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
-                                                      lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITION_FAIL,
-                                                      lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT_FAIL,
-                                                      lookupData.ActionTypes.LOAD_REPAIRED_DESCRIBE_FAIL
+                                                      lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL,
+                                                      lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL,
+                                                      lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL
                                                       )
       .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 
@@ -233,7 +233,7 @@ constructor(private actions$: Actions,
                 private damageTypesService: services.DamageTypeService,
                 private floorboardConditionService: services.FloorboardConditionService,
                 private repairDocumentService: services.RepairDocumentService,
-                private repairedDescribeService: services.RepairedDescribeService,
+                private repairDescriptionService: services.RepairDescriptionService,
                 private toastr: ToastsManager) {
                 }
 

@@ -11,5 +11,5 @@ export * from './station.model';
 export * from './damage-type.model';
 export * from './floorboard-condition.model';
 export * from './repair-document.model';
-export * from './repaired-describe.model';
+export * from './repair-description.model';
 export * from './base-lookup.model';

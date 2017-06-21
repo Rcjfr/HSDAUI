@@ -11,7 +11,7 @@ export class RepairDocumentService {
     private endPointUrl = `${environment.hsdaApiBaseUrl}repairdocument`;
     constructor(private http: Http) { }
 
-    getAllRepairDocument(): Observable<IRepairDocument[]> {
+    getAllRepairDocuments(): Observable<IRepairDocument[]> {
         //TODO:Uncomment when lookup table is available
         //return this.http.get(this.endPointUrl)
         //  .map((result) => result.json());

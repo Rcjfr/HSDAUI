@@ -11,7 +11,7 @@ export class FloorboardConditionService {
   private endPointUrl = `${environment.hsdaApiBaseUrl}floorboardcondition`;
   constructor(private http: Http) { }
 
-  getAllfloorboardCondition(): Observable<IFloorboardCondition[]> {
+  getAllfloorboardConditions(): Observable<IFloorboardCondition[]> {
     //TODO:Uncomment when lookup table is available
     //return this.http.get(this.endPointUrl)
     //  .map((result) => result.json());

@@ -18,7 +18,7 @@ import { AppStateService } from '../../common/services';
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy {
     correctiveActionRepairDescriptionFormGroup: FormGroup;
-    repairDescriptions$: Observable<List<models.IRepairedDescribe>>;
+    repairDescriptions$: Observable<List<models.IRepairDescription>>;
     repairDocuments$:Observable<List<models.IRepairDocument>>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService  ) {

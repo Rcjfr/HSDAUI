@@ -43,13 +43,13 @@ export class AppStateService {
     return this.store.select(fromRoot.getDamageTypes);
   }
   getFloorboardCondition() {
-      return this.store.select(fromRoot.getFloorboardCondition);
+      return this.store.select(fromRoot.getFloorboardConditions);
   }
   getRepairedDescribe() {
-      return this.store.select(fromRoot.getRepairedDescribe);
+      return this.store.select(fromRoot.getRepairDescriptions);
   }
   getRepairDocument() {
-      return this.store.select(fromRoot.getRepairDocument);
+      return this.store.select(fromRoot.getRepairDocuments);
   }
 
   getAircraftInfo() {

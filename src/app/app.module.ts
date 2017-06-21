@@ -32,7 +32,7 @@ import {
   DamageTypeService,
   FloorboardConditionService,
   RepairDocumentService,
-  RepairedDescribeService
+  RepairDescriptionService
 
 } from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
@@ -148,7 +148,7 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
       DamageTypeService,
       FloorboardConditionService,
       RepairDocumentService,
-      RepairedDescribeService
+      RepairDescriptionService
   ],
   bootstrap: [AppComponent]
 })
