@@ -41,7 +41,8 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
       v => {
         this.formGroup.get('manager').setValue('');
         this.formGroup.get('auditDate').setValue(new Date());
-        this.reliabilityApproved = false;
+        this.reliabilityApproved = null;
+        this.formGroup.get('rejectReason').setValue('');
       }
     ));
 
