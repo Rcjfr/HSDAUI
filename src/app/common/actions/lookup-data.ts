@@ -44,9 +44,13 @@ export const ActionTypes = {
   LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
   LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
 
-  LOAD_REPAIR_DOCUMENT: 'Load Damage Types',
-  LOAD_REPAIR_DOCUMENT_COMPLETE: 'Load Damage Types Complete',
-  LOAD_REPAIR_DOCUMENT_FAIL: 'Load Damage Types Fail',
+  LOAD_FLOORBOARD_CONDITION: 'Load Floorboard Condition',
+  LOAD_FLOORBOARD_CONDITION_COMPLETE: 'Load Floorboard Condition Complete',
+  LOAD_FLOORBOARD_CONDITION_FAIL: 'Load Floorboard Condition Fail',
+
+  LOAD_REPAIR_DOCUMENT: 'Load Repair Documents',
+  LOAD_REPAIR_DOCUMENT_COMPLETE: 'Load Repair Documents Complete',
+  LOAD_REPAIR_DOCUMENT_FAIL: 'Load Repair Documents Fail',
 
   LOAD_REPAIRED_DESCRIBE: 'Load Repaired Describe',
   LOAD_REPAIRED_DESCRIBE_COMPLETE: 'Load Repaired Describe Complete',
@@ -209,23 +213,39 @@ export class LoadDamageTypesFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-// Repair Documents
-export class LoadRepairDocumentsAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES;
+//Floorboard Condition
+export class LoadFloorboardConditionAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITION;
     public payload: any;
     constructor() { }
 }
-export class LoadRepairDocumentsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+export class LoadFloorboardConditionCompleteAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITION_COMPLETE;
     constructor(public payload: models.IDamageType[]) { }
 }
-export class LoadRepairDocumentsFailAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+export class LoadFloorboardConditionFailAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITION_FAIL;
     constructor(public payload: any) { }
 }
 
 
-//Repaired Describe
+// Repair Documents
+export class LoadRepairDocumentsAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDocumentsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT_COMPLETE;
+    constructor(public payload: models.IRepairDocument[]) { }
+}
+export class LoadRepairDocumentsFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+//Repaired DescribeI
 export class LoadRepairedDescribeAction implements Action {
     public type = ActionTypes.LOAD_REPAIRED_DESCRIBE;
     public payload: any;
@@ -276,6 +296,9 @@ export type Actions =
   LoadDamageTypesAction |
   LoadDamageTypesCompleteAction |
   LoadDamageTypesFailAction |
+  LoadFloorboardConditionAction |
+  LoadFloorboardConditionCompleteAction |
+  LoadFloorboardConditionFailAction |
   LoadRepairDocumentsAction |
   LoadRepairDocumentsCompleteAction |
   LoadRepairDocumentsFailAction |

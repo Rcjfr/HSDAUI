@@ -15,6 +15,7 @@ export interface State {
   detectionMethods: List<models.IDetectionMethod>;
   stations: List<models.IStation>;
   damageTypes: List<models.IDamageType>;
+  floorboardCondition: List<models.IFloorboardCondition>;
   repairDocument: List<models.IRepairDocument>;
   repairedDescribe: List<models.IRepairedDescribe>;
 }
@@ -32,6 +33,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   detectionMethods: <List<models.IDetectionMethod>>List.of(),
   stations: <List<models.IStation>>List.of(),
   damageTypes: <List<models.IDamageType>>List.of(),
+  floorboardCondition: <List<models.IFloorboardCondition>>List.of(),
   repairDocument: <List<models.IRepairDocument>>List.of(),
   repairedDescribe: <List<models.IRepairedDescribe>>List.of()
 });
@@ -52,6 +54,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS:
     case lookupDataActions.ActionTypes.LOAD_STATIONS:
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITION:
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT:
     case lookupDataActions.ActionTypes.LOAD_REPAIRED_DESCRIBE:
       {
@@ -107,6 +110,11 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
       return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
         }
+    case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITION_COMPLETE:
+        {
+              const act = action as lookupDataActions.LoadFloorboardConditionCompleteAction;
+              return state.merge({ loading: false, floorboardCondition: List.of(...act.payload) });
+        }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT_COMPLETE:
         {
               const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
@@ -135,5 +143,6 @@ export const getDepartments = (state: State) => state.departments;
 export const getDetectionMethods = (state: State) => state.detectionMethods;
 export const getStations = (state: State) => state.stations;
 export const getDamageTypes = (state: State) => state.damageTypes;
+export const getFloorboardCondition = (state: State) => state.floorboardCondition;
 export const getRepairDocument = (state: State) => state.repairDocument;
 export const getRepairedDescribe = (state: State) => state.repairedDescribe;

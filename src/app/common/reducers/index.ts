@@ -39,8 +39,9 @@ export const getDepartments = compose(fromLookupData.getDepartments, getLookupDa
 export const getDetectionMethods = compose(fromLookupData.getDetectionMethods, getLookupDataState);
 export const getStations = compose(fromLookupData.getStations, getLookupDataState);
 export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDataState);
+export const getFloorboardCondition = compose(fromLookupData.getFloorboardCondition, getLookupDataState);
+export const getRepairedDescribe = compose(fromLookupData.getRepairedDescribe, getLookupDataState);
 export const getRepairDocument = compose(fromLookupData.getRepairDocument, getLookupDataState);
-//export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDataState);
 
 
 

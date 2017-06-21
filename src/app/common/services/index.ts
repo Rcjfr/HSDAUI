@@ -9,6 +9,7 @@ export * from './department.service';
 export * from './detection-method.service'
 export * from './station.service';
 export * from './damage-type.service';
+export * from './floorboard-condition.service';
 export * from './repair-document.service';
 export * from './repaired-describe.service';
 
