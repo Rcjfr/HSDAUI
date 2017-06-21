@@ -166,7 +166,7 @@ export class LookupDataEffects {
   });
 
   @Effect()
-  loadFloorBaordConditions$: Observable<Action> = this.actions$
+  loadFloorBoardConditions$: Observable<Action> = this.actions$
       .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
       .switchMap(() => {
           return this.floorboardConditionService.getAllfloorboardConditions()
