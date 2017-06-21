@@ -26,8 +26,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   }
   
   ngOnInit() {
-      this.repairDescriptions$ = this.appStateService.getRepairedDescribe();
-      this.repairDocuments$ = this.appStateService.getRepairDocument();
+      this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+      this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       repairedDescribe: ['', [Validators.required]],
       repairDocument: ['', []],

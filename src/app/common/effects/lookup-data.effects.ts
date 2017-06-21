@@ -192,7 +192,7 @@ export class LookupDataEffects {
                                                       });
       });
   @Effect()
-  loadRepairDescription$: Observable<Action> = this.actions$
+  loadRepairDescriptions$: Observable<Action> = this.actions$
                                               .ofType(lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS)
                                               .switchMap(() => {
                                                   return this.repairDescriptionService.getAllRepairDescriptions()

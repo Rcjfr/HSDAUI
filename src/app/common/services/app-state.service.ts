@@ -42,13 +42,13 @@ export class AppStateService {
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);
   }
-  getFloorboardCondition() {
+  getFloorboardConditions() {
       return this.store.select(fromRoot.getFloorboardConditions);
   }
-  getRepairedDescribe() {
+  getRepairDescriptions() {
       return this.store.select(fromRoot.getRepairDescriptions);
   }
-  getRepairDocument() {
+  getRepairDocuments() {
       return this.store.select(fromRoot.getRepairDocuments);
   }
 
