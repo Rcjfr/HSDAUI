@@ -103,8 +103,7 @@
       <div  [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'" [class.has-error]="displayMessage.floorbaordCondition">
         <aac-field-container label=" Floorboard condition after mat is removed:" [message]="displayMessage.floorbaordCondition">
           <select class="form-control" tabindex='53' id="floorbaordCondition" formControlName="floorbaordCondition">
-            <option value="wet">WET</option>
-            <option value="dry">DRY</option>
+            <option *ngFor="let ac of floorboardConditions$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
         </aac-field-container>
 

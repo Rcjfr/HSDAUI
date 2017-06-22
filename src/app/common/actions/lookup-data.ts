@@ -44,6 +44,18 @@ export const ActionTypes = {
   LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
   LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
 
+  LOAD_FLOORBOARD_CONDITIONS: 'Load Floorboard Conditions',
+  LOAD_FLOORBOARD_CONDITIONS_COMPLETE: 'Load Floorboard Conditions Complete',
+  LOAD_FLOORBOARD_CONDITIONS_FAIL: 'Load Floorboard Conditions Fail',
+
+  LOAD_REPAIR_DOCUMENTS: 'Load Repair Documents',
+  LOAD_REPAIR_DOCUMENTS_COMPLETE: 'Load Repair Documents Complete',
+  LOAD_REPAIR_DOCUMENTS_FAIL: 'Load Repair Documents Fail',
+
+  LOAD_REPAIR_DESCRIPTIONS: 'Load Repair Descriptions',
+  LOAD_REPAIR_DESCRIPTIONS_COMPLETE: 'Load Repair Descriptions Complete',
+  LOAD_REPAIR_DESCRIPTIONS_FAIL: 'Load Repair Descriptions Fail',
+
 
 
   LOAD_LOOKUP_DATA: 'Load All Lookup Data'
@@ -201,7 +213,52 @@ export class LoadDamageTypesFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+//Floorboard Condition
+export class LoadFloorboardConditionsAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadFloorboardConditionsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE;
+    constructor(public payload: models.IFloorboardCondition[]) { }
+}
+export class LoadFloorboardConditionsFailAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL;
+    constructor(public payload: any) { }
+}
 
+
+// Repair Documents
+export class LoadRepairDocumentsAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDocumentsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE;
+    constructor(public payload: models.IRepairDocument[]) { }
+}
+export class LoadRepairDocumentsFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+//Repair Description
+export class LoadRepairDescriptionsAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDescriptionsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE;
+    constructor(public payload: models.IRepairDescription[]) { }
+}
+export class LoadRepairDescriptionsFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL;
+    constructor(public payload: any) { }
+}
 
 // Load Lookup Data
 export class LoadLookupDataAction implements Action {
@@ -239,5 +296,14 @@ export type Actions =
   LoadDamageTypesAction |
   LoadDamageTypesCompleteAction |
   LoadDamageTypesFailAction |
+  LoadFloorboardConditionsAction |
+  LoadFloorboardConditionsCompleteAction |
+  LoadFloorboardConditionsFailAction |
+  LoadRepairDocumentsAction |
+  LoadRepairDocumentsCompleteAction |
+  LoadRepairDocumentsFailAction |
+  LoadRepairDescriptionsAction |
+  LoadRepairDescriptionsCompleteAction |
+  LoadRepairDescriptionsFailAction |
   LoadLookupDataAction;
 

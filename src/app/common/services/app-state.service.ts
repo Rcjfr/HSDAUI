@@ -45,6 +45,15 @@ export class AppStateService {
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);
   }
+  getFloorboardConditions() {
+      return this.store.select(fromRoot.getFloorboardConditions);
+  }
+  getRepairDescriptions() {
+      return this.store.select(fromRoot.getRepairDescriptions);
+  }
+  getRepairDocuments() {
+      return this.store.select(fromRoot.getRepairDocuments);
+  }
 
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);

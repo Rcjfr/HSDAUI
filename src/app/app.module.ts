@@ -29,7 +29,10 @@ import {
   DepartmentService,
   DetectionMethodService,
   StationService,
-  DamageTypeService
+  DamageTypeService,
+  FloorboardConditionService,
+  RepairDocumentService,
+  RepairDescriptionService
 
 } from './common/services/index';
 import { AlertEffects } from './common/effects/alerts.effects';
@@ -142,7 +145,10 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     DepartmentService,
     DetectionMethodService,
     StationService,
-    DamageTypeService
+      DamageTypeService,
+      FloorboardConditionService,
+      RepairDocumentService,
+      RepairDescriptionService
   ],
   bootstrap: [AppComponent]
 })
