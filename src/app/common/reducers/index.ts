@@ -42,6 +42,7 @@ export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDa
 export const getFloorboardConditions = compose(fromLookupData.getFloorboardConditions, getLookupDataState);
 export const getRepairDescriptions = compose(fromLookupData.getRepairDescriptions, getLookupDataState);
 export const getRepairDocuments = compose(fromLookupData.getRepairDocuments, getLookupDataState);
+export const getReasonsForChange = compose(fromLookupData.getReasonsForChange, getLookupDataState);
 
 
 

@@ -12,4 +12,6 @@ export * from './damage-type.service';
 export * from './floorboard-condition.service';
 export * from './repair-document.service';
 export * from './repair-description.service';
+export * from './reason-for-change.service';
+
 

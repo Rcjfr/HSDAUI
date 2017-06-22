@@ -51,8 +51,8 @@ export class MockAppStateService extends AppStateService {
     return Observable.of(<List<models.IDetectionMethod>>List.of());
   }
 
-  getStations() {
-    return Observable.of(<List<models.IStation>>List.of());
+  getStations(query: string) {
+    return Observable.of([]);
   }
 
   getAircraftInfo() {

@@ -56,6 +56,10 @@ export const ActionTypes = {
   LOAD_REPAIR_DESCRIPTIONS_COMPLETE: 'Load Repair Descriptions Complete',
   LOAD_REPAIR_DESCRIPTIONS_FAIL: 'Load Repair Descriptions Fail',
 
+  LOAD_REASONS_FOR_CHANGE: 'Load Reasons for change',
+  LOAD_REASONS_FOR_CHANGE_COMPLETE: 'Load Reasons for change Complete',
+  LOAD_REASONS_FOR_CHANGE_FAIL: 'Load Reasons for change Fail',
+
 
 
   LOAD_LOOKUP_DATA: 'Load All Lookup Data'
@@ -260,6 +264,22 @@ export class LoadRepairDescriptionsFailAction implements Action {
     constructor(public payload: any) { }
 }
 
+//Reasons for change
+export class LoadReasonsForChangeAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE;
+  public payload: any;
+  constructor() { }
+}
+export class LoadReasonsForChangeCompleteAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE_COMPLETE;
+  constructor(public payload: models.IReasonForChange[]) { }
+}
+export class LoadReasonsForChangeFailAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL;
+  constructor(public payload: any) { }
+}
+
+
 // Load Lookup Data
 export class LoadLookupDataAction implements Action {
   public type = ActionTypes.LOAD_LOOKUP_DATA;
@@ -305,5 +325,8 @@ export type Actions =
   LoadRepairDescriptionsAction |
   LoadRepairDescriptionsCompleteAction |
   LoadRepairDescriptionsFailAction |
+  LoadReasonsForChangeAction |
+  LoadReasonsForChangeCompleteAction |
+  LoadReasonsForChangeFailAction |
   LoadLookupDataAction;
 

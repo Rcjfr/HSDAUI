@@ -29,7 +29,8 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDamageTypesAction(),
                                                 new lookupData.LoadFloorboardConditionsAction(),
                                                 new lookupData.LoadRepairDocumentsAction(),
-                                                new lookupData.LoadRepairDescriptionsAction()
+                                                new lookupData.LoadRepairDescriptionsAction(),
+                                                new lookupData.LoadReasonsForChangeAction()
                                                 ]
                                               ));
     @Effect()
@@ -202,7 +203,20 @@ export class LookupDataEffects {
                                                       .catch((err) => {
                                                           return of(new lookupData.LoadRepairDescriptionsFailAction('Failed to load Repaired Describe'));
                                                       });
-      });
+    });
+  @Effect()
+  loadReasonsForChange$: Observable<Action> = this.actions$
+    .ofType(lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE)
+    .switchMap(() => {
+      return this.reasonsForChangeService.getAllReasonsForChange()
+        .map((response: models.IReasonForChange[]) => {
+          return new lookupData.LoadReasonsForChangeCompleteAction(response);
+        })
+        .catch((err) => {
+          return of(new lookupData.LoadReasonsForChangeFailAction('Failed to load Reasons for change'));
+        });
+    });
+
     @Effect()
     showToastrError$: any = this.actions$
                                               .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES_FAIL,
@@ -216,7 +230,8 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
                                                       lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL,
-                                                      lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL
+                                                      lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL,
+                                                      lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL
                                                       )
       .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 
@@ -234,6 +249,7 @@ constructor(private actions$: Actions,
                 private floorboardConditionService: services.FloorboardConditionService,
                 private repairDocumentService: services.RepairDocumentService,
                 private repairDescriptionService: services.RepairDescriptionService,
+                private reasonsForChangeService: services.ReasonForChangeService,
                 private toastr: ToastsManager) {
                 }
 
