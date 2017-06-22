@@ -9,7 +9,7 @@
         <ng-template #customItemTemplate let-model="item" let-index="index">
           <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
         </ng-template>
-        <input type="text" tabindex='7' [(ngModel)]="station" autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$ | async"
+        <input type="text" tabindex='7' [(ngModel)]="station" autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$"
                typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10" />
       </aac-field-container>
   </div>

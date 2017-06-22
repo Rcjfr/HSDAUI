@@ -4,6 +4,8 @@ import { AppStore } from '../store/app-store';
 import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
+import { Observable } from "rxjs/Rx";
+import { IStation } from "../models";
 @Injectable()
 export class AppStateService {
 
@@ -33,10 +35,11 @@ export class AppStateService {
   getDetectionMethods() {
     return this.store.select(fromRoot.getDetectionMethods);
   }
-  getStations(query:string) {
+  getStations(query: string): Observable<IStation[]> {
     const queryExp = new RegExp(query, 'ig');
     return this.store.select(fromRoot.getStations)
-      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)));
+      .map(r => r.filter(r => queryExp.test(r.stationIATACode) || queryExp.test(r.stationDescription)))
+      .map(d => d && d.toJS());
   
   }
   getDamageTypes() {
@@ -53,6 +56,9 @@ export class AppStateService {
   }
   getRepairDocuments() {
       return this.store.select(fromRoot.getRepairDocuments);
+  }
+  getReasonsForChange() {
+    return this.store.select(fromRoot.getReasonsForChange);
   }
 
   getAircraftInfo() {
