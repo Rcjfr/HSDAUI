@@ -42,6 +42,9 @@ export class AppStateService {
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);
   }
+  getCauseOfDamages() {
+      return this.store.select(fromRoot.getCauseOfDamages);
+  }
   getFloorboardConditions() {
       return this.store.select(fromRoot.getFloorboardConditions);
   }

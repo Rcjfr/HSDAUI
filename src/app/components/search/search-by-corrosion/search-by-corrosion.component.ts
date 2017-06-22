@@ -2,7 +2,7 @@
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { ICorrosionLevel, ICorrosionType } from '../../../common/models';
+import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
 @Component({
   selector: 'app-search-by-corrosion',
   templateUrl: './search-by-corrosion.component.html',
@@ -11,6 +11,7 @@ import { ICorrosionLevel, ICorrosionType } from '../../../common/models';
 export class SearchByCorrosionComponent implements OnInit {
 corrosionTypes$: Observable<List<ICorrosionType>>;
 corrosionLevels$: Observable<List<ICorrosionLevel>>;
+causeOfDamages$: Observable<List<ICauseOfDamage>>;
   corrosionLevels:string[]=[];
   causeOfDamage: string[] = [];
   corrosionType:string='';
@@ -19,7 +20,7 @@ corrosionLevels$: Observable<List<ICorrosionLevel>>;
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
-    
+    this.causeOfDamages$ = this.appStateService.getCauseOfDamages();
   }
   hideCorrosionTypeOther(){
     return this.corrosionType != '5';

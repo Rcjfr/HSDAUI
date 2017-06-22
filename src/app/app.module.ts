@@ -30,6 +30,7 @@ import {
   DetectionMethodService,
   StationService,
   DamageTypeService,
+  CauseOfDamageService,
   FloorboardConditionService,
   RepairDocumentService,
   RepairDescriptionService
@@ -146,6 +147,7 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     DetectionMethodService,
     StationService,
       DamageTypeService,
+      CauseOfDamageService,
       FloorboardConditionService,
       RepairDocumentService,
       RepairDescriptionService
