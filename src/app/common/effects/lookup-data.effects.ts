@@ -168,31 +168,31 @@ export class LookupDataEffects {
 
   @Effect()
   loadCauseOfDamages$: Observable<Action> = this.actions$
-                                                    .ofType(lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES)
-                                                    .switchMap(() => {
-                                                        return this.causeOfDamageService.getAllCauseOfDamages()
-                                                            .map((response: models.IDamageType[]) => {
-                                                                return new lookupData.LoadCauseOfDamagesCompleteAction(response);
-                                                            })
-                                                            .catch((err) => {
-                                                                return of(new lookupData.LoadCauseOfDamagesFailAction('Failed to load Cause Of Damages'));
-                                                            });
-                                                    });
+                                              .ofType(lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES)
+                                              .switchMap(() => {
+                                                  return this.causeOfDamageService.getAllCauseOfDamages()
+                                                      .map((response: models.ICauseOfDamage[]) => {
+                                                          return new lookupData.LoadCauseOfDamagesCompleteAction(response);
+                                                      })
+                                                      .catch((err) => {
+                                                          return of(new lookupData.LoadCauseOfDamagesFailAction('Failed to load Cause Of Damages'));
+                                                      });
+                                              });
 
 
 
   @Effect()
   loadFloorBoardConditions$: Observable<Action> = this.actions$
-      .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
-      .switchMap(() => {
-          return this.floorboardConditionService.getAllfloorboardConditions()
-              .map((response: models.IFloorboardCondition[]) => {
-                  return new lookupData.LoadFloorboardConditionsCompleteAction(response);
-              })
-              .catch((err) => {
-                  return of(new lookupData.LoadFloorboardConditionsFailAction('Failed to load Floorboard Conditions'));
-              });
-      });
+                                              .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
+                                              .switchMap(() => {
+                                                  return this.floorboardConditionService.getAllfloorboardConditions()
+                                                      .map((response: models.IFloorboardCondition[]) => {
+                                                          return new lookupData.LoadFloorboardConditionsCompleteAction(response);
+                                                      })
+                                                      .catch((err) => {
+                                                          return of(new lookupData.LoadFloorboardConditionsFailAction('Failed to load Floorboard Conditions'));
+                                                      });
+                                              });
 
 
   @Effect()
@@ -230,6 +230,7 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
                                                       lookupData.ActionTypes.LOAD_STATIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
+                                                      lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL,
                                                       lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL

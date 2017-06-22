@@ -227,7 +227,7 @@ export class LoadCauseOfDamagesAction implements Action {
 export class LoadCauseOfDamagesCompleteAction implements Action {
     public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
     constructor(public payload: models.ICauseOfDamage[]) { }
-}
+} 
 export class LoadCauseOfDamagesFailAction implements Action {
     public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
     constructor(public payload: any) { }
