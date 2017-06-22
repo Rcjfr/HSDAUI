@@ -54,6 +54,9 @@ export class AppStateService {
   getRepairDocuments() {
       return this.store.select(fromRoot.getRepairDocuments);
   }
+  getReasonsForChange() {
+    return this.store.select(fromRoot.getReasonsForChange);
+  }
 
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);
