@@ -2,26 +2,26 @@
   <div class="row">
     <div class="col-md-6">
 
-      <aac-field-container  label="SDR Number:" [message]="displayMessage.sdrNumber">
-        <input type="text"  tabindex="1" class="form-control" formControlName="sdrNumber">
+      <aac-field-container label="SDR Number:" [message]="displayMessage.sdrNumber">
+        <input type="text" tabindex="1" class="form-control" formControlName="sdrNumber">
       </aac-field-container>
-    
+
     </div>
     <div class="col-md-6">
-      <aac-checkbox label="Line Maintenance" tabindex="2" formControlName="lineMaintenance" ></aac-checkbox>
+      <aac-checkbox label="Line Maintenance" tabindex="2" formControlName="lineMaintenance"></aac-checkbox>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Create Date:" [attr.for]="sdaCreateDate.idDatePicker" [message]="displayMessage.createDate" required="true">
-        <datetime [timepicker]="false"  #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
-     
+
     </div>
     <div class="col-md-6">
-      <aac-field-container  required="true"
-              label="Alert Code:"
-              [message]="displayMessage.alertCode" >
+      <aac-field-container required="true"
+                           label="Alert Code:"
+                           [message]="displayMessage.alertCode">
         <select tabindex="13" class="form-control" formControlName="alertCode">
           <option value="">Select Alert Code</option>
           <option *ngFor="let ac of alertCodes$ | async" [value]="ac.code">{{ac.description}}</option>
@@ -33,14 +33,15 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="SDA ID:" required="true">
-        <input   class="form-control" formControlName="sdaId">
+        <input class="form-control" formControlName="sdaId">
       </aac-field-container>
-   
+
       <div>
+        <ng-template #customItemTemplate let-model="item" let-index="index">
+          <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
+        </ng-template>
+
         <aac-field-container required="true" label="Station:" [message]="displayMessage.station">
-          <ng-template #customItemTemplate let-model="item" let-index="index">
-            <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
-          </ng-template>
           <input type="text" tabindex='4' autocomplete="off" class="form-control" maxlength="3" formControlName="station" [typeahead]="stations$"
                  typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate"
                  typeaheadOptionsLimit="10" typeaheadMinLength="1">
@@ -61,16 +62,15 @@
           <option *ngFor="let d of departments$ | async" [value]="d.id">{{d.description}}</option>
         </select>
       </aac-field-container>
-      
+
       <!--Aircraft Info Section-->
-      <app-aircraft-info-section-form
-      [parent]="generalSectionFormGroup"
-      [errorMessages]="displayMessage"
-      [aircraftInfo]="aircraftInfo$ | async"
-      (onNoseNumberChange)="populateAircraftInfo($event)"
-      ></app-aircraft-info-section-form>
+      <app-aircraft-info-section-form [parent]="generalSectionFormGroup"
+                                      [errorMessages]="displayMessage"
+                                      [aircraftInfo]="aircraftInfo$ | async"
+                                      (onNoseNumberChange)="populateAircraftInfo($event)"></app-aircraft-info-section-form>
     </div>
     <div class="col-md-6">
       <app-defect-discovered-during-section-form [parent]="generalSectionFormGroup" [errorMessages]="displayMessage"></app-defect-discovered-during-section-form>
     </div>
   </div>
+</div>
