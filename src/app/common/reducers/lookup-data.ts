@@ -119,7 +119,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE:
         {
               const act = action as lookupDataActions.LoadCauseOfDamagesCompleteAction;
-              return state.merge({ loading: false, CauseOfDamages: List.of(...act.payload) });
+              return state.merge({ loading: false, causeOfDamages: List.of(...act.payload) });
         }
     case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE:
         {

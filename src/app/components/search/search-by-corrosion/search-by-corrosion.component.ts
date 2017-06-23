@@ -26,7 +26,7 @@ causeOfDamages$: Observable<List<ICauseOfDamage>>;
     return this.corrosionType != '5';
   }
   hideCauseOfDamageOther() {
-    return this.causeOfDamage.findIndex(d => d === 'other') < 0;
+    return this.causeOfDamage.findIndex(d => d == '10') < 0;
   }
   onChangeCorrosionLevel(evnt) {
     if (evnt.target.checked) {
