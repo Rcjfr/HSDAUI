@@ -44,6 +44,26 @@ export const ActionTypes = {
   LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
   LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
 
+  LOAD_CAUSE_OF_DAMAGES: 'Load Cause Of Damages',
+  LOAD_CAUSE_OF_DAMAGES_COMPLETE: 'Load Cause Of Damages Complete',
+  LOAD_CAUSE_OF_DAMAGES_FAIL: 'Load Cause Of Damages Fail',
+
+  LOAD_FLOORBOARD_CONDITIONS: 'Load Floorboard Conditions',
+  LOAD_FLOORBOARD_CONDITIONS_COMPLETE: 'Load Floorboard Conditions Complete',
+  LOAD_FLOORBOARD_CONDITIONS_FAIL: 'Load Floorboard Conditions Fail',
+
+  LOAD_REPAIR_DOCUMENTS: 'Load Repair Documents',
+  LOAD_REPAIR_DOCUMENTS_COMPLETE: 'Load Repair Documents Complete',
+  LOAD_REPAIR_DOCUMENTS_FAIL: 'Load Repair Documents Fail',
+
+  LOAD_REPAIR_DESCRIPTIONS: 'Load Repair Descriptions',
+  LOAD_REPAIR_DESCRIPTIONS_COMPLETE: 'Load Repair Descriptions Complete',
+  LOAD_REPAIR_DESCRIPTIONS_FAIL: 'Load Repair Descriptions Fail',
+
+  LOAD_REASONS_FOR_CHANGE: 'Load Reasons for change',
+  LOAD_REASONS_FOR_CHANGE_COMPLETE: 'Load Reasons for change Complete',
+  LOAD_REASONS_FOR_CHANGE_FAIL: 'Load Reasons for change Fail',
+
 
 
   LOAD_LOOKUP_DATA: 'Load All Lookup Data'
@@ -188,19 +208,97 @@ export class LoadStationsFailAction implements Action {
 
 // Damage Types
 export class LoadDamageTypesAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES;
+    public type = ActionTypes.LOAD_DAMAGE_TYPES;
+    public payload: any;
+    constructor() { }
+}
+export class LoadDamageTypesCompleteAction implements Action {
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+    constructor(public payload: models.IDamageType[]) { }
+}
+export class LoadDamageTypesFailAction implements Action {
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+// Cause Of Damages
+export class LoadCauseOfDamagesAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES;
+    public payload: any;
+    constructor() { }
+}
+export class LoadCauseOfDamagesCompleteAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
+    constructor(public payload: models.ICauseOfDamage[]) { }
+} 
+export class LoadCauseOfDamagesFailAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+//Floorboard Condition
+export class LoadFloorboardConditionsAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadFloorboardConditionsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE;
+    constructor(public payload: models.IFloorboardCondition[]) { }
+}
+export class LoadFloorboardConditionsFailAction implements Action {
+    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+// Repair Documents
+export class LoadRepairDocumentsAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDocumentsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE;
+    constructor(public payload: models.IRepairDocument[]) { }
+}
+export class LoadRepairDocumentsFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL;
+    constructor(public payload: any) { }
+}
+
+
+//Repair Description
+export class LoadRepairDescriptionsAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
+    public payload: any;
+    constructor() { }
+}
+export class LoadRepairDescriptionsCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE;
+    constructor(public payload: models.IRepairDescription[]) { }
+}
+export class LoadRepairDescriptionsFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL;
+    constructor(public payload: any) { }
+}
+
+//Reasons for change
+export class LoadReasonsForChangeAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE;
   public payload: any;
   constructor() { }
 }
-export class LoadDamageTypesCompleteAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
-  constructor(public payload: models.IDamageType[]) { }
+export class LoadReasonsForChangeCompleteAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE_COMPLETE;
+  constructor(public payload: models.IReasonForChange[]) { }
 }
-export class LoadDamageTypesFailAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+export class LoadReasonsForChangeFailAction implements Action {
+  public type = ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL;
   constructor(public payload: any) { }
 }
-
 
 
 // Load Lookup Data
@@ -239,5 +337,20 @@ export type Actions =
   LoadDamageTypesAction |
   LoadDamageTypesCompleteAction |
   LoadDamageTypesFailAction |
+  LoadCauseOfDamagesAction |
+  LoadCauseOfDamagesCompleteAction |
+  LoadCauseOfDamagesFailAction |
+  LoadFloorboardConditionsAction |
+  LoadFloorboardConditionsCompleteAction |
+  LoadFloorboardConditionsFailAction |
+  LoadRepairDocumentsAction |
+  LoadRepairDocumentsCompleteAction |
+  LoadRepairDocumentsFailAction |
+  LoadRepairDescriptionsAction |
+  LoadRepairDescriptionsCompleteAction |
+  LoadRepairDescriptionsFailAction |
+  LoadReasonsForChangeAction |
+  LoadReasonsForChangeCompleteAction |
+  LoadReasonsForChangeFailAction |
   LoadLookupDataAction;
 

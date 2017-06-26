@@ -42,16 +42,7 @@
     <div>
       <aac-field-container label="Cause of Damage:" for="causeOfDamage">
         <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='26' id="causeOfDamage">
-          <option>Environment</option>
-          <option>Lav/Galley Spill</option>
-          <option>Blocked Drain</option>
-          <option>Chemical Spill</option>
-          <option>Wet Insulation Blanket</option>
-          <option>Missing/Deteriorated Floorboard Tape</option>
-          <option>Correct Hardware Not Installed</option>
-          <option>Deteriorated/Poor Sealing Practices</option>
-          <option>Missing Corrosion Inhibitor</option>
-          <option value="other">Other</option>
+          <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
         <input type="text" placeholder="Enter other description" tabindex="27" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
 

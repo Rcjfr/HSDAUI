@@ -29,12 +29,17 @@ import {
   DepartmentService,
   DetectionMethodService,
   StationService,
-  DamageTypeService
+  DamageTypeService,
+  CauseOfDamageService,
+  FloorboardConditionService,
+  RepairDocumentService,
+  RepairDescriptionService,
+  ReasonForChangeService
 
-} from './common/services/index';
+} from './common/services';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
-import { reducer } from './common/reducers/index';
+import { reducer } from './common/reducers';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 import { GeneralSectionFormComponent } from './components/general-section-form/general-section-form.component';
 import { AircraftInfoSectionFormComponent } from './components/aircraft-info-section-form/aircraft-info-section-form.component';
@@ -107,7 +112,6 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     SearchByDefectComponent,
     ModifiedPartDescriptionComponent,
     DefectivePartDescriptionComponent,
-
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent
 
@@ -142,7 +146,12 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     DepartmentService,
     DetectionMethodService,
     StationService,
-    DamageTypeService
+      DamageTypeService,
+      CauseOfDamageService,
+      FloorboardConditionService,
+      RepairDocumentService,
+      RepairDescriptionService,
+ReasonForChangeService
   ],
   bootstrap: [AppComponent]
 })

@@ -15,7 +15,7 @@ import { Observer } from "rxjs/Rx";
 export class SearchBySdaFormComponent implements OnInit, OnDestroy {
 
   departments$: Observable<List<models.IDepartment>>;
-  stations$: Observable<List<models.IStation>>;
+  stations$: Observable<models.IStation[]>;
   station: string;
   alertCodes$: Observable<List<models.IAlertCode>>;
   ATACodes$: Observable<List<models.IATACode>>;
@@ -36,7 +36,7 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
       })
       .distinctUntilChanged()
       .switchMap(token => this.appStateService.getStations(token))
-      .map(d => d && d.toJS());
+      ;
 
     this.checkTypes$ = this.appStateService.getCheckTypes();
 

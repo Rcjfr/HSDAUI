@@ -9,4 +9,9 @@ export * from './department.model';
 export * from './detection-method.model'
 export * from './station.model';
 export * from './damage-type.model';
+export * from './cause-of-damage.model';
+export * from './floorboard-condition.model';
+export * from './repair-document.model';
+export * from './repair-description.model';
+export * from './reason-for-change.model';
 export * from './base-lookup.model';

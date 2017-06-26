@@ -14,9 +14,7 @@ import { Observable, Observer } from "rxjs/Rx";
 })
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit {
   departments$: Observable<List<models.IDepartment>>;
-  stations$: Observable<List<models.IStation>>;
-  stations: Array<models.IStation>;
-  station: string;
+  stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
   aircraftInfo$: Observable<models.IAircraftInfo>;
   alertCodes$: Observable<List<models.IAlertCode>>;
@@ -48,19 +46,12 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
     
-
-    //this.stations$ = this.appStateService.getStations(this.generalSectionFormGroup.get('station').value).map(d => d && d.toJS()); //This doesnt work
-    //this.appStateService.getStations('').map(d => d && d.toJS()).subscribe(s => this.stations = s); //This works but trying to avoid subscriptions
-    //TODO
     this.stations$ = Observable.create((observer: Observer<string>) => {
         observer.next(this.generalSectionFormGroup.get('station').value);
       })
-      .debounceTime(100)
-      .distinctUntilChanged()
-      .mergeMap(token => this.appStateService.getStations(token))
-      .map(d => d && d.toJS())
-      .do(d => console.log(d));
-
+      .switchMap(token => this.appStateService.getStations(token))
+      .do(d=>console.log(d))
+      ;
 
   }
   populateAircraftInfo(noseNumber: string) {
