@@ -26,7 +26,8 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDepartmentsAction(),
                                                 new lookupData.LoadDetectionMethodsAction(),
                                                 new lookupData.LoadStationsAction(),
-                                                new lookupData.LoadDamageTypesAction(),
+                                                new lookupData.LoadDamageTypesAction(), 
+                                                new lookupData.LoadCauseOfDamagesAction(),
                                                 new lookupData.LoadFloorboardConditionsAction(),
                                                 new lookupData.LoadRepairDocumentsAction(),
                                                 new lookupData.LoadRepairDescriptionsAction(),
@@ -164,20 +165,35 @@ export class LookupDataEffects {
                                                   .catch((err) => {
                                                     return of(new lookupData.LoadDamageTypesFailAction('Failed to load Damage Types'));
                                                   });
-  });
+        });
+
+  @Effect()
+  loadCauseOfDamages$: Observable<Action> = this.actions$
+                                              .ofType(lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES)
+                                              .switchMap(() => {
+                                                  return this.causeOfDamageService.getAllCauseOfDamages()
+                                                      .map((response: models.ICauseOfDamage[]) => {
+                                                          return new lookupData.LoadCauseOfDamagesCompleteAction(response);
+                                                      })
+                                                      .catch((err) => {
+                                                          return of(new lookupData.LoadCauseOfDamagesFailAction('Failed to load Cause Of Damages'));
+                                                      });
+                                              });
+
+
 
   @Effect()
   loadFloorBoardConditions$: Observable<Action> = this.actions$
-      .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
-      .switchMap(() => {
-          return this.floorboardConditionService.getAllfloorboardConditions()
-              .map((response: models.IFloorboardCondition[]) => {
-                  return new lookupData.LoadFloorboardConditionsCompleteAction(response);
-              })
-              .catch((err) => {
-                  return of(new lookupData.LoadFloorboardConditionsFailAction('Failed to load Floorboard Conditions'));
-              });
-      });
+                                              .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
+                                              .switchMap(() => {
+                                                  return this.floorboardConditionService.getAllfloorboardConditions()
+                                                      .map((response: models.IFloorboardCondition[]) => {
+                                                          return new lookupData.LoadFloorboardConditionsCompleteAction(response);
+                                                      })
+                                                      .catch((err) => {
+                                                          return of(new lookupData.LoadFloorboardConditionsFailAction('Failed to load Floorboard Conditions'));
+                                                      });
+                                              });
 
 
   @Effect()
@@ -228,6 +244,7 @@ export class LookupDataEffects {
                                                       lookupData.ActionTypes.LOAD_DETECTION_METHODS_FAIL,
                                                       lookupData.ActionTypes.LOAD_STATIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
+                                                      lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL,
                                                       lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL,
                                                       lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL,
@@ -246,6 +263,7 @@ constructor(private actions$: Actions,
                 private checkTypesService: services.CheckTypesService,
                 private stationService: services.StationService,
                 private damageTypesService: services.DamageTypeService,
+                private causeOfDamageService: services.CauseOfDamageService,
                 private floorboardConditionService: services.FloorboardConditionService,
                 private repairDocumentService: services.RepairDocumentService,
                 private repairDescriptionService: services.RepairDescriptionService,

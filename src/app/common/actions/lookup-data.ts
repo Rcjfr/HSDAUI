@@ -44,6 +44,10 @@ export const ActionTypes = {
   LOAD_DAMAGE_TYPES_COMPLETE: 'Load Damage Types Complete',
   LOAD_DAMAGE_TYPES_FAIL: 'Load Damage Types Fail',
 
+  LOAD_CAUSE_OF_DAMAGES: 'Load Cause Of Damages',
+  LOAD_CAUSE_OF_DAMAGES_COMPLETE: 'Load Cause Of Damages Complete',
+  LOAD_CAUSE_OF_DAMAGES_FAIL: 'Load Cause Of Damages Fail',
+
   LOAD_FLOORBOARD_CONDITIONS: 'Load Floorboard Conditions',
   LOAD_FLOORBOARD_CONDITIONS_COMPLETE: 'Load Floorboard Conditions Complete',
   LOAD_FLOORBOARD_CONDITIONS_FAIL: 'Load Floorboard Conditions Fail',
@@ -204,18 +208,35 @@ export class LoadStationsFailAction implements Action {
 
 // Damage Types
 export class LoadDamageTypesAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES;
-  public payload: any;
-  constructor() { }
+    public type = ActionTypes.LOAD_DAMAGE_TYPES;
+    public payload: any;
+    constructor() { }
 }
 export class LoadDamageTypesCompleteAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
-  constructor(public payload: models.IDamageType[]) { }
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+    constructor(public payload: models.IDamageType[]) { }
 }
 export class LoadDamageTypesFailAction implements Action {
-  public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
-  constructor(public payload: any) { }
+    public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+    constructor(public payload: any) { }
 }
+
+
+// Cause Of Damages
+export class LoadCauseOfDamagesAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES;
+    public payload: any;
+    constructor() { }
+}
+export class LoadCauseOfDamagesCompleteAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
+    constructor(public payload: models.ICauseOfDamage[]) { }
+} 
+export class LoadCauseOfDamagesFailAction implements Action {
+    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
+    constructor(public payload: any) { }
+}
+
 
 //Floorboard Condition
 export class LoadFloorboardConditionsAction implements Action {
@@ -316,6 +337,9 @@ export type Actions =
   LoadDamageTypesAction |
   LoadDamageTypesCompleteAction |
   LoadDamageTypesFailAction |
+  LoadCauseOfDamagesAction |
+  LoadCauseOfDamagesCompleteAction |
+  LoadCauseOfDamagesFailAction |
   LoadFloorboardConditionsAction |
   LoadFloorboardConditionsCompleteAction |
   LoadFloorboardConditionsFailAction |

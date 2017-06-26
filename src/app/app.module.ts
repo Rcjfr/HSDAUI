@@ -30,6 +30,7 @@ import {
   DetectionMethodService,
   StationService,
   DamageTypeService,
+  CauseOfDamageService,
   FloorboardConditionService,
   RepairDocumentService,
   RepairDescriptionService,
@@ -145,11 +146,12 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     DepartmentService,
     DetectionMethodService,
     StationService,
-    DamageTypeService,
-    FloorboardConditionService,
-    RepairDocumentService,
-    RepairDescriptionService,
-    ReasonForChangeService
+      DamageTypeService,
+      CauseOfDamageService,
+      FloorboardConditionService,
+      RepairDocumentService,
+      RepairDescriptionService,
+ReasonForChangeService
   ],
   bootstrap: [AppComponent]
 })
