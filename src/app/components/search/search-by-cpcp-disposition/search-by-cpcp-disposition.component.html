@@ -1,24 +1,44 @@
 ﻿<div class="row  form-group">
   <div class="col-md-3">
-    <aac-checkbox label="Non-CPCP" tabindex="28"></aac-checkbox>
+    <aac-checkbox-container label="Non-CPCP">
+      <input type="checkbox" tabindex="28" />
+    </aac-checkbox-container>
+
+
+    
   </div>
   <div class="col-md-3">
-    <aac-checkbox label="Review Complete" tabindex="29"></aac-checkbox>
+    <aac-checkbox-container label="Review Complete">
+      <input type="checkbox" tabindex="29" />
+    </aac-checkbox-container>
+
+    
   </div>
   <div class="col-md-3">
-    <aac-checkbox label="Local Corrosion" tabindex="30"></aac-checkbox>
+    <aac-checkbox-container label="Local Corrosion">
+      <input type="checkbox" tabindex="30" />
+    </aac-checkbox-container>
+    
   </div>
   <div class="col-md-3">
-    <aac-checkbox label="Widespread Corrosion" tabindex="31"></aac-checkbox>
-  </div>
+    <aac-checkbox-container label="Widespread Corrosion">
+      <input type="checkbox" tabindex="31" />
+    </aac-checkbox-container>
+    </div>
 </div>
 <div class="row  form-group">
   <div class="col-md-6">
     <div class="row form-group">
       <label class="col-sm-4 control-label">Is CPCP Task # correct?</label>
       <div class="col-sm-8">
-        <aac-radio name="isCpcpTaskNoCorrect" label="Yes" value="1" tabindex="32"></aac-radio>
-        <aac-radio name="isCpcpTaskNoCorrect" label="No" value="0"></aac-radio>
+        <aac-radio-container label="Yes">
+          <input type="radio" value="1" tabindex="32" name="isCpcpTaskNoCorrect"/>
+        </aac-radio-container>
+        <aac-radio-container label="No">
+          <input type="radio" value="0" tabindex="32" name="isCpcpTaskNoCorrect"/>
+        </aac-radio-container>
+
+        
       </div>
     </div>
   </div>
@@ -26,8 +46,14 @@
     <div class="row form-group">
       <label class="col-sm-4 control-label">Is Corrosion Level correct?</label>
       <div class="col-sm-8">
-        <aac-radio name="isCorrosionLevelCorrect" label="Yes" value="1" tabindex="33"></aac-radio>
-        <aac-radio name="isCorrosionLevelCorrect" label="No" value="0"></aac-radio>
+        <aac-radio-container label="Yes">
+          <input type="radio" value="1" tabindex="33" name="isCorrosionLevelCorrect" />
+        </aac-radio-container>
+        <aac-radio-container label="No">
+          <input type="radio" value="0" tabindex="33" name="isCorrosionLevelCorrect" />
+        </aac-radio-container>
+
+        
       </div>
     </div>
   </div>
@@ -67,8 +93,16 @@
 <div class="row  form-group">
   <div class="col-md-12">Custom Searches:</div>
   <div class="col-md-3">
-    <aac-radio name="customSearch" label="All Dispositions" value="1" tabindex="39"></aac-radio>
-    <aac-radio name="customSearch" label="Open Dispositions" value="2" ></aac-radio>
-    <aac-radio name="customSearch" label="Closed Dispositions" value="3"></aac-radio>
+    <aac-radio-container label="All Dispositions">
+      <input type="radio" value="1" tabindex="39" name="customSearch" />
+    </aac-radio-container>
+    <aac-radio-container label="Open Dispositions">
+      <input type="radio" value="2" tabindex="39" name="customSearch" />
+    </aac-radio-container>
+    <aac-radio-container label="Closed Dispositions">
+      <input type="radio" value="3" tabindex="39" name="customSearch" />
+    </aac-radio-container>
+
+    
   </div>
 </div>

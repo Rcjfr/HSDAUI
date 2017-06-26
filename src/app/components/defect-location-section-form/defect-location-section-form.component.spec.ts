@@ -1,7 +1,7 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from "@angular/core";
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { FormControlsModule } from '../../common/directives/form/form-controls.module';
+import { FormControlsModule } from '../../common/components/form-controls.module';
 import { DefectLocationSectionFormComponent } from './defect-location-section-form.component';
 import { AppStateService } from '../../common/services';
 import { TextMaskModule } from 'angular2-text-mask';

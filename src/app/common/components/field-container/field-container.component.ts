@@ -8,26 +8,17 @@ import {
 let identifier = 0;
 @Component({
   selector: 'aac-field-container',
-  template: `
-    <div class="row form-group" [class.has-error]="message">
-      <label class="{{labelCssClass}}" [attr.for]="for || identifier">{{label}} <span class="req" *ngIf="required">*</span></label>
-      <div class="{{fieldCssClass}}">
-        <ng-content></ng-content>
-        <span *ngIf="helptext" class="help-block">{{helptext}}</span>
-        <span *ngIf="message" class="help-block">{{message}}</span>
-      </div>
-
-    </div>
-  `
+  templateUrl: './field-container.component.html',
+  styleUrls: ['./field-container.component.less'],
 })
-export class FieldContainer implements OnInit {
+export class FieldContainerComponent implements OnInit {
   public identifier = `form-container-control-${identifier++}`;
   @Input() public label: string;
   @Input() helptext = '';
   @Input() public message: string;
   @Input() labelGridColumnWidth = 4;
   @Input() fieldGridColumnWidth = 8;
-  @Input() for='';
+  @Input() for = '';
   get labelCssClass() {
     return `col-sm-${this.labelGridColumnWidth} control-label`;
   }
@@ -36,7 +27,7 @@ export class FieldContainer implements OnInit {
   }
   private _required = false;
   @Input('required')
-  set required(req:any) {
+  set required(req: any) {
     this._required = (req === '') ? true : req;
   }
   get required() {

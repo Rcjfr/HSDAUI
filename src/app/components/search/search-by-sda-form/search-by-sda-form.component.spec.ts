@@ -6,15 +6,15 @@ import { FormsModule} from '@angular/forms';
 import { FilterByPipe } from 'ng-pipes';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ng-pipes';
-import { FieldContainer } from '../../../common/directives/form/field-container'
+import { FormControlsModule } from '../../../common/components/form-controls.module';
 describe('SearchBySdaFormComponent', () => {
   let component: SearchBySdaFormComponent;
   let fixture: ComponentFixture<SearchBySdaFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchBySdaFormComponent, FieldContainer],
-      imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule],
+      declarations: [SearchBySdaFormComponent],
+      imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule,FormControlsModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
     .compileComponents();
