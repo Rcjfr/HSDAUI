@@ -1,8 +1,14 @@
 ﻿<div [formGroup]="correctiveActionOptionFormGroup">
   <div class="form-group">
-    <aac-radio id="defectivepart" name="correctiveActionOptions" label="Defective Part Replaced With Identical Part #" value="1" tabindex="58" formControlName="correctiveActionOptions"></aac-radio>
-    <aac-radio id="modifiedpart" name="correctiveActionOptions" label="Modified Part # Installed " value="2" tabindex="59" formControlName="correctiveActionOptions"></aac-radio>
-    <aac-radio id="repairDescribe" name="correctiveActionOptions" label="Repaired (Describe)" value="3" tabindex="60" formControlName="correctiveActionOptions"></aac-radio>
+    <aac-radio-container label="Defective Part Replaced With Identical Part #">
+      <input type="radio" name="correctiveActionOptions" value="1" tabindex="58" formControlName="correctiveActionOptions" />
+    </aac-radio-container>
+    <aac-radio-container label="Modified Part # Installed">
+      <input type="radio" name="correctiveActionOptions" value="2" tabindex="59" formControlName="correctiveActionOptions" />
+    </aac-radio-container>
+    <aac-radio-container label="Repaired (Describe)">
+      <input type="radio" name="correctiveActionOptions" value="3" tabindex="60" formControlName="correctiveActionOptions" />
+    </aac-radio-container>
   </div>
     
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==3">

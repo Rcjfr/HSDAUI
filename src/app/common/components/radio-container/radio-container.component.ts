@@ -8,17 +8,8 @@ import {
 let identifier = 0;
 @Component({
   selector: 'aac-radio-container',
-  template: `
-<div class="customComponent" style="padding-right:20px;">
-  <div>
-    <ng-content></ng-content>
-    <label [attr.for]="identifier">
-      <span class="control"></span>
-      {{label}}
-    </label>
-  </div>
-</div>
- `
+  templateUrl: './radio-container.component.html',
+  styleUrls: ['./radio-container.component.less']
 })
 export class RadioContainer implements AfterContentInit  {
   public identifier = `form-radio-container-control-${identifier++}`;

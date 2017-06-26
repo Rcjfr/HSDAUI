@@ -1,7 +1,7 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { UnscheduledMaintenanceSectionComponent } from './unscheduled-maintenance-section.component';
-import { FieldContainer } from '../../common/directives/form/field-container'
+import { FormControlsModule } from './../../common/components/form-controls.module';
 import { Component } from "@angular/core";
 
 describe('UnscheduledMaintenanceSectionComponent', () => {
@@ -10,10 +10,11 @@ describe('UnscheduledMaintenanceSectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, UnscheduledMaintenanceSectionComponent, FieldContainer],
+      declarations: [TestComponentWrapper, UnscheduledMaintenanceSectionComponent],
       imports: [
         FormsModule,
-        ReactiveFormsModule]
+        ReactiveFormsModule,
+        FormControlsModule]
     })
     .compileComponents();
   }));

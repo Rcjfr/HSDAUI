@@ -1,6 +1,6 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { FormControlsModule } from '../../common/directives/form/form-controls.module';
+import { FormControlsModule } from '../../common/components/form-controls.module';
 import { HttpModule } from '@angular/http';
 import { Component } from "@angular/core";
 import { NO_ERRORS_SCHEMA } from '@angular/core';

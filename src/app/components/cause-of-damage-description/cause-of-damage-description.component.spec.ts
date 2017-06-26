@@ -1,6 +1,6 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { FormControlsModule } from '../../common/directives/form/form-controls.module';
+import { FormControlsModule } from '../../common/components/form-controls.module';
 import { Component } from "@angular/core";
 import { CauseOfDamageDescriptionComponent } from './cause-of-damage-description.component';
 

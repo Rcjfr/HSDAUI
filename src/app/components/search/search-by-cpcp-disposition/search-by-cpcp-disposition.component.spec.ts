@@ -1,5 +1,5 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControlsModule } from '../../../common/directives/form/form-controls.module';
+import { FormControlsModule } from '../../../common/components/form-controls.module';
 import { SearchByCpcpDispositionComponent } from './search-by-cpcp-disposition.component';
 import { AppStateService } from '../../../common/services';
 import { MockAppStateService } from '../../../common/services/mocks/mock-app-state.service';

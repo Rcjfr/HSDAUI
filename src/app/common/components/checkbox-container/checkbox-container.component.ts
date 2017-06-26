@@ -8,17 +8,8 @@ import {
 let identifier = 0;
 @Component({
   selector: 'aac-checkbox-container',
-  template: `
-<div class="customComponent">
-  <div>
-    <ng-content></ng-content>
-    <label class="checkboxLabel" [attr.for]="identifier">
-      <span class="control"></span>
-    </label>
-  </div>
-</div>
-<label [attr.for]="identifier">{{label}}</label>
-  `
+  templateUrl: './checkbox-container.component.html',
+  styleUrls: ['./checkbox-container.component.less']
 })
 export class CheckboxContainer implements AfterContentInit  {
   public identifier = `form-checkbox-container-control-${identifier++}`;
