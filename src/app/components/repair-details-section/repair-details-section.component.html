@@ -21,8 +21,16 @@
       <div class="row form-group">
         <label class="col-sm-4 control-label">Externally Visible?</label>
         <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="33" name="externallyVisible" formControlName="externallyVisible"/>
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="33" name="externallyVisible" formControlName="externallyVisible"/>
+          </aac-radio-container>
+          <!--
+
           <aac-radio name="externallyVisible" label="Yes" value="1" tabindex="33"></aac-radio>
-          <aac-radio name="externallyVisible" label="No" value="0"></aac-radio>
+          <aac-radio name="externallyVisible" label="No" value="0"></aac-radio>-->
         </div>
       </div>
     </div>

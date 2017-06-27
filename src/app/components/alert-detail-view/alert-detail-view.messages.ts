@@ -298,7 +298,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'completedBy': {
         required: 'Completed By is required.',
         maxlength: 'Completed By must not be more than 50 characters.'
-    }
+    },
+      'completedDate': {
+          required: 'Completed Date is required.',
+      }
   }
   , 'currentStatusSectionGroup': {
     openStatus: {},
