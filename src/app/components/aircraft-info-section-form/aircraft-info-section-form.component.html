@@ -35,5 +35,7 @@
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
     <input type="text" tabindex='12' class="form-control" formControlName="fleet" (change)="appStateService.loadFleetCheckTypes($event.target.value)">
   </aac-field-container>
-
+  <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator">
+    <input type="text" tabindex='13' class="form-control" formControlName="originator">
+  </aac-field-container>
 </div>

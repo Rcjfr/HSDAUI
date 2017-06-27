@@ -100,9 +100,9 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div  [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'" [class.has-error]="displayMessage.floorbaordCondition">
-        <aac-field-container label=" Floorboard condition after mat is removed:" [message]="displayMessage.floorbaordCondition">
-          <select class="form-control" tabindex='53' id="floorbaordCondition" formControlName="floorbaordCondition">
+      <div  [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'" [class.has-error]="displayMessage.floorBoardCondition">
+        <aac-field-container label=" Floorboard condition after mat is removed:" [message]="displayMessage.floorBoardCondition">
+          <select class="form-control" tabindex='54' id="floorBoardCondition" formControlName="floorBoardCondition">
             <option *ngFor="let ac of floorboardConditions$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
         </aac-field-container>

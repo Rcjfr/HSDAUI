@@ -22,13 +22,16 @@
     <div class="panel-heading">Current Status</div>
     <app-current-status-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-      
     </app-current-status-section>
+    <div class="panel-heading">Repair Details</div>
+    <app-repair-details-section [parent]="sdaForm"
+                                [errorMessages]="displayMessage$ | async">
+    </app-repair-details-section>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="col-xs-3 pull-right">
-        <button type="submit" class="btn" tabindex="85">Validate</button>
+        <button type="submit" class="btn" tabindex="99">Validate</button>
       </div>
     </div>
   </div>

@@ -62,6 +62,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'fleet': {
         required: 'Fleet is required.',
         maxlength: 'Fleet must not be more than 20 characters.'
+      },
+      'originator': {
+          required: 'Originator is required.',
+          maxlength: 'Originator must not be more than 50 characters.'
       }
     },
     'defectDiscoveredDuringSectionFormGroup': {
@@ -206,7 +210,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Description is  required.',
       maxlength: 'Description must be not more than 250 numbers.'
     },
-    floorbaordCondition: {
+    floorBoardCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
     },
     causeOfDamageGroup: {
@@ -290,7 +294,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         }
 
       }
-    }
+    },
+      'completedBy': {
+        required: 'Completed By is required.',
+        maxlength: 'Completed By must not be more than 50 characters.'
+    },
+      'completedDate': {
+          required: 'Completed Date is required.',
+      }
   }
   , 'currentStatusSectionGroup': {
     openStatus: {},
@@ -326,5 +337,44 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Deletion reason must not be more than 250 characters.'
     }
 
+  },
+  'repairDetailsSectionGroup': {
+      'engineeringAuthorization': {
+          maxlength: 'Engineering Authorization must not be more than 25 characters.'
+      },
+      'routineTaskCard': {
+          maxlength: 'Routine Task Card # must not be more than 50 characters.'
+      },
+      'nonRoutine': {
+          maxlength: 'Non Routine # must not be more than 50 characters.'
+      },
+      'repairDocument': {
+
+      },
+      'chap': {
+          maxlength: 'Chap/Fig/Repair must not be more than 25 characters.'
+      },
+      'repairedDescribe': {
+
+      },
+      'partNomenclature': {
+          maxlength: 'Part Nomenclature must not be more than 50 characters.'
+      },
+      'partNumber': {
+          maxlength: 'Part Number must not be more than 50 characters.'
+      },
+      'partSerialNumber': {
+          maxlength: 'Part Serial Number must not be more than 50 characters.'
+      },
+      'height': {
+          pattern: 'Height must be numeric.',
+          maxlength: 'Height must not be more than 3 digits.'
+      },
+      'width': {
+          pattern: 'Width must be numeric.',
+          maxlength: 'Width must not be more than 3 digits.'
+      }
+      
   }
+
 };
