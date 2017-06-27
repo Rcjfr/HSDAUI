@@ -210,7 +210,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Description is  required.',
       maxlength: 'Description must be not more than 250 numbers.'
     },
-    floorbaordCondition: {
+    floorBoardCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
     },
     causeOfDamageGroup: {
