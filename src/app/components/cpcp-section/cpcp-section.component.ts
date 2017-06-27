@@ -35,7 +35,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
       corrosionTypeText: ['', [Validators.required, Validators.maxLength(250)]],
       corrosionTask: ['', [Validators.required, Validators.maxLength(25)]],
       isfloorboardCondition: ['', []],
-      floorbaordCondition: ['', []]
+      floorBoardCondition: ['', []]
     }
     );
     this.parent.addControl(this.formGroupName, this.cpcpSectionGroup);

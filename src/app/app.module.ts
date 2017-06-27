@@ -76,6 +76,7 @@ import { DefectivePartDescriptionComponent } from './components/defective-part-d
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 import { CpcpDispositionSectionComponent } from './components/cpcp-disposition-section/cpcp-disposition-section.component';
 import { CpcpTaskDescriptionComponent } from './components/cpcp-task-description/cpcp-task-description.component';
+import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { CpcpTaskDescriptionComponent } from './components/cpcp-task-description
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent,
     CpcpDispositionSectionComponent,
-    CpcpTaskDescriptionComponent
+    CpcpTaskDescriptionComponent,
+    RepairDetailsSectionComponent
 
   ],
   imports: [

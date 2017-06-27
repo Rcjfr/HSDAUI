@@ -63,7 +63,8 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
       serialNo: ['', [Validators.required, Validators.maxLength(10)]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
       cycles: ['', [Validators.required, Validators.maxLength(25)]],
-      fleet: ['', [Validators.required, Validators.maxLength(20)]]
+      fleet: ['', [Validators.required, Validators.maxLength(20)]],
+      originator: ['', [Validators.required, Validators.maxLength(50)]]
     });
     this.parent.addControl(this.formGroupName, this.aircraftInfoSectionFormGroup);
     // this.aircraftInfoSectionFormGroup.get('fleet')
