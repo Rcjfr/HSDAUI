@@ -377,12 +377,18 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       
   },
 
-  'cpcpDispositionSectionFormGroup': {
-      'cpcpTaskDescriptionFormGroup': {
+  cpcpDispositionSectionFormGroup: {
+      cpcpTaskDescriptionFormGroup: {
           'cpcpTask': {
               required: 'Cpcp Task# is required.',
               maxlength: 'Cpcp Task# must not be more than 25 characters.'
           }
+      },
+      'localCorrosion': {
+          required: 'Cpcp Task# is required.'
+      },
+      'wsCorrosion': {
+          required: 'Widespread Corrosion is required.'
       }
   }
 

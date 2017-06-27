@@ -26,8 +26,11 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             isCorrosionLevelCorrect: ['', []],
             corrosionLevel: ['', []],
             reasonsForChange: ['', []],
-            localCorrosion: ['', []],
-            wideSpreadCorrosion: ['', []]
+            localCorrosion: ['', [Validators.required]],
+            wideSpreadCorrosion: ['', [Validators.required]],
+            engineeringComments: ['', []],
+            qcFeedback: ['', []],
+            reviewComplete: ['', []]
         });
   }
 

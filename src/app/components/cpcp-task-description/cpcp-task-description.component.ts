@@ -20,6 +20,6 @@ export class CpcpTaskDescriptionComponent extends BaseFormComponent implements O
     
   }
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        this.parent.removeControl(this.formGroupName);
     }
 }
