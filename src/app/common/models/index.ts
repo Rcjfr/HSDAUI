@@ -1,6 +1,7 @@
 ﻿export * from './aircraft-info.model';
 export * from './alert-code.model';
 export * from './alert.model';
+export * from './alert-result.model';
 export * from './ata-code.model';
 export * from './check-type.model';
 export * from './corrosion-level.model';

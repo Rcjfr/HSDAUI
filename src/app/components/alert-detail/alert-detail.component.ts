@@ -15,7 +15,7 @@ import { AppStateService } from '../../common/services';
     providers: []
 })
 export class AlertDetailComponent implements OnInit {
-    alert$: Observable<models.Alert>;
+    alert$: Observable<models.IAlert>;
     loading$: Observable<boolean>;
     constructor(private appStateService: AppStateService,
                 private vcr: ViewContainerRef,

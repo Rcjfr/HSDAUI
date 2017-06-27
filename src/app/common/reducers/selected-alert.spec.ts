@@ -1,9 +1,9 @@
-import * as fromSelectedAlert from './selected-alert';
+﻿import * as fromSelectedAlert from './selected-alert';
 import * as selectedAlert from '../actions/selected-alert';
 import { aircraftInfoFactory } from './models/aircraft-info';
 import { alertFactory } from './models/alert';
 import { List } from 'immutable';
-import { Alert } from '../models/alert.model';
+import { IAlert } from '../models/alert.model';
 describe('selectedAlertReducer', () => {
 const initialState: fromSelectedAlert.State = { loading: false,
                                                 alert: alertFactory(),

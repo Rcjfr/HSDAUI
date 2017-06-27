@@ -1,5 +1,5 @@
 ﻿import { Action } from '@ngrx/store';
-import { Alert } from '../models/alert.model';
+import { IAlert } from '../models/alert.model';
 import * as models from '../../common/models/index';
 
 export const ActionTypes = {

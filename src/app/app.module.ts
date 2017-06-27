@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { GridModule } from '@progress/kendo-angular-grid';
 import { NgPipesModule } from 'ng-pipes';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -74,6 +75,7 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
 import { ModifiedPartDescriptionComponent } from './components/modified-part-description/modified-part-description.component';
 import { DefectivePartDescriptionComponent } from './components/defective-part-description/defective-part-description.component';
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
+import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
 
 
 @NgModule({
@@ -113,12 +115,14 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
     ModifiedPartDescriptionComponent,
     DefectivePartDescriptionComponent,
     CurrentStatusSectionComponent,
-    SearchByCpcpDispositionComponent
+    SearchByCpcpDispositionComponent,
+    AlertsGridComponent
 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    GridModule,
     FormsModule,
     ReactiveFormsModule,
     FormControlsModule,
