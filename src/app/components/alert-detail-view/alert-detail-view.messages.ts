@@ -326,5 +326,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Deletion reason must not be more than 250 characters.'
     }
 
+  },
+
+  'cpcpDispositionSectionFormGroup': {
+      'cpcpTaskDescriptionFormGroup': {
+          'cpcpTask': {
+              required: 'Cpcp Task# is required.',
+              maxlength: 'Cpcp Task# must not be more than 25 characters.'
+          }
+      }
   }
 };

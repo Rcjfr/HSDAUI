@@ -22,8 +22,11 @@
     <div class="panel-heading">Current Status</div>
     <app-current-status-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-      
     </app-current-status-section>
+    <div class="panel-heading">CPCP Disposition</div>
+    <app-cpcp-disposition-section [parent]="sdaForm"
+                                [errorMessages]="displayMessage$ | async">
+    </app-cpcp-disposition-section>
   </div>
   <div class="row">
     <div class="col-md-12">

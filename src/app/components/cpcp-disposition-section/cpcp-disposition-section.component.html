@@ -1,0 +1,130 @@
+﻿<div class="panel-body" [formGroup]="cpcpDispositionSectionFormGroup">
+  <div class="row form-group">
+    <div class="col-md-6">
+        <aac-checkbox-container label="Non-CPCP">
+          <input type="checkbox" tabindex="43" formControlName="nonCpcp" />
+        </aac-checkbox-container>
+      
+    </div>
+  </div>
+  <div class="row form-group ">
+    <div class="col-md-6">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Is CPCP Task # correct?</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="32" name="isCpcpTaskNoCorrect" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="32" name="isCpcpTaskNoCorrect" />
+          </aac-radio-container>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <app-cpcp-task-description [parent]="cpcpDispositionSectionFormGroup" [errorMessages]="displayMessage"></app-cpcp-task-description>
+    </div>
+  </div>
+   
+  <div class="row form-group ">
+    <div class="col-md-4">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Is Corrosion Level correct?</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="33" name="isCorrosionLevelCorrect" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="33" name="isCorrosionLevelCorrect" />
+          </aac-radio-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Local Corrosion</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="33" name="localCorrosion" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="33" name="localCorrosion" />
+          </aac-radio-container>
+        </div>
+      </div>
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Widespread Corrosion</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="33" name="wideSpreadCorrosion" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="33" name="wideSpreadCorrosion" />
+          </aac-radio-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 ">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Corrosion Level:</label>
+        <div class="col-sm-8">
+          <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
+            <input type="radio" [value]="ac.id" tabindex="38" name="corrosionLevel" formControlName="corrosionLevel" />
+          </aac-radio-container>
+          <span *ngIf="displayMessage.corrosionLevel" class="help-block">{{displayMessage.corrosionLevel}}</span>
+        </div>
+      </div>
+      <h2>See GPM 09.09 for corrosion level determinations</h2>
+    </div>
+    <div class="col-md-4">
+      <div class="row form-group" [class.has-error]="displayMessage.reasonsForChange">
+        <label class="col-sm-4 control-label">Reason for level change</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Incorrect per Corrosion Level Block Diagram">
+            <input type="radio" value="4" tabindex="36" name="reasonsForChange" formControlName="reasonsForChange" />
+          </aac-radio-container>
+          <aac-radio-container label="Evidence of  a previous blend has been determined">
+            <input type="radio" value="3" tabindex="36" name="reasonsForChange" formControlName="reasonsForChange" />
+          </aac-radio-container>
+          <aac-radio-container label="New limits have been defined">
+            <input type="radio" value="2" tabindex="36" name="reasonsForChange" formControlName="reasonsForChange" />
+          </aac-radio-container>
+          <aac-radio-container label="Pre-blend measurements indicate Level-1; elected to replace part for company convenience">
+            <input type="radio" value="1" tabindex="36" name="reasonsForChange" formControlName="reasonsForChange" />
+          </aac-radio-container>
+          <aac-radio-container label="Other">
+            <input type="radio" value="0" tabindex="36" name="reasonsForChange" formControlName="reasonsForChange" />
+          </aac-radio-container>
+          <div *ngIf="displayMessage.reasonsForChange" class="error">{{displayMessage.reasonsForChange}}</div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+<!--<div class="col-md-6">
+     <div class="row form-group">
+       <label class="col-sm-4 control-label">Is Corrosion Level correct?</label>
+       <div class="col-sm-8">
+         <aac-radio-container label="Yes">
+           <input type="radio" value="1" tabindex="33" name="isCorrosionLevelCorrect" />
+         </aac-radio-container>
+         <aac-radio-container label="No">
+           <input type="radio" value="0" tabindex="33" name="isCorrosionLevelCorrect" />
+         </aac-radio-container>
+
+
+       </div>
+     </div>
+   </div>-->
