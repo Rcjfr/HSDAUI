@@ -3,11 +3,10 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
-import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
-import { Observer } from "rxjs/Rx";
+import { Observable, Observer } from "rxjs/Rx";
 @Component({
   selector: 'app-general-section-form',
   templateUrl: './general-section-form.component.html',

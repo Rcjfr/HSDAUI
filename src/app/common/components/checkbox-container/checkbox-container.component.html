@@ -1,0 +1,9 @@
+﻿<div class="customComponent">
+  <div>
+    <ng-content></ng-content>
+    <label class="checkboxLabel" [attr.for]="identifier">
+      <span class="control"></span>
+    </label>
+  </div>
+</div>
+<label [attr.for]="identifier">{{label}}</label>

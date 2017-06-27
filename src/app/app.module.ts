@@ -14,8 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
-import { NavBarComponent } from './common/directives/nav-bar/nav-bar.component';
-import { HeaderComponent } from './common/directives/header/header.component';
+import { NavBarComponent } from './common/components/nav-bar/nav-bar.component';
+import { HeaderComponent } from './common/components/header/header.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
 import {
@@ -52,7 +52,7 @@ import {
   UnscheduledMaintenanceSectionComponent
 } from './components/unscheduled-maintenance-section/unscheduled-maintenance-section.component';
 import { AtaCodeComponent } from './components/ata-code/ata-code.component';
-import { FormControlsModule } from './common/directives/form/form-controls.module';
+import { FormControlsModule } from './common/components/form-controls.module';
 import { PreciseLocationGroupComponent } from './components/precise-location-group/precise-location-group.component';
 import { CpcpSectionComponent } from './components/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from './components/cause-of-damage-group/cause-of-damage-group.component';

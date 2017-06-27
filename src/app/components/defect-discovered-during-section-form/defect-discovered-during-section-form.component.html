@@ -1,8 +1,13 @@
 ﻿<div [formGroup]="defectDiscoveredDuringSectionFormGroup">
   <div class="row form-group" [class.has-error]="displayMessage.defectDiscoveredDuring">
     <h4>Defect Discovered during: (Check appropriate box and describe) <span class="req">*</span></h4>
-    <aac-radio id="unscheduledMaintenance" name="defectDiscoveredDuring" label="Unscheduled Maintenance" value="0" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>
-    <aac-radio id="scheduledMaintenance" name="defectDiscoveredDuring" label="Scheduled Maintenance" value="1" tabindex="17" formControlName="defectDiscoveredDuring" ></aac-radio>
+    
+    <aac-radio-container label="Unscheduled Maintenance">
+      <input type="radio" name="defectDiscoveredDuring" value="0" tabindex="17" formControlName="defectDiscoveredDuring"/>  
+    </aac-radio-container>
+    <aac-radio-container label="Scheduled Maintenance">
+      <input type="radio" name="defectDiscoveredDuring" value="1" tabindex="17" formControlName="defectDiscoveredDuring" />
+    </aac-radio-container>
     <div *ngIf="displayMessage.defectDiscoveredDuring" class="error">{{displayMessage.defectDiscoveredDuring}}</div>
   </div>
   <app-unscheduled-maintenance-section

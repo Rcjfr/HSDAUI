@@ -6,7 +6,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 export interface State {
   loading: boolean;
   alertCodes: List<models.IAlertCode>;
-  ATACodes: List<models.IATACode>;
+  ataCodes: List<models.IATACode>;
   checkTypes: List<models.ICheckType>;
   fleetCheckTypes: List<models.ICheckType>;
   corrosionLevels: List<models.ICorrosionLevel>;
@@ -26,7 +26,7 @@ export interface StateRecord extends TypedRecord<StateRecord>, State { }
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
   alertCodes: <List<models.IAlertCode>>List.of(),
-  ATACodes: <List<models.IATACode>>List.of(),
+  ataCodes: <List<models.IATACode>>List.of(),
   checkTypes: <List<models.ICheckType>>List.of(),
   fleetCheckTypes: <List<models.ICheckType>>List.of(),
   corrosionLevels: <List<models.ICorrosionLevel>>List.of(),
@@ -74,7 +74,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_ATA_CODES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadATACodesCompleteAction;
-        return state.merge({ loading: false, ATACodes: List.of(...act.payload) });
+        return state.merge({ loading: false, ataCodes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_FLEET_CHECK_TYPES_COMPLETE:
       {
@@ -150,7 +150,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 // Selector Functions
 export const getAlertCodes = (state: State) => state.alertCodes;
 export const getLoading = (state: State) => state.loading;
-export const getATACodes = (state: State) => state.ATACodes;
+export const getATACodes = (state: State) => state.ataCodes;
 export const getCheckTypes = (state: State) => state.checkTypes;
 export const getFleetCheckTypes = (state: State) => state.fleetCheckTypes;
 export const getCorrosionLevels = (state: State) => state.corrosionLevels;

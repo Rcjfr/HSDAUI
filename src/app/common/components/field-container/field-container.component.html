@@ -1,0 +1,9 @@
+﻿<div class="row form-group" [class.has-error]="message">
+  <label class="{{labelCssClass}}" [attr.for]="for || identifier">{{label}} <span class="req" *ngIf="required">*</span></label>
+  <div class="{{fieldCssClass}}">
+    <ng-content></ng-content>
+    <span *ngIf="helptext" class="help-block">{{helptext}}</span>
+    <span *ngIf="message" class="help-block">{{message}}</span>
+  </div>
+
+</div>

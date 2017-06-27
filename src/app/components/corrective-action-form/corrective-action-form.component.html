@@ -2,7 +2,11 @@
   <div class="row form-group">
 
     <div class="col-sm-2">
-      <aac-checkbox id="deferred" name="deferredSectionOptions" label="Deferred" value="0" tabindex="55" formControlName="deferredSectionOptions"></aac-checkbox>
+      <aac-checkbox-container label="Deferred">
+        <input type="checkbox" tabindex="55" formControlName="deferredSectionOptions" />
+      </aac-checkbox-container>
+
+      
     </div>
     <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
       <div class="col-sm-6">
@@ -36,7 +40,9 @@
   <div class="row form-group">
 
     <div class="col-sm-2">
-      <aac-checkbox id="majorRepair" name="majorRepairOptions" label="Major Repair" value="1" tabindex="70" formControlName="majorRepairOptions"></aac-checkbox>
+      <aac-checkbox-container label="Major Repair">
+        <input type="checkbox" tabindex="70" value="1" formControlName="majorRepairOptions" />
+      </aac-checkbox-container>
     </div>
     <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('majorRepairOptions').value != true">
 
