@@ -352,19 +352,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
 
       },
       'chap': {
-          maxlength: 'Non Routine # must not be more than 25 characters.'
+          maxlength: 'Chap/Fig/Repair must not be more than 25 characters.'
       },
       'repairedDescribe': {
 
       },
       'partNomenclature': {
-          maxlength: 'Chap/Fig/Repair must not be more than 50 characters.'
+          maxlength: 'Part Nomenclature must not be more than 50 characters.'
       },
       'partNumber': {
-          maxlength: 'Chap/Fig/Repair must not be more than 50 characters.'
+          maxlength: 'Part Number must not be more than 50 characters.'
       },
       'partSerialNumber': {
-          maxlength: 'Chap/Fig/Repair must not be more than 50 characters.'
+          maxlength: 'Part Serial Number must not be more than 50 characters.'
       },
       'height': {
           pattern: 'Height must be numeric.',
