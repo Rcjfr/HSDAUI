@@ -47,11 +47,21 @@
                            [message]="displayMessage.repairDescription">
         <textarea tabindex='71' class="form-control" formControlName="repairDescription"></textarea>
       </aac-field-container>
-
-
-
-
     </div>
-
   </div>
-</div>
+  <div class="row form-group">
+    <div class="col-md-6">
+      <aac-field-container required="true" label="Completed By:"
+                           helptext="(Enter Employee ID or Last Name)"
+                           [message]="displayMessage.completedBy">
+        <input type="text" tabindex='71' class="form-control" formControlName="completedBy">
+      </aac-field-container>
+      </div>
+      <div class="col-md-6">
+        <!--<aac-field-container label="Date:" [for]="completedDate.idDatePicker" [message]="displayMessage.completedDate" >
+          <datetime [timepicker]="false" #inspectionDate [tabindex]='75' required="true" formControlName="completedDate"
+                    [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        </aac-field-container>-->
+      </div>
+  </div>
+  </div>
