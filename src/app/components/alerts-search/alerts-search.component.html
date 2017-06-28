@@ -80,5 +80,12 @@
     </div>
     <app-search-by-part></app-search-by-part>
   </accordion-group>
+  <accordion-group #optionGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Options
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-options></app-search-by-options>
+  </accordion-group>
 </accordion>
 </form>
