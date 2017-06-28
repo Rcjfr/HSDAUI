@@ -73,5 +73,12 @@
     </div>
     <app-search-by-status></app-search-by-status>
   </accordion-group>
+  <accordion-group #partGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by Part
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': partGroup?.isOpen, 'icon-add': !partGroup?.isOpen}"></i>
+    </div>
+    <app-search-by-part></app-search-by-part>
+  </accordion-group>
 </accordion>
 </form>
