@@ -7,12 +7,14 @@ import { FormBuilder, Validators } from "@angular/forms";
   templateUrl: './current-status-section.component.html',
   styleUrls: ['./current-status-section.component.less']
 })
-export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit,OnDestroy {
+export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
+
+  private reliabilityApproved: any = null;
 
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
   }
-  private reliabilityApproved:any=null;
+
   ngOnInit() {
     this.formGroup = this.fb.group({
       openStatus: [{ value: true, disabled: true }, []],
@@ -45,8 +47,8 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
         this.formGroup.get('rejectReason').setValue('');
       }
     ));
-
   }
+
   ngOnDestroy() {
     super.ngOnDestroy();
   }
@@ -55,9 +57,9 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
     this.reliabilityApproved = true;
     this.formGroup.get('rejectReason').setValue('');
   }
+
   reject() {
     this.reliabilityApproved = false;
     this.displayMessage["rejectReason"] = '';
   }
-
 }

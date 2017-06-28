@@ -30,21 +30,22 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent {
 
       //this.correctiveActionOptionFormGroup.get('modifiedpartDescription').clearValidators();
       //this.correctiveActionOptionFormGroup.get('defectivePartDescription').clearValidators();
-      
-      
+
+
       //this.correctiveActionOptionFormGroup.get('defectivePartDescription').updateValueAndValidity();
       //this.correctiveActionOptionFormGroup.get('modifiedpartDescription').updateValueAndValidity();
 
-      
+
     }
-    
+
   ////  setCorrectiveActionRepairDescriptionFormGroupFields(correctiveActionOption: number): void {
 
   //     // if (correctiveActionOption == 1) {
   //          //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('repairedDescribe').clearValidators();
   //          //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('externalVisible').clearValidators();
   //          //this.correctiveActionOptionFormGroup.get('modifiedpartDescription').clearValidators();
-  //          //this.correctiveActionOptionFormGroup.get('defectivePartDescription').setValidators([Validators.required, Validators.maxLength(30), Validators.pattern(Expressions.Alphanumerics)]);
+  //          //this.correctiveActionOptionFormGroup.get('defectivePartDescription').setValidators([Validators.required,
+                    //Validators.maxLength(30), Validators.pattern(Expressions.Alphanumerics)]);
   //         // this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').clearValidators();
   //      }
   //    //  else if (correctiveActionOption == 2) {
@@ -53,9 +54,10 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent {
   //         // this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').clearValidators();
   //          //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('repairedDescribe').clearValidators();
   //          //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('externalVisible').clearValidators();
-  //         //this.correctiveActionOptionFormGroup.get('modifiedpartDescription').setValidators([Validators.required, Validators.maxLength(30), Validators.pattern(Expressions.Alphanumerics)]);
+  //         //this.correctiveActionOptionFormGroup.get('modifiedpartDescription').setValidators([Validators.required, Validators.maxLength(30),
+                    //Validators.pattern(Expressions.Alphanumerics)]);
   //      }
-        
+
   //      //else {
   //      //    //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('repairedDescribe').clearValidators();
   //      //    //this.correctiveActionOptionFormGroup.get('correctiveActionRepairDescriptionFormGroup').get('externalVisible').clearValidators();

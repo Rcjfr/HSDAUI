@@ -11,8 +11,8 @@ export class AircraftService {
 
   queryNoseNumbers(search: string): Observable<Array<string>> {
       // TODO: commented till AircraftInfo Service is ready
-        //const url = `${this.endPointUrl}` + (search ? `?search=${search}` : '');
-        //return this.http.get(url)
+        // const url = `${this.endPointUrl}` + (search ? `?search=${search}` : '');
+        // return this.http.get(url)
         //            .map((result) => result.json());
       return Observable.of(['E190', 'A328']);
     };
