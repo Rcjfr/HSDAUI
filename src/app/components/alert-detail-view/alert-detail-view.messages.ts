@@ -337,6 +337,32 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Deletion reason must not be more than 250 characters.'
     }
 
+  }, 'cpcpDispositionSectionFormGroup': {
+      'cpcpTaskDescriptionFormGroup': {
+          'cpcpTask': {
+              required: 'Cpcp Task# is required.',
+              maxlength: 'Cpcp Task# must not be more than 25 characters.'
+          }
+      },
+      'reasonsForChangeTextBox': {
+          maxlength: 'Reasons For Change TextBox must not be more than 250 characters.'
+      },
+      'localCorrosion': {
+          required: 'Cpcp Task# is required.'
+      },
+      'wsCorrosion': {
+          required: 'Widespread Corrosion is required.'
+      },
+      'engineeringComments': {
+          maxlength: 'Engineering Comments must not be more than 250 characters.'
+      },
+      'qcFeedback': {
+          maxlength: 'QC Feedback must not be more than 250 characters.'
+      },
+      'reviewComplete': {
+          maxlength: 'Review Complete must not be more than 50 characters.'
+      }
+
   },
   'repairDetailsSectionGroup': {
       'engineeringAuthorization': {
@@ -377,19 +403,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       
   },
 
-  cpcpDispositionSectionFormGroup: {
-      cpcpTaskDescriptionFormGroup: {
-          'cpcpTask': {
-              required: 'Cpcp Task# is required.',
-              maxlength: 'Cpcp Task# must not be more than 25 characters.'
-          }
-      },
-      'localCorrosion': {
-          required: 'Cpcp Task# is required.'
-      },
-      'wsCorrosion': {
-          required: 'Widespread Corrosion is required.'
-      }
-  }
+  
 
 };

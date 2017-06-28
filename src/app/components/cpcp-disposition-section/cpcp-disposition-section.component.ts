@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms'; 
 import { AppStateService } from '../../common/services';
 import { BaseFormComponent } from '../base-form.component';
 import { Observable } from 'rxjs/Observable';
@@ -17,21 +17,41 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     constructor(private fb: FormBuilder, private appStateService: AppStateService) {
         super('cpcpDispositionSectionFormGroup');
     }
-
+   
     ngOnInit() {
         this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
+       // const localCorrosion: FormControl = this.fb.control(null, Validators.required);
         this.cpcpDispositionSectionFormGroup = this.fb.group({
             nonCpcp: ['', []],
             isCpcpTaskNoCorrect: ['', []],
             isCorrosionLevelCorrect: ['', []],
             corrosionLevel: ['', []],
             reasonsForChange: ['', []],
+            reasonsForChangeTextBox: ['', [Validators.maxLength(250)]],
             localCorrosion: ['', [Validators.required]],
-            wideSpreadCorrosion: ['', [Validators.required]],
-            engineeringComments: ['', []],
-            qcFeedback: ['', []],
-            reviewComplete: ['', []]
+            wsCorrosion: ['', [Validators.required]],
+            engineeringComments: ['', [Validators.maxLength(250)]],
+            qcFeedback: ['', [Validators.maxLength(250)]],
+            reviewComplete: ['', [Validators.maxLength(50)]]
         });
+        this.parent.addControl(this.formGroupName, this.cpcpDispositionSectionFormGroup);
+        this.cpcpDispositionSectionFormGroup.get('nonCpcp').valueChanges
+            .subscribe(val => this.setCorrosionTypeFields(val));
+    }
+    setCorrosionTypeFields(noncpcp: boolean): void {
+        if (noncpcp != true) {
+           
+            this.cpcpDispositionSectionFormGroup.get('localCorrosion').setValidators([Validators.required]);
+            this.cpcpDispositionSectionFormGroup.get('wsCorrosion').setValidators([Validators.required]);
+        } else {
+            this.cpcpDispositionSectionFormGroup.get('localCorrosion').clearValidators();
+            this.cpcpDispositionSectionFormGroup.get('wsCorrosion').clearValidators();
+           // Validators.pattern(Expressions.Alphanumerics)]);
+        }
+        this.cpcpDispositionSectionFormGroup.get('localCorrosion').updateValueAndValidity();
+        this.cpcpDispositionSectionFormGroup.get('wsCorrosion').updateValueAndValidity();
+
+    }
   }
 
-}
+
