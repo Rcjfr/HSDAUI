@@ -76,6 +76,7 @@ import { DefectivePartDescriptionComponent } from './components/defective-part-d
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
+import { SearchByAircraftModelComponent } from './components/search/search-by-aircraft-model/search-by-aircraft-model.component';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { SearchByPartComponent } from './components/search/search-by-part/search
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent,
     RepairDetailsSectionComponent,
-    SearchByPartComponent
+    SearchByPartComponent,
+    SearchByAircraftModelComponent
 
   ],
   imports: [
