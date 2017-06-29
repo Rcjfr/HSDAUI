@@ -55,7 +55,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
 
     submitToQc() {
         
-      //  this.toastr.success('Form Submitted to QC', 'Success');
+        this.toastr.success('Notification sent to QC team', 'Success');
     }
     save()
     {
