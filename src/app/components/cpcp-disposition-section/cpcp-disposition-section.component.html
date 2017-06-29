@@ -71,8 +71,8 @@
         </div>
       </div>
       <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'"-->
-      <div >
-        <div class="col-md-4 ">
+      <div *ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'" >
+        <div class="col-md-4 " >
           <div class="row form-group">
             <label class="col-sm-4 control-label">Corrosion Level:</label>
             <div class="col-sm-8">
@@ -103,16 +103,16 @@
               <aac-radio-container label="Other">
                 <input type="radio" value="0" tabindex="102" name="reasonsForChange" formControlName="reasonsForChange" />
               </aac-radio-container>
-              <div class="col-md-4">
-                <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'">
-                  <aac-field-container label=""
-                                       [message]="displayMessage.reasonsForChangeTextBox">
+              
+                <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'" >
+                 
+                          
                     <textarea tabindex='105' cols="40" rows="5" class="form-control" formControlName="reasonsForChangeTextBox">
                   </textarea>
 
-                  </aac-field-container>
+                 
                 </div>
-              </div>
+           
               </div>
           </div>
         </div>

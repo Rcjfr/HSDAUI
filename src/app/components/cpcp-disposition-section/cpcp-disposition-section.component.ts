@@ -5,6 +5,7 @@ import { BaseFormComponent } from '../base-form.component';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel } from '../../common/models';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-cpcp-disposition-section',
@@ -14,7 +15,7 @@ import { ICorrosionLevel } from '../../common/models';
 export class CpcpDispositionSectionComponent extends BaseFormComponent implements OnInit {
     corrosionLevels$: Observable<List<ICorrosionLevel>>;
     cpcpDispositionSectionFormGroup: FormGroup;
-    constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+    constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastsManager) {
         super('cpcpDispositionSectionFormGroup');
     }
    
@@ -46,12 +47,20 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         } else {
             this.cpcpDispositionSectionFormGroup.get('localCorrosion').clearValidators();
             this.cpcpDispositionSectionFormGroup.get('wsCorrosion').clearValidators();
-           // Validators.pattern(Expressions.Alphanumerics)]);
         }
         this.cpcpDispositionSectionFormGroup.get('localCorrosion').updateValueAndValidity();
         this.cpcpDispositionSectionFormGroup.get('wsCorrosion').updateValueAndValidity();
 
     }
-  }
+
+    submitToQc() {
+        
+      //  this.toastr.success('Form Submitted to QC', 'Success');
+    }
+    save()
+    {
+       this.toastr.success('Form Saved', 'Success');
+    }
+}
 
 
