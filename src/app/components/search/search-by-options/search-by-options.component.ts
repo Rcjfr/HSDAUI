@@ -20,4 +20,8 @@ export class SearchByOptionsComponent implements OnInit {
   ngOnInit() {
   }
 
+  save() {
+
+      //  this.toastr.success('Form Submitted to QC', 'Success');
+  }
 }
