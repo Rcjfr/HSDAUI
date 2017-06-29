@@ -2,7 +2,7 @@
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { UnscheduledMaintenanceSectionComponent } from './unscheduled-maintenance-section.component';
 import { FormControlsModule } from './../../common/components/form-controls.module';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 describe('UnscheduledMaintenanceSectionComponent', () => {
   let component: UnscheduledMaintenanceSectionComponent;

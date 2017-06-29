@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
-import { BaseFormComponent } from "../base-form.component";
-import { FormBuilder, FormGroup, Validators, FormControlName } from "@angular/forms";
+import { BaseFormComponent } from '../base-form.component';
+import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 
 @Component({
   selector: 'app-cause-of-damage-description',
@@ -18,7 +18,7 @@ export class CauseOfDamageDescriptionComponent extends BaseFormComponent impleme
 
   ngOnInit() {
     this.causeOfDamageDescriptionGroup = this.fb.group({
-      damageDescription: ['', [Validators.maxLength(250),Validators.required]]
+      damageDescription: ['', [Validators.maxLength(250), Validators.required]]
     });
     this.parent.addControl(this.formGroupName, this.causeOfDamageDescriptionGroup);
   }

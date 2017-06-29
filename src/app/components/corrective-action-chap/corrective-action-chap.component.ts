@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
-import { BaseFormComponent } from "../base-form.component";
-import { FormBuilder, FormGroup, Validators, FormControlName } from "@angular/forms";
+import { BaseFormComponent } from '../base-form.component';
+import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 
 @Component({
     selector: 'app-corrective-action-chap',

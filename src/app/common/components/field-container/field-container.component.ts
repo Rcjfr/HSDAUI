@@ -36,9 +36,9 @@ export class FieldContainerComponent implements OnInit {
   @ViewChild(FormControlName, { read: ElementRef }) formInputElement: ElementRef;
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngOnInit() {
-    let fld = this._elRef.nativeElement.querySelector("input,textarea,select");
+    let fld = this._elRef.nativeElement.querySelector('input,textarea,select');
     this._renderer.setElementAttribute(fld, 'id', this.identifier);
-    this._renderer.setElementClass(fld, "form-control", true);
+    this._renderer.setElementClass(fld, 'form-control', true);
 
 
   }

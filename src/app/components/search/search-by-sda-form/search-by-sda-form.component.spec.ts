@@ -14,7 +14,7 @@ describe('SearchBySdaFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchBySdaFormComponent],
-      imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule,FormControlsModule],
+      imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule, FormControlsModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
     .compileComponents();

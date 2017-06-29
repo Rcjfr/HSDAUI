@@ -1,18 +1,13 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.less']
 })
-export class NavBarComponent implements OnInit {
-    isAdmin: boolean=false;
-    dataReceived: boolean = false;
+export class NavBarComponent {
+    isAdmin = false;
+    dataReceived = false;
     appInfo: any = {};
-    navCollapsed: boolean = false;
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    navCollapsed = false;
 }

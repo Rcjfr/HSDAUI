@@ -2,7 +2,7 @@
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import { GeneralSectionFormComponent } from './general-section-form.component';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { AppStateService } from '../../common/services';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 import { Observable } from 'rxjs/Observable';

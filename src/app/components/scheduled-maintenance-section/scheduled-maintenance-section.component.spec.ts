@@ -2,7 +2,7 @@
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import { ScheduledMaintenanceSectionComponent } from './scheduled-maintenance-section.component';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { AppStateService } from '../../common/services';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 describe('ScheduledMaintenanceSectionComponent', () => {

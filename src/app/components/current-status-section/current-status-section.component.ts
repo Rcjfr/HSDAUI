@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BaseFormComponent } from "../base-form.component";
-import { FormBuilder, Validators } from "@angular/forms";
+import { BaseFormComponent } from '../base-form.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-current-status-section',
@@ -60,6 +60,6 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
 
   reject() {
     this.reliabilityApproved = false;
-    this.displayMessage["rejectReason"] = '';
+    this.displayMessage['rejectReason'] = '';
   }
 }

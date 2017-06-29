@@ -1,10 +1,10 @@
 ﻿import { FormGroup } from '@angular/forms';
 
 export const Expressions = {
-    Alphanumerics: "[a-zA-Z0-9]+",
-    Alphabets: "[a-zA-Z]+",
-    Numerics: "[0-9]+",
-    Decimals: "[0-9]+(\.[0-9]+)?"
+    Alphanumerics: '[a-zA-Z0-9]+',
+    Alphabets: '[a-zA-Z]+',
+    Numerics: '[0-9]+',
+    Decimals: '[0-9]+(\.[0-9]+)?'
     //TODO - we need to come up with a managable solution for decimal points in ng2+
 };
 
@@ -41,7 +41,7 @@ private _formSubmitted = false;
   processMessages(container: FormGroup, _validationMessages: any = null): { [key: string]: any } {
 
         const messages = {};
-        if (!_validationMessages) {_validationMessages = this.validationMessages;}
+        if (!_validationMessages) {_validationMessages = this.validationMessages; }
         for (const controlKey in container.controls) {
             if (container.controls.hasOwnProperty(controlKey)) {
                 const c = container.controls[controlKey];

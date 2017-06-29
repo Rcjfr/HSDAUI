@@ -17,14 +17,12 @@ export class CheckboxContainer implements AfterContentInit  {
   @ViewChild('input') formInputElement: ElementRef;
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngAfterContentInit() {
-    
-    let chk = this._elRef.nativeElement.querySelector("input[type=checkbox]");
+
+    let chk = this._elRef.nativeElement.querySelector('input[type=checkbox]');
     if (!chk) {
-      throw new Error("Invalid child control");
+      throw new Error('Invalid child control');
     }
     this._renderer.setElementAttribute(chk, 'id', this.identifier);
-    
+
   }
 }
-
-

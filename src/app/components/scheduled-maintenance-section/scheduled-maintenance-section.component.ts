@@ -17,7 +17,7 @@ import { ICheckType } from '../../common/models';
 export class ScheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
   checkTypes$: Observable<List<ICheckType>>;
   scheduledMaintenanceGroup: FormGroup;
-  constructor(private fb: FormBuilder,private appStateService: AppStateService) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('scheduledMaintenanceGroup');
   }
 

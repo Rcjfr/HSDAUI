@@ -86,7 +86,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
-        if (group.controls[i].errors) { console.log(i,group.controls[i].errors);}
+        if (group.controls[i].errors) { console.log(i, group.controls[i].errors); }
         // if(group.controls[i].invalid){
         //   console.log(group.controls[i]);
         // }

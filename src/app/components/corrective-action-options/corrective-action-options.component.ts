@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy,HostListener } from '@angular/core';
+﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
@@ -18,7 +18,7 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent {
     }
     ngOnInit() {
         this.correctiveActionOptionFormGroup = this.fb.group({
-            correctiveActionOptions: ['',[]],
+            correctiveActionOptions: ['', []],
             modifiedpartDescription: ['', [, Validators.maxLength(30)]],
             defectivePartDescription: ['', [, Validators.maxLength(30)]]
         });

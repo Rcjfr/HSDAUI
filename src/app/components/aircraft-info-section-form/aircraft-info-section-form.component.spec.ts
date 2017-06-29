@@ -2,7 +2,7 @@
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import { HttpModule } from '@angular/http';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AircraftInfoSectionFormComponent } from './aircraft-info-section-form.component';
 import { AppStateService } from '../../common/services';

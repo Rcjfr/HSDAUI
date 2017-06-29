@@ -245,13 +245,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'correctiveActionOptions': {
         required: 'Defect Discovered during is required.'
         },
-        'modifiedPartDescriptionGroup':{
+        'modifiedPartDescriptionGroup': {
       'modifiedpartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',
             }
       },
-        'defectivePartDescriptionGroup':{
+        'defectivePartDescriptionGroup': {
       'defectivePartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',

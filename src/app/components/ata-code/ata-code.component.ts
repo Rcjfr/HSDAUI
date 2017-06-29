@@ -36,6 +36,6 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.ataCodesSectionFormGroup.get('ataCode2').setValue('');
     this.ataCodesSectionFormGroup.get('ataCode2').markAsPristine();
     this.ataCodesSectionFormGroup.get('ataCode2').markAsUntouched();
-    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1,true);
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1, true);
   }
 }

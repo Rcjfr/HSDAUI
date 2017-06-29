@@ -4,7 +4,7 @@ import { FormControlsModule } from '../../common/components/form-controls.module
 import { AtaCodeComponent } from './ata-code.component';
 import { FilterByPipe } from 'ng-pipes';
 import { NgPipesModule } from 'ng-pipes';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 describe('AtaCodeComponent', () => {
   let component: AtaCodeComponent;
   let fixture: ComponentFixture<TestComponentWrapper>;
@@ -34,5 +34,5 @@ describe('AtaCodeComponent', () => {
 class TestComponentWrapper {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
-  ataCodes=[];
+  ataCodes= [];
 }

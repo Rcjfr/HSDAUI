@@ -18,9 +18,9 @@ export class RadioContainer implements AfterContentInit  {
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngAfterContentInit() {
     
-    let radio = this._elRef.nativeElement.querySelector("input[type=radio]");
+    let radio = this._elRef.nativeElement.querySelector('input[type=radio]');
     if (!radio) {
-      throw new Error("Invalid child control");
+      throw new Error('Invalid child control');
     }
     this._renderer.setElementAttribute(radio, 'id', this.identifier);
     

@@ -6,7 +6,7 @@ import { BaseFormComponent } from '../base-form.component';
 import { List } from 'immutable';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
-import { Observable, Observer } from "rxjs/Rx";
+import { Observable, Observer } from 'rxjs/Rx';
 @Component({
   selector: 'app-general-section-form',
   templateUrl: './general-section-form.component.html',
@@ -50,7 +50,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
         observer.next(this.generalSectionFormGroup.get('station').value);
       })
       .switchMap(token => this.appStateService.getStations(token))
-      .do(d=>console.log(d))
+      .do(d => console.log(d))
       ;
 
   }

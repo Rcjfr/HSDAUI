@@ -45,7 +45,7 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
             partSerialNumber: ['', [Validators.maxLength(50)]],
             height: ['', [Validators.maxLength(3)]],
             width: ['', [Validators.maxLength(3)]],
-            externallyVisible:['',[]]
+            externallyVisible: ['', []]
         });
         this.parent.addControl(this.formGroupName, this.repairDetailsSectionGroup);
   }

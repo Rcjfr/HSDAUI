@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 
 describe('ATA Codes Service (Mocked)', () => {
   const mockResponse = [
-                         {id: 79, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "00", secondaryCodeDescription:"GENERAL"},
-                         {id: 40, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "10", secondaryCodeDescription:"MAIN GEAR"}
+                         {id: 79, primaryCode: '32', primaryCodeDescription: 'LANDING GEAR', secondaryCode: '00', secondaryCodeDescription: 'GENERAL'},
+                         {id: 40, primaryCode: '32', primaryCodeDescription: 'LANDING GEAR', secondaryCode: '10', secondaryCodeDescription: 'MAIN GEAR'}
                         ];
 
   beforeEach(() => {

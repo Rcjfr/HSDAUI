@@ -56,15 +56,14 @@ export class CustomValidators {
     //    return null;
     //}
     //return { 'aleasttwo': true };
-    let filledContolCount: number = 0;
+    let filledContolCount = 0;
     if (stationLocationControl.value) {
       filledContolCount++;
     }
     if (stringerControl.value) { filledContolCount++; }
     if (wlControl.value) { filledContolCount++; }
     if (blControl.value) { filledContolCount++; }
-    if (filledContolCount >= 2)
-    { return null; }
+    if (filledContolCount >= 2) { return null; }
 
 
     return { 'aleasttwo': true };
@@ -83,7 +82,7 @@ export class CustomValidators {
     const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
     const parent = c.parent;
     let cpcpRelated;
-    if (parent != undefined) {
+    if (parent !== undefined) {
       cpcpRelated = c.parent.get('cpcprelated');
     }
 
@@ -106,30 +105,30 @@ export class CustomValidators {
     if (damageOtherControl.value) { filledContolCount++; }
 
 
-    if (parent == undefined) {
+    if (parent === undefined) {
       return null;
     }
 
     //if ((filledContolCount == 0 && cpcpRealted.value == 1 && !damageOtherControl.touched))
     //{ return { 'atleastone': true }; }
 
-    if (cpcpRelated.value != 1) {
+    if (cpcpRelated.value !== 1) {
       return null;
     }
 
-    if ((damageOtherControl.touched && damageOtherControl.value == false)) {
+    if ((damageOtherControl.touched && damageOtherControl.value === false)) {
       return { 'atleastone': true };
     }
 
-    if ((filledContolCount >= 1 && cpcpRelated.value == 0) || (filledContolCount >= 1 && cpcpRelated.value == 1)) {
+    if ((filledContolCount >= 1 && cpcpRelated.value === 0) || (filledContolCount >= 1 && cpcpRelated.value === 1)) {
       return null;
     }
 
-    if (filledContolCount == 0 && damageOtherControl.value != false && damageOtherControl.value == "") {
+    if (filledContolCount === 0 && damageOtherControl.value !== false && damageOtherControl.value === '') {
       return { 'atleastone': true };
     }
 
-    if (filledContolCount == 0 && cpcpRelated.value == 1) {
+    if (filledContolCount === 0 && cpcpRelated.value === 1) {
       return { 'atleastone': true };
     }
 
