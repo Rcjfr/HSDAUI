@@ -7,7 +7,8 @@
 
     </div>
   </div>
-  <div *ngIf="cpcpDispositionSectionFormGroup.get('nonCpcp').value != true">
+  <!--*ngIf="cpcpDispositionSectionFormGroup.get('nonCpcp').value != true"-->
+  <div  >
     <div class="row form-group ">
       <div class="col-md-6">
         <div class="row form-group">
@@ -25,9 +26,9 @@
         </div>
       </div>
 
-
-      <div class="col-md-6" *ngIf="cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value == '0'">
-        <app-cpcp-task-description [parent]="cpcpDispositionSectionFormGroup"
+      <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value == '0'"-->
+      <div class="col-md-6" >
+        <app-cpcp-task-description [parent]="cpcpDispositionSectionFormGroup" 
                                    [errorMessages]="displayMessage"></app-cpcp-task-description>
       </div>
     </div>
@@ -45,19 +46,20 @@
             </aac-radio-container>
           </div>
         </div>
-        <div class="row form-group" [class.has-error]="displayMessage.localCorrosion">
-          <label class="col-sm-4 control-label">Local Corrosion<span class="req">*</span></label>
+        <div class="row form-group" [class.has-error]="displayMessage.corrosion">
+          <label class="col-sm-4 control-label">Corrosion:<span class="req">*</span></label>
           <div class="col-sm-8">
-            <aac-radio-container label="Yes">
-              <input type="radio" value="1" tabindex="106" name="localCorrosion" formControlName="localCorrosion" required />
+            <aac-radio-container label="Local Corrosion">
+              <input type="radio" value="1" tabindex="106" name="corrosion" formControlName="corrosion"  />
             </aac-radio-container>
-            <aac-radio-container label="No">
-              <input type="radio" value="0" tabindex="106" name="localCorrosion" formControlName="localCorrosion" required />
+            <aac-radio-container label="Widespread Corrosion">
+              <input type="radio" value="0" tabindex="106" name="corrosion" formControlName="corrosion"  />
             </aac-radio-container>
-            <div *ngIf="displayMessage.localCorrosion" class="error">{{displayMessage.localCorrosion}}</div>
+            <div *ngIf="displayMessage.corrosion" class="error">{{displayMessage.corrosion}}</div>
           </div>
         </div>
-        <div class="row form-group" [class.has-error]="displayMessage.wsCorrosion">
+
+        <!--<div class="row form-group" [class.has-error]="displayMessage.wsCorrosion">
           <label class="col-sm-4 control-label">Widespread Corrosion<span class="req">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
@@ -68,11 +70,11 @@
             </aac-radio-container>
             <div *ngIf="displayMessage.wsCorrosion" class="error">{{displayMessage.wsCorrosion}}</div>
           </div>
-        </div>
+        </div>-->
       </div>
       <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'"-->
-      <div *ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'" >
-        <div class="col-md-4 " >
+      <div>
+        <div class="col-md-4 ">
           <div class="row form-group">
             <label class="col-sm-4 control-label">Corrosion Level:</label>
             <div class="col-sm-8">
@@ -82,10 +84,10 @@
 
             </div>
           </div>
-          <h2>See GPM 09.09 for corrosion level determinations</h2>
+        <h2><b>See GPM 09.09 for corrosion level determinations</b></h2>
         </div>
         <div class="col-md-4">
-          <div class="row form-group" >
+          <div class="row form-group">
             <label class="col-sm-4 control-label">Reason for level change</label>
             <div class="col-sm-8">
               <aac-radio-container label="Incorrect per Corrosion Level Block Diagram">
@@ -103,18 +105,16 @@
               <aac-radio-container label="Other">
                 <input type="radio" value="0" tabindex="104" name="reasonsForChange" formControlName="reasonsForChange" />
               </aac-radio-container>
-              
-                <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'" >
-                 
-                          
-                    <textarea tabindex='105' cols="40" rows="5" class="form-control" formControlName="reasonsForChangeTextBox">
-                  </textarea>
-
-                 
-                </div>
-           
-              </div>
+            </div>
           </div>
+           
+              <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'">
+                <aac-field-container [message]="displayMessage.reasonsForChangeTextBox">
+                  <textarea tabindex='105' cols="40" rows="5" class="form-control" formControlName="reasonsForChangeTextBox">
+                  </textarea>
+                </aac-field-container>
+            </div>
+          
         </div>
       </div>
     </div>

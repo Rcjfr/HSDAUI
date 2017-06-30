@@ -347,16 +347,15 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'reasonsForChangeTextBox': {
           maxlength: 'Reasons For Change TextBox must not be more than 250 characters.'
       },
-      'localCorrosion': {
-          required: 'Cpcp Task# is required.'
-      },
-      'wsCorrosion': {
-          required: 'Widespread Corrosion is required.'
+      'corrosion': {
+          required: 'Corrosion is required.'
       },
       'engineeringComments': {
+          required: 'Engineering Comments is required.',
           maxlength: 'Engineering Comments must not be more than 250 characters.'
       },
       'qcFeedback': {
+          required: 'QC Feedback is required.',
           maxlength: 'QC Feedback must not be more than 250 characters.'
       },
       'reviewComplete': {
