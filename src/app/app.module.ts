@@ -77,7 +77,7 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
 import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
 import { SearchByAircraftModelComponent } from './components/search/search-by-aircraft-model/search-by-aircraft-model.component';
-import { SearchByOptionsComponent } from './components/search/search-by-options/search-by-options.component';
+import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
 
 
 @NgModule({
@@ -121,7 +121,7 @@ import { SearchByOptionsComponent } from './components/search/search-by-options/
     RepairDetailsSectionComponent,
     SearchByPartComponent,
     SearchByAircraftModelComponent,
-    SearchByOptionsComponent
+    SearchOptionsComponent
 
   ],
   imports: [

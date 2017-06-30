@@ -1,13 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
-  selector: 'app-search-by-options',
-  templateUrl: './search-by-options.component.html',
-  styleUrls: ['./search-by-options.component.less']
+  selector: 'app-search-options',
+  templateUrl: './search-options.component.html',
+  styleUrls: ['./search-options.component.less']
 })
-export class SearchByOptionsComponent implements OnInit {
-    searchByOptionsFormGroup: FormGroup;
+export class SearchOptionsComponent implements OnInit {
     createNumberMask = createNumberMask;
     private numberMask = createNumberMask({
         prefix: '',
@@ -15,13 +15,13 @@ export class SearchByOptionsComponent implements OnInit {
         includeThousandsSeparator: false,
         allowLeadingZeroes: false
     });
-  constructor() { }
+    constructor(private toastr: ToastsManager) { }
 
   ngOnInit() {
   }
 
   save() {
 
-      //  this.toastr.success('Form Submitted to QC', 'Success');
+        this.toastr.success('Form Saved', 'Success');
   }
 }
