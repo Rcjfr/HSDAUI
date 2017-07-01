@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
+import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { AccordionModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
@@ -34,7 +35,9 @@ import {
   FloorboardConditionService,
   RepairDocumentService,
   RepairDescriptionService,
-  ReasonForChangeService
+  ReasonForChangeService,
+  DteStatusService,
+  RepairInspectionStatusService
 
 } from './common/services';
 import { AlertEffects } from './common/effects/alerts.effects';
@@ -77,6 +80,7 @@ import { SearchByCpcpDispositionComponent } from './components/search/search-by-
 import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
 import { SearchByAircraftModelComponent } from './components/search/search-by-aircraft-model/search-by-aircraft-model.component';
+import { DamageToleranceEvaluationComponent } from './components/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
 
 
 @NgModule({
@@ -119,7 +123,8 @@ import { SearchByAircraftModelComponent } from './components/search/search-by-ai
     SearchByCpcpDispositionComponent,
     RepairDetailsSectionComponent,
     SearchByPartComponent,
-    SearchByAircraftModelComponent
+    SearchByAircraftModelComponent,
+    DamageToleranceEvaluationComponent
 
   ],
   imports: [
@@ -129,6 +134,7 @@ import { SearchByAircraftModelComponent } from './components/search/search-by-ai
     ReactiveFormsModule,
     FormControlsModule,
     HttpModule,
+    FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,
     TextMaskModule,
@@ -152,12 +158,14 @@ import { SearchByAircraftModelComponent } from './components/search/search-by-ai
     DepartmentService,
     DetectionMethodService,
     StationService,
-      DamageTypeService,
-      CauseOfDamageService,
-      FloorboardConditionService,
-      RepairDocumentService,
-      RepairDescriptionService,
-ReasonForChangeService
+    DamageTypeService,
+    CauseOfDamageService,
+    FloorboardConditionService,
+    RepairDocumentService,
+    RepairDescriptionService,
+    ReasonForChangeService,
+    DteStatusService,
+    RepairInspectionStatusService
   ],
   bootstrap: [AppComponent]
 })

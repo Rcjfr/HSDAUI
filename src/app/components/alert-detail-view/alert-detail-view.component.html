@@ -19,14 +19,21 @@
     <app-corrective-action-form [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
     </app-corrective-action-form>
-    <div class="panel-heading">Current Status</div>
-    <app-current-status-section [parent]="sdaForm"
-                                [errorMessages]="displayMessage$ | async">
-    </app-current-status-section>
     <div class="panel-heading">Repair Details</div>
     <app-repair-details-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
     </app-repair-details-section>
+    
+    <div class="panel-heading">Damage Tolerance Evaluation</div>
+    <app-damage-tolerance-evaluation [parent]="sdaForm"
+                                [errorMessages]="displayMessage$ | async">
+    </app-damage-tolerance-evaluation>
+
+    <div class="panel-heading">Current Status</div>
+    <app-current-status-section [parent]="sdaForm"
+                                [errorMessages]="displayMessage$ | async">
+    </app-current-status-section>
+    
   </div>
   <div class="row">
     <div class="col-md-12">

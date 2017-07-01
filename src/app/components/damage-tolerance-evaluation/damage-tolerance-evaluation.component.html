@@ -1,0 +1,209 @@
+﻿<div class="panel-body" [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-md-12">
+      <aac-field-container label="DTE Status:" [message]="displayMessage.dteStatus">
+        <select class="form-control" tabindex='41' formControlName="dteStatus">
+          <option value="">Select DTE Status </option>
+          <option *ngFor="let ac of dteStatus$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <aac-field-container label="Repair Insp. Status:" [message]="displayMessage.repairInspectionStatus">
+        <select class="form-control" tabindex='41' formControlName="repairInspectionStatus">
+          <option value="">Select Repair Inspection Status </option>
+          <option *ngFor="let ac of repairInspectionStatus$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row form-group" [class.has-error]="displayMessage.fatigueCritical">
+        <label class="col-sm-4 control-label">Fatigue Critical</label>
+        <div class="col-sm-8">
+          <aac-radio-container label="Yes">
+            <input type="radio" value="1" tabindex="36" name="fatigueCritical" formControlName="fatigueCritical" />
+          </aac-radio-container>
+          <aac-radio-container label="No">
+            <input type="radio" value="0" tabindex="36" name="fatigueCritical" formControlName="fatigueCritical" />
+          </aac-radio-container>
+          <div *ngIf="displayMessage.fatigueCritical" class="error">{{displayMessage.fatigueCritical}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
+        <datetime [timepicker]="false" #stage1RTSDate [tabindex]='3' formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-3">
+      <aac-radio-container label="6 Months">
+        <input type="radio" [value]="6" tabindex="36" name="duration" formControlName="duration" />
+      </aac-radio-container>
+    </div>
+    <div class="col-md-3">
+      <aac-radio-container label="12 Months">
+        <input type="radio" [value]="12" tabindex="36" name="duration" formControlName="duration" />
+      </aac-radio-container>
+    </div>
+    <div class="col-md-3">
+      <aac-radio-container label="18 Months">
+        <input type="radio" [value]="18" tabindex="36" name="duration" formControlName="duration" />
+      </aac-radio-container>
+    </div>
+    <div class="col-md-3">
+      <aac-radio-container label="24 Months">
+        <input type="radio" [value]="24" tabindex="36" name="duration" formControlName="duration" />
+      </aac-radio-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="Stage 2 Date:" [attr.for]="stage2Date.idDatePicker" [message]="displayMessage.stage2Date">
+        <datetime [timepicker]="false" #stage2Date [tabindex]='3' formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Stage 3 Date:" [attr.for]="stage3Date.idDatePicker" [message]="displayMessage.stage3Date">
+        <datetime [timepicker]="false" #stage3Date [tabindex]='3' formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <aac-field-container label="SR #">
+        <input class="form-control" formControlName="srNo">
+      </aac-field-container>
+    </div>
+    <div class="col-md-4">
+      <aac-field-container label="RDAS #">
+        <input class="form-control" formControlName="rdasNo">
+      </aac-field-container>
+    </div>
+    <div class="col-md-4">
+      <aac-field-container label="ETD #">
+        <input class="form-control" formControlName="etdNo">
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="ESM Sub/Item #">
+        <input class="form-control" formControlName="esmSubItemNo">
+      </aac-field-container>
+    </div>
+  </div>
+  <a href="#" (click)="addThreshold()">Add Another Threshold</a>
+  <div class="row" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
+    <div class="col-md-4">
+      <aac-field-container label="Inspection Threshold:">
+        <input class="form-control" formControlName="inspectionThreshold">
+      </aac-field-container>
+    </div>
+    <div class="col-md-4">
+      <aac-field-container label="Repeat Interval">
+        <input class="form-control" formControlName="repeatInterval">
+      </aac-field-container>
+    </div>
+    <div class="col-md-4">
+      <aac-field-container label="Inspection Method">
+        <input class="form-control" formControlName="inspectionMethod">
+      </aac-field-container>
+    </div>
+  </div>
+  <a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>
+  <div class="row" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let i=index">
+    <div class="col-md-4">
+      <aac-field-container label="FMR/Logpage/MON:">
+        <input class="form-control" formControlName="fmrLogPageMon">
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <aac-field-container label="DTE Comments:">
+        <input class="form-control" formControlName="dteComments">
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Attachments:</h3>
+      <p>Queue length: {{ uploader?.queue?.length }}</p>
+ 
+      <table class="table">
+        <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td><strong>{{ item?.file?.name }}</strong></td>
+          <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+          <td *ngIf="uploader.isHTML5">
+            <div class="progress" style="margin-bottom: 0;">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+            </div>
+          </td>
+          <td class="text-center">
+            <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+            <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+            <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+          </td>
+          <td nowrap>
+            <button type="button" class="btn btn-success btn-xs"
+                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+              <span class="glyphicon glyphicon-upload"></span> Upload
+            </button>
+            <button type="button" class="btn btn-warning btn-xs"
+                    (click)="item.cancel()" [disabled]="!item.isUploading">
+              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+            </button>
+            <button type="button" class="btn btn-danger btn-xs"
+                    (click)="item.remove()">
+              <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+ 
+      <div>
+        <div>
+          Queue progress:
+          <div class="progress" style="">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          </div>
+        </div>
+        <input type="file" class="btn btn-success btn-s" ng2FileSelect [uploader]="uploader" />
+
+        <button type="button" class="btn btn-success btn-s"
+                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+          <span class="glyphicon glyphicon-upload"></span> Upload all
+        </button>
+        <button type="button" class="btn btn-warning btn-s"
+                (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+          <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+        </button>
+        <button type="button" class="btn btn-danger btn-s"
+                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+          <span class="glyphicon glyphicon-trash"></span> Remove all
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

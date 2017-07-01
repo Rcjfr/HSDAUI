@@ -33,6 +33,7 @@
     "jquery": "^3.2.1",
     "ng-pipes": "^0.1.2",
     "ng2-datetime": "^1.4.0",
+    "ng2-file-upload": "^1.2.1",
     "ng2-toastr": "^4.0.1",
     "ngx-bootstrap": "^1.7.1",
     "rxjs": "^5.1.0",
