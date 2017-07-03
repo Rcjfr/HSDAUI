@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import * as models from '../../../common/models';
 
 @Component({
-    selector: 'app-search-by-defect',
+    selector: 'aa-search-by-defect',
     templateUrl: './search-by-defect.component.html',
     styleUrls: ['./search-by-defect.component.less']
 })

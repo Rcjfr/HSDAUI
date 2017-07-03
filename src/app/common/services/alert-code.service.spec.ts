@@ -26,7 +26,7 @@ describe('AlertCodeService', () => {
   it('should create', inject([AlertCodeService], (service: AlertCodeService) => {
     expect(service).toBeTruthy();
   }));
-  
+
 
 
   describe('getAllAlertCodes', () => {

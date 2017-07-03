@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 
 @Component({
-  selector: 'app-search-by-date-range',
+  selector: 'aa-search-by-date-range',
   templateUrl: './search-by-date-range.component.html',
   styleUrls: ['./search-by-date-range.component.less']
 })

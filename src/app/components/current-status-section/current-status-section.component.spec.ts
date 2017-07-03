@@ -8,18 +8,18 @@ import { Component } from '@angular/core';
 
 describe('CurrentStatusSectionComponent', () => {
   let component: CurrentStatusSectionComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, CurrentStatusSectionComponent],
+      declarations: [TestComponentWrapperComponent, CurrentStatusSectionComponent],
       imports: [FormControlsModule, FormsModule, ReactiveFormsModule, NKDatetimeModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <CurrentStatusSectionComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
   });
@@ -31,9 +31,9 @@ describe('CurrentStatusSectionComponent', () => {
 
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-current-status-section [parent]="form" [errorMessages]="displayMessage"></app-current-status-section>'
+  template: '<aa-current-status-section [parent]="form" [errorMessages]="displayMessage"></aa-current-status-section>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any }= {};
 }

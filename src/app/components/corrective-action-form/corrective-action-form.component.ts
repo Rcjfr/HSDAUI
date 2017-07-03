@@ -6,17 +6,18 @@ import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent  } from '../base-form.component';
 
 @Component({
-    selector: 'app-corrective-action-form',
+    selector: 'aa-corrective-action-form',
     templateUrl: './corrective-action-form.component.html',
     styleUrls: ['./corrective-action-form.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CorrectiveActionFormGroupComponent extends BaseFormComponent {
+export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit {
     correctiveActionFormGroup: FormGroup;
 
     constructor(private fb: FormBuilder) {
         super('correctiveActionFormGroup');
     }
+
     ngOnInit() {
         this.correctiveActionFormGroup = this.fb.group({
             deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
@@ -51,6 +52,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent {
         this.correctiveActionFormGroup.get('deferralCode').updateValueAndValidity();
         this.correctiveActionFormGroup.get('deferral').updateValueAndValidity();
     }
+
     setMajorRepairFormFields(isMajorRepairEvent: boolean): void {
         if (isMajorRepairEvent !== true) {
             this.correctiveActionFormGroup.get('repairDescription').clearValidators();
@@ -58,8 +60,5 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent {
             this.correctiveActionFormGroup.get('repairDescription').setValidators([Validators.required, Validators.maxLength(250)]);
         }
         this.correctiveActionFormGroup.get('repairDescription').updateValueAndValidity();
-
-
-
     }
 }

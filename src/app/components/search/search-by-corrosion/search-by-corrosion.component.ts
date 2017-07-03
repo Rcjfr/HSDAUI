@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
 
 @Component({
-  selector: 'app-search-by-corrosion',
+  selector: 'aa-search-by-corrosion',
   templateUrl: './search-by-corrosion.component.html',
   styleUrls: ['./search-by-corrosion.component.less']
 })

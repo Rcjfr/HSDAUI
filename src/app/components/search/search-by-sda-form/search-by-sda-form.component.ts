@@ -8,7 +8,7 @@ import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
 import { Observer } from 'rxjs/Rx';
 @Component({
-  selector: 'app-search-by-sda-form',
+  selector: 'aa-search-by-sda-form',
   templateUrl: './search-by-sda-form.component.html',
   styleUrls: ['./search-by-sda-form.component.less']
 })

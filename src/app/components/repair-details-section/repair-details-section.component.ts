@@ -11,7 +11,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { decimalsNumberMask } from '../../common/masks';
 
 @Component({
-  selector: 'app-repair-details-section',
+  selector: 'aa-repair-details-section',
   templateUrl: './repair-details-section.component.html',
   styleUrls: ['./repair-details-section.component.less']
 })

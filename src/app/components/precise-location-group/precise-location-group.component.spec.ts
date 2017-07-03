@@ -7,18 +7,18 @@ import { PreciseLocationGroupComponent } from './precise-location-group.componen
 
 describe('PreciseLocationGroupComponent', () => {
   let component: PreciseLocationGroupComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, PreciseLocationGroupComponent],
+      declarations: [TestComponentWrapperComponent, PreciseLocationGroupComponent],
       imports: [FormControlsModule, FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <PreciseLocationGroupComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
   });
@@ -29,9 +29,9 @@ describe('PreciseLocationGroupComponent', () => {
 });
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-precise-location-group [parent]="form" [errorMessages]="displayMessage"></app-precise-location-group>'
+  template: '<aa-precise-location-group [parent]="form" [errorMessages]="displayMessage"></aa-precise-location-group>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
 }

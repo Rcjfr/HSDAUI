@@ -29,7 +29,7 @@ describe('CorrosionTypeService', () => {
     it('should return All Corrosion Types', async(inject(
       [CorrosionTypeService, MockBackend], (service: CorrosionTypeService, mockBackend: MockBackend) => {
       const mockResponse = [
-                      {id: 1, description: 'Exfoliation'}, 
+                      {id: 1, description: 'Exfoliation'},
                       {id: 2, description: 'Filiform'},
                       {id: 3, description: 'Galvanic'},
                       {id: 4, description: 'Intergranular'},

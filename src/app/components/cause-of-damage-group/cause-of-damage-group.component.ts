@@ -6,12 +6,12 @@ import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
 
 @Component({
-  selector: 'app-cause-of-damage',
+  selector: 'aa-cause-of-damage',
   templateUrl: './cause-of-damage-group.component.html',
   styleUrls: ['./cause-of-damage-group.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CauseOfDamageGroupComponent extends BaseFormComponent implements OnDestroy {
+export class CauseOfDamageGroupComponent extends BaseFormComponent implements OnDestroy, OnInit {
   causeOfDamageGroup: FormGroup;
 
   constructor(private fb: FormBuilder) {

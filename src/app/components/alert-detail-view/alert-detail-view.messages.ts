@@ -374,7 +374,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Width must be numeric.',
           maxlength: 'Width must not be more than 3 digits.'
       }
-      
+
   }
 
 };

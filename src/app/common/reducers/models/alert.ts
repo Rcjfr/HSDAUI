@@ -1,5 +1,6 @@
 ﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 import {Alert} from '../../models/alert.model';
+
 export interface AlertRecord extends TypedRecord<AlertRecord>, Alert { }
 export const alertFactory = makeTypedFactory<Alert, AlertRecord>({
     sdaId: '',
@@ -39,8 +40,4 @@ export const alertFactory = makeTypedFactory<Alert, AlertRecord>({
     PartTT: '',
     PartTso: '',
     detected: ''
-
 });
-
-
-

@@ -6,28 +6,28 @@ import { GenericValidator, Expressions } from '../../common/validators/generic-v
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import {decimalsNumberMask} from '../../common/masks';
+import { decimalsNumberMask } from '../../common/masks';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
 
 @Component({
-  selector: 'app-corrective-action-repair-description',
+  selector: 'aa-corrective-action-repair-description',
   templateUrl: './corrective-action-repair-description.component.html',
   styleUrls: ['./corrective-action-repair-description.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy {
-    correctiveActionRepairDescriptionFormGroup: FormGroup;
-    repairDescriptions$: Observable<List<models.IRepairDescription>>;
-    repairDocuments$: Observable<List<models.IRepairDocument>>;
+export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
+  correctiveActionRepairDescriptionFormGroup: FormGroup;
+  repairDescriptions$: Observable<List<models.IRepairDescription>>;
+  repairDocuments$: Observable<List<models.IRepairDocument>>;
   decimalsNumberMask = decimalsNumberMask;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService  ) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
-  
+
   ngOnInit() {
-      this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-      this.repairDocuments$ = this.appStateService.getRepairDocuments();
+    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       repairedDescribe: ['', [Validators.required]],
       repairDocument: ['', []],
@@ -36,13 +36,11 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       externalVisible: ['', [Validators.required]],
       height: ['', []],
       repairWidth: ['', []]
-
     },
       {
         validator: CustomValidators.validateCorrectiveActionRepairFields
       }
     );
-
 
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('height').valueChanges.debounceTime(1000).subscribe(v =>
@@ -51,13 +49,9 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
     ));
-
-
   }
-
 
   ngOnDestroy() {
     super.ngOnDestroy();
   }
-
 }

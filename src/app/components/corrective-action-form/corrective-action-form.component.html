@@ -6,7 +6,7 @@
         <input type="checkbox" tabindex="55" formControlName="deferredSectionOptions" />
       </aac-checkbox-container>
 
-      
+
     </div>
     <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
       <div class="col-sm-6">
@@ -34,7 +34,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <app-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></app-corrective-action-options>
+      <aa-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></aa-corrective-action-options>
     </div>
   </div>
   <div class="row form-group">

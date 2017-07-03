@@ -7,18 +7,18 @@ import { NgPipesModule } from 'ng-pipes';
 import { Component } from '@angular/core';
 describe('AtaCodeComponent', () => {
   let component: AtaCodeComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, AtaCodeComponent],
+      declarations: [TestComponentWrapperComponent, AtaCodeComponent],
       imports: [FormControlsModule, FormsModule, ReactiveFormsModule, NgPipesModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <AtaCodeComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
   });
@@ -27,11 +27,12 @@ describe('AtaCodeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-ata-code [parent]="form" [errorMessages]="displayMessage" [ATACodes]="ataCodes"></app-ata-code>'
+  template: '<aa-ata-code [parent]="form" [errorMessages]="displayMessage" [ATACodes]="ataCodes"></aa-ata-code>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
   ataCodes= [];

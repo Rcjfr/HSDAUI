@@ -19,11 +19,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-
-
-
 @Component({
-  selector: 'app-alert-detail-view',
+  selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
   styleUrls: ['./alert-detail-view.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -83,7 +80,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   }
 
   logErrors(group: FormGroup | FormArray) {
-    
+
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
         if (group.controls[i].errors) { console.log(i, group.controls[i].errors); }
@@ -109,5 +106,4 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       }
     }
   }
-
 }

@@ -11,20 +11,17 @@ let identifier = 0;
   templateUrl: './radio-container.component.html',
   styleUrls: ['./radio-container.component.less']
 })
-export class RadioContainer implements AfterContentInit  {
+export class RadioContainerComponent implements AfterContentInit  {
   public identifier = `form-radio-container-control-${identifier++}`;
   @Input() public label: string;
   @ViewChild('input') formInputElement: ElementRef;
   constructor(private _elRef: ElementRef, private _renderer: Renderer) { }
   ngAfterContentInit() {
-    
-    let radio = this._elRef.nativeElement.querySelector('input[type=radio]');
+
+    const radio = this._elRef.nativeElement.querySelector('input[type=radio]');
     if (!radio) {
       throw new Error('Invalid child control');
     }
     this._renderer.setElementAttribute(radio, 'id', this.identifier);
-    
   }
 }
-
-

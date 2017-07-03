@@ -5,14 +5,17 @@
   "rules": {
     "callable-types": true,
     "class-name": true,
-    // "comment-format": [  //Propose getting rid of
+    // "comment-format": [  //I think we should get rid of this
     //   true,
     //   "check-space"
     // ],
     "curly": true,
-    // "eofline": true, //Propose getting rid of
+    // "eofline": true, //I think we should get rid of this
     "forin": true,
-    "import-blacklist": [true, "rxjs"],
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -22,9 +25,9 @@
     "label-position": true,
     "max-line-length": [
       true,
-      190   //Changed this from 140
+      190 //Changed this from 140
     ],
-     "member-access": false,
+    "member-access": false,
     "member-ordering": [
       true,
       "static-before-instance",
@@ -39,23 +42,28 @@
       "time",
       "timeEnd",
       "trace"
-      //"log"   //<--Added. Do we want to disable console.log altogether or figure out how to strip them out during bundling?
     ],
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-empty": false,
-    //"no-empty-interface": true, //TODO - follow up on why these were added
+    //"no-empty-interface": true, //TODO - I think we should keep this rule but I need help from Poojitha/Azeet to understand why these interfaces exist
     "no-eval": true,
-    "no-inferrable-types": [true, "ignore-params"],
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    // "no-trailing-whitespace": true,  //How to only allow one or two lines?
-    "no-unused-expression": [true, "allow-fast-null-checks"],
+    "no-trailing-whitespace": true,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
     "no-use-before-declare": true,
-     "no-var-keyword": true,
+    "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
       true,
@@ -64,7 +72,7 @@
       "check-else",
       "check-whitespace"
     ],
-    // "prefer-const": true, //Get rid of?
+    "prefer-const": true,
     "quotemark": [
       true,
       "single"
@@ -98,29 +106,24 @@
       "check-separator",
       "check-type"
     ],
-
-    // "directive-selector": [true, "attribute", "aa", "camelCase"],
-    // "component-selector": [true, "element", "aa", "kebab-case"],
-    // "use-input-property-decorator": true,
-    // "use-output-property-decorator": true,
-    // "use-host-property-decorator": true,
-    // "no-input-rename": true,
-    // "no-output-rename": true,
-    // "use-life-cycle-interface": true,
-    // "use-pipe-transform-interface": true,
-    // "component-class-suffix": true,
-    // "directive-class-suffix": true,
-    // "no-access-missing-member": true,
-    // "templates-use-public": true,
-    "invoke-injectable": true
-
-
-
-
-    // "no-consecutive-blank-lines": [true, 3]
-
-    //no-consecutive-blank-lines
-    //"arrow-parens": true,
-    //"no-consecutive-blank-lines"
+    "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],    //TODO - tslint version?
+    "component-selector": [true, "element", ["aa", "aac"], "kebab-case"],
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "no-access-missing-member": true,
+    "templates-use-public": true,
+    "invoke-injectable": true,
+    "no-consecutive-blank-lines": [
+      true,
+      3
+    ] //Added
+    //TODO - how to require spacing between functions?
   }
 }

@@ -1,20 +1,20 @@
-﻿
+
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 
 @Component({
-  selector: 'app-modified-part-description',
+  selector: 'aa-modified-part-description',
   templateUrl: './modified-part-description.component.html',
   styleUrls: ['./modified-part-description.component.less']
 })
 export class ModifiedPartDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
     modifiedPartDescriptionGroup: FormGroup;
-  
-  
+
+
   constructor(private fb: FormBuilder) {
       super('modifiedPartDescriptionGroup');
-    
+
   }
 
   ngOnInit() {

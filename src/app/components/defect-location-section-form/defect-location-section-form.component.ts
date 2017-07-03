@@ -10,7 +10,7 @@ import { List } from 'immutable';
 import { decimalsNumberMask } from '../../common/masks';
 import * as models from '../../common/models';
 @Component({
-  selector: 'app-defect-location-section-form',
+  selector: 'aa-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })

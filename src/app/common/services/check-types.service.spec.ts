@@ -13,7 +13,7 @@ describe('CheckTypes Service (Mocked)', () => {
                                       'CheckTypes': [
                                           {id: 1, description: '2C Interval'},
                                           {id: 2, description: 'A CHECK'},
-                                          {id: 3, description: 'A Check'}    
+                                          {id: 3, description: 'A Check'}
                                       ]
                                     }
                         ];
@@ -51,7 +51,7 @@ describe('CheckTypes Service (Mocked)', () => {
         conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
       });
 
-      const result = service.getAllCheckTypes(); 
+      const result = service.getAllCheckTypes();
 
       result.subscribe(res => {
         expect(res).toBeTruthy();
@@ -61,7 +61,7 @@ describe('CheckTypes Service (Mocked)', () => {
         //expect(res[0].Fleet).toEqual('A319');
         //expect(res[0].CheckTypes.length).toEqual(4);
       });
-      
+
     })));
   });
 });

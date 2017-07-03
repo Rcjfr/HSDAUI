@@ -1,32 +1,32 @@
 ﻿<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
   <div class="panel panel-default">
   <div class="panel-heading">General Information</div>
-    <app-general-section-form
+    <aa-general-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
-    ></app-general-section-form>
+    ></aa-general-section-form>
     <div class="panel-heading">Description and Location of Defects or Damage</div>
-    <app-defect-location-section-form
+    <aa-defect-location-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
-    ></app-defect-location-section-form>
+    ></aa-defect-location-section-form>
     <div class="panel-heading">Corrosion Prevention Control Program</div>
-    <app-cpcp-section-form
+    <aa-cpcp-section-form
     [parent]="sdaForm"
     [errorMessages]="displayMessage$ | async"
-    ></app-cpcp-section-form>
+    ></aa-cpcp-section-form>
     <div class="panel-heading">Corrective Action</div>
-    <app-corrective-action-form [parent]="sdaForm"
+    <aa-corrective-action-form [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-corrective-action-form>
+    </aa-corrective-action-form>
     <div class="panel-heading">Current Status</div>
-    <app-current-status-section [parent]="sdaForm"
+    <aa-current-status-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-current-status-section>
+    </aa-current-status-section>
     <div class="panel-heading">Repair Details</div>
-    <app-repair-details-section [parent]="sdaForm"
+    <aa-repair-details-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-repair-details-section>
+    </aa-repair-details-section>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -35,5 +35,5 @@
       </div>
     </div>
   </div>
-  
+
 </form>

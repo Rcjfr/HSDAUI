@@ -9,7 +9,7 @@ import { List } from 'immutable';
 import { ICheckType } from '../../common/models';
 
 @Component({
-  selector: 'app-scheduled-maintenance-section',
+  selector: 'aa-scheduled-maintenance-section',
   templateUrl: './scheduled-maintenance-section.component.html',
   styleUrls: ['./scheduled-maintenance-section.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -6,18 +6,18 @@ import { CauseOfDamageDescriptionComponent } from './cause-of-damage-description
 
 describe('CauseOfDamageDescriptionComponent', () => {
   let component: CauseOfDamageDescriptionComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, CauseOfDamageDescriptionComponent],
+      declarations: [TestComponentWrapperComponent, CauseOfDamageDescriptionComponent],
       imports: [FormControlsModule, FormsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <CauseOfDamageDescriptionComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
   });
@@ -28,9 +28,9 @@ describe('CauseOfDamageDescriptionComponent', () => {
 });
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-cause-of-damage-description [parent]="form" [errorMessages]="displayMessage"></app-cause-of-damage-description>'
+  template: '<aa-cause-of-damage-description [parent]="form" [errorMessages]="displayMessage"></aa-cause-of-damage-description>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
 }

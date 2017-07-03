@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-search-by-aircraft',
+  selector: 'aa-search-by-aircraft',
   templateUrl: './search-by-aircraft.component.html',
   styleUrls: ['./search-by-aircraft.component.less']
 })

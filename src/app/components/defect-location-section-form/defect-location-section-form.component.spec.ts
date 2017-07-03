@@ -9,11 +9,11 @@ import { MockAppStateService } from '../../common/services/mocks/mock-app-state.
 import { PreciseLocationGroupComponent } from '../precise-location-group/precise-location-group.component';
 describe('DefectLocationSectionFormComponent', () => {
   let component: DefectLocationSectionFormComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, DefectLocationSectionFormComponent, PreciseLocationGroupComponent],
+      declarations: [TestComponentWrapperComponent, DefectLocationSectionFormComponent, PreciseLocationGroupComponent],
       imports: [FormControlsModule, FormsModule, ReactiveFormsModule, TextMaskModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
@@ -21,7 +21,7 @@ describe('DefectLocationSectionFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <DefectLocationSectionFormComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
   });
@@ -32,9 +32,9 @@ describe('DefectLocationSectionFormComponent', () => {
 });
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-defect-location-section-form [parent]="form" [errorMessages]="displayMessage"></app-defect-location-section-form>'
+  template: '<aa-defect-location-section-form [parent]="form" [errorMessages]="displayMessage"></aa-defect-location-section-form>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
 }

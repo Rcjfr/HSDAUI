@@ -3,7 +3,7 @@ import { BaseFormComponent } from '../base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-current-status-section',
+  selector: 'aa-current-status-section',
   templateUrl: './current-status-section.component.html',
   styleUrls: ['./current-status-section.component.less']
 })

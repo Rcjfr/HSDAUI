@@ -48,7 +48,7 @@ describe('ATA Codes Service (Mocked)', () => {
       result.subscribe(res => {
          console.log('Response:', res);
         expect(res.length).toEqual(2);
-        
+
         console.log('code:', res[0].primaryCode);
         expect(res[0].primaryCode).toEqual('32');
       });

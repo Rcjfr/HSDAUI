@@ -9,7 +9,7 @@ import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, IFloorboardCondition } from '../../common/models';
 
 @Component({
-  selector: 'app-cpcp-section-form',
+  selector: 'aa-cpcp-section-form',
   templateUrl: './cpcp-section.component.html',
   styleUrls: ['./cpcp-section.component.less']
 })

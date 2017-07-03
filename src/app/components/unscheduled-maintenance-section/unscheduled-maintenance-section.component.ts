@@ -1,16 +1,16 @@
-﻿import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 
 @Component({
-  selector: 'app-unscheduled-maintenance-section',
+  selector: 'aa-unscheduled-maintenance-section',
   templateUrl: './unscheduled-maintenance-section.component.html',
   styleUrls: ['./unscheduled-maintenance-section.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent {
+export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
 unscheduledMaintenanceGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('unscheduledMaintenanceGroup');
@@ -28,6 +28,7 @@ unscheduledMaintenanceGroup: FormGroup;
       );
       this.parent.addControl(this.formGroupName, this.unscheduledMaintenanceGroup);
   }
+
   ngOnDestroy() {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

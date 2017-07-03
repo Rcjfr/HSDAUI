@@ -20,13 +20,13 @@ import { MockComponent } from 'ng2-mock-component';
 
 describe('GeneralSectionFormComponent', () => {
   let component: GeneralSectionFormComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
-  
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
+
 
   beforeEach(async(() => {
      TestBed.configureTestingModule({
          providers: [{ provide: AppStateService, useClass: MockAppStateService }],
-       declarations: [GeneralSectionFormComponent, TestComponentWrapper ],
+       declarations: [GeneralSectionFormComponent, TestComponentWrapperComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
         ReactiveFormsModule, FormsModule, FormControlsModule,
@@ -46,10 +46,10 @@ describe('GeneralSectionFormComponent', () => {
 
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <GeneralSectionFormComponent>fixture.debugElement.children[0].componentInstance;
     fixture.detectChanges();
-    
+
   });
 
   it('should create', () => {
@@ -59,7 +59,7 @@ describe('GeneralSectionFormComponent', () => {
   xit('should get ATA Codes from service', () => {
       //Example to use spyOn
       //const service: AppStateService = TestBed.get(AppStateService);
-      //component.ATACodes$ 
+      //component.ATACodes$
       //spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
       //fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
     component.ATACodes$.subscribe(a => {
@@ -72,9 +72,9 @@ describe('GeneralSectionFormComponent', () => {
 });
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-general-section-form [parent]="form" [errorMessages]="displayMessage"></app-general-section-form>'
+  template: '<aa-general-section-form [parent]="form" [errorMessages]="displayMessage"></aa-general-section-form>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
 }

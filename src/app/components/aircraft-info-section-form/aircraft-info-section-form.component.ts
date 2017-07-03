@@ -9,7 +9,7 @@ import { AppStateService } from '../../common/services';
 
 
 @Component({
-  selector: 'app-aircraft-info-section-form',
+  selector: 'aa-aircraft-info-section-form',
   templateUrl: './aircraft-info-section-form.component.html',
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush

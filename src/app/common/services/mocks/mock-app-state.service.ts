@@ -1,4 +1,4 @@
-﻿
+
 /// <reference path="../../reducers/models/alert.ts" />
 import { AppStateService } from '../app-state.service';
 import { Observable } from 'rxjs/Rx';

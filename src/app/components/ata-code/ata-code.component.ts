@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import * as models from '../../common/models';
 import {FilterByPipe} from 'ng-pipes';
 @Component({
-  selector: 'app-ata-code',
+  selector: 'aa-ata-code',
   templateUrl: './ata-code.component.html',
   styleUrls: ['./ata-code.component.less']
 })

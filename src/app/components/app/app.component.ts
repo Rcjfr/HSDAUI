@@ -2,7 +2,7 @@
 import { AppStateService } from '../../common/services';
 
 @Component({
-  selector: 'app-root',
+  selector: 'aa-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })

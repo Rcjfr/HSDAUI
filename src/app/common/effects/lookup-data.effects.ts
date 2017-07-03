@@ -26,7 +26,7 @@ export class LookupDataEffects {
                                                 new lookupData.LoadDepartmentsAction(),
                                                 new lookupData.LoadDetectionMethodsAction(),
                                                 new lookupData.LoadStationsAction(),
-                                                new lookupData.LoadDamageTypesAction(), 
+                                                new lookupData.LoadDamageTypesAction(),
                                                 new lookupData.LoadCauseOfDamagesAction(),
                                                 new lookupData.LoadFloorboardConditionsAction(),
                                                 new lookupData.LoadRepairDocumentsAction(),

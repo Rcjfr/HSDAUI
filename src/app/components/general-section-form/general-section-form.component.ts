@@ -8,7 +8,7 @@ import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
 import { Observable, Observer } from 'rxjs/Rx';
 @Component({
-  selector: 'app-general-section-form',
+  selector: 'aa-general-section-form',
   templateUrl: './general-section-form.component.html',
   styleUrls: ['./general-section-form.component.less']
 })
@@ -21,7 +21,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   ATACodes$: Observable<List<models.IATACode>>;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('generalSectionFormGroup');
-    
+
   }
 
   ngOnInit() {
@@ -45,7 +45,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-    
+
     this.stations$ = Observable.create((observer: Observer<string>) => {
         observer.next(this.generalSectionFormGroup.get('station').value);
       })
