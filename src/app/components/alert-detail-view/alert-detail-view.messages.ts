@@ -414,6 +414,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
       }
     },
+    dteComments: {
+      maxlength:'DTE Comments must not be more than 500 characters.'
+    },
     updatedBy: {
       required:'Updated By is required.',
       maxlength: 'Updated By must not be more than 50 characters.'

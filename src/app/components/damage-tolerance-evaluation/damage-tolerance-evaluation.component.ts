@@ -43,6 +43,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       dteDueDate: [null, [Validators.maxLength(20)]]
 
     });
+    this.parent.addControl(this.formGroupName, this.formGroup);
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
     const durationControl = this.formGroup.get('duration');
@@ -83,7 +84,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
   addThreshold() {
     let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
-    arr.push(this.initThreshold());
+    if (arr.controls.length < 5) {
+      arr.push(this.initThreshold());
+    }
     return false;
   }
   initMonitorItem() {
@@ -93,7 +96,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
   addMonitorItem() {
     let arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
-    arr.push(this.initMonitorItem());
-    return false;
+    if (arr.controls.length < 5) {
+      arr.push(this.initMonitorItem());
+    }
+    return false; 
   }
 }

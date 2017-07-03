@@ -21,7 +21,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.fatigueCritical">
+      <div class="row form-group">
         <label class="col-sm-4 control-label">Fatigue Critical</label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
@@ -30,7 +30,6 @@
           <aac-radio-container label="No">
             <input type="radio" value="0" tabindex="36" name="fatigueCritical" formControlName="fatigueCritical" />
           </aac-radio-container>
-          <div *ngIf="displayMessage.fatigueCritical" class="error">{{displayMessage.fatigueCritical}}</div>
         </div>
       </div>
     </div>
@@ -67,78 +66,80 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <aac-field-container label="Stage 2 Date:" [attr.for]="stage2Date.idDatePicker" [message]="displayMessage.stage2Date">
+      <aac-field-container label="Stage 2 Date:" [attr.for]="stage2Date.idDatePicker">
         <datetime [timepicker]="false" #stage2Date [tabindex]='3' formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-md-6">
-      <aac-field-container label="Stage 3 Date:" [attr.for]="stage3Date.idDatePicker" [message]="displayMessage.stage3Date">
+      <aac-field-container label="Stage 3 Date:" [attr.for]="stage3Date.idDatePicker">
         <datetime [timepicker]="false" #stage3Date [tabindex]='3' formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-      <aac-field-container label="SR #:">
+      <aac-field-container label="SR #:" [message]="displayMessage.srNo">
         <input class="form-control" formControlName="srNo">
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="RDAS #:">
+      <aac-field-container label="RDAS #:" [message]="displayMessage.rdasNo">
         <input class="form-control" formControlName="rdasNo">
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="ETD #:">
+      <aac-field-container label="ETD #:" [message]="displayMessage.etdNo">
         <input class="form-control" formControlName="etdNo">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <aac-field-container label="ESM Sub/Item #:">
+      <aac-field-container label="ESM Sub/Item #:" [message]="displayMessage.esmSubItemNo">
         <input class="form-control" formControlName="esmSubItemNo">
       </aac-field-container>
     </div>
   </div>
   <a href="#" (click)="addThreshold()">Add Another Threshold</a>
-  <div class="row" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
+  <div class="row well" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
     <div class="col-md-4">
-      <aac-field-container label="Inspection Threshold:">
+      <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].inspectionThreshold">
         <input class="form-control" formControlName="inspectionThreshold">
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="Repeat Interval:">
+      <aac-field-container label="Repeat Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].repeatInterval">
         <input class="form-control" formControlName="repeatInterval">
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="Inspection Method:">
+      <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].inspectionMethod">
         <input class="form-control" formControlName="inspectionMethod">
       </aac-field-container>
     </div>
   </div>
   <a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>
-  <div class="row" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let i=index">
+  <div class="row well" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let k=index">
     <div class="col-md-6">
-      <aac-field-container label="FMR/Logpage/MON:">
+      <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k].fmrLogPageMon">
         <input class="form-control" formControlName="fmrLogPageMon">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <aac-field-container label="DTE Comments:">
-        <input class="form-control" formControlName="dteComments">
+    <div class="col-md-6">
+      <aac-field-container label="DTE Comments:" [message]="displayMessage.dteComments">
+        <textarea class="form-control" rows="5" cols="50" formControlName="dteComments"></textarea>
       </aac-field-container>
     </div>
   </div>
-  <div class="row">
+  <div class="row form-group">
     <div class="col-md-12">
       <h3>Attachments:</h3>
       <p>Queue length: {{ uploader?.queue?.length }}</p>
-
+      <pre>
+        {{uploader | json}}
+</pre>
       <table class="table">
         <thead>
           <tr>
@@ -152,8 +153,8 @@
         <tbody>
           <tr *ngFor="let item of uploader.queue">
             <td><strong>{{ item?.file?.name }}</strong></td>
-            <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-            <td *ngIf="uploader.isHTML5">
+            <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td *ngIf="uploader.options.isHTML5">
               <div class="progress" style="margin-bottom: 0;">
                 <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
               </div>
@@ -208,7 +209,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <aac-field-container label="Major Repair Updated By:">
+      <aac-field-container label="Major Repair Updated By:" [message]="displayMessage.updatedBy">
         <input class="form-control" formControlName="updatedBy">
       </aac-field-container>
     </div>
@@ -218,7 +219,7 @@
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="DTE Due Date:">
+      <aac-field-container label="DTE Due Date:" [message]="displayMessage.dteDueDate">
         <input class="form-control" formControlName="dteDueDate">
       </aac-field-container>
     </div>
