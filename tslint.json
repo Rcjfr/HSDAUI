@@ -107,7 +107,7 @@
       "check-type"
     ],
     "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],
-    "component-selector": [true, "element", ["aa", "aac", "test"], "kebab-case"],
+    "component-selector": [true, "element", ["aa", "aac", "test"], "kebab-case"],   //TODO: need to make a decision about the TestComponentWrapperComponent and keeping "test"
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
