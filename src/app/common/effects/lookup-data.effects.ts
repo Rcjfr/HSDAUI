@@ -253,22 +253,21 @@ export class LookupDataEffects {
       .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 
 
-constructor(private actions$: Actions,
-                private alertCodesService: services.AlertCodeService,
-                private ataCodesService: services.ATACodesService,
-                private corrosionLevelService: services.CorrosionLevelService,
-                private corrosionTypeService: services.CorrosionTypeService,
-                private departmentService: services.DepartmentService,
-                private detectionMethodService: services.DetectionMethodService,
-                private checkTypesService: services.CheckTypesService,
-                private stationService: services.StationService,
-                private damageTypesService: services.DamageTypeService,
-                private causeOfDamageService: services.CauseOfDamageService,
-                private floorboardConditionService: services.FloorboardConditionService,
-                private repairDocumentService: services.RepairDocumentService,
-                private repairDescriptionService: services.RepairDescriptionService,
-                private reasonsForChangeService: services.ReasonForChangeService,
-                private toastr: ToastsManager) {
-                }
-
+    constructor(private actions$: Actions,
+        private alertCodesService: services.AlertCodeService,
+        private ataCodesService: services.ATACodesService,
+        private corrosionLevelService: services.CorrosionLevelService,
+        private corrosionTypeService: services.CorrosionTypeService,
+        private departmentService: services.DepartmentService,
+        private detectionMethodService: services.DetectionMethodService,
+        private checkTypesService: services.CheckTypesService,
+        private stationService: services.StationService,
+        private damageTypesService: services.DamageTypeService,
+        private causeOfDamageService: services.CauseOfDamageService,
+        private floorboardConditionService: services.FloorboardConditionService,
+        private repairDocumentService: services.RepairDocumentService,
+        private repairDescriptionService: services.RepairDescriptionService,
+        private reasonsForChangeService: services.ReasonForChangeService,
+        private toastr: ToastsManager) {
+    }
 }

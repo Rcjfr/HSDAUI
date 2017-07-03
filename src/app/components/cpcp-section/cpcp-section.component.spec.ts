@@ -8,7 +8,7 @@ import { CpcpSectionComponent } from './cpcp-section.component';
 import { CauseOfDamageGroupComponent } from '../cause-of-damage-group/cause-of-damage-group.component';
 import { CauseOfDamageDescriptionComponent } from '../cause-of-damage-description/cause-of-damage-description.component';
 import { AppStateService } from '../../common/services';
-import { MockAppStateService } from '../../common/services/mocks/mock-aa-state.service';
+import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 describe('CpcpSectionComponent', () => {
   let component: CpcpSectionComponent;
   let fixture: ComponentFixture<TestComponentWrapperComponent>;

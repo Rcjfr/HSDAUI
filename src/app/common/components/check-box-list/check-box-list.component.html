@@ -8,7 +8,7 @@
                (change)="onChange($event)"
                (blur)="onTouch()"
                [checked]="isChecked(item)"
-               [attr.tabindex]="_tabindex">
+               [attr.tabindex]="tabindex">
 
         <label class="checkboxLabel" [attr.for]="identifier+'_'+ i">
           <span class="control"></span>

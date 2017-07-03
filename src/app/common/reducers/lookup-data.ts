@@ -39,7 +39,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   floorboardConditions: <List<models.IFloorboardCondition>>List.of(),
   repairDocuments: <List<models.IRepairDocument>>List.of(),
   repairDescriptions: <List<models.IRepairDescription>>List.of(),
-  reasonsForChange: <List < models.IReasonForChange >> List.of()
+  reasonsForChange: <List<models.IReasonForChange>>List.of()
 });
 
 function makeInitialState() {
@@ -112,35 +112,35 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
         return state.merge({ loading: false, stations: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE:
-    {
-      const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
-      return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
-        }
+      {
+        const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
+        return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
+      }
     case lookupDataActions.ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE:
-        {
-              const act = action as lookupDataActions.LoadCauseOfDamagesCompleteAction;
-              return state.merge({ loading: false, causeOfDamages: List.of(...act.payload) });
-        }
+      {
+        const act = action as lookupDataActions.LoadCauseOfDamagesCompleteAction;
+        return state.merge({ loading: false, causeOfDamages: List.of(...act.payload) });
+      }
     case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE:
-        {
-              const act = action as lookupDataActions.LoadFloorboardConditionsCompleteAction;
-              return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
-        }
+      {
+        const act = action as lookupDataActions.LoadFloorboardConditionsCompleteAction;
+        return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
+      }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE:
-        {
-              const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
-            return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
-        }
+      {
+        const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
+        return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
+      }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE:
-        {
-              const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
-              return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
+      {
+        const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
+        return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REASONS_FOR_CHANGE_COMPLETE:
-    {
-      const act = action as lookupDataActions.LoadReasonsForChangeCompleteAction;
-      return state.merge({ loading: false, reasonsForChange: List.of(...act.payload) });
-    }
+      {
+        const act = action as lookupDataActions.LoadReasonsForChangeCompleteAction;
+        return state.merge({ loading: false, reasonsForChange: List.of(...act.payload) });
+      }
     default: {
       return state;
     }

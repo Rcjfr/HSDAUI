@@ -52,7 +52,7 @@ export class CheckBoxListComponent implements ControlValueAccessor, OnInit {
   @Input() labelField: string;
   @Input() required: false;
   @Input() colClass = ''; //col-sm-4
-  @Input('tabindex') _tabindex = 0;
+  @Input('tabindex') tabindex = 0;
   private data: Array<any> = [];
   public identifier = `checkbox-${counter++}`;
 

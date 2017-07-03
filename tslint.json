@@ -106,8 +106,8 @@
       "check-separator",
       "check-type"
     ],
-    "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],    //TODO - tslint version?
-    "component-selector": [true, "element", ["aa", "aac"], "kebab-case"],
+    "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],
+    "component-selector": [true, "element", ["aa", "aac", "test"], "kebab-case"],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -120,10 +120,14 @@
     "no-access-missing-member": true,
     "templates-use-public": true,
     "invoke-injectable": true,
+
+
+     //Propose adding:
+    // "newline-before-return": true,
     "no-consecutive-blank-lines": [
       true,
       3
-    ] //Added
+    ]
     //TODO - how to require spacing between functions?
   }
 }

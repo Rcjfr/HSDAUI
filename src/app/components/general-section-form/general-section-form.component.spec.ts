@@ -43,8 +43,6 @@ describe('GeneralSectionFormComponent', () => {
 
   }));
 
-
-
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <GeneralSectionFormComponent>fixture.debugElement.children[0].componentInstance;
@@ -70,6 +68,8 @@ describe('GeneralSectionFormComponent', () => {
   });
 
 });
+
+
 @Component({
   selector: 'test-component-wrapper',
   template: '<aa-general-section-form [parent]="form" [errorMessages]="displayMessage"></aa-general-section-form>'
