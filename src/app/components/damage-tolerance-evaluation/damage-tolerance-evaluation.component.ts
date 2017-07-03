@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray } from "@angular/forms";
+import { FormBuilder, FormArray, Validators } from "@angular/forms";
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '../base-form.component';
+import * as moment from 'moment';
 import { Observable } from "rxjs/Rx";
 import { List } from "immutable";
 import * as models from '../../common/models';
@@ -23,28 +24,61 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
     this.formGroup = this.fb.group({
-      dteStatus: [1, []],
-      repairInspectionStatus: [1, []],
+      dteStatus: ['', [Validators.required]],
+      repairInspectionStatus: ['', [Validators.required]],
       fatigueCritical: [null, []],
-      stage1RTSDate: ['', []],
-      duration: [6, []],
+      stage1RTSDate: [null, [Validators.required]],
+      duration: [6, [Validators.required]],
       stage2Date: ['', []],
       stage3Date: ['', []],
-      srNo: ['', []],
-      rdasNo: ['', []],
-      etdNo: ['', []],
-      esmSubItemNo: ['', []],
+      srNo: ['', [Validators.maxLength(25)]],
+      rdasNo: ['', [Validators.maxLength(25)]],
+      etdNo: ['', [Validators.maxLength(25)]],
+      esmSubItemNo: ['', [Validators.maxLength(25)]],
       thresholds: this.fb.array([this.initThreshold()]),
       monitorItems: this.fb.array([this.initMonitorItem()]),
-      dteComments:['',[]]
+      dteComments: ['', [Validators.maxLength(500)]],
+      updatedBy: ['', [Validators.required, Validators.maxLength(50)]],
+      updatedDate: [new Date(), [Validators.required]],
+      dteDueDate: [null, [Validators.maxLength(20)]]
 
     });
+    const dteStatusControl = this.formGroup.get('dteStatus');
+    const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
+    const durationControl = this.formGroup.get('duration');
+    const dteDueDateControl = this.formGroup.get('dteDueDate');
+    Observable.merge(dteStatusControl.valueChanges,
+      stage1RTSDateControl.statusChanges,
+      durationControl.statusChanges)
+      .mapTo(1).subscribe(v => {
+        if (stage1RTSDateControl.value == null) { return }
+        let stage1RTSDate = <Date>stage1RTSDateControl.value;
+        const durationMonths = <number>durationControl.value;
+        switch (dteStatusControl.value) {
+          case '1': //Open
+            {
+              var copiedDate = new Date(stage1RTSDate.getTime());
+              const dueDate = new Date(copiedDate.setMonth(copiedDate.getMonth() + durationMonths));
+            dteDueDateControl.setValue(moment(dueDate).format('MM/DD/YYYY'));
+            break;
+          }
+          case '2': //Closed
+            dteDueDateControl.setValue('Completed');
+            break;
+          case '3': //TBD
+            dteDueDateControl.setValue('');
+            break;
+          default:
+            dteDueDateControl.setValue('');
+        }
+
+      });
   }
   initThreshold() {
     return this.fb.group({
-      inspectionThreshold: ['', []],
-      repeatInterval: ['', []],
-      inspectionMethod: ['', []]
+      inspectionThreshold: ['', [Validators.maxLength(50)]],
+      repeatInterval: ['', [Validators.maxLength(50)]],
+      inspectionMethod: ['', [Validators.maxLength(50)]]
     });
   }
   addThreshold() {
@@ -54,11 +88,11 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
   initMonitorItem() {
     return this.fb.group({
-      fmrLogPageMon: ['', []]
+      fmrLogPageMon: ['', [Validators.maxLength(25)]]
     });
   }
   addMonitorItem() {
-    let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
+    let arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
     arr.push(this.initMonitorItem());
     return false;
   }

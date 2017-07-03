@@ -11,7 +11,8 @@ export class DteStatusService {
   getAllDTEStatus(): Observable<IBaseLookUp[]> {
     return Observable.of([
       { id: 1, description: 'Open' },
-      { id: 2, description: 'Closed' }
+      { id: 2, description: 'Closed' },
+      { id: 3, description: 'TBD' }
     ]);
   }
 
