@@ -79,7 +79,6 @@ import { SearchByPartComponent } from './components/search/search-by-part/search
 import { SearchByAircraftModelComponent } from './components/search/search-by-aircraft-model/search-by-aircraft-model.component';
 import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +119,6 @@ import { SearchOptionsComponent } from './components/search/search-options/searc
     SearchByCpcpDispositionComponent,
     RepairDetailsSectionComponent,
     SearchByPartComponent,
-    SearchByAircraftModelComponent,
     SearchOptionsComponent
 
   ],
