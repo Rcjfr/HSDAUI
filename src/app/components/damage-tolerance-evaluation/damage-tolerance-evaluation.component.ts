@@ -2,7 +2,11 @@
 import { FormBuilder, FormArray, Validators } from "@angular/forms";
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '../base-form.component';
+import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+import { DialogService } from "ng2-bootstrap-modal";
+
 import * as moment from 'moment';
+import * as bootbox from 'bootbox';
 import { Observable } from "rxjs/Rx";
 import { List } from "immutable";
 import * as models from '../../common/models';
@@ -16,7 +20,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   dteStatus$: Observable<List<models.IBaseLookUp>>;
   repairInspectionStatus$: Observable<List<models.IBaseLookUp>>;
   public uploader: FileUploader = new FileUploader({ url: '/api/attachments' });
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     super('damageToleranceEvaluationGroup');
   }
 
@@ -60,9 +64,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
             {
               var copiedDate = new Date(stage1RTSDate.getTime());
               const dueDate = new Date(copiedDate.setMonth(copiedDate.getMonth() + durationMonths));
-            dteDueDateControl.setValue(moment(dueDate).format('MM/DD/YYYY'));
-            break;
-          }
+              dteDueDateControl.setValue(moment(dueDate).format('MM/DD/YYYY'));
+              break;
+            }
           case '2': //Closed
             dteDueDateControl.setValue('Completed');
             break;
@@ -89,6 +93,28 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     }
     return false;
   }
+  deleteThreshold(index: number) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: 'Are you sure you want to delete this threshold?'
+    })
+      .subscribe((isConfirmed) => {
+        //We get dialog result
+        if (isConfirmed) {
+          let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
+          arr.removeAt(index);
+        }
+      });
+
+    //TODO:why bootbox is not working
+    //bootbox.confirm('Are you sure you want to delete this threshold?',
+    //  (ok: boolean) => {
+    //    if (!ok) {return;}
+    //    let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
+    //    arr.controls.splice(index, 1);
+    //  });
+    return false;
+  }
   initMonitorItem() {
     return this.fb.group({
       fmrLogPageMon: ['', [Validators.maxLength(25)]]
@@ -99,6 +125,19 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (arr.controls.length < 5) {
       arr.push(this.initMonitorItem());
     }
-    return false; 
+    return false;
+  }
+  deleteMonitorItem(index: number) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: 'Are you sure you want to delete this monitor item?'
+    })
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+          let arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
+          arr.removeAt(index);
+        }
+      });
+    return false;
   }
 }

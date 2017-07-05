@@ -103,27 +103,33 @@
   <a href="#" (click)="addThreshold()">Add Another Threshold</a>
   <div class="row well" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
     <div class="col-md-4">
-      <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].inspectionThreshold">
+      <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionThreshold">
         <input class="form-control" formControlName="inspectionThreshold">
       </aac-field-container>
     </div>
     <div class="col-md-4">
-      <aac-field-container label="Repeat Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].repeatInterval">
+      <aac-field-container label="Repeat Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].repeatInterval">
         <input class="form-control" formControlName="repeatInterval">
       </aac-field-container>
     </div>
-    <div class="col-md-4">
-      <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i].inspectionMethod">
+    <div class="col-md-3">
+      <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionMethod">
         <input class="form-control" formControlName="inspectionMethod">
       </aac-field-container>
+    </div>
+    <div class="col-md-1">
+      <a href="#" (click)="deleteThreshold(i)">Delete</a>
     </div>
   </div>
   <a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>
   <div class="row well" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let k=index">
     <div class="col-md-6">
-      <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k].fmrLogPageMon">
+      <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k] && displayMessage.monitorItems[k].fmrLogPageMon">
         <input class="form-control" formControlName="fmrLogPageMon">
       </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <a href="#" (click)="deleteMonitorItem(k)">Delete</a>
     </div>
   </div>
   <div class="row">
@@ -162,15 +168,7 @@
               <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
             </td>
             <td nowrap>
-              <button type="button"
-                      (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                <span class="glyphicon glyphicon-upload"></span> Upload
-              </button>
-              <button type="button"
-                      (click)="item.cancel()" [disabled]="!item.isUploading">
-                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-              </button>
-              <button type="button"
+              <button type="button" class="btn btn-danger btn-xs"
                       (click)="item.remove()">
                 <span class="glyphicon glyphicon-trash"></span> Remove
               </button>
@@ -180,25 +178,9 @@
       </table>
 
       <div>
-        <div>
-          Queue progress:
-          <div class="progress" style="">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-          </div>
-        </div>
-        <input type="file" ng2FileSelect [uploader]="uploader" />
-
-        <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-          <span class="glyphicon glyphicon-upload"></span> Upload all
-        </button>
-        <button type="button"
-                (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-          <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-        </button>
-        <button type="button"
-                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-          <span class="glyphicon glyphicon-trash"></span> Remove all
-        </button>
+        <label class="btn btn-primary btn-file">
+          Browse <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
+        </label>
       </div>
 
     </div>

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -17,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { NavBarComponent } from './common/components/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/components/header/header.component';
+import { ConfirmComponent } from './common/components/confirm/confirm.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
 import {
@@ -87,6 +89,7 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
   declarations: [
     AppComponent,
     NavBarComponent,
+    ConfirmComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
@@ -137,6 +140,7 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,
+    BootstrapModalModule,
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
@@ -166,6 +170,9 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     ReasonForChangeService,
     DteStatusService,
     RepairInspectionStatusService
+  ],
+  entryComponents: [
+    ConfirmComponent
   ],
   bootstrap: [AppComponent]
 })
