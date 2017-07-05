@@ -340,12 +340,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   }, 'cpcpDispositionSectionFormGroup': {
       'cpcpTaskDescriptionFormGroup': {
           'cpcpTask': {
-              required: 'Cpcp Task# is required.',
-              maxlength: 'Cpcp Task# must not be more than 25 characters.'
+              required: 'CPCP Task # is required.',
+              maxlength: 'CPCP Task # must not be more than 25 characters.'
           }
       },
-      'reasonsForChangeTextBox': {
-          maxlength: 'Reasons For Change TextBox must not be more than 250 characters.'
+      'reasonForChangeTextBox': {
+          maxlength: 'Reason For Change must not be more than 250 characters.'
       },
       'corrosion': {
           required: 'Corrosion is required.'

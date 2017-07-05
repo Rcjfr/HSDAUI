@@ -29,7 +29,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             isCorrosionLevelCorrect: ['', []],
             corrosionLevel: corrossionLevel,
             reasonsForChange: clReasonForChange,
-            reasonsForChangeTextBox: ['', [Validators.maxLength(250)]],
+            reasonForChangeTextBox: ['', [Validators.maxLength(250)]],
             corrosion: ['', [Validators.required]],
             engineeringComments: ['', []],
             qcFeedback: ['', []],
