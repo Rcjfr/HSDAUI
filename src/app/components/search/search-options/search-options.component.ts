@@ -1,13 +1,14 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { BaseFormComponent } from "../../base-form.component";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-search-options',
   templateUrl: './search-options.component.html',
   styleUrls: ['./search-options.component.less']
 })
-export class SearchOptionsComponent implements OnInit {
+export class SearchOptionsComponent  implements OnInit {
     createNumberMask = createNumberMask;
     private numberMask = createNumberMask({
         prefix: '',
@@ -15,7 +16,9 @@ export class SearchOptionsComponent implements OnInit {
         includeThousandsSeparator: false,
         allowLeadingZeroes: false
     });
-    constructor(private toastr: ToastsManager) { }
+    constructor(private vcr: ViewContainerRef, private toastr: ToastsManager) {
+        this.toastr.setRootViewContainerRef(vcr);
+    }
 
   ngOnInit() {
   }
