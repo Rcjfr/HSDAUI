@@ -337,6 +337,31 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Deletion reason must not be more than 250 characters.'
     }
 
+  }, 'cpcpDispositionSectionFormGroup': {
+      'cpcpTaskDescriptionFormGroup': {
+          'cpcpTask': {
+              required: 'CPCP Task # is required.',
+              maxlength: 'CPCP Task # must not be more than 25 characters.'
+          }
+      },
+      'reasonForChangeTextBox': {
+          maxlength: 'Reason For Change must not be more than 250 characters.'
+      },
+      'corrosion': {
+          required: 'Corrosion is required.'
+      },
+      'engineeringComments': {
+          required: 'Engineering Comments is required.',
+          maxlength: 'Engineering Comments must not be more than 250 characters.'
+      },
+      'qcFeedback': {
+          required: 'QC Feedback is required.',
+          maxlength: 'QC Feedback must not be more than 250 characters.'
+      },
+      'reviewComplete': {
+          maxlength: 'Review Complete must not be more than 50 characters.'
+      }
+
   },
   'repairDetailsSectionGroup': {
       'engineeringAuthorization': {
@@ -375,6 +400,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           maxlength: 'Width must not be more than 3 digits.'
       }
       
-  }
+  },
+
+  
 
 };

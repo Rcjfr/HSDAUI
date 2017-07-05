@@ -74,6 +74,8 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
 import { ModifiedPartDescriptionComponent } from './components/modified-part-description/modified-part-description.component';
 import { DefectivePartDescriptionComponent } from './components/defective-part-description/defective-part-description.component';
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
+import { CpcpDispositionSectionComponent } from './components/cpcp-disposition-section/cpcp-disposition-section.component';
+import { CpcpTaskDescriptionComponent } from './components/cpcp-task-description/cpcp-task-description.component';
 import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
 import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
@@ -118,8 +120,9 @@ import { SearchOptionsComponent } from './components/search/search-options/searc
     SearchByCpcpDispositionComponent,
     RepairDetailsSectionComponent,
     SearchByPartComponent,
+    CpcpDispositionSectionComponent,
+    CpcpTaskDescriptionComponent,
     SearchOptionsComponent
-
   ],
   imports: [
     BrowserModule,
