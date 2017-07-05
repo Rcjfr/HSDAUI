@@ -121,8 +121,8 @@ import { SearchOptionsComponent } from './components/search/search-options/searc
     RepairDetailsSectionComponent,
     SearchByPartComponent,
     CpcpDispositionSectionComponent,
-    CpcpTaskDescriptionComponent
-
+    CpcpTaskDescriptionComponent,
+    SearchOptionsComponent
   ],
   imports: [
     BrowserModule,

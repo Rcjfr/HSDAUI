@@ -43,6 +43,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.cpcpDispositionSectionFormGroup.get('nonCpcp').valueChanges
             .subscribe(val => this.updateNonCpcp(val));
     }
+
     updateNonCpcp(noncpcp: boolean): void {
         if (!noncpcp) {
             this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').enable();
@@ -77,6 +78,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.updatecpcpTaskBehavior(1);
         this.updateIsCorresionLevelCorrectBehavior(1);
     }
+
     updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void
     {
         if (cpcpTaskNoCorrect == 0)
@@ -106,7 +108,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.setFeedBackBehavior();
     }
 
-   
     setFeedBackBehavior()
     {
 
@@ -126,14 +127,17 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.cpcpDispositionSectionFormGroup.get('engineeringComments').updateValueAndValidity();
         this.cpcpDispositionSectionFormGroup.get('qcFeedback').updateValueAndValidity();
     }
+
     submitToQc() {
         
         this.toastr.success('Notification sent to QC team', 'Success');
     }
+
     save()
     {
        this.toastr.success('Form Saved', 'Success');
     }
+
 }
 
 

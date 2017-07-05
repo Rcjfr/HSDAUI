@@ -7,28 +7,23 @@
 
     </div>
   </div>
-  <!--*ngIf="cpcpDispositionSectionFormGroup.get('nonCpcp').value != true"-->
-  <div >
+  <div>
     <div class="row form-group ">
       <div class="col-md-6">
         <div class="row form-group">
           <label class="col-sm-4 control-label">Is CPCP Task # correct?</label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" value="1" tabindex="100" name="isCpcpTaskNoCorrect" formControlName="isCpcpTaskNoCorrect"/>
+              <input type="radio" value="1" tabindex="100" name="isCpcpTaskNoCorrect" formControlName="isCpcpTaskNoCorrect" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" value="0" tabindex="100" name="isCpcpTaskNoCorrect" formControlName="isCpcpTaskNoCorrect"/>
+              <input type="radio" value="0" tabindex="100" name="isCpcpTaskNoCorrect" formControlName="isCpcpTaskNoCorrect" />
             </aac-radio-container>
-
-
           </div>
         </div>
       </div>
-
-      <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value == '0'"-->
-      <div class="col-md-6" >
-        <app-cpcp-task-description [parent]="cpcpDispositionSectionFormGroup" 
+      <div class="col-md-6">
+        <app-cpcp-task-description [parent]="cpcpDispositionSectionFormGroup"
                                    [errorMessages]="displayMessage"></app-cpcp-task-description>
       </div>
     </div>
@@ -50,19 +45,18 @@
           <label class="col-sm-4 control-label">Corrosion:<span class="req">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Local Corrosion">
-              <input type="radio" value="1" tabindex="106" name="corrosion" formControlName="corrosion"  />
+              <input type="radio" value="1" tabindex="106" name="corrosion" formControlName="corrosion" />
             </aac-radio-container>
             <aac-radio-container label="Widespread Corrosion">
-              <input type="radio" value="0" tabindex="106" name="corrosion" formControlName="corrosion"  />
+              <input type="radio" value="0" tabindex="106" name="corrosion" formControlName="corrosion" />
             </aac-radio-container>
             <div *ngIf="displayMessage.corrosion" class="error">{{displayMessage.corrosion}}</div>
           </div>
         </div>
       </div>
-      <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'"-->
       <div>
         <div class="col-md-4 ">
-          <div class="row form-group" >
+          <div class="row form-group">
             <label class="col-sm-4 control-label">Corrosion Level:</label>
             <div class="col-sm-8">
               <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
@@ -71,7 +65,7 @@
 
             </div>
           </div>
-        <h2><b>See GPM 09.09 for corrosion level determinations</b></h2>
+          <h2><b>See GPM 09.09 for corrosion level determinations</b></h2>
         </div>
         <div class="col-md-4">
           <div class="row form-group">
@@ -94,14 +88,14 @@
               </aac-radio-container>
             </div>
           </div>
-           
-              <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'">
-                <aac-field-container [message]="displayMessage.reasonsForChangeTextBox">
-                  <textarea tabindex='105' cols="40" rows="5" class="form-control" formControlName="reasonsForChangeTextBox">
+
+          <div *ngIf="cpcpDispositionSectionFormGroup.get('reasonsForChange').value == '0'">
+            <aac-field-container [message]="displayMessage.reasonsForChangeTextBox">
+              <textarea tabindex='105' cols="40" rows="5" class="form-control" formControlName="reasonsForChangeTextBox">
                   </textarea>
-                </aac-field-container>
-            </div>
-          
+            </aac-field-container>
+          </div>
+
         </div>
       </div>
     </div>
@@ -110,7 +104,7 @@
         <aac-field-container label="Engineering Comments:"
                              helptext="(Comments need to be 250 characters or less)"
                              [message]="displayMessage.engineeringComments">
-          <textarea  tabindex='108' cols="40" rows="5" class="form-control" formControlName="engineeringComments">
+          <textarea tabindex='108' cols="40" rows="5" class="form-control" formControlName="engineeringComments">
         </textarea>
         </aac-field-container>
       </div>
@@ -124,7 +118,7 @@
       </div>
     </div>
   </div>
-  <div class="row form-group" >
+  <div class="row form-group">
     <div class="col-md-2">
       <aac-checkbox-container label="Review Complete">
         <input type="checkbox" tabindex="110" formControlName="reviewComplete" />
@@ -132,8 +126,8 @@
     </div>
     <div class="col-md-10">
       <aac-field-container label="" labelGridColumnWidth="1"
-                           [message]="displayMessage.reviewComplete" >
-        <input type="text" tabindex="111" class="form-control" formControlName="reviewComplete" >
+                           [message]="displayMessage.reviewComplete">
+        <input type="text" tabindex="111" class="form-control" formControlName="reviewComplete">
       </aac-field-container>
     </div>
 
@@ -142,5 +136,5 @@
     <button type="button" tabindex="112" (click)="submitToQc()">Submit to QC</button>
     <button type="button" tabindex="113" (click)="save()">Save</button>
   </div>
-    </div>
+</div>
 
