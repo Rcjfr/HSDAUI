@@ -8,7 +8,7 @@
     </div>
   </div>
   <!--*ngIf="cpcpDispositionSectionFormGroup.get('nonCpcp').value != true"-->
-  <div  >
+  <div >
     <div class="row form-group ">
       <div class="col-md-6">
         <div class="row form-group">
@@ -58,24 +58,11 @@
             <div *ngIf="displayMessage.corrosion" class="error">{{displayMessage.corrosion}}</div>
           </div>
         </div>
-
-        <!--<div class="row form-group" [class.has-error]="displayMessage.wsCorrosion">
-          <label class="col-sm-4 control-label">Widespread Corrosion<span class="req">*</span></label>
-          <div class="col-sm-8">
-            <aac-radio-container label="Yes">
-              <input type="radio" value="1" tabindex="107" name="wsCorrosion" formControlName="wsCorrosion" />
-            </aac-radio-container>
-            <aac-radio-container label="No">
-              <input type="radio" value="0" tabindex="107" name="wsCorrosion" formControlName="wsCorrosion" />
-            </aac-radio-container>
-            <div *ngIf="displayMessage.wsCorrosion" class="error">{{displayMessage.wsCorrosion}}</div>
-          </div>
-        </div>-->
       </div>
       <!--*ngIf="cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value == '0'"-->
       <div>
         <div class="col-md-4 ">
-          <div class="row form-group">
+          <div class="row form-group" >
             <label class="col-sm-4 control-label">Corrosion Level:</label>
             <div class="col-sm-8">
               <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">

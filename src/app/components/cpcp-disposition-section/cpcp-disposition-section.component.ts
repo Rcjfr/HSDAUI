@@ -39,7 +39,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').valueChanges
             .subscribe(val => this.updatecpcpTaskBehavior(val));
         this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').valueChanges
-            .subscribe(val => this.updateCorresionLevelReasonForChangeBehavior(val));
+            .subscribe(val => this.updateIsCorresionLevelCorrectBehavior(val));
         this.cpcpDispositionSectionFormGroup.get('nonCpcp').valueChanges
             .subscribe(val => this.updateNonCpcp(val));
     }
@@ -64,8 +64,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             this.cpcpDispositionSectionFormGroup.get('engineeringComments').reset();
             this.cpcpDispositionSectionFormGroup.get('qcFeedback').reset();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
-            //this.cpcpDispositionSectionFormGroup.get('reasonsForChange').reset();
-            //this.cpcpDispositionSectionFormGroup.get('corrosionLevel').reset();
             this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').disable();
             this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').disable();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
@@ -75,7 +73,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
         }
-        this.setBehaviorToDescription();
+        this.setFeedBackBehavior();
+        this.updatecpcpTaskBehavior(1);
+        this.updateIsCorresionLevelCorrectBehavior(1);
     }
     updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void
     {
@@ -83,32 +83,37 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
         else {
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
+            this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
         }
-        this.setBehaviorToDescription();
+        this.setFeedBackBehavior();
     }
 
-    updateCorresionLevelReasonForChangeBehavior(correstionLevelCorrect: number): void {
+    updateIsCorresionLevelCorrectBehavior(correstionLevelCorrect: number): void
+    {
         if (correstionLevelCorrect == 0)
         {
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
         }
-        else {
+        else
+        {
             
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').disable();
         }
-        this.setBehaviorToDescription();
+        this.setFeedBackBehavior();
     }
-    setBehaviorToDescription()
+
+   
+    setFeedBackBehavior()
     {
 
         var isCorrossionLevel = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
         var cpcpTaskCorrect = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
 
-        if (cpcpTaskCorrect == 0 || isCorrossionLevel == 0) {
+        if (cpcpTaskCorrect == "0" || isCorrossionLevel == "0") {
             this.cpcpDispositionSectionFormGroup.get('engineeringComments').setValidators([Validators.required,
             Validators.maxLength(250)]);
             this.cpcpDispositionSectionFormGroup.get('qcFeedback').setValidators([Validators.required,
