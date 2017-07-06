@@ -400,8 +400,59 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           maxlength: 'Width must not be more than 3 digits.'
       }
       
-  },
-
-  
-
+  }
+  ,'damageToleranceEvaluationGroup': {
+    dteStatus: {
+      required:'DTE Status is required.'
+    },
+    repairInspectionStatus: {
+      required:'Repair Inspection Status is required.'
+    },
+    stage1RTSDate: {
+      required:'Stage 1/RTS Date is required.'
+    },
+    srNo: {
+      maxlength:'SR # must not be more than 25 characters.'
+    },
+    rdasNo: {
+      maxlength: 'RDAS # must not be more than 25 characters.'
+    },
+    etdNo: {
+      maxlength: 'ETD # must not be more than 25 characters.'
+    },
+    esmSubItemNo: {
+      maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
+    },
+    thresholds: {
+      inspectionThreshold: {
+        maxlength: 'Inspection Threshold must not be more than 50 characters.'
+      },
+      repeatInterval: {
+        maxlength: 'Repeat Interval must not be more than 50 characters.'
+      },
+      inspectionMethod: {
+        maxlength: 'Inspection Method must not be more than 50 characters.'
+      }
+    },
+    monitorItems: {
+      fmrLogPageMon: {
+        maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
+      }
+    },
+    dteComments: {
+      maxlength:'DTE Comments must not be more than 500 characters.'
+    },
+    updatedBy: {
+      required:'Updated By is required.',
+      maxlength: 'Updated By must not be more than 50 characters.'
+    },
+    updatedDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+    dteDueDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+  }
 };

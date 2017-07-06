@@ -3,7 +3,6 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angul
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import * as $ from 'jquery';
 import { AlertDetailComponent } from './alert-detail.component';
-import { CheckboxComponent } from '../../common/directives/checkbox/checkbox.component';
 import { ATACodesService } from '../../common/services/ata-codes.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
