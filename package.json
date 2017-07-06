@@ -49,6 +49,7 @@
     "@angular/cli": "1.0.0",
     "@angular/compiler-cli": "^4.2.4",
     "@types/bootstrap": "^3.3.33",
+    "@types/datatables.net": "^1.10.4",
     "@types/jasmine": "2.5.38",
     "@types/jquery": "^2.0.42",
     "@types/node": "^6.0.79",
