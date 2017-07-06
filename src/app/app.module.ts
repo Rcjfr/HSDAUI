@@ -79,11 +79,12 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
 import { ModifiedPartDescriptionComponent } from './components/modified-part-description/modified-part-description.component';
 import { DefectivePartDescriptionComponent } from './components/defective-part-description/defective-part-description.component';
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
+import { CpcpDispositionSectionComponent } from './components/cpcp-disposition-section/cpcp-disposition-section.component';
+import { CpcpTaskDescriptionComponent } from './components/cpcp-task-description/cpcp-task-description.component';
 import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
-import { SearchByAircraftModelComponent } from './components/search/search-by-aircraft-model/search-by-aircraft-model.component';
+import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
 import { DamageToleranceEvaluationComponent } from './components/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
-
 
 @NgModule({
   declarations: [
@@ -126,7 +127,9 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     SearchByCpcpDispositionComponent,
     RepairDetailsSectionComponent,
     SearchByPartComponent,
-    SearchByAircraftModelComponent,
+    CpcpDispositionSectionComponent,
+    CpcpTaskDescriptionComponent,
+    SearchOptionsComponent
     DamageToleranceEvaluationComponent
 
   ],

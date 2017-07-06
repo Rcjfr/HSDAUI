@@ -80,12 +80,12 @@
     </div>
     <app-search-by-part></app-search-by-part>
   </accordion-group>
-  <accordion-group #modelGroup panelClass="panel-default search-panel">
+  <accordion-group #optionGroup panelClass="panel-default search-panel">
     <div accordion-heading>
-      Search by Aircraft Model/Series
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': modelGroup?.isOpen, 'icon-add': !modelGroup?.isOpen}"></i>
+      Search Options
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
     </div>
-    <app-search-by-aircraft-model></app-search-by-aircraft-model>
+    <app-search-options></app-search-options>
   </accordion-group>
 </accordion>
 </form>
