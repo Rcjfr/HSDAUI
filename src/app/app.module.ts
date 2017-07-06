@@ -129,7 +129,7 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     SearchByPartComponent,
     CpcpDispositionSectionComponent,
     CpcpTaskDescriptionComponent,
-    SearchOptionsComponent
+    SearchOptionsComponent,
     DamageToleranceEvaluationComponent
 
   ],
