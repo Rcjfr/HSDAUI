@@ -6,7 +6,6 @@ import { ConfirmComponent } from '../../common/components/confirm/confirm.compon
 import { DialogService } from "ng2-bootstrap-modal";
 
 import * as moment from 'moment';
-import * as bootbox from 'bootbox';
 import { Observable } from "rxjs/Rx";
 import { List } from "immutable";
 import * as models from '../../common/models';
@@ -99,20 +98,11 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       message: 'Are you sure you want to delete this threshold?'
     })
       .subscribe((isConfirmed) => {
-        //We get dialog result
         if (isConfirmed) {
           let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
           arr.removeAt(index);
         }
       });
-
-    //TODO:why bootbox is not working
-    //bootbox.confirm('Are you sure you want to delete this threshold?',
-    //  (ok: boolean) => {
-    //    if (!ok) {return;}
-    //    let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
-    //    arr.controls.splice(index, 1);
-    //  });
     return false;
   }
   initMonitorItem() {
