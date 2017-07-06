@@ -100,38 +100,40 @@
       </aac-field-container>
     </div>
   </div>
-  <a href="#" (click)="addThreshold()">Add Another Threshold</a>
-  <div class="row well" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
-    <div class="col-md-4">
-      <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionThreshold">
-        <input class="form-control" formControlName="inspectionThreshold">
-      </aac-field-container>
-    </div>
-    <div class="col-md-4">
-      <aac-field-container label="Repeat Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].repeatInterval">
-        <input class="form-control" formControlName="repeatInterval">
-      </aac-field-container>
-    </div>
-    <div class="col-md-3">
-      <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionMethod">
-        <input class="form-control" formControlName="inspectionMethod">
-      </aac-field-container>
-    </div>
-    <div class="col-md-1">
-      <a href="#" (click)="deleteThreshold(i)">Delete</a>
-    </div>
+  
+<div class="row well" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
+  <div class="col-md-4">
+    <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionThreshold">
+      <input class="form-control" formControlName="inspectionThreshold">
+    </aac-field-container>
   </div>
-  <a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>
-  <div class="row well" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let k=index">
-    <div class="col-md-6">
-      <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k] && displayMessage.monitorItems[k].fmrLogPageMon">
-        <input class="form-control" formControlName="fmrLogPageMon">
-      </aac-field-container>
-    </div>
-    <div class="col-md-6">
-      <a href="#" (click)="deleteMonitorItem(k)">Delete</a>
-    </div>
+  <div class="col-md-4">
+    <aac-field-container label="Inspection Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionInterval">
+      <input class="form-control" formControlName="inspectionInterval">
+    </aac-field-container>
   </div>
+  <div class="col-md-3">
+    <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionMethod">
+      <input class="form-control" formControlName="inspectionMethod">
+    </aac-field-container>
+  </div>
+  <div class="col-md-1">
+    <a href="#" (click)="deleteThreshold(i)">Delete</a>
+  </div>
+</div>
+<a href="#" (click)="addThreshold()">Add Another Threshold</a>
+  
+<div class="row well" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let k=index">
+  <div class="col-md-6">
+    <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k] && displayMessage.monitorItems[k].fmrLogPageMon">
+      <input class="form-control" formControlName="fmrLogPageMon">
+    </aac-field-container>
+  </div>
+  <div class="col-md-6">
+    <a href="#" (click)="deleteMonitorItem(k)">Delete</a>
+  </div>
+</div>
+<a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="DTE Comments:" [message]="displayMessage.dteComments">
@@ -179,7 +181,7 @@
 
       <div>
         <label class="btn btn-primary btn-file">
-          Browse <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
+          Add Attachment <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
         </label>
       </div>
 
@@ -194,7 +196,7 @@
     </div>
     <div class="col-md-4">
       <aac-field-container label="Major Repair Updated Date:" [attr.for]="updatedDate.idDatePicker" [message]="displayMessage.updatedDate">
-        <datetime [timepicker]="false" #updatedDate [tabindex]='3' formControlName="updatedDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [readonly]="true" #updatedDate [tabindex]='3' formControlName="updatedDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-md-4">
