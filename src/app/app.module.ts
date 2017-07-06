@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { NgPipesModule } from 'ng-pipes';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { AccordionModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
@@ -17,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { NavBarComponent } from './common/components/nav-bar/nav-bar.component';
 import { HeaderComponent } from './common/components/header/header.component';
+import { ConfirmComponent } from './common/components/confirm/confirm.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
 import {
@@ -35,7 +38,9 @@ import {
   FloorboardConditionService,
   RepairDocumentService,
   RepairDescriptionService,
-  ReasonForChangeService
+  ReasonForChangeService,
+  DteStatusService,
+  RepairInspectionStatusService
 
 } from './common/services';
 import { AlertEffects } from './common/effects/alerts.effects';
@@ -75,13 +80,19 @@ import { SearchByDefectComponent } from './components/search/search-by-defect/se
 import { ModifiedPartDescriptionComponent } from './components/modified-part-description/modified-part-description.component';
 import { DefectivePartDescriptionComponent } from './components/defective-part-description/defective-part-description.component';
 import { SearchByCpcpDispositionComponent } from './components/search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
+import { CpcpDispositionSectionComponent } from './components/cpcp-disposition-section/cpcp-disposition-section.component';
+import { CpcpTaskDescriptionComponent } from './components/cpcp-task-description/cpcp-task-description.component';
+import { RepairDetailsSectionComponent } from './components/repair-details-section/repair-details-section.component';
+import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
+import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
+import { DamageToleranceEvaluationComponent } from './components/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
+    ConfirmComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
@@ -116,6 +127,12 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     DefectivePartDescriptionComponent,
     CurrentStatusSectionComponent,
     SearchByCpcpDispositionComponent,
+    RepairDetailsSectionComponent,
+    SearchByPartComponent,
+    CpcpDispositionSectionComponent,
+    CpcpTaskDescriptionComponent,
+    SearchOptionsComponent,
+    DamageToleranceEvaluationComponent
     AlertsGridComponent
 
   ],
@@ -127,8 +144,10 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     ReactiveFormsModule,
     FormControlsModule,
     HttpModule,
+    FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,
+    BootstrapModalModule,
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
@@ -150,12 +169,17 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     DepartmentService,
     DetectionMethodService,
     StationService,
-      DamageTypeService,
-      CauseOfDamageService,
-      FloorboardConditionService,
-      RepairDocumentService,
-      RepairDescriptionService,
-ReasonForChangeService
+    DamageTypeService,
+    CauseOfDamageService,
+    FloorboardConditionService,
+    RepairDocumentService,
+    RepairDescriptionService,
+    ReasonForChangeService,
+    DteStatusService,
+    RepairInspectionStatusService
+  ],
+  entryComponents: [
+    ConfirmComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,14 +1,14 @@
 ﻿<div class="row  form-group">
   <div class="col-md-6">
     <aac-checkbox-container label="Widespread Corrosion">
-      <input type="checkbox" tabindex="20"/>
+      <input type="checkbox" tabindex="23"/>
     </aac-checkbox-container>
 
     
   </div>
   <div class="col-md-6">
     <aac-checkbox-container label="Corrosion Previously Blended">
-      <input type="checkbox" tabindex="21" />
+      <input type="checkbox" tabindex="24" />
     </aac-checkbox-container>
     
   </div>
@@ -16,7 +16,7 @@
 <div class="row">
   <div class="col-md-6">
     <aac-field-container label="Corrosion Task #:">
-      <input type="text" tabindex='22' class="form-control">
+      <input type="text" tabindex='25' class="form-control">
     </aac-field-container>
   </div>
   <div class="col-md-6">
@@ -27,7 +27,7 @@
                            labelField="description"
                            valueField="id"
                            colClass="col-sm-4"
-                           tabindex="23">
+                           tabindex="26">
         </aac-checkbox-list>
       </div>
     </div>
@@ -37,7 +37,7 @@
   <div class="col-md-6">
     <div>
       <aac-field-container label="Type of Corrosion:" for="corrosionType">
-        <select class="form-control" multiple tabindex='24' id="corrosionType" [(ngModel)]="corrosionType">
+        <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType">
           <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
         <input type="text" placeholder="Enter other description" tabindex="25" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()" />
@@ -48,7 +48,7 @@
   <div class="col-md-6">
     <div>
       <aac-field-container label="Cause of Damage:" for="causeOfDamage">
-        <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='26' id="causeOfDamage">
+        <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage">
           <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
         <input type="text" placeholder="Enter other description" tabindex="27" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
