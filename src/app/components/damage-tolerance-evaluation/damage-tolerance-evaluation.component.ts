@@ -6,7 +6,7 @@ import { ConfirmComponent } from '../../common/components/confirm/confirm.compon
 import { DialogService } from "ng2-bootstrap-modal";
 
 import * as moment from 'moment';
-import * as bootbox from 'bootbox';
+//import * as bootbox from 'bootbox';
 import { Observable } from "rxjs/Rx";
 import { List } from "immutable";
 import * as models from '../../common/models';
