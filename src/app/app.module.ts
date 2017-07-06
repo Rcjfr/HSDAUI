@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
+import { DataTablesModule } from 'angular-datatables';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
@@ -85,6 +86,7 @@ import { RepairDetailsSectionComponent } from './components/repair-details-secti
 import { SearchByPartComponent } from './components/search/search-by-part/search-by-part.component';
 import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
 import { DamageToleranceEvaluationComponent } from './components/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
+import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +132,8 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     CpcpDispositionSectionComponent,
     CpcpTaskDescriptionComponent,
     SearchOptionsComponent,
-    DamageToleranceEvaluationComponent
+    DamageToleranceEvaluationComponent,
+    AlertsGridComponent
 
   ],
   imports: [
@@ -140,6 +143,7 @@ import { DamageToleranceEvaluationComponent } from './components/damage-toleranc
     ReactiveFormsModule,
     FormControlsModule,
     HttpModule,
+    DataTablesModule,
     FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,

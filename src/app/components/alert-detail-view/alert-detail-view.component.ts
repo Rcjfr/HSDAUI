@@ -12,7 +12,7 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { Alert } from '../../common/models/alert.model';
+import { IAlert } from '../../common/models/alert.model';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -29,7 +29,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit {
-  @Input() alert: Alert;
+  @Input() alert: IAlert;
   @Input() loading: boolean;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
