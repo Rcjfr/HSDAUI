@@ -3,8 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { GridModule } from '@progress/kendo-angular-grid';
 import { NgPipesModule } from 'ng-pipes';
+import { DataTablesModule } from 'angular-datatables';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
@@ -132,18 +132,18 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     CpcpDispositionSectionComponent,
     CpcpTaskDescriptionComponent,
     SearchOptionsComponent,
-    DamageToleranceEvaluationComponent
+    DamageToleranceEvaluationComponent,
     AlertsGridComponent
 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    GridModule,
     FormsModule,
     ReactiveFormsModule,
     FormControlsModule,
     HttpModule,
+    DataTablesModule,
     FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,

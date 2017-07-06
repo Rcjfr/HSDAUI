@@ -1,29 +1,36 @@
-﻿<kendo-grid [data]="alerts" [height]="410"
-            [pageSize]="state.take"
-            [skip]="state.skip"
-            [sort]="state.sort"
-            [sortable]="true"
-            [pageable]="true"
-            [scrollable]="'none'"
-            (dataStateChange)="dataStateChange($event)"
-            >
-  <kendo-grid-column field="sdaId" title="SDA ID" width="100">
-  </kendo-grid-column>
-  <kendo-grid-column field="aircraftNo" title="Aircraft #" width="250">
-  </kendo-grid-column>
-  <kendo-grid-column field="createDate" title="Create Date">
-  </kendo-grid-column>
-  <kendo-grid-column field="statusText" title="Form Status" width="120">
-  </kendo-grid-column>
-  <kendo-grid-column field="station" title="Station">
-  </kendo-grid-column>
-  <kendo-grid-column field="routineNo" title="Routine #" >
-  </kendo-grid-column>
-  <kendo-grid-column field="nonRoutineNo" title="Non-Routine #">
-  </kendo-grid-column>
-  <!--<kendo-grid-column field="Discontinued" title="Discontinued" width="120">
-    <ng-template kendoGridCellTemplate let-dataItem>
-      <input type="checkbox" [checked]="dataItem.Discontinued" disabled />
-    </ng-template>
-  </kendo-grid-column>-->
-</kendo-grid>
+﻿<h1>Search Results</h1>
+<table [dtOptions]="dtOptions" datatable class="table table-striped table-bordered">
+  <thead>
+  <tr>
+    <th>SDA ID</th>
+    <th>Aircraft #</th>
+    <th>Create Date</th>
+    <th>Form Status</th>
+    <th>Station</th>
+    <th>Routine #</th>
+    <th>Non-Routine #</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let alert of alerts">
+    <td>{{ alert.sdaId }}</td>
+    
+    <td>{{alert.aircraftNo}}</td>
+    <td>{{alert.createDate | date}}</td>
+    <td>{{alert.statusText}}</td>
+    <td>{{alert.station}}</td>
+    <td>{{alert.routineNo}}</td>
+    <td>{{alert.nonRoutineNo}}</td>
+    <td>
+      <a [routerLink]="['/alerts', alert.sdaId]">
+        <span>View</span>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row form-group">
+  &nbsp;
+</div>

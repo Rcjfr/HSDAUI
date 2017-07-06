@@ -26,9 +26,9 @@ export class AlertsComponent implements OnInit {
         sdaId: '123457',
         createDate: new Date(),
         aircraftNo: 'A380',
-        station: 'DFW',
-        nonRoutineNo: '1',
-        routineNo: '23',
+        station: 'PHX',
+        nonRoutineNo: '12',
+        routineNo: '233',
         statusText: 'Open'
       },
       {
@@ -38,7 +38,7 @@ export class AlertsComponent implements OnInit {
         station: 'DFW',
         nonRoutineNo: '1',
         routineNo: '23',
-        statusText: 'Open'
+        statusText: 'Completed'
       },
       {
         sdaId: '123459',
@@ -47,15 +47,15 @@ export class AlertsComponent implements OnInit {
         station: 'PHX',
         nonRoutineNo: '1',
         routineNo: '23',
-        statusText: 'Open'
+        statusText: 'Audited'
       },
       {
         sdaId: '123456',
         createDate: new Date(),
         aircraftNo: 'A380',
         station: 'DFW',
-        nonRoutineNo: '1',
-        routineNo: '23',
+        nonRoutineNo: '15',
+        routineNo: '123',
         statusText: 'Open'
       },
       {
@@ -63,8 +63,8 @@ export class AlertsComponent implements OnInit {
         createDate: new Date(),
         aircraftNo: 'A380',
         station: 'PHX',
-        nonRoutineNo: '1',
-        routineNo: '23',
+        nonRoutineNo: '221',
+        routineNo: '2223',
         statusText: 'Open'
       },
       {
@@ -72,8 +72,8 @@ export class AlertsComponent implements OnInit {
         createDate: new Date(),
         aircraftNo: 'A380',
         station: 'DFW',
-        nonRoutineNo: '1',
-        routineNo: '23',
+        nonRoutineNo: '17',
+        routineNo: '2133',
         statusText: 'Open'
       },
       {
@@ -81,8 +81,8 @@ export class AlertsComponent implements OnInit {
         createDate: new Date(),
         aircraftNo: 'A380',
         station: 'PHX',
-        nonRoutineNo: '1',
-        routineNo: '23',
+        nonRoutineNo: '17',
+        routineNo: '235',
         statusText: 'Open'
       }
     ]);

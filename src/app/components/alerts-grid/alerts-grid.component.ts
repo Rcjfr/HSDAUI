@@ -1,13 +1,7 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
 
 import {IAlert} from './../../common/models';
-import { State } from '@progress/kendo-data-query';
-
-import {
-  GridDataResult,
-  DataStateChangeEvent
-} from '@progress/kendo-angular-grid';
-
+import { Subject } from 'rxjs/Rx';
 @Component({
   selector: 'app-alerts-grid',
   templateUrl: './alerts-grid.component.html',
@@ -15,16 +9,24 @@ import {
 })
 export class AlertsGridComponent implements OnInit {
   @Input() alerts: IAlert[];
-  public state: State = {
-    skip: 0,
-    take: 5
-  };
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<number>=new Subject();
+
+  
   constructor() { }
 
-  ngOnInit() {
-  }
-  public dataStateChange(state: DataStateChangeEvent): void {
-    this.state = state;
-    console.log(this.state);
+  ngOnInit():void {
+this.dtOptions = {
+        pagingType:"full_numbers",
+        pageLength:5,
+        searching:false,
+        "paging":   true,
+        "ordering": true,
+        "columnDefs": [ {
+          "targets": 7,
+          "orderable": false
+        } ]
+    };
+    this.dtTrigger.next(1); //TODO: this approach is not working 
   }
 }
