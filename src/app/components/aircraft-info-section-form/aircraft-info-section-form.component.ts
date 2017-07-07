@@ -37,14 +37,14 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     integerLimit: 3,
     requireDecimal: false
   });
-  private decimalNumberMask = createNumberMask({
+  public decimalNumberMask = createNumberMask({
     prefix: '',
     allowDecimal: true,
     includeThousandsSeparator: false,
     decimalLimit: 2,
     requireDecimal: false
   });
-  private numberMask = createNumberMask({
+  public numberMask = createNumberMask({
     prefix: '',
     allowDecimal: false,
     includeThousandsSeparator: false,

@@ -19,13 +19,14 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     repairDescriptions$: Observable<List<models.IRepairDescription>>;
     repairDocuments$: Observable<List<models.IRepairDocument>>;
     createNumberMask = createNumberMask;
-    private numberMask = createNumberMask({
+    public  numberMask = createNumberMask({
         prefix: '',
         allowDecimal: false,
         includeThousandsSeparator: false,
         allowLeadingZeroes: false
     });
     repairDetailsSectionGroup: FormGroup;
+
     constructor(private fb: FormBuilder, private appStateService: AppStateService) {
         super('repairDetailsSectionGroup');
     }

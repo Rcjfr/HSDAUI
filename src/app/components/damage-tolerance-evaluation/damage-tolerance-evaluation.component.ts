@@ -1,17 +1,17 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
+import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '../base-form.component';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
-import { DialogService } from "ng2-bootstrap-modal";
+import { DialogService } from 'ng2-bootstrap-modal';
 
 import * as moment from 'moment';
-import { Observable } from "rxjs/Rx";
-import { List } from "immutable";
+import { Observable } from 'rxjs/Rx';
+import { List } from 'immutable';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
 @Component({
-  selector: 'app-damage-tolerance-evaluation',
+  selector: 'aa-damage-tolerance-evaluation',
   templateUrl: './damage-tolerance-evaluation.component.html',
   styleUrls: ['./damage-tolerance-evaluation.component.less']
 })
@@ -42,8 +42,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       monitorItems: this.fb.array([this.initMonitorItem()]),
       dteComments: ['', [Validators.maxLength(500)]],
       updatedBy: ['', [Validators.required, Validators.maxLength(50)]],
-      updatedDate: new FormControl({ value: new Date(), disabled: true }), 
-      dteDueDate: new FormControl({ value: '', disabled: true })  
+      updatedDate: new FormControl({ value: new Date(), disabled: true }),
+      dteDueDate: new FormControl({ value: '', disabled: true })
 
     });
     this.parent.addControl(this.formGroupName, this.formGroup);
@@ -56,12 +56,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       durationControl.statusChanges)
       .mapTo(1).subscribe(v => {
         if (stage1RTSDateControl.value == null) { return }
-        let stage1RTSDate = <Date>stage1RTSDateControl.value;
+        const stage1RTSDate = <Date>stage1RTSDateControl.value;
         const durationMonths = <number>durationControl.value;
         switch (dteStatusControl.value) {
           case '1': //Open
             {
-              var copiedDate = new Date(stage1RTSDate.getTime());
+              const copiedDate = new Date(stage1RTSDate.getTime());
               const dueDate = new Date(copiedDate.setMonth(copiedDate.getMonth() + durationMonths));
               dteDueDateControl.setValue(moment(dueDate).format('MM/DD/YYYY'));
               break;
@@ -86,7 +86,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
   }
   addThreshold() {
-    let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
+    const arr: FormArray = <FormArray>this.formGroup.get('thresholds');
     if (arr.controls.length < 5) {
       arr.push(this.initThreshold());
     }
@@ -99,7 +99,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     })
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
-          let arr: FormArray = <FormArray>this.formGroup.get('thresholds');
+          const arr: FormArray = <FormArray>this.formGroup.get('thresholds');
           arr.removeAt(index);
         }
       });
@@ -111,7 +111,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
   }
   addMonitorItem() {
-    let arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
+    const arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
     if (arr.controls.length < 5) {
       arr.push(this.initMonitorItem());
     }
@@ -124,7 +124,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     })
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
-          let arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
+          const arr: FormArray = <FormArray>this.formGroup.get('monitorItems');
           arr.removeAt(index);
         }
       });

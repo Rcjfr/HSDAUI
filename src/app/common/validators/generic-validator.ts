@@ -1,10 +1,10 @@
 ﻿import { FormGroup, FormArray } from '@angular/forms';
 
 export const Expressions = {
-  Alphanumerics: "[a-zA-Z0-9]+",
-  Alphabets: "[a-zA-Z]+",
-  Numerics: "[0-9]+",
-  Decimals: "[0-9]+(\.[0-9]+)?"
+  Alphanumerics: '[a-zA-Z0-9]+',
+  Alphabets: '[a-zA-Z]+',
+  Numerics: '[0-9]+',
+  Decimals: '[0-9]+(\.[0-9]+)?'
 };
 
 // Generic validator for Reactive forms
@@ -52,7 +52,7 @@ export class GenericValidator {
         if (c instanceof FormArray) {
           messages[controlKey] = [];
           for (let i = 0; i < (<FormArray>c).controls.length; i++) {
-            let grp = <FormGroup>(<FormArray>c).controls[i];
+            const grp = <FormGroup>(<FormArray>c).controls[i];
             messages[controlKey].push(this.processMessages(grp, _validationMessages[controlKey]));
           }
         }

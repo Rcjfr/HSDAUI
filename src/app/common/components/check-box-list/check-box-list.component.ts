@@ -85,12 +85,12 @@ export class CheckBoxListComponent implements ControlValueAccessor, OnInit {
     this.propagateTouch = fn;
   }
 
-  private onTouch() {
+  public onTouch() {
     this.propagateTouch();
   }
 
   // change events from the textarea
-  private onChange(event) {
+  public onChange(event) {
     // get value from text area
     const newValue: any = event.target.value;
     const checked = event.target.checked;

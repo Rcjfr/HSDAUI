@@ -5,12 +5,7 @@
   "rules": {
     "callable-types": true,
     "class-name": true,
-    // "comment-format": [  //I think we should get rid of this
-    //   true,
-    //   "check-space"
-    // ],
     "curly": true,
-    // "eofline": true, //I think we should get rid of this
     "forin": true,
     "import-blacklist": [
       true,
@@ -47,7 +42,7 @@
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-empty": false,
-    //"no-empty-interface": true, //TODO - I think we should keep this rule but I need help from Poojitha/Azeet to understand why these interfaces exist
+    //"no-empty-interface": true, //TODO - This needs to be enabled
     "no-eval": true,
     "no-inferrable-types": [
       true,
@@ -117,7 +112,7 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-access-missing-member": true,
+    // "no-access-missing-member": true,    //TODO - NEEDS TO BE TURNED BACK ON
     "templates-use-public": true,
     "invoke-injectable": true,
 

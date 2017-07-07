@@ -9,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-  private reliabilityApproved: any = null;
+  public reliabilityApproved: any = null;
 
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');

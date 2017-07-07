@@ -25,13 +25,13 @@
     </app-repair-details-section>
 
     <div class="panel-heading">Damage Tolerance Evaluation</div>
-    <app-damage-tolerance-evaluation [parent]="sdaForm"
+    <aa-damage-tolerance-evaluation [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-damage-tolerance-evaluation>
+    </aa-damage-tolerance-evaluation>
       <div class="panel-heading">CPCP Disposition</div>
-      <app-cpcp-disposition-section [parent]="sdaForm"
+      <aa-cpcp-disposition-section [parent]="sdaForm"
                                     [errorMessages]="displayMessage$ | async">
-      </app-cpcp-disposition-section>
+      </aa-cpcp-disposition-section>
     <div class="panel-heading">Current Status</div>
     <app-current-status-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">

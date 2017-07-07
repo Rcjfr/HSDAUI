@@ -390,11 +390,10 @@ export type Actions =
   LoadReasonsForChangeAction |
   LoadReasonsForChangeCompleteAction |
   LoadReasonsForChangeFailAction |
-  LoadDTEStausAction | 
+  LoadDTEStausAction |
   LoadDTEStausCompleteAction |
   LoadDTEStausFailAction |
   LoadRepairInspectionStatusAction |
   LoadRepairInspectionStatusCompleteAction |
-  LoadRepairInspectionStatusFailAction
+  LoadRepairInspectionStatusFailAction |
   LoadLookupDataAction;
-
