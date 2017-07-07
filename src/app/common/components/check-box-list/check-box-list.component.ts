@@ -10,6 +10,7 @@ export class CheckBoxListValidators {
       if ((<Array<any>>c.value).length === 0) {
         return { 'required': true };
       }
+
       return null;
     };
   }
@@ -20,6 +21,7 @@ export class CheckBoxListValidators {
       if (selectedOptions.length === count && count > 0) {
         return { 'minlength': true };
       }
+
       return null;
     };
   }
@@ -30,6 +32,7 @@ export class CheckBoxListValidators {
       if (selectedOptions.length > count && count > 0) {
         return { 'maxlength': true };
       }
+
       return null;
     };
   }

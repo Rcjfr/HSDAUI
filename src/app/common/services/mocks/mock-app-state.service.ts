@@ -28,6 +28,7 @@ export class MockAppStateService extends AppStateService {
         'secondaryCodeDescription': 'Main Gear'
       }
     ];
+
     return Observable.of(<List<models.IATACode>>List.of(...mockResponse));
     }
 

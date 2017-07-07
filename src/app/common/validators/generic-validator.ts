@@ -80,6 +80,7 @@ export class GenericValidator {
         }
       }
     }
+
     return messages;
   }
 }

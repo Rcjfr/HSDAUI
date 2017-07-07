@@ -115,10 +115,8 @@
     // "no-access-missing-member": true,    //TODO - NEEDS TO BE TURNED BACK ON
     "templates-use-public": true,
     "invoke-injectable": true,
-
-
      //Propose adding:
-    // "newline-before-return": true,
+    "newline-before-return": true,
     "no-consecutive-blank-lines": [
       true,
       3

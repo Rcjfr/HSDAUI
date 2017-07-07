@@ -21,8 +21,10 @@ export class AlertsSearchComponent implements OnInit {
   }
   expandCollapseAll(expandAll: boolean) {
     this.panels.forEach(p => p.isOpen = expandAll);
+
     return false;
   }
+
   searchAlerts() {
 
   }

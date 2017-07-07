@@ -10,6 +10,8 @@ import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '../../common/models';
 import { AppStateService } from '../../common/services';
+
+
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
   templateUrl: './damage-tolerance-evaluation.component.html',
@@ -19,6 +21,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   dteStatus$: Observable<List<models.IBaseLookUp>>;
   repairInspectionStatus$: Observable<List<models.IBaseLookUp>>;
   public uploader: FileUploader = new FileUploader({ url: '/api/attachments' });
+
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     super('damageToleranceEvaluationGroup');
   }
@@ -90,6 +93,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (arr.controls.length < 5) {
       arr.push(this.initThreshold());
     }
+
     return false;
   }
   deleteThreshold(index: number) {
@@ -103,6 +107,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           arr.removeAt(index);
         }
       });
+
     return false;
   }
   initMonitorItem() {
@@ -115,6 +120,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (arr.controls.length < 5) {
       arr.push(this.initMonitorItem());
     }
+
     return false;
   }
   deleteMonitorItem(index: number) {
@@ -128,6 +134,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           arr.removeAt(index);
         }
       });
+
     return false;
   }
 }

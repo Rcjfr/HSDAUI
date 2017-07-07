@@ -37,6 +37,7 @@ export class AppStateService {
   }
   getStations(query: string): Observable<IStation[]> {
     const queryExp = new RegExp(query, 'ig');
+
     return this.store.select(fromRoot.getStations)
       .map(station => station.filter(s => queryExp.test(s.stationIATACode) || queryExp.test(s.stationDescription)))
       .map(d => d && d.toJS());

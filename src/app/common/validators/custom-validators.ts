@@ -8,6 +8,7 @@ export class CustomValidators {
       if (d.value === String(val) && !c.value) {
         return { 'required': true };
       }
+
       return null;
     };
   }
@@ -20,6 +21,7 @@ export class CustomValidators {
 
       return null;
     }
+
     return { 'atleastone': true };
     // if ((nonRoutineNoControl.dirty || nonRoutineNoControl.touched) &&
     //    (routineNoControl.dirty || routineNoControl.touched)) {
@@ -36,6 +38,7 @@ export class CustomValidators {
     if (micNoControl.value || nonRoutineNoControl.value) {
       return null;
     }
+
     return { 'atleastone': true };
     //if ((nonRoutineNoControl.dirty || nonRoutineNoControl.touched) &&
     //  (micNoControl.dirty || micNoControl.touched)) {
@@ -168,7 +171,7 @@ export class CustomValidators {
     if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
       return null;
     }
-    return { 'atleastone': true };
 
+    return { 'atleastone': true };
   };
 }

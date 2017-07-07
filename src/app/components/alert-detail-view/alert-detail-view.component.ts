@@ -74,6 +74,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
+
       return;
     }
     this.toastr.success('Details entered are valid', 'Success');

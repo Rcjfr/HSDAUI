@@ -76,86 +76,103 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_ALERT_CODES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadAlertCodesCompleteAction;
+
         return state.merge({ loading: false, alertCodes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_ATA_CODES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadATACodesCompleteAction;
+
         return state.merge({ loading: false, ataCodes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_FLEET_CHECK_TYPES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadFleetCheckTypesCompleteAction;
+
         return state.merge({ loading: false, fleetCheckTypes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_CHECK_TYPES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadCheckTypesCompleteAction;
+
         return state.merge({ loading: false, checkTypes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_CORROSION_LEVELS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadCorrosionLevelsCompleteAction;
+
         return state.merge({ loading: false, corrosionLevels: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_CORROSION_TYPES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadCorrosionTypesCompleteAction;
+
         return state.merge({ loading: false, corrosionTypes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_DEPARTMENTS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadDepartmentsCompleteAction;
+
         return state.merge({ loading: false, departments: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_DETECTION_METHODS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadDetectionMethodsCompleteAction;
+
         return state.merge({ loading: false, detectionMethods: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_STATIONS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadStationsCompleteAction;
+
         return state.merge({ loading: false, stations: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadDamageTypesCompleteAction;
+
         return state.merge({ loading: false, damageTypes: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE:
       {
         const act = action as lookupDataActions.LoadCauseOfDamagesCompleteAction;
+
         return state.merge({ loading: false, causeOfDamages: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadFloorboardConditionsCompleteAction;
+
         return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
+
         return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
+
         return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REASONS_FOR_CHANGE_COMPLETE:
       {
         const act = action as lookupDataActions.LoadReasonsForChangeCompleteAction;
+
         return state.merge({ loading: false, reasonsForChange: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_DTE_STATUS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadDTEStausCompleteAction;
+
         return state.merge({ loading: false, dteStatus: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_COMPLETE:
       {
         const act = action as lookupDataActions.LoadRepairInspectionStatusCompleteAction;
+
         return state.merge({ loading: false, repairInspectionStatus: List.of(...act.payload) });
       }
     default: {
