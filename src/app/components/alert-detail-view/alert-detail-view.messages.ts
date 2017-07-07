@@ -427,8 +427,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       inspectionThreshold: {
         maxlength: 'Inspection Threshold must not be more than 50 characters.'
       },
-      repeatInterval: {
-        maxlength: 'Repeat Interval must not be more than 50 characters.'
+      inspectionInterval: {
+        maxlength: 'Inspection Interval must not be more than 50 characters.'
       },
       inspectionMethod: {
         maxlength: 'Inspection Method must not be more than 50 characters.'

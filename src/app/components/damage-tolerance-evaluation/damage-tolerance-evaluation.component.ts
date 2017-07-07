@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup,FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '../base-form.component';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
@@ -42,8 +42,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       monitorItems: this.fb.array([this.initMonitorItem()]),
       dteComments: ['', [Validators.maxLength(500)]],
       updatedBy: ['', [Validators.required, Validators.maxLength(50)]],
-      updatedDate: [new Date(), [Validators.required]],
-      dteDueDate: [null, [Validators.maxLength(20)]]
+      updatedDate: new FormControl({ value: new Date(), disabled: true }), 
+      dteDueDate: new FormControl({ value: '', disabled: true })  
 
     });
     this.parent.addControl(this.formGroupName, this.formGroup);
@@ -81,7 +81,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   initThreshold() {
     return this.fb.group({
       inspectionThreshold: ['', [Validators.maxLength(50)]],
-      repeatInterval: ['', [Validators.maxLength(50)]],
+      inspectionInterval: ['', [Validators.maxLength(50)]],
       inspectionMethod: ['', [Validators.maxLength(50)]]
     });
   }
