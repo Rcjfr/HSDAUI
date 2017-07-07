@@ -18,11 +18,11 @@
     <div class="panel-heading">Corrective Action</div>
     <aa-corrective-action-form [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-corrective-action-form>
+    </aa-corrective-action-form>
     <div class="panel-heading">Repair Details</div>
     <aa-repair-details-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-repair-details-section>
+    </aa-repair-details-section>
 
     <div class="panel-heading">Damage Tolerance Evaluation</div>
     <aa-damage-tolerance-evaluation [parent]="sdaForm"
@@ -33,9 +33,9 @@
                                     [errorMessages]="displayMessage$ | async">
       </aa-cpcp-disposition-section>
     <div class="panel-heading">Current Status</div>
-    <app-current-status-section [parent]="sdaForm"
+    <aa-current-status-section [parent]="sdaForm"
                                 [errorMessages]="displayMessage$ | async">
-    </app-current-status-section>
+    </aa-current-status-section>
 
   </div>
   <div class="row">
