@@ -1,5 +1,5 @@
 ﻿import { ActionReducer, Action } from '@ngrx/store';
-import { Alert } from '../models/alert.model';
+import { IAlert } from '../models/alert.model';
 import { AlertRecord, alertFactory } from './models/alert';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';

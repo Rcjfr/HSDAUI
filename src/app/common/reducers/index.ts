@@ -44,3 +44,5 @@ export const getFloorboardConditions = compose(fromLookupData.getFloorboardCondi
 export const getRepairDescriptions = compose(fromLookupData.getRepairDescriptions, getLookupDataState);
 export const getRepairDocuments = compose(fromLookupData.getRepairDocuments, getLookupDataState);
 export const getReasonsForChange = compose(fromLookupData.getReasonsForChange, getLookupDataState);
+export const getRepairInspectionStatus = compose(fromLookupData.getRepairInspectionStatus, getLookupDataState);
+export const getDTEStatus = compose(fromLookupData.getDTEStatus, getLookupDataState);

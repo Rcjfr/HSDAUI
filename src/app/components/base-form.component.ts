@@ -34,7 +34,7 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(v => {
 
         this.parent.markAsDirty();
-        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true}, );
+        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent:true});
       });
   }
   ngOnInit() {

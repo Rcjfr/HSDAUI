@@ -60,6 +60,12 @@ export class AppStateService {
   getReasonsForChange() {
     return this.store.select(fromRoot.getReasonsForChange);
   }
+  getDTEStatus() {
+    return this.store.select(fromRoot.getDTEStatus);
+  }
+  getRepairInspectionStatus() {
+    return this.store.select(fromRoot.getRepairInspectionStatus);
+  }
 
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);

@@ -337,6 +337,31 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Deletion reason must not be more than 250 characters.'
     }
 
+  }, 'cpcpDispositionSectionFormGroup': {
+      'cpcpTaskDescriptionFormGroup': {
+          'cpcpTask': {
+              required: 'CPCP Task # is required.',
+              maxlength: 'CPCP Task # must not be more than 25 characters.'
+          }
+      },
+      'reasonForChangeTextBox': {
+          maxlength: 'Reason For Change must not be more than 250 characters.'
+      },
+      'corrosion': {
+          required: 'Corrosion is required.'
+      },
+      'engineeringComments': {
+          required: 'Engineering Comments is required.',
+          maxlength: 'Engineering Comments must not be more than 250 characters.'
+      },
+      'qcFeedback': {
+          required: 'QC Feedback is required.',
+          maxlength: 'QC Feedback must not be more than 250 characters.'
+      },
+      'reviewComplete': {
+          maxlength: 'Review Complete must not be more than 50 characters.'
+      }
+
   },
   'repairDetailsSectionGroup': {
       'engineeringAuthorization': {
@@ -376,5 +401,58 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       }
 
   }
-
+  ,'damageToleranceEvaluationGroup': {
+    dteStatus: {
+      required:'DTE Status is required.'
+    },
+    repairInspectionStatus: {
+      required:'Repair Inspection Status is required.'
+    },
+    stage1RTSDate: {
+      required:'Stage 1/RTS Date is required.'
+    },
+    srNo: {
+      maxlength:'SR # must not be more than 25 characters.'
+    },
+    rdasNo: {
+      maxlength: 'RDAS # must not be more than 25 characters.'
+    },
+    etdNo: {
+      maxlength: 'ETD # must not be more than 25 characters.'
+    },
+    esmSubItemNo: {
+      maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
+    },
+    thresholds: {
+      inspectionThreshold: {
+        maxlength: 'Inspection Threshold must not be more than 50 characters.'
+      },
+      inspectionInterval: {
+        maxlength: 'Inspection Interval must not be more than 50 characters.'
+      },
+      inspectionMethod: {
+        maxlength: 'Inspection Method must not be more than 50 characters.'
+      }
+    },
+    monitorItems: {
+      fmrLogPageMon: {
+        maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
+      }
+    },
+    dteComments: {
+      maxlength:'DTE Comments must not be more than 500 characters.'
+    },
+    updatedBy: {
+      required:'Updated By is required.',
+      maxlength: 'Updated By must not be more than 50 characters.'
+    },
+    updatedDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+    dteDueDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+  }
 };
