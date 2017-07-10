@@ -22,7 +22,7 @@ describe('Alerts Effect', () => {
       { 'provide': Http, 'useValue': null }
     ]
   }));
-  
+
   it('Call QueryNoseNumber Success action after Query Nose Numbers',
       inject([
         EffectsRunner, AlertEffects, AircraftService
@@ -50,14 +50,14 @@ describe('Alerts Effect', () => {
         runner = _runner;
         alertEffects = _alertEffects;
         aircraftService = _aircraftService;
-        const mockResponse={
-                              "aircraftNo": "A330",
-                              "cycles": 912,
-                              "fleet": "912",
-                              "manufacturer": "Airbus",
-                              "model": "A-330-200",
-                              "serialNo": "1441",
-                              "totalShipTime": 5771
+        const mockResponse = {
+                              'aircraftNo': 'A330',
+                              'cycles': 912,
+                              'fleet': '912',
+                              'manufacturer': 'Airbus',
+                              'model': 'A-330-200',
+                              'serialNo': '1441',
+                              'totalShipTime': 5771
                             };
       spyOn(aircraftService, 'getAircraftInfo')
             .and.returnValue(Observable.of(mockResponse));

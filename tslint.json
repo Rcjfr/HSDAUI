@@ -5,14 +5,12 @@
   "rules": {
     "callable-types": true,
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space"
-    ],
     "curly": true,
-    "eofline": true,
     "forin": true,
-    "import-blacklist": [true, "rxjs"],
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
     "import-spacing": true,
     "indent": [
       true,
@@ -22,7 +20,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      190 //Changed this from 140
     ],
     "member-access": false,
     "member-ordering": [
@@ -44,15 +42,21 @@
     "no-debugger": true,
     "no-duplicate-variable": true,
     "no-empty": false,
-    "no-empty-interface": true,
+    //"no-empty-interface": true, //TODO - This needs to be enabled
     "no-eval": true,
-    "no-inferrable-types": [true, "ignore-params"],
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
-    "no-unused-expression": true,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
@@ -97,9 +101,8 @@
       "check-separator",
       "check-type"
     ],
-
-    "directive-selector": [true, "attribute", "app", "camelCase"],
-    "component-selector": [true, "element", "app", "kebab-case"],
+    "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],
+    "component-selector": [true, "element", ["aa", "aac", "test"], "kebab-case"],   //TODO: need to make a decision about the TestComponentWrapperComponent and keeping "test"
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -109,8 +112,15 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-access-missing-member": true,
+    // "no-access-missing-member": true,    //TODO - NEEDS TO BE TURNED BACK ON
     "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+     //Propose adding:
+    "newline-before-return": true,
+    "no-consecutive-blank-lines": [
+      true,
+      3
+    ]
+    //TODO - how to require spacing between functions?
   }
 }

@@ -11,6 +11,7 @@ import * as lookupData from '../actions/lookup-data';
 import { ATACodesService } from '../services/ata-codes.service';
 import * as models from '../models';
 import '../rxjs-extensions';
+
 @Injectable()
 export class LookupDataEffects {
   @Effect()
@@ -299,5 +300,4 @@ export class LookupDataEffects {
     private repairInspectionStatusService: services.RepairInspectionStatusService,
     private toastr: ToastsManager) {
   }
-
 }

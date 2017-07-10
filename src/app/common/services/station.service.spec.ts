@@ -31,10 +31,10 @@ describe('StationService', () => {
   describe('getAllStations', () => {
     it('should return all stations available', async(inject(
       [StationService, MockBackend], (service: StationService, mockBackend: MockBackend) => {
-      const mockResponse =[ {
+      const mockResponse = [ {
         stationID: 1,
         stationIATACode: 'ABQ',
-        stationDescription:'Albuquerque, NM'
+        stationDescription: 'Albuquerque, NM'
       }
         ];
       mockBackend.connections.subscribe(conn => {

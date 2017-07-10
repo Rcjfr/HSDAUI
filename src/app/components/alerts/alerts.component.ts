@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs/Rx";
-import { IAlertResult } from "app/common/models";
+import { Observable } from 'rxjs/Rx';
+import { IAlertResult } from 'app/common/models';
 
 @Component({
-  selector: 'app-alerts',
+  selector: 'aa-alerts',
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.less']
 })

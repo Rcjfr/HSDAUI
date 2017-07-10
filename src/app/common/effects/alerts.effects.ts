@@ -12,7 +12,7 @@ import * as models from '../models/index';
 import '../rxjs-extensions';
 @Injectable()
 export class AlertEffects {
-    
+
     @Effect()
     loadNoseNumbers$: Observable<Action> = this.actions$
                                               .ofType(selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS)

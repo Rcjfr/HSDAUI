@@ -9,11 +9,11 @@ import { RouterModule } from '@angular/router';
 describe('CheckTypes Service (Mocked)', () => {
   const mockResponse = [
                                     {
-                                      "Fleet": "A319",
-                                      "CheckTypes": [
-                                          {id: 1, description: "2C Interval"},
-                                          {id: 2, description: "A CHECK"},
-                                          {id: 3, description: "A Check"}    
+                                      'Fleet': 'A319',
+                                      'CheckTypes': [
+                                          {id: 1, description: '2C Interval'},
+                                          {id: 2, description: 'A CHECK'},
+                                          {id: 3, description: 'A Check'}
                                       ]
                                     }
                         ];
@@ -51,17 +51,17 @@ describe('CheckTypes Service (Mocked)', () => {
         conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
       });
 
-      const result = service.getAllCheckTypes(); 
+      const result = service.getAllCheckTypes();
 
       result.subscribe(res => {
         expect(res).toBeTruthy();
-        console.log("response",res);
+        console.log('response', res);
 
         //expect(res[0].Fleet).toEqual('A319');
         //expect(res[0].Fleet).toEqual('A319');
         //expect(res[0].CheckTypes.length).toEqual(4);
       });
-      
+
     })));
   });
 });

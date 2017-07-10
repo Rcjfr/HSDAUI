@@ -10,28 +10,28 @@
       <input type="radio" name="correctiveActionOptions" value="3" tabindex="60" formControlName="correctiveActionOptions" />
     </aac-radio-container>
   </div>
-    
+
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==3">
-    <app-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
+    <aa-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
                                               [errorMessages]="displayMessage">
-    </app-corrective-action-repair-description>
+    </aa-corrective-action-repair-description>
   </div>
 
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value ==2">
     <div class="col-md-6">
-      <app-modified-part-description [parent]="correctiveActionOptionFormGroup"
+      <aa-modified-part-description [parent]="correctiveActionOptionFormGroup"
                                                 [errorMessages]="displayMessage">
-      </app-modified-part-description>
+      </aa-modified-part-description>
 
-      
+
 
     </div>
   </div>
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('correctiveActionOptions').value == 1">
     <div class="col-md-6">
-      <app-defective-part-description [parent]="correctiveActionOptionFormGroup"
+      <aa-defective-part-description [parent]="correctiveActionOptionFormGroup"
                                      [errorMessages]="displayMessage">
-      </app-defective-part-description>
+      </aa-defective-part-description>
     </div>
   </div>
 </div>

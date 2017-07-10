@@ -9,7 +9,7 @@ import { AppStateService } from '../../common/services';
 
 
 @Component({
-  selector: 'app-aircraft-info-section-form',
+  selector: 'aa-aircraft-info-section-form',
   templateUrl: './aircraft-info-section-form.component.html',
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,14 +37,14 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     integerLimit: 3,
     requireDecimal: false
   });
-  private decimalNumberMask = createNumberMask({
+  public decimalNumberMask = createNumberMask({
     prefix: '',
     allowDecimal: true,
     includeThousandsSeparator: false,
     decimalLimit: 2,
     requireDecimal: false
   });
-  private numberMask = createNumberMask({
+  public numberMask = createNumberMask({
     prefix: '',
     allowDecimal: false,
     includeThousandsSeparator: false,

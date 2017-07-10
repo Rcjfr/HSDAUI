@@ -1,20 +1,20 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RadioContainer } from './radio-container.component';
+import { RadioContainerComponent } from './radio-container.component';
 
-describe('RadioContainer', () => {
-  let component: RadioContainer;
-  let fixture: ComponentFixture<RadioContainer>;
+describe('RadioContainerComponent', () => {
+  let component: RadioContainerComponent;
+  let fixture: ComponentFixture<RadioContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RadioContainer ]
+      declarations: [RadioContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RadioContainer);
+    fixture = TestBed.createComponent(RadioContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

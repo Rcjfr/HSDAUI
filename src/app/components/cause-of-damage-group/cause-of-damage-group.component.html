@@ -6,14 +6,14 @@
         <input type="checkbox" tabindex="43" formControlName="environment" />
       </aac-checkbox-container>
 
-      
+
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Lav/Galley Spill">
         <input type="checkbox" tabindex="44" formControlName="galleySpill" />
       </aac-checkbox-container>
 
-      
+
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Blocked Drain">
@@ -27,7 +27,7 @@
         <input type="checkbox" tabindex="46" formControlName="chemicalSpill" />
       </aac-checkbox-container>
 
-      
+
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Wet Insulation Blanket">
@@ -39,7 +39,7 @@
         <input type="checkbox" tabindex="48" formControlName="missingFloorBoardTape" />
       </aac-checkbox-container>
 
-      
+
     </div>
   </div>
   <div class="row form-group">
@@ -53,7 +53,7 @@
         <input type="checkbox" tabindex="50" formControlName="poorSealingPractices" />
       </aac-checkbox-container>
 
-      
+
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Missing Corrosion Inhibitor">
@@ -69,7 +69,7 @@
         <input type="checkbox" tabindex="52" formControlName="damageOther" />
       </aac-checkbox-container>
 
-      
+
       <div>
         <span *ngIf="displayMessage.message &&
                   (causeOfDamageGroup.get( 'damageOther').touched ||
@@ -78,12 +78,12 @@
       </div>
     </div>
     <div class="col-md-8">
-      <app-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
+      <aa-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
                                        [parent]="causeOfDamageGroup"
                                        [errorMessages]="displayMessage"
                                        >
-        
-      </app-cause-of-damage-description>
+
+      </aa-cause-of-damage-description>
     </div>
 
   </div>

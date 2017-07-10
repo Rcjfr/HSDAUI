@@ -6,6 +6,6 @@ export class HSDAPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('aa-root h1')).getText();
   }
 }

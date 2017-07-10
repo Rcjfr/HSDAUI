@@ -5,5 +5,5 @@
     station: string;
     nonRoutineNo: string;
     routineNo: string;
-    statusText:string;
+    statusText: string;
 }

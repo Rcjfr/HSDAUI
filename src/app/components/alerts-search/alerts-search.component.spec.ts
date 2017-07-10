@@ -1,9 +1,9 @@
-﻿import { SearchByAircraftComponent } from "../search/search-by-aircraft/search-by-aircraft.component";
-import { SearchByCorrosionComponent } from "../search/search-by-corrosion/search-by-corrosion.component";
-import { SearchByCpcpDispositionComponent } from "../search/search-by-cpcp-disposition/search-by-cpcp-disposition.component";
-import { SearchByDateRangeComponent } from "../search/search-by-date-range/search-by-date-range.component";
-import { SearchByMaintenanceComponent } from "../search/search-by-maintenance/search-by-maintenance.component";
-import { SearchBySdaFormComponent } from "../search/search-by-sda-form/search-by-sda-form.component";
+﻿import { SearchByAircraftComponent } from '../search/search-by-aircraft/search-by-aircraft.component';
+import { SearchByCorrosionComponent } from '../search/search-by-corrosion/search-by-corrosion.component';
+import { SearchByCpcpDispositionComponent } from '../search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
+import { SearchByDateRangeComponent } from '../search/search-by-date-range/search-by-date-range.component';
+import { SearchByMaintenanceComponent } from '../search/search-by-maintenance/search-by-maintenance.component';
+import { SearchBySdaFormComponent } from '../search/search-by-sda-form/search-by-sda-form.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TypeaheadModule } from 'ngx-bootstrap';

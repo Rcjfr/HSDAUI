@@ -36,7 +36,7 @@ describe('AppComponent', () => {
         AlertsSearchComponent,
         AlertsComponent,
         AlertDetailComponent
-        
+
       ],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }, { provide: AppStateService, useClass: MockAppStateService }]
     }).compileComponents();

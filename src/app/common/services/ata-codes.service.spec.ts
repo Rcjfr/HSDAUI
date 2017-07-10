@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 
 describe('ATA Codes Service (Mocked)', () => {
   const mockResponse = [
-                         {id: 79, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "00", secondaryCodeDescription:"GENERAL"},
-                         {id: 40, primaryCode: "32", primaryCodeDescription: "LANDING GEAR", secondaryCode: "10", secondaryCodeDescription:"MAIN GEAR"}
+                         {id: 79, primaryCode: '32', primaryCodeDescription: 'LANDING GEAR', secondaryCode: '00', secondaryCodeDescription: 'GENERAL'},
+                         {id: 40, primaryCode: '32', primaryCodeDescription: 'LANDING GEAR', secondaryCode: '10', secondaryCodeDescription: 'MAIN GEAR'}
                         ];
 
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('ATA Codes Service (Mocked)', () => {
       result.subscribe(res => {
          console.log('Response:', res);
         expect(res.length).toEqual(2);
-        
+
         console.log('code:', res[0].primaryCode);
         expect(res[0].primaryCode).toEqual('32');
       });

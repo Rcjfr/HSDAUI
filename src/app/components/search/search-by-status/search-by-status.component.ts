@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-search-by-status',
+    selector: 'aa-search-by-status',
     templateUrl: './search-by-status.component.html',
     styleUrls: ['./search-by-status.component.less']
 })

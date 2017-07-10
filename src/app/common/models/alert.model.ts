@@ -36,7 +36,6 @@
     PartTT: string;
     PartTso: string;
     detected: string;
-    status:number;
-    statusText:string;
-
+    status: number;
+    statusText: string;
 }

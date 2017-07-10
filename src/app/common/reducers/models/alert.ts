@@ -41,8 +41,4 @@ export const alertFactory = makeTypedFactory<IAlert, AlertRecord>({
   detected: '',
   status: 0,
   statusText: 'Open'
-
 });
-
-
-

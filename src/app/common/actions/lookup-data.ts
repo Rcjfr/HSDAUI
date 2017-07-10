@@ -239,14 +239,14 @@ export class LoadCauseOfDamagesAction implements Action {
 export class LoadCauseOfDamagesCompleteAction implements Action {
     public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
     constructor(public payload: models.ICauseOfDamage[]) { }
-} 
+}
 export class LoadCauseOfDamagesFailAction implements Action {
     public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
     constructor(public payload: any) { }
 }
 
 
-//Floorboard Condition
+// Floorboard Condition
 export class LoadFloorboardConditionsAction implements Action {
     public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS;
     public payload: any;
@@ -278,7 +278,7 @@ export class LoadRepairDocumentsFailAction implements Action {
 }
 
 
-//Repair Description
+// Repair Description
 export class LoadRepairDescriptionsAction implements Action {
     public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
     public payload: any;
@@ -293,7 +293,7 @@ export class LoadRepairDescriptionsFailAction implements Action {
     constructor(public payload: any) { }
 }
 
-//Reasons for change
+// Reasons for change
 export class LoadReasonsForChangeAction implements Action {
   public type = ActionTypes.LOAD_REASONS_FOR_CHANGE;
   public payload: any;
@@ -390,11 +390,10 @@ export type Actions =
   LoadReasonsForChangeAction |
   LoadReasonsForChangeCompleteAction |
   LoadReasonsForChangeFailAction |
-  LoadDTEStausAction | 
+  LoadDTEStausAction |
   LoadDTEStausCompleteAction |
   LoadDTEStausFailAction |
   LoadRepairInspectionStatusAction |
   LoadRepairInspectionStatusCompleteAction |
-  LoadRepairInspectionStatusFailAction
+  LoadRepairInspectionStatusFailAction |
   LoadLookupDataAction;
-

@@ -19,11 +19,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-
-
-
 @Component({
-  selector: 'app-alert-detail-view',
+  selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
   styleUrls: ['./alert-detail-view.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -77,16 +74,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
+
       return;
     }
     this.toastr.success('Details entered are valid', 'Success');
   }
 
   logErrors(group: FormGroup | FormArray) {
-    
+
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
-        if (group.controls[i].errors) { console.log(i,group.controls[i].errors);}
+        if (group.controls[i].errors) { console.log(i, group.controls[i].errors); }
         // if(group.controls[i].invalid){
         //   console.log(group.controls[i]);
         // }
@@ -109,5 +107,4 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       }
     }
   }
-
 }
