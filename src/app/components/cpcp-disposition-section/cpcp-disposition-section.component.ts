@@ -25,7 +25,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         const clReasonForChange: FormControl = this.fb.control({ value: '', disabled: true });
         this.cpcpDispositionSectionFormGroup = this.fb.group({
             nonCpcp: ['', []],
-            isCpcpTaskNoCorrect: ['', []],
+            isCpcpTaskNumCorrect: ['', []],
             isCorrosionLevelCorrect: ['', []],
             corrosionLevel: corrossionLevel,
             reasonsForChange: clReasonForChange,
@@ -37,7 +37,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             reviewCompleteText: ['', [Validators.maxLength(50)]]
         });
         this.parent.addControl(this.formGroupName, this.cpcpDispositionSectionFormGroup);
-        this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').valueChanges
+        this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').valueChanges
             .subscribe(val => this.updatecpcpTaskBehavior(val));
         this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').valueChanges
             .subscribe(val => this.updateIsCorrosionLevelCorrectBehavior(val));
@@ -49,7 +49,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
 
     updateNonCpcp(noncpcp: boolean): void {
         if (!noncpcp) {
-            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').enable();
+            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').enable();
             this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').enable();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
             this.cpcpDispositionSectionFormGroup.get('corrosion').enable();
@@ -62,7 +62,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
 
         }
         else {
-            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').reset();
+            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').reset();
             this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosion').reset();
@@ -72,7 +72,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             this.cpcpDispositionSectionFormGroup.get('reviewComplete').reset();
             this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
-            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').disable();
+            this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').disable();
             this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').disable();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
             this.cpcpDispositionSectionFormGroup.get('corrosion').disable();
@@ -94,7 +94,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             if (!reviewComplete) {
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').enable();
                 this.cpcpDispositionSectionFormGroup.get('engineeringComments').enable();
-                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').enable();
+                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').enable();
                 this.cpcpDispositionSectionFormGroup.get('corrosion').enable();
                 this.cpcpDispositionSectionFormGroup.get('qcFeedback').enable();
                 this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').enable();
@@ -109,7 +109,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
                 ///  this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
                 this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
                 this.cpcpDispositionSectionFormGroup.get('engineeringComments').disable();
-                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').disable();
+                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').disable();
                 this.cpcpDispositionSectionFormGroup.get('corrosion').disable();
                 this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').disable();
                 this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
@@ -118,9 +118,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             }
         }
         // this.setFeedBackBehavior();
-        const isCpcpTaskNoCorrect = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
+        const isCpcpTaskNumCorrect = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').value;
         const corrosionLevel = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
-        if (isCpcpTaskNoCorrect != 0)
+        if (isCpcpTaskNumCorrect != 0)
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
 
         if (corrosionLevel != 0) {
@@ -130,7 +130,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     }
 
     updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void {
-        //var reviewComplete = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
         if (cpcpTaskNoCorrect == 0)
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
         else {
@@ -156,7 +155,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
 
     setFeedBackBehavior() {
 
-        const isCorrossionLevel = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
+        const isCorrossionLevel = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').value;
         const cpcpTaskCorrect = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
 
         if (cpcpTaskCorrect == "0" || isCorrossionLevel == "0") {
