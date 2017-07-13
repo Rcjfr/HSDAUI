@@ -60,8 +60,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').enable();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
 
-        }
-        else {
+        }  else {
             this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').reset();
             this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').reset();
@@ -102,8 +101,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
                 this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
                 this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
                 this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').enable();
-            }
-            else {
+            }  else {
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').disable();
                 ///  this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
@@ -120,19 +118,21 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         // this.setFeedBackBehavior();
         const isCpcpTaskNumCorrect = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').value;
         const corrosionLevel = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
-        if (isCpcpTaskNumCorrect != 0)
-            this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
+        if (isCpcpTaskNumCorrect !== 0) {
 
-        if (corrosionLevel != 0) {
+            this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
+        }
+        if (corrosionLevel !== 0) {
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').disable();
         }
     }
 
     updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void {
-        if (cpcpTaskNoCorrect == 0)
+        if (cpcpTaskNoCorrect == 0) {
+
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
-        else {
+        }  else {
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
         }
@@ -142,8 +142,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         if (correstionLevelCorrect == 0) {
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
-        }
-        else {
+        } else {
 
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').reset();
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').reset();
@@ -158,13 +157,12 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         const isCorrossionLevel = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').value;
         const cpcpTaskCorrect = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
 
-        if (cpcpTaskCorrect == "0" || isCorrossionLevel == "0") {
+        if (cpcpTaskCorrect === '0' || isCorrossionLevel === '0') {
             this.cpcpDispositionSectionFormGroup.get('engineeringComments').setValidators([Validators.required,
             Validators.maxLength(250)]);
             this.cpcpDispositionSectionFormGroup.get('qcFeedback').setValidators([Validators.required,
             Validators.maxLength(250)]);
-        }
-        else {
+        } else {
             this.cpcpDispositionSectionFormGroup.get('engineeringComments').clearValidators();
             this.cpcpDispositionSectionFormGroup.get('qcFeedback').clearValidators();
         }

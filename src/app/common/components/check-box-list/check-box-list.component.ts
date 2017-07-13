@@ -1,4 +1,4 @@
-
+﻿
 import { Component, Input, forwardRef, ElementRef, Renderer, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
@@ -39,7 +39,7 @@ export class CheckBoxListValidators {
 }
 
 @Component({
-  selector: 'aac-checkbox-list',
+  selector: 'aa-checkbox-list',
   templateUrl: './check-box-list.component.html',
   styleUrls: ['./check-box-list.component.less'],
   providers: [
