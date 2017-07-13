@@ -43,8 +43,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
             .subscribe(val => this.updateIsCorresionLevelCorrectBehavior(val));
         this.cpcpDispositionSectionFormGroup.get('nonCpcp').valueChanges
             .subscribe(val => this.updateNonCpcp(val));
-        //this.cpcpDispositionSectionFormGroup.get('reviewComplete').valueChanges
-        //   .subscribe(val => this.updateReviewComplete(val));
+        this.cpcpDispositionSectionFormGroup.get('reviewComplete').valueChanges
+           .subscribe(val => this.updateReviewComplete(val));
     }
 
     updateNonCpcp(noncpcp: boolean): void {
@@ -88,45 +88,64 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.updateIsCorresionLevelCorrectBehavior(1);
     }
 
-    //updateReviewComplete(reviewComplete: boolean): void {
-    //    if (!reviewComplete) {
-    //        this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('engineeringComments').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('corrosion').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('qcFeedback').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('noncpcp').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
-    //        this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').enable();
-    //    }
-    //    else {
-    //        this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
-    //        this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('engineeringComments').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('corrosion').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('reasonsForChange').disable();
-    //        this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').disable();
-    //    }
+    updateReviewComplete(reviewComplete: boolean): void {
+        var noncpcpChecked = this.cpcpDispositionSectionFormGroup.get('nonCpcp').value;
+        if (!noncpcpChecked) {
+            if (!reviewComplete) {
+                this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').enable();
+                this.cpcpDispositionSectionFormGroup.get('engineeringComments').enable();
+                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').enable();
+                this.cpcpDispositionSectionFormGroup.get('corrosion').enable();
+                this.cpcpDispositionSectionFormGroup.get('qcFeedback').enable();
+                this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').enable();
+                // this.cpcpDispositionSectionFormGroup.get('noncpcp').enable();
+                this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
+                this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
+                this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').enable();
+            }
+            else {
+                this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
+                this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').disable();
+                ///  this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
+                this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
+                this.cpcpDispositionSectionFormGroup.get('engineeringComments').disable();
+                this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').disable();
+                this.cpcpDispositionSectionFormGroup.get('corrosion').disable();
+                this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').disable();
+                this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
+                this.cpcpDispositionSectionFormGroup.get('reasonsForChange').disable();
+                this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').disable();
+            }
+        }
+       // this.setFeedBackBehavior();
+        var isCpcpTaskNoCorrect = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
+        var corresionLevel = this.cpcpDispositionSectionFormGroup.get('isCorrosionLevelCorrect').value;
+        if (isCpcpTaskNoCorrect!=0)
+            this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
 
-    //    this.setFeedBackBehavior();
-    //}
+        if (corresionLevel != 0) {
+            this.cpcpDispositionSectionFormGroup.get('corrosionLevel').disable();
+            this.cpcpDispositionSectionFormGroup.get('reasonsForChange').disable();
+        }
+       // this.updatecpcpTaskBehavior(isCpcpTaskNoCorrect);
+      //  this.updateIsCorresionLevelCorrectBehavior(corresionLevel);
+        ///this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').updateValueAndValidity();
+    }
     
     updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void
     {
+        //var reviewComplete = this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNoCorrect').value;
         if (cpcpTaskNoCorrect == 0)
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
         else {
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').disable();
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
         }
-        this.setFeedBackBehavior();
+        //if (!reviewComplete)
+        //{
+        //    this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').reset();
+        //}
+       // this.setFeedBackBehavior();
     }
 
     updateIsCorresionLevelCorrectBehavior(correstionLevelCorrect: number): void
