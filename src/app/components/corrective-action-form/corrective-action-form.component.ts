@@ -34,10 +34,10 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
             );
         this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
         this.correctiveActionFormGroup.get('deferredSectionOptions').valueChanges
-            .subscribe(val => this.setCorrectiveActionFormFields(val))
+            .subscribe(val => this.setCorrectiveActionFormFields(val));
 
         this.correctiveActionFormGroup.get('majorRepairOptions').valueChanges
-            .subscribe(val => this.setMajorRepairFormFields(val))
+            .subscribe(val => this.setMajorRepairFormFields(val));
     }
 
     setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {
