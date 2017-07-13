@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 let identifier = 0;
 @Component({
-  selector: 'aa-radio-container',
+  selector: 'aac-radio-container',
   templateUrl: './radio-container.component.html',
   styleUrls: ['./radio-container.component.less']
 })

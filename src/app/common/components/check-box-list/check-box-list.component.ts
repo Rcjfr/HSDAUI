@@ -39,7 +39,7 @@ export class CheckBoxListValidators {
 }
 
 @Component({
-  selector: 'aa-checkbox-list',
+  selector: 'aac-checkbox-list',
   templateUrl: './check-box-list.component.html',
   styleUrls: ['./check-box-list.component.less'],
   providers: [

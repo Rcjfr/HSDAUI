@@ -128,8 +128,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         }
     }
 
-    updatecpcpTaskBehavior(cpcpTaskNoCorrect: number): void {
-        if (cpcpTaskNoCorrect == 0) {
+    updatecpcpTaskBehavior(cpcpTaskNoCorrect): void {
+        if (cpcpTaskNoCorrect === '0') {
 
             this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').get('cpcpTask').enable();
         }  else {
@@ -138,8 +138,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         }
     }
 
-    updateIsCorrosionLevelCorrectBehavior(correstionLevelCorrect: number): void {
-        if (correstionLevelCorrect == 0) {
+    updateIsCorrosionLevelCorrectBehavior(correstionLevelCorrect): void {
+        if (correstionLevelCorrect === '0') {
             this.cpcpDispositionSectionFormGroup.get('corrosionLevel').enable();
             this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
         } else {
