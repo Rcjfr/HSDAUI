@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import { ICorrosionLevel, IReasonForChange} from '../../../common/models';
 @Component({
-  selector: 'app-search-by-cpcp-disposition',
+  selector: 'aa-search-by-cpcp-disposition',
   templateUrl: './search-by-cpcp-disposition.component.html',
   styleUrls: ['./search-by-cpcp-disposition.component.less']
 })
 export class SearchByCpcpDispositionComponent implements OnInit {
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  reasonsForChange$: Observable<List<IReasonForChange>>; 
+  reasonsForChange$: Observable<List<IReasonForChange>>;
   constructor(private appStateService: AppStateService) { }
 
   ngOnInit() {

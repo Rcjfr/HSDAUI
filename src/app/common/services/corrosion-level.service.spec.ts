@@ -27,7 +27,7 @@ describe('CorrosionLevelsService', () => {
 describe('getAllCorrosionLevels', () => {
     it('should return All Corrosion Levels', async(inject(
       [CorrosionLevelService, MockBackend], (service: CorrosionLevelService, mockBackend: MockBackend) => {
-      const mockResponse = [{id: 2, description: "1"}, {id: 3, description: "2"}, {id: 4, description: "3"}];
+      const mockResponse = [{id: 2, description: '1'}, {id: 3, description: '2'}, {id: 4, description: '3'}];
       mockBackend.connections.subscribe(conn => {
         conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
       });

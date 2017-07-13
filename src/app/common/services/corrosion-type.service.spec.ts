@@ -29,11 +29,11 @@ describe('CorrosionTypeService', () => {
     it('should return All Corrosion Types', async(inject(
       [CorrosionTypeService, MockBackend], (service: CorrosionTypeService, mockBackend: MockBackend) => {
       const mockResponse = [
-                      {id: 1, description: "Exfoliation"}, 
-                      {id: 2, description: "Filiform"},
-                      {id: 3, description: "Galvanic"},
-                      {id: 4, description: "Intergranular"},
-                      {id: 5, description: "Other"}];
+                      {id: 1, description: 'Exfoliation'},
+                      {id: 2, description: 'Filiform'},
+                      {id: 3, description: 'Galvanic'},
+                      {id: 4, description: 'Intergranular'},
+                      {id: 5, description: 'Other'}];
       mockBackend.connections.subscribe(conn => {
         conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
       });
@@ -42,7 +42,7 @@ describe('CorrosionTypeService', () => {
 
       result.subscribe(res => {
         expect(res.length).toEqual(5);
-        expect(res[0].description).toEqual("Exfoliation");
+        expect(res[0].description).toEqual('Exfoliation');
       });
     })));
   });

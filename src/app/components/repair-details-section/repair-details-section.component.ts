@@ -11,7 +11,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { decimalsNumberMask } from '../../common/masks';
 
 @Component({
-  selector: 'app-repair-details-section',
+  selector: 'aa-repair-details-section',
   templateUrl: './repair-details-section.component.html',
   styleUrls: ['./repair-details-section.component.less']
 })
@@ -19,13 +19,14 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     repairDescriptions$: Observable<List<models.IRepairDescription>>;
     repairDocuments$: Observable<List<models.IRepairDocument>>;
     createNumberMask = createNumberMask;
-    private numberMask = createNumberMask({
+    public  numberMask = createNumberMask({
         prefix: '',
         allowDecimal: false,
         includeThousandsSeparator: false,
         allowLeadingZeroes: false
     });
     repairDetailsSectionGroup: FormGroup;
+
     constructor(private fb: FormBuilder, private appStateService: AppStateService) {
         super('repairDetailsSectionGroup');
     }
@@ -45,7 +46,7 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
             partSerialNumber: ['', [Validators.maxLength(50)]],
             height: ['', [Validators.maxLength(3)]],
             width: ['', [Validators.maxLength(3)]],
-            externallyVisible:['',[]]
+            externallyVisible: ['', []]
         });
         this.parent.addControl(this.formGroupName, this.repairDetailsSectionGroup);
   }

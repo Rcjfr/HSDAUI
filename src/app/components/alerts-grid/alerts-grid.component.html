@@ -1,0 +1,36 @@
+﻿<h1>Search Results</h1>
+<table [dtOptions]="dtOptions" datatable class="table table-striped table-bordered">
+  <thead>
+  <tr>
+    <th>SDA ID</th>
+    <th>Aircraft #</th>
+    <th>Create Date</th>
+    <th>Form Status</th>
+    <th>Station</th>
+    <th>Routine #</th>
+    <th>Non-Routine #</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let alert of alerts">
+    <td>{{ alert.sdaId }}</td>
+    
+    <td>{{alert.aircraftNo}}</td>
+    <td>{{alert.createDate | date}}</td>
+    <td>{{alert.statusText}}</td>
+    <td>{{alert.station}}</td>
+    <td>{{alert.routineNo}}</td>
+    <td>{{alert.nonRoutineNo}}</td>
+    <td>
+      <a [routerLink]="['/alerts', alert.sdaId]">
+        <span>View</span>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row form-group">
+  &nbsp;
+</div>

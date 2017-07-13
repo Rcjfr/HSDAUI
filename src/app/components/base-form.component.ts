@@ -16,7 +16,7 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};
-    
+
   }
   constructor(public formGroupName: string) {
     this.subscriptions = [];
@@ -32,9 +32,9 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
     Observable.merge(...this.formInputElements
       .map((formControl: ElementRef) => Observable.fromEvent(formControl.nativeElement, 'blur')))
       .subscribe(v => {
-        
+
         this.parent.markAsDirty();
-        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent:true},);
+        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true});
       });
   }
   ngOnInit() {

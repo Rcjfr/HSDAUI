@@ -1,11 +1,11 @@
-﻿
+
 /// <reference path="../../reducers/models/alert.ts" />
 import { AppStateService } from '../app-state.service';
 import { Observable } from 'rxjs/Rx';
-import { List } from "immutable";
+import { List } from 'immutable';
 import * as models from '../../models';
-import {AircraftInfoRecord,aircraftInfoFactory} from '../../reducers/models/aircraft-info';
-import { AlertRecord,alertFactory } from '../../reducers/models/alert';
+import {AircraftInfoRecord, aircraftInfoFactory} from '../../reducers/models/aircraft-info';
+import { AlertRecord, alertFactory } from '../../reducers/models/alert';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -28,6 +28,7 @@ export class MockAppStateService extends AppStateService {
         'secondaryCodeDescription': 'Main Gear'
       }
     ];
+
     return Observable.of(<List<models.IATACode>>List.of(...mockResponse));
     }
 

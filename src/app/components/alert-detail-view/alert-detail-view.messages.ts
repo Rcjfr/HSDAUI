@@ -223,10 +223,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       }
     }
   },
-
-
   'correctiveActionFormGroup': {
-
     'deferralCode': {
       required: 'Deferral Code is required.',
       pattern: 'Deferral Code must contain only alphabet characters.',
@@ -245,21 +242,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'correctiveActionOptions': {
         required: 'Defect Discovered during is required.'
         },
-        'modifiedPartDescriptionGroup':{
+        'modifiedPartDescriptionGroup': {
       'modifiedpartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',
             }
       },
-        'defectivePartDescriptionGroup':{
+        'defectivePartDescriptionGroup': {
       'defectivePartDescription': {
         required: 'Description is required.',
         maxlength: 'Description must not be more than 30 characters.',
         pattern: 'Description must be alphanumeric.'
             }
         },
-
-
       'correctiveActionRepairDescriptionFormGroup': {
         atleastone: 'Repair Document or Engineering  Authorization is required.',
         'repairedDescribe': {
@@ -292,7 +287,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Height must be numeric.',
           maxlength: 'Height must not be more than 3 digits.'
         }
-
       }
     },
       'completedBy': {
@@ -399,9 +393,60 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Width must be numeric.',
           maxlength: 'Width must not be more than 3 digits.'
       }
-      
-  },
 
-  
-
+  }
+  , 'damageToleranceEvaluationGroup': {
+    dteStatus: {
+      required: 'DTE Status is required.'
+    },
+    repairInspectionStatus: {
+      required: 'Repair Inspection Status is required.'
+    },
+    stage1RTSDate: {
+      required: 'Stage 1/RTS Date is required.'
+    },
+    srNo: {
+      maxlength: 'SR # must not be more than 25 characters.'
+    },
+    rdasNo: {
+      maxlength: 'RDAS # must not be more than 25 characters.'
+    },
+    etdNo: {
+      maxlength: 'ETD # must not be more than 25 characters.'
+    },
+    esmSubItemNo: {
+      maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
+    },
+    thresholds: {
+      inspectionThreshold: {
+        maxlength: 'Inspection Threshold must not be more than 50 characters.'
+      },
+      inspectionInterval: {
+        maxlength: 'Inspection Interval must not be more than 50 characters.'
+      },
+      inspectionMethod: {
+        maxlength: 'Inspection Method must not be more than 50 characters.'
+      }
+    },
+    monitorItems: {
+      fmrLogPageMon: {
+        maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
+      }
+    },
+    dteComments: {
+      maxlength: 'DTE Comments must not be more than 500 characters.'
+    },
+    updatedBy: {
+      required: 'Updated By is required.',
+      maxlength: 'Updated By must not be more than 50 characters.'
+    },
+    updatedDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+    dteDueDate: {
+      required: 'Updated Date is required.',
+      maxlength: 'Updated Date must not be more than 20 characters.'
+    },
+  }
 };

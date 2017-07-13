@@ -1,5 +1,5 @@
 ﻿import { ActionReducer, Action } from '@ngrx/store';
-import { Alert } from '../models/alert.model';
+import { IAlert } from '../models/alert.model';
 import { AlertRecord, alertFactory } from './models/alert';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
@@ -34,6 +34,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadAircraftInfoCompleteAction;
+
         return state.merge({ loading: false, aircraftInfo: aircraftInfoFactory(act.payload) });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL:
@@ -43,6 +44,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadNoseNumbersCompleteAction;
+
         return state.merge({ loading: false, noseNumbers: List.of(...act.payload) });
       }
     default: {

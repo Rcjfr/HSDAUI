@@ -11,6 +11,3 @@ export const aircraftInfoFactory = makeTypedFactory<IAircraftInfo, AircraftInfoR
     fleet: '',
 
 });
-
-
-

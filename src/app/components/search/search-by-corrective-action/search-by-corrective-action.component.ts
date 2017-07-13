@@ -5,14 +5,14 @@ import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { AppStateService } from '../../../common/services';
 @Component({
-    selector: 'app-search-by-corrective-action',
+    selector: 'aa-search-by-corrective-action',
     templateUrl: './search-by-corrective-action.component.html',
     styleUrls: ['./search-by-corrective-action.component.less']
 })
 export class SearchByCorrectiveActionComponent implements OnInit {
     repairDocument: string[] = [];
     repairDesc: string[] = [];
-    repairDescriptions$: Observable<List<models.IRepairDescription>>; 
+    repairDescriptions$: Observable<List<models.IRepairDescription>>;
     repairDocuments$: Observable<List<models.IRepairDocument>>;
 constructor(private appStateService: AppStateService) { }
     ngOnInit() {

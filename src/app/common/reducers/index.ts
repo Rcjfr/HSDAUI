@@ -38,16 +38,11 @@ export const getCorrosionTypes = compose(fromLookupData.getCorrosionTypes, getLo
 export const getDepartments = compose(fromLookupData.getDepartments, getLookupDataState);
 export const getDetectionMethods = compose(fromLookupData.getDetectionMethods, getLookupDataState);
 export const getStations = compose(fromLookupData.getStations, getLookupDataState);
-export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDataState); 
-export const getCauseOfDamages = compose(fromLookupData.getCauseOfDamages, getLookupDataState); 
+export const getDamageTypes = compose(fromLookupData.getDamageTypes, getLookupDataState);
+export const getCauseOfDamages = compose(fromLookupData.getCauseOfDamages, getLookupDataState);
 export const getFloorboardConditions = compose(fromLookupData.getFloorboardConditions, getLookupDataState);
 export const getRepairDescriptions = compose(fromLookupData.getRepairDescriptions, getLookupDataState);
 export const getRepairDocuments = compose(fromLookupData.getRepairDocuments, getLookupDataState);
 export const getReasonsForChange = compose(fromLookupData.getReasonsForChange, getLookupDataState);
-
-
-
-
-
-
-
+export const getRepairInspectionStatus = compose(fromLookupData.getRepairInspectionStatus, getLookupDataState);
+export const getDTEStatus = compose(fromLookupData.getDTEStatus, getLookupDataState);

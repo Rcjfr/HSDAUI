@@ -1,4 +1,4 @@
-﻿export interface Alert {
+﻿export interface IAlert {
     sdaId: string;
     sdrNumber?: string;
     createDate: Date;
@@ -36,5 +36,6 @@
     PartTT: string;
     PartTso: string;
     detected: string;
-
+    status: number;
+    statusText: string;
 }

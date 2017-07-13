@@ -10,7 +10,7 @@ describe('SearchByAircraftComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchByAircraftComponent ],
-imports:[FormsModule,FormControlsModule]
+imports: [FormsModule, FormControlsModule]
     })
     .compileComponents();
   }));

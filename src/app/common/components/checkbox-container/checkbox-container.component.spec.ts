@@ -1,20 +1,20 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckboxContainer } from './checkbox-container.component';
+import { CheckboxContainerComponent } from './checkbox-container.component';
 
-describe('CheckboxContainer', () => {
-  let component: CheckboxContainer;
-  let fixture: ComponentFixture<CheckboxContainer>;
+describe('CheckboxContainerComponent', () => {
+  let component: CheckboxContainerComponent;
+  let fixture: ComponentFixture<CheckboxContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CheckboxContainer ]
+      declarations: [CheckboxContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckboxContainer);
+    fixture = TestBed.createComponent(CheckboxContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

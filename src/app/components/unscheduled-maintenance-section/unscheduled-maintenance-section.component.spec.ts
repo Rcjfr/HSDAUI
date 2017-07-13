@@ -2,15 +2,15 @@
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { UnscheduledMaintenanceSectionComponent } from './unscheduled-maintenance-section.component';
 import { FormControlsModule } from './../../common/components/form-controls.module';
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 describe('UnscheduledMaintenanceSectionComponent', () => {
   let component: UnscheduledMaintenanceSectionComponent;
-  let fixture: ComponentFixture<TestComponentWrapper>;
+  let fixture: ComponentFixture<TestComponentWrapperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapper, UnscheduledMaintenanceSectionComponent],
+      declarations: [TestComponentWrapperComponent, UnscheduledMaintenanceSectionComponent],
       imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -20,9 +20,9 @@ describe('UnscheduledMaintenanceSectionComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapper);
+    fixture = TestBed.createComponent(TestComponentWrapperComponent);
     component = <UnscheduledMaintenanceSectionComponent>fixture.debugElement.children[0].componentInstance;
-    
+
     fixture.detectChanges();
   });
 
@@ -33,9 +33,9 @@ describe('UnscheduledMaintenanceSectionComponent', () => {
 
 @Component({
   selector: 'test-component-wrapper',
-  template: '<app-unscheduled-maintenance-section [parent]="form" [errorMessages]="displayMessage"></app-unscheduled-maintenance-section>'
+  template: '<aa-unscheduled-maintenance-section [parent]="form" [errorMessages]="displayMessage"></aa-unscheduled-maintenance-section>'
 })
-class TestComponentWrapper {
+class TestComponentWrapperComponent {
   form: FormGroup = new FormGroup({});
   displayMessage: { [key: string]: any } = {};
 }

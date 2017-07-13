@@ -1,5 +1,5 @@
 ﻿<div class="panel-body" [formGroup]="cpcpSectionGroup">
-  <div class="row ">
+  <div class="row">
     <div class="col-md-6">
       <div class="row form-group" [class.has-error]="displayMessage.cpcprelated">
         <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req">*</span></label>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div class="row " [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
+  <div class="row" [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
     <div class="col-md-6" [class.has-error]="displayMessage.wsCorrosion">
       <div class="row form-group">
         <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req">*</span></label>
@@ -35,7 +35,7 @@
         <div class="row form-group">
           <label class="col-sm-4 control-label">Corrosion Level:<span class="req">*</span></label>
           <div class="col-sm-8">
-            
+
             <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
               <input type="radio" [value]="ac.id" tabindex="38" name="corrosionLevel" formControlName="corrosionLevel" />
             </aac-radio-container>
@@ -83,7 +83,7 @@
           <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
       </aac-field-container>
-      
+
     </div>
     <div class="col-md-5">
       <div [hidden]="cpcpSectionGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeText">
@@ -94,9 +94,9 @@
     </div>
   </div>
   <div [hidden]="cpcpSectionGroup.get('cpcprelated').value !='1'">
-    <app-cause-of-damage [parent]="cpcpSectionGroup" [errorMessages]="displayMessage"></app-cause-of-damage>
+    <aa-cause-of-damage [parent]="cpcpSectionGroup" [errorMessages]="displayMessage"></aa-cause-of-damage>
   </div>
- 
+
 
   <div class="row">
     <div class="col-md-6">

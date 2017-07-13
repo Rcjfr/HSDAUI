@@ -9,13 +9,13 @@ import '../../common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AppStateService } from '../../common/services';
 @Component({
-    selector: 'app-alert-detail',
+    selector: 'aa-alert-detail',
     templateUrl: './alert-detail.component.html',
     styleUrls: ['./alert-detail.component.less'],
     providers: []
 })
 export class AlertDetailComponent implements OnInit {
-    alert$: Observable<models.Alert>;
+    alert$: Observable<models.IAlert>;
     loading$: Observable<boolean>;
     constructor(private appStateService: AppStateService,
                 private vcr: ViewContainerRef,
