@@ -91,6 +91,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         const noncpcpChecked = this.cpcpDispositionSectionFormGroup.get('nonCpcp').value;
         if (!noncpcpChecked) {
             if (!reviewComplete) {
+                this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').enable();
                 this.cpcpDispositionSectionFormGroup.get('engineeringComments').enable();
                 this.cpcpDispositionSectionFormGroup.get('isCpcpTaskNumCorrect').enable();
@@ -102,7 +103,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
                 this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
                 this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').enable();
             }  else {
-                this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').reset();
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').disable();
                 ///  this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
                 this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
