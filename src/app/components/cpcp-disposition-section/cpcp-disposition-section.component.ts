@@ -103,7 +103,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
                 this.cpcpDispositionSectionFormGroup.get('reasonsForChange').enable();
                 this.cpcpDispositionSectionFormGroup.get('cpcpTaskDescriptionFormGroup').enable();
             }  else {
-               
                 this.cpcpDispositionSectionFormGroup.get('reviewCompleteText').disable();
                 ///  this.cpcpDispositionSectionFormGroup.get('noncpcp').disable();
                 this.cpcpDispositionSectionFormGroup.get('qcFeedback').disable();
