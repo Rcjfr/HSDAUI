@@ -40,7 +40,8 @@ import {
   RepairDescriptionService,
   ReasonForChangeService,
   DteStatusService,
-  RepairInspectionStatusService
+  RepairInspectionStatusService,
+  SdaService
 
 } from './common/services';
 import { AlertEffects } from './common/effects/alerts.effects';
@@ -176,7 +177,8 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     RepairDescriptionService,
     ReasonForChangeService,
     DteStatusService,
-    RepairInspectionStatusService
+    RepairInspectionStatusService,
+    SdaService
   ],
   entryComponents: [
     ConfirmComponent

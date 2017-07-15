@@ -5,7 +5,7 @@ import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import { Observable } from 'rxjs/Rx';
-import { IStation } from '../models';
+import { IStation,ISda } from '../models';
 @Injectable()
 export class AppStateService {
 
@@ -77,8 +77,17 @@ export class AppStateService {
   getSelectedAlertLoading() {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
-
-  // Dispatch Actions
+  getSDAList() {
+    return this.store.select(fromRoot.getSDAList);
+  }
+  //Dispatch Actions
+  saveSda(sda:ISda): void {
+    this.store.dispatch(new selectedAlertActions.SaveSDAAction(sda));
+  }
+  loadSDAList(): void {
+    this.store.dispatch(new selectedAlertActions.LoadSDAsAction());
+  }
+  
   loadAircraftInfo(noseNumber: string): void {
     if (!noseNumber) { return; }
     this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction(noseNumber));

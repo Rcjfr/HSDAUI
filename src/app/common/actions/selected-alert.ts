@@ -1,48 +1,88 @@
 ﻿import { Action } from '@ngrx/store';
-import { IAlert } from '../models/alert.model';
-import * as models from '../../common/models/index';
+import * as models from '../models/index';
 
 export const ActionTypes = {
-    LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
-    LOAD_NOSE_NUMBERS_COMPLETE: 'Load Nose Numbers Complete',
-    LOAD_NOSE_NUMBERS_FAIL: 'Load Nose Numbers Fail',
-    LOAD_AIRCRAFT_INFO: 'Load Aircraft Info',
-    LOAD_AIRCRAFT_INFO_COMPLETE: 'Load Aircraft Info Complete',
-    LOAD_AIRCRAFT_INFO_FAIL: 'Load Aircraft Info Fail'
+  LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
+  LOAD_NOSE_NUMBERS_COMPLETE: 'Load Nose Numbers Complete',
+  LOAD_NOSE_NUMBERS_FAIL: 'Load Nose Numbers Fail',
+  LOAD_AIRCRAFT_INFO: 'Load Aircraft Info',
+  LOAD_AIRCRAFT_INFO_COMPLETE: 'Load Aircraft Info Complete',
+  LOAD_AIRCRAFT_INFO_FAIL: 'Load Aircraft Info Fail',
+  SAVE_SDA: 'Save SDA',
+  SAVE_SDA_COMPLETE: 'Save SDA Complete',
+  SAVE_SDA_FAIL: 'Save SDA Fail',
+  LOAD_SDAS: 'Load SDAs',
+  LOAD_SDAS_COMPLETE: 'Load SDAs Complete',
+  LOAD_SDAS_FAIL: 'Load SDAs Fail'
 };
 
 
 export class LoadNoseNumbersAction implements Action {
-    public type = ActionTypes.LOAD_NOSE_NUMBERS;
-    constructor(public payload: string) { }
+  public type = ActionTypes.LOAD_NOSE_NUMBERS;
+  constructor(public payload: string) { }
 }
 export class LoadNoseNumbersCompleteAction implements Action {
-    public type = ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE;
-    constructor(public payload: Array<string>) { }
+  public type = ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE;
+  constructor(public payload: Array<string>) { }
 }
 export class LoadNoseNumbersFailAction implements Action {
-    public type = ActionTypes.LOAD_NOSE_NUMBERS_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_NOSE_NUMBERS_FAIL;
+  constructor(public payload: any) { }
 }
 
 export class LoadAircraftInfoAction implements Action {
-    public type = ActionTypes.LOAD_AIRCRAFT_INFO;
-    constructor(public payload: string) { }
+  public type = ActionTypes.LOAD_AIRCRAFT_INFO;
+  constructor(public payload: string) { }
 }
 export class LoadAircraftInfoCompleteAction implements Action {
-    public type = ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE;
-    constructor(public payload: models.IAircraftInfo) { }
+  public type = ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE;
+  constructor(public payload: models.IAircraftInfo) { }
 }
 export class LoadAircraftInfoFailAction implements Action {
-    public type = ActionTypes.LOAD_AIRCRAFT_INFO_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_AIRCRAFT_INFO_FAIL;
+  constructor(public payload: any) { }
 }
 
+export class SaveSDAAction implements Action {
+  public type = ActionTypes.SAVE_SDA;
+  constructor(public payload: models.ISda) { }
+}
+export class SaveSDACompleteAction implements Action {
+  public type = ActionTypes.SAVE_SDA_COMPLETE;
+  constructor(public payload: number) { }
+}
+export class SaveSDAFailAction implements Action {
+  public type = ActionTypes.SAVE_SDA_FAIL;
+  constructor(public payload: any) { }
+}
+
+export class LoadSDAsAction implements Action {
+  public type = ActionTypes.LOAD_SDAS;
+  public payload: any;
+  constructor() { }
+}
+export class LoadSDAsCompleteAction implements Action {
+  public type = ActionTypes.LOAD_SDAS_COMPLETE;
+  constructor(public payload: models.ISdaListView[]) { }
+}
+export class LoadSDAsFailAction implements Action {
+  public type = ActionTypes.LOAD_SDAS_FAIL;
+  constructor(public payload: any) { }
+}
+
+
+
 export type Actions =
-    LoadNoseNumbersAction |
-    LoadNoseNumbersCompleteAction |
-    LoadNoseNumbersFailAction |
-    LoadAircraftInfoAction |
-    LoadAircraftInfoCompleteAction |
-    LoadAircraftInfoFailAction;
+  LoadNoseNumbersAction |
+  LoadNoseNumbersCompleteAction |
+  LoadNoseNumbersFailAction |
+  LoadAircraftInfoAction |
+  LoadAircraftInfoCompleteAction |
+  LoadAircraftInfoFailAction |
+  SaveSDAAction |
+  SaveSDACompleteAction |
+  SaveSDAFailAction |
+  LoadSDAsAction |
+  LoadSDAsCompleteAction |
+  LoadSDAsFailAction;
 

@@ -30,7 +30,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
     this.formGroup = this.fb.group({
-      dteStatus: ['', []],
+      dteStatus: ['', [Validators.required]],
       repairInspectionStatus: ['', [Validators.required]],
       fatigueCritical: [null, []],
       stage1RTSDate: [null, [Validators.required]],

@@ -27,18 +27,18 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
     this.defectLocationSectionFormGroup = this.fb.group({
-      defectType: ['', [Validators.required, Validators.maxLength(250)]],
-          defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],
+      damageType: ['', [Validators.required, Validators.maxLength(250)]],
+          damageDescription: ['', [Validators.required,  Validators.maxLength(250)]],
           length: ['', [Validators.required]],
           width: ['', [Validators.required]],
           depth: ['', [Validators.required]],
 
-          MFGpart: ['', [Validators.maxLength(50)]],
+          manufacturerPartNo: ['', [Validators.maxLength(50)]],
           partDefective: ['', [Validators.required, Validators.maxLength(50)]],
-          MFGserial: ['', [Validators.maxLength(50)]],
-          PartTT: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          PartTso: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          detected: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+          manufacturerSerialNo: ['', [Validators.maxLength(50)]],
+          partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
+          partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+          detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
     this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);

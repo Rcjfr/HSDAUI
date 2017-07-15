@@ -51,10 +51,10 @@ export class CustomValidators {
 
   static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
 
-    const stationLocationControl = c.get('stationLocation');
+    const stationLocationControl = c.get('aircraftStation');
     const stringerControl = c.get('stringer');
-    const wlControl = c.get('wl');
-    const blControl = c.get('bl');
+    const wlControl = c.get('waterLine');
+    const blControl = c.get('buttLine');
     //if (stationLocationControl.value || stringerControl.value || wlControl.value || blControl.value) {
     //    return null;
     //}

@@ -26,7 +26,7 @@
                            [message]="displayMessage.alertCode">
         <select tabindex="14" class="form-control" formControlName="alertCode">
           <option value="">Select Alert Code</option>
-          <option *ngFor="let ac of alertCodes$ | async" [value]="ac.code">{{ac.description}}</option>
+          <option *ngFor="let ac of alertCodes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
       </aac-field-container>
 

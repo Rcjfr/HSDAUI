@@ -16,3 +16,5 @@ export * from './repair-document.model';
 export * from './repair-description.model';
 export * from './reason-for-change.model';
 export * from './base-lookup.model';
+export * from './sda.model';
+export * from './sda-list-view.model';

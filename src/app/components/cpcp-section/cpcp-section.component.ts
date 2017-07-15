@@ -30,18 +30,18 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
     const cpcp: FormControl = this.fb.control(null, Validators.required);
     this.cpcpSectionGroup = this.fb.group({
       cpcprelated: cpcp,
-      wsCorrosion: ['', [Validators.required]],
-      corrosionLevel: ['', [Validators.required]],
-      previouslyBlended: [null, [Validators.required]],
-      corrosionType: ['', [Validators.required]],
-      corrosionTypeText: ['', [Validators.required, Validators.maxLength(250)]],
-      corrosionTask: ['', [Validators.required, Validators.maxLength(25)]],
+      wsCorrosion: ['', []],
+      corrosionLevel: ['', []],
+      previouslyBlended: [null, []],
+      corrosionType: ['', []],
+      corrosionTypeText: ['', [Validators.maxLength(250)]],
+      corrosionTask: ['', [Validators.maxLength(25)]],
       isfloorboardCondition: ['', []],
       floorBoardCondition: ['', []]
     });
     this.parent.addControl(this.formGroupName, this.cpcpSectionGroup);
-    this.cpcpSectionGroup.get('cpcprelated').valueChanges
-      .subscribe(val => this.setCorrosionPreventionFields(val));
+    //this.cpcpSectionGroup.get('cpcprelated').valueChanges
+    //  .subscribe(val => this.setCorrosionPreventionFields(val));
     this.cpcpSectionGroup.get('corrosionType').valueChanges
       .subscribe(val => this.setCorrosionTypeFields(val));
   }

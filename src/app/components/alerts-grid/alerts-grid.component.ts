@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { IAlert } from './../../common/models';
+import { ISdaListView } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 
 @Component({
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs/Rx';
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit {
-  @Input() alerts: IAlert[];
+  @Input() sdaList: ISdaListView[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<number> = new Subject();
 

@@ -12,12 +12,13 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { IAlert } from '../../common/models/alert.model';
+import { ISda } from '../../common/models';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AppStateService } from '../../common/services';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -26,7 +27,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit {
-  @Input() alert: IAlert;
+  @Input() alert: ISda;
   @Input() loading: boolean;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -38,7 +39,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
   private genericValidator: GenericValidator;
   constructor(private toastr: ToastsManager,
-    private fb: FormBuilder, private elRef: ElementRef) {
+    private fb: FormBuilder, private elRef: ElementRef,
+    public appStateService: AppStateService) {
     this.genericValidator = new GenericValidator(ValidationMessages);
 
   }
@@ -55,13 +57,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     // Merge the blur event observable with the valueChanges observable
     //Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges, ...controlBlurs)
     Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges)
-              .mapTo(1)
-              .throttleTime(500)
-              .subscribe(value => {
-                const messages = this.genericValidator.processMessages(this.sdaForm);
-                //console.log('Validating...', messages);
-                this.displayMessage$.next(messages);
-              });
+      .mapTo(1)
+      .throttleTime(500)
+      .subscribe(value => {
+        const messages = this.genericValidator.processMessages(this.sdaForm);
+        //console.log('Validating...', messages);
+        this.displayMessage$.next(messages);
+      });
 
   }
   ngOnInit() {
@@ -77,7 +79,34 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
       return;
     }
-    this.toastr.success('Details entered are valid', 'Success');
+    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring == "U";
+    const generalSectionData = Object.assign({},
+      this.sdaForm.value.generalSectionFormGroup,
+      this.sdaForm.value.generalSectionFormGroup.aircraftInfoSectionFormGroup,
+      this.sdaForm.value.generalSectionFormGroup.ataCodesSectionFormGroup,
+      this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup,
+      duringUnscheduledMaintenance
+        ? this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.unscheduledMaintenanceGroup
+        : this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.scheduledMaintenanceGroup
+    );
+    const defectLocationData = Object.assign({},
+      this.sdaForm.value.defectLocationSectionFormGroup,
+      this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
+    );
+    const sdaDetail: ISda = Object.assign({
+
+    }, this.alert,
+      {
+        lastModifiedBy: 'badgeid',
+        lastModifiedOn: new Date(),
+        statusUpdatedBy: 'badgeid',
+        statusUpdatedOn: new Date()
+      },
+      generalSectionData,
+      defectLocationData
+    );
+    this.appStateService.saveSda(sdaDetail);
+    //this.toastr.success('Details entered are valid', 'Success');
   }
 
   logErrors(group: FormGroup | FormArray) {

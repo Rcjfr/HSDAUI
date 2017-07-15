@@ -13,17 +13,17 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let alert of alerts">
-    <td>{{ alert.sdaId }}</td>
+  <tr *ngFor="let sda of sdaList">
+    <td>{{ sda.id }}</td>
     
-    <td>{{alert.aircraftNo}}</td>
-    <td>{{alert.createDate | date}}</td>
-    <td>{{alert.statusText}}</td>
-    <td>{{alert.station}}</td>
-    <td>{{alert.routineNo}}</td>
-    <td>{{alert.nonRoutineNo}}</td>
+    <td>{{sda.aircraftNo}}</td>
+    <td>{{sda.createDate | date}}</td>
+    <td>{{sda.statusText}}</td>
+    <td>{{sda.station}}</td>
+    <td>{{sda.routineNo}}</td>
+    <td>{{sda.nonRoutineNo}}</td>
     <td>
-      <a [routerLink]="['/alerts', alert.sdaId]">
+      <a [routerLink]="['/alerts', sda.id]">
         <span>View</span>
       </a>
     </td>
