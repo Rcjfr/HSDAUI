@@ -66,6 +66,19 @@ export class AlertEffects {
           return of(new selectedAlert.LoadSDAsFailAction('Failed to load SDAs.'));
         });
     });
+  @Effect()
+  loadSda$: Observable<Action> = this.actions$
+    .ofType(selectedAlert.ActionTypes.LOAD_SDA)
+    .map((action: selectedAlert.LoadSDAAction) => action.payload)
+    .switchMap((sdaId:number) => {
+      return this.sdaService.getSda(sdaId)
+        .map((data: models.ISda) => {
+          return new selectedAlert.LoadSDACompleteAction(data);
+        })
+        .catch((err) => {
+          return of(new selectedAlert.LoadSDAFailAction('Failed to load SDA.'));
+        });
+    });
   @Effect() navigateHome$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
     .map(() => this.router.navigate(['/alerts']));
@@ -74,7 +87,8 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
-      selectedAlert.ActionTypes.LOAD_SDAS_FAIL)
+    selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
+    selectedAlert.ActionTypes.LOAD_SDA_FAIL)
     .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,

@@ -11,6 +11,10 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   lastModifiedOn: new Date(),
   statusUpdatedBy: 'BADGEID',
   statusUpdatedOn: new Date(),
-  status: 1, //Open
+  status: 1, //Open,
+  generalSection: null,
+  defectLocationSection: null,
+  cPCPSection: null,
+  correctiveActionSection:null
   
 });

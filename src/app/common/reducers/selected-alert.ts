@@ -31,8 +31,15 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
   switch (action.type) {
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
     case selectedAlertActions.ActionTypes.SAVE_SDA:
+    case selectedAlertActions.ActionTypes.LOAD_SDAS:
+    case selectedAlertActions.ActionTypes.LOAD_SDA:
       {
         return state.merge({ loading: true });
+      }
+    case selectedAlertActions.ActionTypes.LOAD_SDA_COMPLETE:
+      {
+        const act = action as selectedAlertActions.LoadSDAsCompleteAction;
+        return state.merge({ loading: false, sda: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
@@ -63,7 +70,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 };
 
 // Selector Functions
-export const getSelectedAlert = (state: State) => state.sda;
+export const getSelectedSda = (state: State) => state.sda;
 export const getSDAList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;

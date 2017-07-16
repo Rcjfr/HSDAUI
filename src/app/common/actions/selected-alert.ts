@@ -13,7 +13,11 @@ export const ActionTypes = {
   SAVE_SDA_FAIL: 'Save SDA Fail',
   LOAD_SDAS: 'Load SDAs',
   LOAD_SDAS_COMPLETE: 'Load SDAs Complete',
-  LOAD_SDAS_FAIL: 'Load SDAs Fail'
+  LOAD_SDAS_FAIL: 'Load SDAs Fail',
+  LOAD_SDA: 'Load SDA',
+  LOAD_SDA_COMPLETE: 'Load SDA Complete',
+  LOAD_SDA_FAIL: 'Load SDA Fail'
+
 };
 
 
@@ -69,6 +73,19 @@ export class LoadSDAsFailAction implements Action {
   public type = ActionTypes.LOAD_SDAS_FAIL;
   constructor(public payload: any) { }
 }
+export class LoadSDAAction implements Action {
+  public type = ActionTypes.LOAD_SDA;
+  constructor(public payload:number) { }
+}
+export class LoadSDACompleteAction implements Action {
+  public type = ActionTypes.LOAD_SDA_COMPLETE;
+  constructor(public payload: models.ISda) { }
+}
+export class LoadSDAFailAction implements Action {
+  public type = ActionTypes.LOAD_SDA_FAIL;
+  constructor(public payload: any) { }
+}
+
 
 
 
@@ -84,5 +101,8 @@ export type Actions =
   SaveSDAFailAction |
   LoadSDAsAction |
   LoadSDAsCompleteAction |
-  LoadSDAsFailAction;
+  LoadSDAsFailAction |
+  LoadSDAAction |
+  LoadSDACompleteAction |
+  LoadSDAFailAction;
 

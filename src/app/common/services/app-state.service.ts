@@ -71,8 +71,8 @@ export class AppStateService {
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);
   }
-  getSelectedAlert() {
-    return this.store.select(fromRoot.getSelectedAlert);
+  getSelectedSda() {
+    return this.store.select(fromRoot.getSelectedSda);
   }
   getSelectedAlertLoading() {
     return this.store.select(fromRoot.getSelectedAlertLoading);
@@ -80,6 +80,7 @@ export class AppStateService {
   getSDAList() {
     return this.store.select(fromRoot.getSDAList);
   }
+  
   //Dispatch Actions
   saveSda(sda:ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSDAAction(sda));
@@ -87,7 +88,9 @@ export class AppStateService {
   loadSDAList(): void {
     this.store.dispatch(new selectedAlertActions.LoadSDAsAction());
   }
-  
+  loadSDA(sdaId:number): void {
+    this.store.dispatch(new selectedAlertActions.LoadSDAAction(sdaId));
+  }
   loadAircraftInfo(noseNumber: string): void {
     if (!noseNumber) { return; }
     this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction(noseNumber));

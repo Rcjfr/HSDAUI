@@ -19,5 +19,9 @@ export class SdaService {
     return this.http.get(this.endPointUrl)
       .map((result) => result.json());
   };
+  getSda(sdaId:number): Observable<models.ISda> {
+    return this.http.get(`${this.endPointUrl}/${sdaId}`)
+      .map((result) => result.json());
+  };
 
 }

@@ -24,7 +24,7 @@ export const getSelectedAlertState = (state: AppStore) => state.selectedAlert;
 export const getLookupDataState = (state: AppStore) => state.lookupData;
 
 // Level 2
-export const getSelectedAlert = compose(fromSelectedAlert.getSelectedAlert, getSelectedAlertState);
+export const getSelectedSda = compose(fromSelectedAlert.getSelectedSda, getSelectedAlertState);
 export const getSDAList = compose(fromSelectedAlert.getSDAList, getSelectedAlertState);
 export const getAircraftInfo = compose(fromSelectedAlert.getAircraftInfo, getSelectedAlertState);
 export const getSelectedAlertLoading = compose(fromSelectedAlert.getLoading, getSelectedAlertState);
