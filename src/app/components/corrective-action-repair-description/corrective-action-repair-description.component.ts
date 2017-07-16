@@ -29,11 +29,11 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
     this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-      repairedDescribe: ['', [Validators.required]],
+      repairedDescribe: ['', []],
       repairDocument: ['', []],
       chap: ['', [Validators.maxLength(30)]],
       engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-      externalVisible: ['', [Validators.required]],
+      externalVisible: ['', []],
       height: ['', []],
       repairWidth: ['', []]
     },

@@ -2,7 +2,7 @@
   <div class="row col-md-12">
     <div class="col-md-6">
       <div >
-        <aac-field-container required="true" label="Description:" [message]="displayMessage.repairedDescribe">
+        <aac-field-container label="Description:" [message]="displayMessage.repairedDescribe">
           <select class="form-control" tabindex='63' id="repairedDescribe" formControlName="repairedDescribe">
             <option value="">Select</option>
             <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
@@ -45,11 +45,11 @@
     <div class="col-md-6">
       <div [class.has-error]="displayMessage.externalVisible">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Externally Visible?<span class="req">*</span></label>
+          <label class="col-sm-4 control-label">Externally Visible?</label>
           <div class="col-sm-8">
             <div class="customComponent" style="padding-left:20px;">
               <div>
-                <input type="radio" id="externalVisible" name="externalVisible" tabindex='67' value="0" formControlName="externalVisible">
+                <input type="radio" id="externalVisible" name="externalVisible" tabindex='67' [value]="true" formControlName="externalVisible">
                 <label for="externalVisible">
                   <span class="control"></span>
                   Yes
@@ -59,7 +59,7 @@
             </div>
             <div class="customComponent" style="padding-left:20px;">
               <div>
-                <input type="radio" id="noexternalVisible" name="externalVisible" value="1" formControlName="externalVisible">
+                <input type="radio" id="noexternalVisible" name="externalVisible" [value]="false" formControlName="externalVisible">
                 <label for="noexternalVisible">
                   <span class="control"></span>
                   No

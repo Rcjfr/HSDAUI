@@ -42,8 +42,8 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
     this.parent.addControl(this.formGroupName, this.cpcpSectionGroup);
     //this.cpcpSectionGroup.get('cpcprelated').valueChanges
     //  .subscribe(val => this.setCorrosionPreventionFields(val));
-    this.cpcpSectionGroup.get('corrosionType').valueChanges
-      .subscribe(val => this.setCorrosionTypeFields(val));
+    //this.cpcpSectionGroup.get('corrosionType').valueChanges
+    //  .subscribe(val => this.setCorrosionTypeFields(val));
   }
 
   setCorrosionTypeFields(corrosionType: string): void {

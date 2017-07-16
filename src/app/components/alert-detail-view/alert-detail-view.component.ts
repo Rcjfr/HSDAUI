@@ -93,17 +93,62 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       this.sdaForm.value.defectLocationSectionFormGroup,
       this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
     );
-    const sdaDetail: ISda = Object.assign({
+    const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
+    let causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 2 : 0) +
+      (causeOfDamageGroup.chemicalSpill ? 4 : 0) +
+      (causeOfDamageGroup.damageOther ? 256 : 0) +
+      (causeOfDamageGroup.environment ? 0 : 0) +
+      (causeOfDamageGroup.galleySpill ? 1 : 0) +
+      (causeOfDamageGroup.hardwareNotInstalled ? 32 : 0) +
+      (causeOfDamageGroup.missingCorrosionInhibitor ? 128 : 0) +
+      (causeOfDamageGroup.missingFloorBoardTape ? 16 : 0) +
+      (causeOfDamageGroup.poorSealingPractices ? 64 : 0) +
+      (causeOfDamageGroup.wetInsulationBlanket ? 8 : 0);
+    if (causesOfDamage == 0 && !causeOfDamageGroup.environment) {
+      causesOfDamage = null;
+    }
 
-    }, this.alert,
+
+    const cpcpSectionData = Object.assign({},
+      this.sdaForm.value.cpcpSectionGroup,
+      {
+        
+        causesOfDamage: causesOfDamage
+      },
+      this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup.causeOfDamageDescriptionGroup,
+    );
+    const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
+    const correctiveActionData = {
+      isDeferred: correctiveActionSection.deferredSectionOptions,
+      DeferralCode: correctiveActionSection.deferralCode,
+      DeferralNo: correctiveActionSection.deferral,
+      RepairType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionOptions,
+      DefectivePartDescription: correctiveActionSection.correctiveActionOptionFormGroup.defectivePartDescription,
+      ModifiedPartDescription: correctiveActionSection.correctiveActionOptionFormGroup.modifiedpartDescription,
+      RepairDescriptionType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairedDescribe,
+      RepairDocumentType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDocument,
+      ChapFigRepairText: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.correctiveActionChapFormGroup.chap,
+      EngineeringAuthorization: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.engineeringAuthorization,
+      IsExternallyVisible: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.externalVisible,
+      RepairHeight: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.height,
+      RepairWidth: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairWidth,
+      IsMajorRepair: correctiveActionSection.majorRepairOptions,
+      MajorRepairDescription: correctiveActionSection.repairDescription,
+      CompletedBy: correctiveActionSection.completedBy,
+      CompletedDate: correctiveActionSection.completedDate
+    };
+    
+    const sdaDetail: ISda = Object.assign({}, this.alert,
       {
         lastModifiedBy: 'badgeid',
         lastModifiedOn: new Date(),
         statusUpdatedBy: 'badgeid',
-        statusUpdatedOn: new Date()
-      },
-      generalSectionData,
-      defectLocationData
+        statusUpdatedOn: new Date(),
+        generalSection: generalSectionData,
+        defectLocationSection: defectLocationData,
+        cPCPSection: cpcpSectionData,
+        correctiveActionSection: correctiveActionData
+      }
     );
     this.appStateService.saveSda(sdaDetail);
     //this.toastr.success('Details entered are valid', 'Success');

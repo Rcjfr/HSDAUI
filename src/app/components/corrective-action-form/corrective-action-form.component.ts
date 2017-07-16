@@ -25,8 +25,8 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
             deferredSectionOptions: ['', []],
             majorRepairOptions: ['', []],
             repairDescription: ['', [Validators.maxLength(250)]],
-            completedBy: ['', [Validators.required, Validators.maxLength(50)]],
-            completedDate: [new Date(), [Validators.required]]
+            completedBy: ['', [Validators.maxLength(50)]],
+            completedDate: [new Date(), []]
         },
         //{
         //    validator: CustomValidators.validateCorrectiveActionFormFields

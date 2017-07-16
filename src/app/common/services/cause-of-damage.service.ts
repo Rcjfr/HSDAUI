@@ -16,16 +16,16 @@ export class CauseOfDamageService {
     //return this.http.get(this.endPointUrl)
     //  .map((result) => result.json());
     return Observable.of([
-        { id: 1, description: 'Environment' },
-        { id: 2, description: 'Lav / Galley Spill' },
-        { id: 3, description: 'Blocked Drain' },
+        { id: 0, description: 'Environment' },
+        { id: 1, description: 'Lav / Galley Spill' },
+        { id: 2, description: 'Blocked Drain' },
         { id: 4, description: 'Chemical Spill' },
-        { id: 5, description: 'Wet Insulation Blanket' },
-        { id: 6, description: 'Missing / Deteriorated Floorboard Tape' },
-        { id: 7, description: 'Correct Hardware Not Installed' },
-        { id: 8, description: 'Deteriorated / Poor Sealing Practices' },
-        { id: 9, description: 'Missing Corrosion Inhibitor' },
-        { id: 10, description: 'Other' }
+        { id: 8, description: 'Wet Insulation Blanket' },
+        { id: 16, description: 'Missing / Deteriorated Floorboard Tape' },
+        { id: 32, description: 'Correct Hardware Not Installed' },
+        { id: 64, description: 'Deteriorated / Poor Sealing Practices' },
+        { id: 128, description: 'Missing Corrosion Inhibitor' },
+        { id: 256, description: 'Other' }
     ]);
   };
 }

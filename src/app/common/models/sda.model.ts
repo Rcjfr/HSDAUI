@@ -11,6 +11,9 @@ export interface ISda {
     statusUpdatedBy: string;
     statusUpdatedOn: Date;
     status: number;
-    
+    generalSection:any,
+    defectLocationSection: any,
+    cPCPSection: any,
+    correctiveActionSection: any
     
 }
