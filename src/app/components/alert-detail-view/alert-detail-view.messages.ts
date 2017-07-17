@@ -350,7 +350,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           required: 'QC Feedback is required.',
           maxlength: 'QC Feedback must not be more than 250 characters.'
       },
-      'reviewComplete': {
+      'reviewCompleteText': {
           maxlength: 'Review Complete must not be more than 50 characters.'
       }
 
