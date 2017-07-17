@@ -119,21 +119,21 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     );
     const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
     const correctiveActionData = {
-      isDeferred: correctiveActionSection.deferredSectionOptions,
+        IsDeferred: correctiveActionSection.isDeferred,
       DeferralCode: correctiveActionSection.deferralCode,
-      DeferralNo: correctiveActionSection.deferral,
-      RepairType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionOptions,
+      DeferralNo: correctiveActionSection.deferralNo,
+      RepairType: correctiveActionSection.correctiveActionOptionFormGroup.repairType,
       DefectivePartDescription: correctiveActionSection.correctiveActionOptionFormGroup.defectivePartDescription,
       ModifiedPartDescription: correctiveActionSection.correctiveActionOptionFormGroup.modifiedpartDescription,
-      RepairDescriptionType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairedDescribe,
-      RepairDocumentType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDocument,
-      ChapFigRepairText: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.correctiveActionChapFormGroup.chap,
+      RepairDescriptionType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDescriptionType,
+      RepairDocumentType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDocumentType,
+      ChapFigRepairText: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.correctiveActionChapFormGroup.chapFigRepairText,
       EngineeringAuthorization: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.engineeringAuthorization,
-      IsExternallyVisible: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.externalVisible,
-      RepairHeight: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.height,
+      IsExternallyVisible: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.isExternallyVisible,
+      RepairHeight: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairHeight,
       RepairWidth: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairWidth,
-      IsMajorRepair: correctiveActionSection.majorRepairOptions,
-      MajorRepairDescription: correctiveActionSection.repairDescription,
+      IsMajorRepair: correctiveActionSection.isMajorRepair,
+      MajorRepairDescription: correctiveActionSection.majorRepairDescription,
       CompletedBy: correctiveActionSection.completedBy,
       CompletedDate: correctiveActionSection.completedDate
     };

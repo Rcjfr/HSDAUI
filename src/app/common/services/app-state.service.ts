@@ -52,11 +52,11 @@ export class AppStateService {
   getFloorboardConditions() {
       return this.store.select(fromRoot.getFloorboardConditions);
   }
-  getRepairDescriptions() {
-      return this.store.select(fromRoot.getRepairDescriptions);
+  getRepairDescriptionTypes() {
+      return this.store.select(fromRoot.getRepairDescriptionTypes);
   }
-  getRepairDocuments() {
-      return this.store.select(fromRoot.getRepairDocuments);
+  getRepairDocumentTypes() {
+      return this.store.select(fromRoot.getRepairDocumentTypes);
   }
   getReasonsForChange() {
     return this.store.select(fromRoot.getReasonsForChange);

@@ -18,23 +18,23 @@ import { AppStateService } from '../../common/services';
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
   correctiveActionRepairDescriptionFormGroup: FormGroup;
-  repairDescriptions$: Observable<List<models.IRepairDescription>>;
-  repairDocuments$: Observable<List<models.IRepairDocument>>;
+  repairDescriptionTypes$: Observable<List<models.IRepairDescriptionType>>;
+  repairDocumentTypes$: Observable<List<models.IRepairDocumentType>>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
 
   ngOnInit() {
-    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-    this.repairDocuments$ = this.appStateService.getRepairDocuments();
+      this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptionTypes();
+    this.repairDocumentTypes$ = this.appStateService.getRepairDocumentTypes();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-      repairedDescribe: ['', []],
-      repairDocument: ['', []],
-      chap: ['', [Validators.maxLength(30)]],
+        repairDescriptionType: ['', []],
+        repairDocumentType: ['', []],
+        chapFigRepairText: ['', [Validators.maxLength(30)]],
       engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-      externalVisible: ['', []],
-      height: ['', []],
+      isExternallyVisible: ['', []],
+      repairHeight: ['', []],
       repairWidth: ['', []]
     },
       {
@@ -43,8 +43,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     );
 
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
-    this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('height').valueChanges.debounceTime(1000).subscribe(v =>
-      this.correctiveActionRepairDescriptionFormGroup.get('height').setValue(Math.round(v))
+    this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
+        this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))
     ));
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))

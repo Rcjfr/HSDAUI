@@ -1,3 +1,3 @@
 ﻿import {IBaseLookUp} from './base-lookup.model';
-export interface IRepairDocument extends IBaseLookUp {
+export interface IRepairDocumentType extends IBaseLookUp {
 }

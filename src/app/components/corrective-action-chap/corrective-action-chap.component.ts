@@ -14,7 +14,7 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
     }
     ngOnInit() {
         this.correctiveActionChapFormGroup = this.fb.group({
-            chap: ['', [Validators.maxLength(30), Validators.required]]
+            chapFigRepairText: ['', [Validators.maxLength(30), Validators.required]]
         });
         this.parent.addControl(this.formGroupName, this.correctiveActionChapFormGroup);
 

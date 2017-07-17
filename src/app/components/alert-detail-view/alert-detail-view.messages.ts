@@ -227,17 +227,17 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       pattern: 'Deferral Code must contain only alphabet characters.',
       maxlength: 'Deferral Code must not be more than 3 characters.'
     },
-    'deferral': {
+    'deferralNo': {
       required: 'Deferral #  is required.',
       pattern: 'Deferral # must be alphanumeric.',
       maxlength: 'Deferral # must not be more than 15 characters. '
     },
-    'repairDescription': {
+    'majorRepairDescription': {
       required: 'Repair Description is required.',
       maxlength: 'Repair Description must not be more than 250 characters.'
     },
     'correctiveActionOptionFormGroup': {
-      'correctiveActionOptions': {
+      'repairType': {
         required: 'Defect Discovered during is required.'
         },
         'modifiedPartDescriptionGroup': {
@@ -255,15 +255,15 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
       'correctiveActionRepairDescriptionFormGroup': {
         atleastone: 'Repair Document or Engineering  Authorization is required.',
-        'repairedDescribe': {
+        'repairDescriptionType': {
           required: 'Description is required.'
 
         },
-        'repairDocument': {
+        'repairDocumentType': {
 
         },
         'correctiveActionChapFormGroup': {
-          'chap': {
+          'chapFigRepairText': {
             required: 'Chap/Fig/Repair is required.',
             maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
           }
@@ -274,14 +274,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           pattern: 'Engineering  Authorization must be alphanumeric.'
 
         },
-        'externalVisible': {
+        'isExternallyVisible': {
           required: 'Externally Visible is required.'
         },
         'repairWidth': {
           pattern: 'Width must be numeric.',
           maxlength: 'Width must not be more than 3 digits.'
         },
-        'height': {
+        'repairHeight': {
           pattern: 'Height must be numeric.',
           maxlength: 'Height must not be more than 3 digits.'
         }
@@ -365,13 +365,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'nonRoutine': {
           maxlength: 'Non Routine # must not be more than 50 characters.'
       },
-      'repairDocument': {
+      'repairDocumentType': {
 
       },
-      'chap': {
+      'chapFigRepairText': {
           maxlength: 'Chap/Fig/Repair must not be more than 25 characters.'
       },
-      'repairedDescribe': {
+      'repairDescriptionType': {
 
       },
       'partNomenclature': {

@@ -16,8 +16,8 @@ import { decimalsNumberMask } from '../../common/masks';
   styleUrls: ['./repair-details-section.component.less']
 })
 export class RepairDetailsSectionComponent extends BaseFormComponent implements OnInit {
-    repairDescriptions$: Observable<List<models.IRepairDescription>>;
-    repairDocuments$: Observable<List<models.IRepairDocument>>;
+    repairDescriptionTypes$: Observable<List<models.IRepairDescriptionType>>;
+    repairDocumentTypes$: Observable<List<models.IRepairDocumentType>>;
     createNumberMask = createNumberMask;
     public  numberMask = createNumberMask({
         prefix: '',
@@ -32,21 +32,21 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     }
 
     ngOnInit() {
-        this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-        this.repairDocuments$ = this.appStateService.getRepairDocuments();
+        this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptionTypes();
+        this.repairDocumentTypes$ = this.appStateService.getRepairDocumentTypes();
         this.repairDetailsSectionGroup = this.fb.group({
             engineeringAuthorization: ['', [Validators.maxLength(25)]],
             routineTaskCard: ['', [Validators.maxLength(50)]],
             nonRoutine: ['', [Validators.maxLength(50)]],
-            repairDocument: ['', []],
-            chap: ['', [Validators.maxLength(25)]],
-            repairedDescribe: ['', []],
+            repairDocumentType: ['', []],
+            chapFigRepairText: ['', [Validators.maxLength(25)]],
+            repairDescriptionType: ['', []],
             partNomenclature: ['', [Validators.maxLength(50)]],
             partNumber: ['', [Validators.maxLength(50)]],
             partSerialNumber: ['', [Validators.maxLength(50)]],
             height: ['', [Validators.maxLength(3)]],
             width: ['', [Validators.maxLength(3)]],
-            externallyVisible: ['', []]
+            isExternallyVisible: ['', []]
         });
         this.parent.addControl(this.formGroupName, this.repairDetailsSectionGroup);
   }

@@ -52,13 +52,13 @@ export const ActionTypes = {
   LOAD_FLOORBOARD_CONDITIONS_COMPLETE: 'Load Floorboard Conditions Complete',
   LOAD_FLOORBOARD_CONDITIONS_FAIL: 'Load Floorboard Conditions Fail',
 
-  LOAD_REPAIR_DOCUMENTS: 'Load Repair Documents',
-  LOAD_REPAIR_DOCUMENTS_COMPLETE: 'Load Repair Documents Complete',
-  LOAD_REPAIR_DOCUMENTS_FAIL: 'Load Repair Documents Fail',
+  LOAD_REPAIR_DOCUMENT_TYPES: 'Load Repair Documents',
+  LOAD_REPAIR_DOCUMENT_TYPES_COMPLETE: 'Load Repair Documents Complete',
+  LOAD_REPAIR_DOCUMENT_TYPES_FAIL: 'Load Repair Documents Fail',
 
-  LOAD_REPAIR_DESCRIPTIONS: 'Load Repair Descriptions',
-  LOAD_REPAIR_DESCRIPTIONS_COMPLETE: 'Load Repair Descriptions Complete',
-  LOAD_REPAIR_DESCRIPTIONS_FAIL: 'Load Repair Descriptions Fail',
+  LOAD_REPAIR_DESCRIPTION_TYPES: 'Load Repair Descriptions',
+  LOAD_REPAIR_DESCRIPTION_TYPES_COMPLETE: 'Load Repair Descriptions Complete',
+  LOAD_REPAIR_DESCRIPTION_TYPES_FAIL: 'Load Repair Descriptions Fail',
 
   LOAD_REASONS_FOR_CHANGE: 'Load Reasons for change',
   LOAD_REASONS_FOR_CHANGE_COMPLETE: 'Load Reasons for change Complete',
@@ -263,33 +263,33 @@ export class LoadFloorboardConditionsFailAction implements Action {
 
 
 // Repair Documents
-export class LoadRepairDocumentsAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS;
+export class LoadRepairDocumentTypesAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES;
     public payload: any;
     constructor() { }
 }
-export class LoadRepairDocumentsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE;
-    constructor(public payload: models.IRepairDocument[]) { }
+export class LoadRepairDocumentTypesCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES_COMPLETE;
+    constructor(public payload: models.IRepairDocumentType[]) { }
 }
-export class LoadRepairDocumentsFailAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL;
+export class LoadRepairDocumentTypesFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES_FAIL;
     constructor(public payload: any) { }
 }
 
 
 // Repair Description
-export class LoadRepairDescriptionsAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
+export class LoadRepairDescriptionTypesAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES;
     public payload: any;
     constructor() { }
 }
-export class LoadRepairDescriptionsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE;
-    constructor(public payload: models.IRepairDescription[]) { }
+export class LoadRepairDescriptionTypesCompleteAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES_COMPLETE;
+    constructor(public payload: models.IRepairDescriptionType[]) { }
 }
-export class LoadRepairDescriptionsFailAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL;
+export class LoadRepairDescriptionTypesFailAction implements Action {
+    public type = ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES_FAIL;
     constructor(public payload: any) { }
 }
 
@@ -381,12 +381,12 @@ export type Actions =
   LoadFloorboardConditionsAction |
   LoadFloorboardConditionsCompleteAction |
   LoadFloorboardConditionsFailAction |
-  LoadRepairDocumentsAction |
-  LoadRepairDocumentsCompleteAction |
-  LoadRepairDocumentsFailAction |
-  LoadRepairDescriptionsAction |
-  LoadRepairDescriptionsCompleteAction |
-  LoadRepairDescriptionsFailAction |
+  LoadRepairDocumentTypesAction |
+  LoadRepairDocumentTypesCompleteAction |
+  LoadRepairDocumentTypesFailAction |
+  LoadRepairDescriptionTypesAction |
+  LoadRepairDescriptionTypesCompleteAction |
+  LoadRepairDescriptionTypesFailAction |
   LoadReasonsForChangeAction |
   LoadReasonsForChangeCompleteAction |
   LoadReasonsForChangeFailAction |

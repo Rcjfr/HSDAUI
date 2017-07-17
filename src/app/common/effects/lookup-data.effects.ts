@@ -30,8 +30,8 @@ export class LookupDataEffects {
         new lookupData.LoadDamageTypesAction(),
         new lookupData.LoadCauseOfDamagesAction(),
         new lookupData.LoadFloorboardConditionsAction(),
-        new lookupData.LoadRepairDocumentsAction(),
-        new lookupData.LoadRepairDescriptionsAction(),
+        new lookupData.LoadRepairDocumentTypesAction(),
+        new lookupData.LoadRepairDescriptionTypesAction(),
         new lookupData.LoadReasonsForChangeAction(),
         new lookupData.LoadDTEStausAction(),
         new lookupData.LoadRepairInspectionStatusAction()
@@ -200,27 +200,27 @@ export class LookupDataEffects {
 
 
   @Effect()
-  loadRepairDocuments$: Observable<Action> = this.actions$
-    .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS)
+  loadRepairDocumentTypes$: Observable<Action> = this.actions$
+      .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES)
     .switchMap(() => {
-      return this.repairDocumentService.getAllRepairDocuments()
-        .map((response: models.IRepairDocument[]) => {
-          return new lookupData.LoadRepairDocumentsCompleteAction(response);
+        return this.repairDocumentTypeService.getAllRepairDocumentTypes()
+          .map((response: models.IRepairDocumentType[]) => {
+              return new lookupData.LoadRepairDocumentTypesCompleteAction(response);
         })
         .catch((err) => {
-          return of(new lookupData.LoadRepairDocumentsFailAction('Failed to load Repair Documents'));
+            return of(new lookupData.LoadRepairDocumentTypesFailAction('Failed to load Repair Documents'));
         });
     });
   @Effect()
-  loadRepairDescriptions$: Observable<Action> = this.actions$
-    .ofType(lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS)
+  loadRepairDescriptionTypes$: Observable<Action> = this.actions$
+      .ofType(lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES)
     .switchMap(() => {
-      return this.repairDescriptionService.getAllRepairDescriptions()
-        .map((response: models.IRepairDescription[]) => {
-          return new lookupData.LoadRepairDescriptionsCompleteAction(response);
+        return this.repairDescriptionTypeService.getAllRepairDescriptionTypes()
+            .map((response: models.IRepairDescriptionType[]) => {
+            return new lookupData.LoadRepairDescriptionTypesCompleteAction(response);
         })
         .catch((err) => {
-          return of(new lookupData.LoadRepairDescriptionsFailAction('Failed to load Repaired Describe'));
+            return of(new lookupData.LoadRepairDescriptionTypesFailAction('Failed to load Repaired Describe'));
         });
     });
   @Effect()
@@ -272,8 +272,8 @@ export class LookupDataEffects {
     lookupData.ActionTypes.LOAD_DAMAGE_TYPES_FAIL,
     lookupData.ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL,
     lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL,
-    lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL,
-    lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL,
+    lookupData.ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES_FAIL,
+    lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES_FAIL,
     lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL,
     lookupData.ActionTypes.LOAD_DTE_STATUS_FAIL,
     lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL
@@ -293,8 +293,8 @@ export class LookupDataEffects {
     private damageTypesService: services.DamageTypeService,
     private causeOfDamageService: services.CauseOfDamageService,
     private floorboardConditionService: services.FloorboardConditionService,
-    private repairDocumentService: services.RepairDocumentService,
-    private repairDescriptionService: services.RepairDescriptionService,
+    private repairDocumentTypeService: services.RepairDocumentTypeService,
+    private repairDescriptionTypeService: services.RepairDescriptionTypeService,
     private reasonsForChangeService: services.ReasonForChangeService,
     private dteStatusService: services.DteStatusService,
     private repairInspectionStatusService: services.RepairInspectionStatusService,

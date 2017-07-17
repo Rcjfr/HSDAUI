@@ -166,9 +166,9 @@ export class CustomValidators {
   //};
   static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
 
-    const repairDocumentControl = c.get('repairDocument');
+      const repairDocumentTypeControl = c.get('repairDocumentType');
     const engineeringAuthorizationControl = c.get('engineeringAuthorization');
-    if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
+    if (repairDocumentTypeControl.value || engineeringAuthorizationControl.value) {
       return null;
     }
 
