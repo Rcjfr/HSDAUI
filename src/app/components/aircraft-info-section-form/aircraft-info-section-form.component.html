@@ -4,6 +4,7 @@
       <input type="text" #airCraftNo="ngModel" autocomplete="off" class="form-control" name="airCraftNo" id="airCraftNo" required
              [(ngModel)]="alert.aircraftNo"
              [typeahead]="noseNumbers$"
+             [ngModel]="sda.generalSection.aircraftNo"
              (typeaheadOnSelect)="noseNumberOnSelect($event)"
              (change)="populateAircraftInfo($event.target.value)">
 
@@ -11,31 +12,31 @@
         <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="populateAircraftInfo(alert.aircraftNo)"></span>
       </div>
     </div>-->
-    <input type="text" class="form-control" autocomplete="off" tabindex='6' formControlName="aircraftNo"/>
+    <input type="text" class="form-control" [ngModel]="sda.generalSection.aircraftNo" autocomplete="off" tabindex='6' formControlName="aircraftNo"/>
   </aac-field-container>
   <aac-field-container required="true" label="Aircraft Manufacturer:" [message]="displayMessage.manufacturer">
-    <input type="text" tabindex='7' class="form-control" formControlName="manufacturer">
+    <input type="text" tabindex='7' class="form-control" [ngModel]="sda.generalSection.manufacturer" formControlName="manufacturer">
   </aac-field-container>
 
   <aac-field-container required="true" label="Aircraft Model/Series:" [message]="displayMessage.model">
-    <input type="text" tabindex='8' class="form-control" formControlName="model">
+    <input type="text" tabindex='8' class="form-control" [ngModel]="sda.generalSection.model" formControlName="model">
   </aac-field-container>
 
   <aac-field-container required="true" label="Serial #:" [message]="displayMessage.serialNo">
-    <input type="text" tabindex='9' class="form-control" formControlName="serialNo">
+    <input type="text" tabindex='9' class="form-control" [ngModel]="sda.generalSection.serialNo" formControlName="serialNo">
   </aac-field-container>
   
   <aac-field-container required="true" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
-    <input type="text" tabindex='10' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
+    <input type="text" tabindex='10' class="form-control" [ngModel]="sda.generalSection.totalShipTime"   [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
   </aac-field-container>
 
   <aac-field-container required="true" label="Cycles:" [message]="displayMessage.cycles">
-    <input type="text" tabindex='11' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
+    <input type="text" tabindex='11' class="form-control" [ngModel]="sda.generalSection.cycles" [textMask]="{mask: numberMask}" formControlName="cycles">
   </aac-field-container>
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
-    <input type="text" tabindex='12' class="form-control" formControlName="fleet" (change)="appStateService.loadFleetCheckTypes($event.target.value)">
+    <input type="text" tabindex='12' class="form-control" [ngModel]="sda.generalSection.fleet" formControlName="fleet" (change)="appStateService.loadFleetCheckTypes($event.target.value)">
   </aac-field-container>
   <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator">
-    <input type="text" tabindex='13' class="form-control" formControlName="originator">
+    <input type="text" tabindex='13' class="form-control" [ngModel]="sda.generalSection.originator" formControlName="originator">
   </aac-field-container>
 </div>

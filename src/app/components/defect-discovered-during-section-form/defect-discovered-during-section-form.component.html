@@ -1,27 +1,25 @@
-﻿<div [formGroup]="defectDiscoveredDuringSectionFormGroup">
+﻿<div [formGroup]="formGroup">
   <div class="row form-group" [class.has-error]="displayMessage.defectDiscoveredDuring">
     <h4>Defect Discovered during: (Check appropriate box and describe) <span class="req">*</span></h4>
 
     <aac-radio-container label="Unscheduled Maintenance">
-      <input type="radio" name="defectDiscoveredDuring" value="U" tabindex="17" formControlName="defectDiscoveredDuring"/>
+      <input type="radio" name="defectDiscoveredDuring" value="U" [ngModel]="sda.generalSection.defectDiscoveredDuring"  tabindex="17" formControlName="defectDiscoveredDuring" />
     </aac-radio-container>
     <aac-radio-container label="Scheduled Maintenance">
-      <input type="radio" name="defectDiscoveredDuring" value="S" tabindex="17" formControlName="defectDiscoveredDuring" />
+      <input type="radio" name="defectDiscoveredDuring" value="S" [ngModel]="sda.generalSection.defectDiscoveredDuring" tabindex="17" formControlName="defectDiscoveredDuring" />
     </aac-radio-container>
     <div *ngIf="displayMessage.defectDiscoveredDuring" class="error">{{displayMessage.defectDiscoveredDuring}}</div>
   </div>
-  <aa-unscheduled-maintenance-section
-    [parent]="defectDiscoveredDuringSectionFormGroup"
-    [errorMessages]="displayMessage"
-    *ngIf="defectDiscovered === 'U'"
-  >
+  <aa-unscheduled-maintenance-section [parent]="formGroup"
+                                      [sda]="sda"
+                                      [errorMessages]="displayMessage"
+                                      *ngIf="defectDiscovered === 'U'">
 
   </aa-unscheduled-maintenance-section>
-  <aa-scheduled-maintenance-section
-    [parent]="defectDiscoveredDuringSectionFormGroup"
-    [errorMessages]="displayMessage"
-    *ngIf="defectDiscovered === 'S'"
-  >
+  <aa-scheduled-maintenance-section [parent]="formGroup"
+                                    [sda]="sda"
+                                    [errorMessages]="displayMessage"
+                                    *ngIf="defectDiscovered === 'S'">
 
   </aa-scheduled-maintenance-section>
 </div>

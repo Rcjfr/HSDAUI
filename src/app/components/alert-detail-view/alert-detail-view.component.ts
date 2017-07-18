@@ -27,7 +27,7 @@ import { AppStateService } from '../../common/services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit {
-  @Input() alert: ISda;
+  @Input() sda: ISda;
   @Input() loading: boolean;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -79,7 +79,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
       return;
     }
-    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring == "U";
+    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring === 'U';
     const generalSectionData = Object.assign({},
       this.sdaForm.value.generalSectionFormGroup,
       this.sdaForm.value.generalSectionFormGroup.aircraftInfoSectionFormGroup,
@@ -94,32 +94,30 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
     );
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
-    let causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 2 : 0) +
-      (causeOfDamageGroup.chemicalSpill ? 4 : 0) +
-      (causeOfDamageGroup.damageOther ? 256 : 0) +
-      (causeOfDamageGroup.environment ? 0 : 0) +
-      (causeOfDamageGroup.galleySpill ? 1 : 0) +
-      (causeOfDamageGroup.hardwareNotInstalled ? 32 : 0) +
-      (causeOfDamageGroup.missingCorrosionInhibitor ? 128 : 0) +
-      (causeOfDamageGroup.missingFloorBoardTape ? 16 : 0) +
-      (causeOfDamageGroup.poorSealingPractices ? 64 : 0) +
-      (causeOfDamageGroup.wetInsulationBlanket ? 8 : 0);
-    if (causesOfDamage == 0 && !causeOfDamageGroup.environment) {
-      causesOfDamage = null;
-    }
+    const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
+      (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
+      (causeOfDamageGroup.damageOther ? 512 : 0) +
+      (causeOfDamageGroup.environment ? 1 : 0) +
+      (causeOfDamageGroup.galleySpill ? 2 : 0) +
+      (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
+      (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
+      (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
+      (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
+      (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
+
 
 
     const cpcpSectionData = Object.assign({},
       this.sdaForm.value.cpcpSectionGroup,
       {
-        
+
         causesOfDamage: causesOfDamage
       },
       this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup.causeOfDamageDescriptionGroup,
     );
     const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
     const correctiveActionData = {
-        IsDeferred: correctiveActionSection.isDeferred,
+      IsDeferred: correctiveActionSection.isDeferred,
       DeferralCode: correctiveActionSection.deferralCode,
       DeferralNo: correctiveActionSection.deferralNo,
       RepairType: correctiveActionSection.correctiveActionOptionFormGroup.repairType,
@@ -137,8 +135,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       CompletedBy: correctiveActionSection.completedBy,
       CompletedDate: correctiveActionSection.completedDate
     };
-    
-    const sdaDetail: ISda = Object.assign({}, this.alert,
+
+    const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: 'badgeid',
         lastModifiedOn: new Date(),
@@ -146,7 +144,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
         statusUpdatedOn: new Date(),
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
-        cPCPSection: cpcpSectionData,
+        cpcpSection: cpcpSectionData,
         correctiveActionSection: correctiveActionData
       }
     );

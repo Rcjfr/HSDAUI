@@ -1,5 +1,5 @@
 ﻿import { ActionReducer, Action } from '@ngrx/store';
-import { IAlert,ISdaListView } from '../models';
+import { IAlert, ISdaListView } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
@@ -39,13 +39,15 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_SDA_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadSDAsCompleteAction;
+
         return state.merge({ loading: false, sda: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadSDAsCompleteAction;
+
         return state.merge({ loading: false, sdaList: List.of(...act.payload) });
-    }
+      }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadAircraftInfoCompleteAction;
@@ -75,4 +77,3 @@ export const getSDAList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;
-

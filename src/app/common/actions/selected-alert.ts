@@ -75,7 +75,7 @@ export class LoadSDAsFailAction implements Action {
 }
 export class LoadSDAAction implements Action {
   public type = ActionTypes.LOAD_SDA;
-  constructor(public payload:number) { }
+  constructor(public payload: number) { }
 }
 export class LoadSDACompleteAction implements Action {
   public type = ActionTypes.LOAD_SDA_COMPLETE;
@@ -85,9 +85,6 @@ export class LoadSDAFailAction implements Action {
   public type = ActionTypes.LOAD_SDA_FAIL;
   constructor(public payload: any) { }
 }
-
-
-
 
 export type Actions =
   LoadNoseNumbersAction |

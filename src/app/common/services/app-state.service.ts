@@ -5,7 +5,7 @@ import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import { Observable } from 'rxjs/Rx';
-import { IStation,ISda } from '../models';
+import { IStation, ISda } from '../models';
 @Injectable()
 export class AppStateService {
 
@@ -47,16 +47,16 @@ export class AppStateService {
     return this.store.select(fromRoot.getDamageTypes);
   }
   getCauseOfDamages() {
-      return this.store.select(fromRoot.getCauseOfDamages);
+    return this.store.select(fromRoot.getCauseOfDamages);
   }
   getFloorboardConditions() {
-      return this.store.select(fromRoot.getFloorboardConditions);
+    return this.store.select(fromRoot.getFloorboardConditions);
   }
   getRepairDescriptions() {
-      return this.store.select(fromRoot.getRepairDescriptions);
+    return this.store.select(fromRoot.getRepairDescriptions);
   }
   getRepairDocuments() {
-      return this.store.select(fromRoot.getRepairDocuments);
+    return this.store.select(fromRoot.getRepairDocuments);
   }
   getReasonsForChange() {
     return this.store.select(fromRoot.getReasonsForChange);
@@ -80,15 +80,15 @@ export class AppStateService {
   getSDAList() {
     return this.store.select(fromRoot.getSDAList);
   }
-  
+
   //Dispatch Actions
-  saveSda(sda:ISda): void {
+  saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSDAAction(sda));
   }
   loadSDAList(): void {
     this.store.dispatch(new selectedAlertActions.LoadSDAsAction());
   }
-  loadSDA(sdaId:number): void {
+  loadSDA(sdaId: number): void {
     this.store.dispatch(new selectedAlertActions.LoadSDAAction(sdaId));
   }
   loadAircraftInfo(noseNumber: string): void {

@@ -8,7 +8,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import '../../common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AppStateService } from '../../common/services';
-import { Subscription } from "rxjs/Rx";
+import { Subscription } from 'rxjs/Rx';
 import '@ngrx/core/add/operator/select';
 @Component({
   selector: 'aa-alert-detail',
@@ -17,7 +17,7 @@ import '@ngrx/core/add/operator/select';
   providers: []
 })
 export class AlertDetailComponent implements OnInit, OnDestroy {
-  alert$: Observable<models.ISda>;
+  sda$: Observable<models.ISda>;
   actionsSubscription: Subscription;
   loading$: Observable<boolean>;
   constructor(private appStateService: AppStateService,
@@ -29,12 +29,12 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit(): void {
-    this.alert$ = this.appStateService.getSelectedSda(); // .map(d => d && d.toJS());// .subscribe((s: Alert) => this.alert = s);
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
     this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.appStateService.loadNoseNumbers('');
     this.actionsSubscription = this.route.params.select<string>('id').subscribe(id => {
-      if (id !== "new") {
-        let sdaId = Number.parseInt(id);
+      if (id !== 'new') {
+        const sdaId = Number.parseInt(id);
         this.appStateService.loadSDA(sdaId);
       }
     });

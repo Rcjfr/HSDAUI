@@ -1,23 +1,23 @@
-﻿<div [formGroup]="unscheduledMaintenanceGroup">
-  <aac-field-container    label="Description:"    helptext="(RON,Pilot Report etc.)"    [message]="displayMessage.unscheduledMaintenanceDescription"    required >
-    <input type="text" tabindex='18' class="form-control" formControlName="unscheduledMaintenanceDescription">
+﻿<div [formGroup]="formGroup">
+  <aac-field-container label="Description:" helptext="(RON,Pilot Report etc.)" [message]="displayMessage.unscheduledMaintenanceDescription" required>
+    <input type="text" tabindex='18' class="form-control" [ngModel]="sda.generalSection.unscheduledMaintenanceDescription" formControlName="unscheduledMaintenanceDescription">
   </aac-field-container>
 
-  
+
   <aac-field-container label="Non-Routine #:" [message]="displayMessage.nonRoutineNo">
-    <input type="text" tabindex='19' class="form-control" formControlName="nonRoutineNo">
+    <input type="text" tabindex='19' class="form-control" [ngModel]="sda.generalSection.nonRoutineNo" formControlName="nonRoutineNo">
   </aac-field-container>
 
   <aac-field-container label="MIC #:" [message]="displayMessage.micNo">
-    <input type="text" tabindex='20' class="form-control" formControlName="micNo">
+    <input type="text" tabindex='20' class="form-control" [ngModel]="sda.generalSection.micNo" formControlName="micNo">
   </aac-field-container>
   <div class="row form-group">
     <div class="col-md-offset-4 col-sm-8">
       <span *ngIf="displayMessage.message &&
-                (unscheduledMaintenanceGroup.get('micNo').touched ||
-                unscheduledMaintenanceGroup.get('micNo').dirty)" class="error">
-          {{displayMessage.message}}
-        </span>
+                (formGroup.get('micNo').touched ||
+                formGroup.get('micNo').dirty)" class="error">
+        {{displayMessage.message}}
+      </span>
     </div>
   </div>
 </div>

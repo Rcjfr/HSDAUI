@@ -13,7 +13,8 @@ export class CpcpTaskDescriptionComponent extends BaseFormComponent implements O
     constructor(private fb: FormBuilder) {
         super('cpcpTaskDescriptionFormGroup');
     }
-
+    loadData() {
+    }
     ngOnInit() {
         this.cpcpTaskDescriptionFormGroup = this.fb.group({
             cpcpTask: new FormControl({ value: '', disabled: true }, [Validators.maxLength(25), Validators.required])

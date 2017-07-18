@@ -1,19 +1,31 @@
-﻿<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
+﻿<h2 *ngIf="!sda.id">Create new SDA</h2>
+<h2 *ngIf="sda.id">Edit/View SDA</h2>
+<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
+  <div *ngIf="loading">
+    <div class="text-center"><span class="glyphicon glyphicon-refresh"> </span></div>
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading">General Information</div>
     <aa-general-section-form [parent]="sdaForm"
+                             [sda]="sda"
                              [errorMessages]="displayMessage$ | async"></aa-general-section-form>
+    
     <div class="panel-heading">Description and Location of Defects or Damage</div>
     <aa-defect-location-section-form [parent]="sdaForm"
+                                     [sda]="sda"
                                      [errorMessages]="displayMessage$ | async">
     </aa-defect-location-section-form>
+    
     <div class="panel-heading">Corrosion Prevention Control Program</div>
+    
     <aa-cpcp-section-form [parent]="sdaForm"
+                          [sda]="sda"
                           [errorMessages]="displayMessage$ | async">
     </aa-cpcp-section-form>
     
     <div class="panel-heading">Corrective Action</div>
     <aa-corrective-action-form [parent]="sdaForm"
+                               [sda]="sda"
                                [errorMessages]="displayMessage$ | async">
     </aa-corrective-action-form>
     <!--
@@ -28,10 +40,12 @@
     </aa-damage-tolerance-evaluation>
     <div class="panel-heading">CPCP Disposition</div>
     <aa-cpcp-disposition-section [parent]="sdaForm"
+                                  [sda]="sda"
                                  [errorMessages]="displayMessage$ | async">
     </aa-cpcp-disposition-section>-->
     <div class="panel-heading">Current Status</div>
     <aa-current-status-section [parent]="sdaForm"
+                               [sda]="sda"
                                [errorMessages]="displayMessage$ | async">
     </aa-current-status-section>
 
@@ -43,4 +57,5 @@
       </div>
     </div>
   </div>
+  
 </form>

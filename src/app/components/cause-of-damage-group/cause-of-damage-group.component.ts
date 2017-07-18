@@ -35,7 +35,9 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
       });
     this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
   }
-
+  public isChecked(val: number, check: number) {
+    return val & check;
+  }
   ngOnDestroy(): void {
     super.ngOnDestroy();
   }

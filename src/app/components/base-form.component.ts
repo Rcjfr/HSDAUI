@@ -2,11 +2,20 @@
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
+import * as models from '../common/models';
+export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Input() sda: models.ISda;
 
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
+
+  //set sda(data:models.ISda) {
+  //  this._sda = data;
+  //  //if (data.id) { this.loadData(); }
+  //}
+  //get sda() {
+  //  return this._sda;
+  //}
+
+
   @Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
@@ -16,7 +25,6 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input()
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};
-
   }
   constructor(public formGroupName: string) {
     this.subscriptions = [];
@@ -34,7 +42,7 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(v => {
 
         this.parent.markAsDirty();
-        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true});
+        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true });
       });
   }
   ngOnInit() {

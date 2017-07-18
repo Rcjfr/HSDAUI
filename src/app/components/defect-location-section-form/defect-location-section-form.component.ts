@@ -20,26 +20,27 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
-    constructor( private fb: FormBuilder, private appStateService: AppStateService) {
-      super('defectLocationSectionFormGroup');
-    }
-
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+    super('defectLocationSectionFormGroup');
+  }
+  loadData() {
+  }
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
     this.defectLocationSectionFormGroup = this.fb.group({
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
-          damageDescription: ['', [Validators.required,  Validators.maxLength(250)]],
-          length: ['', [Validators.required]],
-          width: ['', [Validators.required]],
-          depth: ['', [Validators.required]],
+      damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
+      length: ['', [Validators.required]],
+      width: ['', [Validators.required]],
+      depth: ['', [Validators.required]],
 
-          manufacturerPartNo: ['', [Validators.maxLength(50)]],
-          partDefective: ['', [Validators.required, Validators.maxLength(50)]],
-          manufacturerSerialNo: ['', [Validators.maxLength(50)]],
-          partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
-          partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+      manufacturerPartNo: ['', [Validators.maxLength(50)]],
+      partDefective: ['', [Validators.required, Validators.maxLength(50)]],
+      manufacturerSerialNo: ['', [Validators.maxLength(50)]],
+      partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
+      partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+      detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
     this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);

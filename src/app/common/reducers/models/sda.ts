@@ -2,7 +2,6 @@
 import { ISda } from '../../models';
 export interface SdaRecord extends TypedRecord<SdaRecord>, ISda {  }
 export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
-  id: 0,
   historicId: '',
   workflowInstanceId: '',
   versionID: '',
@@ -12,9 +11,8 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   statusUpdatedBy: 'BADGEID',
   statusUpdatedOn: new Date(),
   status: 1, //Open,
-  generalSection: null,
-  defectLocationSection: null,
-  cPCPSection: null,
-  correctiveActionSection:null
-  
+  generalSection: {},
+  defectLocationSection: {},
+  cpcpSection: {},
+  correctiveActionSection: {}
 });
