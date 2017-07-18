@@ -19,17 +19,18 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   }
 
   ngOnInit() {
+    const causesOfDamage = this.sda.CPCPSection.causesOfDamage;
     this.causeOfDamageGroup = this.fb.group({
-      environment: ['', []],
-      galleySpill: ['', []],
-      blockedDrain: ['', []],
-      chemicalSpill: ['', []],
-      wetInsulationBlanket: ['', []],
-      missingFloorBoardTape: ['', []],
-      hardwareNotInstalled: ['', []],
-      poorSealingPractices: ['', []],
-      missingCorrosionInhibitor: ['', []],
-      damageOther: ['', []]
+      environment: [causesOfDamage & 0, []],
+      galleySpill: [causesOfDamage & 1, []],
+      blockedDrain: [causesOfDamage & 2, []],
+      chemicalSpill: [causesOfDamage & 4, []],
+      wetInsulationBlanket: [causesOfDamage & 8, []],
+      missingFloorBoardTape: [causesOfDamage & 16, []],
+      hardwareNotInstalled: [causesOfDamage & 32, []],
+      poorSealingPractices: [causesOfDamage & 64, []],
+      missingCorrosionInhibitor: [causesOfDamage & 128, []],
+      damageOther: [causesOfDamage & 256, []]
     }, {
         validator: CustomValidators.validateCauseOfDamageGroupFields
       });

@@ -8,9 +8,21 @@ import { Subject } from 'rxjs/Rx';
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit {
-  @Input() sdaList: ISdaListView[];
+  dtTrigger: Subject<any> = new Subject();
+  private _sdaList: ISdaListView[];
+
+  //@Input() sdaList: ISdaListView[];
+  @Input()
+  set sdaList(data: ISdaListView[]) {
+    this._sdaList = data;
+    this.dtTrigger.next();
+  }
+
+  get name(): ISdaListView[] { return this._sdaList; }
+
+
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<number> = new Subject();
+
 
   constructor() { }
 
@@ -26,6 +38,6 @@ export class AlertsGridComponent implements OnInit {
         'orderable': false
       }]
     };
-    this.dtTrigger.next(1); //TODO: this approach is not working
+    
   }
 }

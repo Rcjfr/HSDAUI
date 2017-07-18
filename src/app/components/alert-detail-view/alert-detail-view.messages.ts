@@ -183,19 +183,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     }
   },
   cpcpSectionGroup: {
-    cpcprelated: {
+    iscpcpRelatedEvent: {
       required: 'CPCP  is required.'
     },
-    wsCorrosion: {
+    isWideSpreadCorrosion: {
       required: 'Widespread Corrosion is required.'
     },
     corrosionLevel: {
       required: 'Corrosion level is required.'
     },
-    previouslyBlended: {
+    isPreviouslyBlended: {
       required: 'Corroded Area Previously Blended is required.'
     },
-    corrosionTask: {
+    corrosionTaskNo: {
       required: 'Corrosion Task # required.',
       pattern: 'Corrosion Task # must be alphanumeric.',
       maxlength: 'Corrosion Task # must not be more than 25 numbers.'
@@ -204,7 +204,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     corrosionType: {
       required: 'Type of Corrosion is required.'
     },
-    corrosionTypeText: {
+    corrosionTypeOtherText: {
       required: 'Description is  required.',
       maxlength: 'Description must be not more than 250 numbers.'
     },

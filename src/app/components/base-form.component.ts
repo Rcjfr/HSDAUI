@@ -2,12 +2,24 @@
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
-
+import * as models from '../common/models';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Input() parent: FormGroup;
+  public _sda: models.ISda;
+
+  @Input()
+  set sda(data:models.ISda) {
+    this._sda = data;
+    this.loadData();
+  }
+  get sda() {
+    return this._sda;
+  }
+
+
+@Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -20,6 +32,9 @@ export class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   constructor(public formGroupName: string) {
     this.subscriptions = [];
+  }
+  loadData() {
+    //Override in subclass
   }
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);

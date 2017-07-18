@@ -1,7 +1,9 @@
 ﻿import { IGeneralSection } from './general-section.model';
 import { IDefectLocationSection } from './defect-location-section.model';
+import { ICPCPSection } from './cpcp-section.model';
+import { ICorrectiveActionSection } from './corrective-action-section.model';
 export interface ISda {
-    id: number;
+    id?: number;
     historicId: string;
     workflowInstanceId: string;
     versionID: string;
@@ -11,9 +13,9 @@ export interface ISda {
     statusUpdatedBy: string;
     statusUpdatedOn: Date;
     status: number;
-    generalSection:any,
-    defectLocationSection: any,
-    cPCPSection: any,
-    correctiveActionSection: any
+    generalSection: IGeneralSection,
+    defectLocationSection: IDefectLocationSection,
+    CPCPSection: ICPCPSection,
+    correctiveActionSection: ICorrectiveActionSection
     
 }

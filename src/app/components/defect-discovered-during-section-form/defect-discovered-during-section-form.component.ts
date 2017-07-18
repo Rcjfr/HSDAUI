@@ -23,7 +23,12 @@ export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponen
     });
     this.parent.addControl(this.formGroupName, this.defectDiscoveredDuringSectionFormGroup);
   }
-
+  loadData() {
+    if (!this.sda.id) return;
+    this.defectDiscoveredDuringSectionFormGroup.patchValue({
+      defectDiscoveredDuring: this.sda.generalSection.defectDiscoveredDuring
+    });
+  }
   get defectDiscovered() {
     return this.defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value;
   }

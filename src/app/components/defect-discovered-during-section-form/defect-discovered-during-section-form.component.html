@@ -12,6 +12,7 @@
   </div>
   <aa-unscheduled-maintenance-section
     [parent]="defectDiscoveredDuringSectionFormGroup"
+                                      [sda]="sda"
     [errorMessages]="displayMessage"
     *ngIf="defectDiscovered === 'U'"
   >
@@ -19,6 +20,7 @@
   </aa-unscheduled-maintenance-section>
   <aa-scheduled-maintenance-section
     [parent]="defectDiscoveredDuringSectionFormGroup"
+                                    [sda]="sda"
     [errorMessages]="displayMessage"
     *ngIf="defectDiscovered === 'S'"
   >

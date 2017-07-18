@@ -17,7 +17,7 @@ import '@ngrx/core/add/operator/select';
   providers: []
 })
 export class AlertDetailComponent implements OnInit, OnDestroy {
-  alert$: Observable<models.ISda>;
+  sda$: Observable<models.ISda>;
   actionsSubscription: Subscription;
   loading$: Observable<boolean>;
   constructor(private appStateService: AppStateService,
@@ -29,7 +29,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit(): void {
-    this.alert$ = this.appStateService.getSelectedSda(); // .map(d => d && d.toJS());// .subscribe((s: Alert) => this.alert = s);
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
     this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.appStateService.loadNoseNumbers('');
     this.actionsSubscription = this.route.params.select<string>('id').subscribe(id => {

@@ -19,8 +19,8 @@ unscheduledMaintenanceGroup: FormGroup;
   ngOnInit() {
     this.unscheduledMaintenanceGroup = this.fb.group({
         unscheduledMaintenanceDescription: ['', [Validators.required]],
-          nonRoutineNo: ['', [Validators.maxLength(50)]],
-          micNo: ['', [Validators.maxLength(50)]]
+        nonRoutineNo: ['', [Validators.maxLength(50)]],
+        micNo: ['', [Validators.maxLength(50)]]
         },
         {
           validator: CustomValidators.validateUnscheduledMaintenanceFields
@@ -28,7 +28,14 @@ unscheduledMaintenanceGroup: FormGroup;
       );
       this.parent.addControl(this.formGroupName, this.unscheduledMaintenanceGroup);
   }
-
+  loadData() {
+    if (!this.sda.id) return;
+    this.unscheduledMaintenanceGroup.patchValue({
+      unscheduledMaintenanceDescription: this.sda.generalSection.unscheduledMaintenanceDescription,
+      nonRoutineNo: this.sda.generalSection.nonRoutineNo,
+      micNo: this.sda.generalSection.micNo
+    });
+  }
   ngOnDestroy() {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.

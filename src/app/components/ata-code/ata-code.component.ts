@@ -24,10 +24,15 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
       ataCode2: ['', Validators.required]
     });
     this.parent.addControl(this.formGroupName, this.ataCodesSectionFormGroup);
-    // this.ataCodes1 = this.ATACodes.map( a=> {
-    //   return {code: a.primaryCode, description: a.primaryCodeDescription}}
-    //   ).filter()
-              }
+  }
+  loadData() {
+    if (!this.sda.id) return;
+    this.getAlertCode2s(this.sda.generalSection.ataCode1.toString());
+    this.ataCodesSectionFormGroup.patchValue({
+      ataCode1: this.sda.generalSection.ataCode1,
+      ataCode2: this.sda.generalSection.ataCode2
+    });
+  }
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
 

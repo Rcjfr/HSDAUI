@@ -3,7 +3,7 @@
     <div class="col-md-6">
 
       <aac-field-container label="SDR Number:" [message]="displayMessage.sdrNumber">
-        <input type="text" tabindex="1" class="form-control" formControlName="sdrNumber">
+        <input type="text" tabindex="1" class="form-control" formControlName="sdrNumber" >
       </aac-field-container>
 
     </div>
@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <aa-ata-code [parent]="generalSectionFormGroup" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
+      <aa-ata-code [parent]="generalSectionFormGroup" [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
       </aa-ata-code>
     </div>
   </div>
@@ -67,12 +67,15 @@
 
       <!--Aircraft Info Section-->
       <aa-aircraft-info-section-form [parent]="generalSectionFormGroup"
+                                     [sda]="sda"
                                       [errorMessages]="displayMessage"
                                       [aircraftInfo]="aircraftInfo$ | async"
                                       (onNoseNumberChange)="populateAircraftInfo($event)"></aa-aircraft-info-section-form>
     </div>
     <div class="col-md-6">
-      <aa-defect-discovered-during-section-form [parent]="generalSectionFormGroup" [errorMessages]="displayMessage"></aa-defect-discovered-during-section-form>
+      <aa-defect-discovered-during-section-form [parent]="generalSectionFormGroup"
+                                                [sda]="sda"
+                                                [errorMessages]="displayMessage"></aa-defect-discovered-during-section-form>
     </div>
   </div>
 </div>

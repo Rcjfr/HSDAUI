@@ -34,7 +34,15 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     this.parent.addControl(this.formGroupName, this.scheduledMaintenanceGroup);
     this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
-ngOnDestroy() {
+  loadData() {
+    if (!this.sda.id) return;
+    this.scheduledMaintenanceGroup.patchValue({
+      checkType: this.sda.generalSection.checkType,
+      nonRoutineNo: this.sda.generalSection.nonRoutineNo,
+      routineNo: this.sda.generalSection.routineNo,
+    });
+  }
+  ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
   }
 }

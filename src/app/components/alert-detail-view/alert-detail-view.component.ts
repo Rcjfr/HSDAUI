@@ -27,7 +27,7 @@ import { AppStateService } from '../../common/services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit {
-  @Input() alert: ISda;
+  @Input() sda: ISda;
   @Input() loading: boolean;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -138,7 +138,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       CompletedDate: correctiveActionSection.completedDate
     };
     
-    const sdaDetail: ISda = Object.assign({}, this.alert,
+    const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: 'badgeid',
         lastModifiedOn: new Date(),

@@ -4,7 +4,7 @@
     <select tabindex="15" class="form-control" (change)='getAlertCode2s($event.target.value)'
             formControlName="ataCode1">
       <option value="">Select ATA Code 1</option>
-      <option *ngFor="let ac of (ATACodes | uniq:'primaryCode')" [value]="ac.primaryId">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
+      <option *ngFor="let ac of (ATACodes | uniq:'primaryId')" [value]="ac.primaryId">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
     </select>
   </aac-field-container>
 

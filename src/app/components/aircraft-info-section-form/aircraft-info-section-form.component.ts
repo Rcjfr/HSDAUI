@@ -72,6 +72,19 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
 
   }
+  loadData() {
+    if (!this.sda.id) return;
+    this.aircraftInfoSectionFormGroup.patchValue({
+      aircraftNo: this.sda.generalSection.aircraftNo,
+      manufacturer: this.sda.generalSection.manufacturer,
+      model: this.sda.generalSection.model,
+      serialNo: this.sda.generalSection.serialNo,
+      totalShipTime: this.sda.generalSection.totalShipTime,
+      cycles: this.sda.generalSection.cycles,
+      fleet: this.sda.generalSection.fleet,
+      originator: this.sda.generalSection.originator
+    });
+  }
   noseNumberOnSelect(e: TypeaheadMatch) {
     // console.log('Selected value: ', e.value);
     this.onNoseNumberChange.emit(e.value);

@@ -10,11 +10,11 @@ import { List } from "immutable";
   styleUrls: ['./alerts.component.less']
 })
 export class AlertsComponent implements OnInit {
-  sdaList$: Observable<List<ISdaListView>>;
+  sdaList$: Observable<ISdaListView[]>;
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.sdaList$ = this.appStateService.getSDAList(); 
+    this.sdaList$ = this.appStateService.getSDAList().map(d=>d&&d.toJS()); 
     this.appStateService.loadSDAList();
   }
 
