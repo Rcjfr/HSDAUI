@@ -94,19 +94,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
     );
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
-    let causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 2 : 0) +
-      (causeOfDamageGroup.chemicalSpill ? 4 : 0) +
-      (causeOfDamageGroup.damageOther ? 256 : 0) +
-      (causeOfDamageGroup.environment ? 0 : 0) +
-      (causeOfDamageGroup.galleySpill ? 1 : 0) +
-      (causeOfDamageGroup.hardwareNotInstalled ? 32 : 0) +
-      (causeOfDamageGroup.missingCorrosionInhibitor ? 128 : 0) +
-      (causeOfDamageGroup.missingFloorBoardTape ? 16 : 0) +
-      (causeOfDamageGroup.poorSealingPractices ? 64 : 0) +
-      (causeOfDamageGroup.wetInsulationBlanket ? 8 : 0);
-    if (causesOfDamage == 0 && !causeOfDamageGroup.environment) {
-      causesOfDamage = null;
-    }
+    let causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
+      (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
+      (causeOfDamageGroup.damageOther ? 512 : 0) +
+      (causeOfDamageGroup.environment ? 1 : 0) +
+      (causeOfDamageGroup.galleySpill ? 2 : 0) +
+      (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
+      (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
+      (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
+      (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
+      (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
+    
 
 
     const cpcpSectionData = Object.assign({},
