@@ -18,22 +18,22 @@ import { AppStateService } from '../../common/services';
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
   correctiveActionRepairDescriptionFormGroup: FormGroup;
-  repairDescriptionTypes$: Observable<List<models.IRepairDescriptionType>>;
-  repairDocumentTypes$: Observable<List<models.IRepairDocumentType>>;
+  repairDescriptions$: Observable<List<models.IRepairDescription>>;
+  repairDocuments$: Observable<List<models.IRepairDocument>>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
 
   ngOnInit() {
-      this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptionTypes();
-    this.repairDocumentTypes$ = this.appStateService.getRepairDocumentTypes();
+     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-        repairDescriptionType: ['', []],
+        repairDescriptionType: ['', [ Validators.required]],
         repairDocumentType: ['', []],
         chapFigRepairText: ['', [Validators.maxLength(30)]],
       engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-      isExternallyVisible: ['', []],
+      isExternallyVisible: ['', [ Validators.required]],
       repairHeight: ['', []],
       repairWidth: ['', []]
     },

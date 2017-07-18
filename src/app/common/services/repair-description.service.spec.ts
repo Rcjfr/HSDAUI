@@ -1,15 +1,15 @@
 ﻿import { TestBed, inject } from '@angular/core/testing';
 
-import { RepairDescriptionTypeService } from './repair-description.service';
+import { RepairDescriptionService } from './repair-description.service';
 
-describe('RepairDescriptionTypeService', () => {
+describe('RepairDescriptionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-        providers: [RepairDescriptionTypeService]
+      providers: [RepairDescriptionService]
     });
   });
 
-  it('should ...', inject([RepairDescriptionTypeService], (service: RepairDescriptionTypeService) => {
+  it('should ...', inject([RepairDescriptionService], (service: RepairDescriptionService) => {
     expect(service).toBeTruthy();
   }));
 });

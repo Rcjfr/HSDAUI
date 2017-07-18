@@ -12,12 +12,12 @@ import { AppStateService } from '../../../common/services';
 export class SearchByCorrectiveActionComponent implements OnInit {
     repairDocumentType: string[] = [];
     majorRepairDescription: string[] = [];
-    repairDescriptionTypes$: Observable<List<models.IRepairDescriptionType>>;
-    repairDocumentTypes$: Observable<List<models.IRepairDocumentType>>;
+    repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
+    repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
 constructor(private appStateService: AppStateService) { }
     ngOnInit() {
-        this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptionTypes();
-        this.repairDocumentTypes$ = this.appStateService.getRepairDocumentTypes();
+        this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
+        this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
     }
 
 }

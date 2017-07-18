@@ -2,16 +2,16 @@
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
-import { IRepairDocumentType } from '../models/repair-document.model';
+import { IRepairDocument } from '../models/repair-document.model';
 import '../rxjs-extensions';
 
 @Injectable()
-export class RepairDocumentTypeService {
+export class RepairDocumentService {
 
-    private endPointUrl = `${environment.hsdaApiBaseUrl}repairDocumentType`;
+    private endPointUrl = `${environment.hsdaApiBaseUrl}repairdocument`;
     constructor(private http: Http) { }
 
-    getAllRepairDocumentTypes(): Observable<IRepairDocumentType[]> {
+    getAllRepairDocuments(): Observable<IRepairDocument[]> {
         //TODO:Uncomment when lookup table is available
         //return this.http.get(this.endPointUrl)
         //  .map((result) => result.json());

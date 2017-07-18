@@ -5,7 +5,7 @@
         <aac-field-container label="Description:" [message]="displayMessage.repairDescriptionType">
           <select class="form-control" tabindex='63' id="repairDescriptionType" formControlName="repairDescriptionType">
             <option value="">Select</option>
-            <option *ngFor="let item of repairDescriptionTypes$ | async" [value]="item.id">{{item.description}}</option>
+            <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
         </aac-field-container>
       </div>
@@ -17,7 +17,7 @@
       <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType">
         <select class="form-control" tabindex='64' id="repairDocumentType" formControlName="repairDocumentType">
           <option value="">Select</option>
-          <option *ngFor="let item of repairDocumentTypes$ | async" [value]="item.id">{{item.description}}</option>
+          <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>
       </aac-field-container>
     </div>

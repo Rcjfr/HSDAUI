@@ -16,8 +16,8 @@ import { decimalsNumberMask } from '../../common/masks';
   styleUrls: ['./repair-details-section.component.less']
 })
 export class RepairDetailsSectionComponent extends BaseFormComponent implements OnInit {
-    repairDescriptionTypes$: Observable<List<models.IRepairDescriptionType>>;
-    repairDocumentTypes$: Observable<List<models.IRepairDocumentType>>;
+     repairDescriptions$: Observable<List<models.IRepairDescription>>;
+    repairDocuments$: Observable<List<models.IRepairDocument>>;
     createNumberMask = createNumberMask;
     public  numberMask = createNumberMask({
         prefix: '',
@@ -32,8 +32,8 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     }
 
     ngOnInit() {
-        this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptionTypes();
-        this.repairDocumentTypes$ = this.appStateService.getRepairDocumentTypes();
+       this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+        this.repairDocuments$ = this.appStateService.getRepairDocuments();
         this.repairDetailsSectionGroup = this.fb.group({
             engineeringAuthorization: ['', [Validators.maxLength(25)]],
             routineTaskCard: ['', [Validators.maxLength(50)]],

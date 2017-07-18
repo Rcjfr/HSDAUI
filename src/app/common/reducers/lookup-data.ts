@@ -17,8 +17,8 @@ export interface State {
   damageTypes: List<models.IDamageType>;
   causeOfDamages: List<models.ICauseOfDamage>;
   floorboardConditions: List<models.IFloorboardCondition>;
-  repairDocumentTypes: List<models.IRepairDocumentType>;
-  repairDescriptionTypes: List<models.IRepairDescriptionType>;
+  repairDocuments: List<models.IRepairDocument>;
+  repairDescriptions: List<models.IRepairDescription>;
   reasonsForChange: List<models.IReasonForChange>;
   dteStatus: List<models.IBaseLookUp>;
   repairInspectionStatus: List<models.IBaseLookUp>;
@@ -39,8 +39,8 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   damageTypes: <List<models.IDamageType>>List.of(),
   causeOfDamages: <List<models.ICauseOfDamage>>List.of(),
   floorboardConditions: <List<models.IFloorboardCondition>>List.of(),
-  repairDocumentTypes: <List<models.IRepairDocumentType>>List.of(),
-  repairDescriptionTypes: <List<models.IRepairDescriptionType>>List.of(),
+  repairDocuments: <List<models.IRepairDocument>>List.of(),
+  repairDescriptions: <List<models.IRepairDescription>>List.of(),
   reasonsForChange: <List<models.IReasonForChange>>List.of(),
   dteStatus: <List<models.IBaseLookUp>>List.of(),
   repairInspectionStatus: <List<models.IBaseLookUp>>List.of()
@@ -65,8 +65,8 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DAMAGE_TYPES:
     case lookupDataActions.ActionTypes.LOAD_CAUSE_OF_DAMAGES:
     case lookupDataActions.ActionTypes.LOAD_FLOORBOARD_CONDITIONS:
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES:
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS:
     case lookupDataActions.ActionTypes.LOAD_REASONS_FOR_CHANGE:
     case lookupDataActions.ActionTypes.LOAD_DTE_STATUS:
     case lookupDataActions.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS:
@@ -145,17 +145,17 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, floorboardConditions: List.of(...act.payload) });
       }
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENT_TYPES_COMPLETE:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE:
       {
-              const act = action as lookupDataActions.LoadRepairDocumentTypesCompleteAction;
+        const act = action as lookupDataActions.LoadRepairDocumentsCompleteAction;
 
-              return state.merge({ loading: false, RepairDocumentTypes: List.of(...act.payload) });
+        return state.merge({ loading: false, repairDocuments: List.of(...act.payload) });
       }
-    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTION_TYPES_COMPLETE:
+    case lookupDataActions.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE:
       {
-              const act = action as lookupDataActions.LoadRepairDescriptionTypesCompleteAction;
+        const act = action as lookupDataActions.LoadRepairDescriptionsCompleteAction;
 
-              return state.merge({ loading: false, repairDescriptionTypes: List.of(...act.payload) });
+        return state.merge({ loading: false, repairDescriptions: List.of(...act.payload) });
       }
     case lookupDataActions.ActionTypes.LOAD_REASONS_FOR_CHANGE_COMPLETE:
       {
@@ -195,8 +195,8 @@ export const getStations = (state: State) => state.stations;
 export const getDamageTypes = (state: State) => state.damageTypes;
 export const getCauseOfDamages = (state: State) => state.causeOfDamages;
 export const getFloorboardConditions = (state: State) => state.floorboardConditions;
-export const getRepairDocumentTypes = (state: State) => state.repairDocumentTypes;
-export const getRepairDescriptionTypes = (state: State) => state.repairDescriptionTypes;
+export const getRepairDocuments = (state: State) => state.repairDocuments;
+export const getRepairDescriptions = (state: State) => state.repairDescriptions;
 export const getReasonsForChange = (state: State) => state.reasonsForChange;
 export const getDTEStatus = (state: State) => state.dteStatus;
 export const getRepairInspectionStatus = (state: State) => state.repairInspectionStatus;
