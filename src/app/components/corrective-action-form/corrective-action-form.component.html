@@ -4,12 +4,12 @@
 
     <div class="col-sm-2">
       <aac-checkbox-container label="Deferred">
-        <input type="checkbox" tabindex="55" formControlName="deferredSectionOptions" />
+        <input type="checkbox" tabindex="55" formControlName="isDeferred" />
       </aac-checkbox-container>
 
 
     </div>
-    <div [hidden]="correctiveActionFormGroup.get('deferredSectionOptions').value != true">
+    <div [hidden]="correctiveActionFormGroup.get('isDeferred').value != true">
       <div class="col-sm-6">
         <aac-field-container label="Enter SCEPTRE Deferral Code:"
                              helptext="(MON, SAD, ROB, etc)"
@@ -20,11 +20,11 @@
       </div>
 
       <div class="col-sm-4">
-        <div class="row form-group" [class.has-error]="displayMessage.deferral">
-          <label class="col-sm-4 control-label" for="deferral">Deferral #:</label>
+        <div class="row form-group" [class.has-error]="displayMessage.deferralNo">
+          <label class="col-sm-4 control-label" for="deferralNo">Deferral #:</label>
           <div class="col-sm-8">
-            <input type="text" tabindex='57' class="form-control" id="deferral" formControlName="deferral">
-            <span *ngIf="displayMessage.deferral" class="help-block">{{displayMessage.deferral}}</span>
+            <input type="text" tabindex='57' class="form-control" id="deferralNo" formControlName="deferralNo">
+            <span *ngIf="displayMessage.deferralNo" class="help-block">{{displayMessage.deferralNo}}</span>
           </div>
         </div>
 
@@ -42,17 +42,17 @@
 
     <div class="col-sm-2">
       <aac-checkbox-container label="Major Repair">
-        <input type="checkbox" tabindex="70" value="1" formControlName="majorRepairOptions" />
+        <input type="checkbox" tabindex="70" value="1" formControlName="isMajorRepair" />
       </aac-checkbox-container>
     </div>
-    <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('majorRepairOptions').value != true">
+    <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('isMajorRepair').value != true">
 
       <aac-field-container 
                            helptext="If major, repair document must be an SRM Reference or an Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
                            label="Description:"
                            labelGridColumnWidth="2"
-                           [message]="displayMessage.repairDescription">
-        <textarea tabindex='71' class="form-control" formControlName="repairDescription"></textarea>
+                           [message]="displayMessage.majorRepairDescription">
+        <textarea tabindex='71' class="form-control" formControlName="majorRepairDescription"></textarea>
       </aac-field-container>
     </div>
   </div>

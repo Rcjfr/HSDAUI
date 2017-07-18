@@ -174,7 +174,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     CauseOfDamageService,
     FloorboardConditionService,
     RepairDocumentService,
-    RepairDescriptionService,
+  RepairDescriptionService,
     ReasonForChangeService,
     DteStatusService,
     RepairInspectionStatusService,

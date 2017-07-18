@@ -10,14 +10,14 @@ import { AppStateService } from '../../../common/services';
     styleUrls: ['./search-by-corrective-action.component.less']
 })
 export class SearchByCorrectiveActionComponent implements OnInit {
-    repairDocument: string[] = [];
-    repairDesc: string[] = [];
-    repairDescriptions$: Observable<List<models.IRepairDescription>>;
-    repairDocuments$: Observable<List<models.IRepairDocument>>;
+    repairDocumentType: string[] = [];
+    majorRepairDescription: string[] = [];
+    repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
+    repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
 constructor(private appStateService: AppStateService) { }
     ngOnInit() {
-        this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-        this.repairDocuments$ = this.appStateService.getRepairDocuments();
+        this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
+        this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
     }
 
 }
