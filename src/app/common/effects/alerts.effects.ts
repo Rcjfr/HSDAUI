@@ -48,7 +48,7 @@ export class AlertEffects {
       return this.sdaService.saveSda(sda)
         .map((sdaid: number) => {
           return new selectedAlert.SaveSDACompleteAction(sdaid);
-          })
+        })
         .catch((err) => {
           return of(new selectedAlert.SaveSDAFailAction('Failed to save SDA.'));
         });
@@ -59,7 +59,7 @@ export class AlertEffects {
     .map((action: selectedAlert.LoadSDAsAction) => action.payload)
     .switchMap(() => {
       return this.sdaService.getAllSda()
-        .map((data:models.ISdaListView[]) => {
+        .map((data: models.ISdaListView[]) => {
           return new selectedAlert.LoadSDAsCompleteAction(data);
         })
         .catch((err) => {
@@ -70,7 +70,7 @@ export class AlertEffects {
   loadSda$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
     .map((action: selectedAlert.LoadSDAAction) => action.payload)
-    .switchMap((sdaId:number) => {
+    .switchMap((sdaId: number) => {
       return this.sdaService.getSda(sdaId)
         .map((data: models.ISda) => {
           return new selectedAlert.LoadSDACompleteAction(data);

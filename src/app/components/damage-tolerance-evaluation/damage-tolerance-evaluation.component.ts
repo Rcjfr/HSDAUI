@@ -25,8 +25,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     super('damageToleranceEvaluationGroup');
   }
-  loadData(){
-}
+
   ngOnInit() {
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
@@ -59,7 +58,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       stage1RTSDateControl.statusChanges,
       durationControl.statusChanges)
       .mapTo(1).subscribe(v => {
-          if (stage1RTSDateControl.value == null) { return; }
+        if (stage1RTSDateControl.value == null) { return; }
         const stage1RTSDate = <Date>stage1RTSDateControl.value;
         const durationMonths = <number>durationControl.value;
         switch (dteStatusControl.value) {

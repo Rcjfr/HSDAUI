@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ISdaListView } from '../../common/models';
-import { AppStateService } from "../../common/services";
-import { List } from "immutable";
+import { AppStateService } from '../../common/services';
+import { List } from 'immutable';
 
 @Component({
   selector: 'aa-alerts',
@@ -14,7 +14,7 @@ export class AlertsComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.sdaList$ = this.appStateService.getSDAList().map(d=>d&&d.toJS()); 
+    this.sdaList$ = this.appStateService.getSDAList().map(d => d && d.toJS());
     this.appStateService.loadSDAList();
   }
 

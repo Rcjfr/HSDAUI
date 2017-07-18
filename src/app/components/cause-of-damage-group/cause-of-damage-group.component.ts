@@ -17,8 +17,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   constructor(private fb: FormBuilder) {
     super('causeOfDamageGroup');
   }
-  loadData(){
-}
+
   ngOnInit() {
     this.causeOfDamageGroup = this.fb.group({
       environment: ['', []],
@@ -36,7 +35,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
       });
     this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
   }
-  public isChecked(val:number,check:number) {
+  public isChecked(val: number, check: number) {
     return val & check;
   }
   ngOnDestroy(): void {

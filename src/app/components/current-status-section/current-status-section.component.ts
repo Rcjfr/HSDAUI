@@ -14,8 +14,7 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
   }
-loadData(){
-}
+
   ngOnInit() {
     this.formGroup = this.fb.group({
       openStatus: [{ value: true, disabled: true }, []],

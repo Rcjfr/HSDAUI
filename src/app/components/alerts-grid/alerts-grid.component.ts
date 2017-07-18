@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Rx';
 })
 export class AlertsGridComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
-  private _sdaList: ISdaListView[];
+  public _sdaList: ISdaListView[];
 
   //@Input() sdaList: ISdaListView[];
   @Input()
@@ -38,6 +38,5 @@ export class AlertsGridComponent implements OnInit {
         'orderable': false
       }]
     };
-    
   }
 }

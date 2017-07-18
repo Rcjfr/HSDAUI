@@ -15,5 +15,4 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   defectLocationSection: {},
   cpcpSection: {},
   correctiveActionSection: {}
-  
 });

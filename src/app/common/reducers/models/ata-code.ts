@@ -7,7 +7,7 @@ export const ATACodeFactory = makeTypedFactory<IATACode, ATACodeRecord>({
     primaryId: 0,
     primaryCode: '',
     primaryCodeDescription: '',
-    secondaryId:0,
+    secondaryId: 0,
     secondaryCode: '',
     secondaryCodeDescription: ''
 });

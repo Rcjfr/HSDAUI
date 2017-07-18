@@ -16,8 +16,7 @@ export class SdaService {
     if (sda.id) {
       return this.http.put(`${this.endPointUrl}/${sda.id}`, sda)
         .map((result) => result.json());
-    }
-    else {
+    } else {
       return this.http.post(this.endPointUrl, sda)
         .map((result) => result.json());
     }
@@ -26,7 +25,7 @@ export class SdaService {
     return this.http.get(this.endPointUrl)
       .map((result) => result.json());
   };
-  getSda(sdaId:number): Observable<models.ISda> {
+  getSda(sdaId: number): Observable<models.ISda> {
     return this.http.get(`${this.endPointUrl}/${sdaId}`)
       .map((result) => Helper.Deserialize(result.text()));
   };

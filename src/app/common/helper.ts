@@ -7,6 +7,7 @@
     if (key.indexOf('Date') > -1) {
       return new Date(value);
     }
+
     return value;
   }
 }

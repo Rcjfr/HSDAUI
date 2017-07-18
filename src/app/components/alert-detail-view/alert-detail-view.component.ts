@@ -79,7 +79,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
       return;
     }
-    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring == "U";
+    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring === 'U';
     const generalSectionData = Object.assign({},
       this.sdaForm.value.generalSectionFormGroup,
       this.sdaForm.value.generalSectionFormGroup.aircraftInfoSectionFormGroup,
@@ -94,7 +94,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
     );
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
-    let causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
+    const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
       (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
       (causeOfDamageGroup.damageOther ? 512 : 0) +
       (causeOfDamageGroup.environment ? 1 : 0) +
@@ -104,20 +104,20 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
       (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
       (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-    
+
 
 
     const cpcpSectionData = Object.assign({},
       this.sdaForm.value.cpcpSectionGroup,
       {
-        
+
         causesOfDamage: causesOfDamage
       },
       this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup.causeOfDamageDescriptionGroup,
     );
     const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
     const correctiveActionData = {
-        IsDeferred: correctiveActionSection.isDeferred,
+      IsDeferred: correctiveActionSection.isDeferred,
       DeferralCode: correctiveActionSection.deferralCode,
       DeferralNo: correctiveActionSection.deferralNo,
       RepairType: correctiveActionSection.correctiveActionOptionFormGroup.repairType,
@@ -135,7 +135,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       CompletedBy: correctiveActionSection.completedBy,
       CompletedDate: correctiveActionSection.completedDate
     };
-    
+
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: 'badgeid',

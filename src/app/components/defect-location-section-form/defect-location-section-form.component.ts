@@ -16,21 +16,21 @@ import * as models from '../../common/models';
   styleUrls: ['./defect-location-section-form.component.less']
 })
 export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit {
-detectionMethods$: Observable<List<models.IDetectionMethod>>;
+  detectionMethods$: Observable<List<models.IDetectionMethod>>;
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
-    constructor( private fb: FormBuilder, private appStateService: AppStateService) {
-      super('defectLocationSectionFormGroup');
-    }
-loadData(){
-}
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+    super('defectLocationSectionFormGroup');
+  }
+  loadData() {
+  }
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
     this.defectLocationSectionFormGroup = this.fb.group({
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
-      damageDescription: ['', [Validators.required,  Validators.maxLength(250)]],
+      damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
       length: ['', [Validators.required]],
       width: ['', [Validators.required]],
       depth: ['', [Validators.required]],

@@ -26,7 +26,6 @@ export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent im
       }
     );
     this.parent.addControl(this.formGroupName, this.formGroup);
-    
   }
   loadData() {
     this.formGroup.patchValue({

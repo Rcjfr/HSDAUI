@@ -17,13 +17,10 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
   floorboardConditions$: Observable<List<IFloorboardCondition>>;
-  
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
   }
-  loadData(){
-}
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();

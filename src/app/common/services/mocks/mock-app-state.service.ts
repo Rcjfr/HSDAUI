@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '../../models';
-import {AircraftInfoRecord, aircraftInfoFactory} from '../../reducers/models/aircraft-info';
+import { AircraftInfoRecord, aircraftInfoFactory } from '../../reducers/models/aircraft-info';
 import { SdaRecord, sdaFactory } from '../../reducers/models/sda';
 
 export class MockAppStateService extends AppStateService {
@@ -22,14 +22,14 @@ export class MockAppStateService extends AppStateService {
         'primaryCodeDescription': `Includes Basic Structure which provides major support
                                                 for the aircraft, while on the ground,
                                                 such as Struts, Linkage,Bolts, Latches, Attachment Fittings, etc.`,
-'secondaryId': 3210,        
-'secondaryCode': '10',
+        'secondaryId': 3210,
+        'secondaryCode': '10',
         'secondaryCodeDescription': 'Main Gear'
       }
     ];
 
     return Observable.of(<List<models.IATACode>>List.of(...mockResponse));
-    }
+  }
 
   getDepartments() {
     return Observable.of(<List<models.IDepartment>>List.of());

@@ -23,17 +23,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     super('generalSectionFormGroup');
 
   }
-  loadData() {
-    this.generalSectionFormGroup.patchValue({
-      sdaId: this.sda.id==0?'':this.sda.id,
-      sdrNumber: this.sda.generalSection.sdrNumber,
-      createDate: this.sda.generalSection.createDate,
-      lineMaintenance: this.sda.generalSection.lineMaintenance,
-      alertCode: this.sda.generalSection.alertCode,
-      station: this.sda.generalSection.station,
-      department: this.sda.generalSection.department,
-    });
-  }
   ngOnInit() {
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
@@ -57,8 +46,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
 
     this.stations$ = Observable.create((observer: Observer<string>) => {
-        observer.next(this.generalSectionFormGroup.get('station').value);
-      })
+      observer.next(this.generalSectionFormGroup.get('station').value);
+    })
       .switchMap(token => this.appStateService.getStations(token))
       .do(d => console.log(d))
       ;

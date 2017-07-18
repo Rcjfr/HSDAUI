@@ -6,7 +6,7 @@ import * as models from '../common/models';
 export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() sda: models.ISda;
 
-  
+
   //set sda(data:models.ISda) {
   //  this._sda = data;
   //  //if (data.id) { this.loadData(); }
@@ -16,7 +16,7 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   //}
 
 
-@Input() parent: FormGroup;
+  @Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -25,12 +25,10 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   @Input()
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};
-
   }
   constructor(public formGroupName: string) {
     this.subscriptions = [];
   }
-  abstract loadData(): void;
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
     this.subscriptions.forEach(s => {
@@ -44,7 +42,7 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
       .subscribe(v => {
 
         this.parent.markAsDirty();
-        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true});
+        this.parent.updateValueAndValidity({ onlySelf: false, emitEvent: true });
       });
   }
   ngOnInit() {

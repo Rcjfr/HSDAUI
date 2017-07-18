@@ -9,20 +9,19 @@ import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/fo
   styleUrls: ['./modified-part-description.component.less']
 })
 export class ModifiedPartDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
-    modifiedPartDescriptionGroup: FormGroup;
+  modifiedPartDescriptionGroup: FormGroup;
 
 
   constructor(private fb: FormBuilder) {
-      super('modifiedPartDescriptionGroup');
+    super('modifiedPartDescriptionGroup');
 
   }
-  loadData(){
-}
+
   ngOnInit() {
-      this.modifiedPartDescriptionGroup = this.fb.group({
-          modifiedPartDescription: ['', [Validators.maxLength(30), Validators.required]]
+    this.modifiedPartDescriptionGroup = this.fb.group({
+      modifiedPartDescription: ['', [Validators.maxLength(30), Validators.required]]
     });
-      this.parent.addControl(this.formGroupName, this.modifiedPartDescriptionGroup);
+    this.parent.addControl(this.formGroupName, this.modifiedPartDescriptionGroup);
   }
 
   ngOnDestroy(): void {
