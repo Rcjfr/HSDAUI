@@ -14,13 +14,14 @@ export class PreciseLocationGroupComponent extends BaseFormComponent implements 
     super('preciseLocationGroup');
 
    }
-
+  loadData() {
+  }
   ngOnInit() {
     this.preciseLocationGroup = this.fb.group({
-      aircraftStation: [this.sda.defectLocationSection.aircraftStation, [Validators.maxLength(50)]],
-      stringer: [this.sda.defectLocationSection.stringer, [Validators.maxLength(25)]],
-      waterLine: [this.sda.defectLocationSection.waterLine, [Validators.maxLength(25)]],
-      buttLine: [this.sda.defectLocationSection.buttLine, [Validators.maxLength(25)]]
+      aircraftStation: ['', [Validators.maxLength(50)]],
+      stringer: ['', [Validators.maxLength(25)]],
+      waterLine: ['', [Validators.maxLength(25)]],
+      buttLine: ['', [Validators.maxLength(25)]]
           },
               {
                   validator: CustomValidators.validatePreciseLocationGroupFields

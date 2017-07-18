@@ -3,20 +3,20 @@
     <div class="col-md-6">
 
       <aac-field-container label="SDR Number:" [message]="displayMessage.sdrNumber">
-        <input type="text" tabindex="1" class="form-control" formControlName="sdrNumber" >
+        <input type="text" tabindex="1" class="form-control" [ngModel]="sda.generalSection.sdrNumber" formControlName="sdrNumber" >
       </aac-field-container>
 
     </div>
     <div class="col-md-6">
       <aac-checkbox-container label="Line Maintenance">
-        <input type="checkbox" tabindex="2" formControlName="lineMaintenance"/>
+        <input type="checkbox" tabindex="2" formControlName="lineMaintenance" [ngModel]="sda.generalSection.lineMaintenance"/>
       </aac-checkbox-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Create Date:" [attr.for]="sdaCreateDate.idDatePicker" [message]="displayMessage.createDate" required="true">
-        <datetime [timepicker]="false" #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" #sdaCreateDate [tabindex]='3' [ngModel]="sda.generalSection.createDate"  formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
 
     </div>
@@ -24,7 +24,7 @@
       <aac-field-container required="true"
                            label="Alert Code:"
                            [message]="displayMessage.alertCode">
-        <select tabindex="14" class="form-control" formControlName="alertCode">
+        <select tabindex="14" class="form-control" [ngModel]="sda.generalSection.alertCode"  formControlName="alertCode">
           <option value="">Select Alert Code</option>
           <option *ngFor="let ac of alertCodes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -35,7 +35,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="SDA ID:" required="true">
-        <input class="form-control" formControlName="sdaId">
+        <input class="form-control" formControlName="sdaId" [ngModel]="sda.id">
       </aac-field-container>
 
       <div>
@@ -44,7 +44,7 @@
         </ng-template>
 
         <aac-field-container required="true" label="Station:" [message]="displayMessage.station">
-          <input type="text" tabindex='4' autocomplete="off" class="form-control" maxlength="3" formControlName="station" [typeahead]="stations$"
+          <input type="text" tabindex='4' autocomplete="off" [ngModel]="sda.generalSection.station"  class="form-control" maxlength="3" formControlName="station" [typeahead]="stations$"
                  typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate"
                  typeaheadOptionsLimit="10" typeaheadMinLength="1">
         </aac-field-container>
@@ -59,7 +59,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container required="true" label="Department:" [message]="displayMessage.department">
-        <select tabindex="5" class="form-control" formControlName="department">
+        <select tabindex="5" class="form-control" formControlName="department" [ngModel]="sda.generalSection.department">
           <option value="">Select Department</option>
           <option *ngFor="let d of departments$ | async" [value]="d.id">{{d.description}}</option>
         </select>

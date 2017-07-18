@@ -1,4 +1,4 @@
-
+﻿
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
@@ -16,10 +16,11 @@ export class ModifiedPartDescriptionComponent extends BaseFormComponent implemen
       super('modifiedPartDescriptionGroup');
 
   }
-
+  loadData(){
+}
   ngOnInit() {
       this.modifiedPartDescriptionGroup = this.fb.group({
-          modifiedpartDescription: ['', [Validators.maxLength(30), Validators.required]]
+          modifiedPartDescription: ['', [Validators.maxLength(30), Validators.required]]
     });
       this.parent.addControl(this.formGroupName, this.modifiedPartDescriptionGroup);
   }

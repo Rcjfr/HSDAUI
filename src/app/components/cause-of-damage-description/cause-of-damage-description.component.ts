@@ -15,7 +15,8 @@ export class CauseOfDamageDescriptionComponent extends BaseFormComponent impleme
     super('causeOfDamageDescriptionGroup');
 
   }
-
+  loadData(){
+}
   ngOnInit() {
     this.causeOfDamageDescriptionGroup = this.fb.group({
       damageDescription: ['', [Validators.maxLength(250), Validators.required]]

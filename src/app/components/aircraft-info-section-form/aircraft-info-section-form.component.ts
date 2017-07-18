@@ -73,7 +73,6 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
   }
   loadData() {
-    if (!this.sda.id) return;
     this.aircraftInfoSectionFormGroup.patchValue({
       aircraftNo: this.sda.generalSection.aircraftNo,
       manufacturer: this.sda.generalSection.manufacturer,

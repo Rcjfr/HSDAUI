@@ -17,27 +17,28 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
   floorboardConditions$: Observable<List<IFloorboardCondition>>;
-  cpcpSectionGroup: FormGroup;
+  
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
   }
-
+  loadData(){
+}
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.floorboardConditions$ = this.appStateService.getFloorboardConditions();
-    this.cpcpSectionGroup = this.fb.group({
-      iscpcpRelatedEvent: [this.sda.CPCPSection.iscpcpRelatedEvent, []],
-      isWideSpreadCorrosion: [this.sda.CPCPSection.isWideSpreadCorrosion, []],
-      corrosionLevel: [this.sda.CPCPSection.corrosionLevel, []],
-      isPreviouslyBlended: [this.sda.CPCPSection.isPreviouslyBlended, []],
-      corrosionType: [this.sda.CPCPSection.corrosionType, []],
-      corrosionTypeOtherText: [this.sda.CPCPSection.corrosionTypeOtherText, [Validators.maxLength(250)]],
-      corrosionTaskNo: [this.sda.CPCPSection.corrosionTaskNo, [Validators.maxLength(25)]],
-      floorBoardCondition: [this.sda.CPCPSection.floorBoardCondition, []]
+    this.formGroup = this.fb.group({
+      iscpcpRelatedEvent: ['', []],
+      isWideSpreadCorrosion: ['', []],
+      corrosionLevel: ['', []],
+      isPreviouslyBlended: ['', []],
+      corrosionType: ['', []],
+      corrosionTypeOtherText: ['', [Validators.maxLength(250)]],
+      corrosionTaskNo: ['', [Validators.maxLength(25)]],
+      floorBoardCondition: ['', []]
     });
-    this.parent.addControl(this.formGroupName, this.cpcpSectionGroup);
+    this.parent.addControl(this.formGroupName, this.formGroup);
     //this.cpcpSectionGroup.get('iscpcpRelatedEvent').valueChanges
     //  .subscribe(val => this.setCorrosionPreventionFields(val));
     //this.cpcpSectionGroup.get('corrosionType').valueChanges
@@ -46,39 +47,39 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
 
   setCorrosionTypeFields(corrosionType: string): void {
     if (corrosionType !== '5') {
-      this.cpcpSectionGroup.get('corrosionTypeOtherText').clearValidators();
+      this.formGroup.get('corrosionTypeOtherText').clearValidators();
     } else {
-      this.cpcpSectionGroup.get('corrosionTypeOtherText').setValidators([Validators.required,
+      this.formGroup.get('corrosionTypeOtherText').setValidators([Validators.required,
       Validators.maxLength(250),
       Validators.pattern(Expressions.Alphanumerics)]);
     }
 
-    this.cpcpSectionGroup.get('corrosionTypeOtherText').updateValueAndValidity();
+    this.formGroup.get('corrosionTypeOtherText').updateValueAndValidity();
   }
 
   setCorrosionPreventionFields(isCorrosionEvent: number): void {
     if (isCorrosionEvent !== 1) {
-      this.cpcpSectionGroup.get('isWideSpreadCorrosion').clearValidators();
-      this.cpcpSectionGroup.get('isPreviouslyBlended').clearValidators();
-      this.cpcpSectionGroup.get('corrosionTaskNo').clearValidators();
-      this.cpcpSectionGroup.get('corrosionLevel').clearValidators();
-      this.cpcpSectionGroup.get('corrosionType').clearValidators();
-      this.cpcpSectionGroup.get('causeOfDamageGroup').clearValidators();
+      this.formGroup.get('isWideSpreadCorrosion').clearValidators();
+      this.formGroup.get('isPreviouslyBlended').clearValidators();
+      this.formGroup.get('corrosionTaskNo').clearValidators();
+      this.formGroup.get('corrosionLevel').clearValidators();
+      this.formGroup.get('corrosionType').clearValidators();
+      this.formGroup.get('causeOfDamageGroup').clearValidators();
     } else {
-      this.cpcpSectionGroup.get('isWideSpreadCorrosion').setValidators([Validators.required]);
-      this.cpcpSectionGroup.get('isPreviouslyBlended').setValidators([Validators.required]);
-      this.cpcpSectionGroup.get('corrosionTaskNo').setValidators([Validators.required,
+      this.formGroup.get('isWideSpreadCorrosion').setValidators([Validators.required]);
+      this.formGroup.get('isPreviouslyBlended').setValidators([Validators.required]);
+      this.formGroup.get('corrosionTaskNo').setValidators([Validators.required,
       Validators.maxLength(25)
       ]);
-      this.cpcpSectionGroup.get('corrosionLevel').setValidators([Validators.required]);
-      this.cpcpSectionGroup.get('corrosionType').setValidators([Validators.required]);
+      this.formGroup.get('corrosionLevel').setValidators([Validators.required]);
+      this.formGroup.get('corrosionType').setValidators([Validators.required]);
     }
 
-    this.cpcpSectionGroup.get('isWideSpreadCorrosion').updateValueAndValidity();
-    this.cpcpSectionGroup.get('isPreviouslyBlended').updateValueAndValidity();
-    this.cpcpSectionGroup.get('corrosionTaskNo').updateValueAndValidity();
-    this.cpcpSectionGroup.get('corrosionLevel').updateValueAndValidity();
-    this.cpcpSectionGroup.get('corrosionType').updateValueAndValidity();
-    this.cpcpSectionGroup.get('causeOfDamageGroup').updateValueAndValidity();
+    this.formGroup.get('isWideSpreadCorrosion').updateValueAndValidity();
+    this.formGroup.get('isPreviouslyBlended').updateValueAndValidity();
+    this.formGroup.get('corrosionTaskNo').updateValueAndValidity();
+    this.formGroup.get('corrosionLevel').updateValueAndValidity();
+    this.formGroup.get('corrosionType').updateValueAndValidity();
+    this.formGroup.get('causeOfDamageGroup').updateValueAndValidity();
   }
 }

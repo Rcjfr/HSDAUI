@@ -12,24 +12,22 @@ import { BaseFormComponent } from '../base-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponent implements OnInit {
-  defectDiscoveredDuringSectionFormGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('defectDiscoveredDuringSectionFormGroup');
   }
 
   ngOnInit() {
-    this.defectDiscoveredDuringSectionFormGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       defectDiscoveredDuring: ['', [Validators.required]]
     });
-    this.parent.addControl(this.formGroupName, this.defectDiscoveredDuringSectionFormGroup);
+    this.parent.addControl(this.formGroupName, this.formGroup);
   }
   loadData() {
-    if (!this.sda.id) return;
-    this.defectDiscoveredDuringSectionFormGroup.patchValue({
+    this.formGroup.patchValue({
       defectDiscoveredDuring: this.sda.generalSection.defectDiscoveredDuring
     });
   }
   get defectDiscovered() {
-    return this.defectDiscoveredDuringSectionFormGroup.get('defectDiscoveredDuring').value;
+    return this.formGroup.get('defectDiscoveredDuring').value;
   }
 }

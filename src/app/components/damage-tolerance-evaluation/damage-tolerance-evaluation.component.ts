@@ -25,7 +25,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     super('damageToleranceEvaluationGroup');
   }
-
+  loadData(){
+}
   ngOnInit() {
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();

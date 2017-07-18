@@ -146,7 +146,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
         statusUpdatedOn: new Date(),
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
-        cPCPSection: cpcpSectionData,
+        cpcpSection: cpcpSectionData,
         correctiveActionSection: correctiveActionData
       }
     );

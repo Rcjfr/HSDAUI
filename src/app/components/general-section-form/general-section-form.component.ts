@@ -24,7 +24,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
   }
   loadData() {
-    if (!this.sda.id) return;
     this.generalSectionFormGroup.patchValue({
       sdaId: this.sda.id==0?'':this.sda.id,
       sdrNumber: this.sda.generalSection.sdrNumber,

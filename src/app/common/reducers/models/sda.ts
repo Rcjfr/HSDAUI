@@ -13,7 +13,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   status: 1, //Open,
   generalSection: {},
   defectLocationSection: {},
-  CPCPSection: {},
+  cpcpSection: {},
   correctiveActionSection: {}
   
 });

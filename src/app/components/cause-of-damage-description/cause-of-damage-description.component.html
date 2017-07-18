@@ -1,7 +1,7 @@
 ﻿<div [formGroup]="causeOfDamageDescriptionGroup">
   
   <aac-field-container required labelGridColumnWidth="7" label="Description:" [message]="displayMessage.damageDescription">
-    <textarea tabindex='53' class="form-control" formControlName="damageDescription">
+    <textarea tabindex='53' class="form-control" [ngModel]="sda.cpcpSection.causeOfDamageOtherText" formControlName="damageDescription">
       </textarea>
   </aac-field-container>
 </div>

@@ -1,7 +1,7 @@
-﻿<div [formGroup]="ataCodesSectionFormGroup">
+﻿<div [formGroup]="formGroup">
 
   <aac-field-container required label="ATA Code 1:" [message]="displayMessage.ataCode1">
-    <select tabindex="15" class="form-control" (change)='getAlertCode2s($event.target.value)'
+    <select tabindex="15" class="form-control" [ngModel]="sda.generalSection.ataCode1"  (change)='getAlertCode2s($event.target.value)'
             formControlName="ataCode1">
       <option value="">Select ATA Code 1</option>
       <option *ngFor="let ac of (ATACodes | uniq:'primaryId')" [value]="ac.primaryId">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
@@ -10,7 +10,7 @@
 
 
   <aac-field-container required label="ATA Code 2:" [message]="displayMessage.ataCode2">
-    <select tabindex="16" class="form-control" formControlName="ataCode2">
+    <select tabindex="16" class="form-control" [ngModel]="sda.generalSection.ataCode2" formControlName="ataCode2">
       <option value="">Select ATA Code 2</option>
       <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryId">{{ac.secondaryCode}} - {{ac.secondaryCodeDescription}}</option>
     </select>

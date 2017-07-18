@@ -4,13 +4,15 @@
     <aa-general-section-form [parent]="sdaForm"
                              [sda]="sda"
                              [errorMessages]="displayMessage$ | async"></aa-general-section-form>
-    <!--
+    
     <div class="panel-heading">Description and Location of Defects or Damage</div>
     <aa-defect-location-section-form [parent]="sdaForm"
                                      [sda]="sda"
                                      [errorMessages]="displayMessage$ | async">
     </aa-defect-location-section-form>
+    
     <div class="panel-heading">Corrosion Prevention Control Program</div>
+    
     <aa-cpcp-section-form [parent]="sdaForm"
                           [sda]="sda"
                           [errorMessages]="displayMessage$ | async">
@@ -21,7 +23,7 @@
                                [sda]="sda"
                                [errorMessages]="displayMessage$ | async">
     </aa-corrective-action-form>
-    
+    <!--
     <div class="panel-heading">Repair Details</div>
     <aa-repair-details-section [parent]="sdaForm"
                                [errorMessages]="displayMessage$ | async">
@@ -33,10 +35,12 @@
     </aa-damage-tolerance-evaluation>
     <div class="panel-heading">CPCP Disposition</div>
     <aa-cpcp-disposition-section [parent]="sdaForm"
+                                  [sda]="sda"
                                  [errorMessages]="displayMessage$ | async">
     </aa-cpcp-disposition-section>-->
     <div class="panel-heading">Current Status</div>
     <aa-current-status-section [parent]="sdaForm"
+                               [sda]="sda"
                                [errorMessages]="displayMessage$ | async">
     </aa-current-status-section>
 
@@ -48,4 +52,5 @@
       </div>
     </div>
   </div>
+  
 </form>

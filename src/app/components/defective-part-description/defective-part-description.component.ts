@@ -1,4 +1,4 @@
-
+﻿
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
@@ -16,7 +16,8 @@ export class DefectivePartDescriptionComponent extends BaseFormComponent impleme
       super('defectivePartDescriptionGroup');
 
   }
-
+  loadData() {
+  }
   ngOnInit() {
       this.defectivePartDescriptionGroup = this.fb.group({
           defectivePartDescription: ['', [Validators.maxLength(30), Validators.required]]

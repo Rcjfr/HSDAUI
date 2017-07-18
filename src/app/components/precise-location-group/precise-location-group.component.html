@@ -4,22 +4,22 @@
   <div class="row">
     <div class="col-md-3">
       <aac-field-container label="Aircraft Station:" [message]="displayMessage.aircraftStation"  helptext="(Body, Spar, Stab, Frame, etc.)"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='26' class="form-control" formControlName="aircraftStation"  >
+        <input type="text" tabindex='26' class="form-control" [ngModel]="sda.defectLocationSection.aircraftStation" formControlName="aircraftStation"  >
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="Stringer:" [message]="displayMessage.stringer"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='27' class="form-control" formControlName="stringer" >
+        <input type="text" tabindex='27' class="form-control" [ngModel]="sda.defectLocationSection.stringer" formControlName="stringer" >
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="WL:" [message]="displayMessage.waterLine" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='28' class="form-control" formControlName="waterLine"  >
+        <input type="text" tabindex='28' class="form-control" [ngModel]="sda.defectLocationSection.waterLine" formControlName="waterLine"  >
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="BL:" [message]="displayMessage.buttLine" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='29' class="form-control" formControlName="buttLine" >
+        <input type="text" tabindex='29' class="form-control" [ngModel]="sda.defectLocationSection.buttLine" formControlName="buttLine" >
       </aac-field-container>
       <span *ngIf="displayMessage.message &&
                   (preciseLocationGroup.get( 'buttLine').touched ||

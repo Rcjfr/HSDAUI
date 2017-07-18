@@ -13,34 +13,33 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   @Input() ATACodes: models.IATACode[];
   ataCodes2: models.IATACode[];
   pipe = new FilterByPipe();
-  ataCodesSectionFormGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('ataCodesSectionFormGroup');
   }
 
   ngOnInit() {
-    this.ataCodesSectionFormGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       ataCode1: ['', Validators.required],
       ataCode2: ['', Validators.required]
     });
-    this.parent.addControl(this.formGroupName, this.ataCodesSectionFormGroup);
+    this.parent.addControl(this.formGroupName, this.formGroup);
+    this.subscriptions.push(this.formGroup.get('ataCode1').valueChanges.subscribe(v => this.getAlertCode2s(v)));
   }
   loadData() {
-    if (!this.sda.id) return;
     this.getAlertCode2s(this.sda.generalSection.ataCode1.toString());
-    this.ataCodesSectionFormGroup.patchValue({
+    this.formGroup.patchValue({
       ataCode1: this.sda.generalSection.ataCode1,
       ataCode2: this.sda.generalSection.ataCode2
     });
   }
   ngOnDestroy() {
-    this.parent.removeControl(this.formGroupName);
+    super.ngOnDestroy();
 
   }
   getAlertCode2s(alertCode1: string) {
-    this.ataCodesSectionFormGroup.get('ataCode2').setValue('');
-    this.ataCodesSectionFormGroup.get('ataCode2').markAsPristine();
-    this.ataCodesSectionFormGroup.get('ataCode2').markAsUntouched();
+    this.formGroup.get('ataCode2').setValue('');
+    this.formGroup.get('ataCode2').markAsPristine();
+    this.formGroup.get('ataCode2').markAsUntouched();
     this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1, true);
   }
 }

@@ -17,26 +17,28 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   constructor(private fb: FormBuilder) {
     super('causeOfDamageGroup');
   }
-
+  loadData(){
+}
   ngOnInit() {
-    const causesOfDamage = this.sda.CPCPSection.causesOfDamage;
     this.causeOfDamageGroup = this.fb.group({
-      environment: [causesOfDamage & 0, []],
-      galleySpill: [causesOfDamage & 1, []],
-      blockedDrain: [causesOfDamage & 2, []],
-      chemicalSpill: [causesOfDamage & 4, []],
-      wetInsulationBlanket: [causesOfDamage & 8, []],
-      missingFloorBoardTape: [causesOfDamage & 16, []],
-      hardwareNotInstalled: [causesOfDamage & 32, []],
-      poorSealingPractices: [causesOfDamage & 64, []],
-      missingCorrosionInhibitor: [causesOfDamage & 128, []],
-      damageOther: [causesOfDamage & 256, []]
+      environment: ['', []],
+      galleySpill: ['', []],
+      blockedDrain: ['', []],
+      chemicalSpill: ['', []],
+      wetInsulationBlanket: ['', []],
+      missingFloorBoardTape: ['', []],
+      hardwareNotInstalled: ['', []],
+      poorSealingPractices: ['', []],
+      missingCorrosionInhibitor: ['', []],
+      damageOther: ['', []]
     }, {
         validator: CustomValidators.validateCauseOfDamageGroupFields
       });
     this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
   }
-
+  public isChecked(val:number,check:number) {
+    return val & check;
+  }
   ngOnDestroy(): void {
     super.ngOnDestroy();
   }

@@ -24,7 +24,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
   }
-
+loadData(){
+}
   ngOnInit() {
      this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
     this.repairDocuments$ = this.appStateService.getRepairDocuments();

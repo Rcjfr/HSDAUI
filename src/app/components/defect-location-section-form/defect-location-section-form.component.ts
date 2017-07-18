@@ -23,23 +23,24 @@ detectionMethods$: Observable<List<models.IDetectionMethod>>;
     constructor( private fb: FormBuilder, private appStateService: AppStateService) {
       super('defectLocationSectionFormGroup');
     }
-
+loadData(){
+}
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
     this.defectLocationSectionFormGroup = this.fb.group({
-      damageType: [this.sda.defectLocationSection.damageType, [Validators.required, Validators.maxLength(250)]],
-      damageDescription: [this.sda.defectLocationSection.damageDescription, [Validators.required,  Validators.maxLength(250)]],
-      length: [this.sda.defectLocationSection.length, [Validators.required]],
-      width: [this.sda.defectLocationSection.width, [Validators.required]],
-      depth: [this.sda.defectLocationSection.depth, [Validators.required]],
+      damageType: ['', [Validators.required, Validators.maxLength(250)]],
+      damageDescription: ['', [Validators.required,  Validators.maxLength(250)]],
+      length: ['', [Validators.required]],
+      width: ['', [Validators.required]],
+      depth: ['', [Validators.required]],
 
-      manufacturerPartNo: [this.sda.defectLocationSection.manufacturerPartNo, [Validators.maxLength(50)]],
-      partDefective: [this.sda.defectLocationSection.partDefective, [Validators.required, Validators.maxLength(50)]],
-      manufacturerSerialNo: [this.sda.defectLocationSection.manufacturerSerialNo, [Validators.maxLength(50)]],
-      partTT: [this.sda.defectLocationSection.partTT, [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
-      partTSO: [this.sda.defectLocationSection.partTSO, [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-      detectionMethod: [this.sda.defectLocationSection.detectionMethod, [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+      manufacturerPartNo: ['', [Validators.maxLength(50)]],
+      partDefective: ['', [Validators.required, Validators.maxLength(50)]],
+      manufacturerSerialNo: ['', [Validators.maxLength(50)]],
+      partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
+      partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+      detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
     this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);

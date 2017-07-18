@@ -16,7 +16,8 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
     constructor(private fb: FormBuilder) {
         super('correctiveActionOptionFormGroup');
     }
-
+    loadData() {
+    }
     ngOnInit() {
         this.correctiveActionOptionFormGroup = this.fb.group({
             repairType: ['', []],

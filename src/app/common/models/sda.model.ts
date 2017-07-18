@@ -15,7 +15,7 @@ export interface ISda {
     status: number;
     generalSection: IGeneralSection,
     defectLocationSection: IDefectLocationSection,
-    CPCPSection: ICPCPSection,
+    cpcpSection: ICPCPSection,
     correctiveActionSection: ICorrectiveActionSection
     
 }

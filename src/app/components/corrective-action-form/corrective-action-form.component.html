@@ -4,7 +4,7 @@
 
     <div class="col-sm-2">
       <aac-checkbox-container label="Deferred">
-        <input type="checkbox" tabindex="55" formControlName="isDeferred" />
+        <input type="checkbox" tabindex="55" [ngModel]="sda.correctiveActionSection.isDeferred" formControlName="isDeferred" />
       </aac-checkbox-container>
 
 
@@ -15,7 +15,7 @@
                              helptext="(MON, SAD, ROB, etc)"
                              [message]="displayMessage.deferralCode"
                              >
-          <input type="text" tabindex='56' class="form-control" formControlName="deferralCode">
+          <input type="text" tabindex='56' class="form-control" [ngModel]="sda.correctiveActionSection.deferralCode" formControlName="deferralCode">
         </aac-field-container>
       </div>
 
@@ -23,7 +23,7 @@
         <div class="row form-group" [class.has-error]="displayMessage.deferralNo">
           <label class="col-sm-4 control-label" for="deferralNo">Deferral #:</label>
           <div class="col-sm-8">
-            <input type="text" tabindex='57' class="form-control" id="deferralNo" formControlName="deferralNo">
+            <input type="text" tabindex='57' class="form-control" [ngModel]="sda.correctiveActionSection.deferralNo" id="deferralNo" formControlName="deferralNo">
             <span *ngIf="displayMessage.deferralNo" class="help-block">{{displayMessage.deferralNo}}</span>
           </div>
         </div>
@@ -35,14 +35,14 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <aa-corrective-action-options [parent]="correctiveActionFormGroup" [errorMessages]="displayMessage"></aa-corrective-action-options>
+      <aa-corrective-action-options [parent]="correctiveActionFormGroup" [sda]="sda" [errorMessages]="displayMessage"></aa-corrective-action-options>
     </div>
   </div>
   <div class="row form-group">
 
     <div class="col-sm-2">
       <aac-checkbox-container label="Major Repair">
-        <input type="checkbox" tabindex="70" value="1" formControlName="isMajorRepair" />
+        <input type="checkbox" tabindex="70" value="1" [ngModel]="sda.correctiveActionSection.isMajorRepair" formControlName="isMajorRepair" />
       </aac-checkbox-container>
     </div>
     <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('isMajorRepair').value != true">
@@ -52,7 +52,7 @@
                            label="Description:"
                            labelGridColumnWidth="2"
                            [message]="displayMessage.majorRepairDescription">
-        <textarea tabindex='71' class="form-control" formControlName="majorRepairDescription"></textarea>
+        <textarea tabindex='71' class="form-control" [ngModel]="sda.correctiveActionSection.majorRepairDescription" formControlName="majorRepairDescription"></textarea>
       </aac-field-container>
     </div>
   </div>
@@ -61,12 +61,12 @@
       <aac-field-container label="Completed By:"
                            helptext="(Enter Employee ID or Last Name)"
                            [message]="displayMessage.completedBy">
-        <input type="text" tabindex='72' class="form-control" formControlName="completedBy">
+        <input type="text" tabindex='72' class="form-control" [ngModel]="sda.correctiveActionSection.completedBy" formControlName="completedBy">
       </aac-field-container>
       </div>
       <div class="col-md-6">
         <aac-field-container label="Date:"  [message]="displayMessage.completedDate" >
-          <datetime [timepicker]="false" #completedDate [tabindex]='73'  formControlName="completedDate"
+          <datetime [timepicker]="false" #completedDate [tabindex]='73'  [ngModel]="sda.correctiveActionSection.completedDate" formControlName="completedDate"
                     [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
         </aac-field-container>
       </div>

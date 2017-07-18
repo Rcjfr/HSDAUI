@@ -11,8 +11,8 @@ import { ICheckType } from '../../common/models';
 @Component({
   selector: 'aa-scheduled-maintenance-section',
   templateUrl: './scheduled-maintenance-section.component.html',
-  styleUrls: ['./scheduled-maintenance-section.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./scheduled-maintenance-section.component.less']
+
 })
 export class ScheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
   checkTypes$: Observable<List<ICheckType>>;
@@ -22,7 +22,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
   }
 
   ngOnInit() {
-    this.scheduledMaintenanceGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       checkType: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],
       routineNo: ['', [Validators.maxLength(50)]]
@@ -31,18 +31,17 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
         validator: CustomValidators.validateScheduledMaintenanceFields
       }
     );
-    this.parent.addControl(this.formGroupName, this.scheduledMaintenanceGroup);
+    this.parent.addControl(this.formGroupName, this.formGroup);
     this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
   loadData() {
-    if (!this.sda.id) return;
-    this.scheduledMaintenanceGroup.patchValue({
+    this.formGroup.patchValue({
       checkType: this.sda.generalSection.checkType,
       nonRoutineNo: this.sda.generalSection.nonRoutineNo,
       routineNo: this.sda.generalSection.routineNo,
     });
   }
   ngOnDestroy() {
-    this.parent.removeControl(this.formGroupName);
+    super.ngOnDestroy();
   }
 }

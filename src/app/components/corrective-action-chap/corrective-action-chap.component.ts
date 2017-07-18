@@ -19,7 +19,8 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
         this.parent.addControl(this.formGroupName, this.correctiveActionChapFormGroup);
 
     }
-
+  loadData(){
+}
 
     ngOnDestroy(): void {
         this.parent.removeControl(this.formGroupName);

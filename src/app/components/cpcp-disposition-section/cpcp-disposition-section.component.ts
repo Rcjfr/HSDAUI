@@ -18,7 +18,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastsManager) {
         super('cpcpDispositionSectionFormGroup');
     }
-
+  loadData(){
+}
     ngOnInit() {
         this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
         const corrossionLevel: FormControl = this.fb.control({ value: '', disabled: true });

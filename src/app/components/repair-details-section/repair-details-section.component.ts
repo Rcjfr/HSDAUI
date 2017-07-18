@@ -30,7 +30,8 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     constructor(private fb: FormBuilder, private appStateService: AppStateService) {
         super('repairDetailsSectionGroup');
     }
-
+    loadData() {
+    }
     ngOnInit() {
        this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
         this.repairDocuments$ = this.appStateService.getRepairDocuments();
