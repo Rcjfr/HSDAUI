@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
+﻿import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
@@ -12,7 +12,7 @@ import { Observable, Observer } from 'rxjs/Rx';
   templateUrl: './general-section-form.component.html',
   styleUrls: ['./general-section-form.component.less']
 })
-export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit {
+export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
@@ -52,6 +52,13 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       .do(d => console.log(d))
       ;
 
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.generalSectionFormGroup.patchValue(newSda.generalSection);
+      this.generalSectionFormGroup.patchValue({ sdaId:newSda.id});
+    }
   }
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);

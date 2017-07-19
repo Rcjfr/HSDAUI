@@ -116,20 +116,21 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup.causeOfDamageDescriptionGroup,
     );
     const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
+    const repairActionGroup = correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup;
     const correctiveActionData = {
       IsDeferred: correctiveActionSection.isDeferred,
       DeferralCode: correctiveActionSection.deferralCode,
       DeferralNo: correctiveActionSection.deferralNo,
       RepairType: correctiveActionSection.correctiveActionOptionFormGroup.repairType,
-      DefectivePartDescription: correctiveActionSection.correctiveActionOptionFormGroup.defectivePartDescription,
-      ModifiedPartDescription: correctiveActionSection.correctiveActionOptionFormGroup.modifiedpartDescription,
-      RepairDescriptionType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDescriptionType,
-      RepairDocumentType: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairDocumentType,
-      ChapFigRepairText: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.correctiveActionChapFormGroup.chapFigRepairText,
-      EngineeringAuthorization: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.engineeringAuthorization,
-      IsExternallyVisible: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.isExternallyVisible,
-      RepairHeight: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairHeight,
-      RepairWidth: correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup.repairWidth,
+      DefectivePartDescription: correctiveActionSection.correctiveActionOptionFormGroup && correctiveActionSection.correctiveActionOptionFormGroup.defectivePartDescription,
+      ModifiedPartDescription: correctiveActionSection.correctiveActionOptionFormGroup && correctiveActionSection.correctiveActionOptionFormGroup.modifiedpartDescription,
+      RepairDescriptionType: repairActionGroup && repairActionGroup.repairDescriptionType,
+      RepairDocumentType: repairActionGroup && repairActionGroup.repairDocumentType,
+      ChapFigRepairText: repairActionGroup && repairActionGroup.correctiveActionChapFormGroup && repairActionGroup.correctiveActionChapFormGroup.chapFigRepairText,
+      EngineeringAuthorization: repairActionGroup && repairActionGroup.engineeringAuthorization,
+      IsExternallyVisible: repairActionGroup && repairActionGroup.isExternallyVisible,
+      RepairHeight: repairActionGroup && repairActionGroup.repairHeight,
+      RepairWidth: repairActionGroup && repairActionGroup.repairWidth,
       IsMajorRepair: correctiveActionSection.isMajorRepair,
       MajorRepairDescription: correctiveActionSection.majorRepairDescription,
       CompletedBy: correctiveActionSection.completedBy,
@@ -156,10 +157,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
-        if (group.controls[i].errors) { console.log(i, group.controls[i].errors); }
-        // if(group.controls[i].invalid){
-        //   console.log(group.controls[i]);
-        // }
+        if (group.controls[i].errors) {
+          console.log(i, group.controls[i].errors);
+        }
+         if(group.controls[i].invalid){
+           console.log(group.controls[i]);
+         }
       } else {
         this.logErrors(group.controls[i]);
       }

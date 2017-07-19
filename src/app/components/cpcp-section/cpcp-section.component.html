@@ -38,7 +38,7 @@
           <div class="col-sm-8">
 
             <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
-              <input type="radio" [value]="ac.id" tabindex="38" [checked]="sda.cpcpSection.corrosionLevel" name="corrosionLevel" formControlName="corrosionLevel" />
+              <input type="radio" [value]="ac.id" tabindex="38" [ngModel]="sda.cpcpSection.corrosionLevel" name="corrosionLevel" formControlName="corrosionLevel" />
             </aac-radio-container>
             <span *ngIf="displayMessage.corrosionLevel" class="help-block">{{displayMessage.corrosionLevel}}</span>
           </div>
