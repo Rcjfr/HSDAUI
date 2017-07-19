@@ -35,7 +35,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     this.actionsSubscription = this.route.params.select<string>('id').subscribe(id => {
       if (id !== 'new') {
         const sdaId = Number.parseInt(id);
-        this.appStateService.loadSDA(sdaId);
+        this.appStateService.loadSda(sdaId);
       }
     });
   }

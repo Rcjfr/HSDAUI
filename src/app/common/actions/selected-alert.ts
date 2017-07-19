@@ -47,41 +47,41 @@ export class LoadAircraftInfoFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export class SaveSDAAction implements Action {
+export class SaveSdaAction implements Action {
   public type = ActionTypes.SAVE_SDA;
   constructor(public payload: models.ISda) { }
 }
-export class SaveSDACompleteAction implements Action {
+export class SaveSdaCompleteAction implements Action {
   public type = ActionTypes.SAVE_SDA_COMPLETE;
   constructor(public payload: number) { }
 }
-export class SaveSDAFailAction implements Action {
+export class SaveSdaFailAction implements Action {
   public type = ActionTypes.SAVE_SDA_FAIL;
   constructor(public payload: any) { }
 }
 
-export class LoadSDAsAction implements Action {
+export class LoadSdasAction implements Action {
   public type = ActionTypes.LOAD_SDAS;
   public payload: any;
   constructor() { }
 }
-export class LoadSDAsCompleteAction implements Action {
+export class LoadSdasCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDAS_COMPLETE;
   constructor(public payload: models.ISdaListView[]) { }
 }
-export class LoadSDAsFailAction implements Action {
+export class LoadSdasFailAction implements Action {
   public type = ActionTypes.LOAD_SDAS_FAIL;
   constructor(public payload: any) { }
 }
-export class LoadSDAAction implements Action {
+export class LoadSdaAction implements Action {
   public type = ActionTypes.LOAD_SDA;
   constructor(public payload: number) { }
 }
-export class LoadSDACompleteAction implements Action {
+export class LoadSdaCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDA_COMPLETE;
   constructor(public payload: models.ISda) { }
 }
-export class LoadSDAFailAction implements Action {
+export class LoadSdaFailAction implements Action {
   public type = ActionTypes.LOAD_SDA_FAIL;
   constructor(public payload: any) { }
 }
@@ -93,13 +93,13 @@ export type Actions =
   LoadAircraftInfoAction |
   LoadAircraftInfoCompleteAction |
   LoadAircraftInfoFailAction |
-  SaveSDAAction |
-  SaveSDACompleteAction |
-  SaveSDAFailAction |
-  LoadSDAsAction |
-  LoadSDAsCompleteAction |
-  LoadSDAsFailAction |
-  LoadSDAAction |
-  LoadSDACompleteAction |
-  LoadSDAFailAction;
+  SaveSdaAction |
+  SaveSdaCompleteAction |
+  SaveSdaFailAction |
+  LoadSdasAction |
+  LoadSdasCompleteAction |
+  LoadSdasFailAction |
+  LoadSdaAction |
+  LoadSdaCompleteAction |
+  LoadSdaFailAction;
 

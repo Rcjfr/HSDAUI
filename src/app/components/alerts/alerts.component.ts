@@ -14,8 +14,8 @@ export class AlertsComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.sdaList$ = this.appStateService.getSDAList().map(d => d && d.toJS());
-    this.appStateService.loadSDAList();
+    this.sdaList$ = this.appStateService.getSdaList().map(d => d && d.toJS());
+    this.appStateService.loadSdaList();
   }
 
 }

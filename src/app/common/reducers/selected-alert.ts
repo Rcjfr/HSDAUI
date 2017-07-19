@@ -38,13 +38,13 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
     case selectedAlertActions.ActionTypes.LOAD_SDA_COMPLETE:
       {
-        const act = action as selectedAlertActions.LoadSDAsCompleteAction;
+        const act = action as selectedAlertActions.LoadSdaCompleteAction;
 
         return state.merge({ loading: false, sda: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
-        const act = action as selectedAlertActions.LoadSDAsCompleteAction;
+        const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
         return state.merge({ loading: false, sdaList: List.of(...act.payload) });
       }
@@ -73,7 +73,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
 // Selector Functions
 export const getSelectedSda = (state: State) => state.sda;
-export const getSDAList = (state: State) => state.sdaList;
+export const getSdaList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;

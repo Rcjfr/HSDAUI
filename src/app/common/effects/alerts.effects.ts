@@ -42,40 +42,40 @@ export class AlertEffects {
   @Effect()
   saveSda$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.SAVE_SDA)
-    .map((action: selectedAlert.SaveSDAAction) => action.payload)
+    .map((action: selectedAlert.SaveSdaAction) => action.payload)
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
         .map((sdaid: number) => {
-          return new selectedAlert.SaveSDACompleteAction(sdaid);
+          return new selectedAlert.SaveSdaCompleteAction(sdaid);
         })
         .catch((err) => {
-          return of(new selectedAlert.SaveSDAFailAction('Failed to save SDA.'));
+          return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));
         });
     });
   @Effect()
   loadSdas$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
-    .map((action: selectedAlert.LoadSDAsAction) => action.payload)
+    .map((action: selectedAlert.LoadSdasAction) => action.payload)
     .switchMap(() => {
       return this.sdaService.getAllSda()
         .map((data: models.ISdaListView[]) => {
-          return new selectedAlert.LoadSDAsCompleteAction(data);
+          return new selectedAlert.LoadSdasCompleteAction(data);
         })
         .catch((err) => {
-          return of(new selectedAlert.LoadSDAsFailAction('Failed to load SDAs.'));
+          return of(new selectedAlert.LoadSdasFailAction('Failed to load SDAs.'));
         });
     });
   @Effect()
   loadSda$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
-    .map((action: selectedAlert.LoadSDAAction) => action.payload)
+    .map((action: selectedAlert.LoadSdaAction) => action.payload)
     .switchMap((sdaId: number) => {
       return this.sdaService.getSda(sdaId)
         .map((data: models.ISda) => {
-          return new selectedAlert.LoadSDACompleteAction(data);
+          return new selectedAlert.LoadSdaCompleteAction(data);
         })
         .catch((err) => {
-          return of(new selectedAlert.LoadSDAFailAction('Failed to load SDA.'));
+          return of(new selectedAlert.LoadSdaFailAction('Failed to load SDA.'));
         });
     });
   @Effect() navigateHome$: any = this.actions$

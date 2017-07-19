@@ -77,19 +77,19 @@ export class AppStateService {
   getSelectedAlertLoading() {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
-  getSDAList() {
-    return this.store.select(fromRoot.getSDAList);
+  getSdaList() {
+    return this.store.select(fromRoot.getSdaList);
   }
 
   //Dispatch Actions
   saveSda(sda: ISda): void {
-    this.store.dispatch(new selectedAlertActions.SaveSDAAction(sda));
+    this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
   }
-  loadSDAList(): void {
-    this.store.dispatch(new selectedAlertActions.LoadSDAsAction());
+  loadSdaList(): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdasAction());
   }
-  loadSDA(sdaId: number): void {
-    this.store.dispatch(new selectedAlertActions.LoadSDAAction(sdaId));
+  loadSda(sdaId: number): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdaAction(sdaId));
   }
   loadAircraftInfo(noseNumber: string): void {
     if (!noseNumber) { return; }

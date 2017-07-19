@@ -8,17 +8,6 @@ import * as models from '../common/models';
 })
 export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() sda: models.ISda;
-
-
-  //set sda(data:models.ISda) {
-  //  this._sda = data;
-  //  //if (data.id) { this.loadData(); }
-  //}
-  //get sda() {
-  //  return this._sda;
-  //}
-
-
   @Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
