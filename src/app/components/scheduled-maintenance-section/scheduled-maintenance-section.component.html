@@ -1,4 +1,4 @@
-﻿<div [formGroup]="scheduledMaintenanceGroup">
+﻿<div [formGroup]="formGroup">
   <aac-field-container required="true" label="Check Type:" [message]="displayMessage.checkType" >
     <select tabindex="18" class="form-control" formControlName="checkType">
       <option value="">Select Check Type</option>
@@ -16,8 +16,8 @@
   <div class="row form-group">
     <div class="col-md-offset-4 col-sm-8">
       <div *ngIf="displayMessage.message &&
-                    (scheduledMaintenanceGroup.get('nonRoutineNo').touched ||
-                    scheduledMaintenanceGroup.get('nonRoutineNo').dirty)
+                    (formGroup.get('nonRoutineNo').touched ||
+                    formGroup.get('nonRoutineNo').dirty)
                   " class="error">{{displayMessage.message}}</div>
     </div>
   </div>

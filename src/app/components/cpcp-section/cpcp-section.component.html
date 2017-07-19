@@ -1,39 +1,40 @@
-﻿<div class="panel-body" [formGroup]="cpcpSectionGroup">
+﻿<div class="panel-body" [formGroup]="formGroup">
+
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.cpcprelated">
-        <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req">*</span></label>
+      <div class="row form-group" [class.has-error]="displayMessage.iscpcpRelatedEvent">
+        <label class="col-sm-4 control-label">Is this a CPCP related event?</label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" value="1" tabindex="36" name="cpcprelated" formControlName="cpcprelated"/>
+            <input type="radio" [value]="true" tabindex="36" name="iscpcpRelatedEvent" formControlName="iscpcpRelatedEvent"/>
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" value="0" tabindex="36" name="cpcprelated" formControlName="cpcprelated" />
+            <input type="radio" [value]="false" tabindex="36" name="iscpcpRelatedEvent" formControlName="iscpcpRelatedEvent" />
           </aac-radio-container>
-          <div *ngIf="displayMessage.cpcprelated" class="error">{{displayMessage.cpcprelated}}</div>
+          <div *ngIf="displayMessage.iscpcpRelatedEvent" class="error">{{displayMessage.iscpcpRelatedEvent}}</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row" [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
-    <div class="col-md-6" [class.has-error]="displayMessage.wsCorrosion">
+  <div class="row" [hidden]="formGroup.get('iscpcpRelatedEvent').value !== true">
+    <div class="col-md-6" [class.has-error]="displayMessage.isWideSpreadCorrosion">
       <div class="row form-group">
-        <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req">*</span></label>
+        <label class="col-sm-4 control-label">Widespread Corrosion:</label>
         <div class="col-sm-8">  
           <aac-radio-container label="Yes">
-            <input type="radio" value="0" tabindex="37" name="wsCorrosion" formControlName="wsCorrosion" />
+            <input type="radio" [value]="true" tabindex="37" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" value="1" tabindex="37" name="wsCorrosion" formControlName="wsCorrosion" />
+            <input type="radio" [value]="false" tabindex="37" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
           </aac-radio-container>
-          <div *ngIf="displayMessage.wsCorrosion" class="error">{{displayMessage.wsCorrosion}}</div>
+          <div *ngIf="displayMessage.isWideSpreadCorrosion" class="error">{{displayMessage.isWideSpreadCorrosion}}</div>
         </div>
       </div>
     </div>
     <div class="row ">
       <div class="col-sm-6 " [class.has-error]="displayMessage.corrosionLevel">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Corrosion Level:<span class="req">*</span></label>
+          <label class="col-sm-4 control-label">Corrosion Level:</label>
           <div class="col-sm-8">
 
             <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
@@ -50,34 +51,34 @@
 
 
 
-  <div class="row" [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
+  <div class="row" [hidden]="formGroup.get('iscpcpRelatedEvent').value !== true">
 
     <div class="col-md-6">
 
-      <div class="row form-group" [class.has-error]="displayMessage.previouslyBlended">
-        <label class="col-sm-4 control-label">Corroded Area Previously Blended:<span class="req">*</span></label>
+      <div class="row form-group" [class.has-error]="displayMessage.isPreviouslyBlended">
+        <label class="col-sm-4 control-label">Corroded Area Previously Blended:</label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" value="0" tabindex="39" name="previouslyBlended" formControlName="previouslyBlended" />
+            <input type="radio" [value]="true" tabindex="39" name="isPreviouslyBlended" formControlName="isPreviouslyBlended" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" value="1" tabindex="39" name="previouslyBlended" formControlName="previouslyBlended" />
+            <input type="radio" [value]="false" tabindex="39" name="isPreviouslyBlended" formControlName="isPreviouslyBlended" />
           </aac-radio-container>
-          <div *ngIf="displayMessage.previouslyBlended" class="error">{{displayMessage.previouslyBlended}}</div>
+          <div *ngIf="displayMessage.isPreviouslyBlended" class="error">{{displayMessage.isPreviouslyBlended}}</div>
         </div>
       </div>
 
     </div>
     <div class="col-md-6">
-      <aac-field-container label="Corrosion Task #:" [message]="displayMessage.corrosionTask" >
-        <input type="text" tabindex='40' class="form-control" formControlName="corrosionTask">
+      <aac-field-container label="Corrosion Task #:" [message]="displayMessage.corrosionTaskNo" >
+        <input type="text" tabindex='40' class="form-control" formControlName="corrosionTaskNo">
       </aac-field-container>
     </div>
   </div>
 
-  <div class="row " [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'">
+  <div class="row " [hidden]="formGroup.get('iscpcpRelatedEvent').value !== true">
     <div class="col-md-6">
-      <aac-field-container required="true" label="Type of Corrosion:" [message]="displayMessage.corrosionType">
+      <aac-field-container label="Type of Corrosion:" [message]="displayMessage.corrosionType">
         <select class="form-control" tabindex='41' id="corrosionType" formControlName="corrosionType">
           <option value="">Select Type of Corrosion </option>
           <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
@@ -86,21 +87,21 @@
 
     </div>
     <div class="col-md-5">
-      <div [hidden]="cpcpSectionGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeText">
-        <aac-field-container label="Description:" [message]="displayMessage.corrosionTypeText">
-          <textarea type="text" tabindex='42'cols="40" rows="5" class="form-control" formControlName="corrosionTypeText"></textarea>
+      <div [hidden]="formGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeOtherText">
+        <aac-field-container label="Description:" [message]="displayMessage.corrosionTypeOtherText">
+          <textarea type="text" tabindex='42'cols="40" rows="5" class="form-control" formControlName="corrosionTypeOtherText"></textarea>
         </aac-field-container>
       </div>
     </div>
   </div>
-  <div [hidden]="cpcpSectionGroup.get('cpcprelated').value !='1'">
-    <aa-cause-of-damage [parent]="cpcpSectionGroup" [errorMessages]="displayMessage"></aa-cause-of-damage>
+  <div [hidden]="formGroup.get('iscpcpRelatedEvent').value !== true">
+    <aa-cause-of-damage [parent]="formGroup" [sda]="sda" [errorMessages]="displayMessage"></aa-cause-of-damage>
   </div>
 
 
   <div class="row">
     <div class="col-md-6">
-      <div  [hidden]="cpcpSectionGroup.get('cpcprelated').value !== '1'" [class.has-error]="displayMessage.floorBoardCondition">
+      <div  [hidden]="formGroup.get('iscpcpRelatedEvent').value !== true" [class.has-error]="displayMessage.floorBoardCondition">
         <aac-field-container label=" Floorboard condition after mat is removed:" [message]="displayMessage.floorBoardCondition">
           <select class="form-control" tabindex='54' id="floorBoardCondition" formControlName="floorBoardCondition">
             <option *ngFor="let ac of floorboardConditions$ | async" [value]="ac.id">{{ac.description}}</option>

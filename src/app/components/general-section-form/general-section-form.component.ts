@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
+﻿import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
@@ -12,7 +12,7 @@ import { Observable, Observer } from 'rxjs/Rx';
   templateUrl: './general-section-form.component.html',
   styleUrls: ['./general-section-form.component.less']
 })
-export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit {
+export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
@@ -21,10 +21,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   ATACodes$: Observable<List<models.IATACode>>;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('generalSectionFormGroup');
-
-  }
-
-  ngOnInit() {
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
       sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
@@ -39,6 +35,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
+  }
+  ngOnInit() {
     this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
     this.alertCodes$ = this.appStateService.getAlertCodes(); // .map(d => d && d.toJS());
     this.ATACodes$ = this.appStateService.getATACodes().map(d => d && d.toJS());
@@ -47,12 +45,19 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.aircraftInfo$ = this.appStateService.getAircraftInfo();
 
     this.stations$ = Observable.create((observer: Observer<string>) => {
-        observer.next(this.generalSectionFormGroup.get('station').value);
-      })
+      observer.next(this.generalSectionFormGroup.get('station').value);
+    })
       .switchMap(token => this.appStateService.getStations(token))
-      .do(d => console.log(d))
+      //.do(d => console.log(d)) //TODO
       ;
 
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.generalSectionFormGroup.patchValue(newSda.generalSection);
+      this.generalSectionFormGroup.patchValue({ sdaId: newSda.id });
+    }
   }
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);

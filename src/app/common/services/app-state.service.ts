@@ -5,7 +5,7 @@ import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import { Observable } from 'rxjs/Rx';
-import { IStation } from '../models';
+import { IStation, ISda } from '../models';
 @Injectable()
 export class AppStateService {
 
@@ -47,16 +47,16 @@ export class AppStateService {
     return this.store.select(fromRoot.getDamageTypes);
   }
   getCauseOfDamages() {
-      return this.store.select(fromRoot.getCauseOfDamages);
+    return this.store.select(fromRoot.getCauseOfDamages);
   }
   getFloorboardConditions() {
-      return this.store.select(fromRoot.getFloorboardConditions);
+    return this.store.select(fromRoot.getFloorboardConditions);
   }
   getRepairDescriptions() {
-      return this.store.select(fromRoot.getRepairDescriptions);
+    return this.store.select(fromRoot.getRepairDescriptions);
   }
   getRepairDocuments() {
-      return this.store.select(fromRoot.getRepairDocuments);
+    return this.store.select(fromRoot.getRepairDocuments);
   }
   getReasonsForChange() {
     return this.store.select(fromRoot.getReasonsForChange);
@@ -71,14 +71,26 @@ export class AppStateService {
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);
   }
-  getSelectedAlert() {
-    return this.store.select(fromRoot.getSelectedAlert);
+  getSelectedSda() {
+    return this.store.select(fromRoot.getSelectedSda);
   }
   getSelectedAlertLoading() {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
+  getSdaList() {
+    return this.store.select(fromRoot.getSdaList);
+  }
 
-  // Dispatch Actions
+  //Dispatch Actions
+  saveSda(sda: ISda): void {
+    this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
+  }
+  loadSdaList(): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdasAction());
+  }
+  loadSda(sdaId: number): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdaAction(sdaId));
+  }
   loadAircraftInfo(noseNumber: string): void {
     if (!noseNumber) { return; }
     this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction(noseNumber));

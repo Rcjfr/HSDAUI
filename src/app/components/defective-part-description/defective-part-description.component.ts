@@ -1,27 +1,32 @@
-
-import { Component, OnInit, OnDestroy, ViewChildren, ElementRef } from '@angular/core';
+﻿
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseFormComponent } from '../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
-
+import * as models from '../../common/models';
 @Component({
-    selector: 'aa-defective-part-description',
-    templateUrl: './defective-part-description.component.html',
-    styleUrls: ['./defective-part-description.component.less']
+  selector: 'aa-defective-part-description',
+  templateUrl: './defective-part-description.component.html',
+  styleUrls: ['./defective-part-description.component.less']
 })
-export class DefectivePartDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
-    defectivePartDescriptionGroup: FormGroup;
+export class DefectivePartDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
+  defectivePartDescriptionGroup: FormGroup;
 
 
   constructor(private fb: FormBuilder) {
-      super('defectivePartDescriptionGroup');
-
-  }
-
-  ngOnInit() {
-      this.defectivePartDescriptionGroup = this.fb.group({
-          defectivePartDescription: ['', [Validators.maxLength(30), Validators.required]]
+    super('defectivePartDescriptionGroup');
+    this.defectivePartDescriptionGroup = this.fb.group({
+      defectivePartDescription: ['', [Validators.maxLength(30), Validators.required]]
     });
-      this.parent.addControl(this.formGroupName, this.defectivePartDescriptionGroup);
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.defectivePartDescriptionGroup.patchValue(newSda.correctiveActionSection);
+    }
+  }
+  ngOnInit() {
+
+    this.parent.addControl(this.formGroupName, this.defectivePartDescriptionGroup);
   }
 
   ngOnDestroy(): void {

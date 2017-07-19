@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
+﻿import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
@@ -14,35 +14,36 @@ import * as models from '../../common/models';
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })
-export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit {
+export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   detectionMethods$: Observable<List<models.IDetectionMethod>>;
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
-    constructor( private fb: FormBuilder, private appStateService: AppStateService) {
-      super('defectLocationSectionFormGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+    super('defectLocationSectionFormGroup');
+    this.defectLocationSectionFormGroup = this.fb.group({
+      damageType: ['', [Validators.required, Validators.maxLength(250)]],
+      damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
+      length: ['', [Validators.required]],
+      width: ['', [Validators.required]],
+      depth: ['', [Validators.required]],
+      manufacturerPartNo: ['', [Validators.maxLength(50)]],
+      partDefective: ['', [Validators.required, Validators.maxLength(50)]],
+      manufacturerSerialNo: ['', [Validators.maxLength(50)]],
+      partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
+      partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
+      detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+    });
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.defectLocationSectionFormGroup.patchValue(newSda.defectLocationSection);
     }
-
+  }
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
-    this.defectLocationSectionFormGroup = this.fb.group({
-      defectType: ['', [Validators.required, Validators.maxLength(250)]],
-          defectDescription: ['', [Validators.required,  Validators.maxLength(250)]],
-          length: ['', [Validators.required]],
-          width: ['', [Validators.required]],
-          depth: ['', [Validators.required]],
-
-          MFGpart: ['', [Validators.maxLength(50)]],
-          partDefective: ['', [Validators.required, Validators.maxLength(50)]],
-          MFGserial: ['', [Validators.maxLength(50)]],
-          PartTT: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          PartTso: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-          detected: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
-
-    });
     this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);
-
   }
-
 }

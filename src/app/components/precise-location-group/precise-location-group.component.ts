@@ -1,32 +1,37 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../base-form.component';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
+import * as models from '../../common/models';
 @Component({
   selector: 'aa-precise-location-group',
   templateUrl: './precise-location-group.component.html',
   styleUrls: ['./precise-location-group.component.less']
 })
-export class PreciseLocationGroupComponent extends BaseFormComponent implements OnInit {
+export class PreciseLocationGroupComponent extends BaseFormComponent implements OnInit, OnChanges {
   preciseLocationGroup: FormGroup;
   constructor(private fb: FormBuilder) {
     super('preciseLocationGroup');
-
-   }
-
-  ngOnInit() {
     this.preciseLocationGroup = this.fb.group({
-              stationLocation: ['', [Validators.maxLength(50)]],
-              stringer: ['', [Validators.maxLength(25)]],
-              wl: ['', [Validators.maxLength(25)]],
-              bl: ['', [Validators.maxLength(25)]]
-          },
-              {
-                  validator: CustomValidators.validatePreciseLocationGroupFields
-              }
-              );
-              this.parent.addControl(this.formGroupName, this.preciseLocationGroup);
+      aircraftStation: ['', [Validators.maxLength(50)]],
+      stringer: ['', [Validators.maxLength(25)]],
+      waterLine: ['', [Validators.maxLength(25)]],
+      buttLine: ['', [Validators.maxLength(25)]]
+    },
+      {
+        validator: CustomValidators.validatePreciseLocationGroupFields
+      }
+    );
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.preciseLocationGroup.patchValue(newSda.defectLocationSection);
+    }
+  }
+  ngOnInit() {
+    this.parent.addControl(this.formGroupName, this.preciseLocationGroup);
   }
 
 }

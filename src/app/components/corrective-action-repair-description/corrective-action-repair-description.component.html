@@ -2,8 +2,8 @@
   <div class="row col-md-12">
     <div class="col-md-6">
       <div >
-        <aac-field-container required="true" label="Description:" [message]="displayMessage.repairedDescribe">
-          <select class="form-control" tabindex='63' id="repairedDescribe" formControlName="repairedDescribe">
+        <aac-field-container label="Description:" [message]="displayMessage.repairDescriptionType">
+          <select class="form-control" tabindex='63' id="repairDescriptionType" formControlName="repairDescriptionType">
             <option value="">Select</option>
             <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
@@ -14,15 +14,15 @@
 
   <div class="row col-md-12">
     <div class="col-md-6">
-      <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocument">
-        <select class="form-control" tabindex='64' id="repairDocument" formControlName="repairDocument">
+      <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType">
+        <select class="form-control" tabindex='64' id="repairDocumentType" formControlName="repairDocumentType">
           <option value="">Select</option>
           <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>
       </aac-field-container>
     </div>
-    <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocument').value !=''">
-      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [errorMessages]="displayMessage" ></aa-corrective-action-chap>
+    <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value !=''">
+      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [errorMessages]="displayMessage" ></aa-corrective-action-chap>
 
       </div>
     </div>
@@ -43,14 +43,14 @@
 
 
     <div class="col-md-6">
-      <div [class.has-error]="displayMessage.externalVisible">
+      <div [class.has-error]="displayMessage.isExternallyVisible">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Externally Visible?<span class="req">*</span></label>
+          <label class="col-sm-4 control-label">Externally Visible?</label>
           <div class="col-sm-8">
             <div class="customComponent" style="padding-left:20px;">
               <div>
-                <input type="radio" id="externalVisible" name="externalVisible" tabindex='67' value="0" formControlName="externalVisible">
-                <label for="externalVisible">
+                <input type="radio" id="isExternallyVisible" name="isExternallyVisible" tabindex='67' [value]="true" formControlName="isExternallyVisible">
+                <label for="isExternallyVisible">
                   <span class="control"></span>
                   Yes
                 </label>
@@ -59,14 +59,14 @@
             </div>
             <div class="customComponent" style="padding-left:20px;">
               <div>
-                <input type="radio" id="noexternalVisible" name="externalVisible" value="1" formControlName="externalVisible">
-                <label for="noexternalVisible">
+                <input type="radio" id="noIsExternallyVisible" name="isExternallyVisible" [value]="false" formControlName="isExternallyVisible">
+                <label for="noIsExternallyVisible">
                   <span class="control"></span>
                   No
                 </label>
               </div>
             </div>
-            <div *ngIf="displayMessage.externalVisible" class="error">{{displayMessage.externalVisible}}</div>
+            <div *ngIf="displayMessage.isExternallyVisible" class="error">{{displayMessage.isExternallyVisible}}</div>
           </div>
 
         </div>
@@ -81,8 +81,8 @@
     </div>
     <div class="row col-md-12">
       <div class="col-md-6">
-        <aac-field-container label="Height(in inches):" [message]="displayMessage.height" >
-          <input type="text" tabindex='68' class="form-control" id="height" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="height">
+        <aac-field-container label="Height(in inches):" [message]="displayMessage.repairHeight" >
+          <input type="text" tabindex='68' class="form-control" id="repairHeight" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairHeight">
         </aac-field-container>
       </div>
       <div class="col-md-6">

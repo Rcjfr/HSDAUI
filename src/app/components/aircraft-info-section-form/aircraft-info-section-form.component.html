@@ -1,9 +1,10 @@
-﻿<div [formGroup]="aircraftInfoSectionFormGroup">
+﻿<div [formGroup]="formGroup">
   <aac-field-container required="true" label="Aircraft #:" [message]="displayMessage.aircraftNo">
     <!--<div class="input-group">
       <input type="text" #airCraftNo="ngModel" autocomplete="off" class="form-control" name="airCraftNo" id="airCraftNo" required
              [(ngModel)]="alert.aircraftNo"
              [typeahead]="noseNumbers$"
+             
              (typeaheadOnSelect)="noseNumberOnSelect($event)"
              (change)="populateAircraftInfo($event.target.value)">
 

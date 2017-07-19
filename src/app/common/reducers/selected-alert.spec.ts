@@ -1,16 +1,17 @@
 ﻿import * as fromSelectedAlert from './selected-alert';
 import * as selectedAlert from '../actions/selected-alert';
 import { aircraftInfoFactory } from './models/aircraft-info';
-import { alertFactory } from './models/alert';
+import { sdaFactory } from './models/sda';
 import { List } from 'immutable';
-import { IAlert } from '../models/alert.model';
+import { ISda, ISdaListView } from '../models';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
-    alert: alertFactory(),
+    sda: sdaFactory(),
     noseNumbers: <List<string>>List.of(),
-    aircraftInfo: aircraftInfoFactory()
+    aircraftInfo: aircraftInfoFactory(),
+    sdaList: <List<ISdaListView>>List.of(),
   };
   const aircraftInfo = aircraftInfoFactory({
     aircraftNo: 'A330',

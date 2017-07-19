@@ -51,10 +51,10 @@ export class CustomValidators {
 
   static validatePreciseLocationGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
 
-    const stationLocationControl = c.get('stationLocation');
+    const stationLocationControl = c.get('aircraftStation');
     const stringerControl = c.get('stringer');
-    const wlControl = c.get('wl');
-    const blControl = c.get('bl');
+    const wlControl = c.get('waterLine');
+    const blControl = c.get('buttLine');
     //if (stationLocationControl.value || stringerControl.value || wlControl.value || blControl.value) {
     //    return null;
     //}
@@ -72,7 +72,7 @@ export class CustomValidators {
     return { 'aleasttwo': true };
   };
   static validateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
-    //const cpcprelated = c.parent.get('cpcprelated');
+    //const iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
 
     const environmentControl = c.get('environment');
     const galleySpillControl = c.get('galleySpill');
@@ -84,15 +84,14 @@ export class CustomValidators {
     const poorSealingPracticesControl = c.get('poorSealingPractices');
     const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
     const parent = c.parent;
-    let cpcpRelated;
+    let iscpcpRelatedEvent;
     if (parent !== undefined) {
-      cpcpRelated = c.parent.get('cpcprelated');
+      iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
     }
 
     const damageOtherControl = c.get('damageOther');
     let filledContolCount: number;
     // var damageOtherTouched = damageOtherControl.touched;
-    //if (cpcprelated.value != "1") return null;
     filledContolCount = 0;
     if (environmentControl.value) {
       filledContolCount++; damageOtherControl.markAsUntouched();
@@ -112,10 +111,7 @@ export class CustomValidators {
       return null;
     }
 
-    //if ((filledContolCount == 0 && cpcpRealted.value == 1 && !damageOtherControl.touched))
-    //{ return { 'atleastone': true }; }
-
-    if (cpcpRelated.value !== 1) {
+    if (iscpcpRelatedEvent.value !== true) {
       return null;
     }
 
@@ -123,7 +119,7 @@ export class CustomValidators {
       return { 'atleastone': true };
     }
 
-    if ((filledContolCount >= 1 && cpcpRelated.value === 0) || (filledContolCount >= 1 && cpcpRelated.value === 1)) {
+    if ((filledContolCount >= 1 && iscpcpRelatedEvent.value === true) || (filledContolCount >= 1 && iscpcpRelatedEvent.value === false)) {
       return null;
     }
 
@@ -131,7 +127,7 @@ export class CustomValidators {
       return { 'atleastone': true };
     }
 
-    if (filledContolCount === 0 && cpcpRelated.value === 1) {
+    if (filledContolCount === 0 && iscpcpRelatedEvent.value === true) {
       return { 'atleastone': true };
     }
 
@@ -166,7 +162,7 @@ export class CustomValidators {
   //};
   static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
 
-    const repairDocumentControl = c.get('repairDocument');
+      const repairDocumentControl = c.get('repairDocumentType');
     const engineeringAuthorizationControl = c.get('engineeringAuthorization');
     if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
       return null;

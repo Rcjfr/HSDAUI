@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { IAlert } from './../../common/models';
+import { ISdaListView } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 
 @Component({
@@ -8,9 +8,21 @@ import { Subject } from 'rxjs/Rx';
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit {
-  @Input() alerts: IAlert[];
+  dtTrigger: Subject<any> = new Subject();
+  public _sdaList: ISdaListView[];
+
+  //@Input() sdaList: ISdaListView[];
+  @Input()
+  set sdaList(data: ISdaListView[]) {
+    this._sdaList = data;
+    this.dtTrigger.next();
+  }
+
+  get name(): ISdaListView[] { return this._sdaList; }
+
+
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<number> = new Subject();
+
 
   constructor() { }
 
@@ -26,6 +38,5 @@ export class AlertsGridComponent implements OnInit {
         'orderable': false
       }]
     };
-    this.dtTrigger.next(1); //TODO: this approach is not working
   }
 }

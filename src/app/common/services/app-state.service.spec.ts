@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { Store } from '@ngrx/store';
 import { List } from 'immutable';
-import { alertFactory } from '../reducers/models/alert';
+import { sdaFactory } from '../reducers/models/sda';
 import { aircraftInfoFactory } from '../reducers/models/aircraft-info';
 
 describe('AppStateService', () => {
@@ -17,7 +17,7 @@ describe('AppStateService', () => {
           provide: Store, useValue: new MockStore({
             selectedAlert: {
               loading: false,
-              alert: alertFactory(),
+              sda: sdaFactory(),
               noseNumbers: List.of(['A312', 'A330']),
               aircraftInfo: aircraftInfoFactory()
             }
