@@ -48,7 +48,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       observer.next(this.generalSectionFormGroup.get('station').value);
     })
       .switchMap(token => this.appStateService.getStations(token))
-      .do(d => console.log(d))
+      //.do(d => console.log(d)) //TODO
       ;
 
   }
