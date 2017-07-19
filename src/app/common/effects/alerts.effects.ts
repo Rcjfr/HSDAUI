@@ -36,7 +36,6 @@ export class AlertEffects {
           return new selectedAlert.LoadAircraftInfoCompleteAction(aircraftInfo);
         })
         .catch((err) => {
-          // tslint:disable-next-line:max-line-length
           return of(new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'));
         });
     });

@@ -26,7 +26,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       isDeferred: ['', []],
       isMajorRepair: ['', []],
       majorRepairDescription: ['', [Validators.maxLength(250)]],
-      completedBy: ['', [Validators.maxLength(50), Validators.required]],
+      completedBy: ['', [Validators.maxLength(50)]],
       completedDate: [new Date(), []]
     },
       //{
