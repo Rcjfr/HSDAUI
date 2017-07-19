@@ -1,25 +1,21 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
+﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { BaseFormComponent } from '../base-form.component';
-
+import * as models from '../../common/models';
 @Component({
   selector: 'aa-corrective-action-form',
   templateUrl: './corrective-action-form.component.html',
   styleUrls: ['./corrective-action-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit {
+export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit, OnChanges {
   correctiveActionFormGroup: FormGroup;
 
   constructor(private fb: FormBuilder) {
     super('correctiveActionFormGroup');
-  }
-  loadData() {
-  }
-  ngOnInit() {
     this.correctiveActionFormGroup = this.fb.group({
       deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
       deferralNo: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
@@ -33,6 +29,14 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       //    validator: CustomValidators.validateCorrectiveActionFormFields
       //    }
     );
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.correctiveActionFormGroup.patchValue(newSda.correctiveActionSection);
+    }
+  }
+  ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
     this.correctiveActionFormGroup.get('isDeferred').valueChanges
       .subscribe(val => this.setCorrectiveActionFormFields(val));

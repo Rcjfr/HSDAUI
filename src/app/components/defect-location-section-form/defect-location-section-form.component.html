@@ -3,13 +3,13 @@
     <div class="col-md-6">
 
       <aac-field-container label="Damage Type:" [message]="displayMessage.damageType" required="true">
-        <select class="form-control" tabindex='21' [ngModel]="sda.defectLocationSection.damageType" formControlName="damageType">
+        <select class="form-control" tabindex='21' formControlName="damageType">
           <option value="">Select Damage Type</option>
           <option *ngFor="let ac of damageTypes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
       </aac-field-container>
       <aac-field-container label="Damage Description:" required="true" [message]="displayMessage.damageDescription" helptext="(Example: 6 inch Crack: 3X4 inch Corroded Area,etc.) Any comments after || denotes historical data.">
-        <textarea type="text" tabindex='22' cols="40" rows="5" [ngModel]="sda.defectLocationSection.damageDescription" class="form-control" formControlName="damageDescription">
+        <textarea type="text" tabindex='22' cols="40" rows="5" class="form-control" formControlName="damageDescription">
         </textarea>
       </aac-field-container>
     </div>
@@ -17,13 +17,13 @@
     <div class="col-md-6">
       <h5>Defect Size (in inches):</h5>
       <aac-field-container label="Length:" [message]="displayMessage.length" required="true">
-        <input type="text" tabindex='23' class="form-control" [ngModel]="sda.defectLocationSection.length" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="length">
+        <input type="text" tabindex='23' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="length">
       </aac-field-container>
       <aac-field-container label="Width:" [message]="displayMessage.width" required="true">
-        <input type="text" tabindex='24' class="form-control" [ngModel]="sda.defectLocationSection.width" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="width">
+        <input type="text" tabindex='24' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="width">
       </aac-field-container>
       <aac-field-container label="Depth:" [message]="displayMessage.depth" required="true" helptext="(If Length, Width, Depth is Null, enter 0.)">
-        <input type="text" tabindex='25' class="form-control" [ngModel]="sda.defectLocationSection.depth" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depth">
+        <input type="text" tabindex='25' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depth">
       </aac-field-container>
     </div>
   </div>
@@ -32,31 +32,31 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="MFG Part #:" [message]="displayMessage.manufacturerPartNo">
-        <input type="text" tabindex='30' class="form-control" [ngModel]="sda.defectLocationSection.manufacturerPartNo" formControlName="manufacturerPartNo">
+        <input type="text" tabindex='30' class="form-control" formControlName="manufacturerPartNo">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Part Defective:" [message]="displayMessage.partDefective" required="true">
-        <input type="text" tabindex='31' class="form-control" [ngModel]="sda.defectLocationSection.partDefective" formControlName="partDefective">
+        <input type="text" tabindex='31' class="form-control" formControlName="partDefective">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
       <aac-field-container label="MFG Serial #:" [message]="displayMessage.manufacturerSerialNo">
-        <input type="text" tabindex='32' class="form-control" [ngModel]="sda.defectLocationSection.manufacturerSerialNo" formControlName="manufacturerSerialNo">
+        <input type="text" tabindex='32' class="form-control" formControlName="manufacturerSerialNo">
       </aac-field-container>
     </div>
     <div class="col-md-4">
       <aac-field-container label="Part TT:" [message]="displayMessage.partTT">
-        <input type="text" tabindex='33' class="form-control" [ngModel]="sda.defectLocationSection.partTT" formControlName="partTT">
+        <input type="text" tabindex='33' class="form-control" formControlName="partTT">
       </aac-field-container>
     </div>
 
 
     <div class="col-md-4">
       <aac-field-container label="Part TSO:" [message]="displayMessage.partTSO">
-        <input type="text" tabindex='34' class="form-control" [ngModel]="sda.defectLocationSection.partTSO" formControlName="partTSO">
+        <input type="text" tabindex='34' class="form-control" formControlName="partTSO">
       </aac-field-container>
     </div>
   </div>
@@ -64,7 +64,7 @@
     <div class="col-md-6">
 
       <aac-field-container required="true" label="How Detected:" [message]="displayMessage.detectionMethod" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
-        <select tabindex="35" class="form-control" [ngModel]="sda.defectLocationSection.detectionMethod" formControlName="detectionMethod">
+        <select tabindex="35" class="form-control" formControlName="detectionMethod">
           <option value=""> </option>
           <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>

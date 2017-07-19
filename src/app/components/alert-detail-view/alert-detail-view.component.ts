@@ -160,9 +160,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
         if (group.controls[i].errors) {
           console.log(i, group.controls[i].errors);
         }
-         if(group.controls[i].invalid){
-           console.log(group.controls[i]);
-         }
+        if (group.controls[i].invalid) {
+          console.log(group.controls[i]);
+        }
       } else {
         this.logErrors(group.controls[i]);
       }

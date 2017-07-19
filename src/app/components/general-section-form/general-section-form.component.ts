@@ -21,9 +21,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   ATACodes$: Observable<List<models.IATACode>>;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('generalSectionFormGroup');
-
-  }
-  ngOnInit() {
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
       sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
@@ -38,6 +35,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
 
     });
+  }
+  ngOnInit() {
     this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
     this.alertCodes$ = this.appStateService.getAlertCodes(); // .map(d => d && d.toJS());
     this.ATACodes$ = this.appStateService.getATACodes().map(d => d && d.toJS());
@@ -57,7 +56,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     if (changes.sda && changes.sda.currentValue.id) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.generalSectionFormGroup.patchValue(newSda.generalSection);
-      this.generalSectionFormGroup.patchValue({ sdaId:newSda.id});
+      this.generalSectionFormGroup.patchValue({ sdaId: newSda.id });
     }
   }
   populateAircraftInfo(noseNumber: string) {

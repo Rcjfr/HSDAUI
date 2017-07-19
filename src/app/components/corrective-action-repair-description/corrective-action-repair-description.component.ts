@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -16,19 +16,13 @@ import { AppStateService } from '../../common/services';
   styleUrls: ['./corrective-action-repair-description.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
+export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   correctiveActionRepairDescriptionFormGroup: FormGroup;
   repairDescriptions$: Observable<List<models.IRepairDescription>>;
   repairDocuments$: Observable<List<models.IRepairDocument>>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
-  }
-  loadData() {
-  }
-  ngOnInit() {
-    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       repairDescriptionType: ['', [Validators.required]],
       repairDocumentType: ['', []],
@@ -42,7 +36,10 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
         validator: CustomValidators.validateCorrectiveActionRepairFields
       }
     );
-
+  }
+  ngOnInit() {
+    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))
@@ -51,7 +48,12 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
     ));
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.correctiveActionRepairDescriptionFormGroup.patchValue(newSda.correctiveActionSection);
+    }
+  }
   ngOnDestroy() {
     super.ngOnDestroy();
   }

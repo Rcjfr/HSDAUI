@@ -3,6 +3,9 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
 import * as models from '../common/models';
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
 export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() sda: models.ISda;
 

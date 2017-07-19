@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../base-form.component';
 import { GenericValidator, Expressions } from '../../common/validators/generic-validator';
@@ -6,25 +6,20 @@ import { CustomValidators } from '../../common/validators/custom-validators';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { ICorrosionLevel, ICorrosionType, IFloorboardCondition } from '../../common/models';
+import * as models from '../../common/models';
 
 @Component({
   selector: 'aa-cpcp-section-form',
   templateUrl: './cpcp-section.component.html',
   styleUrls: ['./cpcp-section.component.less']
 })
-export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
-  corrosionTypes$: Observable<List<ICorrosionType>>;
-  corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  floorboardConditions$: Observable<List<IFloorboardCondition>>;
+export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
+  corrosionTypes$: Observable<List<models.ICorrosionType>>;
+  corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
+  floorboardConditions$: Observable<List<models.IFloorboardCondition>>;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
-  }
-  ngOnInit() {
-    this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
-    this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
-    this.floorboardConditions$ = this.appStateService.getFloorboardConditions();
     this.formGroup = this.fb.group({
       iscpcpRelatedEvent: ['', []],
       isWideSpreadCorrosion: ['', []],
@@ -35,13 +30,23 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit {
       corrosionTaskNo: ['', [Validators.maxLength(25)]],
       floorBoardCondition: ['', []]
     });
+  }
+  ngOnInit() {
+    this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
+    this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
+    this.floorboardConditions$ = this.appStateService.getFloorboardConditions();
     this.parent.addControl(this.formGroupName, this.formGroup);
     //this.cpcpSectionGroup.get('iscpcpRelatedEvent').valueChanges
     //  .subscribe(val => this.setCorrosionPreventionFields(val));
     //this.cpcpSectionGroup.get('corrosionType').valueChanges
     //  .subscribe(val => this.setCorrosionTypeFields(val));
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.formGroup.patchValue(newSda.cpcpSection);
+    }
+  }
   setCorrosionTypeFields(corrosionType: string): void {
     if (corrosionType !== '5') {
       this.formGroup.get('corrosionTypeOtherText').clearValidators();

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../common/validators/generic-validator';
@@ -6,7 +6,7 @@ import { BaseFormComponent } from '../base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { IAircraftInfo } from '../../common/models/aircraft-info.model';
 import { AppStateService } from '../../common/services';
-
+import * as models from '../../common/models';
 
 @Component({
   selector: 'aa-aircraft-info-section-form',
@@ -14,17 +14,17 @@ import { AppStateService } from '../../common/services';
   styleUrls: ['./aircraft-info-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy {
+export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Output() onNoseNumberChange = new EventEmitter();
   @Input()
-  set aircraftInfo(info: IAircraftInfo){
+  set aircraftInfo(info: IAircraftInfo) {
     if (this.aircraftInfoSectionFormGroup) {
-    this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
-    this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
-    this.aircraftInfoSectionFormGroup.get('serialNo').setValue(info.serialNo);
-    this.aircraftInfoSectionFormGroup.get('totalShipTime').setValue(info.totalShipTime);
-    this.aircraftInfoSectionFormGroup.get('cycles').setValue(info.cycles);
-    this.aircraftInfoSectionFormGroup.get('fleet').setValue(info.fleet);
+      this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
+      this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
+      this.aircraftInfoSectionFormGroup.get('serialNo').setValue(info.serialNo);
+      this.aircraftInfoSectionFormGroup.get('totalShipTime').setValue(info.totalShipTime);
+      this.aircraftInfoSectionFormGroup.get('cycles').setValue(info.cycles);
+      this.aircraftInfoSectionFormGroup.get('fleet').setValue(info.fleet);
     }
   }
   aircraftInfoSectionFormGroup: FormGroup;
@@ -53,10 +53,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
   constructor(private fb: FormBuilder, public appStateService: AppStateService) {
     super('aircraftInfoSectionFormGroup');
-  }
-
-  ngOnInit(): void {
-    this.aircraftInfoSectionFormGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
       manufacturer: ['', [Validators.required, Validators.maxLength(100)]],
       model: ['', [Validators.required, Validators.maxLength(15)]],
@@ -66,23 +63,20 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
       fleet: ['', [Validators.required, Validators.maxLength(20)]],
       originator: ['', [Validators.required, Validators.maxLength(50)]]
     });
-    this.parent.addControl(this.formGroupName, this.aircraftInfoSectionFormGroup);
-    // this.aircraftInfoSectionFormGroup.get('fleet')
+  }
+
+  ngOnInit(): void {
+    this.parent.addControl(this.formGroupName, this.formGroup);
+    // this.formGroup.get('fleet')
     //                                  .valueChanges.debounceTime(500)
     //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
 
   }
-  loadData() {
-    this.aircraftInfoSectionFormGroup.patchValue({
-      aircraftNo: this.sda.generalSection.aircraftNo,
-      manufacturer: this.sda.generalSection.manufacturer,
-      model: this.sda.generalSection.model,
-      serialNo: this.sda.generalSection.serialNo,
-      totalShipTime: this.sda.generalSection.totalShipTime,
-      cycles: this.sda.generalSection.cycles,
-      fleet: this.sda.generalSection.fleet,
-      originator: this.sda.generalSection.originator
-    });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda && changes.sda.currentValue.id) {
+      const newSda: models.ISda = changes.sda.currentValue;
+      this.formGroup.patchValue(newSda.generalSection);
+    }
   }
   noseNumberOnSelect(e: TypeaheadMatch) {
     // console.log('Selected value: ', e.value);

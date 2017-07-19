@@ -3,10 +3,10 @@
     <h4>Defect Discovered during: (Check appropriate box and describe) <span class="req">*</span></h4>
 
     <aac-radio-container label="Unscheduled Maintenance">
-      <input type="radio" name="defectDiscoveredDuring" value="U" [ngModel]="sda.generalSection.defectDiscoveredDuring"  tabindex="17" formControlName="defectDiscoveredDuring" />
+      <input type="radio" name="defectDiscoveredDuring" value="U" tabindex="17" formControlName="defectDiscoveredDuring" />
     </aac-radio-container>
     <aac-radio-container label="Scheduled Maintenance">
-      <input type="radio" name="defectDiscoveredDuring" value="S" [ngModel]="sda.generalSection.defectDiscoveredDuring" tabindex="17" formControlName="defectDiscoveredDuring" />
+      <input type="radio" name="defectDiscoveredDuring" value="S" tabindex="17" formControlName="defectDiscoveredDuring" />
     </aac-radio-container>
     <div *ngIf="displayMessage.defectDiscoveredDuring" class="error">{{displayMessage.defectDiscoveredDuring}}</div>
   </div>
