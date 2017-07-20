@@ -71,28 +71,35 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
   }
   flatten(data) {
-    var result = {};
+    const result = {};
     function recurse(cur, prop) {
       if (Object(cur) !== cur) {
         result[prop] = cur;
       } else if (Array.isArray(cur)) {
-        for (var i = 0, l = cur.length; i < l; i++)
-          recurse(cur[i], prop + "[" + i + "]");
-        if (l == 0)
-          result[prop] = [];
+        for (let i = 0, l = cur.length; i < l; i++) {
+          recurse(cur[i], prop + '[' + i + ']');
+
+          if (l === 0) {
+            result[prop] = [];
+          }
+        }
       } else if (cur instanceof Date) {
         result[prop] = cur;
       } else {
-        var isEmpty = true;
-        for (var p in cur) {
-          isEmpty = false;
-          recurse(cur[p], p); //recurse(cur[p], prop ? prop+"."+p : p); //if dot notation is required
+        let isEmpty = true;
+        for (const p in cur) {
+          if (cur.hasOwnProperty(p)) {
+            isEmpty = false;
+            recurse(cur[p], p); //recurse(cur[p], prop ? prop+"."+p : p); //if dot notation is required
+          }
         }
-        if (isEmpty && prop)
+        if (isEmpty && prop) {
           result[prop] = {};
+        }
       }
     }
-    recurse(data, "");
+    recurse(data, '');
+
     return result;
   }
 
@@ -103,9 +110,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
       this.toastr.error('Details entered are invalid.Please correct and try again.', 'Error');
+
       return;
     }
-    
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
@@ -119,7 +126,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
       (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
       (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-    const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage});
+    const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
     const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
 
     const sdaDetail: ISda = Object.assign({}, this.sda,

@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { AppStateService } from '../../common/services';
-import { Router, NavigationEnd } from "@angular/router";
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'aa-root',

@@ -70,9 +70,10 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
     .map((action: selectedAlert.LoadSdaAction) => action.payload)
     .switchMap((sdaId: number) => {
-      if (sdaId == 0) {
+      if (sdaId === 0) {
         return of(new selectedAlert.LoadSdaCompleteAction({}));
       }
+
       return this.sdaService.getSda(sdaId)
         .map((data: models.ISda) => {
           return new selectedAlert.LoadSdaCompleteAction(data);
