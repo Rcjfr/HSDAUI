@@ -36,7 +36,7 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
     });
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.defectLocationSectionFormGroup.patchValue(newSda.defectLocationSection);
     }

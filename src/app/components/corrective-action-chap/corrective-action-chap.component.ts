@@ -20,7 +20,7 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
     this.parent.addControl(this.formGroupName, this.correctiveActionChapFormGroup);
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionChapFormGroup.patchValue(newSda.correctiveActionSection);
     }

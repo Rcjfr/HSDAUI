@@ -53,7 +53,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.generalSectionFormGroup.patchValue(newSda.generalSection);
       this.generalSectionFormGroup.patchValue({ sdaId: newSda.id });
