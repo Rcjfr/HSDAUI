@@ -84,7 +84,12 @@ export class AlertEffects {
     });
   @Effect() navigateHome$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
-    .map(() => this.router.navigate(['/alerts']));
+    .map((action: Action) => {
+      this.toastr.success("SDA Details saved successfully.", 'Success');
+      return action;
+    })
+    .delay(1000)
+    .map((action: selectedAlert.SaveSdaCompleteAction) => this.router.navigate(['/alerts',action.payload]));
   @Effect()
   showToastrError$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,

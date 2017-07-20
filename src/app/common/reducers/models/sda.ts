@@ -34,7 +34,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     routineNo: null,
     nonRoutineNo: null,
     micNo: null,
-    createDate: null,
+    createDate: new Date(),
   },
   defectLocationSection: {
     damageType: null,
