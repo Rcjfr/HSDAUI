@@ -33,10 +33,11 @@ export class AlertDetailComponent implements OnInit, OnDestroy {
     this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.appStateService.loadNoseNumbers('');
     this.actionsSubscription = this.route.params.select<string>('id').subscribe(id => {
+      let sdaId = 0;
       if (id !== 'new') {
-        const sdaId = Number.parseInt(id);
-        this.appStateService.loadSda(sdaId);
+        sdaId = Number.parseInt(id);
       }
+      this.appStateService.loadSda(sdaId);
     });
   }
   ngOnDestroy() {

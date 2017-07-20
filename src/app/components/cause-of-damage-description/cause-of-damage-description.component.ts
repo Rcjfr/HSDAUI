@@ -22,7 +22,7 @@ export class CauseOfDamageDescriptionComponent extends BaseFormComponent impleme
     this.parent.addControl(this.formGroupName, this.causeOfDamageDescriptionGroup);
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.causeOfDamageDescriptionGroup.patchValue(newSda.cpcpSection);
     }

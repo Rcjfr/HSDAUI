@@ -29,7 +29,7 @@ export class AlertsGridComponent implements OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       searching: false,
       'paging': true,
       'ordering': true,

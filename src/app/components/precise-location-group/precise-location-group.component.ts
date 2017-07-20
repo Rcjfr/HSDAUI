@@ -25,7 +25,7 @@ export class PreciseLocationGroupComponent extends BaseFormComponent implements 
     );
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.preciseLocationGroup.patchValue(newSda.defectLocationSection);
     }

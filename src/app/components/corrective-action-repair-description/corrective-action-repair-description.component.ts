@@ -49,7 +49,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     ));
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionRepairDescriptionFormGroup.patchValue(newSda.correctiveActionSection);
     }

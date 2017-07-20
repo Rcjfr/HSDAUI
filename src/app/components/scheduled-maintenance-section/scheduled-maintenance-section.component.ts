@@ -35,7 +35,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.generalSection);
     }

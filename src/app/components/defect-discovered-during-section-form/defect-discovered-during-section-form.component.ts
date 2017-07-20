@@ -24,7 +24,7 @@ export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponen
     this.parent.addControl(this.formGroupName, this.formGroup);
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.generalSection);
     }

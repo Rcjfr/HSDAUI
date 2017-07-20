@@ -38,7 +38,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.causeOfDamageGroup.patchValue({
         environment: this.isChecked(newSda.cpcpSection.causesOfDamage, 1),

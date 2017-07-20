@@ -70,29 +70,44 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     this.sdaForm = this.fb.group({});
 
   }
+  flatten(data) {
+    var result = {};
+    function recurse(cur, prop) {
+      if (Object(cur) !== cur) {
+        result[prop] = cur;
+      } else if (Array.isArray(cur)) {
+        for (var i = 0, l = cur.length; i < l; i++)
+          recurse(cur[i], prop + "[" + i + "]");
+        if (l == 0)
+          result[prop] = [];
+      } else if (cur instanceof Date) {
+        result[prop] = cur;
+      } else {
+        var isEmpty = true;
+        for (var p in cur) {
+          isEmpty = false;
+          recurse(cur[p], p); //recurse(cur[p], prop ? prop+"."+p : p); //if dot notation is required
+        }
+        if (isEmpty && prop)
+          result[prop] = {};
+      }
+    }
+    recurse(data, "");
+    return result;
+  }
+
   saveAlert() {
     this.genericValidator.formSubmitted = true;
     this.markAsDirty(this.sdaForm);
     this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
-
+      this.toastr.error('Details entered are invalid.Please correct and try again.', 'Error');
       return;
     }
-    const duringUnscheduledMaintenance = this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.defectDiscoveredDuring === 'U';
-    const generalSectionData = Object.assign({},
-      this.sdaForm.value.generalSectionFormGroup,
-      this.sdaForm.value.generalSectionFormGroup.aircraftInfoSectionFormGroup,
-      this.sdaForm.value.generalSectionFormGroup.ataCodesSectionFormGroup,
-      this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup,
-      duringUnscheduledMaintenance
-        ? this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.unscheduledMaintenanceGroup
-        : this.sdaForm.value.generalSectionFormGroup.defectDiscoveredDuringSectionFormGroup.scheduledMaintenanceGroup
-    );
-    const defectLocationData = Object.assign({},
-      this.sdaForm.value.defectLocationSectionFormGroup,
-      this.sdaForm.value.defectLocationSectionFormGroup.preciseLocationGroup
-    );
+    
+    const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
+    const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
     const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
       (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
@@ -104,38 +119,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
       (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
       (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-
-
-
-    const cpcpSectionData = Object.assign({},
-      this.sdaForm.value.cpcpSectionGroup,
-      {
-
-        causesOfDamage: causesOfDamage
-      },
-      this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup.causeOfDamageDescriptionGroup,
-    );
-    const correctiveActionSection = this.sdaForm.value.correctiveActionFormGroup;
-    const repairActionGroup = correctiveActionSection.correctiveActionOptionFormGroup.correctiveActionRepairDescriptionFormGroup;
-    const correctiveActionData = {
-      IsDeferred: correctiveActionSection.isDeferred,
-      DeferralCode: correctiveActionSection.deferralCode,
-      DeferralNo: correctiveActionSection.deferralNo,
-      RepairType: correctiveActionSection.correctiveActionOptionFormGroup.repairType,
-      DefectivePartDescription: correctiveActionSection.correctiveActionOptionFormGroup && correctiveActionSection.correctiveActionOptionFormGroup.defectivePartDescription,
-      ModifiedPartDescription: correctiveActionSection.correctiveActionOptionFormGroup && correctiveActionSection.correctiveActionOptionFormGroup.modifiedpartDescription,
-      RepairDescriptionType: repairActionGroup && repairActionGroup.repairDescriptionType,
-      RepairDocumentType: repairActionGroup && repairActionGroup.repairDocumentType,
-      ChapFigRepairText: repairActionGroup && repairActionGroup.correctiveActionChapFormGroup && repairActionGroup.correctiveActionChapFormGroup.chapFigRepairText,
-      EngineeringAuthorization: repairActionGroup && repairActionGroup.engineeringAuthorization,
-      IsExternallyVisible: repairActionGroup && repairActionGroup.isExternallyVisible,
-      RepairHeight: repairActionGroup && repairActionGroup.repairHeight,
-      RepairWidth: repairActionGroup && repairActionGroup.repairWidth,
-      IsMajorRepair: correctiveActionSection.isMajorRepair,
-      MajorRepairDescription: correctiveActionSection.majorRepairDescription,
-      CompletedBy: correctiveActionSection.completedBy,
-      CompletedDate: correctiveActionSection.completedDate
-    };
+    const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage});
+    const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
 
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {

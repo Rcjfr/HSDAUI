@@ -26,9 +26,11 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.subscriptions.push(this.formGroup.get('ataCode1').valueChanges.subscribe(v => this.getAlertCode2s(v)));
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sda && changes.sda.currentValue.id) {
+    if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.getAlertCode2s(newSda.generalSection.ataCode1.toString());
+      if (newSda.generalSection.ataCode1) {
+        this.getAlertCode2s(newSda.generalSection.ataCode1.toString());
+      }
       this.formGroup.patchValue(newSda.generalSection);
     }
   }
