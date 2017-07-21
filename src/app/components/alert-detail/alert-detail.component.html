@@ -1,2 +1,5 @@
-﻿<aa-alert-detail-view [sda]="sda$ | async" [loading]="loading$ | async">
+﻿<aa-alert-detail-view [sda]="sda$ | async" 
+                      [loading]="loading$ | async"
+                      (onReset)="loadSda()"
+                      >
 </aa-alert-detail-view>

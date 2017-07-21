@@ -18,5 +18,11 @@ export class AppComponent implements OnInit {
       window.scrollTo(0, 0)
     });
   }
-
+  loadNewSda() {
+    this.router.navigate(['alerts', 'new']).then(result => {
+      if (result) { this.appStateService.loadSda(0); }
+    });
+    
+    return false;
+  }
 }
