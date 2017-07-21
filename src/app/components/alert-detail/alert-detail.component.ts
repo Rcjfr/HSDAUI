@@ -11,7 +11,7 @@ import { AppStateService } from '../../common/services';
 import { Subscription } from 'rxjs/Rx';
 import '@ngrx/core/add/operator/select';
 import { ComponentCanDeactivate } from '../../common/components/pending-changes.guard';
-import { AlertDetailViewComponent } from "../alert-detail-view/alert-detail-view.component";
+import { AlertDetailViewComponent } from '../alert-detail-view/alert-detail-view.component';
 @Component({
   selector: 'aa-alert-detail',
   templateUrl: './alert-detail.component.html',

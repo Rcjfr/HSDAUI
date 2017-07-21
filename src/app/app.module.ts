@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
 import { DataTablesModule } from 'angular-datatables';
-import { BootstrapModalModule,DialogService } from 'ng2-bootstrap-modal';
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -180,7 +180,6 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     DteStatusService,
     RepairInspectionStatusService,
     SdaService,
-    DialogService,
     PendingChangesGuard
   ],
   entryComponents: [

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['alerts', 'new']).then(result => {
       if (result) { this.appStateService.loadSda(0); }
     });
-    
+
     return false;
   }
 }

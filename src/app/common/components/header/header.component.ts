@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
     }
   newSda() {
     this.onNewSda.emit();
+
     return false;
   }
 }

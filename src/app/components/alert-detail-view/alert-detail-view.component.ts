@@ -67,7 +67,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       });
 
   }
-  
   ngOnInit() {
     this.sdaForm = this.fb.group({});
 
