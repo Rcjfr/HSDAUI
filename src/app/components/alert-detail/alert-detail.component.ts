@@ -36,6 +36,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   canDeactivate(): Observable<boolean> | boolean {
     return !this.alertDetailView.sdaForm.dirty;
   }
+
   ngOnInit(): void {
     this.loadSda();
     this.loading$ = this.appStateService.getSelectedAlertLoading();
