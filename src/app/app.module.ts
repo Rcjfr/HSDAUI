@@ -44,6 +44,7 @@ import {
   SdaService
 
 } from './common/services';
+import { PendingChangesGuard } from './common/components/pending-changes.guard';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
 import { reducer } from './common/reducers';
@@ -174,11 +175,12 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     CauseOfDamageService,
     FloorboardConditionService,
     RepairDocumentService,
-  RepairDescriptionService,
+    RepairDescriptionService,
     ReasonForChangeService,
     DteStatusService,
     RepairInspectionStatusService,
-    SdaService
+    SdaService,
+    PendingChangesGuard
   ],
   entryComponents: [
     ConfirmComponent

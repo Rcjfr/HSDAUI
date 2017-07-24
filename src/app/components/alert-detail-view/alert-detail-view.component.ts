@@ -1,6 +1,6 @@
 ﻿import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit
+  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener
 } from '@angular/core';
 import {
   FormBuilder,
@@ -29,6 +29,7 @@ import { AppStateService } from '../../common/services';
 export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   @Input() sda: ISda;
   @Input() loading: boolean;
+  @Output() onReset = new EventEmitter();
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
@@ -102,7 +103,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
     return result;
   }
+  resetSdaForm() {
 
+  }
   saveAlert() {
     this.genericValidator.formSubmitted = true;
     this.markAsDirty(this.sdaForm);
