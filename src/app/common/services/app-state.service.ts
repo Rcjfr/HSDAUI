@@ -77,6 +77,9 @@ export class AppStateService {
   getSelectedAlertLoading() {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
+  getSelectedAlertSavedState() {
+    return this.store.select(fromRoot.getSelectedAlertSavedState);
+  }
   getSdaList() {
     return this.store.select(fromRoot.getSdaList);
   }

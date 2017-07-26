@@ -13,6 +13,7 @@ import {
   AbstractControl
 } from '@angular/forms';
 import { ISda } from '../../common/models';
+import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -67,11 +68,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       });
 
   }
+
   ngOnInit() {
     this.sdaForm = this.fb.group({});
-
+    this.appStateService.getSelectedAlertSavedState().subscribe(saved => {
+      if (saved) {
+        this.sdaForm.markAsPristine();
+      }
+    });
   }
-  flatten(data) {
+
+  flatten(data):any {
     const result = {};
     function recurse(cur, prop) {
       if (Object(cur) !== cur) {
@@ -103,9 +110,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
     return result;
   }
-  resetSdaForm() {
 
-  }
   saveAlert() {
     this.genericValidator.formSubmitted = true;
     this.markAsDirty(this.sdaForm);
@@ -116,7 +121,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
       return;
     }
-    const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
+    const generalSectionData:any = this.flatten(this.sdaForm.value.generalSectionFormGroup);
+    generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
     const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
@@ -131,7 +137,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
       (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
     const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
     const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
-
+    if (correctiveActionData.completedDate) {
+      correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
+    }
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: 'badgeid',
@@ -149,7 +157,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   }
 
   logErrors(group: FormGroup | FormArray) {
-
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
         if (group.controls[i].errors) {
