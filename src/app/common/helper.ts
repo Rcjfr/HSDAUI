@@ -4,7 +4,7 @@
   }
 
   private static ReviveDateTime(key: any, value: any): any {
-    if (key.indexOf('Date') > -1) {
+    if (key.indexOf('Date') > -1 && value) {
       return new Date(value);
     }
 

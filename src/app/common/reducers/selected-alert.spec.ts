@@ -8,6 +8,7 @@ import { ISda, ISdaListView } from '../models';
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
+    saved: false,
     sda: sdaFactory(),
     noseNumbers: <List<string>>List.of(),
     aircraftInfo: aircraftInfoFactory(),
