@@ -78,7 +78,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
     });
   }
 
-  flatten(data):any {
+  flatten(data): any {
     const result = {};
     function recurse(cur, prop) {
       if (Object(cur) !== cur) {
@@ -121,7 +121,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
       return;
     }
-    const generalSectionData:any = this.flatten(this.sdaForm.value.generalSectionFormGroup);
+    const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
     const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
