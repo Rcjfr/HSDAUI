@@ -16,7 +16,8 @@ export const ActionTypes = {
   LOAD_SDAS_FAIL: 'Load SDAs Fail',
   LOAD_SDA: 'Load SDA',
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
-  LOAD_SDA_FAIL: 'Load SDA Fail'
+  LOAD_SDA_FAIL: 'Load SDA Fail',
+  LOAD_NEW_SDA: 'Load New SDA'
 
 };
 
@@ -85,6 +86,11 @@ export class LoadSdaFailAction implements Action {
   public type = ActionTypes.LOAD_SDA_FAIL;
   constructor(public payload: any) { }
 }
+export class LoadNewSdaAction implements Action {
+  public type = ActionTypes.LOAD_NEW_SDA;
+  public payload: any
+  constructor() { }
+}
 
 export type Actions =
   LoadNoseNumbersAction |
@@ -101,5 +107,6 @@ export type Actions =
   LoadSdasFailAction |
   LoadSdaAction |
   LoadSdaCompleteAction |
-  LoadSdaFailAction;
+  LoadSdaFailAction |
+  LoadNewSdaAction;
 

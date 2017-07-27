@@ -80,6 +80,9 @@ export class AppStateService {
   getSelectedAlertSavedState() {
     return this.store.select(fromRoot.getSelectedAlertSavedState);
   }
+  getLoadNewSdaState() {
+    return this.store.select(fromRoot.getLoadNewSdaState);
+  }
   getSdaList() {
     return this.store.select(fromRoot.getSdaList);
   }
@@ -87,6 +90,9 @@ export class AppStateService {
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
+  }
+  loadNewSda(): void {
+    this.store.dispatch(new selectedAlertActions.LoadNewSdaAction());
   }
   loadSdaList(): void {
     this.store.dispatch(new selectedAlertActions.LoadSdasAction());

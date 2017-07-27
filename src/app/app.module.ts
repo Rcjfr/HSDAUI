@@ -89,6 +89,8 @@ import { SearchByPartComponent } from './components/search/search-by-part/search
 import { SearchOptionsComponent } from './components/search/search-options/search-options.component';
 import { DamageToleranceEvaluationComponent } from './components/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './common/custom-route-reuse-strategy';
 
 @NgModule({
   declarations: [
@@ -180,7 +182,12 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     DteStatusService,
     RepairInspectionStatusService,
     SdaService,
-    PendingChangesGuard
+    PendingChangesGuard,
+    // TODO: Not really working as expected.
+    //{
+    //  provide: RouteReuseStrategy,
+    //  useClass: CustomRouteReuseStrategy
+    //}
   ],
   entryComponents: [
     ConfirmComponent

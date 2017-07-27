@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, ViewContainerRef, OnDestroy, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../../common/models';
@@ -12,6 +12,9 @@ import { Subscription } from 'rxjs/Rx';
 import '@ngrx/core/add/operator/select';
 import { ComponentCanDeactivate } from '../../common/components/pending-changes.guard';
 import { AlertDetailViewComponent } from '../alert-detail-view/alert-detail-view.component';
+import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+import { DialogService } from 'ng2-bootstrap-modal';
+
 @Component({
   selector: 'aa-alert-detail',
   templateUrl: './alert-detail.component.html',
@@ -20,6 +23,7 @@ import { AlertDetailViewComponent } from '../alert-detail-view/alert-detail-view
 })
 export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   sda$: Observable<models.ISda>;
+  currentSdaId = 0;
   actionsSubscription: Subscription;
   loading$: Observable<boolean>;
   @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
@@ -27,7 +31,8 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     private vcr: ViewContainerRef,
     private toastr: ToastsManager,
     private route: ActivatedRoute,
-
+    private dialogService: DialogService,
+    private router: Router
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -38,22 +43,38 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   }
 
   ngOnInit(): void {
-    this.loadSda();
     this.loading$ = this.appStateService.getSelectedAlertLoading();
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
+    this.actionsSubscription = this.appStateService.getLoadNewSdaState()
+      .filter(s => s !== 0)
+      .subscribe(v => {
+        // if already in new sda form and entered any details
+        if (this.currentSdaId === 0 && !this.canDeactivate()) {
+          this.dialogService.addDialog(ConfirmComponent, {
+            title: 'Confirm?',
+            message: 'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
+          }).subscribe((result) => {
+            if (result === true) {
+              this.currentSdaId = 0;
+              this.appStateService.loadSda(this.currentSdaId);
+              this.alertDetailView.clearForm();
+            }
+          });
+        }
+
+      });
     this.appStateService.loadNoseNumbers('');
-    this.actionsSubscription = this.route.params.select<string>('id').subscribe(id => {
-      let sdaId = 0;
+    this.route.params.select<string>('id').subscribe(id => {
       if (id !== 'new') {
-        sdaId = Number.parseInt(id);
+        this.currentSdaId = Number.parseInt(id);
       } else {
-        this.loadSda();
+        this.currentSdaId = 0;
       }
-      this.appStateService.loadSda(sdaId);
+      this.appStateService.loadSda(this.currentSdaId);
+      this.alertDetailView.clearForm();
     });
   }
-  loadSda() {
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
-  }
+
   ngOnDestroy() {
     this.actionsSubscription && this.actionsSubscription.unsubscribe();
   }
