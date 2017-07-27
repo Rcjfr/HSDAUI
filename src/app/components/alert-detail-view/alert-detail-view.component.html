@@ -1,9 +1,6 @@
 ﻿<h2 *ngIf="!sda.id">Create new SDA</h2>
 <h2 *ngIf="sda.id">Edit/View SDA</h2>
 <form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
-  <div *ngIf="loading">
-    <div class="text-center"><span class="glyphicon glyphicon-refresh"> </span></div>
-  </div>
   <div class="panel panel-default">
     <div class="panel-heading">General Information</div>
     <aa-general-section-form [parent]="sdaForm"

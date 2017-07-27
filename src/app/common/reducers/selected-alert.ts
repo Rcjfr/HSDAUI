@@ -10,6 +10,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 export interface State {
   loading: boolean;
   saved: boolean;
+  loadNewSdaCounter: number,
   sda: SdaRecord;
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
@@ -20,6 +21,7 @@ export interface StateRecord extends TypedRecord<StateRecord>, State { }
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
   saved: false,
+  loadNewSdaCounter: 0,
   sda: sdaFactory(),
   noseNumbers: <List<string>>List.of(),
   aircraftInfo: aircraftInfoFactory(),
@@ -37,6 +39,10 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_SDA:
       {
         return state.merge({ loading: true });
+      }
+    case selectedAlertActions.ActionTypes.LOAD_NEW_SDA:
+      {
+        return state.merge({ loadNewSdaCounter: state.loadNewSdaCounter + 1 });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDA_COMPLETE:
       {
@@ -82,5 +88,6 @@ export const getSelectedSda = (state: State) => state.sda;
 export const getSdaList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
 export const getSavedState = (state: State) => state.saved;
+export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;

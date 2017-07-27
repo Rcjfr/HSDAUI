@@ -43,8 +43,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   constructor(private toastr: ToastsManager,
     private fb: FormBuilder, private elRef: ElementRef,
     public appStateService: AppStateService) {
+    this.sdaForm = this.fb.group({});
     this.genericValidator = new GenericValidator(ValidationMessages);
-
   }
   ngAfterContentInit(): void {
     const frm = this.elRef.nativeElement.querySelector('form');
@@ -70,12 +70,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    this.sdaForm = this.fb.group({});
     this.appStateService.getSelectedAlertSavedState().subscribe(saved => {
       if (saved) {
-        this.sdaForm.markAsPristine();
+        this.clearForm();
       }
     });
+  }
+
+  clearForm() {
+    this.genericValidator.formSubmitted = false;
+    this.sdaForm.reset();
+    this.displayMessage$.next({});
   }
 
   flatten(data): any {
