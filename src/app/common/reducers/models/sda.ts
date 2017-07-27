@@ -82,6 +82,6 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     isMajorRepair: null,
     majorRepairDescription: null,
     completedBy: null,
-    completedDate: null
+    completedDate: new Date()
   }
 });
