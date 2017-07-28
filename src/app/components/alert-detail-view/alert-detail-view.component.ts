@@ -1,6 +1,6 @@
 ﻿import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener
+  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy
 } from '@angular/core';
 import {
   FormBuilder,
@@ -17,9 +17,10 @@ import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppStateService } from '../../common/services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -27,7 +28,8 @@ import { AppStateService } from '../../common/services';
   styleUrls: ['./alert-detail-view.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertDetailViewComponent implements OnInit, AfterContentInit {
+export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy {
+  getCurrentSdaIdSubscription: Subscription;
   @Input() sda: ISda;
   @Input() loading: boolean;
   @Output() onReset = new EventEmitter();
@@ -41,7 +43,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
 
   private genericValidator: GenericValidator;
   constructor(private toastr: ToastsManager,
-    private fb: FormBuilder, private elRef: ElementRef,
+    private fb: FormBuilder, private elRef: ElementRef, private router: Router,
     public appStateService: AppStateService) {
     this.sdaForm = this.fb.group({});
     this.genericValidator = new GenericValidator(ValidationMessages);
@@ -70,11 +72,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    this.appStateService.getSelectedAlertSavedState().subscribe(saved => {
-      if (saved) {
+    this.getCurrentSdaIdSubscription = this.appStateService.getCurrentSdaId()
+      .filter(currentSdaId => currentSdaId !== 0)
+      .delay(1000)
+      .subscribe(savedId => {
         this.clearForm();
-      }
-    });
+        this.router.navigate(['/alerts', savedId]);
+      });
+  }
+
+  ngOnDestroy() {
+    this.getCurrentSdaIdSubscription && this.getCurrentSdaIdSubscription.unsubscribe();
   }
 
   clearForm() {

@@ -80,6 +80,9 @@ export class AppStateService {
   getSelectedAlertSavedState() {
     return this.store.select(fromRoot.getSelectedAlertSavedState);
   }
+  getCurrentSdaId() {
+    return this.store.select(fromRoot.getCurrentSdaId);
+  }
   getLoadNewSdaState() {
     return this.store.select(fromRoot.getLoadNewSdaState);
   }
