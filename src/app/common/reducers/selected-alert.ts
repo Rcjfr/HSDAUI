@@ -72,6 +72,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.SAVE_SDA_COMPLETE:
       {
         const act = action as selectedAlertActions.SaveSdaCompleteAction;
+
         return state.merge({ loading: false, saved: true, currentSdaId: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
