@@ -86,6 +86,7 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
     .map((action: selectedAlert.SaveSdaCompleteAction) => {
       this.toastr.success('SDA Details saved successfully.', 'Success');
+
       return new selectedAlert.LoadSdaAction(action.payload);
     });
   @Effect()
