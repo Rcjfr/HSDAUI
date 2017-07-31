@@ -73,10 +73,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   ngOnInit() {
     this.getCurrentSdaIdSubscription = this.appStateService.getCurrentSdaId()
-      .filter(currentSdaId => currentSdaId !== 0)
+      .filter(currentSdaId => currentSdaId > 0)
       .delay(1000)
       .subscribe(savedId => {
-        this.clearForm();
         this.router.navigate(['/alerts', savedId]);
       });
   }
