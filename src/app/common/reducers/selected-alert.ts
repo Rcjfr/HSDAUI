@@ -10,6 +10,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 export interface State {
   loading: boolean;
   saved: boolean;
+  currentSdaId: number;
   loadNewSdaCounter: number,
   sda: SdaRecord;
   noseNumbers: List<string>;
@@ -22,6 +23,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
   saved: false,
   loadNewSdaCounter: 0,
+  currentSdaId: 0,
   sda: sdaFactory(),
   noseNumbers: <List<string>>List.of(),
   aircraftInfo: aircraftInfoFactory(),
@@ -48,7 +50,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdaCompleteAction;
 
-        return state.merge({ loading: false, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
+        return state.merge({ loading: false, currentSdaId: act.payload.id, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
@@ -69,7 +71,9 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
     case selectedAlertActions.ActionTypes.SAVE_SDA_COMPLETE:
       {
-        return state.merge({ loading: false, saved: true });
+        const act = action as selectedAlertActions.SaveSdaCompleteAction;
+
+        return state.merge({ loading: false, saved: true, currentSdaId: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
@@ -89,5 +93,6 @@ export const getSdaList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
 export const getSavedState = (state: State) => state.saved;
 export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
+export const getCurrentSdaId = (state: State) => state.currentSdaId;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;

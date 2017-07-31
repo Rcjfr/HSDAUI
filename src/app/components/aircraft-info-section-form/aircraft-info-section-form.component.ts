@@ -75,6 +75,9 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
+      if (newSda.generalSection.fleet) {
+        this.appStateService.loadFleetCheckTypes(newSda.generalSection.fleet);
+      }
       this.formGroup.patchValue(newSda.generalSection);
     }
   }

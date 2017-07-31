@@ -9,6 +9,7 @@ describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
     saved: false,
+    currentSdaId: 0,
     loadNewSdaCounter: 0,
     sda: sdaFactory(),
     noseNumbers: <List<string>>List.of(),
