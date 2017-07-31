@@ -44,7 +44,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
 
   ngOnInit(): void {
     this.loading$ = this.appStateService.getSelectedAlertLoading();
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
+    this.loadSda();
     this.alertDetailView.clearForm();
     this.actionsSubscription = this.appStateService.getLoadNewSdaState()
       .filter(s => s !== 0)
@@ -75,7 +75,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       this.appStateService.loadSda(this.currentSdaId);
     });
   }
-
+  loadSda() {
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
+  }
   ngOnDestroy() {
     this.actionsSubscription && this.actionsSubscription.unsubscribe();
   }
