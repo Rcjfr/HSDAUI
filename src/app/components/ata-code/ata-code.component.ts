@@ -28,10 +28,8 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      if (newSda.generalSection.ataCode1) {
-        this.getAlertCode2s(newSda.generalSection.ataCode1.toString());
-      }
-      this.formGroup.patchValue(newSda.generalSection);
+      this.formGroup.patchValue({ ataCode1: newSda.generalSection.ataCode1 || '' });
+      this.formGroup.patchValue({ ataCode2: newSda.generalSection.ataCode2 || '' });
     }
   }
   ngOnDestroy() {
@@ -42,6 +40,6 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.formGroup.get('ataCode2').setValue('');
     this.formGroup.get('ataCode2').markAsPristine();
     this.formGroup.get('ataCode2').markAsUntouched();
-    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1, true);
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1 || '', true);
   }
 }
