@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   loadNewSda() {
     this.router.navigate(['alerts', 'new']);
     this.appStateService.loadNewSda();
-
     return false;
   }
 }

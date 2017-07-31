@@ -72,16 +72,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngOnInit() {
-    this.getCurrentSdaIdSubscription = this.appStateService.getCurrentSdaId()
-      .filter(currentSdaId => currentSdaId > 0)
-      .delay(1000)
-      .subscribe(savedId => {
-        this.router.navigate(['/alerts', savedId]);
-      });
+    
   }
 
   ngOnDestroy() {
-    this.getCurrentSdaIdSubscription && this.getCurrentSdaIdSubscription.unsubscribe();
+    
   }
 
   clearForm() {
@@ -167,7 +162,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     );
     this.appStateService.saveSda(sdaDetail);
-    //this.toastr.success('Details entered are valid', 'Success');
   }
 
   logErrors(group: FormGroup | FormArray) {

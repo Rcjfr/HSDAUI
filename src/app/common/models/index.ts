@@ -18,3 +18,4 @@ export * from './reason-for-change.model';
 export * from './base-lookup.model';
 export * from './sda.model';
 export * from './sda-list-view.model';
+export * from './saved-state.model';

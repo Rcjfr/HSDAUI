@@ -4,11 +4,12 @@ import { aircraftInfoFactory } from './models/aircraft-info';
 import { sdaFactory } from './models/sda';
 import { List } from 'immutable';
 import { ISda, ISdaListView } from '../models';
+import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
-    saved: false,
+    savedState: SavedStateFactory(),
     currentSdaId: 0,
     loadNewSdaCounter: 0,
     sda: sdaFactory(),

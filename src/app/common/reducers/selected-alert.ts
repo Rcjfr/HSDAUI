@@ -3,13 +3,14 @@ import { IAlert, ISdaListView } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
+import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 import * as selectedAlertActions from '../actions/selected-alert';
 import { List, Record } from 'immutable';
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
-  saved: boolean;
+  savedState: SavedStateRecord,
   currentSdaId: number;
   loadNewSdaCounter: number,
   sda: SdaRecord;
@@ -21,7 +22,8 @@ export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
-  saved: false,
+  savedState: null,
+
   loadNewSdaCounter: 0,
   currentSdaId: 0,
   sda: sdaFactory(),
@@ -73,7 +75,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.SaveSdaCompleteAction;
 
-        return state.merge({ loading: false, saved: true, currentSdaId: act.payload });
+        return state.merge({ loading: false, savedState: SavedStateFactory(act.payload), currentSdaId: act.payload.sdaId });
       }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
@@ -91,7 +93,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 export const getSelectedSda = (state: State) => state.sda;
 export const getSdaList = (state: State) => state.sdaList;
 export const getLoading = (state: State) => state.loading;
-export const getSavedState = (state: State) => state.saved;
+export const getSavedState = (state: State) => state.savedState;
 export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
 export const getCurrentSdaId = (state: State) => state.currentSdaId;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
