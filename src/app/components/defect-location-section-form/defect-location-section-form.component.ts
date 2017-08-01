@@ -39,6 +39,8 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.defectLocationSectionFormGroup.patchValue(newSda.defectLocationSection);
+      this.defectLocationSectionFormGroup.patchValue({ damageType: newSda.defectLocationSection.damageType || '' });
+      this.defectLocationSectionFormGroup.patchValue({ detectionMethod: newSda.defectLocationSection.detectionMethod || '' });
     }
   }
   ngOnInit() {

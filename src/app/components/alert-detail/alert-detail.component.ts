@@ -43,27 +43,37 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   }
 
   ngOnInit(): void {
+    //
     this.loading$ = this.appStateService.getSelectedAlertLoading();
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
-    this.alertDetailView.clearForm();
-    this.actionsSubscription = this.appStateService.getLoadNewSdaState()
-      .filter(s => s !== 0)
-      .subscribe(v => {
-        // if already in new sda form and entered any details
-        if (this.currentSdaId === 0 && !this.canDeactivate()) {
-          this.dialogService.addDialog(ConfirmComponent, {
-            title: 'Confirm?',
-            message: 'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
-          }).subscribe((result) => {
-            if (result === true) {
-              this.currentSdaId = 0;
-              this.appStateService.loadSda(this.currentSdaId);
-              this.alertDetailView.clearForm();
-            }
-          });
-        }
+    this.loadSda();
+    this.appStateService.getLoadNewSdaState().subscribe(() => {
+      if (this.currentSdaId > 0) {
+        return;
+      }
+      if (this.currentSdaId === 0 && !this.canDeactivate()) {
+        this.dialogService.addDialog(ConfirmComponent, {
+          title: 'Confirm?',
+          message: 'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
+        }).subscribe((result) => {
+          if (result === true) {
+            this.appStateService.loadSda(this.currentSdaId);
+            this.alertDetailView.clearForm();
+          }
+        });
+      }
 
-      });
+    });
+    this.appStateService.getSelectedAlertSavedState().map(d => d && d.toJS()).subscribe((savedState) => {
+      if (savedState) {
+        this.toastr.success('SDA Details saved successfully.', 'Success');
+        this.alertDetailView.clearForm();
+        if (savedState.sdaId !== this.currentSdaId) { //must be newly created sda
+          this.router.navigate(['/alerts', savedState.sdaId]);
+        } else {
+          this.appStateService.loadSda(this.currentSdaId);
+        }
+      }
+    });
     this.appStateService.loadNoseNumbers('');
     this.route.params.select<string>('id').subscribe(id => {
       if (id !== 'new') {
@@ -75,7 +85,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       this.appStateService.loadSda(this.currentSdaId);
     });
   }
-
+  loadSda() {
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
+  }
   ngOnDestroy() {
     this.actionsSubscription && this.actionsSubscription.unsubscribe();
   }

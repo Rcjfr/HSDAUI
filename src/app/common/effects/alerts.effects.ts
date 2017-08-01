@@ -45,8 +45,8 @@ export class AlertEffects {
     .map((action: selectedAlert.SaveSdaAction) => action.payload)
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
-        .map((sdaid: number) => {
-          return new selectedAlert.SaveSdaCompleteAction(sdaid);
+        .map((sdaId: number) => {
+          return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
           return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));
@@ -82,9 +82,9 @@ export class AlertEffects {
           return of(new selectedAlert.LoadSdaFailAction('Failed to load SDA.'));
         });
     });
-  @Effect() navigateHome$: any = this.actions$
-    .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
-    .map((action: Action) => this.toastr.success('SDA Details saved successfully.', 'Success'));
+  //@Effect() navigateHome$: any = this.actions$
+  //  .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
+  //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
   @Effect()
   showToastrError$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,

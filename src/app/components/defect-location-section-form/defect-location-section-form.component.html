@@ -65,7 +65,7 @@
 
       <aac-field-container required="true" label="How Detected:" [message]="displayMessage.detectionMethod" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
         <select tabindex="35" class="form-control" formControlName="detectionMethod">
-          <option value=""> </option>
+          <option value="">Select Detection Method</option>
           <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
       </aac-field-container>

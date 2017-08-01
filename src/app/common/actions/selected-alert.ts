@@ -54,7 +54,7 @@ export class SaveSdaAction implements Action {
 }
 export class SaveSdaCompleteAction implements Action {
   public type = ActionTypes.SAVE_SDA_COMPLETE;
-  constructor(public payload: number) { }
+  constructor(public payload: models.ISavedState) { }
 }
 export class SaveSdaFailAction implements Action {
   public type = ActionTypes.SAVE_SDA_FAIL;

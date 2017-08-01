@@ -38,6 +38,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.generalSection);
+      this.formGroup.patchValue({ checkType: newSda.generalSection.checkType || '' });
     }
   }
   ngOnDestroy() {
