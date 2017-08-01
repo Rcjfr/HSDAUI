@@ -89,6 +89,10 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
   }
+  resetSda() {
+    this.alertDetailView.clearForm();
+    this.loadSda();
+  }
   ngOnDestroy() {
     this.newSdaSubscription && this.newSdaSubscription.unsubscribe();
     this.savedStateSubscription && this.savedStateSubscription.unsubscribe();
