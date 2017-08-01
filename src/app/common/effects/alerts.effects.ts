@@ -47,6 +47,7 @@ export class AlertEffects {
       return this.sdaService.saveSda(sda)
         .map((sdaId: number) => {
           this.appStateService.notifySavedSda({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
+
           return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
