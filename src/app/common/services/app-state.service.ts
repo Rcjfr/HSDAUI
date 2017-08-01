@@ -5,11 +5,13 @@ import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda } from '../models';
+import { IStation, ISda, ISavedState } from '../models';
 
 @Injectable()
 export class AppStateService {
   private loadNewSdaSubject = new Subject<any>();
+  private savedSdaSubject = new Subject<ISavedState>();
+
   constructor(private store: Store<AppStore>) { }
 
   getAlertCodes() {
@@ -79,7 +81,8 @@ export class AppStateService {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
   getSelectedAlertSavedState() {
-    return this.store.select(fromRoot.getSelectedAlertSavedState);
+    //return this.store.select(fromRoot.getSelectedAlertSavedState);
+    return this.savedSdaSubject.asObservable();
   }
   getCurrentSdaId() {
     return this.store.select(fromRoot.getCurrentSdaId);
@@ -94,6 +97,9 @@ export class AppStateService {
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
+  }
+  notifySavedSda(value: ISavedState) {
+    this.savedSdaSubject.next(value);
   }
 
   loadNewSda(): void {

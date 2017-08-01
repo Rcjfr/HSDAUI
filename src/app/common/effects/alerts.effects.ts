@@ -46,6 +46,7 @@ export class AlertEffects {
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
         .map((sdaId: number) => {
+          this.appStateService.notifySavedSda({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
           return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
@@ -96,6 +97,7 @@ export class AlertEffects {
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,
+    private appStateService: services.AppStateService,
     private router: Router,
     private toastr: ToastsManager) {
   }
