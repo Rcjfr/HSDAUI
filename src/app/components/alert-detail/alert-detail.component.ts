@@ -24,7 +24,8 @@ import { DialogService } from 'ng2-bootstrap-modal';
 export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   sda$: Observable<models.ISda>;
   currentSdaId = 0;
-  actionsSubscription: Subscription;
+  newSdaSubscription: Subscription;
+  savedStateSubscription: Subscription;
   loading$: Observable<boolean>;
   @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
   constructor(private appStateService: AppStateService,
@@ -46,7 +47,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     //
     this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.loadSda();
-    this.appStateService.getLoadNewSdaState().subscribe(() => {
+    this.newSdaSubscription = this.appStateService.getLoadNewSdaState().subscribe(() => {
       if (this.currentSdaId > 0) {
         return;
       }
@@ -63,7 +64,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       }
 
     });
-    this.appStateService.getSelectedAlertSavedState().map(d => d && d.toJS()).subscribe((savedState) => {
+    this.savedStateSubscription =  this.appStateService.getSelectedAlertSavedState().subscribe((savedState) => {
       if (savedState) {
         this.toastr.success('SDA Details saved successfully.', 'Success');
         this.alertDetailView.clearForm();
@@ -89,6 +90,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
   }
   ngOnDestroy() {
-    this.actionsSubscription && this.actionsSubscription.unsubscribe();
+    this.newSdaSubscription && this.newSdaSubscription.unsubscribe();
+    this.savedStateSubscription && this.savedStateSubscription.unsubscribe();
   }
 }
