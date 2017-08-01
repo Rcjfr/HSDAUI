@@ -46,7 +46,7 @@ export class AlertEffects {
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
         .map((sdaId: number) => {
-          return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id,Timestamp:new Date() });
+          return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
           return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));

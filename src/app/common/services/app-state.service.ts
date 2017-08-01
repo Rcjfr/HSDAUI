@@ -95,9 +95,9 @@ export class AppStateService {
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
   }
-  
+
   loadNewSda(): void {
-    this.loadNewSdaSubject.next({load:true});
+    this.loadNewSdaSubject.next({ load: true });
   }
   loadSdaList(): void {
     this.store.dispatch(new selectedAlertActions.LoadSdasAction());

@@ -59,7 +59,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       this.generalSectionFormGroup.patchValue({ sdaId: newSda.id });
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
-      
+
     }
   }
   populateAircraftInfo(noseNumber: string) {

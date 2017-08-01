@@ -47,6 +47,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.loadSda();
     this.appStateService.getLoadNewSdaState().subscribe(() => {
+      if (this.currentSdaId > 0) {
+        return;
+      }
       if (this.currentSdaId === 0 && !this.canDeactivate()) {
         this.dialogService.addDialog(ConfirmComponent, {
           title: 'Confirm?',
@@ -64,10 +67,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       if (savedState) {
         this.toastr.success('SDA Details saved successfully.', 'Success');
         this.alertDetailView.clearForm();
-        if (savedState.sdaId != this.currentSdaId) { //must be newly created sda
+        if (savedState.sdaId !== this.currentSdaId) { //must be newly created sda
           this.router.navigate(['/alerts', savedState.sdaId]);
-        }
-        else {
+        } else {
           this.appStateService.loadSda(this.currentSdaId);
         }
       }

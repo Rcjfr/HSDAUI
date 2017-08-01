@@ -72,11 +72,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngOnInit() {
-    
+
   }
 
   ngOnDestroy() {
-    
+
   }
 
   clearForm() {
