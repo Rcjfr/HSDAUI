@@ -22,6 +22,7 @@ import { HeaderComponent } from './common/components/header/header.component';
 import { ConfirmComponent } from './common/components/confirm/confirm.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
+import { SdaResolverService } from './common/resolvers/sda-resolver.service';
 import {
   AircraftService,
   AlertCodeService,
@@ -183,6 +184,7 @@ import { CustomRouteReuseStrategy } from './common/custom-route-reuse-strategy';
     RepairInspectionStatusService,
     SdaService,
     PendingChangesGuard,
+    SdaResolverService
     // TODO: Not really working as expected.
     //{
     //  provide: RouteReuseStrategy,

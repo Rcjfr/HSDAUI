@@ -24,16 +24,16 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
-      repairDescriptionType: ['', [Validators.required]],
+      repairDescriptionType: ['', []], //Validators.required
       repairDocumentType: ['', []],
       chapFigRepairText: ['', [Validators.maxLength(30)]],
       engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
-      isExternallyVisible: ['', [Validators.required]],
+      isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]
     },
       {
-        validator: CustomValidators.validateCorrectiveActionRepairFields
+        //validator: CustomValidators.validateCorrectiveActionRepairFields
       }
     );
   }

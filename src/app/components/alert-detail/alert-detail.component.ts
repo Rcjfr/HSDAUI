@@ -44,9 +44,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   }
 
   ngOnInit(): void {
-    //
     this.loading$ = this.appStateService.getSelectedAlertLoading();
-    this.loadSda();
     this.newSdaSubscription = this.appStateService.getLoadNewSdaState().subscribe(() => {
       if (this.currentSdaId > 0) {
         return;
@@ -57,21 +55,21 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
           message: 'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
         }).subscribe((result) => {
           if (result === true) {
-            this.appStateService.loadSda(this.currentSdaId);
             this.alertDetailView.clearForm();
+            this.loadSda();
           }
         });
       }
 
     });
-    this.savedStateSubscription =  this.appStateService.getSelectedAlertSavedState().subscribe((savedState) => {
+    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().subscribe((savedState) => {
       if (savedState) {
         this.toastr.success('SDA Details saved successfully.', 'Success');
         this.alertDetailView.clearForm();
-        if (savedState.sdaId !== this.currentSdaId) { //must be newly created sda
+        if (savedState.newSda) {
           this.router.navigate(['/alerts', savedState.sdaId]);
         } else {
-          this.appStateService.loadSda(this.currentSdaId);
+          //this.loadSda();
         }
       }
     });
@@ -83,7 +81,12 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.currentSdaId = 0;
       }
       this.alertDetailView.clearForm();
-      this.appStateService.loadSda(this.currentSdaId);
+    });
+
+    this.route.data.subscribe(data => {
+      this.sda$ = Observable.of(data['sda']);
+      this.alertDetailView.clearForm();
+      //this.appStateService.loadSda(this.currentSdaId);
     });
   }
   loadSda() {

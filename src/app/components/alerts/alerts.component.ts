@@ -11,10 +11,12 @@ import { List } from 'immutable';
 })
 export class AlertsComponent implements OnInit {
   sdaList$: Observable<ISdaListView[]>;
+  loading$: Observable<boolean>;
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
     this.sdaList$ = this.appStateService.getSdaList().map(d => d && d.toJS());
+    this.loading$ = Observable.merge(this.appStateService.getSelectedAlertLoading(), this.appStateService.getLookupDataLoading());
     this.appStateService.loadSdaList();
   }
 

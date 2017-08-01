@@ -38,11 +38,12 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
   }
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
-    this.correctiveActionFormGroup.get('isDeferred').valueChanges
-      .subscribe(val => this.setCorrectiveActionFormFields(val));
+    // TODO: need to revisit when sda complete functionality is implemented
+    //this.correctiveActionFormGroup.get('isDeferred').valueChanges
+    //  .subscribe(val => this.setCorrectiveActionFormFields(val));
 
-    this.correctiveActionFormGroup.get('isMajorRepair').valueChanges
-      .subscribe(val => this.setMajorRepairFormFields(val));
+    //this.correctiveActionFormGroup.get('isMajorRepair').valueChanges
+    //  .subscribe(val => this.setMajorRepairFormFields(val));
   }
 
   setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {

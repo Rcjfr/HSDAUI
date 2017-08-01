@@ -13,7 +13,9 @@ export class AppStateService {
   private savedSdaSubject = new Subject<ISavedState>();
 
   constructor(private store: Store<AppStore>) { }
-
+  getLookupDataLoading() {
+    return this.store.select(fromRoot.getLookupDataLoading);
+  }
   getAlertCodes() {
     return this.store.select(fromRoot.getAlertCodes);
   }
@@ -42,7 +44,10 @@ export class AppStateService {
     const queryExp = new RegExp(query, 'ig');
 
     return this.store.select(fromRoot.getStations)
-      .map(station => station.filter(s => queryExp.test(s.stationIATACode) || queryExp.test(s.stationDescription)))
+      //TODO: need to revisit for wildcard search
+      //.map(station => station.filter(s => (query.length == 1 && s.stationIATACode.startsWith(query.toUpperCase())) ||
+      //  (query.length > 1 && (queryExp.test(s.stationIATACode) || queryExp.test(s.stationDescription)))))
+      .map(station => station.filter(s => s.stationIATACode.startsWith(query.toUpperCase())))
       .map(d => d && d.toJS());
 
   }
@@ -70,7 +75,6 @@ export class AppStateService {
   getRepairInspectionStatus() {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
-
   getAircraftInfo() {
     return this.store.select(fromRoot.getAircraftInfo);
   }

@@ -56,7 +56,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.generalSectionFormGroup.patchValue(newSda.generalSection);
-      this.generalSectionFormGroup.patchValue({ sdaId: newSda.id });
+      this.generalSectionFormGroup.patchValue({ sdaId: newSda.id === 0 ? '' : newSda.id });
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
 
