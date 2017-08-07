@@ -30,7 +30,6 @@ import { SearchOptionsComponent } from './search-options/search-options.componen
     NgPipesModule,
     TypeaheadModule.forRoot(),
     FormControlsModule
-   
   ],
   exports: [
     SearchByDateRangeComponent,
