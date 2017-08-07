@@ -1,6 +1,6 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { FormControlsModule } from '../../common/components/form-controls.module';
+import { FormControlsModule } from '../../../../common/components/form-controls.module';
 import { Component } from '@angular/core';
 
 import { PreciseLocationGroupComponent } from './precise-location-group.component';

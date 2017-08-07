@@ -1,7 +1,7 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
-import { FormControlsModule } from '../../common/components/form-controls.module';
+import { FormControlsModule } from '../../../../common/components/form-controls.module';
 import { DefectDiscoveredDuringSectionFormComponent } from './defect-discovered-during-section-form.component';
 import { ScheduledMaintenanceSectionComponent } from '../scheduled-maintenance-section/scheduled-maintenance-section.component';
 import {
