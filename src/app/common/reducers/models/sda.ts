@@ -2,7 +2,7 @@
 import { ISda } from '../../models';
 export interface SdaRecord extends TypedRecord<SdaRecord>, ISda { }
 export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
-  id: null,
+  id: 0,
   historicId: '',
   workflowInstanceId: '',
   versionID: '',

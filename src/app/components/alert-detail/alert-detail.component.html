@@ -1,4 +1,5 @@
-﻿<aa-alert-detail-view [sda]="sda$ | async" 
+﻿<aac-loading *ngIf="loading$ | async"></aac-loading>
+<aa-alert-detail-view [sda]="sda$ | async" 
                       [loading]="loading$ | async"
                       (onReset)="resetSda()"
                       >

@@ -5,6 +5,7 @@ import { CheckboxContainerComponent } from './checkbox-container/checkbox-contai
 import { RadioContainerComponent } from './radio-container/radio-container.component';
 import { CheckBoxListComponent } from './check-box-list/check-box-list.component';
 import { FieldContainerComponent } from './field-container/field-container.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
@@ -16,13 +17,15 @@ import { FieldContainerComponent } from './field-container/field-container.compo
     FieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
-    CheckBoxListComponent
+    CheckBoxListComponent,
+    LoadingComponent
   ],
   declarations: [
     FieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
-    CheckBoxListComponent
+    CheckBoxListComponent,
+    LoadingComponent
   ],
   providers: []
 })

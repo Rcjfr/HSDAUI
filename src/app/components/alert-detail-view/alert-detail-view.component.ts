@@ -81,7 +81,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   clearForm() {
     this.genericValidator.formSubmitted = false;
-    this.sdaForm.reset();
+    //this.sdaForm.reset();
     this.sdaForm.markAsPristine();
     this.sdaForm.markAsUntouched();
     this.displayMessage$.next({});
