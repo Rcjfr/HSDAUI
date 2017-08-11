@@ -22,7 +22,7 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.correctiveActionChapFormGroup.patchValue(newSda.correctiveActionSection);
+      this.correctiveActionChapFormGroup.patchValue(newSda.correctiveActionSection || {});
     }
   }
   ngOnDestroy(): void {

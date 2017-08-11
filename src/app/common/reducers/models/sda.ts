@@ -5,7 +5,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   id: 0,
   historicId: '',
   workflowInstanceId: '',
-  versionID: '',
+  versionID: 0,
   version: 1,
   lastModifiedBy: 'BADGEID',
   lastModifiedOn: new Date(),
