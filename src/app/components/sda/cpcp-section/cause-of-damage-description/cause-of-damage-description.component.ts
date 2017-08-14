@@ -24,7 +24,7 @@ export class CauseOfDamageDescriptionComponent extends BaseFormComponent impleme
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.causeOfDamageDescriptionGroup.patchValue(newSda.cpcpSection);
+      this.causeOfDamageDescriptionGroup.patchValue(newSda.cpcpSection || {});
     }
   }
   ngOnDestroy(): void {
