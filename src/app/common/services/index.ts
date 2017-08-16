@@ -17,5 +17,6 @@ export * from './reason-for-change.service';
 export * from './dte-status.service';
 export * from './repair-inspection-status.service';
 export * from './sda.service';
+export * from './auth.service';
 
 
