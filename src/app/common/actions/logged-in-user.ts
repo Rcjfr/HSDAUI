@@ -5,8 +5,6 @@ export const ActionTypes = {
   LOAD_USER: 'Load Logged In User Details',
   LOAD_USER_COMPLETE: 'Load Logged In User Details Complete',
   LOAD_USER_FAIL: 'Load Logged In User Details Fail'
-  
-
 };
 
 

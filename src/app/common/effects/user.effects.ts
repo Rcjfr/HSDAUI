@@ -31,6 +31,7 @@ export class UserEffects {
     .ofType(userActions.ActionTypes.LOAD_USER_FAIL)
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
+
       return action;
     })
     .delay(1000)

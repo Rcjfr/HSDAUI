@@ -28,6 +28,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     if (this.authService.isAuthenticated()) {
       return true;
     }
+
     return false;
   }
 }

@@ -1,15 +1,15 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { IUser } from './../models/user.model';
-import { Observable } from "rxjs/Rx";
-import { AppStateService } from ".";
+import { Observable } from 'rxjs/Rx';
+import { AppStateService } from './app-state.service';
 import { environment } from '../../../environments/environment';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   public currentUser$: Observable<IUser>;
-  
+
   private endPointUrl = `${environment.hsdaApiBaseUrl}users`;
   constructor(private http: Http, private appStateService: AppStateService, private router: Router) {
     this.currentUser$ = this.appStateService.getUser().filter(u => !!u).map(u => u && u.toJS());
@@ -20,15 +20,16 @@ export class AuthService {
       .map((result) => result.json());
   }
   isAuthenticated(): Observable<boolean> {
-    return this.currentUser$.map(u=>!!u);
+    return this.currentUser$.map(u => !!u);
   }
   requestOptions(): Observable<RequestOptionsArgs> {
     return this.accessToken().map(token => {
-      let headers: Headers = new Headers();
+      const headers = new Headers();
       let requestOptions: RequestOptionsArgs;
       headers.append('Authorization', 'Bearer ' + token);
       headers.append('Content-Type', 'application/json');
       requestOptions = { headers: headers };
+
       return requestOptions;
     });
   }

@@ -27,7 +27,8 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case userActions.ActionTypes.LOAD_USER_COMPLETE:
       {
         const act = action as userActions.LoadUserCompleteAction;
-        return state.merge({ loading:false,user:UserRecordFactory(act.payload) });
+
+        return state.merge({ loading: false, user: UserRecordFactory(act.payload) });
       }
     default: {
       return state;
