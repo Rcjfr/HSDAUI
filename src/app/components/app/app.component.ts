@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { AppStateService } from '../../common/services';
+import { AppStateService, AuthService } from '../../common/services';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -8,8 +8,9 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  constructor(private appStateService: AppStateService, private router: Router) { }
+  constructor(private appStateService: AppStateService, private authService: AuthService, private router: Router) { }
   ngOnInit(): void {
+    this.appStateService.loadUser();
     this.appStateService.loadLookupData();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {

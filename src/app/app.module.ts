@@ -26,6 +26,7 @@ import { SdaResolverService } from './common/resolvers/sda-resolver.service';
 import * as services from './common/services';
 import { PendingChangesGuard } from './common/components/pending-changes.guard';
 import { AlertEffects } from './common/effects/alerts.effects';
+import { UserEffects } from './common/effects/user.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
 import { reducer } from './common/reducers';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
@@ -73,9 +74,11 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
     EffectsModule.run(AlertEffects),
-    EffectsModule.run(LookupDataEffects)
+    EffectsModule.run(LookupDataEffects),
+    EffectsModule.run(UserEffects)
   ],
   providers: [
+    services.AuthService,
     services.AircraftService,
     services.AlertCodeService,
     services.AppStateService,

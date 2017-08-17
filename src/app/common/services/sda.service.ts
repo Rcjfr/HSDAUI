@@ -5,29 +5,37 @@ import { environment } from '../../../environments/environment';
 import { Helper } from '../helper';
 import * as models from '../models';
 import '../rxjs-extensions';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class SdaService {
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}sda`;
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authService: AuthService) {
+  }
 
   saveSda(sda: models.ISda): Observable<number> {
-    if (sda.id) {
-      return this.http.put(`${this.endPointUrl}/${sda.id}`, sda)
-        .map((result) => result.json());
-    } else {
-      return this.http.post(this.endPointUrl, sda)
-        .map((result) => result.json());
-    }
+    return this.authService.requestOptions().flatMap(options => {
+      if (sda.id) {
+        return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, options)
+          .map((result) => result.json());
+      } else {
+        return this.http.post(this.endPointUrl, sda)
+          .map((result) => result.json());
+      }
+    });
   };
   getAllSda(): Observable<models.ISdaListView[]> {
-    return this.http.get(this.endPointUrl)
-      .map((result) => result.json());
+    return this.authService.requestOptions().flatMap(options => {
+      return this.http.get(this.endPointUrl, options)
+        .map((result) => result.json());
+    });
   };
   getSda(sdaId: number): Observable<models.ISda> {
-    return this.http.get(`${this.endPointUrl}/${sdaId}`)
-      .map((result) => Helper.Deserialize(result.text()));
+    return this.authService.requestOptions().flatMap(options => {
+      return this.http.get(`${this.endPointUrl}/${sdaId}`, options)
+        .map((result) => Helper.Deserialize(result.text()));
+    });
   };
 
 }
