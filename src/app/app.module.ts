@@ -14,6 +14,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { InputTextModule, ButtonModule, DataTableModule, DialogModule, DataGridModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
@@ -67,6 +68,14 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     BootstrapModalModule,
     TextMaskModule,
     NgPipesModule,
+
+    //PrimeNG
+    InputTextModule,
+    ButtonModule,
+    DataTableModule,
+    DialogModule,
+    DataGridModule,
+
     TypeaheadModule.forRoot(),
     AccordionModule.forRoot(),
     TabsModule.forRoot(),

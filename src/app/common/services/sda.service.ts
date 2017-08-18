@@ -10,6 +10,7 @@ import '../rxjs-extensions';
 export class SdaService {
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}sda`;
+
   constructor(private http: Http) { }
 
   saveSda(sda: models.ISda): Observable<number> {
@@ -21,10 +22,12 @@ export class SdaService {
         .map((result) => result.json());
     }
   };
-  getAllSda(): Observable<models.ISdaListView[]> {
-    return this.http.get(this.endPointUrl)
+
+  getAllSda(pageData): Observable<models.ISdaListResult> {
+    return this.http.post(this.endPointUrl + 's', pageData)
       .map((result) => result.json());
   };
+
   getSda(sdaId: number): Observable<models.ISda> {
     return this.http.get(`${this.endPointUrl}/${sdaId}`)
       .map((result) => Helper.Deserialize(result.text()));

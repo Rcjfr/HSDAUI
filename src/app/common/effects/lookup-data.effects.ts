@@ -37,6 +37,7 @@ export class LookupDataEffects {
         new lookupData.LoadRepairInspectionStatusAction()
       ]
       ));
+
   @Effect()
   loadAlertCodes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES)
@@ -49,6 +50,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadAlertCodesFailAction('Failed to load Alert Codes'));
         });
     });
+
   @Effect()
   loadATACodes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_ATA_CODES)
@@ -61,6 +63,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadATACodesFailAction('Failed to load ATA Codes'));
         });
     });
+
   @Effect()
   loadCheckTypes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_CHECK_TYPES)
@@ -74,6 +77,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadCheckTypesFailAction('Failed to load Check Types'));
         });
     });
+
   @Effect()
   loadFleetCheckTypes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_FLEET_CHECK_TYPES)
@@ -87,6 +91,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadFleetCheckTypesFailAction('Failed to load Fleet Check Types'));
         });
     });
+
   @Effect()
   loadCorrosionLevels$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_CORROSION_LEVELS)
@@ -101,6 +106,7 @@ export class LookupDataEffects {
           );
         });
     });
+
   @Effect()
   loadCorrosionTypes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_CORROSION_TYPES)
@@ -115,6 +121,7 @@ export class LookupDataEffects {
           );
         });
     });
+
   @Effect()
   loadDepartments$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_DEPARTMENTS)
@@ -129,6 +136,7 @@ export class LookupDataEffects {
           );
         });
     });
+
   @Effect()
   loadDetectionMethods$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_DETECTION_METHODS)
@@ -144,7 +152,6 @@ export class LookupDataEffects {
         });
     });
 
-
   @Effect()
   loadStations$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_STATIONS)
@@ -157,6 +164,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadStationsFailAction('Failed to load Stations'));
         });
     });
+
   @Effect()
   loadDamageTypes$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_DAMAGE_TYPES)
@@ -183,8 +191,6 @@ export class LookupDataEffects {
         });
     });
 
-
-
   @Effect()
   loadFloorBoardConditions$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_FLOORBOARD_CONDITIONS)
@@ -198,7 +204,6 @@ export class LookupDataEffects {
         });
     });
 
-
   @Effect()
   loadRepairDocuments$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_REPAIR_DOCUMENTS)
@@ -211,6 +216,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadRepairDocumentsFailAction('Failed to load Repair Documents'));
         });
     });
+
   @Effect()
   loadRepairDescriptions$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS)
@@ -223,6 +229,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadRepairDescriptionsFailAction('Failed to load Repaired Describe'));
         });
     });
+
   @Effect()
   loadReasonsForChange$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE)
@@ -235,6 +242,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadReasonsForChangeFailAction('Failed to load Reasons for change'));
         });
     });
+
   @Effect()
   loadDTEStaus$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_DTE_STATUS)
@@ -247,6 +255,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadDTEStausFailAction('Failed to load Reasons for DTE Staus'));
         });
     });
+
   @Effect()
   loadRepairInspectionStatus$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS)
@@ -259,6 +268,7 @@ export class LookupDataEffects {
           return of(new lookupData.LoadRepairInspectionStatusFailAction('Failed to load Repair Inspection Status'));
         });
     });
+
   @Effect()
   showToastrError$: any = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES_FAIL,
@@ -281,7 +291,7 @@ export class LookupDataEffects {
     .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 
 
-  constructor(private actions$: Actions,
+    constructor(private actions$: Actions,
     private alertCodesService: services.AlertCodeService,
     private ataCodesService: services.ATACodesService,
     private corrosionLevelService: services.CorrosionLevelService,

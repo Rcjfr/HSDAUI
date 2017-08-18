@@ -17,6 +17,7 @@ export interface State {
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
   sdaList: List<ISdaListView>;
+  sdaListTotalCount: number;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -30,6 +31,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   noseNumbers: <List<string>>List.of(),
   aircraftInfo: aircraftInfoFactory(),
   sdaList: <List<ISdaListView>>List.of(),
+  sdaListTotalCount: 0
 });
 
 function makeInitialState() {
@@ -58,7 +60,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
-        return state.merge({ loading: false, sdaList: List.of(...act.payload) });
+        return state.merge({ loading: false, sdaList: List.of(...act.payload.records), sdaListTotalCount: act.payload.totalRecords });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
@@ -92,6 +94,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 // Selector Functions
 export const getSelectedSda = (state: State) => state.sda;
 export const getSdaList = (state: State) => state.sdaList;
+export const getSdaListTotal = (state: State) => state.sdaListTotalCount;
 export const getLoading = (state: State) => state.loading;
 export const getSavedState = (state: State) => state.savedState;
 export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;

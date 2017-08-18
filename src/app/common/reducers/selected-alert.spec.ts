@@ -16,6 +16,7 @@ describe('selectedAlertReducer', () => {
     noseNumbers: <List<string>>List.of(),
     aircraftInfo: aircraftInfoFactory(),
     sdaList: <List<ISdaListView>>List.of(),
+    sdaListTotalCount: 0
   };
   const aircraftInfo = aircraftInfoFactory({
     aircraftNo: 'A330',

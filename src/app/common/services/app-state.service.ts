@@ -97,6 +97,9 @@ export class AppStateService {
   getSdaList() {
     return this.store.select(fromRoot.getSdaList);
   }
+   getSdaListTotal() {
+    return this.store.select(fromRoot.getSdaListTotal);
+  }
 
   //Dispatch Actions
   saveSda(sda: ISda): void {
@@ -105,12 +108,11 @@ export class AppStateService {
   notifySavedSda(value: ISavedState) {
     this.savedSdaSubject.next(value);
   }
-
   loadNewSda(): void {
     this.loadNewSdaSubject.next({ load: true });
   }
-  loadSdaList(): void {
-    this.store.dispatch(new selectedAlertActions.LoadSdasAction());
+  loadSdaList(pageData): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
   }
   loadSda(sdaId: number): void {
     this.store.dispatch(new selectedAlertActions.LoadSdaAction(sdaId));

@@ -58,9 +58,9 @@ export class AlertEffects {
   loadSdas$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
     .map((action: selectedAlert.LoadSdasAction) => action.payload)
-    .switchMap(() => {
-      return this.sdaService.getAllSda()
-        .map((data: models.ISdaListView[]) => {
+    .switchMap((pageData: any) => {
+      return this.sdaService.getAllSda(pageData)
+        .map((data: models.ISdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
         })
         .catch((err) => {
