@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../../services";
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'aa-nav-bar',
@@ -7,6 +7,6 @@ import { AuthService } from "../../services";
   styleUrls: ['./nav-bar.component.less']
 })
 export class NavBarComponent {
-    constructor(private authService: AuthService) {
+    constructor(public authService: AuthService) {
     }
 }
