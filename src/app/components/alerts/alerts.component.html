@@ -1,8 +1,9 @@
-﻿<aac-loading *ngIf="loading$ | async"></aac-loading>
+﻿<div *ngIf="loading$">
+  <aac-loading *ngIf="loading$ | async"></aac-loading>
+</div>
 <aa-alerts-search></aa-alerts-search>
-<aa-alerts-grid
-  [sdaList]="sdaList$ | async"
-  [sdaListTotal]="sdaListTotal$ | async"
+<aa-alerts-grid *ngIf="sdaListResult$"
+  [sdaListResult]="sdaListResult$ | async"
 ></aa-alerts-grid>
 
 

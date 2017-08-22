@@ -1,6 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ISdaListView } from '../../common/models';
+import { ISdaListResult } from '../../common/models';
 import { AppStateService } from '../../common/services';
 import { List } from 'immutable';
 
@@ -9,17 +9,21 @@ import { List } from 'immutable';
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.less']
 })
-export class AlertsComponent implements OnInit {
-  sdaList$: Observable<ISdaListView[]>;
-  sdaListTotal$: Observable<number>;
+export class AlertsComponent implements OnInit, AfterViewInit {
+  sdaListResult$: Observable<ISdaListResult>;
   loading$: Observable<boolean>;
+
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.sdaList$ = this.appStateService.getSdaList().map(d => d && d.toJS());
-    this.sdaListTotal$ = this.appStateService.getSdaListTotal();
-    this.loading$ = Observable.merge(this.appStateService.getSelectedAlertLoading(), this.appStateService.getLookupDataLoading());
+    this.loading$ = this.appStateService.getLookupDataLoading();
+
     this.appStateService.loadSdaList(null);
+
+    this.sdaListResult$ = this.appStateService.getSdaListResult();
+    //TODO - if this isn't called here we get the ExpressionChangedAfterItHasBeenCheckedError
   }
 
+  ngAfterViewInit() {
+  }
 }

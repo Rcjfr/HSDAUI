@@ -94,11 +94,8 @@ export class AppStateService {
   getLoadNewSdaState() {
     return this.loadNewSdaSubject.asObservable();
   }
-  getSdaList() {
-    return this.store.select(fromRoot.getSdaList);
-  }
-   getSdaListTotal() {
-    return this.store.select(fromRoot.getSdaListTotal);
+  getSdaListResult() {
+    return this.store.select(fromRoot.getSdaListResult);
   }
 
   //Dispatch Actions

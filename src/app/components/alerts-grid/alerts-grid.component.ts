@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Input } from '@angular/core';
-import { ISdaListView } from './../../common/models';
+import { ISdaListResult } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService } from '../../common/services';
 
@@ -16,27 +16,13 @@ export interface LazyLoadEvent {
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent {
-  public _sdaList: ISdaListView[];
-  public _sdaListTotal: number;
+  @Input() sdaListResult: ISdaListResult;
 
   defaultPageSize = 4;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
 
-  @Input()
-  set sdaList(data: ISdaListView[]) {
-    this._sdaList = data;
-  }
-  @Input()
-  set sdaListTotal(data: number) {
-    this._sdaListTotal = data;
-  }
-
   constructor(private appStateService: AppStateService) { }
-
-  get name(): ISdaListView[] {
-    return this._sdaList;
-  }
 
   loadTablePage(pageData: LazyLoadEvent) {
     if (!pageData) {
@@ -47,9 +33,8 @@ export class AlertsGridComponent {
         sortOrder: this.defaultSortOrder
       }
     }
-    console.log(pageData);
-    //fire off an action
-    this.appStateService.loadSdaList(pageData);
 
+    //TODO - this is getting fired the first time the table loads
+    this.appStateService.loadSdaList(pageData);
   }
 }
