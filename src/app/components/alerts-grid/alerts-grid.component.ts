@@ -17,6 +17,7 @@ export interface LazyLoadEvent {
 })
 export class AlertsGridComponent {
   @Input() sdaListResult: ISdaListResult;
+  @Input() searchCriteria: any;
 
   defaultPageSize = 4;
   defaultSortColumn = 'createDate';
@@ -25,6 +26,8 @@ export class AlertsGridComponent {
   constructor(private appStateService: AppStateService) { }
 
   loadTablePage(pageData: LazyLoadEvent) {
+    //TODO - this is getting fired the first time the table loads
+
     if (!pageData) {
       pageData = {
         first: 0,
@@ -34,7 +37,8 @@ export class AlertsGridComponent {
       }
     }
 
-    //TODO - this is getting fired the first time the table loads
-    this.appStateService.loadSdaList(pageData);
+    if (this.searchCriteria) {
+      this.appStateService.loadSdaList(this.searchCriteria.toJS());
+    }
   }
 }

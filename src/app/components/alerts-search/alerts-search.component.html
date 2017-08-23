@@ -4,23 +4,22 @@
     <a href="" (click)="expandCollapseAll(false)">Collapse All</a>
   </h5>
 </h1>
-<form novalidate (submit)="searchAlerts()" [formGroup]="sdaSearchForm">
+<!-- <form novalidate (submit)="searchAlerts()" [formGroup]="sdaSearchForm"> -->
+<form novalidate (submit)="searchAlerts()">
 <accordion>
   <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by Date Range
       <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
     </div>
-    <aa-search-by-date-range></aa-search-by-date-range>
+    <aa-search-by-date-range [model]="models.SearchByDateRange" (isValid)="isValid = $event"></aa-search-by-date-range>
   </accordion-group>
   <accordion-group #sdaFormGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by SDA Form
       <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
     </div>
-    <aa-search-by-sda-form>
-
-    </aa-search-by-sda-form>
+    <aa-search-by-sda-form [model]="models.SearchBySDA" (isValid)="isValid = $event"></aa-search-by-sda-form>
   </accordion-group>
   <accordion-group #aircraftGroup panelClass="panel-default search-panel">
     <div accordion-heading>
@@ -57,8 +56,6 @@
     </div>
     <aa-search-by-defect></aa-search-by-defect>
   </accordion-group>
-
-
   <accordion-group #correctiveGroup panelClass="panel-default search-panel">
     <div accordion-heading>
       Search by Corrective Action
@@ -88,4 +85,5 @@
     <aa-search-options></aa-search-options>
   </accordion-group>
 </accordion>
+<button type="submit" style="float:right;" class="btn btn-primary">Search</button>
 </form>

@@ -4,6 +4,5 @@
 <aa-alerts-search></aa-alerts-search>
 <aa-alerts-grid *ngIf="sdaListResult$"
   [sdaListResult]="sdaListResult$ | async"
+  [searchCriteria]="searchCriteria$ | async"
 ></aa-alerts-grid>
-
-

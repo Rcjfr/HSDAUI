@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppStateService } from '../../common/services';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -9,16 +10,41 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
+  models: {
+    SearchByDateRange: {
+      dateFrom: any;
+      dateThrough: any;
+    };
+    SearchBySDA: {
+      sdrId: any;
+      station: any;
+      alertCode: any;
+      sdrNumber: any;
+      department: any;
+      ataCode1: any;
+      originator: any;
+      ataCode2: any;
+      fleet: any;
+      checkType: any;
+    };
+    PageData: any;
+  };
 
-
+  private isValid: false;
+  searchState = 'SearchByDateRange';
   sdaSearchForm: FormGroup;
-  constructor(private fb: FormBuilder) {
-    this.sdaSearchForm = this.fb.group({});
+
+  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
+    this.models = {
+      SearchByDateRange: { dateFrom: undefined, dateThrough: undefined },
+      SearchBySDA: { sdrId: undefined, station: undefined, alertCode: undefined, sdrNumber: undefined, department: undefined,
+                      ataCode1: undefined, originator: undefined, ataCode2: undefined, fleet: undefined, checkType: undefined },
+      PageData: undefined
+    };
   }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
   expandCollapseAll(expandAll: boolean) {
     this.panels.forEach(p => p.isOpen = expandAll);
 
@@ -26,6 +52,9 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   searchAlerts() {
+    console.log(this.isValid);
+    console.log(this.models);
 
+    this.appStateService.loadSdaList(this.models);
   }
 }

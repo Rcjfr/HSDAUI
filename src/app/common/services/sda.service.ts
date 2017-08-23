@@ -23,6 +23,11 @@ export class SdaService {
     }
   };
 
+  searchSda(criteria): Observable<models.ISdaListResult> {
+    return this.http.post(this.endPointUrl + '/search', criteria)
+      .map((result) => result.json());
+  };
+
   getAllSda(pageData): Observable<models.ISdaListResult> {
     return this.http.post(this.endPointUrl + 's', pageData)
       .map((result) => result.json());
