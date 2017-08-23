@@ -26,8 +26,6 @@ export class AlertsGridComponent {
   constructor(private appStateService: AppStateService) { }
 
   loadTablePage(pageData: LazyLoadEvent) {
-    //TODO - this is getting fired the first time the table loads
-
     if (!pageData) {
       pageData = {
         first: 0,
@@ -37,8 +35,13 @@ export class AlertsGridComponent {
       }
     }
 
-    if (this.searchCriteria) {
-      this.appStateService.loadSdaList(this.searchCriteria.toJS());
-    }
+    //TODO - this is getting fired the first time the table loads
+    //const searchCriteria2 = this.appStateService.getSearchCriteria();
+    //console.log(this.searchCriteria.toJS());
+    //this.appStateService.loadSdaList({ PageData: pageData });
+
+    const postData = this.searchCriteria.toJS();
+    postData.PageData = pageData;
+    this.appStateService.loadSdaList(postData);
   }
 }

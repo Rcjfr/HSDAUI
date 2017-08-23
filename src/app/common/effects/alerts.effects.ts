@@ -64,8 +64,6 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
     .map((action: selectedAlert.LoadSdasAction) => action.payload)
     .switchMap((criteria: any) => {
-      //update the store here?
-
       return this.sdaService.searchSda(criteria)
         .map((data: models.ISdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
