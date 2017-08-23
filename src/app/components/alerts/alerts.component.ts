@@ -10,20 +10,12 @@ import { List } from 'immutable';
   styleUrls: ['./alerts.component.less']
 })
 export class AlertsComponent implements OnInit, AfterViewInit {
-  sdaListResult$: Observable<ISdaListResult>;
-  searchCriteria$: Observable<ISdaListResult>;
   loading$: Observable<boolean>;
 
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
     this.loading$ = this.appStateService.getLookupDataLoading();
-
-    this.appStateService.loadSdaList({PageData: undefined });
-
-    //TODO - if this isn't called here we get the ExpressionChangedAfterItHasBeenCheckedError
-    this.sdaListResult$ = this.appStateService.getSdaListResult();
-    this.searchCriteria$ = this.appStateService.getSearchCriteria();
   }
 
   ngAfterViewInit() {

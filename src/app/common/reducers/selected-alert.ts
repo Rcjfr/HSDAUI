@@ -56,6 +56,10 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, currentSdaId: act.payload.id, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
       }
+      case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
+      {
+        return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
+      }
       case selectedAlertActions.ActionTypes.LOAD_SDAS:
       {
         return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });

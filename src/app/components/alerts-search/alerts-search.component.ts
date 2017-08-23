@@ -55,6 +55,6 @@ export class AlertsSearchComponent implements OnInit {
     console.log(this.isValid);
     console.log(this.models);
 
-    this.appStateService.loadSdaList(this.models);
+    this.appStateService.saveSdaSearchCriteria(this.models);
   }
 }
