@@ -60,8 +60,6 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
       {
         const blah = searchCriteriaFactory(action.payload);
-        //spread notation?
-        // const copy = { ...original }
 
         return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
       }

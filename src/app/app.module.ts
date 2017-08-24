@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgPipesModule } from 'ng-pipes';
-import { DataTablesModule } from 'angular-datatables';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
@@ -61,7 +60,6 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     SdaFormModule,
     SdaSearchModule,
     HttpModule,
-    DataTablesModule,
     FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,

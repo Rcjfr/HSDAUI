@@ -60,6 +60,7 @@ export class AlertEffects {
         });
     });
 
+    //TODO - Melinda saving for research
 // @Effect()
 //   saveSearchCriteria$: Observable<Action> = this.actions$
 //     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
