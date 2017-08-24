@@ -24,12 +24,17 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   searchCriteria$: Observable<ISdaListResult>;
 
   searchCriteria;
-  sdaListResult: ISdaListResult = { totalRecords: 0, records: List<ISdaListResult>() };
+  sdaListResult: ISdaListResult = {
+    totalRecords: 0,
+    records: List<ISdaListResult>()
+  };
   doShowTable = false;
 
-  defaultPageSize = 20;
+  defaultPageSize = 4;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
+
+  skipLoad = false;
 
   constructor(private appStateService: AppStateService) { }
 
@@ -39,15 +44,16 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
     this.sdaListResult$.skip(1)
       .takeUntil(this.ngUnsubscribe)
-      .subscribe(d => {
-        this.sdaListResult = d;
+      .subscribe(results => {
+        this.sdaListResult = results;
+        this.doShowTable = true;
       });
 
     this.searchCriteria$.skip(1)
       .takeUntil(this.ngUnsubscribe)
       .subscribe(d => {
-        this.searchCriteria = d;
-        this.doShowTable = true;
+        this.skipLoad = true;
+        // this.doShowTable = true;
       });
   }
 
@@ -57,10 +63,21 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  //this method will trigger when the table is initialized the first time (which happens once we have search criteria in the store)
+
+  //TODO - it would be better to initalize all the loads in here since this has the paging data in it (default sort, etc)
+
   loadPageOfRecords(pageData: LazyLoadEvent) {
+    // PrimeNG will fire this event the first time the table loads. We don't want to fire off a second service call to get results since that was already triggered
+    if (this.skipLoad) {
+      this.skipLoad = false;
+    } else {
+      this.appStateService.loadSdaList(this.getPageData(pageData));
+    }
+  }
+
+  getPageData(pageData) {
     if (!pageData) {
-      pageData = {
+      return {
         first: 0,
         rows: this.defaultPageSize,
         sortField: this.defaultSortColumn,
@@ -68,8 +85,6 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
       }
     }
 
-    const postData = this.searchCriteria.toJS();
-    postData.PageData = pageData;
-    this.appStateService.loadSdaList(postData);
+    return pageData;
   }
 }
