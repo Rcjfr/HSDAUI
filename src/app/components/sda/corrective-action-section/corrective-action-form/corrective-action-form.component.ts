@@ -44,7 +44,8 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
     return this.correctiveActionFormGroup.get('isDeferred').value === true;
   }
   isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open;
+    return this.sda.status === models.Status.Open ||
+      this.sda.status === models.Status.Deleted;
   }
   setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {
     if (isCorrectiveEvent !== true) {

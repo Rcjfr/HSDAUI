@@ -92,6 +92,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     return this.formGroup.get('iscpcpRelatedEvent').value === true;
   }
   isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open;
+    return this.sda.status === models.Status.Open ||
+           this.sda.status === models.Status.Deleted;
   }
 }

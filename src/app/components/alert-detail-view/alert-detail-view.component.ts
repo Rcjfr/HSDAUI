@@ -21,7 +21,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppStateService, AuthService } from '../../common/services';
 import { Router } from '@angular/router';
-
+import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
@@ -39,11 +39,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   statusUpdatedOn: Date = new Date();
   public Status = Status;// to make it available in template
   public currentStatus: number;
-
+  @ViewChild('statusModal') public statusModal: ModalDirective;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
   sdaForm: FormGroup;
+  sdaStatusForm: FormGroup;
+  public sdaStatusTitle = '';
 
   // Use with the generic validation message class
   displayMessage$ = new BehaviorSubject<any>({});
@@ -54,6 +56,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     public appStateService: AppStateService, public authService: AuthService) {
     this.sdaForm = this.fb.group({
       status: ['', [Validators.required]],
+    });
+    this.sdaStatusForm = this.fb.group({
+      status: ['', [Validators.required]],
+      completedBy: ['', [Validators.required]],
+      completedOn: ['', [Validators.required]],
+      comments: ['', []],
     });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
@@ -136,16 +144,32 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     return result;
   }
+
+  hideStatusModal() {
+    this.statusModal.hide();
+  }
+
   saveAlert(newStatus: number) {
     this.sda.status = newStatus;
     this.sdaForm.patchValue({ status: newStatus });
 
     setTimeout(() => {
-      this.saveAlertData(newStatus);
+      this.validateAlertData();
     }, 100);
   }
-
-  saveAlertData(newStatus: number) {
+  saveStatusModal() {
+    this.markAsDirty(this.sdaStatusForm);
+    this.sdaStatusForm.updateValueAndValidity();
+    if (!this.sdaStatusForm.valid) {
+      return;
+    }
+    this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
+    this.sda.statusUpdatedOn = this.sdaStatusForm.get('completedOn').value;
+    this.sda.comments = this.sdaStatusForm.get('comments').value;
+    this.hideStatusModal();
+    this.saveAlertData();
+  }
+  validateAlertData() {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
     this.genericValidator.formSubmitted = true;
@@ -155,9 +179,33 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
       this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
-
       return;
     }
+    if (this.sda.status === Status.Open ||
+      this.sda.status === Status.Closed) { //User can not change UpdatedBy/Date. so no need to show the modal 
+      this.sda.statusUpdatedBy = this.statusUpdatedBy;
+      this.sda.statusUpdatedOn = this.statusUpdatedOn;
+      this.saveAlertData();
+    }
+    else {
+      if (this.sda.status === Status.Complete) {
+        this.sdaStatusTitle = "Complete SDA" + (this.sda.id?`(SDA ID:${this.sda.id})`:"");
+      }
+      if (this.sda.status === Status.Audited) {
+        this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
+      }
+      if (this.sda.status === Status.Deleted) {
+        this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
+      }
+      if (this.sda.status === Status.Rejected) {
+        this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
+      }
+      
+      this.sdaStatusForm.patchValue({ status: this.sda.status, completedBy: this.lastModifiedBy, completedOn: new Date() });
+      this.statusModal.show();
+    }
+  }
+  saveAlertData() {
     const a = 1;
     if (a === 1) {
       this.toastr.success('Details entered are valid.', 'Success');
@@ -186,8 +234,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       {
         lastModifiedBy: this.lastModifiedBy,
         lastModifiedOn: this.lastModifiedOn,
-        statusUpdatedBy: this.statusUpdatedBy,
-        statusUpdatedOn: this.statusUpdatedOn,
+        //statusUpdatedBy: this.statusUpdatedBy,
+        //statusUpdatedOn: this.statusUpdatedOn,
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
         cpcpSection: cpcpSectionData,

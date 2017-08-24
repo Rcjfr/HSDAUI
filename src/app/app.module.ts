@@ -1,4 +1,4 @@
-﻿import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { AccordionModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
+import { AccordionModule, TypeaheadModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
@@ -69,6 +69,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
     ToastModule.forRoot(),

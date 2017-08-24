@@ -59,6 +59,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   }
 
   isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open;
+    return this.sda.status === models.Status.Open ||
+      this.sda.status === models.Status.Deleted;
   }
 }
