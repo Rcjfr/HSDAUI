@@ -9,7 +9,10 @@ import { of } from 'rxjs/observable/of';
 import * as selectedAlert from '../actions/selected-alert';
 import * as services from '../services';
 import * as models from '../models';
+import * as fromRoot from '../reducers';
 import '../rxjs-extensions';
+
+
 @Injectable()
 export class AlertEffects {
 
@@ -26,6 +29,7 @@ export class AlertEffects {
           return of(new selectedAlert.LoadNoseNumbersFailAction('Failed to load Nose Numbers'));
         });
     });
+
   @Effect()
   loadAircraftInfo$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO)
@@ -39,6 +43,7 @@ export class AlertEffects {
           return of(new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'));
         });
     });
+
   @Effect()
   saveSda$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.SAVE_SDA)
@@ -54,19 +59,36 @@ export class AlertEffects {
           return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));
         });
     });
+
+    //TODO - Melinda saving for research
+// @Effect()
+//   saveSearchCriteria$: Observable<Action> = this.actions$
+//     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
+//     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
+//    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
+//     // .switchMap((searchCriteria) => {
+//     //   return new selectedAlert.LoadSdasAction(undefined);
+//     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
+//     // });
+
   @Effect()
   loadSdas$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
     .map((action: selectedAlert.LoadSdasAction) => action.payload)
-    .switchMap(() => {
-      return this.sdaService.getAllSda()
-        .map((data: models.ISdaListView[]) => {
+    .withLatestFrom(this.appStateService.getSearchCriteria())
+    .switchMap(([payload, searchCriteria]) => {
+      const criteria = searchCriteria.toJS();
+      criteria.PageData = payload;
+
+      return this.sdaService.searchSda(criteria)
+        .map((data: models.ISdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
         })
         .catch((err) => {
           return of(new selectedAlert.LoadSdasFailAction('Failed to load SDAs.'));
         });
     });
+
   @Effect()
   loadSda$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
@@ -84,9 +106,11 @@ export class AlertEffects {
           return of(new selectedAlert.LoadSdaFailAction('Failed to load SDA.'));
         });
     });
+
   //@Effect() navigateHome$: any = this.actions$
   //  .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
   //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
+
   @Effect()
   showToastrError$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
@@ -95,6 +119,8 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
     selectedAlert.ActionTypes.LOAD_SDA_FAIL)
     .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
+
+
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,

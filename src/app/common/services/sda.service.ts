@@ -25,12 +25,17 @@ export class SdaService {
       }
     });
   };
-  getAllSda(): Observable<models.ISdaListView[]> {
-    return this.authService.requestOptions().flatMap(options => {
-      return this.http.get(this.endPointUrl, options)
-        .map((result) => result.json());
-    });
+
+  searchSda(criteria): Observable<models.ISdaListResult> {
+    return this.http.post(this.endPointUrl + '/search', criteria)
+      .map((result) => result.json());
   };
+
+  getAllSda(pageData): Observable<models.ISdaListResult> {
+    return this.http.post(this.endPointUrl + 's', pageData)
+      .map((result) => result.json());
+  };
+
   getSda(sdaId: number): Observable<models.ISda> {
     return this.authService.requestOptions().flatMap(options => {
       return this.http.get(`${this.endPointUrl}/${sdaId}`, options)

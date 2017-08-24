@@ -1,37 +1,18 @@
 ﻿<h1>Search Results</h1>
 
-<table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-striped table-bordered">
-  <thead>
-  <tr>
-    <th>SDA ID</th>
-    <th>Aircraft #</th>
-    <th>Create Date</th>
-    <th>Form Status</th>
-    <th>Station</th>
-    <th>Routine #</th>
-    <th>Non-Routine #</th>
-    <th>&nbsp;</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let sda of _sdaList">
-    <td>{{ sda.id }}</td>
-    
-    <td>{{sda.aircraftNo}}</td>
-    <td>{{sda.createDate | date}}</td>
-    <td>{{sda.statusText}}</td>
-    <td>{{sda.station}}</td>
-    <td>{{sda.routineNo}}</td>
-    <td>{{sda.nonRoutineNo}}</td>
-    <td>
-      <a [routerLink]="['/alerts', sda.id]">
-        <span>View</span>
-      </a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
+<div *ngIf="showTable">
+  <p-dataTable [value]="sdaListResult.records" [totalRecords]="sdaListResult.totalRecords" [lazy]="true" (onLazyLoad)="loadPageOfRecords($event)"
+    [responsive]="true" [rows]="defaultPageSize" [paginator]="true" [sortField]="defaultSortColumn" [sortOrder]="defaultSortOrder">
+    <p-header>SDAs</p-header>
+    <p-column field="id" header="SDA ID" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="aircraftNo" header="Aircraft #" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="createDate" header="Create Date" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="statusText" header="Form Status" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="station" header="Station" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="routineNo" header="Routine #" [sortable]="true" [filter]="true"></p-column>
+    <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true" [filter]="true"></p-column>
+  </p-dataTable>
+</div>
 <div class="row form-group">
   &nbsp;
 </div>

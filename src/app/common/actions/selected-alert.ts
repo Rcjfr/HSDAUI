@@ -17,8 +17,8 @@ export const ActionTypes = {
   LOAD_SDA: 'Load SDA',
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
   LOAD_SDA_FAIL: 'Load SDA Fail',
-  LOAD_NEW_SDA: 'Load New SDA'
-
+  LOAD_NEW_SDA: 'Load New SDA',
+  SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria'
 };
 
 
@@ -63,17 +63,21 @@ export class SaveSdaFailAction implements Action {
 
 export class LoadSdasAction implements Action {
   public type = ActionTypes.LOAD_SDAS;
-  public payload: any;
-  constructor() { }
+  constructor(public payload: any) { }
+}
+export class SaveSdaSearchCriteria implements Action {
+  public type = ActionTypes.SAVE_SDA_SEARCH_CRITERIA;
+  constructor(public payload: models.ISdaSearchCriteria) { }
 }
 export class LoadSdasCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDAS_COMPLETE;
-  constructor(public payload: models.ISdaListView[]) { }
+  constructor(public payload: models.ISdaListResult) { }
 }
 export class LoadSdasFailAction implements Action {
   public type = ActionTypes.LOAD_SDAS_FAIL;
   constructor(public payload: any) { }
 }
+
 export class LoadSdaAction implements Action {
   public type = ActionTypes.LOAD_SDA;
   constructor(public payload: number) { }
@@ -103,6 +107,7 @@ export type Actions =
   SaveSdaCompleteAction |
   SaveSdaFailAction |
   LoadSdasAction |
+  SaveSdaSearchCriteria |
   LoadSdasCompleteAction |
   LoadSdasFailAction |
   LoadSdaAction |
