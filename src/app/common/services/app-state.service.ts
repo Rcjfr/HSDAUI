@@ -111,8 +111,8 @@ export class AppStateService {
   loadNewSda(): void {
     this.loadNewSdaSubject.next({ load: true });
   }
-  loadSdaList(criteria): void {
-    this.store.dispatch(new selectedAlertActions.LoadSdasAction(criteria));
+  loadSdaList(pageData): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
   }
   saveSdaSearchCriteria(criteria): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));

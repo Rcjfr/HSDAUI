@@ -28,15 +28,16 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     totalRecords: 0,
     records: List<ISdaListResult>()
   };
-  doShowTable = false;
+  showTable = false;
 
+  //Default paging options
   defaultPageSize = 4;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
 
   skipLoad = false;
 
-  constructor(private appStateService: AppStateService) { }
+  constructor(private appStateService: AppStateService) {}
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult();
@@ -46,14 +47,14 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
       .takeUntil(this.ngUnsubscribe)
       .subscribe(results => {
         this.sdaListResult = results;
-        this.doShowTable = true;
+        this.showTable = true;
       });
 
     this.searchCriteria$.skip(1)
       .takeUntil(this.ngUnsubscribe)
       .subscribe(d => {
         this.skipLoad = true;
-        // this.doShowTable = true;
+        this.appStateService.loadSdaList(this.getDefaultPageData());
       });
   }
 
@@ -62,9 +63,6 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
-
-
-  //TODO - it would be better to initalize all the loads in here since this has the paging data in it (default sort, etc)
 
   loadPageOfRecords(pageData: LazyLoadEvent) {
     // PrimeNG will fire this event the first time the table loads. We don't want to fire off a second service call to get results since that was already triggered
@@ -77,14 +75,18 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
   getPageData(pageData) {
     if (!pageData) {
-      return {
-        first: 0,
-        rows: this.defaultPageSize,
-        sortField: this.defaultSortColumn,
-        sortOrder: this.defaultSortOrder
-      }
+      return this.getDefaultPageData();
     }
 
     return pageData;
+  }
+
+  getDefaultPageData() {
+    return {
+      first: 0,
+      rows: this.defaultPageSize,
+      sortField: this.defaultSortColumn,
+      sortOrder: this.defaultSortOrder
+    }
   }
 }

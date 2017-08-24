@@ -63,7 +63,7 @@ export class SaveSdaFailAction implements Action {
 
 export class LoadSdasAction implements Action {
   public type = ActionTypes.LOAD_SDAS;
-  constructor(public payload: models.ISdaSearchCriteria) { }
+  constructor(public payload: any) { }
 }
 export class SaveSdaSearchCriteria implements Action {
   public type = ActionTypes.SAVE_SDA_SEARCH_CRITERIA;

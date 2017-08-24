@@ -52,9 +52,6 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   searchAlerts() {
-    console.log(this.isValid);
-    console.log(this.models);
-
     this.appStateService.saveSdaSearchCriteria(this.models);
   }
 }

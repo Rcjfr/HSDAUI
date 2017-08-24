@@ -38,6 +38,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
 function makeInitialState() {
   return stateFactory();
 }
+
 export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: selectedAlertActions.Actions) => {
   switch (action.type) {
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
@@ -58,11 +59,15 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
       case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
       {
+        const blah = searchCriteriaFactory(action.payload);
+        //spread notation?
+        // const copy = { ...original }
+
         return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
       }
       case selectedAlertActions.ActionTypes.LOAD_SDAS:
       {
-        return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
+        return state.merge({ loading: false });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {

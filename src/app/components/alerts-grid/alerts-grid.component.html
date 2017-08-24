@@ -1,6 +1,6 @@
 ﻿<h1>Search Results</h1>
 
-<div *ngIf="doShowTable">
+<div *ngIf="showTable">
   <p-dataTable [value]="sdaListResult.records" [totalRecords]="sdaListResult.totalRecords" [lazy]="true" (onLazyLoad)="loadPageOfRecords($event)"
     [responsive]="true" [rows]="defaultPageSize" [paginator]="true" [sortField]="defaultSortColumn" [sortOrder]="defaultSortOrder">
     <p-header>SDAs</p-header>

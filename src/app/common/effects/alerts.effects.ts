@@ -9,6 +9,7 @@ import { of } from 'rxjs/observable/of';
 import * as selectedAlert from '../actions/selected-alert';
 import * as services from '../services';
 import * as models from '../models';
+import * as fromRoot from '../reducers';
 import '../rxjs-extensions';
 
 
@@ -59,11 +60,25 @@ export class AlertEffects {
         });
     });
 
+// @Effect()
+//   saveSearchCriteria$: Observable<Action> = this.actions$
+//     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
+//     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
+//    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
+//     // .switchMap((searchCriteria) => {
+//     //   return new selectedAlert.LoadSdasAction(undefined);
+//     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
+//     // });
+
   @Effect()
   loadSdas$: Observable<Action> = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
     .map((action: selectedAlert.LoadSdasAction) => action.payload)
-    .switchMap((criteria: any) => {
+    .withLatestFrom(this.appStateService.getSearchCriteria())
+    .switchMap(([payload, searchCriteria]) => {
+      const criteria = searchCriteria.toJS();
+      criteria.PageData = payload;
+
       return this.sdaService.searchSda(criteria)
         .map((data: models.ISdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
@@ -105,7 +120,7 @@ export class AlertEffects {
     .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
 
 
-    constructor(private actions$: Actions,
+  constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,
     private appStateService: services.AppStateService,
