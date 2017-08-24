@@ -1,5 +1,5 @@
 ﻿export interface ISdaSearchCriteria {
   PageData: any;
-  SearchByDate: any;
+  SearchByDateRange: any;
   SearchBySDA: any;
 }

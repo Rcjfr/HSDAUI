@@ -6,6 +6,6 @@ export interface SdaSearchCriteriaRecord extends TypedRecord<SdaSearchCriteriaRe
 
 export const searchCriteriaFactory = makeTypedFactory<ISdaSearchCriteria, SdaSearchCriteriaRecord>({
     PageData: undefined,
-    SearchByDate: undefined,
+    SearchByDateRange: undefined,
     SearchBySDA: undefined
 });
