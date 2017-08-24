@@ -3,16 +3,17 @@
     <div>
       <aac-field-container label="Date - From:" [attr.for]="fromDate.idDatePicker">
         <datetime [timepicker]="false" #fromDate [tabindex]='1' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
-          formControlName="dateFrom" [(ngModel)]="model.dateFrom"></datetime>
+          formControlName="dateFrom" (ngModelChange)="onDateFromChanged($event)"></datetime>
       </aac-field-container>
     </div>
   </div>
 <!-- TODO - handle date format -->
+<!-- 2017-07-22T00:00:00 -->
   <div class="col-md-6">
-    <div>
+     <div>
       <aac-field-container label="Date - Through:" [attr.for]="toDate.idDatePicker">
         <datetime [timepicker]="false" #toDate [tabindex]='2' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
-          formControlName="dateThrough" [(ngModel)]="model.dateThrough"></datetime>
+          formControlName="dateThrough" (ngModelChange)="onDateThroughChanged($event)"></datetime>
       </aac-field-container>
     </div>
   </div>
