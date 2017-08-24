@@ -31,7 +31,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   showTable = false;
 
   //Default paging options
-  defaultPageSize = 4;
+  defaultPageSize = 20;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
 
