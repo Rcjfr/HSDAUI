@@ -1,9 +1,9 @@
-﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
+<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
   <div class="row col-md-12">
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Description:" [message]="displayMessage.repairDescriptionType">
-          <select class="form-control" tabindex='63' id="repairDescriptionType" formControlName="repairDescriptionType">
+        <aac-field-container [required]="!isSDAOpen()" label="Description:" [message]="displayMessage.repairDescriptionType">
+          <select class="form-control" tabindex='63' [required]="!isSDAOpen()"  id="repairDescriptionType" formControlName="repairDescriptionType">
             <option value="">Select</option>
             <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
@@ -45,13 +45,13 @@
     <div class="col-md-6">
       <div [class.has-error]="displayMessage.isExternallyVisible">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Externally Visible?</label>
+          <label class="col-sm-4 control-label">Externally Visible?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="67" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="true" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="67" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="false" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isExternallyVisible" class="error">{{displayMessage.isExternallyVisible}}</div>
           </div>

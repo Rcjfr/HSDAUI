@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -83,5 +83,15 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     this.formGroup.get('corrosionLevel').updateValueAndValidity();
     this.formGroup.get('corrosionType').updateValueAndValidity();
     this.formGroup.get('causeOfDamageGroup').updateValueAndValidity();
+  }
+
+  areCPCPFieldsRequired(): boolean {
+    return this.isCPCPRelatedEvent() && !this.isSDAOpen(); //Only required when trying to complete the sda and a cpcp related event
+  }
+  isCPCPRelatedEvent(): boolean {
+    return this.formGroup.get('iscpcpRelatedEvent').value === true;
+  }
+  isSDAOpen(): boolean {
+    return this.sda.status === models.Status.Open;
   }
 }

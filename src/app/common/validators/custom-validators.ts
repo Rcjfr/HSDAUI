@@ -1,4 +1,5 @@
-﻿import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { Status } from '../models';
 
 export class CustomValidators {
 
@@ -88,6 +89,7 @@ export class CustomValidators {
     if (parent !== undefined) {
       iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
     }
+    const statusControl = c.root.get('status');
 
     const damageOtherControl = c.get('damageOther');
     let filledContolCount: number;
@@ -111,7 +113,7 @@ export class CustomValidators {
       return null;
     }
 
-    if (iscpcpRelatedEvent.value !== true) {
+    if (iscpcpRelatedEvent.value !== true || statusControl.value === Status.Open) { //if SDA is open or not cpcp event, no validation required
       return null;
     }
 
@@ -162,12 +164,16 @@ export class CustomValidators {
   //};
   static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
 
+    const statusControl = c.root.get('status'); //TODO: not sure whether this is the best way
+
       const repairDocumentControl = c.get('repairDocumentType');
     const engineeringAuthorizationControl = c.get('engineeringAuthorization');
     if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
       return null;
     }
-
-    return { 'atleastone': true };
+    if (statusControl.value === Status.Open) {
+      return { 'atleastone': true };
+    }
+    return null;
   };
 }

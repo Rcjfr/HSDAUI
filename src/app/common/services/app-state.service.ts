@@ -139,4 +139,7 @@ export class AppStateService {
   loadUser() {
     this.store.dispatch(new userActions.LoadUserAction());
   }
+  getUserLoading() {
+    return this.store.select(fromRoot.getUserLoading);
+  }
 }

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, HostListener, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -33,5 +33,9 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
 
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
+  }
+
+  isSDAOpen(): boolean {
+    return this.sda.status === models.Status.Open;
   }
 }

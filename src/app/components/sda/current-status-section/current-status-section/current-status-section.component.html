@@ -1,83 +1,51 @@
-﻿<div class="panel-body" [formGroup]="formGroup">
-  <div class="row form-group">
-    <div class="col-md-12">
-      <aac-checkbox-container label="Open">
-        <input type="checkbox" tabindex="74" [checked]="true" />
-      </aac-checkbox-container>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <aac-checkbox-container label="Complete">
-        <input type="checkbox" tabindex="75" formControlName="completedStatus" />
-      </aac-checkbox-container>
+<div class="panel-body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Completed By
+        </th>
+        <th>
+          Completed On
+        </th>
+        <th>
+          Comments
+        </th>
+      </tr>
+    </thead>
+    <!---->
+    <tbody>
+      <tr *ngFor="let stat of sda.history;let i=index"
+          [ngClass]="{'active':stat.status==1,
+    'info':stat.status==2,
+    'warning':stat.status==4,
+    'success':stat.status==8,
+    'danger':stat.status==16
+    }"
+          >
+        <td>
+          {{i+1}}
+        </td>
+        <td>
+          {{stat.statusText}}
+        </td>
+        <td>
+          {{stat.statusUpdatedBy}}
+        </td>
+        <td>
+          {{stat.statusUpdatedOn}}
+        </td>
+        <td>{{stat.comments}}</td>
+      </tr>
+    </tbody>
+  </table>
 
 
-    </div>
-    <div class="col-md-6">
-      <aac-field-container label="Inspector:" [message]="displayMessage.inspector" [hidden]="formGroup.get('completedStatus').value !==true">
-        <input type="text" tabindex="76" class="form-control" formControlName="inspector" [required]="formGroup.get('completedStatus').value==true">
-      </aac-field-container>
-    </div>
-    <div class="col-md-4">
-      <aac-field-container label="Date:" [for]="inspectionDate.idDatePicker" [message]="displayMessage.inspectionDate" [hidden]="formGroup.get('completedStatus').value !==true">
-        <datetime [timepicker]="false" #inspectionDate [tabindex]='77' [required]="formGroup.get('completedStatus').value==true" formControlName="inspectionDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
-      </aac-field-container>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <aac-checkbox-container label="Audited">
-        <input type="checkbox" tabindex="78" formControlName="auditedStatus" />
-      </aac-checkbox-container>
 
-
-    </div>
-    <div class="col-md-6">
-      <aac-field-container label="QC Manager/Designee:" [message]="displayMessage.manager" [hidden]="formGroup.get('auditedStatus').value !==true">
-        <input type="text" tabindex="79" class="form-control" formControlName="manager" [required]="formGroup.get('auditedStatus').value==true">
-      </aac-field-container>
-    </div>
-    <div class="col-md-4">
-      <aac-field-container label="Date:" [for]="auditDate.idDatePicker" [message]="displayMessage.auditDate" [hidden]="formGroup.get('auditedStatus').value !==true">
-        <datetime [timepicker]="false" #auditDate [tabindex]='80' formControlName="auditDate" [required]="formGroup.get('auditedStatus').value==true" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
-      </aac-field-container>
-    </div>
-  </div>
-  <div class="row form-group" [hidden]="formGroup.get('auditedStatus').value !==true">
-    <div class="col-md-2 text-right">
-      Reliability
-    </div>
-    <div class="col-md-2">
-      <button type="button" tabindex="81" (click)="approve()">Accept</button>
-      <button type="button" tabindex="82" (click)="reject()">Reject</button>
-    </div>
-    <div class="col-md-8">
-      <aac-field-container label="Rejection Reason:" [hidden]="reliabilityApproved !== false" labelGridColumnWidth="2" [message]="displayMessage.rejectReason">
-        <textarea tabindex="83" rows="3" cols="50" [required]="reliabilityApproved === false" class="form-control" formControlName="rejectReason"></textarea>
-      </aac-field-container>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-12">
-      <aac-checkbox-container label="Closed">
-        <input type="checkbox" tabindex="84" [checked]="reliabilityApproved===true" formControlName="closedStatus" />
-      </aac-checkbox-container>
-
-
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <aac-checkbox-container label="Deleted">
-        <input type="checkbox" tabindex="85" formControlName="deletedStatus" />
-      </aac-checkbox-container>
-    </div>
-    <div class="col-md-10">
-      <aac-field-container label="" labelGridColumnWidth="1" [message]="displayMessage.deleteReason" [hidden]="formGroup.get('deletedStatus').value !==true">
-        <input type="text" tabindex="86" class="form-control" formControlName="deleteReason"   [required]="formGroup.get('deletedStatus').value==true">
-      </aac-field-container>
-    </div>
-
-  </div>
 </div>

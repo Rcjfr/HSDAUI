@@ -28,7 +28,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
       missingCorrosionInhibitor: ['', []],
       damageOther: ['', []]
     }, {
-        //validator: CustomValidators.validateCauseOfDamageGroupFields
+        validator: CustomValidators.validateCauseOfDamageGroupFields
       });
   }
 

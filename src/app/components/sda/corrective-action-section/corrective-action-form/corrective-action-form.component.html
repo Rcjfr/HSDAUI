@@ -1,37 +1,27 @@
-﻿<div class="panel-body" [formGroup]="correctiveActionFormGroup">
-  
+<div class="panel-body" [formGroup]="correctiveActionFormGroup">
+
   <div class="row form-group">
 
     <div class="col-sm-2">
       <aac-checkbox-container label="Deferred">
         <input type="checkbox" tabindex="55" formControlName="isDeferred" />
       </aac-checkbox-container>
-
-
     </div>
-    <div [hidden]="correctiveActionFormGroup.get('isDeferred').value != true">
+    <div [hidden]="!isDeferred()">
       <div class="col-sm-6">
         <aac-field-container label="Enter SCEPTRE Deferral Code:"
                              helptext="(MON, SAD, ROB, etc)"
-                             [message]="displayMessage.deferralCode"
-                             >
-          <input type="text" tabindex='56' class="form-control" formControlName="deferralCode">
+                             [message]="displayMessage.deferralCode">
+          <input type="text" tabindex='56' class="form-control" [required]="isDeferred() && !isSDAOpen()" formControlName="deferralCode">
         </aac-field-container>
       </div>
-
       <div class="col-sm-4">
-        <div class="row form-group" [class.has-error]="displayMessage.deferralNo">
-          <label class="col-sm-4 control-label" for="deferralNo">Deferral #:</label>
-          <div class="col-sm-8">
-            <input type="text" tabindex='57' class="form-control" id="deferralNo" formControlName="deferralNo">
-            <span *ngIf="displayMessage.deferralNo" class="help-block">{{displayMessage.deferralNo}}</span>
-          </div>
-        </div>
-
-
+        <aac-field-container label="Deferral #:"
+                             [message]="displayMessage.deferralNo">
+          <input type="text" tabindex='57' class="form-control" [required]="isDeferred() && !isSDAOpen()" formControlName="deferralNo">
+        </aac-field-container>
       </div>
     </div>
-
   </div>
   <div class="row">
     <div class="col-sm-12">
@@ -47,28 +37,29 @@
     </div>
     <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('isMajorRepair').value != true">
 
-      <aac-field-container 
-                           helptext="If major, repair document must be an SRM Reference or an Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+      <aac-field-container helptext="If major, repair document must be an SRM Reference or an Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
                            label="Description:"
                            labelGridColumnWidth="2"
+                           [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()"
                            [message]="displayMessage.majorRepairDescription">
-        <textarea tabindex='71' class="form-control" formControlName="majorRepairDescription"></textarea>
+        <textarea tabindex='71' class="form-control"
+                  [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()" formControlName="majorRepairDescription"></textarea>
       </aac-field-container>
     </div>
   </div>
-  <div class="row form-group">
+  <!--<div class="row form-group">
     <div class="col-md-6">
       <aac-field-container label="Completed By:"
                            helptext="(Enter Employee ID or Last Name)"
                            [message]="displayMessage.completedBy">
         <input type="text" tabindex='72' class="form-control" formControlName="completedBy">
       </aac-field-container>
-      </div>
-      <div class="col-md-6">
-        <aac-field-container label="Date:"  [message]="displayMessage.completedDate" >
-          <datetime [timepicker]="false" #completedDate [tabindex]='73'  formControlName="completedDate"
-                    [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
-        </aac-field-container>
-      </div>
-  </div>
-  </div>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Date:" [message]="displayMessage.completedDate">
+        <datetime [timepicker]="false" #completedDate [tabindex]='73' formControlName="completedDate"
+                  [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+    </div>
+  </div>-->
+</div>

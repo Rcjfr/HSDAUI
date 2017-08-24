@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component, OnInit, Input, ViewChildren, ElementRef,
   ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy
 } from '@angular/core';
@@ -12,14 +12,14 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda } from '../../common/models';
+import { ISda, Status } from '../../common/models';
 import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppStateService } from '../../common/services';
+import { AppStateService, AuthService } from '../../common/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,6 +33,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   @Input() sda: ISda;
   @Input() loading: boolean;
   @Output() onReset = new EventEmitter();
+  lastModifiedBy: string;
+  statusUpdatedBy: string;
+  lastModifiedOn: Date = new Date();
+  statusUpdatedOn: Date = new Date();
+  public Status = Status;// to make it available in template
+  public currentStatus: number;
+
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
@@ -44,8 +51,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   private genericValidator: GenericValidator;
   constructor(private toastr: ToastsManager,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
-    public appStateService: AppStateService) {
-    this.sdaForm = this.fb.group({});
+    public appStateService: AppStateService, public authService: AuthService) {
+    this.sdaForm = this.fb.group({
+      status: ['', [Validators.required]],
+    });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
   ngAfterContentInit(): void {
@@ -72,7 +81,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngOnInit() {
-
+    this.currentStatus = this.sda.status;
+    this.authService.auditDisplayName().take(1).subscribe(s => {
+      this.lastModifiedBy = s;
+      this.statusUpdatedBy = s;
+      if (!this.sda.id) { //in case of new sda
+        this.sda.correctiveActionSection.completedBy = s;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -120,15 +136,31 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     return result;
   }
+  saveAlert(newStatus: number) {
+    this.sda.status = newStatus;
+    this.sdaForm.patchValue({ status: newStatus });
 
-  saveAlert() {
-    this.genericValidator.formSubmitted = true;
+    setTimeout(() => {
+      this.saveAlertData(newStatus);
+    }, 100);
+  }
+
+  saveAlertData(newStatus: number) {
+    this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
-    this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
+    this.genericValidator.formSubmitted = true;
+    const messages = this.genericValidator.processMessages(this.sdaForm);
+    this.logErrors(this.sdaForm);
+    this.displayMessage$.next(messages);
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
       this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
+      return;
+    }
+    const a = 1;
+    if (a === 1) {
+      this.toastr.success('Details entered are valid.', 'Success');
       return;
     }
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
@@ -152,10 +184,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {
-        lastModifiedBy: 'badgeid',
-        lastModifiedOn: new Date(),
-        statusUpdatedBy: 'badgeid',
-        statusUpdatedOn: new Date(),
+        lastModifiedBy: this.lastModifiedBy,
+        lastModifiedOn: this.lastModifiedOn,
+        statusUpdatedBy: this.statusUpdatedBy,
+        statusUpdatedOn: this.statusUpdatedOn,
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
         cpcpSection: cpcpSectionData,

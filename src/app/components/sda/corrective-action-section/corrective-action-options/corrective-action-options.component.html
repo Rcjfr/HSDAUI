@@ -1,14 +1,15 @@
-﻿<div [formGroup]="correctiveActionOptionFormGroup">
+<div [formGroup]="correctiveActionOptionFormGroup">
   <div class="form-group">
     <aac-radio-container label="Defective Part Replaced With Identical Part #">
-      <input type="radio" name="repairType" [value]="1" tabindex="58" formControlName="repairType" />
+      <input type="radio" name="repairType" [value]="1" [required]="!isSDAOpen()" tabindex="58" formControlName="repairType" />
     </aac-radio-container>
     <aac-radio-container label="Modified Part # Installed">
-      <input type="radio" name="repairType" [value]="2" tabindex="59" formControlName="repairType" />
+      <input type="radio" name="repairType" [value]="2" [required]="!isSDAOpen()" tabindex="59" formControlName="repairType" />
     </aac-radio-container>
     <aac-radio-container label="Repaired (Describe)">
-      <input type="radio" name="repairType" [value]="3" tabindex="60" formControlName="repairType" />
+      <input type="radio" name="repairType" [value]="3" [required]="!isSDAOpen()" tabindex="60" formControlName="repairType" />
     </aac-radio-container>
+    <div *ngIf="displayMessage.repairType" class="error">{{displayMessage.repairType}}</div>
   </div>
 
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('repairType').value ==3">

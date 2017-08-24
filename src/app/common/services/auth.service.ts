@@ -9,12 +9,15 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   public currentUser$: Observable<IUser>;
+  readonly QC_Inspector = "QC_Inspector";
+  readonly QC_Supervisor = "QC_Supervisor";
+  readonly QC_Manager = "QC_Manager";
+  readonly Reliability_Analyst = "Reliability_Analyst";
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}users`;
   constructor(private http: Http, private appStateService: AppStateService, private router: Router) {
     this.currentUser$ = this.appStateService.getUser().filter(u => !!u).map(u => u && u.toJS());
   }
-
   loadLoggedInUser(): Observable<IUser> {
     return this.http.get(this.endPointUrl)
       .map((result) => result.json());
@@ -36,6 +39,9 @@ export class AuthService {
   displayName(): Observable<string> {
     return this.currentUser$.map(u => `${u.sm_user_lastname}, ${u.sm_user_firstname}`);
   }
+  auditDisplayName(): Observable<string> {
+    return this.currentUser$.map(u => `${u.sm_user} - ${u.sm_user_lastname}, ${u.sm_user_firstname}`);
+  }
   email(): Observable<string> {
     return this.currentUser$.map(u => u.sm_user_email);
   }
@@ -55,6 +61,16 @@ export class AuthService {
     return this.currentUser$.map(u => u.access_token);
   }
   logOut(): void {
-    window.location.href = 'https://newjetnet.aa.com';
+    window.location.href = environment.logoutUrl;
+  }
+
+  isQCInspector(): Observable<boolean> {
+    return this.hasRole(this.QC_Inspector);
+  }
+  isQCManager(): Observable<boolean> {
+    return this.hasAnyRole([this.QC_Manager, this.QC_Supervisor]);
+  }
+  isReliabilityAnalyst(): Observable<boolean> {
+    return this.hasRole(this.Reliability_Analyst);
   }
 }

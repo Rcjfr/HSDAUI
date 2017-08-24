@@ -16,7 +16,7 @@ export class AlertsComponent implements OnInit {
 
   ngOnInit() {
     this.sdaList$ = this.appStateService.getSdaList().map(d => d && d.toJS());
-    this.loading$ = Observable.merge(this.appStateService.getSelectedAlertLoading(), this.appStateService.getLookupDataLoading());
+    this.loading$ = Observable.merge(this.appStateService.getSelectedAlertLoading(), this.appStateService.getLookupDataLoading(), this.appStateService.getUserLoading());
     this.appStateService.loadSdaList();
   }
 

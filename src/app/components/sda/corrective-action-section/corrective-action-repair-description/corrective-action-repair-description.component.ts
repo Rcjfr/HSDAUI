@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -33,7 +33,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       repairWidth: ['', []]
     },
       {
-        //validator: CustomValidators.validateCorrectiveActionRepairFields
+        validator: CustomValidators.validateCorrectiveActionRepairFields
       }
     );
   }
@@ -56,5 +56,9 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   }
   ngOnDestroy() {
     super.ngOnDestroy();
+  }
+
+  isSDAOpen(): boolean {
+    return this.sda.status === models.Status.Open;
   }
 }

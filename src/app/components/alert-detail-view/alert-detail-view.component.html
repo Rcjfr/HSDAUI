@@ -1,25 +1,25 @@
-﻿<h2 *ngIf="!sda.id">Create new SDA</h2>
+<h2 *ngIf="!sda.id">Create new SDA</h2>
 <h2 *ngIf="sda.id">Edit/View SDA</h2>
-<form novalidate (submit)="saveAlert()" [formGroup]="sdaForm">
+<form novalidate [formGroup]="sdaForm">
   <div class="panel panel-default">
     <div class="panel-heading">General Information</div>
     <aa-general-section-form [parent]="sdaForm"
                              [sda]="sda"
                              [errorMessages]="displayMessage$ | async"></aa-general-section-form>
-    
+
     <div class="panel-heading">Description and Location of Defects or Damage</div>
     <aa-defect-location-section-form [parent]="sdaForm"
                                      [sda]="sda"
                                      [errorMessages]="displayMessage$ | async">
     </aa-defect-location-section-form>
-    
+
     <div class="panel-heading">Corrosion Prevention Control Program</div>
-    
+
     <aa-cpcp-section-form [parent]="sdaForm"
                           [sda]="sda"
                           [errorMessages]="displayMessage$ | async">
     </aa-cpcp-section-form>
-    
+
     <div class="panel-heading">Corrective Action</div>
     <aa-corrective-action-form [parent]="sdaForm"
                                [sda]="sda"
@@ -40,20 +40,44 @@
                                   [sda]="sda"
                                  [errorMessages]="displayMessage$ | async">
     </aa-cpcp-disposition-section>-->
-    <div class="panel-heading">Current Status</div>
-    <aa-current-status-section [parent]="sdaForm"
+    <div class="panel-heading" *ngIf="sda.id">Status History</div>
+    <aa-current-status-section *ngIf="sda.id" [parent]="sdaForm"
                                [sda]="sda"
                                [errorMessages]="displayMessage$ | async">
     </aa-current-status-section>
-
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="col-xs-3 pull-right">
+    <div class="col-md-12 ">
+      <div class="pull-right">
         <button type="button" class="btn btn-default btn-lg" tabindex="114" (click)="onReset.emit()">Reset</button>
-        <button type="submit" class="btn btn-primary btn-lg" tabindex="114">Save Details</button>
+
+        <span *ngIf="authService.isQCInspector() | async">
+          <!--QC Analyst Actions-->
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Complete)" tabindex="114">Complete SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+        </span>
+        <span *ngIf="authService.isQCManager() | async">
+          <!--QC Manager/Supervisor Actions-->
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
+        </span>
+        <span *ngIf="authService.isReliabilityAnalyst() | async">
+          <!--Reliability Analyst Actions-->
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+          <button type="submit" class="btn btn-danger btn-lg" (click)="saveAlert(Status.Rejected)"  tabindex="114">Reject SDA</button>
+          <button type="submit" class="btn btn-success btn-lg" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+        </span>
+        <span *ngIf="false"><!--TODO-->
+          <!--Compliance Engg/Liasion Engg Actions-->
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+
+        </span>
+
       </div>
     </div>
   </div>
-  
 </form>

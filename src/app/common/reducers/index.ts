@@ -57,3 +57,4 @@ export const getDTEStatus = compose(fromLookupData.getDTEStatus, getLookupDataSt
 
 
 export const getUser = compose(fromLoggedInUser.getUser, getUserDataState);
+export const getUserLoading = compose(fromLoggedInUser.getLoading, getUserDataState);

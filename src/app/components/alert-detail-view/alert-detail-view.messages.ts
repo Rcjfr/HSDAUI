@@ -238,7 +238,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'correctiveActionOptionFormGroup': {
       'repairType': {
-        required: 'Defect Discovered during is required.'
+        required: 'Repair Type is required.'
         },
         'modifiedPartDescriptionGroup': {
       'modifiedPartDescription': {
