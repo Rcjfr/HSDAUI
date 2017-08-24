@@ -30,7 +30,7 @@ export class AlertsSearchComponent implements OnInit {
     PageData: any;
   };
 
-  private isValid: false;
+  isValid: false;
   searchState = 'SearchByDateRange';
   sdaSearchForm: FormGroup;
 
