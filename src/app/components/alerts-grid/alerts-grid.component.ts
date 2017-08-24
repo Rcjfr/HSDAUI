@@ -26,7 +26,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   searchCriteria;
   sdaListResult: ISdaListResult = {
     totalRecords: 0,
-    records: List<ISdaListView>()
+    records: List<ISdaListResult>()
   };
   showTable = false;
 

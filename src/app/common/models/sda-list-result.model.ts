@@ -3,5 +3,5 @@ import { List } from 'immutable';
 
 export interface ISdaListResult {
   totalRecords: number;
-  records: List<ISdaListView>
+  records: List<ISdaListResult>
 }
