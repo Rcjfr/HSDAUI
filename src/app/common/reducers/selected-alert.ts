@@ -59,13 +59,11 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
       case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
       {
-        const blah = searchCriteriaFactory(action.payload);
-
         return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
       }
       case selectedAlertActions.ActionTypes.LOAD_SDAS:
       {
-        return state.merge({ loading: false });
+        return state.merge({ loading: true });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {

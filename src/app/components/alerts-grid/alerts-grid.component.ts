@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ISdaListResult } from './../../common/models';
+import { ISdaListResult, ISdaListView } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +26,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   searchCriteria;
   sdaListResult: ISdaListResult = {
     totalRecords: 0,
-    records: List<ISdaListResult>()
+    records: List<ISdaListView>()
   };
   showTable = false;
 
