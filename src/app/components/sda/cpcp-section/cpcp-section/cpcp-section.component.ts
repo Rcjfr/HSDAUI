@@ -44,7 +44,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.formGroup.patchValue(newSda.cpcpSection);
+      this.formGroup.patchValue(newSda.cpcpSection || {});
     }
   }
   setCorrosionTypeFields(corrosionType: string): void {

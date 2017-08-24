@@ -9,8 +9,8 @@
             <li><a href="#">Page 2</a></li>
         </ul>-->
         <ul class="nav navbar-nav navbar-right">
-            <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li>Welcome {{authService.displayName() || async}}</li>
+            <li><a href="https://smlogin.qcorpaa.aa.com/login/SMLogout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

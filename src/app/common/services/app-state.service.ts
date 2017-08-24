@@ -4,6 +4,7 @@ import { AppStore } from '../store/app-store';
 import * as fromRoot from '../reducers';
 import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
+import * as userActions from '../actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
 import { IStation, ISda, ISavedState } from '../models';
 
@@ -101,6 +102,10 @@ export class AppStateService {
     return this.store.select(fromRoot.getSearchCriteria);
   }
 
+  getUser() {
+    return this.store.select(fromRoot.getUser);
+  }
+
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
@@ -136,5 +141,7 @@ export class AppStateService {
   loadLookupData() {
     this.store.dispatch(new lookupDataActions.LoadLookupDataAction());
   }
-
+  loadUser() {
+    this.store.dispatch(new userActions.LoadUserAction());
+  }
 }

@@ -3,11 +3,13 @@ import { compose } from '@ngrx/core/compose';
 import { combineReducers, Action } from '@ngrx/store';
 import * as fromSelectedAlert from './selected-alert';
 import * as fromLookupData from './lookup-data';
+import * as fromLoggedInUser from './logged-in-user';
 import { AppStore } from '../store/app-store';
 
 const reducers = {
   selectedAlert: fromSelectedAlert.reducer,
-  lookupData: fromLookupData.reducer
+  lookupData: fromLookupData.reducer,
+  user: fromLoggedInUser.reducer
 };
 
 const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
@@ -22,6 +24,7 @@ export function reducer(state: AppStore, action: Action): AppStore {
 // Level 1
 export const getSelectedAlertState = (state: AppStore) => state.selectedAlert;
 export const getLookupDataState = (state: AppStore) => state.lookupData;
+export const getUserDataState = (state: AppStore) => state.user;
 
 // Level 2
 export const getSelectedSda = compose(fromSelectedAlert.getSelectedSda, getSelectedAlertState);
@@ -52,3 +55,6 @@ export const getRepairDocuments = compose(fromLookupData.getRepairDocuments, get
 export const getReasonsForChange = compose(fromLookupData.getReasonsForChange, getLookupDataState);
 export const getRepairInspectionStatus = compose(fromLookupData.getRepairInspectionStatus, getLookupDataState);
 export const getDTEStatus = compose(fromLookupData.getDTEStatus, getLookupDataState);
+
+
+export const getUser = compose(fromLoggedInUser.getUser, getUserDataState);

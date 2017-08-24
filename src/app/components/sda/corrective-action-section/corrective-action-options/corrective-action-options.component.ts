@@ -24,7 +24,7 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.correctiveActionOptionFormGroup.patchValue(newSda.correctiveActionSection);
+      this.correctiveActionOptionFormGroup.patchValue(newSda.correctiveActionSection || {});
     }
   }
   ngOnInit() {
