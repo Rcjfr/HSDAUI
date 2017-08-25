@@ -32,14 +32,8 @@ export class AlertsSearchComponent implements OnInit {
     PageData: any;
   };
 
-<<<<<<< HEAD
   //Each element represents one section of the form and whether or not it has at least one value entered
   isValid = [false, false];
-=======
-  isValid: false;
-  searchState = 'SearchByDateRange';
-  sdaSearchForm: FormGroup;
->>>>>>> 7ad0383ea5f096d990fb146c585b965171611d86
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     this.models = {
