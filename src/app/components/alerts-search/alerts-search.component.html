@@ -11,14 +11,14 @@
         Search by Date Range
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-date-range [model]="models.SearchByDateRange" (isValid)="isValid = $event"></aa-search-by-date-range>
+      <aa-search-by-date-range [model]="models.SearchByDateRange" (isValid)="isValid[0] = $event"></aa-search-by-date-range>
     </accordion-group>
     <accordion-group #sdaFormGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by SDA Form
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-sda-form [model]="models.SearchBySDA" (isValid)="isValid = $event"></aa-search-by-sda-form>
+      <aa-search-by-sda-form [model]="models.SearchBySDA" (isValid)="isValid[1] = $event"></aa-search-by-sda-form>
     </accordion-group>
     <accordion-group #aircraftGroup panelClass="panel-default search-panel">
       <div accordion-heading>

@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormBuilder, FormControlName, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../common/models';
@@ -29,16 +29,16 @@ export class SearchBySdaFormComponent extends SearchBaseFormComponent implements
 
   constructor(private formBuilder: FormBuilder, private appStateService: AppStateService) {
     super(formBuilder.group({
-      'sdrId': [undefined, Validators.required],
-      'station': [undefined, Validators.required],
-      'alertCode': [undefined, Validators.required],
-      'sdrNumber': [undefined, Validators.required],
-      'department': [undefined, Validators.required],
-      'ataCode1': [undefined, Validators.required],
-      'originator': [undefined, Validators.required],
-      'ataCode2': [undefined, Validators.required],
-      'fleet': [undefined, Validators.required],
-      'checkType': [undefined, Validators.required]
+      'id': [undefined],
+      'station': [undefined],
+      'alertCode': [undefined],
+      'sdrNumber': [undefined],
+      'department': [undefined],
+      'ataCode1': [undefined],
+      'originator': [undefined],
+      'ataCode2': [undefined],
+      'fleet': [undefined],
+      'checkType': [undefined]
     }));
   }
 

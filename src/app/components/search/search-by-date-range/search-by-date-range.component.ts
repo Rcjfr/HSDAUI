@@ -13,16 +13,24 @@ export class SearchByDateRangeComponent extends SearchBaseFormComponent {
 
   constructor(private formBuilder: FormBuilder) {
     super(formBuilder.group({
-      'dateFrom': [undefined, Validators.required],
-      'dateThrough': [undefined, Validators.required]
+      'dateFrom': [undefined],
+      'dateThrough': [undefined]
     }));
   }
 
   onDateFromChanged(event) {
-    this.model.dateFrom = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
+    if (event) {
+      this.model.dateFrom = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
+    } else {
+      this.model.dateFrom = '';
+    }
   }
 
   onDateThroughChanged(event) {
-    this.model.dateThrough = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
+    if (event) {
+      this.model.dateThrough = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
+    } else {
+      this.model.dateThrough = '';
+    }
   }
 }
