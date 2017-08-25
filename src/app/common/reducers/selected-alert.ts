@@ -1,9 +1,8 @@
 ﻿import { ActionReducer, Action } from '@ngrx/store';
-import { IAlert, ISdaListView, ISdaListResult } from '../models';
+import { IAlert, ISdaListView } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
-import { SdaSearchCriteria } from '../models';
+import { SdaListResult, SdaSearchCriteria } from '../models';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
-import { sdaListResultFactory } from './models/sda-list-result';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 import * as selectedAlertActions from '../actions/selected-alert';
@@ -18,7 +17,7 @@ export interface State {
   sda: SdaRecord;
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
-  sdaListResult: ISdaListResult
+  sdaListResult: SdaListResult
   searchCriteria: SdaSearchCriteria
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
@@ -31,7 +30,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   sda: sdaFactory(),
   noseNumbers: <List<string>>List.of(),
   aircraftInfo: aircraftInfoFactory(),
-  sdaListResult: sdaListResultFactory(),    // TODO - convert to record
+  sdaListResult: new SdaListResult(),
   searchCriteria: new SdaSearchCriteria()
 });
 
@@ -69,7 +68,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
-        return state.merge({ loading: false, sdaListResult: sdaListResultFactory(act.payload) });
+        return state.merge({ loading: false, sdaListResult: act.payload });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {

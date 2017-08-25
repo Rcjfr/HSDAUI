@@ -3,8 +3,9 @@ import * as selectedAlert from '../actions/selected-alert';
 import { aircraftInfoFactory } from './models/aircraft-info';
 import { sdaFactory } from './models/sda';
 import { List } from 'immutable';
-import { ISda, ISdaListView, ISdaListResult } from '../models';
+import { ISda, ISdaListView } from '../models';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
+import { SdaListResult, SdaSearchCriteria } from '../models';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
@@ -15,9 +16,8 @@ describe('selectedAlertReducer', () => {
     sda: sdaFactory(),
     noseNumbers: <List<string>>List.of(),
     aircraftInfo: aircraftInfoFactory(),
-    sdaListResult: ISdaListResult
-    // sdaList: <List<ISdaListView>>List.of(),
-    // sdaListTotalCount: 0
+    sdaListResult: new SdaListResult(),
+    searchCriteria: new SdaSearchCriteria()
   };
   const aircraftInfo = aircraftInfoFactory({
     aircraftNo: 'A330',

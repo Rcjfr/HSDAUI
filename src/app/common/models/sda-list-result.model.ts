@@ -1,7 +1,21 @@
 ﻿import { ISdaListView } from 'app/common/models';
-import { List } from 'immutable';
+import { Record, List } from 'immutable';
 
-export interface ISdaListResult {
+type SdaListResultProps = {
   totalRecords: number;
-  records: List<ISdaListResult>
-}
+  records: ISdaListView[]
+};
+
+const defaultProps = {
+  totalRecords: undefined,
+  records: undefined
+};
+
+export class SdaListResult extends Record(defaultProps) {
+  totalRecords: number;
+  records: ISdaListView[]
+
+  constructor(props: SdaListResultProps = defaultProps) {
+    super(props);
+  }
+};
