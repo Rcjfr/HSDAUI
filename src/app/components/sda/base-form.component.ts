@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef, ViewChildren, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef, ViewChildren, OnDestroy, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
@@ -11,6 +11,7 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   @Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
+  public Status = models.Status;
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
   public displayMessage: any = {}; // { [key: string]: any }
@@ -39,5 +40,19 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   }
   ngOnInit() {
 
+  }
+
+  public isSDAOpen(): boolean {
+    return this.sda.status === models.Status.Open ||
+      this.sda.status === models.Status.Rejected ||
+      this.sda.status === models.Status.Deleted;
+  }
+
+  public checkSDAFormStatus(): boolean {
+    if (!(this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
+      this.parent.controls[this.formGroupName].disable();
+      return true;
+    }
+    return false;
   }
 }

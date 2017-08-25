@@ -36,6 +36,9 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       this.correctiveActionFormGroup.patchValue(newSda.correctiveActionSection || {});
     }
   }
+  ngAfterViewInit(): void {
+    this.checkSDAFormStatus();
+  }
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
     
@@ -43,10 +46,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
   isDeferred(): boolean {
     return this.correctiveActionFormGroup.get('isDeferred').value === true;
   }
-  isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open ||
-      this.sda.status === models.Status.Deleted;
-  }
+  
   setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {
     if (isCorrectiveEvent !== true) {
       this.correctiveActionFormGroup.get('deferralCode').clearValidators();

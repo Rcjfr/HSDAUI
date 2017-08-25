@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -13,7 +13,7 @@ import * as models from '../../../../common/models';
   templateUrl: './cpcp-section.component.html',
   styleUrls: ['./cpcp-section.component.less']
 })
-export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
+export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
   corrosionTypes$: Observable<List<models.ICorrosionType>>;
   corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
   floorboardConditions$: Observable<List<models.IFloorboardCondition>>;
@@ -31,6 +31,11 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
       floorBoardCondition: ['', []]
     });
   }
+
+  ngAfterViewInit(): void {
+    this.checkSDAFormStatus();
+  }
+
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
@@ -90,9 +95,5 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   }
   isCPCPRelatedEvent(): boolean {
     return this.formGroup.get('iscpcpRelatedEvent').value === true;
-  }
-  isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open ||
-           this.sda.status === models.Status.Deleted;
   }
 }

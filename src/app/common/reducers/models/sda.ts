@@ -1,4 +1,4 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 import { ISda } from '../../models';
 export interface SdaRecord extends TypedRecord<SdaRecord>, ISda { }
 export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({

@@ -65,6 +65,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
+  
   ngAfterContentInit(): void {
     const frm = this.elRef.nativeElement.querySelector('form');
     const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select,textarea'));
@@ -85,7 +86,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         //console.log('Validating...', messages);
         this.displayMessage$.next(messages);
       });
-
+    
   }
 
   ngOnInit() {
@@ -189,7 +190,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
     else {
       if (this.sda.status === Status.Complete) {
-        this.sdaStatusTitle = "Complete SDA" + (this.sda.id?`(SDA ID:${this.sda.id})`:"");
+        this.sdaStatusTitle = "Complete SDA" + (this.sda.id ? `(SDA ID:${this.sda.id})` : "");
       }
       if (this.sda.status === Status.Audited) {
         this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
@@ -200,17 +201,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       if (this.sda.status === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
-      
+
       this.sdaStatusForm.patchValue({ status: this.sda.status, completedBy: this.lastModifiedBy, completedOn: new Date() });
       this.statusModal.show();
     }
   }
   saveAlertData() {
-    const a = 1;
-    if (a === 1) {
-      this.toastr.success('Details entered are valid.', 'Success');
-      return;
-    }
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
@@ -259,7 +255,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
   }
-
+  
   markAsDirty(group: FormGroup | FormArray) {
     group.markAsDirty();
     for (const i in group.controls) {

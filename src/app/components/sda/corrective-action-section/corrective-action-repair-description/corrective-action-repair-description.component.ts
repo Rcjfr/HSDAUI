@@ -31,15 +31,12 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]
-    },
-      {
-        validator: CustomValidators.validateCorrectiveActionRepairFields
-      }
-    );
+    });
   }
   ngOnInit() {
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
     this.repairDocuments$ = this.appStateService.getRepairDocuments();
+    this.correctiveActionRepairDescriptionFormGroup.validator = CustomValidators.validateCorrectiveActionRepairFields(this.sda.status);
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))
@@ -51,15 +48,13 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.correctiveActionRepairDescriptionFormGroup.patchValue(newSda.correctiveActionSection || {});
+      const data = newSda.correctiveActionSection || {};
+      this.correctiveActionRepairDescriptionFormGroup.patchValue(data);
+      this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDescriptionType: data.repairDescriptionType || '' });
+      this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDocumentType: data.repairDocumentType || '' });
     }
   }
   ngOnDestroy() {
     super.ngOnDestroy();
-  }
-
-  isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open ||
-      this.sda.status === models.Status.Deleted;
   }
 }

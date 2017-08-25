@@ -34,9 +34,4 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
   }
-
-  isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open ||
-      this.sda.status === models.Status.Deleted;
-  }
 }

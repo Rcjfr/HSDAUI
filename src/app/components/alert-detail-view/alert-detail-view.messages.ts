@@ -1,4 +1,4 @@
-﻿// Defines all of the validation messages for the form.
+// Defines all of the validation messages for the form.
 
 export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
   'generalSectionFormGroup': {
@@ -27,7 +27,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'department': {
       required: 'Department is required.'
-    },
+    }
+    ,
+      'originator': {
+          required: 'Originator is required.',
+          maxlength: 'Originator must not be more than 50 characters.'
+      },
     'aircraftInfoSectionFormGroup': {
       'aircraftNo': {
         required: 'Aircraft # is required.',
@@ -62,10 +67,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'fleet': {
         required: 'Fleet is required.',
         maxlength: 'Fleet must not be more than 20 characters.'
-      },
-      'originator': {
-          required: 'Originator is required.',
-          maxlength: 'Originator must not be more than 50 characters.'
       }
     },
     'defectDiscoveredDuringSectionFormGroup': {

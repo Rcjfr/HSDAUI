@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -27,13 +27,11 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
       poorSealingPractices: ['', []],
       missingCorrosionInhibitor: ['', []],
       damageOther: ['', []]
-    }, {
-        validator: CustomValidators.validateCauseOfDamageGroupFields
-      });
+    });
   }
 
   ngOnInit() {
-
+    this.causeOfDamageGroup.validator = CustomValidators.validateCauseOfDamageGroupFields(this.sda.status);
     this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
   }
 

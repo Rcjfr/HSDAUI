@@ -1,4 +1,4 @@
-﻿<div [formGroup]="formGroup">
+<div [formGroup]="formGroup">
   <aac-field-container required="true" label="Aircraft #:" [message]="displayMessage.aircraftNo">
     <!--<div class="input-group">
       <input type="text" #airCraftNo="ngModel" autocomplete="off" class="form-control" name="airCraftNo" id="airCraftNo" required
@@ -36,7 +36,5 @@
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
     <input type="text" tabindex='12' class="form-control" formControlName="fleet" (change)="appStateService.loadFleetCheckTypes($event.target.value)">
   </aac-field-container>
-  <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator">
-    <input type="text" tabindex='13' class="form-control" formControlName="originator">
-  </aac-field-container>
+  
 </div>

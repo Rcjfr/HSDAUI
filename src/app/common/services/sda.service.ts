@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
@@ -20,7 +20,7 @@ export class SdaService {
         return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, options)
           .map((result) => result.json());
       } else {
-        return this.http.post(this.endPointUrl, sda)
+        return this.http.post(this.endPointUrl, sda, options)
           .map((result) => result.json());
       }
     });

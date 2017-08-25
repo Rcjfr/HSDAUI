@@ -1,4 +1,4 @@
-﻿import { ActionReducer, Action } from '@ngrx/store';
+import { ActionReducer, Action } from '@ngrx/store';
 import { IAlert, ISdaListView } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
@@ -27,7 +27,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   loadNewSdaCounter: 0,
   currentSdaId: 0,
   sda: sdaFactory(),
-  noseNumbers: <List<string>>List.of(),
+  noseNumbers: List<string>(),
   aircraftInfo: aircraftInfoFactory(),
   sdaList: <List<ISdaListView>>List.of(),
 });

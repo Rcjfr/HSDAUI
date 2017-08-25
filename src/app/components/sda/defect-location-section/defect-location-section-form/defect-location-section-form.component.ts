@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
 import { CustomValidators } from '../../../../common/validators/custom-validators';
@@ -14,7 +14,7 @@ import * as models from '../../../../common/models';
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })
-export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
+export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
   detectionMethods$: Observable<List<models.IDetectionMethod>>;
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
@@ -43,6 +43,11 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
       this.defectLocationSectionFormGroup.patchValue({ detectionMethod: newSda.defectLocationSection.detectionMethod || '' });
     }
   }
+
+  ngAfterViewInit(): void {
+    this.checkSDAFormStatus();
+  }
+
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
