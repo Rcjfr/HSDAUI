@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { Subject, Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -12,6 +13,11 @@ import { DialogService } from 'ng2-bootstrap-modal';
 })
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
+
+  searchBySDA$: Subject<any> = new Subject();
+  searchByAircraft$: Subject<any> = new Subject();
+  criteria;
+
   models: {
     searchByDateRange: {
       dateFrom: any;
@@ -29,11 +35,17 @@ export class AlertsSearchComponent implements OnInit {
       fleet: any;
       checkType: any;
     };
+    searchByAircraft: {
+      aircraftNo: string;
+      manufacturer: string;
+      model: string;
+      serialNo: string;
+    };
     pageData: any;
   };
 
   //Each element represents one section of the form and whether or not it has at least one value entered
-  isValid = [false, false];
+  isValid = [false, false, false];
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     this.models = {
@@ -42,11 +54,19 @@ export class AlertsSearchComponent implements OnInit {
         id: undefined, station: undefined, alertCode: undefined, sdrNumber: undefined, department: undefined,
         ataCode1: undefined, originator: undefined, ataCode2: undefined, fleet: undefined, checkType: undefined
       },
+      searchByAircraft: { aircraftNo: undefined, manufacturer: undefined, model: undefined, serialNo: undefined },
       pageData: undefined
     };
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    Observable.combineLatest(this.searchBySDA$.startWith(undefined), this.searchByAircraft$.startWith(undefined), this.combineCriteria).subscribe(s => this.criteria = s );
+
+  }
+
+  combineCriteria(searchBySDA, searchByAircraft) {
+    return { searchBySDA, searchByAircraft }
+  }
 
   expandCollapseAll(expandAll: boolean) {
     this.panels.forEach(p => p.isOpen = expandAll);
@@ -59,15 +79,15 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   searchAlerts() {
-    const formIsInvalid = this.isValid.every(this.isFalse);
+    // const formIsInvalid = this.isValid.every(this.isFalse);
 
-    if (!formIsInvalid) {
-      this.appStateService.saveSdaSearchCriteria(this.models);
-    } else {
-      this.dialogService.addDialog(ConfirmComponent, {
-        title: 'Search Filters',
-        message: 'Please input at least one search filter.'
-      })
-    }
+    // if (!formIsInvalid) {
+      this.appStateService.saveSdaSearchCriteria(this.criteria);
+    // } else {
+    //   this.dialogService.addDialog(ConfirmComponent, {
+    //     title: 'Search Filters',
+    //     message: 'Please input at least one search filter.'
+    //   })
+    // }
   }
 }

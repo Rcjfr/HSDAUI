@@ -1,9 +1,11 @@
 ﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ISdaListResult, ISdaListView } from './../../common/models';
+import { SdaSearchCriteria } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
+import { Subscription } from 'rxjs/Subscription';
 
 export interface LazyLoadEvent {
   first?: number;
@@ -18,10 +20,8 @@ export interface LazyLoadEvent {
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit, OnDestroy {
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
-
   sdaListResult$: Observable<ISdaListResult>;
-  searchCriteria$: Observable<ISdaListResult>;
+  searchCriteria$: Observable<SdaSearchCriteria>;
 
   searchCriteria;
   sdaListResult: ISdaListResult = {
@@ -37,21 +37,23 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
   skipLoad = false;
 
+  resultSubscription: Subscription;
+  criteriaSubscription: Subscription;
+
   constructor(private appStateService: AppStateService) {}
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult();
     this.searchCriteria$ = this.appStateService.getSearchCriteria();
 
-    this.sdaListResult$.skip(1)
-      .takeUntil(this.ngUnsubscribe)
+    // TODO - try to get this back to async, update to record
+    this.resultSubscription = this.sdaListResult$
       .subscribe(results => {
         this.sdaListResult = results;
         this.showTable = true;
       });
 
-    this.searchCriteria$.skip(1)
-      .takeUntil(this.ngUnsubscribe)
+    this.criteriaSubscription = this.searchCriteria$.skip(1)
       .subscribe(d => {
         this.skipLoad = true;
         this.appStateService.loadSdaList(this.getDefaultPageData());
@@ -59,9 +61,8 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //from: https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.resultSubscription.unsubscribe();
+    this.criteriaSubscription.unsubscribe();
   }
 
   loadPageOfRecords(pageData: LazyLoadEvent) {

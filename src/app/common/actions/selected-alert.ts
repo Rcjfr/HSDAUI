@@ -1,5 +1,6 @@
 ﻿import { Action } from '@ngrx/store';
 import * as models from '../models/index';
+import { SdaSearchCriteria } from 'app/common/models/sda-search-criteria.model';
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
@@ -67,7 +68,7 @@ export class LoadSdasAction implements Action {
 }
 export class SaveSdaSearchCriteria implements Action {
   public type = ActionTypes.SAVE_SDA_SEARCH_CRITERIA;
-  constructor(public payload: models.ISdaSearchCriteria) { }
+  constructor(public payload: SdaSearchCriteria) { }
 }
 export class LoadSdasCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDAS_COMPLETE;

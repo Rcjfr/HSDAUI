@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { SearchBaseFormComponent } from '../search-base-form.component';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 import * as moment from 'moment';

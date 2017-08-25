@@ -1,9 +1,9 @@
 ﻿import { ActionReducer, Action } from '@ngrx/store';
 import { IAlert, ISdaListView, ISdaListResult } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
+import { SdaSearchCriteria } from '../models';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { sdaListResultFactory } from './models/sda-list-result';
-import { searchCriteriaFactory } from './models/search-criteria';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 import * as selectedAlertActions from '../actions/selected-alert';
@@ -19,7 +19,7 @@ export interface State {
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
   sdaListResult: ISdaListResult
-  searchCriteria: any
+  searchCriteria: SdaSearchCriteria
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -31,8 +31,8 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   sda: sdaFactory(),
   noseNumbers: <List<string>>List.of(),
   aircraftInfo: aircraftInfoFactory(),
-  sdaListResult: sdaListResultFactory(),
-  searchCriteria: searchCriteriaFactory()
+  sdaListResult: sdaListResultFactory(),    // TODO - convert to record
+  searchCriteria: new SdaSearchCriteria()
 });
 
 function makeInitialState() {
@@ -59,7 +59,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
       case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
       {
-        return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
+        return state.merge({ loading: false, searchCriteria: action.payload });
       }
       case selectedAlertActions.ActionTypes.LOAD_SDAS:
       {

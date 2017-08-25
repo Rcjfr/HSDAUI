@@ -1,24 +1,27 @@
-﻿<div class="row">
-  <div class="col-md-6">
-    <aac-field-container label="Aircraft #:">
-      <input type="text" tabindex="12">
-    </aac-field-container>
+﻿<form novalidate [formGroup]="aircraftForm">
+
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="Aircraft #:">
+        <input type="text" tabindex='12' formControlName="aircraftNo">
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Aircraft Manufacturer:">
+        <input type="text" tabindex='13' formControlName="manufacturer">
+      </aac-field-container>
+    </div>
   </div>
-  <div class="col-md-6">
-    <aac-field-container label="Aircraft Manufacturer:">
-      <input type="text" maxlength="50" tabindex="13">
-    </aac-field-container>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="Aircraft Model/Series:">
+        <input type="text" tabindex='14' formControlName="model">
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Serial #:">
+        <input type="text" tabindex='15' formControlName="serialNo">
+      </aac-field-container>
+    </div>
   </div>
-</div> 
-<div class="row">
-  <div class="col-md-6">
-    <aac-field-container label="Aircraft Model/Series:">
-      <input type="text" maxlength="50" tabindex="14">
-    </aac-field-container>
-  </div>
-  <div class="col-md-6">
-    <aac-field-container label="Serial #:">
-      <input type="text" maxlength="50" tabindex="15">
-    </aac-field-container>
-  </div>
-</div>
+</form>

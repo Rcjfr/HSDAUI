@@ -18,14 +18,14 @@
         Search by SDA Form
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-sda-form [model]="models.searchBySDA" (isValid)="isValid[1] = $event"></aa-search-by-sda-form>
+      <aa-search-by-sda-form (update)="searchBySDA$.next($event)"></aa-search-by-sda-form>
     </accordion-group>
     <accordion-group #aircraftGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Aircraft
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-aircraft></aa-search-by-aircraft>
+      <aa-search-by-aircraft (update)="searchByAircraft$.next($event)"></aa-search-by-aircraft>
     </accordion-group>
     <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
       <div accordion-heading>

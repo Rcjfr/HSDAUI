@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -15,7 +15,9 @@ import { SearchBaseFormComponent } from '../search-base-form.component';
   templateUrl: './search-by-sda-form.component.html',
   styleUrls: ['./search-by-sda-form.component.less']
 })
-export class SearchBySdaFormComponent extends SearchBaseFormComponent implements OnInit, OnDestroy {
+export class SearchBySdaFormComponent implements OnInit, OnDestroy {
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
   station: string;
@@ -27,20 +29,20 @@ export class SearchBySdaFormComponent extends SearchBaseFormComponent implements
   pipe = new FilterByPipe();
   ataSubscription: Subscription;
 
-  constructor(private formBuilder: FormBuilder, private appStateService: AppStateService) {
-    super(formBuilder.group({
-      'id': [undefined],
-      'station': [undefined],
-      'alertCode': [undefined],
-      'sdrNumber': [undefined],
-      'department': [undefined],
-      'ataCode1': [undefined],
-      'originator': [undefined],
-      'ataCode2': [undefined],
-      'fleet': [undefined],
-      'checkType': [undefined]
-    }));
-  }
+  sdaForm = new FormGroup({
+    id: new FormControl(),
+    station: new FormControl(),
+    alertCode: new FormControl(),
+    sdrNumber: new FormControl(),
+    department: new FormControl(),
+    ataCode1: new FormControl(),
+    ataCode2: new FormControl(),
+    originator: new FormControl(),
+    fleet: new FormControl(),
+    checkType: new FormControl()
+  });
+
+  constructor(private formBuilder: FormBuilder, private appStateService: AppStateService) { }
 
   ngOnInit() {
     this.alertCodes$ = this.appStateService.getAlertCodes();
@@ -49,11 +51,13 @@ export class SearchBySdaFormComponent extends SearchBaseFormComponent implements
       .subscribe(data => this.ATACodes = data);
     this.departments$ = this.appStateService.getDepartments();
     this.stations$ = Observable.create((observer: Observer<string>) => {
-      observer.next(this.station);
+      observer.next(this.sdaForm.get('station').value);
     })
       .distinctUntilChanged()
       .switchMap(token => this.appStateService.getStations(token));
     this.checkTypes$ = this.appStateService.getCheckTypes();
+
+    this.sdaForm.valueChanges.subscribe(this.update);
   }
 
   ngOnDestroy(): void {
