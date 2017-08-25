@@ -13,11 +13,11 @@ import { DialogService } from 'ng2-bootstrap-modal';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
   models: {
-    SearchByDateRange: {
+    searchByDateRange: {
       dateFrom: any;
       dateThrough: any;
     };
-    SearchBySDA: {
+    searchBySDA: {
       id: any;
       station: any;
       alertCode: any;
@@ -29,7 +29,7 @@ export class AlertsSearchComponent implements OnInit {
       fleet: any;
       checkType: any;
     };
-    PageData: any;
+    pageData: any;
   };
 
   //Each element represents one section of the form and whether or not it has at least one value entered
@@ -37,12 +37,12 @@ export class AlertsSearchComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
     this.models = {
-      SearchByDateRange: { dateFrom: undefined, dateThrough: undefined },
-      SearchBySDA: {
+      searchByDateRange: { dateFrom: undefined, dateThrough: undefined },
+      searchBySDA: {
         id: undefined, station: undefined, alertCode: undefined, sdrNumber: undefined, department: undefined,
         ataCode1: undefined, originator: undefined, ataCode2: undefined, fleet: undefined, checkType: undefined
       },
-      PageData: undefined
+      pageData: undefined
     };
   }
 
