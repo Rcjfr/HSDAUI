@@ -14,58 +14,23 @@ import { Subject, Observable } from 'rxjs/Rx';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
+  searchByDateRange$: Subject<any> = new Subject();
   searchBySDA$: Subject<any> = new Subject();
   searchByAircraft$: Subject<any> = new Subject();
   criteria;
 
-  models: {
-    searchByDateRange: {
-      dateFrom: any;
-      dateThrough: any;
-    };
-    searchBySDA: {
-      id: any;
-      station: any;
-      alertCode: any;
-      sdrNumber: any;
-      department: any;
-      ataCode1: any;
-      originator: any;
-      ataCode2: any;
-      fleet: any;
-      checkType: any;
-    };
-    searchByAircraft: {
-      aircraftNo: string;
-      manufacturer: string;
-      model: string;
-      serialNo: string;
-    };
-    pageData: any;
-  };
-
-  //Each element represents one section of the form and whether or not it has at least one value entered
-  isValid = [false, false, false];
-
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
-    this.models = {
-      searchByDateRange: { dateFrom: undefined, dateThrough: undefined },
-      searchBySDA: {
-        id: undefined, station: undefined, alertCode: undefined, sdrNumber: undefined, department: undefined,
-        ataCode1: undefined, originator: undefined, ataCode2: undefined, fleet: undefined, checkType: undefined
-      },
-      searchByAircraft: { aircraftNo: undefined, manufacturer: undefined, model: undefined, serialNo: undefined },
-      pageData: undefined
-    };
-  }
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
 
   ngOnInit() {
-    Observable.combineLatest(this.searchBySDA$.startWith(undefined), this.searchByAircraft$.startWith(undefined), this.combineCriteria).subscribe(s => this.criteria = s );
-
+    Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
+          this.searchBySDA$.startWith(undefined),
+          this.searchByAircraft$.startWith(undefined),
+          this.combineCriteria)
+          .subscribe(s => this.criteria = s );
   }
 
-  combineCriteria(searchBySDA, searchByAircraft) {
-    return { searchBySDA, searchByAircraft }
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft) {
+    return { searchByDateRange, searchBySDA, searchByAircraft }
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -74,11 +39,12 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
-  isFalse(element, index, array) {
-    return element === false;
-  }
+  // isFalse(element, index, array) {
+  //   return element === false;
+  // }
 
   searchAlerts() {
+    //TODO - confirm that at least one criteria has data before submitting
     // const formIsInvalid = this.isValid.every(this.isFalse);
 
     // if (!formIsInvalid) {

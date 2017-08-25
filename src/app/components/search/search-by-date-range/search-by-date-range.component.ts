@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { SearchBaseFormComponent } from '../search-base-form.component';
-import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 import * as moment from 'moment';
 
 @Component({
@@ -9,28 +8,25 @@ import * as moment from 'moment';
   templateUrl: './search-by-date-range.component.html',
   styleUrls: ['./search-by-date-range.component.less']
 })
-export class SearchByDateRangeComponent extends SearchBaseFormComponent {
+export class SearchByDateRangeComponent implements OnInit {
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private formBuilder: FormBuilder) {
-    super(formBuilder.group({
-      'dateFrom': [undefined],
-      'dateThrough': [undefined]
-    }));
-  }
+  dateRangeForm = new FormGroup({
+    dateFrom: new FormControl(),
+    dateThrough: new FormControl()
+  });
 
-  onDateFromChanged(event) {
-    if (event) {
-      this.model.dateFrom = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
-    } else {
-      this.model.dateFrom = '';
-    }
-  }
+  constructor(private formBuilder: FormBuilder) { }
 
-  onDateThroughChanged(event) {
-    if (event) {
-      this.model.dateThrough = moment(event).format('YYYY-MM-DD') + 'T00:00:00';
-    } else {
-      this.model.dateThrough = '';
-    }
+  ngOnInit() {
+    this.dateRangeForm.valueChanges.subscribe(values => {
+      if (values && values.dateFrom) {
+        values.dateFrom = moment(values.dateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (values && values.dateThrough) {
+        values.dateThrough = moment(values.dateThrough).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      this.update.emit(values);
+    });
   }
 }
