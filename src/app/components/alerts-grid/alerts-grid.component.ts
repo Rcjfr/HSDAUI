@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ISdaListResult } from './../../common/models';
+import { ISdaListResult, ISdaListView } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService } from '../../common/services';
 import { Observable } from 'rxjs/Observable';
@@ -31,7 +31,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   showTable = false;
 
   //Default paging options
-  defaultPageSize = 4;
+  defaultPageSize = 20;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
 

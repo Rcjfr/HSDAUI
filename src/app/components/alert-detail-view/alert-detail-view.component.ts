@@ -85,6 +85,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.sdaForm.markAsPristine();
     this.sdaForm.markAsUntouched();
     this.displayMessage$.next({});
+    window.scrollTo(0, 0);
   }
 
   flatten(data): any {

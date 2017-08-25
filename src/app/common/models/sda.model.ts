@@ -6,7 +6,7 @@ export interface ISda {
   id?: number;
   historicId?: string;
   workflowInstanceId?: string;
-  versionID?: string;
+  versionID?: number;
   version?: number;
   lastModifiedBy?: string;
   lastModifiedOn?: Date;
