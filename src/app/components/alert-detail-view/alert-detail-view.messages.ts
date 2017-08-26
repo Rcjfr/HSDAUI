@@ -184,7 +184,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     }
   },
   cpcpSectionGroup: {
-    iscpcpRelatedEvent: {
+    isCPCPRelatedEvent: {
       required: 'CPCP  is required.'
     },
     isWideSpreadCorrosion: {

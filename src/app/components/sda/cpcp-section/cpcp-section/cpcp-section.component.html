@@ -2,16 +2,16 @@
 
   <div class="row">
     <div class="col-md-6">
-      <div class="row form-group" [class.has-error]="displayMessage.iscpcpRelatedEvent">
+      <div class="row form-group" [class.has-error]="displayMessage.isCPCPRelatedEvent">
         <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="36" name="iscpcpRelatedEvent" [required]="!isSDAOpen()"  formControlName="iscpcpRelatedEvent"/>
+            <input type="radio" [value]="true" tabindex="36" name="isCPCPRelatedEvent" [required]="!isSDAOpen()"  formControlName="isCPCPRelatedEvent"/>
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="36" name="iscpcpRelatedEvent" [required]="!isSDAOpen()" formControlName="iscpcpRelatedEvent" />
+            <input type="radio" [value]="false" tabindex="36" name="isCPCPRelatedEvent" [required]="!isSDAOpen()" formControlName="isCPCPRelatedEvent" />
           </aac-radio-container>
-          <div *ngIf="displayMessage.iscpcpRelatedEvent" class="error">{{displayMessage.iscpcpRelatedEvent}}</div>
+          <div *ngIf="displayMessage.isCPCPRelatedEvent" class="error">{{displayMessage.isCPCPRelatedEvent}}</div>
         </div>
       </div>
     </div>

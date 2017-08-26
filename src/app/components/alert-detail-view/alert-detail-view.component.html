@@ -55,23 +55,23 @@
 
         <span *ngIf="authService.isQCInspector() | async">
           <!--QC Analyst Actions-->
-          <button type="button" class="btn btn-default btn-lg" *ngIf="sda.status == Status.Open || sda.status == Status.Rejected" tabindex="114" (click)="onReset.emit()">Reset</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && sda.status == Status.Open" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status == Status.Open || sda.status == Status.Rejected" (click)="saveAlert(Status.Complete)" tabindex="114">Complete SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status == Status.Open || sda.status == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+          <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="114" (click)="onReset.emit()">Reset</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && currentStatus == Status.Open" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(Status.Complete)" tabindex="114">Complete SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
         </span>
         <span *ngIf="authService.isQCManager() | async">
           <!--QC Manager/Supervisor Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status == Status.Open || sda.status == Status.Rejected || sda.status == Status.Complete" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status == Status.Complete" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
         </span>
         <span *ngIf="authService.isReliabilityAnalyst() | async">
           <!--Reliability Analyst Actions-->
           <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
-          <button type="submit" class="btn btn-danger btn-lg" *ngIf="sda.status == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
-          <button type="submit" class="btn btn-success btn-lg" *ngIf="sda.status == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.status !== Status.Deleted" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
+          <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus !== Status.Deleted" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
         </span>
         <span *ngIf="false">
           <!--TODO-->

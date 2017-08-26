@@ -21,7 +21,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
     this.formGroup = this.fb.group({
-      iscpcpRelatedEvent: ['', []],
+      isCPCPRelatedEvent: ['', []],
       isWideSpreadCorrosion: ['', []],
       corrosionLevel: ['', []],
       isPreviouslyBlended: ['', []],
@@ -94,6 +94,6 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     return this.isCPCPRelatedEvent() && !this.isSDAOpen(); //Only required when trying to complete the sda and a cpcp related event
   }
   isCPCPRelatedEvent(): boolean {
-    return this.formGroup.get('iscpcpRelatedEvent').value === true;
+    return this.formGroup.get('isCPCPRelatedEvent').value === true;
   }
 }

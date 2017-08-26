@@ -14,7 +14,7 @@ export class SdaService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  saveSda(sda: models.ISda): Observable<number> {
+  saveSda(sda: models.ISda): Observable<models.ISda> {
     return this.authService.requestOptions().flatMap(options => {
       if (sda.id) {
         return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, options)

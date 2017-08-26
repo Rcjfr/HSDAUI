@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Action } from '@ngrx/store';
@@ -45,10 +45,10 @@ export class AlertEffects {
     .map((action: selectedAlert.SaveSdaAction) => action.payload)
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
-        .map((sdaId: number) => {
-          this.appStateService.notifySavedSda({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
+        .map((updatedSda:models.ISda) => {
+          this.appStateService.notifySavedSda({ sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });
 
-          return new selectedAlert.SaveSdaCompleteAction({ sdaId: sdaId, newSda: !sda.id, Timestamp: new Date() });
+          return new selectedAlert.SaveSdaCompleteAction({ sda: updatedSda, sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
           return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));

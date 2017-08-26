@@ -88,7 +88,7 @@ export class CustomValidators {
       const parent = c.parent;
       let iscpcpRelatedEvent;
       if (parent !== undefined) {
-        iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
+        iscpcpRelatedEvent = c.parent.get('isCPCPRelatedEvent');
       }
 
       const damageOtherControl = c.get('damageOther');
