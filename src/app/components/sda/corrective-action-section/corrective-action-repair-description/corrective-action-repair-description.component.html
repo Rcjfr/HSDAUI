@@ -22,7 +22,7 @@
       </aac-field-container>
     </div>
     <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value">
-      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [errorMessages]="displayMessage"></aa-corrective-action-chap>
+      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [newSdaStus]="newSdaStus" [errorMessages]="displayMessage"></aa-corrective-action-chap>
 
     </div>
   </div>

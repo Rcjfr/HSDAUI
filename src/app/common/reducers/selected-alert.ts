@@ -1,5 +1,5 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import { IAlert, ISdaListView } from '../models';
+import { IAlert, ISdaListView, Status } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
@@ -14,6 +14,7 @@ export interface State {
   currentSdaId: number;
   loadNewSdaCounter: number,
   sda: SdaRecord;
+  newSdaStatus: Status;
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
   sdaList: List<ISdaListView>;
@@ -27,6 +28,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   loadNewSdaCounter: 0,
   currentSdaId: 0,
   sda: sdaFactory(),
+  newSdaStatus:Status.Open,
   noseNumbers: List<string>(),
   aircraftInfo: aircraftInfoFactory(),
   sdaList: <List<ISdaListView>>List.of(),
@@ -52,7 +54,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdaCompleteAction;
 
-        return state.merge({ loading: false, currentSdaId: act.payload.id, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
+        return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status,  sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
@@ -75,13 +77,19 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.SaveSdaCompleteAction;
 
-        return state.merge({ loading: false, sda: sdaFactory(act.payload.sda), savedState: SavedStateFactory(act.payload), currentSdaId: act.payload.sdaId });
+        return state.merge({ loading: false, sda: sdaFactory(act.payload.sda), newSdaStatus: act.payload.sda.status, savedState: SavedStateFactory(act.payload), currentSdaId: act.payload.sdaId });
       }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadNoseNumbersCompleteAction;
 
         return state.merge({ loading: false, noseNumbers: List.of(...act.payload) });
+      }
+    case selectedAlertActions.ActionTypes.SET_SDA_NEW_STATUS:
+      {
+        const act = action as selectedAlertActions.SetSdaNewStatusAction;
+
+        return state.merge({ newSdaStatus: act.payload });
       }
     default: {
       return state;
@@ -98,3 +106,5 @@ export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
 export const getCurrentSdaId = (state: State) => state.currentSdaId;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;
+export const getNewSdaStatus = (state: State) => state.newSdaStatus;
+

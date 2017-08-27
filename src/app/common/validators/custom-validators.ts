@@ -72,69 +72,67 @@ export class CustomValidators {
 
     return { 'aleasttwo': true };
   };
-  static validateCauseOfDamageGroupFields = (status: Status) => {
-    return (c: AbstractControl): { [key: string]: boolean } | null => {
-      //const iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
+  static validateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
+    //const iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
+    const statusControl = c.get('status');
+    const environmentControl = c.get('environment');
+    const galleySpillControl = c.get('galleySpill');
+    const blockedDrainControl = c.get('blockedDrain');
+    const chemicalSpillControl = c.get('chemicalSpill');
+    const wetInsulationBlanketControl = c.get('wetInsulationBlanket');
+    const missingFloorBoardTapeControl = c.get('missingFloorBoardTape');
+    const hardwareNotInstalledControl = c.get('hardwareNotInstalled');
+    const poorSealingPracticesControl = c.get('poorSealingPractices');
+    const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
+    const parent = c.parent;
+    let iscpcpRelatedEvent;
+    if (parent !== undefined) {
+      iscpcpRelatedEvent = c.parent.get('isCPCPRelatedEvent');
+    }
 
-      const environmentControl = c.get('environment');
-      const galleySpillControl = c.get('galleySpill');
-      const blockedDrainControl = c.get('blockedDrain');
-      const chemicalSpillControl = c.get('chemicalSpill');
-      const wetInsulationBlanketControl = c.get('wetInsulationBlanket');
-      const missingFloorBoardTapeControl = c.get('missingFloorBoardTape');
-      const hardwareNotInstalledControl = c.get('hardwareNotInstalled');
-      const poorSealingPracticesControl = c.get('poorSealingPractices');
-      const missingCorrosionInhibitorControl = c.get('missingCorrosionInhibitor');
-      const parent = c.parent;
-      let iscpcpRelatedEvent;
-      if (parent !== undefined) {
-        iscpcpRelatedEvent = c.parent.get('isCPCPRelatedEvent');
-      }
-
-      const damageOtherControl = c.get('damageOther');
-      let filledContolCount: number;
-      // var damageOtherTouched = damageOtherControl.touched;
-      filledContolCount = 0;
-      if (environmentControl.value) {
-        filledContolCount++; damageOtherControl.markAsUntouched();
-      }
-      if (galleySpillControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (blockedDrainControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (chemicalSpillControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (wetInsulationBlanketControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (missingFloorBoardTapeControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (hardwareNotInstalledControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (poorSealingPracticesControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (missingCorrosionInhibitorControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
-      if (damageOtherControl.value) { filledContolCount++; }
+    const damageOtherControl = c.get('damageOther');
+    let filledContolCount: number;
+    // var damageOtherTouched = damageOtherControl.touched;
+    filledContolCount = 0;
+    if (environmentControl.value) {
+      filledContolCount++; damageOtherControl.markAsUntouched();
+    }
+    if (galleySpillControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (blockedDrainControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (chemicalSpillControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (wetInsulationBlanketControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (missingFloorBoardTapeControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (hardwareNotInstalledControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (poorSealingPracticesControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (missingCorrosionInhibitorControl.value) { filledContolCount++; damageOtherControl.markAsUntouched(); }
+    if (damageOtherControl.value) { filledContolCount++; }
 
 
-      if (parent === undefined) {
-        return null;
-      }
-
-      if (iscpcpRelatedEvent.value !== true || status === Status.Open) { //if SDA is open or not cpcp event, no validation required
-        return null;
-      }
-
-      if ((damageOtherControl.touched && damageOtherControl.value === false)) {
-        return { 'atleastone': true };
-      }
-
-      if ((filledContolCount >= 1 && iscpcpRelatedEvent.value === true) || (filledContolCount >= 1 && iscpcpRelatedEvent.value === false)) {
-        return null;
-      }
-
-      if (filledContolCount === 0 && damageOtherControl.value !== false && damageOtherControl.value === '') {
-        return { 'atleastone': true };
-      }
-
-      if (filledContolCount === 0 && iscpcpRelatedEvent.value === true) {
-        return { 'atleastone': true };
-      }
-
+    if (parent === undefined) {
       return null;
     }
+
+    if (iscpcpRelatedEvent.value !== true || <Status>statusControl.value === Status.Open) { //if SDA is open or not cpcp event, no validation required
+      return null;
+    }
+
+    if ((damageOtherControl.touched && damageOtherControl.value === false)) {
+      return { 'atleastone': true };
+    }
+
+    if ((filledContolCount >= 1 && iscpcpRelatedEvent.value === true) || (filledContolCount >= 1 && iscpcpRelatedEvent.value === false)) {
+      return null;
+    }
+
+    if (filledContolCount === 0 && damageOtherControl.value !== false && damageOtherControl.value === '') {
+      return { 'atleastone': true };
+    }
+
+    if (filledContolCount === 0 && iscpcpRelatedEvent.value === true) {
+      return { 'atleastone': true };
+    }
+
+    return null;
   };
 
   //static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
@@ -164,18 +162,17 @@ export class CustomValidators {
 
   //};
 
-  static validateCorrectiveActionRepairFields = (status: Status) => {
-    return (c: AbstractControl): { [key: string]: boolean } | null => {
-
+  static validateCorrectiveActionRepairFields (c: AbstractControl): { [key: string]: boolean } | null {
+      const statusControl = c.get('status');
       const repairDocumentControl = c.get('repairDocumentType');
       const engineeringAuthorizationControl = c.get('engineeringAuthorization');
       if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
         return null;
       }
-      if (status === Status.Open) {
+      if (<Status>statusControl.value === Status.Complete) {
         return { 'atleastone': true };
       }
       return null;
     }
-  };
+  
 }

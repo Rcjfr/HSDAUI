@@ -1,4 +1,4 @@
-﻿<div [formGroup]="causeOfDamageGroup">
+<div [formGroup]="causeOfDamageGroup">
   
   <h4>Cause of Damage:</h4>
   <div class="row form-group">
@@ -64,7 +64,7 @@
         <input type="checkbox" tabindex="52" formControlName="damageOther" />
       </aac-checkbox-container>
 
-
+      
       <div>
         <span *ngIf="displayMessage.message &&
                   (causeOfDamageGroup.get( 'damageOther').touched ||

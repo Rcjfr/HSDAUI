@@ -78,6 +78,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
         this.appStateService.loadFleetCheckTypes(newSda.generalSection.fleet);
       }
       this.formGroup.patchValue(newSda.generalSection);
+      this.checkSDAFormStatus();
     }
   }
   noseNumberOnSelect(e: TypeaheadMatch) {

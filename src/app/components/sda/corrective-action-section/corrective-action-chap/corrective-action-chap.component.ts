@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
@@ -23,6 +23,12 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionChapFormGroup.patchValue(newSda.correctiveActionSection || {});
+      if (this.checkSDAFormStatus()) {
+        this.correctiveActionChapFormGroup.disable();
+      }
+      else {
+        this.correctiveActionChapFormGroup.enable();
+      }
     }
   }
   ngOnDestroy(): void {

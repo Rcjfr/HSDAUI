@@ -8,6 +8,7 @@ import * as models from '../../common/models';
 })
 export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() sda: models.ISda;
+  @Input() newSdaStus: models.Status;
   @Input() parent: FormGroup;
   formGroup: FormGroup;
   protected subscriptions: Subscription[] = [];
@@ -43,16 +44,18 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   public isSDAOpen(): boolean {
-    return this.sda.status === models.Status.Open ||
-      this.sda.status === models.Status.Rejected ||
-      this.sda.status === models.Status.Deleted;
+    return this.newSdaStus === models.Status.Open ||
+      this.newSdaStus === models.Status.Rejected ||
+      this.newSdaStus === models.Status.Deleted;
   }
 
   public checkSDAFormStatus(): boolean {
+    const group = this.parent.controls[this.formGroupName];
     if (!(this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
-      this.parent.controls[this.formGroupName].disable();
+      group && group.disable();
       return true;
     }
+    group && group.enable();
     return false;
   }
 }

@@ -40,20 +40,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   }
 
   ngAfterViewInit(): void {
-    if (this.checkSDAFormStatus()) {
-      this.disableCreateDate = true;
-    }
-    this.generalSectionFormGroup.get('sdrNumber').disable();
-    this.authService.isReliabilityAnalyst().take(1).subscribe(isReliabilityAnalyst => {
-      if (isReliabilityAnalyst && this.sda.generalSection.sdrNumber === '') {
-        this.generalSectionFormGroup.get('sdrNumber').enable();
-      }
-    });
-    this.authService.auditDisplayName().take(1).subscribe(u => {
-      if (!this.sda.id) {
-        this.generalSectionFormGroup.patchValue({originator:u});
-      }
-    });
+    console.log('sdaid:', this.sda.id);
+
   }
 
   ngOnInit() {
@@ -80,7 +68,29 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
-      
+      this.generalSectionFormGroup.patchValue({ createDate: new Date(newSda.generalSection.createDate)});
+
+      if (this.checkSDAFormStatus()) {
+        this.generalSectionFormGroup.disable();
+        this.disableCreateDate = true;
+      }
+      else {
+        this.generalSectionFormGroup.enable();
+        this.disableCreateDate = false;
+      }
+      this.generalSectionFormGroup.get('sdaId').disable();
+      this.generalSectionFormGroup.get('sdrNumber').disable();
+      this.authService.isReliabilityAnalyst().take(1).subscribe(isReliabilityAnalyst => {
+        if (isReliabilityAnalyst && this.sda.generalSection.sdrNumber === '') {
+          this.generalSectionFormGroup.get('sdrNumber').enable();
+        }
+      });
+
+      if (!this.sda.id) {
+        this.authService.auditDisplayName().take(1).subscribe(u => {
+          this.generalSectionFormGroup.patchValue({ originator: u });
+        });
+      }
 
     }
   }

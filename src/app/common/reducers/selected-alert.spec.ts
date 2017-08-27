@@ -1,9 +1,9 @@
-﻿import * as fromSelectedAlert from './selected-alert';
+import * as fromSelectedAlert from './selected-alert';
 import * as selectedAlert from '../actions/selected-alert';
 import { aircraftInfoFactory } from './models/aircraft-info';
 import { sdaFactory } from './models/sda';
 import { List } from 'immutable';
-import { ISda, ISdaListView } from '../models';
+import { ISda, ISdaListView, Status } from '../models';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 
 describe('selectedAlertReducer', () => {
@@ -13,6 +13,7 @@ describe('selectedAlertReducer', () => {
     currentSdaId: 0,
     loadNewSdaCounter: 0,
     sda: sdaFactory(),
+    newSdaStatus: Status.Open,
     noseNumbers: <List<string>>List.of(),
     aircraftInfo: aircraftInfoFactory(),
     sdaList: <List<ISdaListView>>List.of(),

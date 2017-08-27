@@ -33,7 +33,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   }
 
   ngAfterViewInit(): void {
-    this.checkSDAFormStatus();
+    
   }
 
   ngOnInit() {
@@ -50,6 +50,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.cpcpSection || {});
+      this.checkSDAFormStatus();
     }
   }
   setCorrosionTypeFields(corrosionType: string): void {

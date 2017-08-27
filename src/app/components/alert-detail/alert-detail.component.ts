@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewContainerRef, OnDestroy, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnDestroy, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -81,13 +81,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.currentSdaId = 0;
       }
       this.alertDetailView.clearForm();
+      this.appStateService.loadSda(this.currentSdaId);
     });
-
-    this.route.data.subscribe(data => {
-      this.sda$ = Observable.of(data['sda']);
-      this.alertDetailView.clearForm();
-      //this.appStateService.loadSda(this.currentSdaId);
-    });
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS());
   }
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());

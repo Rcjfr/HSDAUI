@@ -41,11 +41,13 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
       this.defectLocationSectionFormGroup.patchValue(newSda.defectLocationSection);
       this.defectLocationSectionFormGroup.patchValue({ damageType: newSda.defectLocationSection.damageType || '' });
       this.defectLocationSectionFormGroup.patchValue({ detectionMethod: newSda.defectLocationSection.detectionMethod || '' });
+
+      this.checkSDAFormStatus();
     }
   }
 
   ngAfterViewInit(): void {
-    this.checkSDAFormStatus();
+    
   }
 
   ngOnInit() {

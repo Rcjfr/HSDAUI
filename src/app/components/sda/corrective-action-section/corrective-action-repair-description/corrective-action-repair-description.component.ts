@@ -24,6 +24,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
+      status: ['', []],
       repairDescriptionType: ['', []], //Validators.required
       repairDocumentType: ['', []],
       chapFigRepairText: ['', [Validators.maxLength(30)]],
@@ -31,12 +32,14 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]
-    });
+    },
+      {
+        validator: CustomValidators.validateCorrectiveActionRepairFields
+      });
   }
   ngOnInit() {
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
     this.repairDocuments$ = this.appStateService.getRepairDocuments();
-    this.correctiveActionRepairDescriptionFormGroup.validator = CustomValidators.validateCorrectiveActionRepairFields(this.sda.status);
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))
@@ -52,6 +55,12 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.correctiveActionRepairDescriptionFormGroup.patchValue(data);
       this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDescriptionType: data.repairDescriptionType || '' });
       this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDocumentType: data.repairDocumentType || '' });
+      if (this.checkSDAFormStatus()) {
+        this.correctiveActionRepairDescriptionFormGroup.disable();
+      }
+      else {
+        this.correctiveActionRepairDescriptionFormGroup.enable();
+      }
     }
   }
   ngOnDestroy() {

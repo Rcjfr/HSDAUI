@@ -22,6 +22,12 @@ export class DefectivePartDescriptionComponent extends BaseFormComponent impleme
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.defectivePartDescriptionGroup.patchValue(newSda.correctiveActionSection || {});
+      if (this.checkSDAFormStatus()) {
+        this.defectivePartDescriptionGroup.disable();
+      }
+      else {
+        this.defectivePartDescriptionGroup.enable();
+      }
     }
   }
   ngOnInit() {

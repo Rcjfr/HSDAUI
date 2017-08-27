@@ -1,4 +1,4 @@
-﻿import { ActionReducer } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
 import { compose } from '@ngrx/core/compose';
 import { combineReducers, Action } from '@ngrx/store';
 import * as fromSelectedAlert from './selected-alert';
@@ -35,6 +35,7 @@ export const getSelectedAlertSavedState = compose(fromSelectedAlert.getSavedStat
 export const getLoadNewSdaState = compose(fromSelectedAlert.getLoadNewSdaState, getSelectedAlertState);
 export const getNoseNumbers = compose(fromSelectedAlert.getNoseNumbers, getSelectedAlertState);
 export const getCurrentSdaId = compose(fromSelectedAlert.getCurrentSdaId, getSelectedAlertState);
+export const getNewSdaStatus = compose(fromSelectedAlert.getNewSdaStatus, getSelectedAlertState);
 
 export const getLookupDataLoading = compose(fromLookupData.getLoading, getLookupDataState);
 export const getAlertCodes = compose(fromLookupData.getAlertCodes, getLookupDataState);

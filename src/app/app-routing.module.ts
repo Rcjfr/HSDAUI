@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'alerts/:id', component: AlertDetailComponent,
-    resolve: { sda: SdaResolverService },
+    //resolve: { sda: SdaResolverService },
     canDeactivate: [PendingChangesGuard],
     children: []
   },

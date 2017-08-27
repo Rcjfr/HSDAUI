@@ -14,7 +14,7 @@
 
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('repairType').value ==3">
     <aa-corrective-action-repair-description [parent]="correctiveActionOptionFormGroup"
-                                             [sda]="sda"
+                                             [sda]="sda" [newSdaStus]="newSdaStus"
                                              [errorMessages]="displayMessage">
     </aa-corrective-action-repair-description>
   </div>

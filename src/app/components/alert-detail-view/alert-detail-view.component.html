@@ -5,11 +5,13 @@
     <div class="panel-heading">General Information</div>
     <aa-general-section-form [parent]="sdaForm"
                              [sda]="sda"
+                             [newSdaStus]="newSdaStus$ | async"
                              [errorMessages]="displayMessage$ | async"></aa-general-section-form>
 
     <div class="panel-heading">Description and Location of Defects or Damage</div>
     <aa-defect-location-section-form [parent]="sdaForm"
                                      [sda]="sda"
+                                     [newSdaStus]="newSdaStus$ | async"
                                      [errorMessages]="displayMessage$ | async">
     </aa-defect-location-section-form>
 
@@ -17,12 +19,14 @@
 
     <aa-cpcp-section-form [parent]="sdaForm"
                           [sda]="sda"
+                          [newSdaStus]="newSdaStus$ | async"
                           [errorMessages]="displayMessage$ | async">
     </aa-cpcp-section-form>
 
     <div class="panel-heading">Corrective Action</div>
     <aa-corrective-action-form [parent]="sdaForm"
                                [sda]="sda"
+                               [newSdaStus]="newSdaStus$ | async"
                                [errorMessages]="displayMessage$ | async">
     </aa-corrective-action-form>
     <!--

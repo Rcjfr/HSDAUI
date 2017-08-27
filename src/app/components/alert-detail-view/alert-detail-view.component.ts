@@ -1,6 +1,6 @@
 import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy
+  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 import {
   FormBuilder,
@@ -28,17 +28,19 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   styleUrls: ['./alert-detail-view.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy {
+export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   getCurrentSdaIdSubscription: Subscription;
   @Input() sda: ISda;
   @Input() loading: boolean;
   @Output() onReset = new EventEmitter();
+  currentSdaId: number;
   lastModifiedBy: string;
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
   statusUpdatedOn: Date = new Date();
   public Status = Status;// to make it available in template
   public currentStatus: number;
+  public newSdaStus$: Observable<Status>;
   @ViewChild('statusModal') public statusModal: ModalDirective;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -65,7 +67,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
-  
+  ngOnChanges(changes: SimpleChanges) {
+    this.currentSdaId = this.sda.id;
+    this.currentStatus = this.sda.status;
+  }
   ngAfterContentInit(): void {
     const frm = this.elRef.nativeElement.querySelector('form');
     const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select,textarea'));
@@ -90,7 +95,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngOnInit() {
-    this.currentStatus = this.sda.status;
+    this.newSdaStus$ = this.appStateService.getNewSdaStatus();
     this.authService.auditDisplayName().take(1).subscribe(s => {
       this.lastModifiedBy = s;
       this.statusUpdatedBy = s;
@@ -151,11 +156,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   saveAlert(newStatus: number) {
-    this.sda.status = newStatus;
+    //this.sda.status = newStatus;
     this.sdaForm.patchValue({ status: newStatus });
-
-    setTimeout(() => {
-      this.validateAlertData();
+    this.appStateService.setNewSdaStatus(newStatus);
+    setTimeout(() => { //TODO: need to revisit to see if there is any better way
+      this.validateAlertData(newStatus);
     }, 100);
   }
   saveStatusModal() {
@@ -170,7 +175,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.hideStatusModal();
     this.saveAlertData();
   }
-  validateAlertData() {
+  validateAlertData(newStatus:Status) {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
     this.genericValidator.formSubmitted = true;
@@ -182,27 +187,27 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
       return;
     }
-    if (this.sda.status === Status.Open ||
-      this.sda.status === Status.Closed) { //User can not change UpdatedBy/Date. so no need to show the modal 
+    if (newStatus === Status.Open ||
+      newStatus === Status.Closed) { //User can not change UpdatedBy/Date. so no need to show the modal 
       this.sda.statusUpdatedBy = this.statusUpdatedBy;
       this.sda.statusUpdatedOn = this.statusUpdatedOn;
       this.saveAlertData();
     }
     else {
-      if (this.sda.status === Status.Complete) {
+      if (newStatus === Status.Complete) {
         this.sdaStatusTitle = "Complete SDA" + (this.sda.id ? `(SDA ID:${this.sda.id})` : "");
       }
-      if (this.sda.status === Status.Audited) {
+      if (newStatus === Status.Audited) {
         this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
       }
-      if (this.sda.status === Status.Deleted) {
+      if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
       }
-      if (this.sda.status === Status.Rejected) {
+      if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
 
-      this.sdaStatusForm.patchValue({ status: this.sda.status, completedBy: this.lastModifiedBy, completedOn: new Date() });
+      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date() });
       this.statusModal.show();
     }
   }
@@ -232,6 +237,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         lastModifiedOn: this.lastModifiedOn,
         //statusUpdatedBy: this.statusUpdatedBy,
         //statusUpdatedOn: this.statusUpdatedOn,
+        status:this.sdaForm.get('status').value,
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
         cpcpSection: cpcpSectionData,

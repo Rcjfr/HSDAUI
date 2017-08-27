@@ -17,6 +17,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   constructor(private fb: FormBuilder) {
     super('causeOfDamageGroup');
     this.causeOfDamageGroup = this.fb.group({
+      status: [''],
       environment: ['', []],
       galleySpill: ['', []],
       blockedDrain: ['', []],
@@ -27,11 +28,11 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
       poorSealingPractices: ['', []],
       missingCorrosionInhibitor: ['', []],
       damageOther: ['', []]
-    });
+    }, { validator: CustomValidators.validateCauseOfDamageGroupFields }
+    );
   }
 
   ngOnInit() {
-    this.causeOfDamageGroup.validator = CustomValidators.validateCauseOfDamageGroupFields(this.sda.status);
     this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
   }
 
@@ -52,6 +53,10 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
           damageOther: this.isChecked(newSda.cpcpSection.causesOfDamage, 512),
         });
       }
+      
+    }
+    if (changes.newSdaStus) {
+      this.causeOfDamageGroup.patchValue({ status: changes.newSdaStus.currentValue });
     }
   }
 

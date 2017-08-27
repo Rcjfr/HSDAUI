@@ -1,4 +1,4 @@
-﻿import { Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import * as models from '../models/index';
 
 export const ActionTypes = {
@@ -17,7 +17,8 @@ export const ActionTypes = {
   LOAD_SDA: 'Load SDA',
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
   LOAD_SDA_FAIL: 'Load SDA Fail',
-  LOAD_NEW_SDA: 'Load New SDA'
+  LOAD_NEW_SDA: 'Load New SDA',
+  SET_SDA_NEW_STATUS: 'Set SDA new status'
 
 };
 
@@ -91,6 +92,10 @@ export class LoadNewSdaAction implements Action {
   public payload: any
   constructor() { }
 }
+export class SetSdaNewStatusAction implements Action {
+  public type = ActionTypes.SET_SDA_NEW_STATUS;
+  constructor(public payload: models.Status) { }
+}
 
 export type Actions =
   LoadNoseNumbersAction |
@@ -108,5 +113,6 @@ export type Actions =
   LoadSdaAction |
   LoadSdaCompleteAction |
   LoadSdaFailAction |
-  LoadNewSdaAction;
+  LoadNewSdaAction |
+  SetSdaNewStatusAction;
 

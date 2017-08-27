@@ -34,10 +34,11 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionFormGroup.patchValue(newSda.correctiveActionSection || {});
+      this.checkSDAFormStatus();
     }
   }
   ngAfterViewInit(): void {
-    this.checkSDAFormStatus();
+    
   }
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
