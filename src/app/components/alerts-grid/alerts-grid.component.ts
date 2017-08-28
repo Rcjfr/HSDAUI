@@ -1,42 +1,92 @@
-﻿import { Component, OnInit, Input } from '@angular/core';
-import { ISdaListView } from './../../common/models';
+﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { ISdaListResult, ISdaListView } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
+import { AppStateService } from '../../common/services';
+import { Observable } from 'rxjs/Observable';
+import { List } from 'immutable';
+
+export interface LazyLoadEvent {
+  first?: number;
+  rows?: number;
+  sortField?: string;
+  sortOrder?: number;
+}
 
 @Component({
   selector: 'aa-alerts-grid',
   templateUrl: './alerts-grid.component.html',
   styleUrls: ['./alerts-grid.component.less']
 })
-export class AlertsGridComponent implements OnInit {
-  dtTrigger: Subject<any> = new Subject();
-  public _sdaList: ISdaListView[];
+export class AlertsGridComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
-  //@Input() sdaList: ISdaListView[];
-  @Input()
-  set sdaList(data: ISdaListView[]) {
-    this._sdaList = data;
-    this.dtTrigger.next();
+  sdaListResult$: Observable<ISdaListResult>;
+  searchCriteria$: Observable<ISdaListResult>;
+
+  searchCriteria;
+  sdaListResult: ISdaListResult = {
+    totalRecords: 0,
+    records: List<ISdaListResult>()
+  };
+  showTable = false;
+
+  //Default paging options
+  defaultPageSize = 20;
+  defaultSortColumn = 'createDate';
+  defaultSortOrder = -1;
+
+  skipLoad = false;
+
+  constructor(private appStateService: AppStateService) {}
+
+  ngOnInit() {
+    this.sdaListResult$ = this.appStateService.getSdaListResult();
+    this.searchCriteria$ = this.appStateService.getSearchCriteria();
+
+    this.sdaListResult$.skip(1)
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(results => {
+        this.sdaListResult = results;
+        this.showTable = true;
+      });
+
+    this.searchCriteria$.skip(1)
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(d => {
+        this.skipLoad = true;
+        this.appStateService.loadSdaList(this.getDefaultPageData());
+      });
   }
 
-  get name(): ISdaListView[] { return this._sdaList; }
+  ngOnDestroy() {
+    //from: https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
+  loadPageOfRecords(pageData: LazyLoadEvent) {
+    // PrimeNG will fire this event the first time the table loads. We don't want to fire off a second service call to get results since that was already triggered
+    if (this.skipLoad) {
+      this.skipLoad = false;
+    } else {
+      this.appStateService.loadSdaList(this.getPageData(pageData));
+    }
+  }
 
-  dtOptions: DataTables.Settings = {};
+  getPageData(pageData) {
+    if (!pageData) {
+      return this.getDefaultPageData();
+    }
 
+    return pageData;
+  }
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      searching: false,
-      'paging': true,
-      'ordering': true,
-      'columnDefs': [{
-        'targets': 7,
-        'orderable': false
-      }]
-    };
+  getDefaultPageData() {
+    return {
+      first: 0,
+      rows: this.defaultPageSize,
+      sortField: this.defaultSortColumn,
+      sortOrder: this.defaultSortOrder
+    }
   }
 }

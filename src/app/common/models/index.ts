@@ -20,5 +20,7 @@ export * from './sda.model';
 export * from './sda-list-view.model';
 export * from './saved-state.model';
 export * from './user.model';
+export * from './sda-list-result.model'
+export * from './sda-search-criteria.model'
 export * from './sda-status.model';
 export * from './status';

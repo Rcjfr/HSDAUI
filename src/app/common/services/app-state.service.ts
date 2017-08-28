@@ -95,8 +95,11 @@ export class AppStateService {
   getLoadNewSdaState() {
     return this.loadNewSdaSubject.asObservable();
   }
-  getSdaList() {
-    return this.store.select(fromRoot.getSdaList);
+  getSdaListResult() {
+    return this.store.select(fromRoot.getSdaListResult);
+  }
+   getSearchCriteria() {
+    return this.store.select(fromRoot.getSearchCriteria);
   }
 
   getUser() {
@@ -110,12 +113,14 @@ export class AppStateService {
   notifySavedSda(value: ISavedState) {
     this.savedSdaSubject.next(value);
   }
-
   loadNewSda(): void {
     this.loadNewSdaSubject.next({ load: true });
   }
-  loadSdaList(): void {
-    this.store.dispatch(new selectedAlertActions.LoadSdasAction());
+  loadSdaList(pageData): void {
+    this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
+  }
+  saveSdaSearchCriteria(criteria): void {
+    this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));
   }
   loadSda(sdaId: number): void {
     this.store.dispatch(new selectedAlertActions.LoadSdaAction(sdaId));

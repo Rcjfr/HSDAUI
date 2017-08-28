@@ -1,7 +1,9 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import { IAlert, ISdaListView, Status } from '../models';
+import { IAlert, ISdaListView, ISdaListResult, Status } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
+import { sdaListResultFactory } from './models/sda-list-result';
+import { searchCriteriaFactory } from './models/search-criteria';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 import * as selectedAlertActions from '../actions/selected-alert';
@@ -17,31 +19,32 @@ export interface State {
   newSdaStatus: Status;
   noseNumbers: List<string>;
   aircraftInfo: AircraftInfoRecord;
-  sdaList: List<ISdaListView>;
+  sdaListResult: ISdaListResult
+  searchCriteria: any
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
   savedState: null,
-
   loadNewSdaCounter: 0,
   currentSdaId: 0,
   sda: sdaFactory(),
   newSdaStatus: Status.Open,
   noseNumbers: List<string>(),
   aircraftInfo: aircraftInfoFactory(),
-  sdaList: <List<ISdaListView>>List.of(),
+  sdaListResult: sdaListResultFactory(),
+  searchCriteria: searchCriteriaFactory()
 });
 
 function makeInitialState() {
   return stateFactory();
 }
+
 export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: selectedAlertActions.Actions) => {
   switch (action.type) {
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
     case selectedAlertActions.ActionTypes.SAVE_SDA:
-    case selectedAlertActions.ActionTypes.LOAD_SDAS:
     case selectedAlertActions.ActionTypes.LOAD_SDA:
       {
         return state.merge({ loading: true });
@@ -56,11 +59,19 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
       }
+      case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
+      {
+        return state.merge({ loading: false, searchCriteria: searchCriteriaFactory(action.payload) });
+      }
+      case selectedAlertActions.ActionTypes.LOAD_SDAS:
+      {
+        return state.merge({ loading: true });
+      }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
-        return state.merge({ loading: false, sdaList: List.of(...act.payload) });
+        return state.merge({ loading: false, sdaListResult: sdaListResultFactory(act.payload) });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
@@ -105,12 +116,13 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
 // Selector Functions
 export const getSelectedSda = (state: State) => state.sda;
-export const getSdaList = (state: State) => state.sdaList;
+export const getSdaListResult = (state: State) => state.sdaListResult;
 export const getLoading = (state: State) => state.loading;
 export const getSavedState = (state: State) => state.savedState;
 export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
 export const getCurrentSdaId = (state: State) => state.currentSdaId;
 export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;
+export const getSearchCriteria = (state: State) => state.searchCriteria;
 export const getNewSdaStatus = (state: State) => state.newSdaStatus;
 
