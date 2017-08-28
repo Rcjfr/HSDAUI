@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Date - From:" [attr.for]="fromDate.idDatePicker">
+        <aac-field-container label="SDA Create Date - From:" [attr.for]="fromDate.idDatePicker">
           <datetime [timepicker]="false" #fromDate [tabindex]='1' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
             formControlName="dateFrom"></datetime>
         </aac-field-container>
@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Date - Through:" [attr.for]="toDate.idDatePicker">
+        <aac-field-container label="SDA Create Date - Through:" [attr.for]="toDate.idDatePicker">
           <datetime [timepicker]="false" #toDate [tabindex]='2' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
             formControlName="dateThrough"></datetime>
         </aac-field-container>

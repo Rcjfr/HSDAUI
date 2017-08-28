@@ -8,7 +8,7 @@
   <accordion>
     <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
       <div accordion-heading>
-        Search by Date Range
+        Search by Create Date Range
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
       </div>
       <aa-search-by-date-range (update)="searchByDateRange$.next($event)"></aa-search-by-date-range>
