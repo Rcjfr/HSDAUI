@@ -7,7 +7,6 @@ import { AppStateService } from '../../../common/services';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
 import { Observer } from 'rxjs/Rx';
-import { SearchBaseFormComponent } from '../search-base-form.component';
 
 
 @Component({

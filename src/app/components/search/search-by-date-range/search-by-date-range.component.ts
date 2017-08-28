@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { SearchBaseFormComponent } from '../search-base-form.component';
 import * as moment from 'moment';
 
 @Component({

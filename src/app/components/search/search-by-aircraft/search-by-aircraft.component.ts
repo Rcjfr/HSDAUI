@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { SearchBaseFormComponent } from '../search-base-form.component';
 
 @Component({
   selector: 'aa-search-by-aircraft',
