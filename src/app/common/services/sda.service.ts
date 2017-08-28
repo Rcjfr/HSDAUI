@@ -6,7 +6,7 @@ import { Helper } from '../helper';
 import * as models from '../models';
 import '../rxjs-extensions';
 import { AuthService } from './auth.service';
-import { SdaListResult } from "app/common/models/sda-list-result.model";
+import { SdaListResult } from 'app/common/models/sda-list-result.model';
 
 @Injectable()
 export class SdaService {
