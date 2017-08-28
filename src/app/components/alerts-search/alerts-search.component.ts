@@ -2,6 +2,9 @@
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
+import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+import { DialogService } from 'ng2-bootstrap-modal';
+import { Subject, Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -10,40 +13,25 @@ import { AppStateService } from '../../common/services';
 })
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
-  models: {
-    SearchByDateRange: {
-      dateFrom: any;
-      dateThrough: any;
-    };
-    SearchBySDA: {
-      sdrId: any;
-      station: any;
-      alertCode: any;
-      sdrNumber: any;
-      department: any;
-      ataCode1: any;
-      originator: any;
-      ataCode2: any;
-      fleet: any;
-      checkType: any;
-    };
-    PageData: any;
-  };
 
-  isValid: false;
-  searchState = 'SearchByDateRange';
-  sdaSearchForm: FormGroup;
+  searchByDateRange$: Subject<any> = new Subject();
+  searchBySDA$: Subject<any> = new Subject();
+  searchByAircraft$: Subject<any> = new Subject();
+  criteria;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-    this.models = {
-      SearchByDateRange: { dateFrom: undefined, dateThrough: undefined },
-      SearchBySDA: { sdrId: undefined, station: undefined, alertCode: undefined, sdrNumber: undefined, department: undefined,
-                      ataCode1: undefined, originator: undefined, ataCode2: undefined, fleet: undefined, checkType: undefined },
-      PageData: undefined
-    };
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
+
+  ngOnInit() {
+    Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
+          this.searchBySDA$.startWith(undefined),
+          this.searchByAircraft$.startWith(undefined),
+          this.combineCriteria)
+          .subscribe(s => this.criteria = s );
   }
 
-  ngOnInit() { }
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft) {
+    return { searchByDateRange, searchBySDA, searchByAircraft }
+  }
 
   expandCollapseAll(expandAll: boolean) {
     this.panels.forEach(p => p.isOpen = expandAll);
@@ -51,7 +39,21 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
+  // isFalse(element, index, array) {
+  //   return element === false;
+  // }
+
   searchAlerts() {
-    this.appStateService.saveSdaSearchCriteria(this.models);
+    //TODO - confirm that at least one criteria has data before submitting
+    // const formIsInvalid = this.isValid.every(this.isFalse);
+
+    // if (!formIsInvalid) {
+      this.appStateService.saveSdaSearchCriteria(this.criteria);
+    // } else {
+    //   this.dialogService.addDialog(ConfirmComponent, {
+    //     title: 'Search Filters',
+    //     message: 'Please input at least one search filter.'
+    //   })
+    // }
   }
 }

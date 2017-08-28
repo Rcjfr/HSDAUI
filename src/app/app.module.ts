@@ -13,6 +13,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { InputTextModule, ButtonModule, DataTableModule, DialogModule, DataGridModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -80,6 +81,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     TabsModule.forRoot(),
     ToastModule.forRoot(),
     StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),
     EffectsModule.run(LookupDataEffects),
     EffectsModule.run(UserEffects)

@@ -6,6 +6,7 @@ import { Helper } from '../helper';
 import * as models from '../models';
 import '../rxjs-extensions';
 import { AuthService } from './auth.service';
+import { SdaListResult } from 'app/common/models/sda-list-result.model';
 
 @Injectable()
 export class SdaService {
@@ -26,12 +27,12 @@ export class SdaService {
     });
   };
 
-  searchSda(criteria): Observable<models.ISdaListResult> {
+  searchSda(criteria): Observable<SdaListResult> {
     return this.http.post(this.endPointUrl + '/search', criteria)
       .map((result) => result.json());
   };
 
-  getAllSda(pageData): Observable<models.ISdaListResult> {
+  getAllSda(pageData): Observable<SdaListResult> {
     return this.http.post(this.endPointUrl + 's', pageData)
       .map((result) => result.json());
   };
