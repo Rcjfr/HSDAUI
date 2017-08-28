@@ -24,8 +24,7 @@ export class ModifiedPartDescriptionComponent extends BaseFormComponent implemen
       this.modifiedPartDescriptionGroup.patchValue(newSda.correctiveActionSection || {});
       if (this.checkSDAFormStatus()) {
         this.modifiedPartDescriptionGroup.disable();
-      }
-      else {
+      } else {
         this.modifiedPartDescriptionGroup.enable();
       }
     }

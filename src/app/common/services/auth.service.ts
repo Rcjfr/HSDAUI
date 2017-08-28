@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { IUser } from './../models/user.model';
 import { Observable } from 'rxjs/Rx';
@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   public currentUser$: Observable<IUser>;
-  readonly QC_Inspector = "QC_Inspector";
-  readonly QC_Supervisor = "QC_Supervisor";
-  readonly QC_Manager = "QC_Manager";
-  readonly Reliability_Analyst = "Reliability_Analyst";
+  readonly QC_Inspector = 'QC_Inspector';
+  readonly QC_Supervisor = 'QC_Supervisor';
+  readonly QC_Manager = 'QC_Manager';
+  readonly Reliability_Analyst = 'Reliability_Analyst';
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}users`;
   constructor(private http: Http, private appStateService: AppStateService, private router: Router) {

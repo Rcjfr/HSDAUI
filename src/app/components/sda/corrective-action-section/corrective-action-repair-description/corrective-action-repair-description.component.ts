@@ -57,8 +57,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDocumentType: data.repairDocumentType || '' });
       if (this.checkSDAFormStatus()) {
         this.correctiveActionRepairDescriptionFormGroup.disable();
-      }
-      else {
+      } else {
         this.correctiveActionRepairDescriptionFormGroup.enable();
       }
     }

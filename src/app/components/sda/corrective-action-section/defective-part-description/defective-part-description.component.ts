@@ -24,8 +24,7 @@ export class DefectivePartDescriptionComponent extends BaseFormComponent impleme
       this.defectivePartDescriptionGroup.patchValue(newSda.correctiveActionSection || {});
       if (this.checkSDAFormStatus()) {
         this.defectivePartDescriptionGroup.disable();
-      }
-      else {
+      } else {
         this.defectivePartDescriptionGroup.enable();
       }
     }

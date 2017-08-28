@@ -30,6 +30,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       //    }
     );
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
@@ -37,17 +38,15 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       this.checkSDAFormStatus();
     }
   }
-  ngAfterViewInit(): void {
-    
-  }
+
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
-    
   }
+
   isDeferred(): boolean {
     return this.correctiveActionFormGroup.get('isDeferred').value === true;
   }
-  
+
   setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {
     if (isCorrectiveEvent !== true) {
       this.correctiveActionFormGroup.get('deferralCode').clearValidators();

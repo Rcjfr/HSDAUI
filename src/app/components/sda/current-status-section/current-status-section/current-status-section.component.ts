@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -9,20 +9,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
-  }
-
-  ngOnInit() {
-    
-    
-    
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
   }
-
-  
 }

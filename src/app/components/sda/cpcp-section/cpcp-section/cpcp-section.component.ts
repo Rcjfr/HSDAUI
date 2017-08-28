@@ -13,7 +13,7 @@ import * as models from '../../../../common/models';
   templateUrl: './cpcp-section.component.html',
   styleUrls: ['./cpcp-section.component.less']
 })
-export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
+export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   corrosionTypes$: Observable<List<models.ICorrosionType>>;
   corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
   floorboardConditions$: Observable<List<models.IFloorboardCondition>>;
@@ -30,10 +30,6 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
       corrosionTaskNo: ['', [Validators.maxLength(25)]],
       floorBoardCondition: ['', []]
     });
-  }
-
-  ngAfterViewInit(): void {
-    
   }
 
   ngOnInit() {

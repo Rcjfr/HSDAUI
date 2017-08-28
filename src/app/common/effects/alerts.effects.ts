@@ -45,7 +45,7 @@ export class AlertEffects {
     .map((action: selectedAlert.SaveSdaAction) => action.payload)
     .switchMap((sda: models.ISda) => {
       return this.sdaService.saveSda(sda)
-        .map((updatedSda:models.ISda) => {
+        .map((updatedSda: models.ISda) => {
           this.appStateService.notifySavedSda({ sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });
 
           return new selectedAlert.SaveSdaCompleteAction({ sda: updatedSda, sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });

@@ -68,13 +68,12 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
       this.generalSectionFormGroup.patchValue({ alertCode: newSda.generalSection.alertCode || '' });
-      this.generalSectionFormGroup.patchValue({ createDate: new Date(newSda.generalSection.createDate)});
+      this.generalSectionFormGroup.patchValue({ createDate: new Date(newSda.generalSection.createDate) });
 
       if (this.checkSDAFormStatus()) {
         this.generalSectionFormGroup.disable();
         this.disableCreateDate = true;
-      }
-      else {
+      } else {
         this.generalSectionFormGroup.enable();
         this.disableCreateDate = false;
       }

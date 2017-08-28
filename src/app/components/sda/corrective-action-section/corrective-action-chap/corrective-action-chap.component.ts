@@ -25,8 +25,7 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
       this.correctiveActionChapFormGroup.patchValue(newSda.correctiveActionSection || {});
       if (this.checkSDAFormStatus()) {
         this.correctiveActionChapFormGroup.disable();
-      }
-      else {
+      } else {
         this.correctiveActionChapFormGroup.enable();
       }
     }

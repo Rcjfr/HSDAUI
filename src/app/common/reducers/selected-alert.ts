@@ -28,7 +28,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   loadNewSdaCounter: 0,
   currentSdaId: 0,
   sda: sdaFactory(),
-  newSdaStatus:Status.Open,
+  newSdaStatus: Status.Open,
   noseNumbers: List<string>(),
   aircraftInfo: aircraftInfoFactory(),
   sdaList: <List<ISdaListView>>List.of(),
@@ -54,7 +54,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdaCompleteAction;
 
-        return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status,  sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
+        return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
@@ -77,7 +77,13 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.SaveSdaCompleteAction;
 
-        return state.merge({ loading: false, sda: sdaFactory(act.payload.sda), newSdaStatus: act.payload.sda.status, savedState: SavedStateFactory(act.payload), currentSdaId: act.payload.sdaId });
+        return state.merge({
+          loading: false,
+          sda: sdaFactory(act.payload.sda),
+          newSdaStatus: act.payload.sda.status,
+          savedState: SavedStateFactory(act.payload),
+          currentSdaId: act.payload.sdaId
+        });
       }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {

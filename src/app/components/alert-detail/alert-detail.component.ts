@@ -35,7 +35,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     private dialogService: DialogService,
     private router: Router
   ) {
-    this.toastr.setRootViewContainerRef(vcr);
+    //this.toastr.setRootViewContainerRef(vcr);
   }
   // @HostListener allows us to also guard against browser refresh, close, etc.
   @HostListener('window:beforeunload')

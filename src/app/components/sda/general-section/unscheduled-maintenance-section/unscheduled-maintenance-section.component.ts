@@ -33,8 +33,7 @@ export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent im
       this.formGroup.patchValue(newSda.generalSection);
       if (this.checkSDAFormStatus()) {
         this.formGroup.disable();
-      }
-else {
+      } else {
         this.formGroup.enable();
       }
     }

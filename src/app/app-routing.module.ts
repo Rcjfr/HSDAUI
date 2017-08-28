@@ -4,6 +4,7 @@ import { AlertsComponent } from './components/alerts/alerts.component';
 import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
 import { PendingChangesGuard } from './common/components/pending-changes.guard';
 import { SdaResolverService } from './common/resolvers/sda-resolver.service';
+import { AuthGuardService } from './common/services/auth-guard.service';
 const routes: Routes = [
   {
     path: 'alerts', component: AlertsComponent,
@@ -12,6 +13,7 @@ const routes: Routes = [
   {
     path: 'alerts/:id', component: AlertDetailComponent,
     //resolve: { sda: SdaResolverService },
+    canActivate: [AuthGuardService],
     canDeactivate: [PendingChangesGuard],
     children: []
   },

@@ -41,8 +41,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
       this.formGroup.patchValue({ checkType: newSda.generalSection.checkType || '' });
       if (this.checkSDAFormStatus()) {
         this.formGroup.disable();
-      }
-      else {
+      } else {
         this.formGroup.enable();
       }
     }

@@ -27,8 +27,7 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
       this.correctiveActionOptionFormGroup.patchValue(newSda.correctiveActionSection || {});
       if (this.checkSDAFormStatus()) {
         this.correctiveActionOptionFormGroup.disable();
-      }
-      else {
+      } else {
         this.correctiveActionOptionFormGroup.enable();
       }
     }

@@ -53,7 +53,7 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
           damageOther: this.isChecked(newSda.cpcpSection.causesOfDamage, 512),
         });
       }
-      
+
     }
     if (changes.newSdaStus) {
       this.causeOfDamageGroup.patchValue({ status: changes.newSdaStus.currentValue });

@@ -53,9 +53,11 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
     const group = this.parent.controls[this.formGroupName];
     if (!(this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
       group && group.disable();
+
       return true;
     }
     group && group.enable();
+
     return false;
   }
 }

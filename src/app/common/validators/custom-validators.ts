@@ -172,7 +172,7 @@ export class CustomValidators {
       if (<Status>statusControl.value === Status.Complete) {
         return { 'atleastone': true };
       }
+
       return null;
     }
-  
 }

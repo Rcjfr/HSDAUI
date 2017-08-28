@@ -38,7 +38,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
   statusUpdatedOn: Date = new Date();
-  public Status = Status;// to make it available in template
+  public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
   @ViewChild('statusModal') public statusModal: ModalDirective;
@@ -91,7 +91,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         //console.log('Validating...', messages);
         this.displayMessage$.next(messages);
       });
-    
+
   }
 
   ngOnInit() {
@@ -175,7 +175,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.hideStatusModal();
     this.saveAlertData();
   }
-  validateAlertData(newStatus:Status) {
+  validateAlertData(newStatus: Status) {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
     this.genericValidator.formSubmitted = true;
@@ -185,17 +185,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
       this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+
       return;
     }
-    if (newStatus === Status.Open ||
-      newStatus === Status.Closed) { //User can not change UpdatedBy/Date. so no need to show the modal 
+    if (newStatus === Status.Open || newStatus === Status.Closed) {
+     // User can not change UpdatedBy/Date.so no need to show the modal
       this.sda.statusUpdatedBy = this.statusUpdatedBy;
       this.sda.statusUpdatedOn = this.statusUpdatedOn;
       this.saveAlertData();
-    }
-    else {
+    } else {
       if (newStatus === Status.Complete) {
-        this.sdaStatusTitle = "Complete SDA" + (this.sda.id ? `(SDA ID:${this.sda.id})` : "");
+        this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
       }
       if (newStatus === Status.Audited) {
         this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
@@ -237,7 +237,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         lastModifiedOn: this.lastModifiedOn,
         //statusUpdatedBy: this.statusUpdatedBy,
         //statusUpdatedOn: this.statusUpdatedOn,
-        status:this.sdaForm.get('status').value,
+        status: this.sdaForm.get('status').value,
         generalSection: generalSectionData,
         defectLocationSection: defectLocationData,
         cpcpSection: cpcpSectionData,
@@ -261,7 +261,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
   }
-  
+
   markAsDirty(group: FormGroup | FormArray) {
     group.markAsDirty();
     for (const i in group.controls) {

@@ -80,6 +80,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
   ],
   providers: [
     services.AuthService,
+    services.AuthGuardService,
     services.AircraftService,
     services.AlertCodeService,
     services.AppStateService,

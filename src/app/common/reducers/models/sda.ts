@@ -84,5 +84,5 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     completedBy: null,
     completedDate: new Date()
   },
-  history:[]
+  history: []
 });
