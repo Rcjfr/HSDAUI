@@ -25,7 +25,7 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
       damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
       length: ['', [Validators.required]],
-      width: ['', [Validators.required]],  
+      width: ['', [Validators.required]],
       depth: ['', [Validators.required]],
       manufacturerPartNo: ['', [Validators.maxLength(50)]],
       partDefective: ['', [Validators.required, Validators.maxLength(50)]],

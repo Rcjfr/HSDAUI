@@ -18,7 +18,7 @@ export const ActionTypes = {
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
   LOAD_SDA_FAIL: 'Load SDA Fail',
   LOAD_NEW_SDA: 'Load New SDA',
-  SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria'
+  SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria',
   SET_SDA_NEW_STATUS: 'Set SDA new status'
 
 };
