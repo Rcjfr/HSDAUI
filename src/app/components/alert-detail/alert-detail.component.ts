@@ -62,9 +62,14 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     });
     this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().filter(s => !!s).subscribe((savedState) => {
       this.toastr.success('SDA Details saved successfully.', 'Success');
-      this.alertDetailView.clearForm();
+
       if (savedState.newSda) {
-        this.router.navigate(['/alerts', savedState.sdaId]);
+        setTimeout(() => {
+          this.alertDetailView.clearForm();
+          this.router.navigate(['/alerts', savedState.sdaId])
+        }, 1000);
+      } else {
+        this.alertDetailView.clearForm();
       }
     });
     this.appStateService.loadNoseNumbers('');
@@ -77,7 +82,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       this.alertDetailView.clearForm();
       this.appStateService.loadSda(this.currentSdaId);
     });
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS());
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView.clearForm());
   }
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());
