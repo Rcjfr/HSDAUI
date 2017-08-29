@@ -240,7 +240,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (correctiveActionData.completedDate) {
       correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
     }
-    let sdaDetail: ISda = Object.assign({}, this.sda,
+    const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: this.lastModifiedBy,
         lastModifiedOn: this.lastModifiedOn,
