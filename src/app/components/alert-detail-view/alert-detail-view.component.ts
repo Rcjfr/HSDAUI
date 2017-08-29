@@ -53,6 +53,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   displayMessage$ = new BehaviorSubject<any>({});
 
   private genericValidator: GenericValidator;
+
   constructor(private toastr: ToastsManager,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
     public appStateService: AppStateService, public authService: AuthService) {
@@ -67,10 +68,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
+
   ngOnChanges(changes: SimpleChanges) {
     this.currentSdaId = this.sda.id;
     this.currentStatus = this.sda.status;
   }
+
   ngAfterContentInit(): void {
     const frm = this.elRef.nativeElement.querySelector('form');
     const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select,textarea'));
@@ -163,6 +166,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.validateAlertData(newStatus);
     }, 100);
   }
+
   saveStatusModal() {
     this.markAsDirty(this.sdaStatusForm);
     this.sdaStatusForm.updateValueAndValidity();
@@ -175,6 +179,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.hideStatusModal();
     this.saveAlertData();
   }
+
   validateAlertData(newStatus: Status) {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
@@ -211,6 +216,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.statusModal.show();
     }
   }
+
   saveAlertData() {
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
@@ -277,9 +283,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
         group.controls[i].markAsDirty();
-        // if(group.controls[i].invalid){
-        //   console.log(group.controls[i]);
-        // }
       } else {
         this.markAsDirty(group.controls[i]);
       }

@@ -21,6 +21,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   alertCodes$: Observable<List<models.IAlertCode>>;
   ATACodes$: Observable<List<models.IATACode>>;
   disableCreateDate = false;
+
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private authService: AuthService) {
     super('generalSectionFormGroup');
     this.generalSectionFormGroup = this.fb.group({
@@ -60,6 +61,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       ;
 
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
@@ -80,7 +82,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       this.generalSectionFormGroup.get('sdaId').disable();
       this.generalSectionFormGroup.get('sdrNumber').disable();
       this.authService.isReliabilityAnalyst().take(1).subscribe(isReliabilityAnalyst => {
-        if (isReliabilityAnalyst && this.sda.generalSection.sdrNumber === '') {
+        if (isReliabilityAnalyst && this.sda.generalSection && this.sda.generalSection.sdrNumber === '') {
           this.generalSectionFormGroup.get('sdrNumber').enable();
         }
       });
@@ -93,6 +95,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
     }
   }
+
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);
   }
