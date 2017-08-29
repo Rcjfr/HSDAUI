@@ -34,9 +34,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private router: Router
-  ) {
-    //this.toastr.setRootViewContainerRef(vcr);
-  }
+  ) { }
   // @HostListener allows us to also guard against browser refresh, close, etc.
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
@@ -62,15 +60,11 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       }
 
     });
-    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().subscribe((savedState) => {
-      if (savedState) {
-        this.toastr.success('SDA Details saved successfully.', 'Success');
-        this.alertDetailView.clearForm();
-        if (savedState.newSda) {
-          this.router.navigate(['/alerts', savedState.sdaId]);
-        } else {
-          //this.loadSda();
-        }
+    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().filter(s => !!s).subscribe((savedState) => {
+      this.toastr.success('SDA Details saved successfully.', 'Success');
+      this.alertDetailView.clearForm();
+      if (savedState.newSda) {
+        this.router.navigate(['/alerts', savedState.sdaId]);
       }
     });
     this.appStateService.loadNoseNumbers('');

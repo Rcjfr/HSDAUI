@@ -189,7 +189,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       return;
     }
     if (newStatus === Status.Open || newStatus === Status.Closed) {
-     // User can not change UpdatedBy/Date.so no need to show the modal
+      // User can not change UpdatedBy/Date.so no need to show the modal
       this.sda.statusUpdatedBy = this.statusUpdatedBy;
       this.sda.statusUpdatedOn = this.statusUpdatedOn;
       this.saveAlertData();
@@ -215,35 +215,45 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
-    const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
-    const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
-      (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
-      (causeOfDamageGroup.damageOther ? 512 : 0) +
-      (causeOfDamageGroup.environment ? 1 : 0) +
-      (causeOfDamageGroup.galleySpill ? 2 : 0) +
-      (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
-      (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
-      (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
-      (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
-      (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-    const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
+    let cpcpSectionData = undefined;
+    if (this.sdaForm.value.cpcpSectionGroup) {
+      const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
+      const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
+        (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
+        (causeOfDamageGroup.damageOther ? 512 : 0) +
+        (causeOfDamageGroup.environment ? 1 : 0) +
+        (causeOfDamageGroup.galleySpill ? 2 : 0) +
+        (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
+        (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
+        (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
+        (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
+        (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
+      cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
+    }
     const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
     if (correctiveActionData.completedDate) {
       correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
     }
-    const sdaDetail: ISda = Object.assign({}, this.sda,
+    let sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: this.lastModifiedBy,
         lastModifiedOn: this.lastModifiedOn,
-        //statusUpdatedBy: this.statusUpdatedBy,
-        //statusUpdatedOn: this.statusUpdatedOn,
         status: this.sdaForm.get('status').value,
-        generalSection: generalSectionData,
-        defectLocationSection: defectLocationData,
-        cpcpSection: cpcpSectionData,
-        correctiveActionSection: correctiveActionData
       }
     );
+    if (this.sdaForm.value.generalSectionFormGroup) {
+      sdaDetail.generalSection = generalSectionData;
+    }
+    if (this.sdaForm.value.defectLocationSectionFormGroup) {
+      sdaDetail.defectLocationSection = defectLocationData;
+    }
+    if (this.sdaForm.value.cpcpSectionGroup) {
+      sdaDetail.cpcpSection = cpcpSectionData;
+    }
+    if (this.sdaForm.value.correctiveActionFormGroup) {
+      sdaDetail.correctiveActionSection = correctiveActionData;
+    }
+
     this.appStateService.saveSda(sdaDetail);
   }
 
