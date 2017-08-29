@@ -21,7 +21,7 @@ export interface LazyLoadEvent {
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit, OnDestroy {
-  sdaListResult$: Observable<any>;
+  sdaListResult$: Observable<SdaListResult>;
   criteriaSubscription: Subscription;
 
   searchCriteria;

@@ -5,6 +5,7 @@ import { AppStateService } from '../../common/services';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -17,20 +18,22 @@ export class AlertsSearchComponent implements OnInit {
   searchByDateRange$: Subject<any> = new Subject();
   searchBySDA$: Subject<any> = new Subject();
   searchByAircraft$: Subject<any> = new Subject();
+  searchByPart$: Subject<any> = new Subject();
   criteria;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
 
   ngOnInit() {
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
-          this.searchBySDA$.startWith(undefined),
-          this.searchByAircraft$.startWith(undefined),
-          this.combineCriteria)
-          .subscribe(s => this.criteria = s );
+      this.searchBySDA$.startWith(undefined),
+      this.searchByAircraft$.startWith(undefined),
+      this.searchByPart$.startWith(undefined),
+      this.combineCriteria)
+      .subscribe(s => this.criteria = s);
   }
 
-  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft) {
-    return { searchByDateRange, searchBySDA, searchByAircraft }
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart) {
+    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart }
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -39,21 +42,25 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
-  // isFalse(element, index, array) {
-  //   return element === false;
-  // }
-
   searchAlerts() {
-    //TODO - confirm that at least one criteria has data before submitting
-    // const formIsInvalid = this.isValid.every(this.isFalse);
+    const values = _.values(this.criteria);
 
-    // if (!formIsInvalid) {
+    let hasCriteria = false;
+    _.forIn(this.criteria, (value, key) => {
+      if (value) {
+        if (_.every(_.values(value), (s) => { return s || s !== ''; })) {
+          hasCriteria = true;
+        }
+      }
+    });
+
+    if (!hasCriteria) {
+      this.dialogService.addDialog(ConfirmComponent, {
+        title: 'Search Filters',
+        message: 'Please input at least one search filter.'
+      })
+    } else {
       this.appStateService.saveSdaSearchCriteria(this.criteria);
-    // } else {
-    //   this.dialogService.addDialog(ConfirmComponent, {
-    //     title: 'Search Filters',
-    //     message: 'Please input at least one search filter.'
-    //   })
-    // }
+    }
   }
 }
