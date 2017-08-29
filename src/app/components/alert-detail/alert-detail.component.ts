@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewContainerRef, OnDestroy, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../../common/models';
 import { List } from 'immutable';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import '../../common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AppStateService } from '../../common/services';
@@ -29,8 +29,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   loading$: Observable<boolean>;
   @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
   constructor(private appStateService: AppStateService,
-    private vcr: ViewContainerRef,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private router: Router

@@ -1,11 +1,11 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { AppStateService } from '../../../../common/services';
 import { BaseFormComponent } from '../../base-form.component';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel } from '../../../../common/models';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'aa-cpcp-disposition-section',
@@ -15,7 +15,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class CpcpDispositionSectionComponent extends BaseFormComponent implements OnInit {
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
   cpcpDispositionSectionFormGroup: FormGroup;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastsManager) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastrService) {
     super('cpcpDispositionSectionFormGroup');
   }
 

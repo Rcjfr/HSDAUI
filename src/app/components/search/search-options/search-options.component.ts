@@ -1,7 +1,7 @@
-﻿import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'aa-search-options',
   templateUrl: './search-options.component.html',
@@ -16,9 +16,7 @@ export class SearchOptionsComponent  implements OnInit {
         allowLeadingZeroes: false
     });
 
-    constructor(private vcr: ViewContainerRef, private toastr: ToastsManager) {
-        this.toastr.setRootViewContainerRef(vcr);
-    }
+    constructor(private toastr: ToastrService) { }
 
   ngOnInit() {
   }

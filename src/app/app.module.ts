@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +10,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { AccordionModule, TypeaheadModule, TabsModule, ModalModule } from 'ngx-bootstrap';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -54,6 +55,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AlertsGridComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -80,7 +82,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
-    ToastModule.forRoot(),
+    ToastrModule.forRoot(),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),

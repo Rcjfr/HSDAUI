@@ -1,6 +1,6 @@
-﻿import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
-import { ToastModule, ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 import { AlertEffects } from './alerts.effects';
 import * as selectedAlert from '../actions/selected-alert';
@@ -11,11 +11,11 @@ describe('Alerts Effect', () => {
   let runner: EffectsRunner;
   let alertEffects: AlertEffects;
   let aircraftService: AircraftService;
-  let toaster: ToastsManager;
+  let toaster: ToastrService;
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       EffectsTestingModule,
-      ToastModule.forRoot(),
+      ToastrModule.forRoot(),
     ],
     providers: [
       AlertEffects, AircraftService,
@@ -73,7 +73,7 @@ describe('Alerts Effect', () => {
 
   it('Call Show Toastr error after any fail actions',
       inject([
-        EffectsRunner, AlertEffects, AircraftService, ToastsManager
+        EffectsRunner, AlertEffects, AircraftService, ToastrService 
       ],
       (_runner, _alertEffects, _aircraftService, _toaster) => {
         runner = _runner;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -112,14 +112,17 @@ export class AlertEffects {
   //  .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
   //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
 
-  @Effect()
+  @Effect({ dispatch: false })
   showToastrError$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
     selectedAlert.ActionTypes.LOAD_SDA_FAIL)
-    .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
+    .map((action: Action) => {
+      this.toastr.error(<string>action.payload, 'ERROR');
+      return null;
+    });
 
 
   constructor(private actions$: Actions,
@@ -127,7 +130,7 @@ export class AlertEffects {
     private sdaService: services.SdaService,
     private appStateService: services.AppStateService,
     private router: Router,
-    private toastr: ToastsManager) {
+    private toastr: ToastrService) {
   }
 
 }

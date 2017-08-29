@@ -1,6 +1,6 @@
 import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges
+  AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 import {
   FormBuilder,
@@ -16,7 +16,7 @@ import { ISda, Status } from '../../common/models';
 import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppStateService, AuthService } from '../../common/services';
@@ -54,7 +54,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   private genericValidator: GenericValidator;
 
-  constructor(private toastr: ToastsManager,
+  constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
     public appStateService: AppStateService, public authService: AuthService) {
     this.sdaForm = this.fb.group({

@@ -5,14 +5,14 @@ import {
 } from '@angular/router';
 
 import { AuthService } from './auth.service';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
 
   constructor(private authService: AuthService,
-    private router: Router, private toastr: ToastsManager) { }
+    private router: Router, private toastr: ToastrService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
