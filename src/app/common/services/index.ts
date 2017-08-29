@@ -1,4 +1,4 @@
-﻿export * from './aircraft.service';
+export * from './aircraft.service';
 export * from './alert-code.service';
 export * from './app-state.service';
 export * from './ata-codes.service';
@@ -18,5 +18,6 @@ export * from './dte-status.service';
 export * from './repair-inspection-status.service';
 export * from './sda.service';
 export * from './auth.service';
+export * from './auth-guard.service';
 
 

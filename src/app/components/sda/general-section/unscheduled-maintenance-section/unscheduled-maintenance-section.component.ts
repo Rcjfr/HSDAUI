@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../../../common/validators/generic-validator';
@@ -31,6 +31,11 @@ export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent im
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.generalSection);
+      if (this.checkSDAFormStatus()) {
+        this.formGroup.disable();
+      } else {
+        this.formGroup.enable();
+      }
     }
   }
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-﻿<div class="panel-body" [formGroup]='generalSectionFormGroup'>
+<div class="panel-body" [formGroup]='generalSectionFormGroup'>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="SDR Number:" [message]="displayMessage.sdrNumber">
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Create Date:" [attr.for]="sdaCreateDate.idDatePicker" [message]="displayMessage.createDate" required="true">
-        <datetime [timepicker]="false" #sdaCreateDate [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" #sdaCreateDate [readonly]="disableCreateDate?'':null" [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false }"></datetime>
       </aac-field-container>
 
     </div>
@@ -33,7 +33,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <aac-field-container label="SDA ID:" required="true">
+      <aac-field-container label="SDA ID:">
         <input class="form-control" formControlName="sdaId" >
       </aac-field-container>
 
@@ -75,6 +75,13 @@
       <aa-defect-discovered-during-section-form [parent]="generalSectionFormGroup"
                                                 [sda]="sda"
                                                 [errorMessages]="displayMessage"></aa-defect-discovered-during-section-form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator">
+        <input type="text" tabindex='13' class="form-control" formControlName="originator">
+      </aac-field-container>
     </div>
   </div>
 </div>

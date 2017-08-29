@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -19,7 +19,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
     this.correctiveActionFormGroup = this.fb.group({
       deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
       deferralNo: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
-      isDeferred: ['', []],
+      isDeferred: [false, []],
       isMajorRepair: ['', []],
       majorRepairDescription: ['', [Validators.maxLength(250)]],
       completedBy: ['', [Validators.maxLength(50)]],
@@ -30,20 +30,21 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       //    }
     );
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionFormGroup.patchValue(newSda.correctiveActionSection || {});
+      this.checkSDAFormStatus();
     }
   }
+
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
-    // TODO: need to revisit when sda complete functionality is implemented
-    //this.correctiveActionFormGroup.get('isDeferred').valueChanges
-    //  .subscribe(val => this.setCorrectiveActionFormFields(val));
+  }
 
-    //this.correctiveActionFormGroup.get('isMajorRepair').valueChanges
-    //  .subscribe(val => this.setMajorRepairFormFields(val));
+  isDeferred(): boolean {
+    return this.correctiveActionFormGroup.get('isDeferred').value === true;
   }
 
   setCorrectiveActionFormFields(isCorrectiveEvent: boolean): void {

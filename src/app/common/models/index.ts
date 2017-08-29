@@ -1,4 +1,4 @@
-﻿export * from './aircraft-info.model';
+export * from './aircraft-info.model';
 export * from './alert-code.model';
 export * from './alert.model';
 export * from './alert-result.model';
@@ -22,3 +22,5 @@ export * from './saved-state.model';
 export * from './user.model';
 export * from './sda-list-result.model'
 export * from './sda-search-criteria.model'
+export * from './sda-status.model';
+export * from './status';

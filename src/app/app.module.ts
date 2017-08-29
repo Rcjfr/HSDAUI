@@ -1,4 +1,5 @@
-﻿import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,8 +9,8 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { AccordionModule, TypeaheadModule, TabsModule } from 'ngx-bootstrap';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { AccordionModule, TypeaheadModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -54,6 +55,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AlertsGridComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -77,9 +79,10 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     DataGridModule,
 
     TypeaheadModule.forRoot(),
+    ModalModule.forRoot(),
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
-    ToastModule.forRoot(),
+    ToastrModule.forRoot(),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),
@@ -88,6 +91,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
   ],
   providers: [
     services.AuthService,
+    services.AuthGuardService,
     services.AircraftService,
     services.AlertCodeService,
     services.AppStateService,

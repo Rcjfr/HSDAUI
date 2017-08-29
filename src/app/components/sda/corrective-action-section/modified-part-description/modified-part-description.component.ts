@@ -1,4 +1,4 @@
-﻿
+
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
@@ -22,6 +22,11 @@ export class ModifiedPartDescriptionComponent extends BaseFormComponent implemen
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.modifiedPartDescriptionGroup.patchValue(newSda.correctiveActionSection || {});
+      if (this.checkSDAFormStatus()) {
+        this.modifiedPartDescriptionGroup.disable();
+      } else {
+        this.modifiedPartDescriptionGroup.enable();
+      }
     }
   }
   ngOnInit() {

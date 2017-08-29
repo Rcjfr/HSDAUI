@@ -1,6 +1,6 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -39,7 +39,7 @@ export class UserEffects {
   constructor(private actions$: Actions,
     private authService: services.AuthService,
     private router: Router,
-    private toastr: ToastsManager) {
+    private toastr: ToastrService) {
   }
 
 }

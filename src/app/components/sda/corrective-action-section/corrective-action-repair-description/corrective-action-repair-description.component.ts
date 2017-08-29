@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -24,6 +24,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('correctiveActionRepairDescriptionFormGroup');
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
+      status: ['', []],
       repairDescriptionType: ['', []], //Validators.required
       repairDocumentType: ['', []],
       chapFigRepairText: ['', [Validators.maxLength(30)]],
@@ -33,9 +34,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       repairWidth: ['', []]
     },
       {
-        //validator: CustomValidators.validateCorrectiveActionRepairFields
-      }
-    );
+        validator: CustomValidators.validateCorrectiveActionRepairFields
+      });
   }
   ngOnInit() {
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
@@ -51,7 +51,15 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.correctiveActionRepairDescriptionFormGroup.patchValue(newSda.correctiveActionSection || {});
+      const data = newSda.correctiveActionSection || {};
+      this.correctiveActionRepairDescriptionFormGroup.patchValue(data);
+      this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDescriptionType: data.repairDescriptionType || '' });
+      this.correctiveActionRepairDescriptionFormGroup.patchValue({ repairDocumentType: data.repairDocumentType || '' });
+      if (this.checkSDAFormStatus()) {
+        this.correctiveActionRepairDescriptionFormGroup.disable();
+      } else {
+        this.correctiveActionRepairDescriptionFormGroup.enable();
+      }
     }
   }
   ngOnDestroy() {

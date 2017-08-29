@@ -1,10 +1,10 @@
-﻿import { Component, OnInit, ViewContainerRef, OnDestroy, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import * as models from '../../common/models';
 import { List } from 'immutable';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import '../../common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AppStateService } from '../../common/services';
@@ -29,14 +29,11 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   loading$: Observable<boolean>;
   @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
   constructor(private appStateService: AppStateService,
-    private vcr: ViewContainerRef,
-    private toastr: ToastsManager,
+    private toastr: ToastrService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private router: Router
-  ) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
+  ) { }
   // @HostListener allows us to also guard against browser refresh, close, etc.
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
@@ -62,15 +59,16 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       }
 
     });
-    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().subscribe((savedState) => {
-      if (savedState) {
-        this.toastr.success('SDA Details saved successfully.', 'Success');
+    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().filter(s => !!s).subscribe((savedState) => {
+      this.toastr.success('SDA Details saved successfully.', 'Success');
+
+      if (savedState.newSda) {
+        setTimeout(() => {
+          this.alertDetailView.clearForm();
+          this.router.navigate(['/alerts', savedState.sdaId])
+        }, 1000);
+      } else {
         this.alertDetailView.clearForm();
-        if (savedState.newSda) {
-          this.router.navigate(['/alerts', savedState.sdaId]);
-        } else {
-          //this.loadSda();
-        }
       }
     });
     this.appStateService.loadNoseNumbers('');
@@ -81,13 +79,9 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.currentSdaId = 0;
       }
       this.alertDetailView.clearForm();
+      this.appStateService.loadSda(this.currentSdaId);
     });
-
-    this.route.data.subscribe(data => {
-      this.sda$ = Observable.of(data['sda']);
-      this.alertDetailView.clearForm();
-      //this.appStateService.loadSda(this.currentSdaId);
-    });
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView.clearForm());
   }
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());

@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../../../common/validators/generic-validator';
@@ -50,7 +50,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     includeThousandsSeparator: false,
     allowLeadingZeroes: false
   });
-
+  public Status = models.Status;
   constructor(private fb: FormBuilder, public appStateService: AppStateService) {
     super('aircraftInfoSectionFormGroup');
     this.formGroup = this.fb.group({
@@ -60,8 +60,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
       serialNo: ['', [Validators.required, Validators.maxLength(10)]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(25)]],
       cycles: ['', [Validators.required, Validators.maxLength(25)]],
-      fleet: ['', [Validators.required, Validators.maxLength(20)]],
-      originator: ['', [Validators.required, Validators.maxLength(50)]]
+      fleet: ['', [Validators.required, Validators.maxLength(20)]]
     });
   }
 
@@ -79,6 +78,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
         this.appStateService.loadFleetCheckTypes(newSda.generalSection.fleet);
       }
       this.formGroup.patchValue(newSda.generalSection);
+      this.checkSDAFormStatus();
     }
   }
   noseNumberOnSelect(e: TypeaheadMatch) {

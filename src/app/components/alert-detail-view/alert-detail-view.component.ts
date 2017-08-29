@@ -1,6 +1,6 @@
-﻿import {
+import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  ViewContainerRef, AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy
+  AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 import {
   FormBuilder,
@@ -12,42 +12,68 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda } from '../../common/models';
+import { ISda, Status } from '../../common/models';
 import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppStateService } from '../../common/services';
+import { AppStateService, AuthService } from '../../common/services';
 import { Router } from '@angular/router';
-
+import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
   styleUrls: ['./alert-detail-view.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy {
+export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   getCurrentSdaIdSubscription: Subscription;
   @Input() sda: ISda;
   @Input() loading: boolean;
   @Output() onReset = new EventEmitter();
+  currentSdaId: number;
+  lastModifiedBy: string;
+  statusUpdatedBy: string;
+  lastModifiedOn: Date = new Date();
+  statusUpdatedOn: Date = new Date();
+  public Status = Status; // to make it available in template
+  public currentStatus: number;
+  public newSdaStus$: Observable<Status>;
+  @ViewChild('statusModal') public statusModal: ModalDirective;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
   sdaForm: FormGroup;
+  sdaStatusForm: FormGroup;
+  public sdaStatusTitle = '';
 
   // Use with the generic validation message class
   displayMessage$ = new BehaviorSubject<any>({});
 
   private genericValidator: GenericValidator;
-  constructor(private toastr: ToastsManager,
+
+  constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
-    public appStateService: AppStateService) {
-    this.sdaForm = this.fb.group({});
+    public appStateService: AppStateService, public authService: AuthService) {
+    this.sdaForm = this.fb.group({
+      status: ['', [Validators.required]],
+    });
+    this.sdaStatusForm = this.fb.group({
+      status: ['', [Validators.required]],
+      completedBy: ['', [Validators.required]],
+      completedOn: ['', [Validators.required]],
+      comments: ['', []],
+    });
     this.genericValidator = new GenericValidator(ValidationMessages);
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.currentSdaId = this.sda.id;
+    this.currentStatus = this.sda.status;
+  }
+
   ngAfterContentInit(): void {
     const frm = this.elRef.nativeElement.querySelector('form');
     const formElements = Array.prototype.slice.call(frm.querySelectorAll('input,select,textarea'));
@@ -72,7 +98,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   ngOnInit() {
-
+    this.newSdaStus$ = this.appStateService.getNewSdaStatus();
+    this.authService.auditDisplayName().take(1).subscribe(s => {
+      this.lastModifiedBy = s;
+      this.statusUpdatedBy = s;
+      if (!this.sda.id) { //in case of new sda
+        this.sda.correctiveActionSection.completedBy = s;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -121,47 +154,112 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return result;
   }
 
-  saveAlert() {
-    this.genericValidator.formSubmitted = true;
+  hideStatusModal() {
+    this.statusModal.hide();
+  }
+
+  saveAlert(newStatus: number) {
+    //this.sda.status = newStatus;
+    this.sdaForm.patchValue({ status: newStatus });
+    this.appStateService.setNewSdaStatus(newStatus);
+    setTimeout(() => { //TODO: need to revisit to see if there is any better way
+      this.validateAlertData(newStatus);
+    }, 100);
+  }
+
+  saveStatusModal() {
+    this.markAsDirty(this.sdaStatusForm);
+    this.sdaStatusForm.updateValueAndValidity();
+    if (!this.sdaStatusForm.valid) {
+      return;
+    }
+    this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
+    this.sda.statusUpdatedOn = this.sdaStatusForm.get('completedOn').value;
+    this.sda.comments = this.sdaStatusForm.get('comments').value;
+    this.hideStatusModal();
+    this.saveAlertData();
+  }
+
+  validateAlertData(newStatus: Status) {
+    this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
-    this.displayMessage$.next(this.genericValidator.processMessages(this.sdaForm));
+    this.genericValidator.formSubmitted = true;
+    const messages = this.genericValidator.processMessages(this.sdaForm);
+    this.logErrors(this.sdaForm);
+    this.displayMessage$.next(messages);
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
       this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
       return;
     }
+    if (newStatus === Status.Open || newStatus === Status.Closed) {
+      // User can not change UpdatedBy/Date.so no need to show the modal
+      this.sda.statusUpdatedBy = this.statusUpdatedBy;
+      this.sda.statusUpdatedOn = this.statusUpdatedOn;
+      this.saveAlertData();
+    } else {
+      if (newStatus === Status.Complete) {
+        this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
+      }
+      if (newStatus === Status.Audited) {
+        this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
+      }
+      if (newStatus === Status.Deleted) {
+        this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
+      }
+      if (newStatus === Status.Rejected) {
+        this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
+      }
+
+      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date() });
+      this.statusModal.show();
+    }
+  }
+
+  saveAlertData() {
     const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
     const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
-    const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
-    const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
-      (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
-      (causeOfDamageGroup.damageOther ? 512 : 0) +
-      (causeOfDamageGroup.environment ? 1 : 0) +
-      (causeOfDamageGroup.galleySpill ? 2 : 0) +
-      (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
-      (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
-      (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
-      (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
-      (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-    const cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
+    let cpcpSectionData = undefined;
+    if (this.sdaForm.value.cpcpSectionGroup) {
+      const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
+      const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
+        (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
+        (causeOfDamageGroup.damageOther ? 512 : 0) +
+        (causeOfDamageGroup.environment ? 1 : 0) +
+        (causeOfDamageGroup.galleySpill ? 2 : 0) +
+        (causeOfDamageGroup.hardwareNotInstalled ? 64 : 0) +
+        (causeOfDamageGroup.missingCorrosionInhibitor ? 256 : 0) +
+        (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
+        (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
+        (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
+      cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
+    }
     const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
     if (correctiveActionData.completedDate) {
       correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
     }
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {
-        lastModifiedBy: 'badgeid',
-        lastModifiedOn: new Date(),
-        statusUpdatedBy: 'badgeid',
-        statusUpdatedOn: new Date(),
-        generalSection: generalSectionData,
-        defectLocationSection: defectLocationData,
-        cpcpSection: cpcpSectionData,
-        correctiveActionSection: correctiveActionData
+        lastModifiedBy: this.lastModifiedBy,
+        lastModifiedOn: this.lastModifiedOn,
+        status: this.sdaForm.get('status').value,
       }
     );
+    if (this.sdaForm.value.generalSectionFormGroup) {
+      sdaDetail.generalSection = generalSectionData;
+    }
+    if (this.sdaForm.value.defectLocationSectionFormGroup) {
+      sdaDetail.defectLocationSection = defectLocationData;
+    }
+    if (this.sdaForm.value.cpcpSectionGroup) {
+      sdaDetail.cpcpSection = cpcpSectionData;
+    }
+    if (this.sdaForm.value.correctiveActionFormGroup) {
+      sdaDetail.correctiveActionSection = correctiveActionData;
+    }
+
     this.appStateService.saveSda(sdaDetail);
   }
 
@@ -185,9 +283,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     for (const i in group.controls) {
       if (group.controls[i] instanceof FormControl) {
         group.controls[i].markAsDirty();
-        // if(group.controls[i].invalid){
-        //   console.log(group.controls[i]);
-        // }
       } else {
         this.markAsDirty(group.controls[i]);
       }

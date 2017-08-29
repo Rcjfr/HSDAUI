@@ -1,4 +1,5 @@
-﻿import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { Status } from '../models';
 
 export class CustomValidators {
 
@@ -73,7 +74,7 @@ export class CustomValidators {
   };
   static validateCauseOfDamageGroupFields(c: AbstractControl): { [key: string]: boolean } | null {
     //const iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
-
+    const statusControl = c.get('status');
     const environmentControl = c.get('environment');
     const galleySpillControl = c.get('galleySpill');
     const blockedDrainControl = c.get('blockedDrain');
@@ -86,7 +87,7 @@ export class CustomValidators {
     const parent = c.parent;
     let iscpcpRelatedEvent;
     if (parent !== undefined) {
-      iscpcpRelatedEvent = c.parent.get('iscpcpRelatedEvent');
+      iscpcpRelatedEvent = c.parent.get('isCPCPRelatedEvent');
     }
 
     const damageOtherControl = c.get('damageOther');
@@ -111,7 +112,7 @@ export class CustomValidators {
       return null;
     }
 
-    if (iscpcpRelatedEvent.value !== true) {
+    if (iscpcpRelatedEvent.value !== true || <Status>statusControl.value === Status.Open) { //if SDA is open or not cpcp event, no validation required
       return null;
     }
 
@@ -160,14 +161,18 @@ export class CustomValidators {
   //    return { 'atleastone': true };
 
   //};
-  static validateCorrectiveActionRepairFields(c: AbstractControl): { [key: string]: boolean } | null {
 
+  static validateCorrectiveActionRepairFields (c: AbstractControl): { [key: string]: boolean } | null {
+      const statusControl = c.get('status');
       const repairDocumentControl = c.get('repairDocumentType');
-    const engineeringAuthorizationControl = c.get('engineeringAuthorization');
-    if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
+      const engineeringAuthorizationControl = c.get('engineeringAuthorization');
+      if (repairDocumentControl.value || engineeringAuthorizationControl.value) {
+        return null;
+      }
+      if (<Status>statusControl.value === Status.Complete) {
+        return { 'atleastone': true };
+      }
+
       return null;
     }
-
-    return { 'atleastone': true };
-  };
 }

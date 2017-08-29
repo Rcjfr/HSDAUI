@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
@@ -15,13 +15,13 @@ export class SdaService {
   constructor(private http: Http, private authService: AuthService) {
   }
 
-  saveSda(sda: models.ISda): Observable<number> {
+  saveSda(sda: models.ISda): Observable<models.ISda> {
     return this.authService.requestOptions().flatMap(options => {
       if (sda.id) {
         return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, options)
           .map((result) => result.json());
       } else {
-        return this.http.post(this.endPointUrl, sda)
+        return this.http.post(this.endPointUrl, sda, options)
           .map((result) => result.json());
       }
     });

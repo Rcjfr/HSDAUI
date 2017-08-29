@@ -1,10 +1,10 @@
-﻿<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
+<div [formGroup]="correctiveActionRepairDescriptionFormGroup">
   <div class="row col-md-12">
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Description:" [message]="displayMessage.repairDescriptionType">
-          <select class="form-control" tabindex='63' id="repairDescriptionType" formControlName="repairDescriptionType">
-            <option value="">Select</option>
+        <aac-field-container [required]="!isSDAOpen()" label="Description:" [message]="displayMessage.repairDescriptionType">
+          <select class="form-control" tabindex='63' [required]="!isSDAOpen()"  id="repairDescriptionType" formControlName="repairDescriptionType">
+            <option value="" selected>Select Description</option>
             <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
         </aac-field-container>
@@ -16,13 +16,13 @@
     <div class="col-md-6">
       <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType">
         <select class="form-control" tabindex='64' id="repairDocumentType" formControlName="repairDocumentType">
-          <option value="">Select</option>
+          <option value="" selected>Select Repair Document</option>
           <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>
       </aac-field-container>
     </div>
     <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value">
-      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [errorMessages]="displayMessage"></aa-corrective-action-chap>
+      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [newSdaStus]="newSdaStus" [errorMessages]="displayMessage"></aa-corrective-action-chap>
 
     </div>
   </div>
@@ -45,13 +45,13 @@
     <div class="col-md-6">
       <div [class.has-error]="displayMessage.isExternallyVisible">
         <div class="row form-group">
-          <label class="col-sm-4 control-label">Externally Visible?</label>
+          <label class="col-sm-4 control-label">Externally Visible?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="67" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="true" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="67" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="false" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isExternallyVisible" class="error">{{displayMessage.isExternallyVisible}}</div>
           </div>

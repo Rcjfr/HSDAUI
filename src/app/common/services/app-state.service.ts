@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store/app-store';
 import * as fromRoot from '../reducers';
@@ -6,7 +6,7 @@ import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import * as userActions from '../actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda, ISavedState } from '../models';
+import { IStation, ISda, ISavedState, Status } from '../models';
 
 @Injectable()
 export class AppStateService {
@@ -143,5 +143,14 @@ export class AppStateService {
   }
   loadUser() {
     this.store.dispatch(new userActions.LoadUserAction());
+  }
+  getUserLoading() {
+    return this.store.select(fromRoot.getUserLoading);
+  }
+  setNewSdaStatus(status: Status) {
+    return this.store.dispatch(new selectedAlertActions.SetSdaNewStatusAction(status));
+  }
+  getNewSdaStatus() {
+    return this.store.select(fromRoot.getNewSdaStatus);
   }
 }

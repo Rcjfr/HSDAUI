@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -27,6 +27,7 @@ export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponen
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.generalSection);
+      this.checkSDAFormStatus();
     }
   }
   get defectDiscovered() {

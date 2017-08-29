@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -21,7 +21,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   constructor(private fb: FormBuilder, private appStateService: AppStateService) {
     super('cpcpSectionGroup');
     this.formGroup = this.fb.group({
-      iscpcpRelatedEvent: ['', []],
+      isCPCPRelatedEvent: ['', []],
       isWideSpreadCorrosion: ['', []],
       corrosionLevel: ['', []],
       isPreviouslyBlended: ['', []],
@@ -31,6 +31,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
       floorBoardCondition: ['', []]
     });
   }
+
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
@@ -45,6 +46,7 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.cpcpSection || {});
+      this.checkSDAFormStatus();
     }
   }
   setCorrosionTypeFields(corrosionType: string): void {
@@ -83,5 +85,12 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     this.formGroup.get('corrosionLevel').updateValueAndValidity();
     this.formGroup.get('corrosionType').updateValueAndValidity();
     this.formGroup.get('causeOfDamageGroup').updateValueAndValidity();
+  }
+
+  areCPCPFieldsRequired(): boolean {
+    return this.isCPCPRelatedEvent() && !this.isSDAOpen(); //Only required when trying to complete the sda and a cpcp related event
+  }
+  isCPCPRelatedEvent(): boolean {
+    return this.formGroup.get('isCPCPRelatedEvent').value === true;
   }
 }

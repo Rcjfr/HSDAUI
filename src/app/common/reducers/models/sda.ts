@@ -1,4 +1,4 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 import { ISda } from '../../models';
 export interface SdaRecord extends TypedRecord<SdaRecord>, ISda { }
 export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
@@ -7,11 +7,11 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   workflowInstanceId: '',
   versionID: 0,
   version: 1,
-  lastModifiedBy: 'BADGEID',
+  lastModifiedBy: '',
   lastModifiedOn: new Date(),
-  statusUpdatedBy: 'BADGEID',
+  statusUpdatedBy: '',
   statusUpdatedOn: new Date(),
-  status: 1, //Open,
+  status: 0, //Open,
   generalSection: {
     sdrNumber: null,
     station: null,
@@ -83,5 +83,6 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     majorRepairDescription: null,
     completedBy: null,
     completedDate: new Date()
-  }
+  },
+  history: []
 });
