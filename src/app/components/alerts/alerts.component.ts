@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ISdaListResult } from '../../common/models';
 import { AppStateService } from '../../common/services';
 import { List } from 'immutable';
 

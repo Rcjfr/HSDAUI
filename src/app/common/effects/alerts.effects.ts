@@ -11,6 +11,7 @@ import * as services from '../services';
 import * as models from '../models';
 import * as fromRoot from '../reducers';
 import '../rxjs-extensions';
+import { SdaListResult } from '../models';
 
 
 @Injectable()
@@ -81,7 +82,7 @@ export class AlertEffects {
       criteria.PageData = payload;
 
       return this.sdaService.searchSda(criteria)
-        .map((data: models.ISdaListResult) => {
+        .map((data: SdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
         })
         .catch((err) => {
