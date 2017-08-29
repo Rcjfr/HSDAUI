@@ -121,6 +121,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_SDA_FAIL)
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
+
       return null;
     });
 

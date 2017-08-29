@@ -8,11 +8,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
+
   constructor(private appStateService: AppStateService,
-private authService: AuthService,
-private router: Router, private toastr: ToastrService ) {
-    
-  }
+    private authService: AuthService,
+    private router: Router, private toastr: ToastrService) { }
+
   ngOnInit(): void {
     this.appStateService.loadUser();
     this.appStateService.loadLookupData();
@@ -23,6 +23,7 @@ private router: Router, private toastr: ToastrService ) {
       window.scrollTo(0, 0);
     });
   }
+
   loadNewSda() {
     this.router.navigate(['alerts', 'new']);
     this.appStateService.loadNewSda();
