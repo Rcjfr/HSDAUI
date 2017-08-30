@@ -52,7 +52,7 @@ export class AuthService {
     return this.currentUser$.map(u => u.roles);
   }
   hasRole(role: string): Observable<boolean> {
-    return this.currentUser$.map(u => u.roles.includes(role));
+    return this.currentUser$.map(u => u.roles.indexOf(role) > -1);
   }
   hasAnyRole(roles: string[]): Observable<boolean> {
     return this.currentUser$.map(u => u.roles.some((role) => { return roles.indexOf(role) > -1 }));

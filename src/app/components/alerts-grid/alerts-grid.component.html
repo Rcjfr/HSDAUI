@@ -4,7 +4,11 @@
   (onLazyLoad)="loadPageOfRecords($event)" [responsive]="true" [rows]="defaultPageSize" [paginator]="true" [sortField]="defaultSortColumn"
   [sortOrder]="defaultSortOrder">
   <p-header>SDAs</p-header>
-  <p-column field="id" header="SDA ID" [sortable]="true" [filter]="true"></p-column>
+  <p-column field="id" header="SDA ID" [sortable]="true" [filter]="true">
+    <ng-template let-col let-record="rowData" pTemplate="body">
+      <a [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+    </ng-template>
+  </p-column>
   <p-column field="aircraftNo" header="Aircraft #" [sortable]="true" [filter]="true"></p-column>
   <p-column field="createDate" header="Create Date" [sortable]="true" [filter]="true"></p-column>
   <p-column field="statusText" header="Form Status" [sortable]="true" [filter]="true"></p-column>
