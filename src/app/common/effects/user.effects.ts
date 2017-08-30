@@ -37,6 +37,7 @@ export class UserEffects {
     .delay(1000)
     .map((action: Action) => {
       this.router.navigateByUrl('https://newjetnet.aa.com');
+
       return null;
     });
   constructor(private actions$: Actions,

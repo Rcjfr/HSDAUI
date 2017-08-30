@@ -290,6 +290,7 @@ export class LookupDataEffects {
     )
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
+
       return null;
     });
 

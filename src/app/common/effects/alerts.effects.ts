@@ -61,16 +61,16 @@ export class AlertEffects {
         });
     });
 
-    //TODO - Melinda saving for research
-// @Effect()
-//   saveSearchCriteria$: Observable<Action> = this.actions$
-//     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
-//     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
-//    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
-//     // .switchMap((searchCriteria) => {
-//     //   return new selectedAlert.LoadSdasAction(undefined);
-//     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
-//     // });
+  //TODO - Melinda saving for research
+  // @Effect()
+  //   saveSearchCriteria$: Observable<Action> = this.actions$
+  //     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
+  //     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
+  //    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
+  //     // .switchMap((searchCriteria) => {
+  //     //   return new selectedAlert.LoadSdasAction(undefined);
+  //     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
+  //     // });
 
   @Effect()
   loadSdas$: Observable<Action> = this.actions$
@@ -131,6 +131,7 @@ export class AlertEffects {
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
       this.router.navigate(['/alerts']);
+
       return null;
     });
 
