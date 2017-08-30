@@ -117,14 +117,22 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
-    selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
-    selectedAlert.ActionTypes.LOAD_SDA_FAIL)
+    selectedAlert.ActionTypes.LOAD_SDAS_FAIL
+    )
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
 
       return null;
     });
 
+  @Effect({ dispatch: false })
+  showLoadSdaFailError$: any = this.actions$
+    .ofType(selectedAlert.ActionTypes.LOAD_SDA_FAIL)
+    .map((action: Action) => {
+      this.toastr.error(<string>action.payload, 'ERROR');
+      this.router.navigate(['/alerts']);
+      return null;
+    });
 
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
