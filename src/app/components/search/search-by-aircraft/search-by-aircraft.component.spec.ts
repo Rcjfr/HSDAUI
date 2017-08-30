@@ -1,7 +1,7 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { FormControlsModule } from '../../../common/components/form-controls.module';
 import { SearchByAircraftComponent } from './search-by-aircraft.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('SearchByAircraftComponent', () => {
   let component: SearchByAircraftComponent;
@@ -10,7 +10,7 @@ describe('SearchByAircraftComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SearchByAircraftComponent ],
-imports: [FormsModule, FormControlsModule]
+      imports: [ReactiveFormsModule, FormControlsModule]
     })
     .compileComponents();
   }));
