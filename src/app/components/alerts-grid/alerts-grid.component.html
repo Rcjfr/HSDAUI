@@ -1,4 +1,4 @@
-﻿<h1>Search Results</h1>
+<h1>Search Results</h1>
 
 <p-dataTable [value]="(sdaListResult$ | async).records" [totalRecords]="(sdaListResult$ | async).totalRecords" [lazy]="true"
   (onLazyLoad)="loadPageOfRecords($event)" [responsive]="true" [rows]="defaultPageSize" [paginator]="true" [sortField]="defaultSortColumn"

@@ -61,16 +61,16 @@ export class AlertEffects {
         });
     });
 
-    //TODO - Melinda saving for research
-// @Effect()
-//   saveSearchCriteria$: Observable<Action> = this.actions$
-//     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
-//     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
-//    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
-//     // .switchMap((searchCriteria) => {
-//     //   return new selectedAlert.LoadSdasAction(undefined);
-//     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
-//     // });
+  //TODO - Melinda saving for research
+  // @Effect()
+  //   saveSearchCriteria$: Observable<Action> = this.actions$
+  //     .ofType(selectedAlert.ActionTypes.SAVE_SDA_SEARCH_CRITERIA)
+  //     // .map((action: selectedAlert.SaveSdaSearchCriteria) => action.payload)
+  //    .map(action => { return new selectedAlert.LoadSdasAction(undefined) } );
+  //     // .switchMap((searchCriteria) => {
+  //     //   return new selectedAlert.LoadSdasAction(undefined);
+  //     //   // return new selectedAlert.LoadSdasAction(searchCriteria.toJS());
+  //     // });
 
   @Effect()
   loadSdas$: Observable<Action> = this.actions$
@@ -117,14 +117,23 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
-    selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
-    selectedAlert.ActionTypes.LOAD_SDA_FAIL)
+    selectedAlert.ActionTypes.LOAD_SDAS_FAIL
+    )
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
 
       return null;
     });
 
+  @Effect({ dispatch: false })
+  showLoadSdaFailError$: any = this.actions$
+    .ofType(selectedAlert.ActionTypes.LOAD_SDA_FAIL)
+    .map((action: Action) => {
+      this.toastr.error(<string>action.payload, 'ERROR');
+      this.router.navigate(['/alerts']);
+
+      return null;
+    });
 
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,

@@ -26,7 +26,7 @@ export class UserEffects {
           return of(new userActions.LoadUserFailAction('Failed to load logged in user'));
         });
     });
-  @Effect()
+  @Effect({ dispatch: false })
   showToastrError$: any = this.actions$
     .ofType(userActions.ActionTypes.LOAD_USER_FAIL)
     .map((action: Action) => {
@@ -35,7 +35,11 @@ export class UserEffects {
       return action;
     })
     .delay(1000)
-    .map((action: Action) => this.router.navigateByUrl('https://newjetnet.aa.com'));
+    .map((action: Action) => {
+      this.router.navigateByUrl('https://newjetnet.aa.com');
+
+      return null;
+    });
   constructor(private actions$: Actions,
     private authService: services.AuthService,
     private router: Router,
