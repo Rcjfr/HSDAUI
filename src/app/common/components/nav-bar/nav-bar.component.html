@@ -10,7 +10,7 @@
         </ul>-->
         <ul class="nav navbar-nav navbar-right">
             <li><p class="navbar-text" *ngIf="authService.displayName() | async">Welcome {{authService.displayName() | async}}</p></li>
-            <li><a href="#" (click)="authService.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="{{authService.logOutUrl()}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
     </div>
 </nav>

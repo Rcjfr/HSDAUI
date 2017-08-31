@@ -60,8 +60,8 @@ export class AuthService {
   accessToken(): Observable<string> {
     return this.currentUser$.map(u => u.access_token);
   }
-  logOut(): void {
-    window.location.href = environment.logoutUrl;
+  logOutUrl(): string {
+    return environment.logoutUrl;
   }
 
   isQCInspector(): Observable<boolean> {
