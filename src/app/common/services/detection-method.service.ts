@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { IDetectionMethod } from '../models/detection-method.model';
@@ -9,11 +9,10 @@ import '../rxjs-extensions';
 export class DetectionMethodService {
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}detectionmethods`;
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
     getAllDetectionMethods(): Observable<IDetectionMethod[]> {
-      return this.http.get(this.endPointUrl)
-                    .map((result) => result.json());
+      return this.http.get(this.endPointUrl);
     };
 
 

@@ -1,5 +1,5 @@
-﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { IRepairDescription } from '../models/repair-description.model';
@@ -9,12 +9,11 @@ import '../rxjs-extensions';
 export class RepairDescriptionService {
 
     private endPointUrl = `${environment.hsdaApiBaseUrl}repaireddescribe`;
-  constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
   getAllRepairDescriptions(): Observable<IRepairDescription[]> {
     //TODO:Uncomment when lookup table is available
-    //return this.http.get(this.endPointUrl)
-    //  .map((result) => result.json());
+    //return this.http.get(this.endPointUrl);
     return Observable.of([
         { id: 1, description: 'Bonded Repair' },
         { id: 2, description: 'Bore/Fastener Hole(s) Rework' },
