@@ -33,7 +33,6 @@ export class AuthInterceptorService implements HttpInterceptor {
             }
           }
         }).catch(err => {
-          console.log(err);
           // for some reason, the 302 is not being captured above.
           // so for now,just capturing status == 0
           // any suggestions?

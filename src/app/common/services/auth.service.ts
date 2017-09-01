@@ -25,7 +25,6 @@ export class AuthService {
     return this.http.get(this.endPointUrl)
       .map((result) => result.json())
       .catch(err => {
-        //console.log(err);
         if (err.status && err.status === 401) {
           this.toastr.warning('User session not found. Redirecting to login page...', 'Error');
           setTimeout(() => location.reload(true), 1000);

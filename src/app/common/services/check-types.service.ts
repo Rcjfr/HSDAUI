@@ -13,12 +13,13 @@ export class CheckTypesService {
   private checkTypesEndPointUrl = `${environment.hsdaApiBaseUrl}checktypes`;
   constructor(private http: HttpClient) { }
 
-    getAllCheckTypes(): Observable<ICheckType[]> {
-      return this.http.get(this.checkTypesEndPointUrl);
-    };
- getFleetCheckTypes(fleetType: string): Observable<ICheckType[]> {
-      return this.http.get(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`);
-    };
+  getAllCheckTypes(): Observable<ICheckType[]> {
+    return this.http.get(this.checkTypesEndPointUrl);
+  };
+
+  getFleetCheckTypes(fleetType: string): Observable<ICheckType[]> {
+    return this.http.get(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`);
+  };
 
 
 }
