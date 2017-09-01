@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgPipesModule } from 'ng-pipes';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -64,6 +65,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     SdaFormModule,
     SdaSearchModule,
     HttpModule,
+    HttpClientModule,
     FileUploadModule,
     AppRoutingModule,
     NKDatetimeModule,
@@ -112,7 +114,11 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     services.RepairInspectionStatusService,
     services.SdaService,
     PendingChangesGuard,
-    SdaResolverService
+    SdaResolverService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: services.AuthInterceptorService,
+      multi: true
+    }
   ],
   entryComponents: [
     ConfirmComponent
