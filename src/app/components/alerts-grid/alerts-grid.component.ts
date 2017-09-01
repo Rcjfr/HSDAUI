@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { SdaListResult } from 'app/common/models/sda-list-result.model';
+import * as _ from 'lodash';
 
 export interface LazyLoadEvent {
   first?: number;
@@ -41,19 +42,30 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult()
-    .map(listResult => {
-      if (listResult) {
-        return listResult.toJS();
-      } else {
-        return new SdaListResult();
-      }
-    });
+      .map(listResult => {
+        if (listResult) {
+          return listResult.toJS();
+        } else {
+          return new SdaListResult();
+        }
+      });
 
-    this.criteriaSubscription = this.appStateService.getSearchCriteria()
+      this.criteriaSubscription = this.appStateService.getSearchCriteria()
       .subscribe(criteria => {
         if (criteria) {
+          let hasCriteria = false;
+          _.forIn(criteria.toJS(), (value, key) => {
+            if (value) {
+              if (_.every(_.values(value), (s) => { return s || s !== ''; })) {
+                hasCriteria = true;
+              }
+            }
+          });
+
+          if (hasCriteria) {
+            this.appStateService.loadSdaList(this.getDefaultPageData());
+          }
           this.skipNextLoad = true;
-          this.appStateService.loadSdaList(this.getDefaultPageData());
         }
       });
   }
