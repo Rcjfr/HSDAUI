@@ -54,11 +54,10 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
       .subscribe(criteria => {
         if (criteria) {
           let hasCriteria = false;
-          _.forIn(criteria.toJS(), (value, key) => {
-            if (value) {
-              if (_.every(_.values(value), (s) => { return s || s !== ''; })) {
-                hasCriteria = true;
-              }
+          const definedSections = _.pickBy(criteria.toJS(), _.identity);  //Get all defined properties (searchByDateRange, etc)
+          _.forIn(definedSections, (value, key) => {
+            if (!_.isEmpty(_.pickBy(value, _.identity))) {  //Get all defined sub-properties of that section (dateFrom, dateThrough, etc)
+              hasCriteria = true;
             }
           });
 

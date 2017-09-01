@@ -43,14 +43,11 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   searchAlerts() {
-    const values = _.values(this.criteria);
-
     let hasCriteria = false;
-    _.forIn(this.criteria, (value, key) => {
-      if (value) {
-        if (_.every(_.values(value), (s) => { return s || s !== ''; })) {
-          hasCriteria = true;
-        }
+    const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
+    _.forIn(definedSections, (value, key) => {
+      if (!_.isEmpty(_.pickBy(value, _.identity))) {  //Get all defined sub-properties of that section (dateFrom, dateThrough, etc)
+        hasCriteria = true;
       }
     });
 
