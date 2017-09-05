@@ -112,7 +112,7 @@
           </div>
           <div class="form-group">
             <label [attr.for]="completedOn.idDatePicker">Completed On:<span class="req">*</span></label>
-            <datetime #completedOn [readonly]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null"  formControlName="completedOn" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,endDate:'0d' }"></datetime>
+            <datetime #completedOn [readonly]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null"  formControlName="completedOn" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false }"></datetime>
             <div *ngIf="sdaStatusForm.get('completedOn').errors && (sdaStatusForm.get('completedOn').dirty || sdaStatusForm.get('completedOn').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedOn').errors.required">
                 Completed Date is required

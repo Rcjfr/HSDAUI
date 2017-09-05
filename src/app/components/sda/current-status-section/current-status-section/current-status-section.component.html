@@ -39,7 +39,7 @@
           {{stat.statusUpdatedBy}}
         </td>
         <td>
-          {{stat.statusUpdatedOn | date:'medium'}}
+          {{moment(stat.statusUpdatedOn).format('LLL')}}
         </td>
         <td>{{stat.comments}}</td>
       </tr>

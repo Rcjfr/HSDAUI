@@ -37,7 +37,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   lastModifiedBy: string;
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
-  statusUpdatedOn: Date = new Date();
+  statusUpdatedOn: Date = this.lastModifiedOn;
   public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
@@ -174,7 +174,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       return;
     }
     this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
-    this.sda.statusUpdatedOn = this.sdaStatusForm.get('completedOn').value;
+    this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
     this.sda.comments = this.sdaStatusForm.get('comments').value;
     this.hideStatusModal();
     this.saveAlertData();
@@ -196,7 +196,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (newStatus === Status.Open) {
       if (this.sda.status == Status.Complete) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
-        this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date(), comments: '' });
+        this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
         this.statusModal.show();
       } else {
         // User can not change UpdatedBy/Date.so no need to show the modal
@@ -217,7 +217,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
 
-      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date(), comments: '' });
+      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
       this.statusModal.show();
     }
   }
@@ -249,6 +249,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       {
         lastModifiedBy: this.lastModifiedBy,
         lastModifiedOn: this.lastModifiedOn,
+
         status: this.sdaForm.get('status').value,
       }
     );
