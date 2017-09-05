@@ -193,26 +193,31 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
       return;
     }
-    if (newStatus === Status.Open || newStatus === Status.Closed) {
-      // User can not change UpdatedBy/Date.so no need to show the modal
-      this.sda.statusUpdatedBy = this.statusUpdatedBy;
-      this.sda.statusUpdatedOn = this.statusUpdatedOn;
-      this.saveAlertData();
+    if (newStatus === Status.Open) {
+      if (this.sda.status == Status.Complete) {  //Reopening the form
+        this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
+        this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date(), comments: '' });
+        this.statusModal.show();
+      } else {
+        // User can not change UpdatedBy/Date.so no need to show the modal
+        this.sda.statusUpdatedBy = this.statusUpdatedBy;
+        this.sda.statusUpdatedOn = this.statusUpdatedOn;
+        this.saveAlertData();
+      }
     } else {
-      if (newStatus === Status.Complete) {
+      if (newStatus === Status.Closed) {
+        this.sdaStatusTitle = `Approve SDA(SDA ID:${this.sda.id})`;
+      } else if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
-      }
-      if (newStatus === Status.Audited) {
+      } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
-      }
-      if (newStatus === Status.Deleted) {
+      } else if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
-      }
-      if (newStatus === Status.Rejected) {
+      } else if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
 
-      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date() });
+      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date(), comments: '' });
       this.statusModal.show();
     }
   }
