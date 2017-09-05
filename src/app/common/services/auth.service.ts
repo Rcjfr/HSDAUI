@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Rx';
 import { AppStateService } from './app-state.service';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthService {
@@ -14,16 +16,36 @@ export class AuthService {
   readonly QC_Manager = 'QC_Manager';
   readonly Reliability_Analyst = 'Reliability_Analyst';
 
-  private endPointUrl = `${environment.hsdaApiBaseUrl}users`;
-  constructor(private http: Http, private appStateService: AppStateService, private router: Router) {
+  private endPointUrl = `${environment.hsdaApiBaseUrl}users?ts=${(new Date()).getTime()}`;
+  // Using Http here so that the HttpClient Interceptor do not intercept this api call
+  constructor(private http: Http, private appStateService: AppStateService, private router: Router, private toastr: ToastrService) {
     this.currentUser$ = this.appStateService.getUser().filter(u => !!u).map(u => u && u.toJS());
   }
   loadLoggedInUser(): Observable<IUser> {
     return this.http.get(this.endPointUrl)
-      .map((result) => result.json());
+      .map((result) => result.json())
+      .catch(err => {
+        if (err.status && err.status === 401) {
+          this.toastr.warning('User session not found. Redirecting to login page...', 'Error');
+          setTimeout(() => location.reload(true), 1000);
+
+          return;
+        }
+
+        return Observable.throw(err);
+      });
   }
   isAuthenticated(): Observable<boolean> {
     return this.currentUser$.map(u => !!u);
+  }
+  requestHeaders(): Observable<HttpHeaders> {
+    return this.accessToken().map(token => {
+      const headers = new HttpHeaders();
+      headers.set('Authorization', 'Bearer ' + token);
+      headers.set('Content-Type', 'application/json');
+
+      return headers;
+    });
   }
   requestOptions(): Observable<RequestOptionsArgs> {
     return this.accessToken().map(token => {
@@ -60,8 +82,8 @@ export class AuthService {
   accessToken(): Observable<string> {
     return this.currentUser$.map(u => u.access_token);
   }
-  logOut(): void {
-    window.location.href = environment.logoutUrl;
+  logOutUrl(): string {
+    return environment.logoutUrl;
   }
 
   isQCInspector(): Observable<boolean> {

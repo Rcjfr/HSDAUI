@@ -1,5 +1,5 @@
-﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { ICauseOfDamage } from '../models/cause-of-damage.model';
@@ -9,7 +9,7 @@ import '../rxjs-extensions';
 export class CauseOfDamageService {
 
     private endPointUrl = `${environment.hsdaApiBaseUrl}causeofdamages`;
-  constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
   getAllCauseOfDamages(): Observable<ICauseOfDamage[]> {
     //TODO:Uncomment when lookup table is available

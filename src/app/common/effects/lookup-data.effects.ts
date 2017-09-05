@@ -269,7 +269,7 @@ export class LookupDataEffects {
         });
     });
 
-  @Effect()
+  @Effect({ dispatch: false })
   showToastrError$: any = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_ALERT_CODES_FAIL,
     lookupData.ActionTypes.LOAD_ATA_CODES_FAIL,
@@ -288,7 +288,11 @@ export class LookupDataEffects {
     lookupData.ActionTypes.LOAD_DTE_STATUS_FAIL,
     lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL
     )
-    .map((action: Action) => this.toastr.error(<string>action.payload, 'ERROR'));
+    .map((action: Action) => {
+      this.toastr.error(<string>action.payload, 'ERROR');
+
+      return null;
+    });
 
 
     constructor(private actions$: Actions,
