@@ -2,6 +2,8 @@
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { SearchByDateRangeComponent } from './search-by-date-range.component';
 import { FormControlsModule } from '../../../common/components/form-controls.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 describe('SearchByDateRangeComponent', () => {
   let component: SearchByDateRangeComponent;
   let fixture: ComponentFixture<SearchByDateRangeComponent>;
@@ -9,7 +11,7 @@ describe('SearchByDateRangeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchByDateRangeComponent],
-      imports: [NKDatetimeModule, FormControlsModule]
+      imports: [NKDatetimeModule, FormControlsModule, ReactiveFormsModule]
     })
     .compileComponents();
   }));

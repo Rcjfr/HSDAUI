@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchByPartComponent } from './search-by-part.component';
+import { FormControlsModule } from '../../../common/components/form-controls.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('SearchByPartComponent', () => {
   let component: SearchByPartComponent;
@@ -8,7 +9,8 @@ describe('SearchByPartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchByPartComponent ]
+      declarations: [ SearchByPartComponent ],
+      imports: [ReactiveFormsModule, FormControlsModule]
     })
     .compileComponents();
   }));

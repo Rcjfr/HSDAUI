@@ -1,9 +1,4 @@
-﻿import { SearchByAircraftComponent } from '../search/search-by-aircraft/search-by-aircraft.component';
-import { SearchByCorrosionComponent } from '../search/search-by-corrosion/search-by-corrosion.component';
-import { SearchByCpcpDispositionComponent } from '../search/search-by-cpcp-disposition/search-by-cpcp-disposition.component';
-import { SearchByDateRangeComponent } from '../search/search-by-date-range/search-by-date-range.component';
-import { SearchByMaintenanceComponent } from '../search/search-by-maintenance/search-by-maintenance.component';
-import { SearchBySdaFormComponent } from '../search/search-by-sda-form/search-by-sda-form.component';
+﻿import { SdaSearchModule } from '../search/sda-search.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TypeaheadModule } from 'ngx-bootstrap';
@@ -12,18 +7,22 @@ import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import { AlertsSearchComponent } from './alerts-search.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {  NgPipesModule } from 'ng-pipes';
+import { TextMaskModule } from 'angular2-text-mask';
+import { AppStateService } from '../../common/services';
+import { DialogService } from 'ng2-bootstrap-modal';
+
 describe('AlertsSearchComponent', () => {
   let component: AlertsSearchComponent;
   let fixture: ComponentFixture<AlertsSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AlertsSearchComponent, SearchByAircraftComponent,
-        SearchByCorrosionComponent, SearchByCpcpDispositionComponent,
-        SearchByDateRangeComponent, SearchByMaintenanceComponent,
-        SearchBySdaFormComponent],
-      imports: [FormControlsModule, FormsModule, ReactiveFormsModule, AccordionModule.forRoot(), NKDatetimeModule, TypeaheadModule.forRoot()],
-      schemas: []
+      declarations: [AlertsSearchComponent],
+      imports: [FormControlsModule, FormsModule, ReactiveFormsModule, AccordionModule.forRoot(),
+            NKDatetimeModule, TypeaheadModule.forRoot(), NgPipesModule, TextMaskModule, SdaSearchModule],
+      schemas: [],
+      providers: [AppStateService, DialogService]
     })
       .compileComponents();
   }));

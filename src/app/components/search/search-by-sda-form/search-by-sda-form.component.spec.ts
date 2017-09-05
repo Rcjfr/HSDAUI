@@ -2,11 +2,11 @@
 import { SearchBySdaFormComponent } from './search-by-sda-form.component';
 import { AppStateService } from '../../../common/services';
 import { MockAppStateService } from '../../../common/services/mocks/mock-app-state.service';
-import { FormsModule} from '@angular/forms';
-import { FilterByPipe } from 'ng-pipes';
+import { FilterByPipe, NgPipesModule } from 'ng-pipes';
 import { TypeaheadModule } from 'ngx-bootstrap';
-import { NgPipesModule } from 'ng-pipes';
 import { FormControlsModule } from '../../../common/components/form-controls.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 describe('SearchBySdaFormComponent', () => {
   let component: SearchBySdaFormComponent;
   let fixture: ComponentFixture<SearchBySdaFormComponent>;
@@ -14,7 +14,7 @@ describe('SearchBySdaFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchBySdaFormComponent],
-      imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule, FormControlsModule],
+      imports: [NgPipesModule, TypeaheadModule.forRoot(), ReactiveFormsModule, FormControlsModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
     .compileComponents();

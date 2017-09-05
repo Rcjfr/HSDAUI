@@ -44,18 +44,18 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder, private appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.alertCodes$ = this.appStateService.getAlertCodes();
     this.ataSubscription = this.appStateService.getATACodes()
       .map(d => d && d.toJS())
       .subscribe(data => this.ATACodes = data);
-    this.departments$ = this.appStateService.getDepartments();
-    this.stations$ = Observable.create((observer: Observer<string>) => {
-      observer.next(this.sdaForm.get('station').value);
-    })
-      .distinctUntilChanged()
-      .switchMap(token => this.appStateService.getStations(token));
-    this.checkTypes$ = this.appStateService.getCheckTypes();
 
+    this.stations$ = Observable.create((observer: Observer<string>) => {
+          observer.next(this.sdaForm.get('station').value);
+        }).distinctUntilChanged()
+          .switchMap(token => this.appStateService.getStations(token));
+
+    this.alertCodes$ = this.appStateService.getAlertCodes();
+    this.departments$ = this.appStateService.getDepartments();
+    this.checkTypes$ = this.appStateService.getCheckTypes();
     this.sdaForm.valueChanges.subscribe(this.update);
   }
 
