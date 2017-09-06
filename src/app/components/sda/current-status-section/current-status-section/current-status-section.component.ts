@@ -8,12 +8,15 @@ import * as moment from 'moment';
   styleUrls: ['./current-status-section.component.less']
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
-  public moment  = moment;
   constructor(private fb: FormBuilder) {
     super('currentStatusSectionGroup');
   }
 
   ngOnDestroy() {
     super.ngOnDestroy();
+  }
+
+  formatDate(date: Date): string {
+    return moment(date).format('LLL');
   }
 }
