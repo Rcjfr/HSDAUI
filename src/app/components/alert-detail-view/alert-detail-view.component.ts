@@ -216,10 +216,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       } else if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
-
+      this.statusUpdatedOn = new Date();
       this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
       this.statusModal.show();
     }
+  }
+  get tomorrow(): Date {
+    let tomorrow = moment(new Date()).add(1, 'days')
+    return new Date(tomorrow.valueOf());
   }
 
   saveAlertData() {
