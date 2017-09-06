@@ -222,7 +222,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
   }
   get tomorrow(): Date {
-    let tomorrow = moment(new Date()).add(1, 'days')
+    const tomorrow = moment(new Date()).add(1, 'days');
+
     return new Date(tomorrow.valueOf());
   }
 
