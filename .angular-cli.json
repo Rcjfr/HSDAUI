@@ -22,6 +22,7 @@
       "styles": [
         "app/app.css",
         "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
+        "../node_modules/bootstrap-timepicker/css/bootstrap-timepicker.css",
         "../node_modules/ngx-toastr/toastr.css",
         "styles.less",
         "../node_modules/font-awesome/css/font-awesome.min.css",
@@ -31,7 +32,8 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"
+        "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
+        "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

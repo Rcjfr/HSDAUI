@@ -17,9 +17,11 @@ export class SdaService {
 
   saveSda(sda: models.ISda): Observable<models.ISda> {
     if (sda.id) {
-      return this.http.put(`${this.endPointUrl}/${sda.id}`, sda);
+      return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, { responseType: 'text' })
+        .map((result) => Helper.Deserialize(result));
     } else {
-      return this.http.post(this.endPointUrl, sda);
+      return this.http.post(this.endPointUrl, sda, { responseType: 'text' })
+        .map((result) => Helper.Deserialize(result));
     }
   };
 
