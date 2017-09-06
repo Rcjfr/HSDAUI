@@ -37,7 +37,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   lastModifiedBy: string;
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
-  statusUpdatedOn: Date = new Date();
+  statusUpdatedOn: Date = this.lastModifiedOn;
   public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
@@ -174,7 +174,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       return;
     }
     this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
-    this.sda.statusUpdatedOn = this.sdaStatusForm.get('completedOn').value;
+    this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
     this.sda.comments = this.sdaStatusForm.get('comments').value;
     this.hideStatusModal();
     this.saveAlertData();
@@ -193,28 +193,38 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
       return;
     }
-    if (newStatus === Status.Open || newStatus === Status.Closed) {
-      // User can not change UpdatedBy/Date.so no need to show the modal
-      this.sda.statusUpdatedBy = this.statusUpdatedBy;
-      this.sda.statusUpdatedOn = this.statusUpdatedOn;
-      this.saveAlertData();
+    if (newStatus === Status.Open) {
+      if (this.sda.status === Status.Complete) {  //Reopening the form
+        this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
+        this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
+        this.statusModal.show();
+      } else {
+        // User can not change UpdatedBy/Date.so no need to show the modal
+        this.sda.statusUpdatedBy = this.statusUpdatedBy;
+        this.sda.statusUpdatedOn = this.statusUpdatedOn;
+        this.saveAlertData();
+      }
     } else {
-      if (newStatus === Status.Complete) {
+      if (newStatus === Status.Closed) {
+        this.sdaStatusTitle = `Approve SDA(SDA ID:${this.sda.id})`;
+      } else if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
-      }
-      if (newStatus === Status.Audited) {
+      } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
-      }
-      if (newStatus === Status.Deleted) {
+      } else if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
-      }
-      if (newStatus === Status.Rejected) {
+      } else if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA(SDA ID:${this.sda.id})`;
       }
-
-      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: new Date() });
+      this.statusUpdatedOn = new Date();
+      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
       this.statusModal.show();
     }
+  }
+  get tomorrow(): Date {
+    const tomorrow = moment(new Date()).add(1, 'days');
+
+    return new Date(tomorrow.valueOf());
   }
 
   saveAlertData() {
@@ -244,6 +254,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       {
         lastModifiedBy: this.lastModifiedBy,
         lastModifiedOn: this.lastModifiedOn,
+
         status: this.sdaForm.get('status').value,
       }
     );

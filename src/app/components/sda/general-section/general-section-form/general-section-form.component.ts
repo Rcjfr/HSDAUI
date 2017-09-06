@@ -21,6 +21,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   alertCodes$: Observable<List<models.IAlertCode>>;
   ATACodes$: Observable<List<models.IATACode>>;
   disableCreateDate = false;
+  public today = new Date();
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private authService: AuthService) {
     super('generalSectionFormGroup');

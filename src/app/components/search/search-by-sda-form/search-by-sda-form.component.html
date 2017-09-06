@@ -1,9 +1,14 @@
-﻿<form [formGroup]="sdaForm">
+<form [formGroup]="sdaForm">
   <div>
     <div class="row">
       <div class="col-md-4">
+<<<<<<< HEAD
         <aac-field-container label="SDR ID:">
           <input type="text" tabindex='3' formControlName="id">
+=======
+        <aac-field-container label="SDA ID:">
+          <input type="text" tabindex='3' formControlName="id" type="number">
+>>>>>>> 926c4664d1049a67fe2b9d83ca20c87eee36c611
         </aac-field-container>
       </div>
       <div class="col-md-4">
@@ -52,7 +57,7 @@
         <aac-field-container label="ATA Code 2:">
           <select tabindex="12" class="form-control" formControlName="ataCode2">
         <option value="">Select ATA Code 2</option>
-        <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryCode">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
+        <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryId">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
       </select>
         </aac-field-container>
       </div>
