@@ -52,7 +52,7 @@
         <aac-field-container label="ATA Code 2:">
           <select tabindex="12" class="form-control" formControlName="ataCode2">
         <option value="">Select ATA Code 2</option>
-        <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryCode">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
+        <option *ngFor="let ac of ataCodes2" [value]="ac.primaryCode+ac.secondaryCode">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
       </select>
         </aac-field-container>
       </div>
