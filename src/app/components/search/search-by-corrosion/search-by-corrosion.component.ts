@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'aa-search-by-corrosion',
@@ -11,16 +11,16 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./search-by-corrosion.component.less']
 })
 export class SearchByCorrosionComponent implements OnInit {
-    @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
-    corrosionForm = new FormGroup({
-        isWideSpreadCorrosion: new FormControl(),
-        isPreviouslyBlended: new FormControl(),
-        corrosionTaskNo: new FormControl(),
-        corrosionLevel: new FormControl(),
-        corrosionType: new FormControl(),
-        causesOfDamage: new FormControl()
-    });
+  corrosionForm = new FormGroup({
+    isWideSpreadCorrosion: new FormControl(),
+    isPreviouslyBlended: new FormControl(),
+    corrosionTaskNo: new FormControl(),
+    corrosionLevel: new FormArray([]),
+    corrosionType: new FormControl(),
+    causesOfDamage: new FormControl()
+  });
 
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
@@ -51,6 +51,17 @@ export class SearchByCorrosionComponent implements OnInit {
       this.corrosionLevels.push(evnt.target.value);
     } else {
       this.corrosionLevels.splice(this.corrosionLevels.indexOf(evnt.target.value), 1);
+    }
+  }
+
+  onLevelCheckChange(id: string, isChecked: boolean) {
+    const idArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
+
+    if (isChecked) {
+      idArray.push(new FormControl(id));
+    } else {
+      const index = idArray.controls.findIndex(x => x.value === id)
+      idArray.removeAt(index);
     }
   }
 }
