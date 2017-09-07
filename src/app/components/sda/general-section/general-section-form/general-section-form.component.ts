@@ -82,12 +82,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       }
       this.generalSectionFormGroup.get('sdaId').disable();
       this.generalSectionFormGroup.get('sdrNumber').disable();
-      this.authService.isReliabilityAnalyst().take(1).subscribe(isReliabilityAnalyst => {
-        if (isReliabilityAnalyst && this.sda.generalSection && this.sda.generalSection.sdrNumber === '') {
-          this.generalSectionFormGroup.get('sdrNumber').enable();
-        }
-      });
-
       if (!this.sda.id) {
         this.authService.auditDisplayName().take(1).subscribe(u => {
           this.generalSectionFormGroup.patchValue({ originator: u });

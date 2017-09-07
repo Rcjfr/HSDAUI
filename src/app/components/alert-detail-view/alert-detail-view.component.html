@@ -72,7 +72,7 @@
         </span>
         <span *ngIf="authService.isReliabilityAnalyst() | async">
           <!--Reliability Analyst Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Require SDR</button>
           <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
           <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
           <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus !== Status.Deleted" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
