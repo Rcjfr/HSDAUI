@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
@@ -19,6 +19,7 @@ export class AlertsSearchComponent implements OnInit {
   searchBySDA$: Subject<any> = new Subject();
   searchByAircraft$: Subject<any> = new Subject();
   searchByPart$: Subject<any> = new Subject();
+  searchByCorrosion$: Subject<any> = new Subject();
   criteria;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
@@ -28,12 +29,13 @@ export class AlertsSearchComponent implements OnInit {
       this.searchBySDA$.startWith(undefined),
       this.searchByAircraft$.startWith(undefined),
       this.searchByPart$.startWith(undefined),
+      this.searchByCorrosion$.startWith(undefined),
       this.combineCriteria)
       .subscribe(s => this.criteria = s);
   }
 
-  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart) {
-    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart }
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion) {
+    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion}
   }
 
   expandCollapseAll(expandAll: boolean) {

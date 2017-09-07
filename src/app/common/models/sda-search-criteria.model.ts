@@ -1,17 +1,19 @@
-﻿import { Record } from 'immutable';
+import { Record } from 'immutable';
 
 type SdaSearchCriteriaProps = {
   pageData: any;
   searchByDateRange: SearchByDateRangeProps;
   searchBySDA: SearchBySda;
   searchByAircraft: SearchByAircraft;
+  searchByCorrosion: SearchByCorrosion;
 };
 
 const defaultProps = {
   pageData: undefined,
   searchByDateRange: undefined,
   searchBySDA: undefined,
-  searchByAircraft: undefined
+  searchByAircraft: undefined,
+  searchByCorrosion: undefined
 };
 
 export class SdaSearchCriteria extends Record(defaultProps) {
@@ -19,6 +21,7 @@ export class SdaSearchCriteria extends Record(defaultProps) {
   searchByDateRange: SearchByDateRangeProps;
   searchBySDA: SearchBySda;
   searchByAircraft: SearchByAircraft;
+  searchByCorrosion: SearchByCorrosion;
 
   constructor(props: SdaSearchCriteriaProps = defaultProps) {
     super(props);
@@ -108,3 +111,37 @@ export class SearchByAircraft extends Record(aircraftDefaultProps) {
     super(props);
   }
 };
+
+//searchByCorrosion
+type searchByCorrosionProps = {
+    isWideSpreadCorrosion: any;
+    isPreviouslyBlended: any;
+    corrosionTaskNo: any;
+    corrosionLevel: any;
+    corrosionType: any;
+    causesOfDamage: any;
+   
+};
+
+const corrosionDefaultProps = {
+    isWideSpreadCorrosion: undefined,
+    isPreviouslyBlended: undefined,
+    corrosionTaskNo: undefined,
+    corrosionLevel: undefined,
+    corrosionType: undefined,
+    causesOfDamage: undefined
+};
+
+export class SearchByCorrosion extends Record(corrosionDefaultProps) {
+    isWideSpreadCorrosion: any;
+    isPreviouslyBlended: any;
+    corrosionTaskNo: any;
+    corrosionLevel: any;
+    corrosionType: any;
+    causesOfDamage: any;
+
+    constructor(props: searchByCorrosionProps = corrosionDefaultProps) {
+        super(props);
+    }
+};
+

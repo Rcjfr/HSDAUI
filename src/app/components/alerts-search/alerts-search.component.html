@@ -1,4 +1,4 @@
-﻿<h1>Search Filters
+<h1>Search Filters
   <h5 class="pull-right">
     <a href="" (click)="expandCollapseAll(true)">Expland All</a>
     <a href="" (click)="expandCollapseAll(false)">Collapse All</a>
@@ -39,7 +39,7 @@
         Search by Corrosion
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-corrosion></aa-search-by-corrosion>
+      <aa-search-by-corrosion (update)="searchByCorrosion$.next($event)"></aa-search-by-corrosion>
     </accordion-group>
     <accordion-group #cpcpDispositionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
