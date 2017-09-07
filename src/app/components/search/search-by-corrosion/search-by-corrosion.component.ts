@@ -46,15 +46,7 @@ export class SearchByCorrosionComponent implements OnInit {
     return this.causeOfDamage.findIndex(d => d === '10') < 0;
   }
 
-  onChangeCorrosionLevel(evnt) {
-    if (evnt.target.checked) {
-      this.corrosionLevels.push(evnt.target.value);
-    } else {
-      this.corrosionLevels.splice(this.corrosionLevels.indexOf(evnt.target.value), 1);
-    }
-  }
-
-  onLevelCheckChange(id: string, isChecked: boolean) {
+  onCorrosionLevelChange(id: string, isChecked: boolean) {
     const idArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
 
     if (isChecked) {
