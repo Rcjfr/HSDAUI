@@ -55,36 +55,38 @@
       <div class="pull-right">
         <a class="btn btn-default btn-lg" [routerLink]="['/alerts']">Cancel</a>
 
-        
 
-        <span *ngIf="authService.isQCInspector() | async">
+
+        <ng-container *ngIf="authService.isQCPersonnel() | async ">
           <!--QC Analyst Actions-->
           <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="114" (click)="onReset.emit()">Reset</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && currentStatus == Status.Open" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(Status.Complete)" tabindex="114">Complete SDA</button>
+          <!--<button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && currentStatus == Status.Open" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>-->
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="(authService.isQCInspector() | async) && (currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="saveAlert(Status.Complete)" tabindex="114">Complete SDA</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="(authService.isQCManager() | async) && (currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="saveAlert(Status.Audited)" tabindex="114">Complete SDA</button>
           <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
-        </span>
-        <span *ngIf="authService.isQCManager() | async">
+        </ng-container>
+        <ng-container *ngIf="authService.isQCManager() | async">
           <!--QC Manager/Supervisor Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <!--<button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>-->
           <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
           <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
-        </span>
-        <span *ngIf="authService.isReliabilityAnalyst() | async">
+        </ng-container>
+        <ng-container *ngIf="authService.isReliabilityAnalyst() | async">
           <!--Reliability Analyst Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Require SDR</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.generalSection.sdrNumber === '' || sda.generalSection.sdrNumber == null" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
           <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
           <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus !== Status.Deleted" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
-        </span>
-        <span *ngIf="false">
+        </ng-container>
+        <ng-container *ngIf="false">
           <!--TODO-->
           <!--Compliance Engg/Liasion Engg Actions-->
           <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
+        </ng-container>
+        <ng-container *ngIf="((authService.isReliabilityAnalyst() | async) && currentStatus !== Status.Deleted) ||
+                            ((authService.isQCInspector() | async) && (sda.id && currentStatus == Status.Open)) ||
+                            ((authService.isQCManager() | async) && (currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete))">
           <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
-
-        </span>
-
+        </ng-container>
       </div>
     </div>
   </div>
@@ -106,16 +108,19 @@
             <input type="text" id="completedBy" [attr.disabled]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null" class="form-control" formControlName="completedBy" />
             <div *ngIf="sdaStatusForm.get('completedBy').errors && (sdaStatusForm.get('completedBy').dirty || sdaStatusForm.get('completedBy').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedBy').errors.required">
-                Completed By is required
+                Completed By is required.
               </div>
             </div>
           </div>
           <div class="form-group">
             <label [attr.for]="completedOn.idDatePicker">Completed On:<span class="req">*</span></label>
-            <datetime #completedOn [readonly]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null"  formControlName="completedOn" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,endDate:tomorrow }"></datetime>
+            <datetime #completedOn [readonly]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null" formControlName="completedOn" [timepicker]="{showSeconds:false}" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false}"></datetime>
             <div *ngIf="sdaStatusForm.get('completedOn').errors && (sdaStatusForm.get('completedOn').dirty || sdaStatusForm.get('completedOn').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedOn').errors.required">
-                Completed Date is required
+                Completed Date is required.
+              </div>
+              <div [hidden]="!sdaStatusForm.get('completedOn').errors.future">
+                Completed Date can not be a future date.
               </div>
             </div>
           </div>
@@ -124,7 +129,7 @@
             <textarea class="form-control" id="comments" [required]="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted" formControlName="comments"></textarea>
             <div *ngIf="sdaStatusForm.get('comments').errors && (sdaStatusForm.get('comments').dirty || sdaStatusForm.get('comments').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('comments').errors.required">
-                Comments are required
+                Comments are required.
               </div>
             </div>
           </div>

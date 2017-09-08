@@ -13,6 +13,15 @@ export class CustomValidators {
       return null;
     };
   }
+  static validateFutureDate(c: AbstractControl): { [key: string]: boolean } | null {
+
+    const date = <Date>c.value;
+    if (date > new Date()) {
+      return { 'future': true };
+    }
+
+    return null;
+  };
   static validateScheduledMaintenanceFields(c: AbstractControl): { [key: string]: boolean } | null {
 
     const routineNoControl = c.get('routineNo');

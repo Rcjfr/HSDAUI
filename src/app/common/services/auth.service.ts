@@ -87,10 +87,16 @@ export class AuthService {
   }
 
   isQCInspector(): Observable<boolean> {
-    return this.hasRole(this.QC_Inspector);
+    return Observable.combineLatest(this.isQCPersonnel(), this.isQCManager()).map(latestValues => {
+      const [qcPersonnel, qcManager] = latestValues;
+      return qcPersonnel && !qcManager;
+    });
   }
   isQCManager(): Observable<boolean> {
     return this.hasAnyRole([this.QC_Manager, this.QC_Supervisor]);
+  }
+  isQCPersonnel(): Observable<boolean> {
+    return this.hasAnyRole([this.QC_Inspector, this.QC_Manager, this.QC_Supervisor]);
   }
   isReliabilityAnalyst(): Observable<boolean> {
     return this.hasRole(this.Reliability_Analyst);
