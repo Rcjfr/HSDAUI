@@ -39,20 +39,19 @@
           <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType" formControlName="corrosionType">
             <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
-          <input type="text" placeholder="Enter other description" tabindex="25" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()"
-          />
+          <input type="text" placeholder="Other description" tabindex="25" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()" />
         </aac-field-container>
       </div>
     </div>
     <div class="col-md-6">
       <div>
         <aac-field-container label="Cause of Damage:" for="causeOfDamage">
-          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage" formControlName="causesOfDamage">
+          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage"
+              formControlName="causesOfDamage" (change)="onCauseOfDamageChange($event)">
             <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
-          <input type="text" placeholder="Enter other description" tabindex="27" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()"
-          />
-
+          <input type="text" style="margin-top:5px;" placeholder="Other description" tabindex="27" class="form-control" maxlength="250"
+                *ngIf="!hideCauseOfDamageOther" formControlName="causeOfDamageOtherDescription"/>
         </aac-field-container>
       </div>
     </div>
