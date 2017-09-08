@@ -16,7 +16,6 @@ export class CauseOfDamageService {
     //return this.http.get(this.endPointUrl)
     //  .map((result) => result.json());
       return Observable.of([
-        { id: 0, description: '' },
         { id: 1, description: 'Environment' },
         { id: 2, description: 'Lav / Galley Spill' },
         { id: 4, description: 'Blocked Drain' },
