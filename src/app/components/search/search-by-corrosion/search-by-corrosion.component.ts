@@ -20,7 +20,7 @@ export class SearchByCorrosionComponent implements OnInit {
     corrosionLevel: new FormArray([]),
     corrosionType: new FormControl(),
     causesOfDamage: new FormControl(),
-    causeOfDamageOtherDescription: new FormControl()
+    corrosionTypeOtherText: new FormControl()
   });
 
   corrosionTypes$: Observable<List<ICorrosionType>>;
@@ -30,7 +30,7 @@ export class SearchByCorrosionComponent implements OnInit {
   causeOfDamage: string[] = [];
   corrosionType = '';
 
-  hideCauseOfDamageOther = true;
+  hideCorrosionTypeOther = true;
 
   constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
 
@@ -41,21 +41,17 @@ export class SearchByCorrosionComponent implements OnInit {
     this.corrosionForm.valueChanges.subscribe(this.update);
   }
 
-  hideCorrosionTypeOther() {
-    return this.corrosionType !== '5';
-  }
-
-  onCauseOfDamageChange(event) {
-    const damageArray = <FormArray>this.corrosionForm.controls.causesOfDamage;
-    if (damageArray) {
-      if (damageArray.value.indexOf(256) >= 0) {
-        this.hideCauseOfDamageOther = false;
+  onCorrosionTypeChange(event) {
+    const typeArray = <FormArray>this.corrosionForm.controls.corrosionType;
+    if (typeArray) {
+      if (typeArray.value.indexOf(5) >= 0) {
+        this.hideCorrosionTypeOther = false;
 
         return;
       }
     }
 
-    this.hideCauseOfDamageOther =  true;
+    this.hideCorrosionTypeOther =  true;
   }
 
   onCorrosionLevelChange(id: string, isChecked: boolean) {
