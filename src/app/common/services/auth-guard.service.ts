@@ -17,7 +17,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const id = route.params['id'];
     if (id && id === 'new') {
-      return this.authService.isQCInspector().take(1).map(hasRole => {
+      return this.authService.isQCPersonnel().take(1).map(hasRole => {
         if (!hasRole) {
           console.log('Unauthorized');
           //alert('Unauthorized');

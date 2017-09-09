@@ -73,7 +73,7 @@
         </ng-container>
         <ng-container *ngIf="authService.isReliabilityAnalyst() | async">
           <!--Reliability Analyst Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.generalSection.sdrNumber === '' || sda.generalSection.sdrNumber == null" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && (sda.generalSection.sdrNumber === '' || sda.generalSection.sdrNumber == null)" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
           <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
           <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Approve SDA</button>
         </ng-container>
@@ -85,7 +85,7 @@
         <ng-container *ngIf="((authService.isReliabilityAnalyst() | async) && currentStatus !== Status.Deleted) ||
                             ((authService.isQCInspector() | async) && (sda.id && currentStatus == Status.Open)) ||
                             ((authService.isQCManager() | async) && (currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete))">
-          <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
         </ng-container>
       </div>
     </div>
