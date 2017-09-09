@@ -35,7 +35,7 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion) {
-    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion}
+    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion }
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -47,8 +47,17 @@ export class AlertsSearchComponent implements OnInit {
   searchAlerts() {
     let hasCriteria = false;
     const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
-    _.forIn(definedSections, (value, key) => {
-      if (!_.isEmpty(_.pickBy(value, _.identity))) {  //Get all defined sub-properties of that section (dateFrom, dateThrough, etc)
+    _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
+      //Make sure they're A) defined and B) not an empty array
+      const validValues = _.pickBy(_.pickBy(value, _.identity), (x) => {
+        if (Array.isArray(x)) {
+          return x.length > 0;
+        }
+
+        return true;
+      });
+
+      if (!_.isEmpty(validValues)) {
         hasCriteria = true;
       }
     });
