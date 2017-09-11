@@ -184,6 +184,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.hideStatusModal();
     this.saveAlertData();
   }
+
   requestSdrNumber() {
     this.dialogService.addDialog(ConfirmComponent, {
       title: 'Confirm?',
@@ -198,6 +199,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.saveAlertData();
       });
   }
+
   validateAlertData(newStatus: Status) {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
@@ -224,7 +226,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     } else {
       if (newStatus === Status.Closed) {
-        this.sdaStatusTitle = `Approve SDA(SDA ID:${this.sda.id})`;
+        this.sdaStatusTitle = `Accept SDA(SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
       } else if (newStatus === Status.Audited) {
@@ -239,6 +241,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.statusModal.show();
     }
   }
+
   get tomorrow(): Date {
     const tomorrow = moment(new Date()).add(1, 'days');
 
