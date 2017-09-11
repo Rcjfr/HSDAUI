@@ -1,62 +1,61 @@
-﻿<div class="row  form-group">
-  <div class="col-md-6">
-    <aac-checkbox-container label="Widespread Corrosion">
-      <input type="checkbox" tabindex="23"/>
-    </aac-checkbox-container>
+<form [formGroup]="corrosionForm">
+  <div class="row">
+    <div class="col-md-6">
+      <aac-checkbox-container label="Widespread Corrosion">
+        <input type="checkbox" tabindex="23" formControlName="isWideSpreadCorrosion" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-6">
+      <aac-checkbox-container label="Corrosion Previously Blended">
+        <input type="checkbox" tabindex="24" formControlName="isPreviouslyBlended" />
+      </aac-checkbox-container>
+    </div>
+  </div>
 
-    
-  </div>
-  <div class="col-md-6">
-    <aac-checkbox-container label="Corrosion Previously Blended">
-      <input type="checkbox" tabindex="24" />
-    </aac-checkbox-container>
-    
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-6">
-    <aac-field-container label="Corrosion Task #:">
-      <input type="text" tabindex='25' class="form-control">
-    </aac-field-container>
-  </div>
-  <div class="col-md-6">
-    <div class="row form-group">
-      <label class="col-sm-4 control-label">Corrosion Level:</label>
-      <div class="col-sm-8">
-        <aac-checkbox-list [source]="corrosionLevels$ | async"
-                           labelField="description"
-                           valueField="id"
-                           colClass="col-sm-4"
-                           tabindex="26">
-        </aac-checkbox-list>
+  <div class="row">
+    <div class="col-md-6">
+      <aac-field-container label="Corrosion Task #:">
+        <input type="text" tabindex='25' class="form-control" formControlName="corrosionTaskNo">
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Corrosion Level:</label>
+        <div class="col-sm-8">
+          <div *ngFor="let level of corrosionLevels$ | async">
+            <aac-checkbox-container class="checkbox-group" label="{{level.description}}">
+              <input type="checkbox" [value]="level.id" (change)="onCorrosionLevelChange(level.id, $event.target.checked)" />
+            </aac-checkbox-container>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row  form-group">
-  <div class="col-md-6">
-    <div>
-      <aac-field-container label="Type of Corrosion:" for="corrosionType">
-        <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType">
-          <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
-        </select>
-        <input type="text" placeholder="Enter other description" tabindex="25" class="form-control" maxlength="250" *ngIf="!hideCorrosionTypeOther()" />
-      </aac-field-container>
+
+  <div class="row form-group">
+    <div class="col-md-6">
+      <div>
+        <aac-field-container label="Corrosion Type:" for="corrosionType">
+          <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType"
+                formControlName="corrosionType" (change)="onCorrosionTypeChange($event)">
+            <option value=""> </option>
+            <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+          </select>
+          <input type="text" placeholder="Other description" tabindex="25" class="form-control" maxlength="250"
+            *ngIf="!hideCorrosionTypeOther" formControlName="corrosionTypeOtherText" />
+        </aac-field-container>
+      </div>
     </div>
-
-  </div>
-  <div class="col-md-6">
-    <div>
-      <aac-field-container label="Cause of Damage:" for="causeOfDamage">
-        <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage">
-          <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>
-        </select>
-        <input type="text" placeholder="Enter other description" tabindex="27" class="form-control" maxlength="250" *ngIf="!hideCauseOfDamageOther()" />
-
-      </aac-field-container>
-
-
+    <div class="col-md-6">
+      <div>
+        <aac-field-container label="Cause of Damage:" for="causeOfDamage">
+          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage"
+              formControlName="causesOfDamage">
+            <option value=""> </option>
+            <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>
+          </select>
+        </aac-field-container>
+      </div>
     </div>
   </div>
-</div>
-
+</form>
