@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AppStateService } from '../../common/services';
 import { List } from 'immutable';
@@ -14,6 +14,6 @@ export class AlertsComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.loading$ = this.appStateService.getLookupDataLoading();
+    this.loading$ = Observable.merge(this.appStateService.getLookupDataLoading(), this.appStateService.getUserLoading());
   }
 }
