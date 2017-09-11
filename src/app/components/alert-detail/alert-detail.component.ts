@@ -41,7 +41,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   }
 
   ngOnInit(): void {
-    this.loading$ = this.appStateService.getSelectedAlertLoading();
+    this.loading$ = Observable.merge(this.appStateService.getLookupDataLoading(), this.appStateService.getUserLoading(), this.appStateService.getSelectedAlertLoading());
     this.newSdaSubscription = this.appStateService.getLoadNewSdaState().subscribe(() => {
       if (this.currentSdaId > 0) {
         return;
