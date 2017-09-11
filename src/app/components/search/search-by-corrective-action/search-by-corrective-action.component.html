@@ -100,15 +100,20 @@
   </div>
   <div class="row">
     <div class="row col-md-6">
-      <label class="col-sm-4 control-label">Externally Visible?</label>
-      <div class="col-sm-8">
+      <!--<label class="col-sm-4 control-label">Externally Visible?</label>-->
+      <!--<div class="col-sm-8">
         <aac-radio-container label="Yes">
           <input type="radio" value="1" tabindex="61" name="isExternallyVisible" formControlName="isExternallyVisible" />
         </aac-radio-container>
         <aac-radio-container label="No">
           <input type="radio" value="0" tabindex="61" name="isExternallyVisible" formControlName="isExternallyVisible" />
         </aac-radio-container>
-      </div>
+      </div>-->
+      <aac-field-container label="Externally Visible?" for="isExternallyVisible">
+        <select [(ngModel)]="isExternallyVisible" class="form-control" tabindex='28' id="isExternallyVisible" formControlName="isExternallyVisible">
+          <option *ngFor="let ac of correctiveActions$" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
 
     </div>
   </div>

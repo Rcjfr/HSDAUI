@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
     styleUrls: ['./search-by-corrective-action.component.less']
 })
 export class SearchByCorrectiveActionComponent implements OnInit {
+   
     @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
     correctiveActionForm = new FormGroup({
@@ -36,10 +37,23 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
+    correctiveActions$: {
+        id: number;
+        description: string;
+    }[];
+
     constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
+        // this.correctiveActions$ = Observable.of).select;
+
+        this.correctiveActions$ = [
+            { id: 1, description: 'Yes' },
+            { id: 0, description: 'No' },
+            { id: -1, description: 'Both' }
+        ];
+
         this.correctiveActionForm.valueChanges.subscribe(this.update);
     }
 
