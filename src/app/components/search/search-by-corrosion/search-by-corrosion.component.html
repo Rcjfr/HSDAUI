@@ -36,9 +36,8 @@
     <div class="col-md-6">
       <div>
         <aac-field-container label="Corrosion Type:" for="corrosionType">
-          <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType"
-                formControlName="corrosionType" (change)="onCorrosionTypeChange($event)">
-            <option value=""> </option>
+          <select class="form-control" multiple tabindex='27' id="corrosionType" formControlName="corrosionType" (change)="onCorrosionTypeChange($event)">
+            <option></option>
             <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
           <input type="text" placeholder="Other description" tabindex="25" class="form-control" maxlength="250"
