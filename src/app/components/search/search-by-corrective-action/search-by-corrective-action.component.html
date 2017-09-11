@@ -2,9 +2,15 @@
   <h4>Corrective Actions</h4>
   <div class="row">
     <div class="col-md-6">
-      <aac-checkbox-container label="Deferred">
+      <!--<aac-checkbox-container label="Deferred">
         <input type="checkbox" tabindex="49" formControlName="isDeferred"/>
-      </aac-checkbox-container>
+      </aac-checkbox-container>-->
+
+      <aac-field-container label="Deferred:" for="isDeferred">
+        <select class="form-control" tabindex='28' id="isDeferred" formControlName="isDeferred">
+          <option *ngFor="let ac of isDeferred" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
 
 
 
@@ -18,9 +24,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <!--<aac-checkbox-container label="Defective Part Replaced with Identical Part #">
-        <input type="checkbox" tabindex="51" formControlName="RepairType" />
-      </aac-checkbox-container>-->
+      <aac-checkbox-container label="Defective Part Replaced with Identical Part #">
+        <input type="checkbox" tabindex="51" />
+      </aac-checkbox-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Identical Part #:">
@@ -31,9 +37,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <!--<aac-checkbox-container label="Modified Part # Installed" >
-        <input type="checkbox" tabindex="53" formControlName="RepairType" />
-      </aac-checkbox-container>-->
+      <aac-checkbox-container label="Modified Part # Installed">
+        <input type="checkbox" tabindex="53" />
+      </aac-checkbox-container>
 
 
 
@@ -47,9 +53,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <!--<aac-checkbox-container label="Repaired">
-        <input type="checkbox" tabindex="55" formControlName="RepairType" />
-      </aac-checkbox-container>-->
+      <aac-checkbox-container label="Repaired">
+        <input type="checkbox" tabindex="55" />
+      </aac-checkbox-container>
 
 
 
@@ -66,9 +72,14 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <aac-checkbox-container label="Major Repair">
+      <!--<aac-checkbox-container label="Major Repair">
         <input type="checkbox" tabindex="57" formControlName="isMajorRepair"/>
-      </aac-checkbox-container>
+      </aac-checkbox-container>-->
+      <aac-field-container label="Major Repair:" for="isMajorRepair">
+        <select class="form-control" tabindex='28' id="isMajorRepair" formControlName="isMajorRepair">
+          <option *ngFor="let ac of isMajorRepair" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
 
 
 
@@ -99,19 +110,10 @@
 
   </div>
   <div class="row">
-    <div class="row col-md-6">
-      <!--<label class="col-sm-4 control-label">Externally Visible?</label>-->
-      <!--<div class="col-sm-8">
-        <aac-radio-container label="Yes">
-          <input type="radio" value="1" tabindex="61" name="isExternallyVisible" formControlName="isExternallyVisible" />
-        </aac-radio-container>
-        <aac-radio-container label="No">
-          <input type="radio" value="0" tabindex="61" name="isExternallyVisible" formControlName="isExternallyVisible" />
-        </aac-radio-container>
-      </div>-->
+    <div class="col-md-6">
       <aac-field-container label="Externally Visible?" for="isExternallyVisible">
-        <select [(ngModel)]="isExternallyVisible" class="form-control" tabindex='28' id="isExternallyVisible" formControlName="isExternallyVisible">
-          <option *ngFor="let ac of correctiveActions$" [value]="ac.id">{{ac.description}}</option>
+        <select class="form-control" tabindex='28' id="isExternallyVisible" formControlName="isExternallyVisible">
+          <option *ngFor="let ac of isExternallyVisible" [value]="ac.id">{{ac.description}}</option>
         </select>
       </aac-field-container>
 
@@ -122,28 +124,28 @@
       <h4>Approximate External Doubler Repair Dimensions</h4>
     </div>
   </div>
- 
-    <div class="row">
-      <div class="col-md-6">
-        <div>
-          <aac-field-container label="Height From (in inches):">
-            <input type="text" tabindex='62' class="form-control" formControlName="repairHeightFrom">
-          </aac-field-container>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div>
-          <aac-field-container label="Height To (in inches):">
-            <input type="text" tabindex='62' class="form-control" formControlName="repairHeightTo">
-          </aac-field-container>
-        </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <aac-field-container label="Height From (in inches):">
+          <input type="text" tabindex='62' class="form-control" formControlName="repairHeightFrom">
+        </aac-field-container>
       </div>
     </div>
-    <!--<div class="col-md-6">
-      <aac-field-container label="Height (in inches):">
-        <input type="text" tabindex='62' class="form-control" formControlName="repairHeight">
-      </aac-field-container>
-    </div>-->
+    <div class="col-md-6">
+      <div>
+        <aac-field-container label="Height To (in inches):">
+          <input type="text" tabindex='62' class="form-control" formControlName="repairHeightTo">
+        </aac-field-container>
+      </div>
+    </div>
+  </div>
+  <!--<div class="col-md-6">
+    <aac-field-container label="Height (in inches):">
+      <input type="text" tabindex='62' class="form-control" formControlName="repairHeight">
+    </aac-field-container>
+  </div>-->
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Width From (in inches):">
@@ -170,4 +172,4 @@
     </div>
 
   </div>
-  </form>
+</form>

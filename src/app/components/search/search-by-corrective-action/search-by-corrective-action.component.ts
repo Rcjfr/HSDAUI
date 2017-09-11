@@ -37,7 +37,15 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
-    correctiveActions$: {
+    isDeferred: {
+        id: number;
+        description: string;
+    }[];
+    isExternallyVisible: {
+        id: number;
+        description: string;
+    }[];
+    isMajorRepair: {
         id: number;
         description: string;
     }[];
@@ -48,10 +56,20 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
         // this.correctiveActions$ = Observable.of).select;
 
-        this.correctiveActions$ = [
+        this.isExternallyVisible = [
             { id: 1, description: 'Yes' },
             { id: 0, description: 'No' },
-            { id: -1, description: 'Both' }
+            { id: 2, description: 'Both' }
+        ];
+        this.isDeferred = [
+            { id: 1, description: 'Yes' },
+            { id: 0, description: 'No' },
+            { id: 2, description: 'Both' }
+        ];
+        this.isMajorRepair = [
+            { id: 1, description: 'Yes' },
+            { id: 0, description: 'No' },
+            { id: 2, description: 'Both' }
         ];
 
         this.correctiveActionForm.valueChanges.subscribe(this.update);
