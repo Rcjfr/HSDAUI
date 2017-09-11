@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'aa-search-by-corrosion',
@@ -28,7 +29,6 @@ export class SearchByCorrosionComponent implements OnInit {
   causeOfDamages$: Observable<List<ICauseOfDamage>>;
   corrosionLevels: string[] = [];
   causeOfDamage: string[] = [];
-  corrosionType = '';
 
   hideCorrosionTypeOther = true;
 
@@ -38,13 +38,19 @@ export class SearchByCorrosionComponent implements OnInit {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.causeOfDamages$ = this.appStateService.getCauseOfDamages();
-    this.corrosionForm.valueChanges.subscribe(this.update);
+    this.corrosionForm.valueChanges.subscribe(form => {
+      //Remove any empty selections from the multi-select dropdowns
+      form.corrosionType = _.compact(form.corrosionType);
+      form.causesOfDamage = _.compact(form.causesOfDamage);
+      this.update.emit(form);
+    });
   }
 
   onCorrosionTypeChange(event) {
-    const typeArray = <FormArray>this.corrosionForm.controls.corrosionType;
-    if (typeArray) {
-      if (typeArray.value.indexOf(5) >= 0) {
+    const corrosionType = this.corrosionForm.controls.corrosionType;
+    if (corrosionType) {
+      //If they select "Other" we need to display an extra textbox for the description
+      if (corrosionType.value.indexOf(5) >= 0) {
         this.hideCorrosionTypeOther = false;
 
         return;
