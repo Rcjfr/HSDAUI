@@ -104,7 +104,6 @@ export class AlertEffects {
           return new selectedAlert.LoadSdaCompleteAction(data);
         })
         .catch((err) => {
-          console.log(err);
           return of(new selectedAlert.LoadSdaFailAction('Failed to load SDA.'));
         });
     });

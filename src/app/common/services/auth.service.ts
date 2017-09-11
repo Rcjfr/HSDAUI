@@ -89,6 +89,7 @@ export class AuthService {
   isQCInspector(): Observable<boolean> {
     return Observable.combineLatest(this.isQCPersonnel(), this.isQCManager()).map(latestValues => {
       const [qcPersonnel, qcManager] = latestValues;
+
       return qcPersonnel && !qcManager;
     });
   }

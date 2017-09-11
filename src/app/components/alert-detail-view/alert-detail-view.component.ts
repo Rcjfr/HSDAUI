@@ -23,9 +23,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppStateService, AuthService } from '../../common/services';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { NKDatetime } from "ng2-datetime/ng2-datetime";
-import { CustomValidators } from "../../common/validators/custom-validators";
-import { ConfirmComponent } from "../../common/components/confirm/confirm.component";
+import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+import { CustomValidators } from '../../common/validators/custom-validators';
+import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 @Component({
   selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
@@ -188,13 +188,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.dialogService.addDialog(ConfirmComponent, {
       title: 'Confirm?',
       message: `Are you sure you want to request SDR for this SDA:${this.sda.id}?`
-    }).filter(confirm => confirm == true).subscribe(confirm => {
-      this.sda.generalSection.sdrNumber = "Y";
+    }).filter(confirm => confirm === true).subscribe(confirm => {
+      this.sda.generalSection.sdrNumber = 'Y';
       this.sdaForm.get('generalSectionFormGroup').patchValue({ 'sdrNumber': 'Y' });
       this.sdaForm.patchValue({ status: this.currentStatus });
       this.sda.statusUpdatedBy = this.lastModifiedBy;
       this.sda.statusUpdatedOn = new Date();
-      this.sda.comments = "SDR Requested";
+      this.sda.comments = 'SDR Requested';
       this.saveAlertData();
       });
   }
