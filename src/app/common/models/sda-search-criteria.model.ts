@@ -120,7 +120,6 @@ type searchByCorrosionProps = {
     corrosionLevel: any;
     corrosionType: any;
     causesOfDamage: any;
-   
 };
 
 const corrosionDefaultProps = {
