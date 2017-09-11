@@ -159,8 +159,10 @@ type searchByCorrectiveActionProps = {
     CompletedBy: any;
     RepairDocumentType: any;
     IsExternallyVisible: any;
-    RepairHeight: any;
-    RepairWidth: any;
+    repairHeightFrom: any;
+    repairHeightTo: any;
+    repairWidthFrom: any;
+    repairWidthTo: any;
     ChapFigRepairText: any;
     DeferralNo: any;
     RepairType: any;
@@ -177,8 +179,10 @@ const CorrectiveActionDefaultProps = {
     CompletedBy: undefined,
     RepairDocumentType: undefined,
     IsExternallyVisible: undefined,
-    RepairHeight: undefined,
-    RepairWidth: undefined,
+    repairHeightFrom: undefined,
+    repairHeightTo: undefined,
+    repairWidthFrom: undefined,
+    repairWidthTo: undefined,
     ChapFigRepairText: undefined,
     DeferralNo: undefined,
     RepairType: undefined
@@ -195,8 +199,10 @@ export class SearchByCorrectiveAction extends Record(CorrectiveActionDefaultProp
     CompletedBy: any;
     RepairDocumentType: any;
     IsExternallyVisible: any;
-    RepairHeight: any;
-    RepairWidth: any;
+    repairHeightFrom: any;
+    repairHeightTo: any;
+    repairWidthFrom: any;
+    repairWidthTo: any;
     ChapFigRepairText: any;
     DeferralNo: any;
     RepairType: any;

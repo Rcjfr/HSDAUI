@@ -24,8 +24,10 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         completedBy: new FormControl(),
         repairDocumentType: new FormControl(),
         isExternallyVisible: new FormControl(),
-        repairHeight: new FormControl(),
-        repairWidth: new FormControl(),
+        repairHeightFrom: new FormControl(),
+        repairHeightTo: new FormControl(),
+        repairWidthFrom: new FormControl(),
+        repairWidthTo: new FormControl(),
         chapFigRepairText: new FormControl(),
         deferralNo: new FormControl(),
         repairType: new FormControl()
