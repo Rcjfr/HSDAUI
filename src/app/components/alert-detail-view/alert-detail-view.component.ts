@@ -16,12 +16,16 @@ import { ISda, Status } from '../../common/models';
 import * as moment from 'moment';
 import { GenericValidator } from '../../common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
+import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AppStateService, AuthService } from '../../common/services';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+import { CustomValidators } from '../../common/validators/custom-validators';
+import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 @Component({
   selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
@@ -56,14 +60,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
-    public appStateService: AppStateService, public authService: AuthService) {
+    public appStateService: AppStateService, public authService: AuthService, private dialogService: DialogService) {
     this.sdaForm = this.fb.group({
       status: ['', [Validators.required]],
     });
     this.sdaStatusForm = this.fb.group({
       status: ['', [Validators.required]],
       completedBy: ['', [Validators.required]],
-      completedOn: ['', [Validators.required]],
+      completedOn: ['', [Validators.required, CustomValidators.validateFutureDate]],
       comments: ['', []],
     });
     this.genericValidator = new GenericValidator(ValidationMessages);
@@ -175,9 +179,25 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
     this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
     this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
+
     this.sda.comments = this.sdaStatusForm.get('comments').value;
     this.hideStatusModal();
     this.saveAlertData();
+  }
+
+  requestSdrNumber() {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: `Are you sure you want to request SDR for this SDA:${this.sda.id}?`
+    }).filter(confirm => confirm === true).subscribe(confirm => {
+      this.sda.generalSection.sdrNumber = 'Y';
+      this.sdaForm.get('generalSectionFormGroup').patchValue({ 'sdrNumber': 'Y' });
+      this.sdaForm.patchValue({ status: this.currentStatus });
+      this.sda.statusUpdatedBy = this.lastModifiedBy;
+      this.sda.statusUpdatedOn = new Date();
+      this.sda.comments = 'SDR Requested';
+      this.saveAlertData();
+      });
   }
 
   validateAlertData(newStatus: Status) {
@@ -194,7 +214,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       return;
     }
     if (newStatus === Status.Open) {
-      if (this.sda.status === Status.Complete) {  //Reopening the form
+      if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
         this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
         this.statusModal.show();
@@ -206,11 +226,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     } else {
       if (newStatus === Status.Closed) {
-        this.sdaStatusTitle = `Approve SDA(SDA ID:${this.sda.id})`;
+        this.sdaStatusTitle = `Accept SDA(SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
       } else if (newStatus === Status.Audited) {
-        this.sdaStatusTitle = `Audit SDA(SDA ID:${this.sda.id})`;
+        this.sdaStatusTitle = this.sda.id ? `Audit SDA(SDA ID:${this.sda.id})` : 'Complete SDA';
       } else if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete/Archive SDA(SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Rejected) {
@@ -221,6 +241,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.statusModal.show();
     }
   }
+
   get tomorrow(): Date {
     const tomorrow = moment(new Date()).add(1, 'days');
 
@@ -228,12 +249,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   saveAlertData() {
-    const generalSectionData = this.flatten(this.sdaForm.value.generalSectionFormGroup);
+    const formData = this.sdaForm.getRawValue();
+    const generalSectionData = this.flatten(formData.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
-    const defectLocationData = this.flatten(this.sdaForm.value.defectLocationSectionFormGroup);
+    const defectLocationData = this.flatten(formData.defectLocationSectionFormGroup);
     let cpcpSectionData = undefined;
-    if (this.sdaForm.value.cpcpSectionGroup) {
-      const causeOfDamageGroup = this.sdaForm.value.cpcpSectionGroup.causeOfDamageGroup;
+    if (formData.cpcpSectionGroup) {
+      const causeOfDamageGroup = formData.cpcpSectionGroup.causeOfDamageGroup;
       const causesOfDamage: any = (causeOfDamageGroup.blockedDrain ? 4 : 0) +
         (causeOfDamageGroup.chemicalSpill ? 8 : 0) +
         (causeOfDamageGroup.damageOther ? 512 : 0) +
@@ -244,9 +266,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         (causeOfDamageGroup.missingFloorBoardTape ? 32 : 0) +
         (causeOfDamageGroup.poorSealingPractices ? 128 : 0) +
         (causeOfDamageGroup.wetInsulationBlanket ? 16 : 0);
-      cpcpSectionData = Object.assign(this.flatten(this.sdaForm.value.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
+      cpcpSectionData = Object.assign(this.flatten(formData.cpcpSectionGroup), { causesOfDamage: causesOfDamage });
     }
-    const correctiveActionData = this.flatten(this.sdaForm.value.correctiveActionFormGroup);
+    const correctiveActionData = this.flatten(formData.correctiveActionFormGroup);
     if (correctiveActionData.completedDate) {
       correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
     }

@@ -1,4 +1,4 @@
-﻿import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { FormControlsModule } from '../../../../common/components/form-controls.module';
 import { GeneralSectionFormComponent } from './general-section-form.component';
@@ -12,7 +12,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule, TypeaheadMatch } from 'ngx-bootstrap';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 import { MockStore } from '../../../../common/store/mock-store';
 import { BaseFormComponent } from '../../base-form.component';
@@ -35,7 +35,7 @@ describe('GeneralSectionFormComponent', () => {
         TypeaheadModule.forRoot(),
         FormsModule,
         // StoreModule.provideStore(reducer),
-        ToastModule.forRoot()
+        ToastrModule.forRoot()
       ]
     })
 
