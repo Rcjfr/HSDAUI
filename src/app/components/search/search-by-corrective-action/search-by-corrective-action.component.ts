@@ -5,6 +5,7 @@ import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { AppStateService } from '../../../common/services';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import * as _ from 'lodash';
 @Component({
     selector: 'aa-search-by-corrective-action',
     templateUrl: './search-by-corrective-action.component.html',
@@ -54,8 +55,6 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
-        // this.correctiveActions$ = Observable.of).select;
-
         this.isExternallyVisible = [
             { id: 1, description: 'Yes' },
             { id: 0, description: 'No' },
@@ -72,7 +71,12 @@ export class SearchByCorrectiveActionComponent implements OnInit {
             { id: 2, description: 'Both' }
         ];
 
-        this.correctiveActionForm.valueChanges.subscribe(this.update);
+        this.correctiveActionForm.valueChanges.subscribe(form => {
+      //Remove any empty selections from the multi-select dropdowns
+            form.repairDescriptionType = _.compact(form.repairDescriptionType);
+            form.repairDocumentType = _.compact(form.repairDocumentType);
+      this.update.emit(form);
+    });
     }
 
 }

@@ -1,4 +1,4 @@
-﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { FormControlsModule } from '../../common/components/form-controls.module';
 import * as $ from 'jquery';
@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule, TypeaheadMatch } from 'ngx-bootstrap';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { AppStateService } from '../../common/services';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 
@@ -29,7 +29,7 @@ describe('AlertDetailComponent', () => {
         NKDatetimeModule,
         TypeaheadModule.forRoot(),
         // StoreModule.provideStore(reducer),
-        ToastModule.forRoot()
+        ToastrModule.forRoot()
       ]
     })
       .compileComponents();

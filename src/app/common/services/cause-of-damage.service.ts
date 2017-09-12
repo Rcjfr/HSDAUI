@@ -15,17 +15,17 @@ export class CauseOfDamageService {
     //TODO:Uncomment when lookup table is available
     //return this.http.get(this.endPointUrl)
     //  .map((result) => result.json());
-    return Observable.of([
-        { id: 0, description: 'Environment' },
-        { id: 1, description: 'Lav / Galley Spill' },
-        { id: 2, description: 'Blocked Drain' },
-        { id: 4, description: 'Chemical Spill' },
-        { id: 8, description: 'Wet Insulation Blanket' },
-        { id: 16, description: 'Missing / Deteriorated Floorboard Tape' },
-        { id: 32, description: 'Correct Hardware Not Installed' },
-        { id: 64, description: 'Deteriorated / Poor Sealing Practices' },
-        { id: 128, description: 'Missing Corrosion Inhibitor' },
-        { id: 256, description: 'Other' }
+      return Observable.of([
+        { id: 1, description: 'Environment' },
+        { id: 2, description: 'Lav / Galley Spill' },
+        { id: 4, description: 'Blocked Drain' },
+        { id: 8, description: 'Chemical Spill' },
+        { id: 16, description: 'Wet Insulation Blanket' },
+        { id: 32, description: 'Missing / Deteriorated Floorboard Tape' },
+        { id: 64, description: 'Correct Hardware Not Installed' },
+        { id: 128, description: 'Deteriorated / Poor Sealing Practices' },
+        { id: 256, description: 'Missing Corrosion Inhibitor' },
+        { id: 512, description: 'Other' }
     ]);
   };
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'aa-search-by-corrosion',
@@ -19,7 +20,8 @@ export class SearchByCorrosionComponent implements OnInit {
     corrosionTaskNo: new FormControl(),
     corrosionLevel: new FormArray([]),
     corrosionType: new FormControl(),
-    causesOfDamage: new FormControl()
+    causesOfDamage: new FormControl(),
+    corrosionTypeOtherText: new FormControl()
   });
 
   corrosionTypes$: Observable<List<ICorrosionType>>;
@@ -27,7 +29,8 @@ export class SearchByCorrosionComponent implements OnInit {
   causeOfDamages$: Observable<List<ICauseOfDamage>>;
   corrosionLevels: string[] = [];
   causeOfDamage: string[] = [];
-  corrosionType = '';
+
+  hideCorrosionTypeOther = true;
 
   constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
 
@@ -35,25 +38,35 @@ export class SearchByCorrosionComponent implements OnInit {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.causeOfDamages$ = this.appStateService.getCauseOfDamages();
-    this.corrosionForm.valueChanges.subscribe(this.update);
+    this.corrosionForm.valueChanges.subscribe(form => {
+      //Remove any empty selections from the multi-select dropdowns
+      form.corrosionType = _.compact(form.corrosionType);
+      form.causesOfDamage = _.compact(form.causesOfDamage);
+      this.update.emit(form);
+    });
   }
 
-  hideCorrosionTypeOther() {
-    return this.corrosionType !== '5';
-  }
+  onCorrosionTypeChange(event) {
+    const corrosionType = this.corrosionForm.controls.corrosionType;
+    if (corrosionType) {
+      //If they select "Other" we need to display an extra textbox for the description
+      if (corrosionType.value.indexOf(5) >= 0) {
+        this.hideCorrosionTypeOther = false;
 
-  hideCauseOfDamageOther() {
-    return this.causeOfDamage.findIndex(d => d === '10') < 0;
+        return;
+      }
+    }
+
+    this.hideCorrosionTypeOther =  true;
   }
 
   onCorrosionLevelChange(id: string, isChecked: boolean) {
-    const idArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
+    const corrosionArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
 
     if (isChecked) {
-      idArray.push(new FormControl(id));
+      corrosionArray.push(new FormControl(id));
     } else {
-      const index = idArray.controls.findIndex(x => x.value === id)
-      idArray.removeAt(index);
+      corrosionArray.removeAt(corrosionArray.controls.findIndex(x => x.value === id));
     }
   }
 }
