@@ -64,7 +64,10 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
     this.ataSubscription && this.ataSubscription.unsubscribe();
   }
 
-  getAlertCode2s(alertCode1: string) {
+  onAlertCode1Change(alertCode1: string) {
     this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
+
+    //reset ataCode2
+    this.sdaForm.controls['ataCode2'].setValue(null);
   }
 }
