@@ -6,10 +6,13 @@ export class Helper {
   }
 
   private static ReviveDateTime(key: any, value: any): any {
-    if (typeof key === 'string' && ((key.indexOf('Date') > -1 || key.indexOf('lastModifiedOn') > -1 || key.indexOf('statusUpdatedOn') > -1)) && value) {
+    if (typeof key === 'string' && ((key.indexOf('lastModifiedOn') > -1 || key.indexOf('statusUpdatedOn') > -1)) && value) {
       const date = new Date(moment.utc(value).valueOf());
 
       return date;
+    }
+    if (typeof key === 'string' && ((key.indexOf('Date') > -1))) {
+      return new Date(value);
     }
 
     return value;

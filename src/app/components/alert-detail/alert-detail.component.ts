@@ -14,6 +14,7 @@ import { ComponentCanDeactivate } from '../../common/components/pending-changes.
 import { AlertDetailViewComponent } from '../alert-detail-view/alert-detail-view.component';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Component({
   selector: 'aa-alert-detail',
@@ -26,7 +27,7 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   currentSdaId = 0;
   newSdaSubscription: Subscription;
   savedStateSubscription: Subscription;
-  loading$: Observable<boolean>;
+  loading$ = new BehaviorSubject(true);
   @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
   constructor(private appStateService: AppStateService,
     private toastr: ToastrService,
@@ -41,7 +42,8 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   }
 
   ngOnInit(): void {
-    this.loading$ = Observable.merge(this.appStateService.getLookupDataLoading(), this.appStateService.getUserLoading(), this.appStateService.getSelectedAlertLoading());
+    //https://stackoverflow.com/questions/34364880/expression-has-changed-after-it-was-checked
+    this.appStateService.getSdaLoading().subscribe(d=>setTimeout(()=>this.loading$.next(d),0));
     this.newSdaSubscription = this.appStateService.getLoadNewSdaState().subscribe(() => {
       if (this.currentSdaId > 0) {
         return;
