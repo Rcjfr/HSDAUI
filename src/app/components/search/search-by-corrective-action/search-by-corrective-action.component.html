@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <aac-field-container label="Deferred:" for="isDeferred">
         <select class="form-control" tabindex='28' id="isDeferred" formControlName="isDeferred">
-          <option *ngFor="let ac of isDeferred" [value]="ac.id">{{ac.description}}</option>
+          <option *ngFor="let option of yesNoOptions" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
     </div>
@@ -48,7 +48,7 @@
       <aac-field-container label="Repaired Desc:">
         <select class="form-control" multiple tabindex='56' formControlName="repairDescriptionType">
           <option value=""> </option>
-          <option *ngFor="let ac of repairDescriptionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+          <option *ngFor="let option of repairDescriptionTypes$ | async" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
     </div>
@@ -57,7 +57,7 @@
     <div class="col-md-6">
       <aac-field-container label="Major Repair:" for="isMajorRepair">
         <select class="form-control" tabindex='28' id="isMajorRepair" formControlName="isMajorRepair">
-          <option *ngFor="let ac of isMajorRepair" [value]="ac.id">{{ac.description}}</option>
+          <option *ngFor="let option of yesNoOptions" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
     </div>
@@ -74,7 +74,7 @@
       <aac-field-container label="Repair Document:">
         <select class="form-control" multiple tabindex='60' formControlName="repairDocumentType">
           <option value=""> </option>
-          <option *ngFor="let ac of repairDocumentTypes$ | async" [value]="ac.id">{{ac.description}}</option>
+          <option *ngFor="let type of repairDocumentTypes$ | async" [value]="type.id">{{type.description}}</option>
         </select>
       </aac-field-container>
     </div>
@@ -83,7 +83,7 @@
     <div class="col-md-6">
       <aac-field-container label="Externally Visible?" for="isExternallyVisible">
         <select class="form-control" tabindex='28' id="isExternallyVisible" formControlName="isExternallyVisible">
-          <option *ngFor="let ac of isExternallyVisible" [value]="ac.id">{{ac.description}}</option>
+          <option *ngFor="let option of yesNoOptions" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
     </div>
@@ -122,7 +122,6 @@
     </div>
   </div>
   <div class="row">
-
     <div class="col-md-6">
       <aac-field-container label="Chap/Fig/Repair:">
         <input type="text" tabindex='64' class="form-control" formControlName="chapFigRepairText">
@@ -133,6 +132,5 @@
         <input type="text" tabindex='65' class="form-control" formControlName="deferralNo">
       </aac-field-container>
     </div>
-
   </div>
 </form>

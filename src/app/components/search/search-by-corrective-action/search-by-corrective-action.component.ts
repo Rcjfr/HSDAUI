@@ -12,7 +12,7 @@ import * as _ from 'lodash';
     styleUrls: ['./search-by-corrective-action.component.less']
 })
 export class SearchByCorrectiveActionComponent implements OnInit {
-   
+
     @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
     correctiveActionForm = new FormGroup({
@@ -38,15 +38,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
-    isDeferred: {
-        id: number;
-        description: string;
-    }[];
-    isExternallyVisible: {
-        id: number;
-        description: string;
-    }[];
-    isMajorRepair: {
+    yesNoOptions: {
         id: number;
         description: string;
     }[];
@@ -54,32 +46,23 @@ export class SearchByCorrectiveActionComponent implements OnInit {
    
 
     constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
+
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
-        this.isExternallyVisible = [
+        this.yesNoOptions = [
+            { id: null, description: 'Select' },
             { id: 1, description: 'Yes' },
-            { id: 0, description: 'No' },
-            { id: 2, description: 'Both' }
-        ];
-        this.isDeferred = [
-            { id: 1, description: 'Yes' },
-            { id: 0, description: 'No' },
-            { id: 2, description: 'Both' }
-        ];
-        this.isMajorRepair = [
-            { id: 1, description: 'Yes' },
-            { id: 0, description: 'No' },
-            { id: 2, description: 'Both' }
+            { id: 0, description: 'No' }
         ];
 
 
         this.correctiveActionForm.valueChanges.subscribe(form => {
-      //Remove any empty selections from the multi-select dropdowns
+            //Remove any empty selections from the multi-select dropdowns
             form.repairDescriptionType = _.compact(form.repairDescriptionType);
             form.repairDocumentType = _.compact(form.repairDocumentType);
-      this.update.emit(form);
-    });
+            this.update.emit(form);
+        });
     }
 
 }
