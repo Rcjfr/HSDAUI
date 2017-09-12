@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { AppStateService } from '../../../common/services';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 @Component({
     selector: 'aa-search-by-corrective-action',
@@ -32,7 +32,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         repairWidthTo: new FormControl(),
         chapFigRepairText: new FormControl(),
         deferralNo: new FormControl(),
-        repairType: new FormControl()
+        repairTypes: new FormArray([])
     });
     repairDocumentType: string[] = [];
     majorRepairDescription: string[] = [];
@@ -62,4 +62,13 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         });
     }
 
+    onDefectChange(id: string, isChecked: boolean) {
+        const repairArray = <FormArray>this.correctiveActionForm.controls.repairTypes;
+
+        if (isChecked) {
+            repairArray.push(new FormControl(id));
+        } else {
+            repairArray.removeAt(repairArray.controls.findIndex(x => x.value === id));
+        }
+      }
 }
