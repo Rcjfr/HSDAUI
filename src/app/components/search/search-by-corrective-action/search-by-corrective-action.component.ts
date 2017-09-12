@@ -51,6 +51,8 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         description: string;
     }[];
 
+   
+
     constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
@@ -70,6 +72,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
             { id: 0, description: 'No' },
             { id: 2, description: 'Both' }
         ];
+
 
         this.correctiveActionForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
