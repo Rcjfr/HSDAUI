@@ -197,7 +197,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.sda.statusUpdatedOn = new Date();
       this.sda.comments = 'SDR Requested';
       this.saveAlertData();
-      });
+    });
   }
 
   validateAlertData(newStatus: Status) {
@@ -320,5 +320,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.markAsDirty(group.controls[i]);
       }
     }
+  }
+
+  canRequestSdr() {
+    let ok = true;
+    ok = this.sda.id && (this.currentStatus != Status.Deleted && this.currentStatus != Status.Closed) && (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
+    return ok;
   }
 }

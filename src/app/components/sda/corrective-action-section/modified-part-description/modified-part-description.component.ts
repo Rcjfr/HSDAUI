@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, Simp
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
+import { AuthService } from "../../../../common/services";
 @Component({
   selector: 'aa-modified-part-description',
   templateUrl: './modified-part-description.component.html',
@@ -12,8 +13,8 @@ export class ModifiedPartDescriptionComponent extends BaseFormComponent implemen
   modifiedPartDescriptionGroup: FormGroup;
 
 
-  constructor(private fb: FormBuilder) {
-    super('modifiedPartDescriptionGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('modifiedPartDescriptionGroup', authService);
     this.modifiedPartDescriptionGroup = this.fb.group({
       modifiedPartDescription: ['', [Validators.maxLength(30), Validators.required]]
     });

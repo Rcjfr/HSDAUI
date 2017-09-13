@@ -1,9 +1,9 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
 import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../../common/models';
@@ -27,8 +27,8 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     });
     repairDetailsSectionGroup: FormGroup;
 
-    constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-        super('repairDetailsSectionGroup');
+    constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+      super('repairDetailsSectionGroup', authService);
     }
     ngOnInit() {
        this.repairDescriptions$ = this.appStateService.getRepairDescriptions();

@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../../../common/validators/generic-validator';
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import * as models from '../../../../common/models';
+import { AuthService } from "../../../../common/services";
 @Component({
   selector: 'aa-unscheduled-maintenance-section',
   templateUrl: './unscheduled-maintenance-section.component.html',
@@ -11,8 +12,8 @@ import * as models from '../../../../common/models';
 
 })
 export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
-  constructor(private fb: FormBuilder) {
-    super('unscheduledMaintenanceGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('unscheduledMaintenanceGroup', authService);
     this.formGroup = this.fb.group({
       unscheduledMaintenanceDescription: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],

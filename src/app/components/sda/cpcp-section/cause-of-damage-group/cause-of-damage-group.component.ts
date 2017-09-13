@@ -5,6 +5,7 @@ import { GenericValidator, Expressions } from '../../../../common/validators/gen
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../base-form.component';
 import * as models from '../../../../common/models';
+import { AuthService } from "../../../../common/services";
 @Component({
   selector: 'aa-cause-of-damage',
   templateUrl: './cause-of-damage-group.component.html',
@@ -14,8 +15,8 @@ import * as models from '../../../../common/models';
 export class CauseOfDamageGroupComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   causeOfDamageGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    super('causeOfDamageGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('causeOfDamageGroup', authService);
     this.causeOfDamageGroup = this.fb.group({
       status: [''],
       environment: ['', []],

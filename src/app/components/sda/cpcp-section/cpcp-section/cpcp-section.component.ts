@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
 import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../../common/models';
@@ -18,8 +18,8 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
   corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
   floorboardConditions$: Observable<List<models.IFloorboardCondition>>;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-    super('cpcpSectionGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+    super('cpcpSectionGroup', authService);
     this.formGroup = this.fb.group({
       isCPCPRelatedEvent: ['', []],
       isWideSpreadCorrosion: ['', []],

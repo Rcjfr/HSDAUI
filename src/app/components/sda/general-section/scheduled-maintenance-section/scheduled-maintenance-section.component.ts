@@ -3,7 +3,7 @@ import { BaseFormComponent } from '../../base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Expressions } from '../../../../common/validators/generic-validator';
 import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../../common/models';
@@ -17,8 +17,8 @@ import * as models from '../../../../common/models';
 export class ScheduledMaintenanceSectionComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   checkTypes$: Observable<List<models.ICheckType>>;
   scheduledMaintenanceGroup: FormGroup;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-    super('scheduledMaintenanceGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+    super('scheduledMaintenanceGroup',authService);
     this.formGroup = this.fb.group({
       checkType: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],

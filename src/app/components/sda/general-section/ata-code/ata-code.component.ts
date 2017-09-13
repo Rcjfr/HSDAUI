@@ -1,9 +1,11 @@
-﻿import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { List } from 'immutable';
 import * as models from '../../../../common/models';
 import { FilterByPipe } from 'ng-pipes';
+import { AuthService } from '../../../../common/services';
+
 @Component({
   selector: 'aa-ata-code',
   templateUrl: './ata-code.component.html',
@@ -13,8 +15,8 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   @Input() ATACodes: models.IATACode[];
   ataCodes2: models.IATACode[];
   pipe = new FilterByPipe();
-  constructor(private fb: FormBuilder) {
-    super('ataCodesSectionFormGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('ataCodesSectionFormGroup',authService);
     this.formGroup = this.fb.group({
       ataCode1: ['', Validators.required],
       ataCode2: ['', Validators.required]

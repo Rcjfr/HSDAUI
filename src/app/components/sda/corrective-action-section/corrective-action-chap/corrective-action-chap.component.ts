@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, Simp
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
+import { AuthService } from "../../../../common/services";
 @Component({
   selector: 'aa-corrective-action-chap',
   templateUrl: './corrective-action-chap.component.html',
@@ -9,8 +10,8 @@ import * as models from '../../../../common/models';
 })
 export class CorrectiveActionChapComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   correctiveActionChapFormGroup: FormGroup;
-  constructor(private fb: FormBuilder) {
-    super('correctiveActionChapFormGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('correctiveActionChapFormGroup', authService);
     this.correctiveActionChapFormGroup = this.fb.group({
       chapFigRepairText: ['', [Validators.maxLength(30), Validators.required]]
     });

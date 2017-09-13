@@ -5,6 +5,7 @@ import { GenericValidator, Expressions } from '../../../../common/validators/gen
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../base-form.component';
 import * as models from '../../../../common/models';
+import { AuthService } from "../../../../common/services";
 
 @Component({
   selector: 'aa-defect-discovered-during-section-form',
@@ -13,8 +14,8 @@ import * as models from '../../../../common/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefectDiscoveredDuringSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
-  constructor(private fb: FormBuilder) {
-    super('defectDiscoveredDuringSectionFormGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('defectDiscoveredDuringSectionFormGroup', authService);
     this.formGroup = this.fb.group({
       defectDiscoveredDuring: ['', [Validators.required]]
     });
