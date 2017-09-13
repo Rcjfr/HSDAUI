@@ -1,5 +1,4 @@
 ﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RadioContainerComponent } from './radio-container.component';
 
 describe('RadioContainerComponent', () => {
@@ -8,7 +7,7 @@ describe('RadioContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RadioContainerComponent ]
+      declarations: [RadioContainerComponent]
     })
     .compileComponents();
   }));

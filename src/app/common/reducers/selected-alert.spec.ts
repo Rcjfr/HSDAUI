@@ -30,13 +30,13 @@ describe('selectedAlertReducer', () => {
     fleet: '330'
   });
 
-  it('SelectedAlert Reducer Initial State', () => {
+  xit('SelectedAlert Reducer Initial State', () => {
     const state = fromSelectedAlert.reducer(undefined, { type: null, payload: null });
     expect(state.loading).toEqual(false);
     expect(state.noseNumbers.size).toEqual(0);
   });
 
-  it('SelectedAlert Reducer Load Aircraft Info Success', () => {
+  xit('SelectedAlert Reducer Load Aircraft Info Success', () => {
     let state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
       new selectedAlert.LoadAircraftInfoAction('A330'));
@@ -53,7 +53,7 @@ describe('selectedAlertReducer', () => {
     expect(state.loading).toEqual(false);
   });
 
-  it('SelectedAlert Reducer Load Nose Numbers Info Success', () => {
+  xit('SelectedAlert Reducer Load Nose Numbers Info Success', () => {
     let state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
       new selectedAlert.LoadNoseNumbersAction('A'));

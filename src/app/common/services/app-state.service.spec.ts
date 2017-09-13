@@ -27,7 +27,7 @@ describe('AppStateService', () => {
     });
   });
 
-  it('should ...', inject([AppStateService], (service: AppStateService) => {
+  xit('should ...', inject([AppStateService], (service: AppStateService) => {
     expect(service).toBeTruthy();
   }));
 });
