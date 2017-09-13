@@ -7,7 +7,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       pattern: 'SDR Number must be alphanumeric.'
     },
     'createDate': {
-      required: 'Create Date is required.'
+      required: 'Create Date is required.',
+      future: 'Create Date can not be a future date.'
     },
     'alertCode': {
       required: 'Alert Code is required.'

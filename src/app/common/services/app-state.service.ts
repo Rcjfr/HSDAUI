@@ -153,4 +153,8 @@ export class AppStateService {
   getNewSdaStatus() {
     return this.store.select(fromRoot.getNewSdaStatus);
   }
+
+  getSdaLoading() {
+    return Observable.merge(this.getLookupDataLoading(), this.getUserLoading(), this.getSelectedAlertLoading());
+  }
 }

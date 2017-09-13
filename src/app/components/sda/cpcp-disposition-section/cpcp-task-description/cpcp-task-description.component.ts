@@ -1,6 +1,7 @@
-﻿import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
+import { AuthService } from '../../../../common/services';
 
 @Component({
   selector: 'aa-cpcp-task-description',
@@ -10,8 +11,8 @@ import { BaseFormComponent } from '../../base-form.component';
 export class CpcpTaskDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit {
     cpcpTaskDescriptionFormGroup: FormGroup;
 
-    constructor(private fb: FormBuilder) {
-        super('cpcpTaskDescriptionFormGroup');
+    constructor(private fb: FormBuilder, authService: AuthService) {
+      super('cpcpTaskDescriptionFormGroup', authService);
     }
     ngOnInit() {
         this.cpcpTaskDescriptionFormGroup = this.fb.group({

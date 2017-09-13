@@ -4,7 +4,7 @@ import { GenericValidator, Expressions } from '../../../../common/validators/gen
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { decimalsNumberMask } from '../../../../common/masks';
@@ -19,8 +19,8 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
   damageTypes$: Observable<List<models.IDamageType>>;
   defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-    super('defectLocationSectionFormGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+    super('defectLocationSectionFormGroup', authService);
     this.defectLocationSectionFormGroup = this.fb.group({
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
       damageDescription: ['', [Validators.required, Validators.maxLength(250)]],

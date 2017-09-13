@@ -5,6 +5,7 @@ import { GenericValidator, Expressions } from '../../../../common/validators/gen
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../base-form.component';
 import * as models from '../../../../common/models';
+import { AuthService } from '../../../../common/services';
 @Component({
   selector: 'aa-corrective-action-options',
   templateUrl: './corrective-action-options.component.html',
@@ -13,8 +14,8 @@ import * as models from '../../../../common/models';
 })
 export class CorrectiveActionOptionsComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   correctiveActionOptionFormGroup: FormGroup;
-  constructor(private fb: FormBuilder) {
-    super('correctiveActionOptionFormGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('correctiveActionOptionFormGroup', authService);
     this.correctiveActionOptionFormGroup = this.fb.group({
       repairType: ['', []],
       modifiedpartDescription: ['', [, Validators.maxLength(30)]],
