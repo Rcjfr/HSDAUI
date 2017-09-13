@@ -18,7 +18,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
   checkTypes$: Observable<List<models.ICheckType>>;
   scheduledMaintenanceGroup: FormGroup;
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
-    super('scheduledMaintenanceGroup',authService);
+    super('scheduledMaintenanceGroup', authService);
     this.formGroup = this.fb.group({
       checkType: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],

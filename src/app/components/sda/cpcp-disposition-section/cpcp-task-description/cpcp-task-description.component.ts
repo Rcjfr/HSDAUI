@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
-import { AuthService } from "../../../../common/services";
+import { AuthService } from '../../../../common/services';
 
 @Component({
   selector: 'aa-cpcp-task-description',

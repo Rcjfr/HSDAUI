@@ -5,7 +5,7 @@ import { GenericValidator, Expressions } from '../../../../common/validators/gen
 import { CustomValidators } from '../../../../common/validators/custom-validators';
 import { BaseFormComponent } from '../../base-form.component';
 import * as models from '../../../../common/models';
-import { AuthService } from "../../../../common/services";
+import { AuthService } from '../../../../common/services';
 @Component({
   selector: 'aa-corrective-action-form',
   templateUrl: './corrective-action-form.component.html',

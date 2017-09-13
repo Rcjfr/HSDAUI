@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, Simp
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
-import { AuthService } from "../../../../common/services";
+import { AuthService } from '../../../../common/services';
 @Component({
   selector: 'aa-cause-of-damage-description',
   templateUrl: './cause-of-damage-description.component.html',

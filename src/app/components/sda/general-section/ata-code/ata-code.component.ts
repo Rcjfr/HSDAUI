@@ -16,7 +16,7 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   ataCodes2: models.IATACode[];
   pipe = new FilterByPipe();
   constructor(private fb: FormBuilder, authService: AuthService) {
-    super('ataCodesSectionFormGroup',authService);
+    super('ataCodesSectionFormGroup', authService);
     this.formGroup = this.fb.group({
       ataCode1: ['', Validators.required],
       ataCode2: ['', Validators.required]

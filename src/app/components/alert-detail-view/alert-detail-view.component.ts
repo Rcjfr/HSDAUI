@@ -324,7 +324,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   canRequestSdr() {
     let ok = true;
-    ok = this.sda.id && (this.currentStatus != Status.Deleted && this.currentStatus != Status.Closed) && (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
+    ok = this.sda.id &&
+        (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed) &&
+        (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
+
     return ok;
   }
 }

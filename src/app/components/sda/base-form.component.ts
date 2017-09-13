@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
 import * as models from '../../common/models';
-import { AuthService } from "../../common/services";
+import { AuthService } from '../../common/services';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -54,7 +54,6 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
 
   public checkSDAFormStatus(): boolean {
     const group = this.parent.controls[this.formGroupName];
-    
     if (!(this.isQCPersonnel && this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
       group && group.disable();
 
