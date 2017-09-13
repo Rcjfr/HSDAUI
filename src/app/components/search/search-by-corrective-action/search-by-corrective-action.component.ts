@@ -16,8 +16,8 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
     correctiveActionForm = new FormGroup({
-        isDeferred: new FormControl(),
-        isMajorRepair: new FormControl(),
+        isDeferred: new FormControl(''),
+        isMajorRepair: new FormControl(''),
         deferralCode: new FormControl(),
         defectivePartDescription: new FormControl(),
         modifiedPartDescription: new FormControl(),
@@ -25,21 +25,21 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         majorRepairDescription: new FormControl(),
         completedBy: new FormControl(),
         repairDocumentType: new FormControl(),
-        isExternallyVisible: new FormControl(),
+        isExternallyVisible: new FormControl(''),
         repairHeightFrom: new FormControl(),
         repairHeightTo: new FormControl(),
         repairWidthFrom: new FormControl(),
         repairWidthTo: new FormControl(),
         chapFigRepairText: new FormControl(),
         deferralNo: new FormControl(),
-        repairTypes: new FormArray([])
+        repairType: new FormArray([])
     });
     repairDocumentType: string[] = [];
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
     yesNoOptions: {
-        id: number;
+        id: string;
         description: string;
     }[];
 
@@ -51,9 +51,9 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
         this.yesNoOptions = [
-            { id: null, description: 'Select' },
-            { id: 1, description: 'Yes' },
-            { id: 0, description: 'No' }
+            //{ id: null, description: 'Select' },
+            { id: '1', description: 'Yes' },
+            { id: '0', description: 'No' }
         ];
 
 
@@ -66,7 +66,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     }
 
     onDefectChange(id: string, isChecked: boolean) {
-        const repairArray = <FormArray>this.correctiveActionForm.controls.repairTypes;
+        const repairArray = <FormArray>this.correctiveActionForm.controls.repairType;
 
         if (isChecked) {
             repairArray.push(new FormControl(id));
