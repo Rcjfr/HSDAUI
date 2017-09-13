@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -31,14 +31,14 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
   sdaForm = new FormGroup({
     id: new FormControl(),
     station: new FormControl(),
-    alertCode: new FormControl(),
+    alertCode: new FormControl(''),
     sdrNumber: new FormControl(),
-    department: new FormControl(),
-    ataCode1: new FormControl(),
-    ataCode2: new FormControl(),
+    department: new FormControl(''),
+    ataCode1: new FormControl(''),
+    ataCode2: new FormControl(''),
     originator: new FormControl(),
     fleet: new FormControl(),
-    checkType: new FormControl()
+    checkType: new FormControl('')
   });
 
   constructor(private formBuilder: FormBuilder, private appStateService: AppStateService) { }

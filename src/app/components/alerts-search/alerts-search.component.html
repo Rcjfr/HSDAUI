@@ -60,7 +60,7 @@
         Search by Corrective Action
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': correctiveGroup?.isOpen, 'icon-add': !correctiveGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-corrective-action></aa-search-by-corrective-action>
+      <aa-search-by-corrective-action (update)="searchByCorrectiveAction$.next($event)"></aa-search-by-corrective-action>
     </accordion-group>
     <accordion-group #statusGroup panelClass="panel-default search-panel">
       <div accordion-heading>
