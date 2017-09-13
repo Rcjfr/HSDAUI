@@ -50,7 +50,8 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
         this.yesNoOptions = [
             { id: '1', description: 'Yes' },
-            { id: '0', description: 'No' }
+            { id: '0', description: 'No' },
+            { id: '2', description: 'Both' }
         ];
 
 
