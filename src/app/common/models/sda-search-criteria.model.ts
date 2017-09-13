@@ -7,6 +7,7 @@ type SdaSearchCriteriaProps = {
   searchByAircraft: SearchByAircraft;
   searchByCorrosion: SearchByCorrosion;
   searchByCorrectiveAction: SearchByCorrectiveAction;
+  searchByDefect: SearchByDefect;
 };
 
 const defaultProps = {
@@ -15,7 +16,8 @@ const defaultProps = {
   searchBySDA: undefined,
   searchByAircraft: undefined,
   searchByCorrosion: undefined,
-  searchByCorrectiveAction: undefined
+  searchByCorrectiveAction: undefined,
+  searchByDefect: undefined
 };
 
 export class SdaSearchCriteria extends Record(defaultProps) {
@@ -25,6 +27,7 @@ export class SdaSearchCriteria extends Record(defaultProps) {
   searchByAircraft: SearchByAircraft;
   searchByCorrosion: SearchByCorrosion;
   searchByCorrectiveAction: SearchByCorrectiveAction;
+  searchByDefect: SearchByDefect;
 
   constructor(props: SdaSearchCriteriaProps = defaultProps) {
     super(props);
@@ -207,6 +210,55 @@ export class SearchByCorrectiveAction extends Record(CorrectiveActionDefaultProp
     repairType: any;
 
     constructor(props: searchByCorrectiveActionProps = CorrectiveActionDefaultProps) {
+        super(props);
+    }
+    //searchByDefect
+type searchByDefectProps = {
+    aircraftStation: any;
+    stringer: any;
+    waterLine: any;
+    buttLine: any;
+    damageType: any;
+    detectionMethod: any;
+    lengthFrom: any;
+    lengthTo: any;
+    widthFrom: any;
+    widthTo: any;
+    depthFrom: any;
+    depthTo: any;
+};
+
+const DefectDefaultProps = {
+    aircraftStation: undefined,
+    stringer: undefined,
+    waterLine: undefined,
+    buttLine: undefined,
+    damageType: undefined,
+    detectionMethod: undefined,
+    lengthFrom: undefined,
+    lengthTo: undefined,
+    widthFrom: undefined,
+    widthTo: undefined,
+    depthFrom: undefined,
+    depthTo: undefined
+   
+};
+
+export class SearchByDefect extends Record(DefectDefaultProps) {
+    aircraftStation: any;
+    stringer: any;
+    waterLine: any;
+    buttLine: any;
+    damageType: any;
+    detectionMethod: any;
+    lengthFrom: any;
+    lengthTo: any;
+    widthFrom: any;
+    widthTo: any;
+    depthFrom: any;
+    depthTo: any;
+
+    constructor(props: searchByDefectProps = DefectDefaultProps) {
         super(props);
     }
 };

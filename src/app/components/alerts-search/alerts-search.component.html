@@ -53,7 +53,7 @@
         Search by Defect/Damage
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-defect></aa-search-by-defect>
+      <aa-search-by-defect (update)="searchByDefect$.next($event)"></aa-search-by-defect>
     </accordion-group>
     <accordion-group #correctiveGroup panelClass="panel-default search-panel">
       <div accordion-heading>

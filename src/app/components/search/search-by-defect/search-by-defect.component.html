@@ -1,22 +1,22 @@
-﻿<div class="row">
+<div class="row" [formGroup]="defectForm">
   <div class="col-md-3">
     <aac-field-container label="Aircraft Station:" helptext="(Body, Spar, Stab, Frame, etc.)" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-      <input type="text" tabindex='40' class="form-control" >
+      <input type="text" tabindex='40' class="form-control" formControlName="aircraftStation" >
     </aac-field-container>
   </div>
   <div class="col-md-3">
     <aac-field-container label="Stringer:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-      <input type="text" tabindex='41' class="form-control" >
+      <input type="text" tabindex='41' class="form-control" formControlName="stringer" >
     </aac-field-container>
   </div>
   <div class="col-md-3">
     <aac-field-container label="WL:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-      <input type="text" tabindex='42' class="form-control">
+      <input type="text" tabindex='42' class="form-control" formControlName="waterLine">
     </aac-field-container>
   </div>
   <div class="col-md-3">
     <aac-field-container label="BL:"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
-      <input type="text" tabindex='43' class="form-control">
+      <input type="text" tabindex='43' class="form-control" formControlName="buttLine">
     </aac-field-container>
    
   </div>
@@ -24,7 +24,7 @@
 <div class="row">
   <div class="col-md-6">
     <aac-field-container label="Damage Type:">
-      <select class="form-control" tabindex='44' multiple="">
+      <select class="form-control" tabindex='44' multiple="" formControlName="damageType">
         <option value=""></option>
         <option *ngFor="let ac of damageTypes$ | async" [value]="ac.id">{{ac.description}}</option>
       </select>
@@ -33,7 +33,7 @@
   </div>
   <div class="col-md-6">
     <aac-field-container label="How Detected:" for="detected" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
-      <select multiple tabindex='45' class="form-control" id="detected" [(ngModel)]="detected">
+      <select multiple tabindex='45' class="form-control" id="detected" [(ngModel)]="detected" formControlName="detectionMethod">
         <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
       </select>
     </aac-field-container>
@@ -41,9 +41,10 @@
 
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div >
     <h5>Defect Size (in inches):</h5>
-    <aac-field-container label="Length:" >
+
+    <!--<aac-field-container label="Length:" >
       <input type="text" tabindex='46' class="form-control">
     </aac-field-container>
     <aac-field-container label="Width:" >
@@ -51,6 +52,6 @@
     </aac-field-container>
     <aac-field-container label="Depth:"  >
       <input type="text" tabindex='48' class="form-control">
-    </aac-field-container>
+    </aac-field-container>-->
   </div>
   </div>
