@@ -43,8 +43,6 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         description: string;
     }[];
 
-   
-
     constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
