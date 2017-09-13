@@ -42,6 +42,15 @@ export class SearchByCorrosionComponent implements OnInit {
       //Remove any empty selections from the multi-select dropdowns
       form.corrosionType = _.compact(form.corrosionType);
       form.causesOfDamage = _.compact(form.causesOfDamage);
+
+      //These are temporarily checkboxes until we convert them to dropdowns
+      //We want to pass null instead of false if unchecked
+      if (form.isWideSpreadCorrosion === false) {
+        form.isWideSpreadCorrosion = null;
+      }
+      if (form.isPreviouslyBlended === false) {
+        form.isPreviouslyBlended = null;
+      }
       this.update.emit(form);
     });
   }
