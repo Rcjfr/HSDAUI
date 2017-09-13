@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { FormGroup, FormControl } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'aa-search-by-defect',
@@ -27,13 +28,18 @@ export class SearchByDefectComponent implements OnInit {
         depthFrom: new FormControl(),
         depthTo: new FormControl()
     });
-  detectionMethods$: Observable<List<models.IDetectionMethod>>;
-  damageTypes$: Observable<List<models.IDamageType>>;
+    detectionMethods$: Observable<List<models.IDetectionMethod>>;
+    damageTypes$: Observable<List<models.IDamageType>>;
     constructor(private appStateService: AppStateService) { }
 
     ngOnInit() {
-      this.detectionMethods$ = this.appStateService.getDetectionMethods();
-      this.damageTypes$ = this.appStateService.getDamageTypes();
+        this.detectionMethods$ = this.appStateService.getDetectionMethods();
+        this.damageTypes$ = this.appStateService.getDamageTypes();
+        this.defectForm.valueChanges.subscribe(form => {
+            //Remove any empty selections from the multi-select dropdowns
+            form.damageType = _.compact(form.damageType);
+            form.detectionMethod = _.compact(form.detectionMethod);
+        });
     }
 
 }

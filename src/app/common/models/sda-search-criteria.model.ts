@@ -1,120 +1,120 @@
 import { Record } from 'immutable';
 
 type SdaSearchCriteriaProps = {
-  pageData: any;
-  searchByDateRange: SearchByDateRangeProps;
-  searchBySDA: SearchBySda;
-  searchByAircraft: SearchByAircraft;
-  searchByCorrosion: SearchByCorrosion;
-  searchByCorrectiveAction: SearchByCorrectiveAction;
-  searchByDefect: SearchByDefect;
+    pageData: any;
+    searchByDateRange: SearchByDateRangeProps;
+    searchBySDA: SearchBySda;
+    searchByAircraft: SearchByAircraft;
+    searchByCorrosion: SearchByCorrosion;
+    searchByCorrectiveAction: SearchByCorrectiveAction;
+    searchByDefect: SearchByDefect;
 };
 
 const defaultProps = {
-  pageData: undefined,
-  searchByDateRange: undefined,
-  searchBySDA: undefined,
-  searchByAircraft: undefined,
-  searchByCorrosion: undefined,
-  searchByCorrectiveAction: undefined,
-  searchByDefect: undefined
+    pageData: undefined,
+    searchByDateRange: undefined,
+    searchBySDA: undefined,
+    searchByAircraft: undefined,
+    searchByCorrosion: undefined,
+    searchByCorrectiveAction: undefined,
+    searchByDefect: undefined
 };
 
 export class SdaSearchCriteria extends Record(defaultProps) {
-  pageData: any;
-  searchByDateRange: SearchByDateRangeProps;
-  searchBySDA: SearchBySda;
-  searchByAircraft: SearchByAircraft;
-  searchByCorrosion: SearchByCorrosion;
-  searchByCorrectiveAction: SearchByCorrectiveAction;
-  searchByDefect: SearchByDefect;
+    pageData: any;
+    searchByDateRange: SearchByDateRangeProps;
+    searchBySDA: SearchBySda;
+    searchByAircraft: SearchByAircraft;
+    searchByCorrosion: SearchByCorrosion;
+    searchByCorrectiveAction: SearchByCorrectiveAction;
+    searchByDefect: SearchByDefect;
 
-  constructor(props: SdaSearchCriteriaProps = defaultProps) {
-    super(props);
-  }
+    constructor(props: SdaSearchCriteriaProps = defaultProps) {
+        super(props);
+    }
 };
 
 //searchByDateRange
 type SearchByDateRangeProps = {
-  dateFrom: any;
-  dateThrough: any;
+    dateFrom: any;
+    dateThrough: any;
 };
 
 const dateRangeDefaultProps = {
-  dateFrom: undefined,
-  dateThrough: undefined
+    dateFrom: undefined,
+    dateThrough: undefined
 };
 
 export class SearchByDateRange extends Record(dateRangeDefaultProps) {
-  dateFrom: any;
-  dateThrough: any;
+    dateFrom: any;
+    dateThrough: any;
 
-  constructor(props: SearchByDateRangeProps = dateRangeDefaultProps) {
-    super(props);
-  }
+    constructor(props: SearchByDateRangeProps = dateRangeDefaultProps) {
+        super(props);
+    }
 };
 
 //searchBySda
 type SearchBySdaProps = {
-  id: any;
-  station: any;
-  alertCode: any;
-  sdrNumber: any;
-  department: any;
-  ataCode1: any;
-  originator: any;
-  ataCode2: any;
-  fleet: any;
-  checkType: any;
+    id: any;
+    station: any;
+    alertCode: any;
+    sdrNumber: any;
+    department: any;
+    ataCode1: any;
+    originator: any;
+    ataCode2: any;
+    fleet: any;
+    checkType: any;
 };
 
 const sdaDefaultProps = {
-  id: undefined,
-  station: undefined,
-  alertCode: undefined,
-  sdrNumber: undefined,
-  department: undefined,
-  ataCode1: undefined,
-  originator: undefined,
-  ataCode2: undefined,
-  fleet: undefined,
-  checkType: undefined
+    id: undefined,
+    station: undefined,
+    alertCode: undefined,
+    sdrNumber: undefined,
+    department: undefined,
+    ataCode1: undefined,
+    originator: undefined,
+    ataCode2: undefined,
+    fleet: undefined,
+    checkType: undefined
 };
 
 export class SearchBySda extends Record(sdaDefaultProps) {
-  pageData: any;
-  searchByDateRange: any;
-  searchBySDA: any;
+    pageData: any;
+    searchByDateRange: any;
+    searchBySDA: any;
 
-  constructor(props: SearchBySdaProps = sdaDefaultProps) {
-    super(props);
-  }
+    constructor(props: SearchBySdaProps = sdaDefaultProps) {
+        super(props);
+    }
 };
 
 //searchByAircraft
 type searchByAircraftProps = {
-  aircraftNo: any;
-  manufacturer: any;
-  model: any;
-  serialNo: any;
+    aircraftNo: any;
+    manufacturer: any;
+    model: any;
+    serialNo: any;
 };
 
 const aircraftDefaultProps = {
-  aircraftNo: undefined,
-  manufacturer: undefined,
-  model: undefined,
-  serialNo: undefined
+    aircraftNo: undefined,
+    manufacturer: undefined,
+    model: undefined,
+    serialNo: undefined
 };
 
 export class SearchByAircraft extends Record(aircraftDefaultProps) {
-  aircraftNo: any;
-  manufacturer: any;
-  model: any;
-  serialNo: any;
+    aircraftNo: any;
+    manufacturer: any;
+    model: any;
+    serialNo: any;
 
-  constructor(props: searchByAircraftProps = aircraftDefaultProps) {
-    super(props);
-  }
+    constructor(props: searchByAircraftProps = aircraftDefaultProps) {
+        super(props);
+    }
 };
 
 //searchByCorrosion
@@ -212,7 +212,8 @@ export class SearchByCorrectiveAction extends Record(CorrectiveActionDefaultProp
     constructor(props: searchByCorrectiveActionProps = CorrectiveActionDefaultProps) {
         super(props);
     }
-    //searchByDefect
+};
+//searchByDefect
 type searchByDefectProps = {
     aircraftStation: any;
     stringer: any;
@@ -241,7 +242,7 @@ const DefectDefaultProps = {
     widthTo: undefined,
     depthFrom: undefined,
     depthTo: undefined
-   
+
 };
 
 export class SearchByDefect extends Record(DefectDefaultProps) {
