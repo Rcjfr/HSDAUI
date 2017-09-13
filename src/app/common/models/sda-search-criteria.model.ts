@@ -88,7 +88,6 @@ export class SearchBySda extends Record(sdaDefaultProps) {
   }
 };
 
-
 //searchByAircraft
 type searchByAircraftProps = {
   aircraftNo: any;
@@ -146,68 +145,68 @@ export class SearchByCorrosion extends Record(corrosionDefaultProps) {
         super(props);
     }
 };
+
 //searchByCorrectiveAction
 type searchByCorrectiveActionProps = {
-    IsDeferred: any;
-    IsMajorRepair: any;
-    DeferralCode: any;
-    DefectivePartDescription: any;
-    ModifiedPartDescription: any;
-    RepairDescriptionType: any;
-    MajorRepairDescription: any;
-    CompletedBy: any;
-    RepairDocumentType: any;
-    IsExternallyVisible: any;
+    isDeferred: any;
+    isMajorRepair: any;
+    deferralCode: any;
+    defectivePartDescription: any;
+    modifiedPartDescription: any;
+    repairDescriptionType: any;
+    majorRepairDescription: any;
+    completedBy: any;
+    repairDocumentType: any;
+    isExternallyVisible: any;
     repairHeightFrom: any;
     repairHeightTo: any;
     repairWidthFrom: any;
     repairWidthTo: any;
-    ChapFigRepairText: any;
-    DeferralNo: any;
-    RepairType: any;
+    chapFigRepairText: any;
+    deferralNo: any;
+    repairType: any;
 };
 
 const CorrectiveActionDefaultProps = {
-    IsDeferred: undefined,
-    IsMajorRepair: undefined,
-    DeferralCode: undefined,
-    DefectivePartDescription: undefined,
-    ModifiedPartDescription: undefined,
-    RepairDescriptionType: undefined,
-    MajorRepairDescription: undefined,
-    CompletedBy: undefined,
-    RepairDocumentType: undefined,
-    IsExternallyVisible: undefined,
+    isDeferred: undefined,
+    isMajorRepair: undefined,
+    deferralCode: undefined,
+    defectivePartDescription: undefined,
+    modifiedPartDescription: undefined,
+    repairDescriptionType: undefined,
+    majorRepairDescription: undefined,
+    completedBy: undefined,
+    repairDocumentType: undefined,
+    isExternallyVisible: undefined,
     repairHeightFrom: undefined,
     repairHeightTo: undefined,
     repairWidthFrom: undefined,
     repairWidthTo: undefined,
-    ChapFigRepairText: undefined,
-    DeferralNo: undefined,
-    RepairType: undefined
+    chapFigRepairText: undefined,
+    deferralNo: undefined,
+    repairType: undefined
 };
 
 export class SearchByCorrectiveAction extends Record(CorrectiveActionDefaultProps) {
-    IsDeferred: any;
-    IsMajorRepair: any;
-    DeferralCode: any;
-    DefectivePartDescription: any;
-    ModifiedPartDescription: any;
-    RepairDescriptionType: any;
-    MajorRepairDescription: any;
-    CompletedBy: any;
-    RepairDocumentType: any;
-    IsExternallyVisible: any;
+    isDeferred: any;
+    isMajorRepair: any;
+    deferralCode: any;
+    defectivePartDescription: any;
+    modifiedPartDescription: any;
+    repairDescriptionType: any;
+    majorRepairDescription: any;
+    completedBy: any;
+    repairDocumentType: any;
+    isExternallyVisible: any;
     repairHeightFrom: any;
     repairHeightTo: any;
     repairWidthFrom: any;
     repairWidthTo: any;
-    ChapFigRepairText: any;
-    DeferralNo: any;
-    RepairType: any;
+    chapFigRepairText: any;
+    deferralNo: any;
+    repairType: any;
 
     constructor(props: searchByCorrectiveActionProps = CorrectiveActionDefaultProps) {
         super(props);
     }
 };
-

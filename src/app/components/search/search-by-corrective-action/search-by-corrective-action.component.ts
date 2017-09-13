@@ -49,7 +49,6 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
         this.yesNoOptions = [
-            //{ id: null, description: 'Select' },
             { id: '1', description: 'Yes' },
             { id: '0', description: 'No' }
         ];
@@ -71,5 +70,5 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         } else {
             repairArray.removeAt(repairArray.controls.findIndex(x => x.value === id));
         }
-      }
+    }
 }
