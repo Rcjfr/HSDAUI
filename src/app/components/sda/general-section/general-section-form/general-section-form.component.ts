@@ -23,12 +23,12 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   disableCreateDate = false;
   public today = new Date();
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private authService: AuthService) {
-    super('generalSectionFormGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+    super('generalSectionFormGroup', authService);
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
       sdrNumber: ['', [Validators.maxLength(20), Validators.pattern(Expressions.Alphanumerics)]],
-      createDate: [new Date(), [Validators.required]],
+      createDate: [new Date(), [Validators.required, CustomValidators.validateFutureDate]],
       lineMaintenance: false,
       alertCode: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
       station: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormControlName } from '@angular/forms';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 import { BaseFormComponent } from '../../base-form.component';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -15,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 export class CpcpDispositionSectionComponent extends BaseFormComponent implements OnInit {
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
   cpcpDispositionSectionFormGroup: FormGroup;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastrService) {
-    super('cpcpDispositionSectionFormGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private toastr: ToastrService, authService: AuthService) {
+    super('cpcpDispositionSectionFormGroup', authService);
   }
 
   ngOnInit() {

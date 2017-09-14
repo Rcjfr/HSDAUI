@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, Simp
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
+import { AuthService } from '../../../../common/services';
 @Component({
   selector: 'aa-defective-part-description',
   templateUrl: './defective-part-description.component.html',
@@ -12,8 +13,8 @@ export class DefectivePartDescriptionComponent extends BaseFormComponent impleme
   defectivePartDescriptionGroup: FormGroup;
 
 
-  constructor(private fb: FormBuilder) {
-    super('defectivePartDescriptionGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('defectivePartDescriptionGroup', authService);
     this.defectivePartDescriptionGroup = this.fb.group({
       defectivePartDescription: ['', [Validators.maxLength(30), Validators.required]]
     });

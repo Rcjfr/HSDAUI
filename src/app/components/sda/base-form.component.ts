@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
 import * as models from '../../common/models';
+import { AuthService } from '../../common/services';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -11,6 +12,7 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   @Input() newSdaStus: models.Status;
   @Input() parent: FormGroup;
   formGroup: FormGroup;
+  isQCPersonnel = false;
   protected subscriptions: Subscription[] = [];
   public Status = models.Status;
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -20,8 +22,9 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   set errorMessages(value) {
     this.displayMessage = value[this.formGroupName] || {};
   }
-  constructor(public formGroupName: string) {
+  constructor(public formGroupName: string, public authService: AuthService) {
     this.subscriptions = [];
+    this.authService.isQCPersonnel().take(1).subscribe(t => this.isQCPersonnel = t);
   }
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
@@ -51,7 +54,7 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
 
   public checkSDAFormStatus(): boolean {
     const group = this.parent.controls[this.formGroupName];
-    if (!(this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
+    if (!(this.isQCPersonnel && this.sda.status === models.Status.Open || this.sda.status === models.Status.Rejected)) {
       group && group.disable();
 
       return true;

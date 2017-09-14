@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '../../base-form.component';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '../../../../common/models';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 
 
 @Component({
@@ -22,8 +22,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   repairInspectionStatus$: Observable<List<models.IBaseLookUp>>;
   public uploader: FileUploader = new FileUploader({ url: '/api/attachments' });
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) {
-    super('damageToleranceEvaluationGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService) {
+    super('damageToleranceEvaluationGroup', authService);
   }
 
   ngOnInit() {

@@ -8,7 +8,7 @@ import { BaseFormComponent } from '../../base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { decimalsNumberMask } from '../../../../common/masks';
 import * as models from '../../../../common/models';
-import { AppStateService } from '../../../../common/services';
+import { AppStateService, AuthService } from '../../../../common/services';
 
 @Component({
   selector: 'aa-corrective-action-repair-description',
@@ -21,8 +21,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
   repairDescriptions$: Observable<List<models.IRepairDescription>>;
   repairDocuments$: Observable<List<models.IRepairDocument>>;
   decimalsNumberMask = decimalsNumberMask;
-  constructor(private fb: FormBuilder, private appStateService: AppStateService) {
-    super('correctiveActionRepairDescriptionFormGroup');
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+    super('correctiveActionRepairDescriptionFormGroup', authService);
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       status: ['', []],
       repairDescriptionType: ['', []], //Validators.required

@@ -1,7 +1,8 @@
-﻿import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseFormComponent } from '../../base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '../../../../common/models';
+import { AuthService } from '../../../../common/services';
 @Component({
   selector: 'aa-cause-of-damage-description',
   templateUrl: './cause-of-damage-description.component.html',
@@ -11,8 +12,8 @@ export class CauseOfDamageDescriptionComponent extends BaseFormComponent impleme
   causeOfDamageDescriptionGroup: FormGroup;
 
 
-  constructor(private fb: FormBuilder) {
-    super('causeOfDamageDescriptionGroup');
+  constructor(private fb: FormBuilder, authService: AuthService) {
+    super('causeOfDamageDescriptionGroup', authService);
     this.causeOfDamageDescriptionGroup = this.fb.group({
       damageDescription: ['', [Validators.maxLength(250), Validators.required]]
     });

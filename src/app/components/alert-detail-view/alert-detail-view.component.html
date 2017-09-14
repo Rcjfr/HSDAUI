@@ -73,7 +73,7 @@
         </ng-container>
         <ng-container *ngIf="authService.isReliabilityAnalyst() | async">
           <!--Reliability Analyst Actions-->
-          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && (currentStatus != Status.Deleted) && (sda.generalSection.sdrNumber === '' || sda.generalSection.sdrNumber == null)" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
+          <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id" [disabled]="!canRequestSdr()" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
           <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
           <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Accept SDA</button>
           <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Closed" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
