@@ -33,6 +33,8 @@
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.1",
     "jquery": "^3.2.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-trx-reporter": "^0.2.9",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "ng-pipes": "^0.1.2",
