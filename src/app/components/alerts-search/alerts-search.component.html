@@ -32,7 +32,7 @@
         Search by Maintenance Type
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-maintenance></aa-search-by-maintenance>
+      <aa-search-by-maintenance (update)="searchByMaintenace$.next($event)"></aa-search-by-maintenance>
     </accordion-group>
     <accordion-group #corrosionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
