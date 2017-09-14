@@ -242,7 +242,6 @@ const DefectDefaultProps = {
     widthTo: undefined,
     depthFrom: undefined,
     depthTo: undefined
-
 };
 
 export class SearchByDefect extends Record(DefectDefaultProps) {

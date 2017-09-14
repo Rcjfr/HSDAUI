@@ -35,11 +35,12 @@ export class SearchByDefectComponent implements OnInit {
     ngOnInit() {
         this.detectionMethods$ = this.appStateService.getDetectionMethods();
         this.damageTypes$ = this.appStateService.getDamageTypes();
-        this.defectForm.valueChanges.subscribe(form => {
-            //Remove any empty selections from the multi-select dropdowns
-            form.damageType = _.compact(form.damageType);
-            form.detectionMethod = _.compact(form.detectionMethod);
-        });
+        this.defectForm.valueChanges.subscribe(this.update);
+        //this.defectForm.valueChanges.subscribe(form => {
+        //    Remove any empty selections from the multi-select dropdowns
+        //    form.damageType = _.compact(form.damageType);
+        //    form.detectionMethod = _.compact(form.detectionMethod);
+        //});
     }
 
 }
