@@ -21,23 +21,23 @@ describe('CorrosionLevelsService', () => {
     });
   });
 
-  it('should create', inject([CorrosionLevelService], (service: CorrosionLevelService) => {
+  xit('should create', inject([CorrosionLevelService], (service: CorrosionLevelService) => {
     expect(service).toBeTruthy();
   }));
-describe('getAllCorrosionLevels', () => {
-    it('should return All Corrosion Levels', async(inject(
+
+  describe('getAllCorrosionLevels', () => {
+    xit('should return All Corrosion Levels', async(inject(
       [CorrosionLevelService, MockBackend], (service: CorrosionLevelService, mockBackend: MockBackend) => {
-      const mockResponse = [{id: 2, description: '1'}, {id: 3, description: '2'}, {id: 4, description: '3'}];
-      mockBackend.connections.subscribe(conn => {
-        conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
-      });
+        const mockResponse = [{ id: 2, description: '1' }, { id: 3, description: '2' }, { id: 4, description: '3' }];
+        mockBackend.connections.subscribe(conn => {
+          conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
+        });
 
-      const result = service.getAllCorrosionLevels();
+        const result = service.getAllCorrosionLevels();
 
-      result.subscribe(res => {
-        expect(res.length).toEqual(3);
-      });
-    })));
+        result.subscribe(res => {
+          expect(res.length).toEqual(3);
+        });
+      })));
   });
-
 });

@@ -21,12 +21,12 @@ describe('CorrosionTypeService', () => {
     });
   });
 
-  it('should create', inject([CorrosionTypeService], (service: CorrosionTypeService) => {
+  xit('should create', inject([CorrosionTypeService], (service: CorrosionTypeService) => {
     expect(service).toBeTruthy();
   }));
 
   describe('getAllCorrosionTypes', () => {
-    it('should return All Corrosion Types', async(inject(
+    xit('should return All Corrosion Types', async(inject(
       [CorrosionTypeService, MockBackend], (service: CorrosionTypeService, mockBackend: MockBackend) => {
       const mockResponse = [
                       {id: 1, description: 'Exfoliation'},

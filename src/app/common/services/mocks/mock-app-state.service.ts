@@ -66,7 +66,28 @@ export class MockAppStateService extends AppStateService {
   getSelectedAlertLoading() {
     return Observable.of(false);
   }
+
   getFleetCheckTypes() {
     return Observable.of(<List<models.ICheckType>>List.of());
+  }
+
+  getRepairDescriptions() {
+    return Observable.of(<List<models.IRepairDescription>>List.of());
+  }
+
+  getRepairDocuments() {
+    return Observable.of(<List<models.IRepairDocument>>List.of());
+  }
+
+  getCauseOfDamages() {
+    return Observable.of(<List<models.ICauseOfDamage>>List.of());
+  }
+
+  getReasonsForChange() {
+    return Observable.of(<List<models.IReasonForChange>>List.of());
+  }
+
+  getDamageTypes() {
+    return Observable.of(<List<models.IDamageType>>List.of());
   }
 }
