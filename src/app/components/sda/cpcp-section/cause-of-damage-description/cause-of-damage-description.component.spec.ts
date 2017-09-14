@@ -1,24 +1,35 @@
-﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+﻿import { CauseOfDamageDescriptionComponent } from './cause-of-damage-description.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppStateService } from '../../../../common/services';
+import { MockAppStateService } from '../../../../common/services/mocks/mock-app-state.service';
 import { FormControlsModule } from '../../../../common/components/form-controls.module';
-import { Component } from '@angular/core';
-import { CauseOfDamageDescriptionComponent } from './cause-of-damage-description.component';
+import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { SdaFormModule } from 'app/components/sda/sda-form.module';
+import * as models from '../../../../common/models';
+
 
 describe('CauseOfDamageDescriptionComponent', () => {
   let component: CauseOfDamageDescriptionComponent;
-  let fixture: ComponentFixture<TestComponentWrapperComponent>;
+  let fixture: ComponentFixture<CauseOfDamageDescriptionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponentWrapperComponent, CauseOfDamageDescriptionComponent],
-      imports: [FormControlsModule, FormsModule, ReactiveFormsModule]
+      declarations: [],
+      imports: [ReactiveFormsModule, FormControlsModule, SdaFormModule],
+      providers: [{ provide: AppStateService, useClass: MockAppStateService }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponentWrapperComponent);
-    component = <CauseOfDamageDescriptionComponent>fixture.debugElement.children[0].componentInstance;
+    fixture = TestBed.createComponent(CauseOfDamageDescriptionComponent);
+    component = component = fixture.componentInstance;
+
+    //Inputs
+    component.parent = new FormGroup({});
+    component.sda = {};
+    component.newSdaStus = models.Status.Open;
+
     fixture.detectChanges();
   });
 
@@ -26,11 +37,3 @@ describe('CauseOfDamageDescriptionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-@Component({
-  selector: 'test-component-wrapper',
-  template: '<aa-cause-of-damage-description [parent]="form" [errorMessages]="displayMessage"></aa-cause-of-damage-description>'
-})
-class TestComponentWrapperComponent {
-  form: FormGroup = new FormGroup({});
-  displayMessage: { [key: string]: any } = {};
-}
