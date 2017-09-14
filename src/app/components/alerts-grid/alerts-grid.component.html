@@ -10,7 +10,11 @@
     </ng-template>
   </p-column>
   <p-column field="aircraftNo" header="Aircraft #" [sortable]="true" [filter]="true"></p-column>
-  <p-column field="createDate" header="Create Date" [sortable]="true" [filter]="true"></p-column>
+  <p-column field="createDate" header="Create Date" [sortable]="true" [filter]="true">
+    <ng-template let-col let-record="rowData" pTemplate="body">
+      {{record[col.field] | date:'shortDate' }}
+    </ng-template>
+  </p-column>
   <p-column field="statusText" header="Form Status" [sortable]="true" [filter]="true"></p-column>
   <p-column field="station" header="Station" [sortable]="true" [filter]="true"></p-column>
   <p-column field="routineNo" header="Routine #" [sortable]="true" [filter]="true"></p-column>
