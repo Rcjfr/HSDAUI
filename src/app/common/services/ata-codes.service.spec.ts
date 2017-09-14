@@ -29,14 +29,14 @@ describe('ATA Codes Service (Mocked)', () => {
     });
   });
 
-  it('should construct', async(inject(
+  xit('should construct', async(inject(
     [ATACodesService, MockBackend], (service: ATACodesService, mockBackend: MockBackend) => {
 
     expect(service).toBeDefined();
   })));
 
   describe('getATACodes', () => {
-    it('should return all ATACodes', async(inject(
+    xit('should return all ATACodes', async(inject(
       [ATACodesService, MockBackend], (service: ATACodesService, mockBackend: MockBackend) => {
 
       mockBackend.connections.subscribe(conn => {

@@ -23,7 +23,7 @@ describe('Alerts Effect', () => {
     ]
   }));
 
-  it('Call QueryNoseNumber Success action after Query Nose Numbers',
+  xit('Call QueryNoseNumber Success action after Query Nose Numbers',
     inject([
       EffectsRunner, AlertEffects, AircraftService
     ],
@@ -42,7 +42,7 @@ describe('Alerts Effect', () => {
       })
   );
 
-  it('Call get Aircraft Info Success action after get Aircraft Info',
+  xit('Call get Aircraft Info Success action after get Aircraft Info',
     inject([
       EffectsRunner, AlertEffects, AircraftService
     ],
@@ -71,7 +71,7 @@ describe('Alerts Effect', () => {
       })
   );
 
-  it('Call Show Toastr error after any fail actions',
+  xit('Call Show Toastr error after any fail actions',
     inject([EffectsRunner, AlertEffects, AircraftService, ToastrService],
       (_runner, _alertEffects, _aircraftService, _toaster) => {
         runner = _runner;

@@ -37,14 +37,14 @@ describe('CheckTypes Service (Mocked)', () => {
     });
   });
 
-  it('should construct', async(inject(
+  xit('should construct', async(inject(
     [CheckTypesService, MockBackend], (service: CheckTypesService, mockBackend: MockBackend) => {
 
     expect(service).toBeDefined();
   })));
 
   describe('getAllCheckTypes', () => {
-    it('should return all Check types', async(inject(
+    xit('should return all Check types', async(inject(
       [CheckTypesService, MockBackend], (service: CheckTypesService, mockBackend: MockBackend) => {
 
       mockBackend.connections.subscribe(conn => {
