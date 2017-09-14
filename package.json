@@ -39,6 +39,7 @@
     "ng2-bootstrap-modal": "^1.0.1",
     "ng2-datetime": "^1.4.0",
     "ng2-file-upload": "^1.2.1",
+    "ng2-scroll-to-el": "^1.0.0",
     "ngx-bootstrap": "^1.7.1",
     "ngx-toastr": "^6.1.2",
     "primeng": "^4.1.2",
