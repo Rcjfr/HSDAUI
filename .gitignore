@@ -36,7 +36,6 @@
 npm-debug.log
 testem.log
 /typings
-karma-test-results.trx
 
 # e2e
 /e2e/*.js
