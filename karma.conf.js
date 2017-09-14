@@ -35,7 +35,7 @@ module.exports = function (config) {
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
       ? ['progress', 'coverage-istanbul']
-      : ['progress', 'kjhtml', 'trx'],
+      : ['progress', 'kjhtml', 'progress', 'trx'],
     trxReporter: {
       outputFile: 'karma-test-results.trx',
       shortTestName: false
@@ -46,7 +46,7 @@ module.exports = function (config) {
     autoWatch: true,
     // browsers: ['Chrome'],  //Used for running locally
     browsers: ['PhantomJS'],  //Used during the builds
-    singleRun: false,
+    singleRun: false, //This value is getting ignored when running 'ng test' for some reason. Using --single-run is working
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
       exitOnResourceError: true
