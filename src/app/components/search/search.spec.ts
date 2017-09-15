@@ -18,111 +18,97 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppStateService } from '../../common/services';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 import { ToastrModule } from 'ngx-toastr';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { TypeaheadModule } from 'ngx-bootstrap';
+import { NgPipesModule } from 'ng-pipes';
 
 describe('SearchFilterComponents', () => {
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SearchOptionsComponent, SearchByStatusComponent],
+            declarations: [
+                SearchByAircraftComponent,
+                SearchByCorrectiveActionComponent,
+                SearchByCorrosionComponent,
+                SearchByCpcpDispositionComponent,
+                SearchByDateRangeComponent,
+                SearchByDefectComponent,
+                SearchByMaintenanceComponent,
+                SearchByPartComponent,
+                SearchBySdaFormComponent,
+                SearchByStatusComponent,
+                SearchOptionsComponent
+            ],
             imports: [
                 ReactiveFormsModule,
+                FormsModule,
                 FormControlsModule,
                 ToastrModule.forRoot({
                     timeOut: 800,
                     progressBar: true,
                     onActivateTick: true,
                     enableHtml: true,
-                })],
+                }),
+                NKDatetimeModule,
+                TypeaheadModule.forRoot(),
+                NgPipesModule],
             providers: [{ provide: AppStateService, useClass: MockAppStateService }]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     it('SearchByAircraftComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByAircraftComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByAircraftComponent)).toBeTruthy();
     });
 
     it('SearchByCorrectiveActionComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByCorrectiveActionComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByCorrectiveActionComponent)).toBeTruthy();
     });
 
     it('SearchByCorrosionComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByCorrosionComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByCorrosionComponent)).toBeTruthy();
     });
 
     it('SearchByCpcpDispositionComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByCpcpDispositionComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByCpcpDispositionComponent)).toBeTruthy();
     });
 
     it('SearchByDateRangeComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByDateRangeComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByDateRangeComponent)).toBeTruthy();
     });
 
     it('SearchByDefectComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByDefectComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByDefectComponent)).toBeTruthy();
     });
 
     it('SearchByMaintenanceComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByMaintenanceComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByMaintenanceComponent)).toBeTruthy();
     });
 
     it('SearchByPartComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByPartComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByPartComponent)).toBeTruthy();
     });
 
     it('SearchBySdaFormComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchBySdaFormComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchBySdaFormComponent)).toBeTruthy();
     });
 
     it('SearchByStatusComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchByStatusComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchByStatusComponent)).toBeTruthy();
     });
 
     it('SearchOptionsComponent should create', () => {
-        const fixture = TestBed.createComponent(SearchOptionsComponent);
-        const component = fixture.componentInstance;
-        fixture.detectChanges();
-
-        expect(component).toBeTruthy();
+        expect(componentMaker(SearchOptionsComponent)).toBeTruthy();
     });
+
+    function componentMaker(componentName) {
+        let component;
+        try {
+            const fixture = TestBed.createComponent(componentName);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        } catch (e) {
+            component = undefined;
+        }
+
+        return component;
+    }
 });
