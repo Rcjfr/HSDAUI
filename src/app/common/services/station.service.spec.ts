@@ -30,7 +30,7 @@ describe('StationService', () => {
   }));
 
   describe('getAllStations', () => {
-    it('should return all stations available', async(inject(
+    xit('should return all stations available', async(inject(
       [StationService, MockBackend], (service: StationService, mockBackend: MockBackend) => {
       const mockResponse = [ {
         stationID: 1,
