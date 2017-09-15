@@ -34,7 +34,7 @@ module.exports = function (config) {
       environment: 'dev'
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
-      ? ['progress', 'coverage-istanbul']
+      ? ['progress', 'coverage-istanbul', 'trx']
       : ['progress', 'kjhtml', 'progress', 'trx'],
     trxReporter: {
       outputFile: 'karma-test-results.trx',
