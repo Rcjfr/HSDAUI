@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgPipesModule } from 'ng-pipes';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ScrollToModule } from 'ng2-scroll-to-el';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { AccordionModule, TypeaheadModule, TabsModule, ModalModule } from 'ngx-bootstrap';
@@ -85,6 +86,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot(),
+    ScrollToModule.forRoot(),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),
