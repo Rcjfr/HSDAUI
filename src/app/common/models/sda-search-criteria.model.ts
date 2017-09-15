@@ -8,7 +8,7 @@ type SdaSearchCriteriaProps = {
     searchByCorrosion: SearchByCorrosion;
     searchByCorrectiveAction: SearchByCorrectiveAction;
     searchByDefect: SearchByDefect;
-    searchByMaintenace : SearchByMaintenace;
+    searchByMaintenance: SearchByMaintenance;
 };
 
 const defaultProps = {
@@ -19,7 +19,7 @@ const defaultProps = {
     searchByCorrosion: undefined,
     searchByCorrectiveAction: undefined,
     searchByDefect: undefined,
-    searchByMaintenace: undefined
+    searchByMaintenance: undefined
 };
 
 export class SdaSearchCriteria extends Record(defaultProps) {
@@ -30,7 +30,7 @@ export class SdaSearchCriteria extends Record(defaultProps) {
     searchByCorrosion: SearchByCorrosion;
     searchByCorrectiveAction: SearchByCorrectiveAction;
     searchByDefect: SearchByDefect;
-    searchByMaintenace: SearchByMaintenace;
+    searchByMaintenance: SearchByMaintenance;
 
     constructor(props: SdaSearchCriteriaProps = defaultProps) {
         super(props);
@@ -266,8 +266,8 @@ export class SearchByDefect extends Record(DefectDefaultProps) {
         super(props);
     }
 }
-    //SearchBymaintenace
-type searchByMaintenaceProps = {
+    //SearchByMaintenance
+type searchByMaintenanceProps = {
     lineMaintenance: any;
     defectDiscoveredDuring: any;
     unscheduledMaintenanceDescription: any;
@@ -276,7 +276,7 @@ type searchByMaintenaceProps = {
     micNo: any;
 };
 
-const MaintenaceDefaultProps = {
+const MaintenanceDefaultProps = {
     lineMaintenance: undefined,
     defectDiscoveredDuring: undefined,
     unscheduledMaintenanceDescription: undefined,
@@ -285,7 +285,7 @@ const MaintenaceDefaultProps = {
     micNo: undefined
 };
 
-export class SearchByMaintenace extends Record(MaintenaceDefaultProps) {
+export class SearchByMaintenance extends Record(MaintenanceDefaultProps) {
     lineMaintenance: any;
     defectDiscoveredDuring: any;
     unscheduledMaintenanceDescription: any;
@@ -293,7 +293,7 @@ export class SearchByMaintenace extends Record(MaintenaceDefaultProps) {
     nonRoutineNo: any;
     micNo: any;
 
-    constructor(props: searchByMaintenaceProps = MaintenaceDefaultProps) {
+    constructor(props: searchByMaintenanceProps = MaintenanceDefaultProps) {
         super(props);
     }
 };

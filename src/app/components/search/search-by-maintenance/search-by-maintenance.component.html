@@ -2,20 +2,21 @@
   <div class="row  form-group">
     <div class="col-md-4">
       <aac-checkbox-container label="Unscheduled Maintenance">
-        <input type="checkbox" tabindex="16" />
+        <input type="checkbox" tabindex="16" [value]="U"  (change)="onMaintenanceChange('U', $event.target.checked)"/>
       </aac-checkbox-container>
-
-
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Scheduled Maintenance">
-        <input type="checkbox" tabindex="17"  />
+        <input type="checkbox" tabindex="17"  [value]="S"  (change)="onMaintenanceChange('S', $event.target.checked)"/>
       </aac-checkbox-container>
     </div>
     <div class="col-md-4">
-      <aac-checkbox-container label="Line Maintenance">
-        <input type="checkbox" tabindex="18" formControlName="lineMaintenance" />
-      </aac-checkbox-container>
+      <aac-field-container label="Line Maintenance:" for="lineMaintenance">
+        <select class="form-control" tabindex='18' id="lineMaintenance" formControlName="lineMaintenance">
+          <option value="">Select Line Maintenance</option>
+          <option *ngFor="let option of yesNoOptions" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
   </div>
 
@@ -34,12 +35,12 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="MIC #:">
-        <input type="text" tabindex='21' class="form-control" formControlName="nonRoutineNo">
+        <input type="text" tabindex='21' class="form-control" formControlName="micNo">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Non-Routine #:">
-        <input type="text" tabindex='22' class="form-control" formControlName="micNo">
+        <input type="text" tabindex='22' class="form-control" formControlName="nonRoutineNo">
       </aac-field-container>
     </div>
   </div>

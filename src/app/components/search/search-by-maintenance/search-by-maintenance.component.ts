@@ -10,26 +10,35 @@ export class SearchByMaintenanceComponent implements OnInit {
 
     maintenanceForm = new FormGroup({
         lineMaintenance: new FormControl(),
-        defectDiscoveredDuring: new FormControl(),
+        defectDiscoveredDuring: new FormArray([]),
         unscheduledMaintenanceDescription: new FormControl(),
         routineNo: new FormControl(),
         nonRoutineNo: new FormControl(),
         micNo: new FormControl()
 
     });
+    yesNoOptions: {
+        id: string;
+        description: string;
+    }[];
     constructor() { }
 
     ngOnInit() {
+        this.yesNoOptions = [
+            { id: '1', description: 'Yes' },
+            { id: '0', description: 'No' },
+            { id: '2', description: 'Both' }
+        ];
         this.maintenanceForm.valueChanges.subscribe(this.update);
     }
     onMaintenanceChange(id: string, isChecked: boolean) {
-        const defectDiscoveredArray = <FormArray>this.maintenanceForm.controls.defectDiscoveredDuring;
-
+        const maintenanceTypeArray = <FormArray>this.maintenanceForm.controls.defectDiscoveredDuring;
         if (isChecked) {
-            defectDiscoveredArray.push(new FormControl(id));
+            maintenanceTypeArray.push(new FormControl(id));
         } else {
-            defectDiscoveredArray.removeAt(defectDiscoveredArray.controls.findIndex(x => x.value === id));
+            maintenanceTypeArray.removeAt(maintenanceTypeArray.controls.findIndex(x => x.value === id));
         }
+       // console.log(maintenanceTypeArray);
     }
 
 }
