@@ -19,8 +19,7 @@ describe('AlertDetailViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
-    console.log("HELLO");
   });
 });
