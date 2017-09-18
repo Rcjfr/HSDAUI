@@ -5,6 +5,7 @@ import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as _ from 'lodash';
+import { decimalsNumberMask } from '../../../common/masks';
 
 @Component({
     selector: 'aa-search-by-defect',
@@ -30,6 +31,7 @@ export class SearchByDefectComponent implements OnInit {
     });
     detectionMethods$: Observable<List<models.IDetectionMethod>>;
     damageTypes$: Observable<List<models.IDamageType>>;
+    decimalsNumberMask = decimalsNumberMask;
     constructor(private appStateService: AppStateService) { }
 
     ngOnInit() {
