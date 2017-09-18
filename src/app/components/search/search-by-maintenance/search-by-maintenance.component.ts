@@ -18,7 +18,7 @@ export class SearchByMaintenanceComponent implements OnInit {
         micNo: new FormControl()
 
     });
-    yesNoOptions: {
+    yesNoBothOptions: {
         id: string;
         description: string;
     }[];
@@ -30,7 +30,7 @@ export class SearchByMaintenanceComponent implements OnInit {
         //    { id: '0', description: 'No' },
         //    { id: '2', description: 'Both' }
         //];
-        this.yesNoOptions = this.utilityService.getYesNoOptions();
+        this.yesNoBothOptions = this.utilityService.getYesNoOptions();
         this.maintenanceForm.valueChanges.subscribe(this.update);
     }
     onMaintenanceChange(id: string, isChecked: boolean) {

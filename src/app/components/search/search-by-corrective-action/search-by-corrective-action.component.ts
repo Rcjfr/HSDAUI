@@ -38,7 +38,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
-    yesNoOptions: {
+    yesNoBothOptions: {
         id: string;
         description: string;
     }[];
@@ -53,7 +53,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
         //    { id: '0', description: 'No' },
         //    { id: '2', description: 'Both' }
         //];  
-        this.yesNoOptions = this.utilityService.getYesNoOptions();
+        this.yesNoBothOptions = this.utilityService.getYesNoOptions();
         //console.log(this.utilityService.getYesNoOptions());
 
         this.correctiveActionForm.valueChanges.subscribe(form => {

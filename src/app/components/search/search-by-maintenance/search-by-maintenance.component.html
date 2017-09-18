@@ -14,7 +14,7 @@
       <aac-field-container label="Line Maintenance:" for="lineMaintenance">
         <select class="form-control" tabindex='18' id="lineMaintenance" formControlName="lineMaintenance">
           <option value="">Select Line Maintenance</option>
-          <option *ngFor="let option of yesNoOptions" [value]="option.id">{{option.description}}</option>
+          <option *ngFor="let option of yesNoBothOptions" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
     </div>
