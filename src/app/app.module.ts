@@ -113,6 +113,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     services.DteStatusService,
     services.RepairInspectionStatusService,
     services.SdaService,
+    services.UtilityService,
     PendingChangesGuard,
     SdaResolverService, {
       provide: HTTP_INTERCEPTORS,
