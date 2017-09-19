@@ -213,8 +213,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
       return;
     }
-this.statusUpdatedOn = new Date();
-this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
+    this.statusUpdatedOn = new Date();
+    this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
@@ -340,5 +340,25 @@ this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifie
       (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
 
     return ok;
+  }
+
+  canEditCompletedBy() {
+    const ok = this.sdaStatusForm.get('status').value === Status.Complete ||
+      this.sdaStatusForm.get('status').value === Status.Audited;
+
+    return ok;
+
+  }
+
+  canArchiveSda(): Observable<boolean> {
+    return Observable.combineLatest(this.authService.isReliabilityAnalyst(),
+      this.authService.isQCInspector(),
+      this.authService.isQCManager(), (isReliabilityAnalyst, isQCInspector, isQCManager) => {
+        const ok = (isReliabilityAnalyst && this.currentStatus !== Status.Deleted) ||
+          ((isQCInspector) && (this.sda.id && this.currentStatus == Status.Open)) ||
+          ((isQCManager) && (this.currentStatus == Status.Open || this.currentStatus == Status.Rejected || this.currentStatus == Status.Complete));
+
+        return ok;
+      });
   }
 }
