@@ -228,7 +228,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       if (newStatus === Status.Closed) {
         this.sdaStatusTitle = `Accept SDA (SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Complete) {
-        this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
+        this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? ` (SDA ID:${this.sda.id})` : '');
       } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = this.sda.id ? `Audit SDA (SDA ID:${this.sda.id})` : 'Complete SDA';
       } else if (newStatus === Status.Deleted) {
