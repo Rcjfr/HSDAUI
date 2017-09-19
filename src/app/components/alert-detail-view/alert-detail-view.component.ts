@@ -213,10 +213,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
       return;
     }
+    this.statusUpdatedOn = new Date();
+    this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA(SDA ID:${this.sda.id})`;
-        this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
         this.statusModal.show();
       } else {
         // User can not change UpdatedBy/Date.so no need to show the modal
@@ -224,10 +225,22 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.sda.statusUpdatedOn = this.statusUpdatedOn;
         this.saveAlertData();
       }
+    } else if (newStatus === Status.Closed) {
+      this.sdaStatusTitle = `Accept SDA(SDA ID:${this.sda.id})`;
+      if (!this.sda.generalSection.sdrNumber) {
+        this.dialogService.addDialog(ConfirmComponent, {
+          title: 'Confirm?',
+          message: `Are you sure you want to accept the SDA(${this.sda.id}) without reqesting SDR?`
+        }).filter(confirm => confirm === true).subscribe(confirm => {
+          this.statusModal.show();
+        });
+
+        return;
+      } else {
+        this.statusModal.show();
+      }
     } else {
-      if (newStatus === Status.Closed) {
-        this.sdaStatusTitle = `Accept SDA (SDA ID:${this.sda.id})`;
-      } else if (newStatus === Status.Complete) {
+      if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA' + (this.sda.id ? ` (SDA ID:${this.sda.id})` : '');
       } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = this.sda.id ? `Audit SDA (SDA ID:${this.sda.id})` : 'Complete SDA';
@@ -236,8 +249,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       } else if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA (SDA ID:${this.sda.id})`;
       }
-      this.statusUpdatedOn = new Date();
-      this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
       this.statusModal.show();
     }
   }
@@ -324,10 +335,34 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   canRequestSdr() {
-   const ok = this.sda.id &&
-        (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed) &&
-        (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
+    const ok = this.sda.id &&
+      (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed) &&
+      (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
 
     return ok;
+  }
+
+  canEditCompletedBy() {
+    const ok = this.sdaStatusForm.get('status').value === Status.Complete ||
+      this.sdaStatusForm.get('status').value === Status.Audited;
+
+    return ok;
+
+  }
+
+  canArchiveSda(): Observable<boolean> {
+    return Observable.combineLatest(
+      this.authService.isReliabilityAnalyst(),
+      this.authService.isQCInspector(),
+      this.authService.isQCManager(),
+      (isReliabilityAnalyst, isQCInspector, isQCManager) => {
+        const ok = (isReliabilityAnalyst && this.currentStatus !== Status.Deleted) ||
+          ((isQCInspector) && (this.sda.id && this.currentStatus === Status.Open)) ||
+          ((isQCManager) && (this.currentStatus === Status.Open ||
+            this.currentStatus === Status.Rejected ||
+            this.currentStatus === Status.Complete));
+
+        return ok;
+      });
   }
 }
