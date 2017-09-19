@@ -351,12 +351,16 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   canArchiveSda(): Observable<boolean> {
-    return Observable.combineLatest(this.authService.isReliabilityAnalyst(),
+    return Observable.combineLatest(
+      this.authService.isReliabilityAnalyst(),
       this.authService.isQCInspector(),
-      this.authService.isQCManager(), (isReliabilityAnalyst, isQCInspector, isQCManager) => {
+      this.authService.isQCManager(),
+      (isReliabilityAnalyst, isQCInspector, isQCManager) => {
         const ok = (isReliabilityAnalyst && this.currentStatus !== Status.Deleted) ||
-          ((isQCInspector) && (this.sda.id && this.currentStatus == Status.Open)) ||
-          ((isQCManager) && (this.currentStatus == Status.Open || this.currentStatus == Status.Rejected || this.currentStatus == Status.Complete));
+          ((isQCInspector) && (this.sda.id && this.currentStatus === Status.Open)) ||
+          ((isQCManager) && (this.currentStatus === Status.Open ||
+            this.currentStatus === Status.Rejected ||
+            this.currentStatus === Status.Complete));
 
         return ok;
       });
