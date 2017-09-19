@@ -25,12 +25,7 @@ export class SearchByMaintenanceComponent implements OnInit {
     constructor(private utilityService: UtilityService) { }
 
     ngOnInit() {
-        //this.yesNoOptions = [
-        //    { id: '1', description: 'Yes' },
-        //    { id: '0', description: 'No' },
-        //    { id: '2', description: 'Both' }
-        //];
-        this.yesNoBothOptions = this.utilityService.getYesNoOptions();
+        this.yesNoBothOptions = this.utilityService.getYesNoBothOptions();
         this.maintenanceForm.valueChanges.subscribe(this.update);
     }
     onMaintenanceChange(id: string, isChecked: boolean) {
@@ -40,7 +35,6 @@ export class SearchByMaintenanceComponent implements OnInit {
         } else {
             maintenanceTypeArray.removeAt(maintenanceTypeArray.controls.findIndex(x => x.value === id));
         }
-       // console.log(maintenanceTypeArray);
     }
 
 }

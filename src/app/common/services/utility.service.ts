@@ -5,7 +5,7 @@ import '../rxjs-extensions';
 export class UtilityService {
     constructor() { }
 
-    getYesNoOptions() {
+    getYesNoBothOptions() {
         var yesNoBothOptions = [
             { id: '1', description: 'Yes' },
             { id: '0', description: 'No' },

@@ -48,13 +48,7 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
-        //this.yesNoOptions = [
-        //    { id: '1', description: 'Yes' },
-        //    { id: '0', description: 'No' },
-        //    { id: '2', description: 'Both' }
-        //];  
-        this.yesNoBothOptions = this.utilityService.getYesNoOptions();
-        //console.log(this.utilityService.getYesNoOptions());
+        this.yesNoBothOptions = this.utilityService.getYesNoBothOptions();
 
         this.correctiveActionForm.valueChanges.subscribe(form => {
             //Remove any empty selections from the multi-select dropdowns
