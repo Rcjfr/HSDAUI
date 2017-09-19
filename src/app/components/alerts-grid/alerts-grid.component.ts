@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ISdaListView } from './../../common/models';
 import { SdaSearchCriteria } from './../../common/models';
 import { Subject } from 'rxjs/Rx';
@@ -8,6 +8,7 @@ import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { SdaListResult } from 'app/common/models/sda-list-result.model';
 import * as _ from 'lodash';
+import { ScrollToService } from 'ng2-scroll-to-el';
 
 export interface LazyLoadEvent {
   first?: number;
@@ -38,10 +39,11 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   defaultSortOrder = -1;
 
 
-  constructor(private appStateService: AppStateService) { }
+  constructor(private appStateService: AppStateService, private scrollToService: ScrollToService) { }
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult()
+      .do(d => this.scrollToService.scrollTo('#searchResults'))
       .map(listResult => {
         if (listResult) {
           return listResult.toJS();

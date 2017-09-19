@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { DamageTypeService } from './damage-type.service';
 
 describe('DamageTypeService', () => {
@@ -9,7 +8,7 @@ describe('DamageTypeService', () => {
     });
   });
 
-  it('should ...', inject([DamageTypeService], (service: DamageTypeService) => {
+  xit('should ...', inject([DamageTypeService], (service: DamageTypeService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -282,6 +282,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     );
     if (this.sdaForm.value.generalSectionFormGroup) {
       sdaDetail.generalSection = generalSectionData;
+      sdaDetail.generalSection.station = sdaDetail.generalSection.station.toUpperCase();
     }
     if (this.sdaForm.value.defectLocationSectionFormGroup) {
       sdaDetail.defectLocationSection = defectLocationData;
