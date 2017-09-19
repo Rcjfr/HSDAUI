@@ -41,6 +41,7 @@ import { SdaSearchModule } from './components/search/sda-search.module';
 
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
+import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AppComponent,
     NavBarComponent,
     ConfirmComponent,
+    SaveSearchDialogComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
@@ -114,6 +116,7 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     services.DteStatusService,
     services.RepairInspectionStatusService,
     services.SdaService,
+    services.SearchesService,
     PendingChangesGuard,
     SdaResolverService, {
       provide: HTTP_INTERCEPTORS,
@@ -122,7 +125,8 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     }
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent,
+    SaveSearchDialogComponent
   ],
   bootstrap: [AppComponent]
 })

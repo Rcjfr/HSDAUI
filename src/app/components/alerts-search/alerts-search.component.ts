@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
+import { SearchesService } from 'app/common/services/searches.service';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
+import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -23,8 +25,13 @@ export class AlertsSearchComponent implements OnInit {
   searchByCorrectiveAction$: Subject<any> = new Subject();
   searchByOptions$: Subject<any> = new Subject();
   criteria;
+  selectedSearch;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
+  constructor(private fb: FormBuilder,
+    private appStateService: AppStateService,
+    private searchesService: SearchesService,
+    private dialogService: DialogService
+  ) { }
 
   ngOnInit() {
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
@@ -39,7 +46,7 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByOptions) {
-      return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByOptions}
+    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByOptions }
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -77,6 +84,18 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   saveCriteria() {
-      console.log(this.criteria);
+    console.log(this.criteria);
+    console.log(this.selectedSearch);
+
+    if (!this.selectedSearch) {
+      this.dialogService.addDialog(SaveSearchDialogComponent, {
+        title: 'Save Search Criteria',
+        message: `What would you like to name this search?`
+      }).subscribe(result => {
+        console.log(result);
+      });
+    }
+
+    this.searchesService.saveSearch(this.criteria);
   }
 }
