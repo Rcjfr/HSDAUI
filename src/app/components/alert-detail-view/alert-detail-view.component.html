@@ -83,9 +83,7 @@
           <!--Compliance Engg/Liasion Engg Actions-->
           <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
         </ng-container>
-        <ng-container *ngIf="((authService.isReliabilityAnalyst() | async) && currentStatus !== Status.Deleted) ||
-                            ((authService.isQCInspector() | async) && (sda.id && currentStatus == Status.Open)) ||
-                            ((authService.isQCManager() | async) && (currentStatus == Status.Open || currentStatus == Status.Rejected || currentStatus == Status.Complete))">
+        <ng-container *ngIf="canArchiveSda() | async">
           <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
         </ng-container>
       </div>
@@ -106,7 +104,7 @@
         <form novalidate [formGroup]="sdaStatusForm">
           <div class="form-group">
             <label for="completedBy">Completed By:<span class="req">*</span></label>
-            <input type="text" id="completedBy" [attr.disabled]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null" class="form-control" formControlName="completedBy" />
+            <input type="text" id="completedBy" [attr.disabled]="canEditCompletedBy()?null:''" class="form-control" formControlName="completedBy" />
             <div *ngIf="sdaStatusForm.get('completedBy').errors && (sdaStatusForm.get('completedBy').dirty || sdaStatusForm.get('completedBy').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedBy').errors.required">
                 Completed By is required.
@@ -115,7 +113,7 @@
           </div>
           <div class="form-group">
             <label [attr.for]="completedOn.idDatePicker">Completed On:<span class="req">*</span></label>
-            <datetime #completedOn [readonly]="sdaStatusForm.get('status').value===Status.Open || sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted?'':null" formControlName="completedOn" [timepicker]="{showSeconds:false}" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false}"></datetime>
+            <datetime #completedOn [readonly]="canEditCompletedBy()?null:''" formControlName="completedOn" [timepicker]="{showSeconds:false}" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false}"></datetime>
             <div *ngIf="sdaStatusForm.get('completedOn').errors && (sdaStatusForm.get('completedOn').dirty || sdaStatusForm.get('completedOn').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedOn').errors.required">
                 Completed Date is required.
