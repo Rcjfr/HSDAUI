@@ -81,13 +81,42 @@
         Search Options
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
       </div>
-      <aa-search-options></aa-search-options>
+      <aa-search-options (update)="searchByOptions$.next($event)"></aa-search-options>
     </accordion-group>
   </accordion>
+
   <div class="row form-group" style="padding-top:15px;">
       <div class="col-md-9"></div>
     <div class="col-md-3">
       <button type="submit" style="float:right;" class="btn btn-primary">Search</button>
     </div>
   </div>
+
+  <h2>Save Search Filters</h2>
+  <accordion>
+      <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
+          <div accordion-heading>
+              Save Search Filters
+              <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
+          </div>
+          <div class="row form-group" style="padding-top:15px;">
+              <div class="col-md-1"></div>
+              <div class="col-md-6">
+                  <aac-field-container label="Search Name:">
+                      <select class="form-control">
+                <option value="" selected></option>
+              </select>
+                  </aac-field-container>
+              </div>
+              <div class="col-md-2">
+                  <aac-checkbox-container label="Default Search">
+                      <input type="checkbox" />
+                  </aac-checkbox-container>
+              </div>
+              <div class="col-md-2">
+                  <button type="button" (click)="saveCriteria()" class="btn btn-info">Save Current Criteria</button>
+              </div>
+          </div>
+      </accordion-group>
+  </accordion>
 </form>

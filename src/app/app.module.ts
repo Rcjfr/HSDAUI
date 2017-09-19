@@ -40,7 +40,6 @@ import { SdaFormModule } from './components/sda/sda-form.module';
 import { SdaSearchModule } from './components/search/sda-search.module';
 
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
-import { AlertsSaveSearchesComponent } from './components/alerts-save-searches/alerts-save-searches.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
 
 
@@ -54,7 +53,6 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AlertDetailComponent,
     AlertDetailViewComponent,
     AlertsSearchComponent,
-    AlertsSaveSearchesComponent,
     AlertsGridComponent
   ],
   imports: [
