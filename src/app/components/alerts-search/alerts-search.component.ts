@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
-import { SearchesService } from 'app/common/services/searches.service';
+import { SavedSearchStateService } from 'app/common/services/saved-searches-state.service';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
 import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
+import { List } from 'immutable';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -17,6 +18,9 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
+  savedSearches$: Observable<List<any>>;
+
+  //Search filters
   searchByDateRange$: Subject<any> = new Subject();
   searchBySDA$: Subject<any> = new Subject();
   searchByAircraft$: Subject<any> = new Subject();
@@ -25,15 +29,18 @@ export class AlertsSearchComponent implements OnInit {
   searchByCorrectiveAction$: Subject<any> = new Subject();
   searchByOptions$: Subject<any> = new Subject();
   criteria;
-  selectedSearch;
+  selectedSearch = '';
 
   constructor(private fb: FormBuilder,
     private appStateService: AppStateService,
-    private searchesService: SearchesService,
+    private savedSearchStateService: SavedSearchStateService,
     private dialogService: DialogService
   ) { }
 
   ngOnInit() {
+    this.savedSearchStateService.loadSearches();
+    this.savedSearches$ = this.savedSearchStateService.getSavedSearches();
+
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
       this.searchBySDA$.startWith(undefined),
       this.searchByAircraft$.startWith(undefined),
@@ -87,15 +94,18 @@ export class AlertsSearchComponent implements OnInit {
     console.log(this.criteria);
     console.log(this.selectedSearch);
 
+    let newName = '';
+
     if (!this.selectedSearch) {
       this.dialogService.addDialog(SaveSearchDialogComponent, {
-        title: 'Save Search Criteria',
+        title: 'Save Search Filters',
         message: `What would you like to name this search?`
       }).subscribe(result => {
+        newName = result;
         console.log(result);
       });
     }
 
-    this.searchesService.saveSearch(this.criteria);
+    this.savedSearchStateService.saveSearch({criteria: this.criteria, id: this.selectedSearch, name: newName, default: false });
   }
 }

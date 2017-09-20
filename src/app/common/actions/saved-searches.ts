@@ -5,7 +5,9 @@ export const ActionTypes = {
   LOAD_SEARCHES: 'Load Searches',
   LOAD_SEARCHES_COMPLETE: 'Load SDAs Complete',
   LOAD_SEARCHES_FAIL: 'Load SDAs Fail',
-  SAVE_SEARCH: 'Set Search Criteria'
+  SAVE_SEARCH: 'Set Search',
+  SAVE_SEARCH_COMPLETE: 'Set Search Complete',
+  SAVE_SEARCH_FAIL: 'Set Search Fail'
 };
 
 export class LoadSearchesAction implements Action {
@@ -15,7 +17,7 @@ export class LoadSearchesAction implements Action {
 
 export class LoadSearchesCompleteAction implements Action {
   public type = ActionTypes.LOAD_SEARCHES_COMPLETE;
-  constructor(public payload: SearchData[]) { }
+  constructor(public payload: any[]) { }
 }
 
 export class LoadSearchesFailAction implements Action {
@@ -23,7 +25,15 @@ export class LoadSearchesFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export class SaveSearchCriteria implements Action {
+export class SaveSearchAction implements Action {
+  public type = ActionTypes.SAVE_SEARCH;
+  constructor(public payload: any) { }
+}
+export class SaveSearchCompleteAction implements Action {
+  public type = ActionTypes.SAVE_SEARCH;
+  constructor(public payload: any) { }
+}
+export class SaveSearchFailAction implements Action {
   public type = ActionTypes.SAVE_SEARCH;
   constructor(public payload: any) { }
 }
@@ -33,4 +43,6 @@ export type Actions =
 LoadSearchesAction |
 LoadSearchesCompleteAction |
 LoadSearchesFailAction |
-SaveSearchCriteria;
+SaveSearchAction |
+SaveSearchCompleteAction |
+SaveSearchFailAction;

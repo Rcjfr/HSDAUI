@@ -32,6 +32,7 @@ import { PendingChangesGuard } from './common/components/pending-changes.guard';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { UserEffects } from './common/effects/user.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
+import { SavedSearchesEffects } from './common/effects/saved-searches.effects';
 import { reducer } from './common/reducers';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 
@@ -92,7 +93,8 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
     StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),
     EffectsModule.run(LookupDataEffects),
-    EffectsModule.run(UserEffects)
+    EffectsModule.run(UserEffects),
+    EffectsModule.run(SavedSearchesEffects)
   ],
   providers: [
     services.AuthService,
@@ -116,7 +118,8 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
     services.DteStatusService,
     services.RepairInspectionStatusService,
     services.SdaService,
-    services.SearchesService,
+    services.SavedSearchService,
+    services.SavedSearchStateService,
     PendingChangesGuard,
     SdaResolverService, {
       provide: HTTP_INTERCEPTORS,
