@@ -1,29 +1,18 @@
 import { Record } from 'immutable';
+import { ISavedSearch } from 'app/common/models/saved-search.model';
 
-// tslint:disable-next-line
 type SearchDataProps = {
-    // id: number;
-    // name: string;
-    // criteria: any;
-    searches: any[];
+    searches: ISavedSearch[];
 };
 
 const defaultProps = {
-    // id: undefined,
-    // name: undefined,
-    // criteria: undefined
     searches: []
 };
 
 export class SearchData extends Record(defaultProps) {
-    // id: number;
-    // name: string;
-    // criteria: any;
-    searches: any;
+    searches: ISavedSearch[];
 
-    constructor(
-        props: SearchDataProps = defaultProps
-    ) {
+    constructor(props: SearchDataProps = defaultProps) {
         super(props);
     }
 };
