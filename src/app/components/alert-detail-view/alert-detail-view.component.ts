@@ -350,6 +350,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   }
 
+  formatDate(date: Date): string {
+    return moment(date).format('LLL');
+  }
+
   canArchiveSda(): Observable<boolean> {
     return Observable.combineLatest(
       this.authService.isReliabilityAnalyst(),
