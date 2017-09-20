@@ -1,5 +1,9 @@
 <h2 *ngIf="!sda.id">Create new SDA</h2>
 <h2 *ngIf="sda.id">Edit/View SDA(SDA ID:{{sda.id}}) </h2>
+<div class="alert alert-danger" *ngIf="currentStatus == Status.Rejected">
+  <strong>SDA Form Rejected by Reliability on {{formatDate(sda.statusUpdatedOn)}}</strong>
+  <p>{{sda.comments}}</p>
+</div>
 <form novalidate [formGroup]="sdaForm">
   <div class="panel panel-default">
     <div class="panel-heading">General Information</div>
