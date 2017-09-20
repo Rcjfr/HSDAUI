@@ -6,7 +6,8 @@ import * as selectedAlertActions from '../actions/selected-alert';
 import * as lookupDataActions from '../actions/lookup-data';
 import * as userActions from '../actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda, ISavedState, Status } from '../models';
+import { IStation, ISda, ISavedState, Status, IAircraftInfo } from '../models';
+import { List } from "immutable";
 
 @Injectable()
 export class AppStateService {
@@ -51,6 +52,9 @@ export class AppStateService {
       .map(station => station.filter(s => s.stationIATACode.startsWith(query.toUpperCase())))
       .map(d => d && d.toJS());
 
+  }
+  getNoseNumbers(): Observable<Array<IAircraftInfo>> {
+    return this.store.select(fromRoot.getNoseNumbers).map(d => d && d.toJS());
   }
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);

@@ -3,7 +3,7 @@ import * as selectedAlert from '../actions/selected-alert';
 import { aircraftInfoFactory } from './models/aircraft-info';
 import { sdaFactory } from './models/sda';
 import { List } from 'immutable';
-import { ISda, ISdaListView, Status } from '../models';
+import { ISda, ISdaListView, Status, IAircraftInfo } from '../models';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
 import { SdaListResult, SdaSearchCriteria } from '../models';
 
@@ -15,13 +15,13 @@ describe('selectedAlertReducer', () => {
     loadNewSdaCounter: 0,
     sda: sdaFactory(),
     newSdaStatus: Status.Open,
-    noseNumbers: <List<string>>List.of(),
+    noseNumbers: List.of<IAircraftInfo>(),
     aircraftInfo: aircraftInfoFactory(),
     sdaListResult: new SdaListResult(),
     searchCriteria: new SdaSearchCriteria()
   };
   const aircraftInfo = aircraftInfoFactory({
-    aircraftNo: 'A330',
+    noseNumber: 'A330',
     model: 'A330',
     manufacturer: 'Airbus',
     serialNo: '1234',
@@ -60,7 +60,7 @@ describe('selectedAlertReducer', () => {
     expect(state.loading).toEqual(false);
     state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
-      new selectedAlert.LoadNoseNumbersCompleteAction(['A330', 'A319']));
+      new selectedAlert.LoadNoseNumbersCompleteAction([{ noseNumber: 'A330', cycles: '', fleet: '', manufacturer: '', model: '', serialNo: '', totalShipTime: '' }, { noseNumber: 'A319', cycles: '', fleet: '', manufacturer: '', model: '', serialNo: '', totalShipTime: '' }]));
     expect(state.loading).toEqual(false);
     // console.log('nose numbers:', state.noseNumbers.size);
     const noseNumbers = fromSelectedAlert.getNoseNumbers(state); //changed getSelectedAlertNoseNumbers to getNoseNumbers

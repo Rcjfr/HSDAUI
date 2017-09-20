@@ -7,6 +7,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 import { IAircraftInfo } from '../../../../common/models/aircraft-info.model';
 import { AppStateService, AuthService } from '../../../../common/services';
 import * as models from '../../../../common/models';
+import { Observable, Observer } from "rxjs/Rx";
 
 
 @Component({
@@ -17,18 +18,19 @@ import * as models from '../../../../common/models';
 })
 export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Output() onNoseNumberChange = new EventEmitter();
+  noseNumbers$: Observable<models.IAircraftInfo[]>;
   @Input()
   set aircraftInfo(info: IAircraftInfo) {
-    if (this.aircraftInfoSectionFormGroup) {
-      this.aircraftInfoSectionFormGroup.get('manufacturer').setValue(info.manufacturer);
-      this.aircraftInfoSectionFormGroup.get('model').setValue(info.model);
-      this.aircraftInfoSectionFormGroup.get('serialNo').setValue(info.serialNo);
-      this.aircraftInfoSectionFormGroup.get('totalShipTime').setValue(info.totalShipTime);
-      this.aircraftInfoSectionFormGroup.get('cycles').setValue(info.cycles);
-      this.aircraftInfoSectionFormGroup.get('fleet').setValue(info.fleet);
+    if (this.formGroup && info) {
+      this.formGroup.get('manufacturer').setValue(info.manufacturer);
+      this.formGroup.get('model').setValue(info.model);
+      this.formGroup.get('serialNo').setValue(info.serialNo);
+      this.formGroup.get('totalShipTime').setValue(info.totalShipTime);
+      this.formGroup.get('cycles').setValue(info.cycles);
+      this.formGroup.get('fleet').setValue(info.fleet);
+      this.appStateService.loadFleetCheckTypes(info.fleet);
     }
   }
-  aircraftInfoSectionFormGroup: FormGroup;
   createNumberMask = createNumberMask;
   private measurementNumberMask = createNumberMask({
     prefix: '',
@@ -71,6 +73,13 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     //                                  .valueChanges.debounceTime(500)
     //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
 
+    this.noseNumbers$ = Observable.create((observer: Observer<string>) => {
+      observer.next(this.formGroup.get('aircraftNo').value);
+    })
+      .switchMap(token => {
+        this.appStateService.loadNoseNumbers(token);
+        return this.appStateService.getNoseNumbers();
+      });
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
@@ -79,11 +88,12 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
         this.appStateService.loadFleetCheckTypes(newSda.generalSection.fleet);
       }
       this.formGroup.patchValue(newSda.generalSection);
+
       this.checkSDAFormStatus();
     }
   }
-  noseNumberOnSelect(e: TypeaheadMatch) {
-    // console.log('Selected value: ', e.value);
-    this.onNoseNumberChange.emit(e.value);
+  noseNumberOnSelect(noseNumber: string) {
+    this.onNoseNumberChange.emit(noseNumber);
   }
+  
 }

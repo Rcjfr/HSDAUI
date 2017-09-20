@@ -1,7 +1,7 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { IAlert, ISdaListView, Status } from '../models';
 import { SdaRecord, sdaFactory } from './models/sda';
-import { SdaListResult, SdaSearchCriteria } from '../models';
+import { SdaListResult, SdaSearchCriteria, IAircraftInfo } from '../models';
 import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
 import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
@@ -16,7 +16,7 @@ export interface State {
   loadNewSdaCounter: number,
   sda: SdaRecord;
   newSdaStatus: Status;
-  noseNumbers: List<string>;
+  noseNumbers: List<IAircraftInfo>;
   aircraftInfo: AircraftInfoRecord;
   sdaListResult: SdaListResult
   searchCriteria: SdaSearchCriteria
@@ -30,7 +30,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   currentSdaId: 0,
   sda: sdaFactory(),
   newSdaStatus: Status.Open,
-  noseNumbers: List<string>(),
+  noseNumbers: List.of<AircraftInfoRecord>(),
   aircraftInfo: aircraftInfoFactory(),
   sdaListResult: new SdaListResult(),
   searchCriteria: new SdaSearchCriteria()

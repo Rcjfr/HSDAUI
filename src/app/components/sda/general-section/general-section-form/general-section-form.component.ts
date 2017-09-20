@@ -52,7 +52,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.ATACodes$ = this.appStateService.getATACodes().map(d => d && d.toJS());
     this.departments$ = this.appStateService.getDepartments();
 
-    this.aircraftInfo$ = this.appStateService.getAircraftInfo();
+    this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
 
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
