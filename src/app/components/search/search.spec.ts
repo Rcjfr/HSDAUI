@@ -51,7 +51,7 @@ describe('SearchFilterComponents', () => {
                 NKDatetimeModule,
                 TypeaheadModule.forRoot(),
                 NgPipesModule],
-            providers: [{ provide: AppStateService, useClass: MockAppStateService }, UtilityService]
+            providers: [{ provide: AppStateService, useClass: MockAppStateService }, { provide: UtilityService, useClass: UtilityService }]
         }).compileComponents();
     }));
 
