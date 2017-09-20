@@ -60,7 +60,15 @@ describe('selectedAlertReducer', () => {
     expect(state.loading).toEqual(false);
     state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
-      new selectedAlert.LoadNoseNumbersCompleteAction([{ noseNumber: 'A330', cycles: '', fleet: '', manufacturer: '', model: '', serialNo: '', totalShipTime: '' }, { noseNumber: 'A319', cycles: '', fleet: '', manufacturer: '', model: '', serialNo: '', totalShipTime: '' }]));
+      new selectedAlert.LoadNoseNumbersCompleteAction([
+        {
+          noseNumber: 'A330', cycles: '', fleet: '',
+          manufacturer: '', model: '', serialNo: '', totalShipTime: ''
+        },
+        {
+          noseNumber: 'A319', cycles: '', fleet: '',
+          manufacturer: '', model: '', serialNo: '', totalShipTime: ''
+        }]));
     expect(state.loading).toEqual(false);
     // console.log('nose numbers:', state.noseNumbers.size);
     const noseNumbers = fromSelectedAlert.getNoseNumbers(state); //changed getSelectedAlertNoseNumbers to getNoseNumbers

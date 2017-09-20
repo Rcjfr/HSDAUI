@@ -7,7 +7,7 @@ import * as lookupDataActions from '../actions/lookup-data';
 import * as userActions from '../actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
 import { IStation, ISda, ISavedState, Status, IAircraftInfo } from '../models';
-import { List } from "immutable";
+import { List } from 'immutable';
 
 @Injectable()
 export class AppStateService {

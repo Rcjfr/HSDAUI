@@ -12,6 +12,7 @@ export class AircraftService {
 
   queryNoseNumbers(query: string): Observable<Array<IAircraftInfo>> {
     const url = `${this.endPointUrl}?query=${query}`;
+
     return this.http.get<Array<IAircraftInfo>>(url);
   };
   getAircraftInfo(noseNumber: string): Observable<IAircraftInfo> {

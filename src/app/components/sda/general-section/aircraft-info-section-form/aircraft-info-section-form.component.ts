@@ -7,7 +7,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 import { IAircraftInfo } from '../../../../common/models/aircraft-info.model';
 import { AppStateService, AuthService } from '../../../../common/services';
 import * as models from '../../../../common/models';
-import { Observable, Observer } from "rxjs/Rx";
+import { Observable, Observer } from 'rxjs/Rx';
 
 
 @Component({
@@ -69,15 +69,12 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
   ngOnInit(): void {
     this.parent.addControl(this.formGroupName, this.formGroup);
-    // this.formGroup.get('fleet')
-    //                                  .valueChanges.debounceTime(500)
-    //                                  .subscribe((v: string) => this.appStateService.loadCheckTypes(v));
-
     this.noseNumbers$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.formGroup.get('aircraftNo').value);
     })
       .switchMap(token => {
         this.appStateService.loadNoseNumbers(token);
+
         return this.appStateService.getNoseNumbers();
       });
   }
@@ -95,5 +92,4 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   noseNumberOnSelect(noseNumber: string) {
     this.onNoseNumberChange.emit(noseNumber);
   }
-  
 }
