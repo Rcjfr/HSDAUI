@@ -15,7 +15,7 @@ import {
 } from './';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppStateService } from '../../common/services';
+import { AppStateService, UtilityService } from '../../common/services';
 import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
 import { ToastrModule } from 'ngx-toastr';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -51,7 +51,7 @@ describe('SearchFilterComponents', () => {
                 NKDatetimeModule,
                 TypeaheadModule.forRoot(),
                 NgPipesModule],
-            providers: [{ provide: AppStateService, useClass: MockAppStateService }]
+            providers: [{ provide: AppStateService, useClass: MockAppStateService }, { provide: UtilityService, useClass: UtilityService }]
         }).compileComponents();
     }));
 

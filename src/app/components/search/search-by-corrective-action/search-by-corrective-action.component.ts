@@ -3,7 +3,7 @@ import { ICorrosionLevel, IBaseLookUp } from '../../../common/models';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../common/models';
-import { AppStateService } from '../../../common/services';
+import { AppStateService, UtilityService } from '../../../common/services';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 @Component({
@@ -38,22 +38,17 @@ export class SearchByCorrectiveActionComponent implements OnInit {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
-    yesNoOptions: {
+    yesNoBothOptions: {
         id: string;
         description: string;
     }[];
 
-    constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
+    constructor(private appStateService: AppStateService, private utilityService: UtilityService, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
-        this.yesNoOptions = [
-            { id: '1', description: 'Yes' },
-            { id: '0', description: 'No' },
-            { id: '2', description: 'Both' }
-        ];
-
+        this.yesNoBothOptions = this.utilityService.getYesNoBothOptions();
 
         this.correctiveActionForm.valueChanges.subscribe(form => {
             //Remove any empty selections from the multi-select dropdowns

@@ -32,7 +32,7 @@
         Search by Maintenance Type
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-maintenance></aa-search-by-maintenance>
+      <aa-search-by-maintenance (update)="searchByMaintenance$.next($event)"></aa-search-by-maintenance>
     </accordion-group>
     <accordion-group #corrosionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
@@ -53,7 +53,7 @@
         Search by Defect/Damage
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-defect></aa-search-by-defect>
+      <aa-search-by-defect (update)="searchByDefect$.next($event)"></aa-search-by-defect>
     </accordion-group>
     <accordion-group #correctiveGroup panelClass="panel-default search-panel">
       <div accordion-heading>
