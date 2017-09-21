@@ -23,8 +23,8 @@ export class AlertEffects {
     .map((action: selectedAlert.LoadNoseNumbersAction) => action.payload)
     .switchMap((search: string) => {
       return this.aircraftService.queryNoseNumbers(search)
-        .map((noseNumbers: string[]) => {
-          return new selectedAlert.LoadNoseNumbersCompleteAction(noseNumbers);
+        .map((data: models.IAircraftInfo[]) => {
+          return new selectedAlert.LoadNoseNumbersCompleteAction(data);
         })
         .catch((err) => {
           return of(new selectedAlert.LoadNoseNumbersFailAction('Failed to load Nose Numbers'));
@@ -41,7 +41,15 @@ export class AlertEffects {
           return new selectedAlert.LoadAircraftInfoCompleteAction(aircraftInfo);
         })
         .catch((err) => {
-          return of(new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'));
+          return Observable.from([
+            new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'),
+            new selectedAlert.LoadAircraftInfoCompleteAction(
+              {
+                noseNumber: noseNumber,
+                cycles: '', fleet: '', manufacturer: '',
+                model: '', serialNo: '', totalShipTime: ''
+              })]);
+
         });
     });
 

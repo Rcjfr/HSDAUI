@@ -32,12 +32,20 @@ describe('Alerts Effect', () => {
         alertEffects = _alertEffects;
         aircraftService = _aircraftService;
         spyOn(aircraftService, 'queryNoseNumbers')
-          .and.returnValue(Observable.of(['A330']));
+          .and.returnValue(Observable.of([{
+            'noseNumber': 'A330',
+            'cycles': 912,
+            'fleet': '912',
+            'manufacturer': 'Airbus',
+            'model': 'A-330-200',
+            'serialNo': '1441',
+            'totalShipTime': 5771
+          }]));
         runner.queue(new selectedAlert.LoadNoseNumbersAction('A'));
         alertEffects.loadNoseNumbers$.subscribe(result => {
           expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE);
           expect(result.payload.length).toEqual(1);
-          expect(result.payload[0]).toEqual('A330');
+          expect(result.payload[0].noseNumber).toEqual('A330');
         });
       })
   );
@@ -51,7 +59,7 @@ describe('Alerts Effect', () => {
         alertEffects = _alertEffects;
         aircraftService = _aircraftService;
         const mockResponse = {
-          'aircraftNo': 'A330',
+          'noseNumber': 'A330',
           'cycles': 912,
           'fleet': '912',
           'manufacturer': 'Airbus',
@@ -65,7 +73,7 @@ describe('Alerts Effect', () => {
         alertEffects.loadAircraftInfo$.subscribe((result: selectedAlert.LoadAircraftInfoCompleteAction) => {
           expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE);
           expect(result.payload).toBeTruthy();
-          expect(result.payload.aircraftNo).toEqual('A330');
+          expect(result.payload.noseNumber).toEqual('A330');
           expect(result.payload.manufacturer).toEqual('Airbus');
         });
       })

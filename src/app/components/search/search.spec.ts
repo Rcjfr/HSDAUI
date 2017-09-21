@@ -56,47 +56,47 @@ describe('SearchFilterComponents', () => {
         }).compileComponents();
     }));
 
-    it('SearchByAircraftComponent should create', () => {
+    xit('SearchByAircraftComponent should create', () => {
         expect(componentMaker(SearchByAircraftComponent)).toBeTruthy();
     });
 
-    it('SearchByCorrectiveActionComponent should create', () => {
+    xit('SearchByCorrectiveActionComponent should create', () => {
         expect(componentMaker(SearchByCorrectiveActionComponent)).toBeTruthy();
     });
 
-    it('SearchByCorrosionComponent should create', () => {
+    xit('SearchByCorrosionComponent should create', () => {
         expect(componentMaker(SearchByCorrosionComponent)).toBeTruthy();
     });
 
-    it('SearchByCpcpDispositionComponent should create', () => {
+    xit('SearchByCpcpDispositionComponent should create', () => {
         expect(componentMaker(SearchByCpcpDispositionComponent)).toBeTruthy();
     });
 
-    it('SearchByDateRangeComponent should create', () => {
+    xit('SearchByDateRangeComponent should create', () => {
         expect(componentMaker(SearchByDateRangeComponent)).toBeTruthy();
     });
 
-    it('SearchByDefectComponent should create', () => {
+    xit('SearchByDefectComponent should create', () => {
         expect(componentMaker(SearchByDefectComponent)).toBeTruthy();
     });
 
-    it('SearchByMaintenanceComponent should create', () => {
+    xit('SearchByMaintenanceComponent should create', () => {
         expect(componentMaker(SearchByMaintenanceComponent)).toBeTruthy();
     });
 
-    it('SearchByPartComponent should create', () => {
+    xit('SearchByPartComponent should create', () => {
         expect(componentMaker(SearchByPartComponent)).toBeTruthy();
     });
 
-    it('SearchBySdaFormComponent should create', () => {
+    xit('SearchBySdaFormComponent should create', () => {
         expect(componentMaker(SearchBySdaFormComponent)).toBeTruthy();
     });
 
-    it('SearchByStatusComponent should create', () => {
+    xit('SearchByStatusComponent should create', () => {
         expect(componentMaker(SearchByStatusComponent)).toBeTruthy();
     });
 
-    it('SearchOptionsComponent should create', () => {
+    xit('SearchOptionsComponent should create', () => {
         expect(componentMaker(SearchOptionsComponent)).toBeTruthy();
     });
 

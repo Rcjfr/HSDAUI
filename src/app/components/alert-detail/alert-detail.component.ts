@@ -73,7 +73,6 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.alertDetailView.clearForm();
       }
     });
-    this.appStateService.loadNoseNumbers('');
     this.route.params.select<string>('id').subscribe(id => {
       if (id !== 'new') {
         this.currentSdaId = Number.parseInt(id);
