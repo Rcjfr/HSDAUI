@@ -9,20 +9,17 @@ import { Helper } from 'app/common/helper';
 @Injectable()
 export class SavedSearchService {
     private endPointUrl = `${environment.hsdaApiBaseUrl}`;
-    badgeNumber = '531621';
 
     constructor(private http: HttpClient, private authService: AuthService) { }
 
     saveSearch(searchData: ISavedSearch): Observable<any> {
-        if (searchData && this.badgeNumber) {
-            searchData.badgeNumber = this.badgeNumber;
-
+        if (searchData) {
             return this.http.post(`${this.endPointUrl}savedsearches`, searchData)
         }
     }
 
     getSavedSearches(badgeNumber): Observable<any> {
-        if (this.badgeNumber) {
+        if (badgeNumber) {
             return this.http.get(`${this.endPointUrl}/users/${badgeNumber}/savedsearches`)
         }
     };
