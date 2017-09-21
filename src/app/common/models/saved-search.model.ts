@@ -1,6 +1,6 @@
 export interface ISavedSearch {
-  user_id?: number;
-  id?: number;
+  badgeNumber: string;
+  searchId?: number;
   name: string;
   criteria: string;
   isDefault: boolean;
