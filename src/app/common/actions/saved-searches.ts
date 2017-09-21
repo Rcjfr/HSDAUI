@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { SearchData } from 'app/common/models';
+import { ISavedSearch } from 'app/common/models/saved-search.model';
 
 export const ActionTypes = {
   LOAD_SEARCHES: 'Load Searches',
@@ -12,7 +13,7 @@ export const ActionTypes = {
 
 export class LoadSearchesAction implements Action {
   public type = ActionTypes.LOAD_SEARCHES;
-  constructor() { }
+  constructor(public badgeNumber: string) { }
 }
 
 export class LoadSearchesCompleteAction implements Action {
@@ -27,14 +28,14 @@ export class LoadSearchesFailAction implements Action {
 
 export class SaveSearchAction implements Action {
   public type = ActionTypes.SAVE_SEARCH;
-  constructor(public payload: any) { }
+  constructor(public payload: ISavedSearch) { }
 }
 export class SaveSearchCompleteAction implements Action {
-  public type = ActionTypes.SAVE_SEARCH;
-  constructor(public payload: any) { }
+  public type = ActionTypes.SAVE_SEARCH_COMPLETE;
+  constructor(public payload: ISavedSearch) { }
 }
 export class SaveSearchFailAction implements Action {
-  public type = ActionTypes.SAVE_SEARCH;
+  public type = ActionTypes.SAVE_SEARCH_FAIL;
   constructor(public payload: any) { }
 }
 

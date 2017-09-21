@@ -21,32 +21,23 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
         //loading: false
         return state.merge({ loading: false, searches: List.of(...act.payload) });
       }
+    case actions.ActionTypes.SAVE_SEARCH:
+      {
+        return state.merge({ loading: true });
+      }
+    case actions.ActionTypes.SAVE_SEARCH_FAIL:
+      {
+        return state.merge({ loading: false });
+      }
+    case actions.ActionTypes.SAVE_SEARCH_COMPLETE:
+      {
+        const act = action as actions.SaveSearchCompleteAction;
 
-
-    // case actions.ActionTypes.SAVE_SEARCH:
-    //   {
-    //     return state.merge({ loading: true });
-    //   }
-    // case actions.ActionTypes.SAVE_SEARCH_FAIL:
-    //   {
-    //     return state.merge({ loading: false });
-    //   }
-    // case actions.ActionTypes.SAVE_SEARCH_COMPLETE:
-    //   {
-    //     const act = action as actions.SaveSearchCompleteAction;
-
-    //     //TODO - update searches with new saved search (trigger in effect?)
-
-    //     return state.merge({
-    //       loading: false,
-    //       sda: sdaFactory(act.payload.sda),
-    //       newSdaStatus: act.payload.sda.status,
-    //       savedState: SavedStateFactory(act.payload),
-    //       currentSdaId: act.payload.sdaId
-    //     });
-    //   }
-
-
+        return state.merge({
+          loading: false,
+          searches: [...state.searches, act.payload]
+        });
+      }
     default: {
       return state;
     }
@@ -55,4 +46,3 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
 
 // Selector Functions
 export const getSearches = (state: State) => state.searches;
-

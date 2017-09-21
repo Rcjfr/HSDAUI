@@ -15,8 +15,8 @@ export class SavedSearchStateService {
         return this.store.select(fromRoot.getSavedSearches);
     }
 
-    loadSearches() {
-        this.store.dispatch(new searchesActions.LoadSearchesAction());
+    loadSearches(badgeNumber) {
+        this.store.dispatch(new searchesActions.LoadSearchesAction(badgeNumber));
     }
 
     saveSearch(criteria) {

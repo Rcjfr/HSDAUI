@@ -15,8 +15,9 @@ export class SavedSearchesEffects {
   @Effect()
   loadSearches$: Observable<Action> = this.actions$
     .ofType(searchesAlert.ActionTypes.LOAD_SEARCHES)
-    .switchMap(() => {
-      return this.savedSearchService.getSavedSearches()
+    .map((action: searchesAlert.LoadSearchesAction) => action.badgeNumber)
+    .switchMap((badgeNumber: string) => {
+      return this.savedSearchService.getSavedSearches(badgeNumber)
         .map((data: ISavedSearch[]) => {
           return new searchesAlert.LoadSearchesCompleteAction(data);
         })
@@ -32,9 +33,7 @@ export class SavedSearchesEffects {
     .switchMap((data: ISavedSearch) => {
       return this.savedSearchService.saveSearch(data)
         .map((updatedSearchData: any) => {  //models.ISda
-          //this.appStateService.notifySavedSda({ sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });
-
-          return new searchesAlert.SaveSearchCompleteAction({ newData: updatedSearchData });
+          return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);
         })
         .catch((err) => {
           return of(new searchesAlert.SaveSearchFailAction('Failed to save search.'));

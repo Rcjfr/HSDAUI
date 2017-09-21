@@ -9,6 +9,8 @@ import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
 import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
 import { List } from 'immutable';
+import { AuthService } from 'app/common/services/auth.service';
+import { SearchData } from 'app/common/models';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -18,7 +20,7 @@ import { List } from 'immutable';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
-  savedSearches$: Observable<List<any>>;
+  savedSearches$: Observable<List<SearchData>>;
 
   //Search filters
   searchByDateRange$: Subject<any> = new Subject();
@@ -30,15 +32,24 @@ export class AlertsSearchComponent implements OnInit {
   searchByOptions$: Subject<any> = new Subject();
   criteria;
   selectedSearch = '';
+  isDefault = false;
+
+  badgeNumber;
 
   constructor(private fb: FormBuilder,
     private appStateService: AppStateService,
     private savedSearchStateService: SavedSearchStateService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.savedSearchStateService.loadSearches();
+    this.authService.badgeId()
+      .map(badgeId => {
+        this.badgeNumber = badgeId;
+        this.savedSearchStateService.loadSearches(badgeId);
+      }).subscribe();
+
     this.savedSearches$ = this.savedSearchStateService.getSavedSearches();
 
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
@@ -91,21 +102,13 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   saveCriteria() {
-    console.log(this.criteria);
-    console.log(this.selectedSearch);
-
-    let newName = '';
-
     if (!this.selectedSearch) {
       this.dialogService.addDialog(SaveSearchDialogComponent, {
         title: 'Save Search Filters',
         message: `What would you like to name this search?`
-      }).subscribe(result => {
-        newName = result;
-        console.log(result);
+      }).subscribe(newName => {
+        this.savedSearchStateService.saveSearch({ criteria: JSON.stringify(this.criteria), id: this.selectedSearch, name: newName, default: this.isDefault });
       });
     }
-
-    this.savedSearchStateService.saveSearch({criteria: this.criteria, id: this.selectedSearch, name: newName, default: false });
   }
 }
