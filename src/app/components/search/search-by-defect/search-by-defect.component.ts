@@ -5,6 +5,7 @@ import { List } from 'immutable';
 import * as models from '../../../common/models';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as _ from 'lodash';
+import { decimalsNumberMask } from '../../../common/masks';
 
 @Component({
     selector: 'aa-search-by-defect',
@@ -30,15 +31,16 @@ export class SearchByDefectComponent implements OnInit {
     });
     detectionMethods$: Observable<List<models.IDetectionMethod>>;
     damageTypes$: Observable<List<models.IDamageType>>;
+    decimalsNumberMask = decimalsNumberMask;
     constructor(private appStateService: AppStateService) { }
 
     ngOnInit() {
         this.detectionMethods$ = this.appStateService.getDetectionMethods();
         this.damageTypes$ = this.appStateService.getDamageTypes();
         this.defectForm.valueChanges.subscribe(form => {
-            //Remove any empty selections from the multi-select dropdowns
             form.damageType = _.compact(form.damageType);
             form.detectionMethod = _.compact(form.detectionMethod);
+         this.update.emit(form);
         });
     }
 

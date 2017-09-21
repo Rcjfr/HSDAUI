@@ -51,36 +51,36 @@
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Length From (in inches):">
-        <input type="text" tabindex='46' class="form-control" formControlName="lengthFrom">
+        <input type="text" tabindex='46' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Length To (in inches):">
-        <input type="text" tabindex='47' class="form-control" formControlName="lengthTo">
+        <input type="text" tabindex='47' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthTo">
       </aac-field-container>
     </div>
   </div>
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Width From (in inches):">
-        <input type="text" tabindex='48' class="form-control" formControlName="widthFrom">
+        <input type="text" tabindex='48' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Width To (in inches):">
-        <input type="text" tabindex='49' class="form-control" formControlName="widthTo">
+        <input type="text" tabindex='49' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthTo">
       </aac-field-container>
     </div>
   </div>
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Depth From (in inches):">
-        <input type="text" tabindex='50' class="form-control" formControlName="depthFrom">
+        <input type="text" tabindex='50' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Depth To (in inches):">
-        <input type="text" tabindex='51' class="form-control" formControlName="depthTo">
+        <input type="text" tabindex='51' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthTo">
       </aac-field-container>
     </div>
   </div>

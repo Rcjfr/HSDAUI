@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ng-pipes';
+import { TextMaskModule } from 'angular2-text-mask';
 
 describe('SearchFilterComponents', () => {
     beforeEach(async(() => {
@@ -50,7 +51,7 @@ describe('SearchFilterComponents', () => {
                 }),
                 NKDatetimeModule,
                 TypeaheadModule.forRoot(),
-                NgPipesModule],
+                NgPipesModule, TextMaskModule],
             providers: [{ provide: AppStateService, useClass: MockAppStateService }, { provide: UtilityService, useClass: UtilityService }]
         }).compileComponents();
     }));
