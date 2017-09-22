@@ -32,13 +32,16 @@ export class SavedSearchesEffects {
     .map((action: searchesAlert.SaveSearchAction) => action.payload)
     .switchMap((data: ISavedSearch) => {
       return this.savedSearchService.saveSearch(data)
-        .map((updatedSearchData: any) => {  //models.ISda
+        .map((updatedSearchData: any) => {
+          this.savedSearchStateService.loadSearches(updatedSearchData.badgeNumber);
+
           return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);
         })
         .catch((err) => {
           return of(new searchesAlert.SaveSearchFailAction('Failed to save search.'));
         });
     });
+
 
   constructor(private actions$: Actions,
     private savedSearchStateService: services.SavedSearchStateService,

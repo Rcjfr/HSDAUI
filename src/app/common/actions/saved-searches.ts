@@ -4,8 +4,8 @@ import { ISavedSearch } from 'app/common/models/saved-search.model';
 
 export const ActionTypes = {
   LOAD_SEARCHES: 'Load Searches',
-  LOAD_SEARCHES_COMPLETE: 'Load SDAs Complete',
-  LOAD_SEARCHES_FAIL: 'Load SDAs Fail',
+  LOAD_SEARCHES_COMPLETE: 'Load Searches Complete',
+  LOAD_SEARCHES_FAIL: 'Load Searches Fail',
   SAVE_SEARCH: 'Set Search',
   SAVE_SEARCH_COMPLETE: 'Set Search Complete',
   SAVE_SEARCH_FAIL: 'Set Search Fail'
