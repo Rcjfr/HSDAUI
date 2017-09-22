@@ -4,12 +4,14 @@ import { combineReducers, Action } from '@ngrx/store';
 import * as fromSelectedAlert from './selected-alert';
 import * as fromLookupData from './lookup-data';
 import * as fromLoggedInUser from './logged-in-user';
+import * as fromSavedSearches from './saved-searches';
 import { AppStore } from '../store/app-store';
 
 const reducers = {
   selectedAlert: fromSelectedAlert.reducer,
   lookupData: fromLookupData.reducer,
-  user: fromLoggedInUser.reducer
+  user: fromLoggedInUser.reducer,
+  savedSearches: fromSavedSearches.reducer
 };
 
 const combinedReducers: ActionReducer<AppStore> = combineReducers(reducers);
@@ -25,6 +27,7 @@ export function reducer(state: AppStore, action: Action): AppStore {
 export const getSelectedAlertState = (state: AppStore) => state.selectedAlert;
 export const getLookupDataState = (state: AppStore) => state.lookupData;
 export const getUserDataState = (state: AppStore) => state.user;
+export const getSavedSearchState = (state: AppStore) => state.savedSearches;
 
 // Level 2
 export const getSelectedSda = compose(fromSelectedAlert.getSelectedSda, getSelectedAlertState);
@@ -60,3 +63,5 @@ export const getDTEStatus = compose(fromLookupData.getDTEStatus, getLookupDataSt
 
 export const getUser = compose(fromLoggedInUser.getUser, getUserDataState);
 export const getUserLoading = compose(fromLoggedInUser.getLoading, getUserDataState);
+
+export const getSavedSearches = compose(fromSavedSearches.getSearches, getSavedSearchState);

@@ -1,27 +1,21 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, ViewContainerRef, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'aa-search-options',
   templateUrl: './search-options.component.html',
   styleUrls: ['./search-options.component.less']
 })
-export class SearchOptionsComponent  implements OnInit {
-    createNumberMask = createNumberMask;
-    public numberMask = createNumberMask({
-        prefix: '',
-        allowDecimal: false,
-        includeThousandsSeparator: false,
-        allowLeadingZeroes: false
-    });
+export class SearchOptionsComponent implements OnInit {
+  @Output() update: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private toastr: ToastrService) { }
+  optionsForm = new FormGroup({
+    useAndOperator: new FormControl()
+  });
+
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  save() {
-        this.toastr.success('Form Saved', 'Success');
+    this.optionsForm.valueChanges.subscribe(this.update);
   }
 }

@@ -20,6 +20,8 @@ export * from './sda.service';
 export * from './auth.service';
 export * from './auth-guard.service';
 export * from './auth-interceptor.service';
+export * from './saved-searches.service';
+export * from './saved-searches-state.service';
 export * from './utility.service';
 
 

@@ -29,10 +29,6 @@ export class SdaService {
     return this.http.post(this.endPointUrl + '/search', criteria);
   };
 
-  getAllSda(pageData): Observable<SdaListResult> {
-    return this.http.post(this.endPointUrl + 's', pageData);
-  };
-
   getSda(sdaId: number): Observable<models.ISda> {
     return this.http.get(`${this.endPointUrl}/${sdaId}`, { responseType: 'text' })
       .map((result) => Helper.Deserialize(result));

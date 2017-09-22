@@ -2,10 +2,15 @@ import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppStateService } from '../../common/services';
+import { SavedSearchStateService } from 'app/common/services/saved-searches-state.service';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
+import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
+import { List } from 'immutable';
+import { AuthService } from 'app/common/services/auth.service';
+import { SearchData } from 'app/common/models';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -15,6 +20,9 @@ import * as _ from 'lodash';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
+  savedSearches$: Observable<List<SearchData>>;
+
+  //Search filters
   searchByDateRange$: Subject<any> = new Subject();
   searchBySDA$: Subject<any> = new Subject();
   searchByAircraft$: Subject<any> = new Subject();
@@ -23,11 +31,29 @@ export class AlertsSearchComponent implements OnInit {
   searchByCorrectiveAction$: Subject<any> = new Subject();
   searchByDefect$: Subject<any> = new Subject();
   searchByMaintenance$: Subject<any> = new Subject();
+  searchByOptions$: Subject<any> = new Subject();
   criteria;
+  selectedSearch = '';
+  isDefault = false;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService) { }
+  badgeNumber;
+
+  constructor(private fb: FormBuilder,
+    private appStateService: AppStateService,
+    private savedSearchStateService: SavedSearchStateService,
+    private dialogService: DialogService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.badgeId()
+      .map(badgeId => {
+        this.badgeNumber = badgeId;
+        this.savedSearchStateService.loadSearches(badgeId);
+      }).subscribe();
+
+    this.savedSearches$ = this.savedSearchStateService.getSavedSearches().do(searches => this.selectDefaultSearch(searches));
+
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
       this.searchBySDA$.startWith(undefined),
       this.searchByAircraft$.startWith(undefined),
@@ -36,12 +62,13 @@ export class AlertsSearchComponent implements OnInit {
       this.searchByCorrectiveAction$.startWith(undefined),
       this.searchByDefect$.startWith(undefined),
       this.searchByMaintenance$.startWith(undefined),
+      this.searchByOptions$.startWith(undefined),
       this.combineCriteria)
       .subscribe(s => this.criteria = s);
   }
 
-  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance ) {
-      return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance}
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions) {
+      return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions}
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -75,6 +102,38 @@ export class AlertsSearchComponent implements OnInit {
       })
     } else {
       this.appStateService.saveSdaSearchCriteria(this.criteria);
+    }
+  }
+
+  selectDefaultSearch(searches) {
+    if (searches && searches instanceof List) {
+      const defaultItem = _.find(searches.toJS(), s => s.isDefault === true);
+      if (defaultItem) {
+        this.selectedSearch = defaultItem.searchId;
+      }
+    }
+  }
+
+  getSearchDisplayName(search: any) {
+    return search.name + (search.isDefault ? ' (Default)' : '');
+  }
+
+  saveCriteria() {
+    if (!this.selectedSearch) {
+      this.dialogService.addDialog(PromptDialogComponent, {
+        title: 'Save Search Filters',
+        message: `What would you like to name this search?`
+      }).subscribe(newName => {
+        if (newName) {
+          this.savedSearchStateService.saveSearch({
+            badgeNumber: this.badgeNumber,
+            criteria: JSON.stringify(this.criteria),
+            id: this.selectedSearch,
+            name: newName,
+            isDefault: this.isDefault
+          });
+        }
+      });
     }
   }
 }

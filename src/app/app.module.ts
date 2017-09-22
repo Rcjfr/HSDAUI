@@ -32,6 +32,7 @@ import { PendingChangesGuard } from './common/components/pending-changes.guard';
 import { AlertEffects } from './common/effects/alerts.effects';
 import { UserEffects } from './common/effects/user.effects';
 import { LookupDataEffects } from './common/effects/lookup-data.effects';
+import { SavedSearchesEffects } from './common/effects/saved-searches.effects';
 import { reducer } from './common/reducers';
 import { AlertDetailViewComponent } from './components/alert-detail-view/alert-detail-view.component';
 
@@ -41,6 +42,7 @@ import { SdaSearchModule } from './components/search/sda-search.module';
 
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
+import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
 
 
 @NgModule({
@@ -48,12 +50,12 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     AppComponent,
     NavBarComponent,
     ConfirmComponent,
+    PromptDialogComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
     AlertDetailViewComponent,
     AlertsSearchComponent,
-
     AlertsGridComponent
   ],
   imports: [
@@ -91,7 +93,8 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
     EffectsModule.run(AlertEffects),
     EffectsModule.run(LookupDataEffects),
-    EffectsModule.run(UserEffects)
+    EffectsModule.run(UserEffects),
+    EffectsModule.run(SavedSearchesEffects)
   ],
   providers: [
     services.AuthService,
@@ -115,6 +118,8 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     services.DteStatusService,
     services.RepairInspectionStatusService,
     services.SdaService,
+    services.SavedSearchService,
+    services.SavedSearchStateService,
     services.UtilityService,
     PendingChangesGuard,
     SdaResolverService, {
@@ -124,7 +129,8 @@ import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.compon
     }
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent,
+    PromptDialogComponent
   ],
   bootstrap: [AppComponent]
 })
