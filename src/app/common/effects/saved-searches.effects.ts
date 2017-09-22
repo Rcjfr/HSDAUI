@@ -32,7 +32,7 @@ export class SavedSearchesEffects {
     .map((action: searchesAlert.SaveSearchAction) => action.payload)
     .switchMap((data: ISavedSearch) => {
       return this.savedSearchService.saveSearch(data)
-        .map((updatedSearchData: any) => {
+        .map((updatedSearchData: ISavedSearch) => {
           this.savedSearchStateService.loadSearches(updatedSearchData.badgeNumber);
 
           return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);

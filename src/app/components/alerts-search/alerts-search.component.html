@@ -94,10 +94,10 @@
 
   <h2>Save Search Filters</h2>
   <accordion>
-    <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
+    <accordion-group #savedSearchesGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Save Search Filters
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
+        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': savedSearchesGroup?.isOpen, 'icon-add': !savedSearchesGroup?.isOpen}"></i>
       </div>
       <div class="row form-group" style="padding-top:15px;">
         <div class="col-md-1"></div>

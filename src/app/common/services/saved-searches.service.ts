@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthService } from './auth.service';
 import { environment } from '../../../environments/environment';
 import { ISavedSearch } from 'app/common/models/saved-search.model';
 import { Helper } from 'app/common/helper';
@@ -10,17 +9,17 @@ import { Helper } from 'app/common/helper';
 export class SavedSearchService {
     private endPointUrl = `${environment.hsdaApiBaseUrl}`;
 
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient) { }
 
-    saveSearch(searchData: ISavedSearch): Observable<any> {
+    saveSearch(searchData: ISavedSearch): Observable<ISavedSearch> {
         if (searchData) {
-            return this.http.post(`${this.endPointUrl}savedsearches`, searchData)
+            return this.http.post<ISavedSearch>(`${this.endPointUrl}savedsearches`, searchData)
         }
     }
 
-    getSavedSearches(badgeNumber): Observable<any> {
+    getSavedSearches(badgeNumber): Observable<ISavedSearch[]> {
         if (badgeNumber) {
-            return this.http.get(`${this.endPointUrl}/users/${badgeNumber}/savedsearches`)
+            return this.http.get<ISavedSearch[]>(`${this.endPointUrl}/users/${badgeNumber}/savedsearches`)
         }
     };
 }
