@@ -29,7 +29,7 @@ export class RepairDescriptionService {
         { id: 12, description: 'Reinforcing - Modification' },
         { id: 13, description: 'Restore Bonded Material' },
         { id: 14, description: 'Splice Repair' },
-        { id: 15, description: 'Plug Reinforcement ( Nested Angles)' },
+        { id: 15, description: 'Plug Reinforcement (Nested Angles)' },
         { id: 16, description: 'Plug-Fastener' },
         { id: 17, description: 'Other' }
     ]);

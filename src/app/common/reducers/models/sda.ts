@@ -12,6 +12,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   statusUpdatedBy: '',
   statusUpdatedOn: new Date(),
   status: 0, //Open,
+  comments: '',
   generalSection: {
     sdrNumber: null,
     station: null,

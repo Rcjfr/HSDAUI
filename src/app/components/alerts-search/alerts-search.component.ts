@@ -29,6 +29,8 @@ export class AlertsSearchComponent implements OnInit {
   searchByPart$: Subject<any> = new Subject();
   searchByCorrosion$: Subject<any> = new Subject();
   searchByCorrectiveAction$: Subject<any> = new Subject();
+  searchByDefect$: Subject<any> = new Subject();
+  searchByMaintenance$: Subject<any> = new Subject();
   searchByOptions$: Subject<any> = new Subject();
   criteria;
   selectedSearch = '';
@@ -58,13 +60,15 @@ export class AlertsSearchComponent implements OnInit {
       this.searchByPart$.startWith(undefined),
       this.searchByCorrosion$.startWith(undefined),
       this.searchByCorrectiveAction$.startWith(undefined),
+      this.searchByDefect$.startWith(undefined),
+      this.searchByMaintenance$.startWith(undefined),
       this.searchByOptions$.startWith(undefined),
       this.combineCriteria)
       .subscribe(s => this.criteria = s);
   }
 
-  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByOptions) {
-    return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByOptions }
+  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions) {
+      return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions}
   }
 
   expandCollapseAll(expandAll: boolean) {

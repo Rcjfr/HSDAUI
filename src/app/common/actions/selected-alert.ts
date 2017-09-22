@@ -31,7 +31,7 @@ export class LoadNoseNumbersAction implements Action {
 }
 export class LoadNoseNumbersCompleteAction implements Action {
   public type = ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE;
-  constructor(public payload: Array<string>) { }
+  constructor(public payload: Array<models.IAircraftInfo>) { }
 }
 export class LoadNoseNumbersFailAction implements Action {
   public type = ActionTypes.LOAD_NOSE_NUMBERS_FAIL;

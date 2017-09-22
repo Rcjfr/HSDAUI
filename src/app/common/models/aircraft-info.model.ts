@@ -1,5 +1,5 @@
 export interface IAircraftInfo {
-    aircraftNo: string;
+    noseNumber: string;
     manufacturer: string;
     model: string;
     serialNo: string;

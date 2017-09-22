@@ -1,4 +1,4 @@
-﻿export interface IGeneralSection {
+export interface IGeneralSection {
   id?: number;
   sdrNumber?: string;
   station?: string;
@@ -7,8 +7,8 @@
   manufacturer?: string;
   model?: string;
   serialNo?: string;
-  totalShipTime?: number;
-  cycles?: number;
+  totalShipTime?: string;
+  cycles?: string;
   fleet?: string;
   originator?: string;
   lineMaintenance?: boolean;
