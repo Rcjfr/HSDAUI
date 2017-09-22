@@ -13,7 +13,7 @@ export const ActionTypes = {
 
 export class LoadSearchesAction implements Action {
   public type = ActionTypes.LOAD_SEARCHES;
-  constructor(public badgeNumber: string) { }
+  constructor(public payload: string) { }
 }
 
 export class LoadSearchesCompleteAction implements Action {

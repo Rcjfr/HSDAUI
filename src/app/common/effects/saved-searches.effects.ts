@@ -15,7 +15,7 @@ export class SavedSearchesEffects {
   @Effect()
   loadSearches$: Observable<Action> = this.actions$
     .ofType(searchesAlert.ActionTypes.LOAD_SEARCHES)
-    .map((action: searchesAlert.LoadSearchesAction) => action.badgeNumber)
+    .map((action: searchesAlert.LoadSearchesAction) => action.payload)
     .switchMap((badgeNumber: string) => {
       return this.savedSearchService.getSavedSearches(badgeNumber)
         .map((data: ISavedSearch[]) => {
