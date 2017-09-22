@@ -101,13 +101,25 @@ export class AlertsSearchComponent implements OnInit {
     }
   }
 
+  getSearchDisplayName(search: any) {
+    return search.name + (search.isDefault ? ' (Default)' : '');
+  }
+
   saveCriteria() {
     if (!this.selectedSearch) {
       this.dialogService.addDialog(SaveSearchDialogComponent, {
         title: 'Save Search Filters',
         message: `What would you like to name this search?`
       }).subscribe(newName => {
-        this.savedSearchStateService.saveSearch({ criteria: JSON.stringify(this.criteria), id: this.selectedSearch, name: newName, default: this.isDefault });
+        if (newName) {
+          this.savedSearchStateService.saveSearch({
+            badgeNumber: this.badgeNumber,
+            criteria: JSON.stringify(this.criteria),
+            id: this.selectedSearch,
+            name: newName,
+            isDefault: this.isDefault
+          });
+        }
       });
     }
   }

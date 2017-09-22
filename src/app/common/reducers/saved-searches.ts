@@ -18,7 +18,6 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
       {
         const act = action as actions.LoadSearchesCompleteAction;
 
-        //loading: false
         return state.merge({ loading: false, searches: List.of(...act.payload) });
       }
     case actions.ActionTypes.SAVE_SEARCH:
