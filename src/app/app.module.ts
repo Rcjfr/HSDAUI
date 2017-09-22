@@ -118,12 +118,9 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
     services.DteStatusService,
     services.RepairInspectionStatusService,
     services.SdaService,
-<<<<<<< HEAD
     services.SavedSearchService,
     services.SavedSearchStateService,
-=======
     services.UtilityService,
->>>>>>> master
     PendingChangesGuard,
     SdaResolverService, {
       provide: HTTP_INTERCEPTORS,
