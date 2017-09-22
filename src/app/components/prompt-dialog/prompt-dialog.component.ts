@@ -8,11 +8,11 @@ export interface ConfirmModel {
 }
 
 @Component({
-  selector: 'aa-save-search-dialog',
-  templateUrl: './save-search-dialog.component.html',
-  styleUrls: ['./save-search-dialog.component.less']
+  selector: 'aa-save-prompt-dialog',
+  templateUrl: './prompt-dialog.component.html',
+  styleUrls: ['./prompt-dialog.component.less']
 })
-export class SaveSearchDialogComponent extends DialogComponent<ConfirmModel, any> implements ConfirmModel {
+export class PromptDialogComponent extends DialogComponent<ConfirmModel, any> implements ConfirmModel {
 
   title: string;
   message: string;

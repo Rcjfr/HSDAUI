@@ -42,7 +42,7 @@ import { SdaSearchModule } from './components/search/sda-search.module';
 
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
-import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
+import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
     AppComponent,
     NavBarComponent,
     ConfirmComponent,
-    SaveSearchDialogComponent,
+    PromptDialogComponent,
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
@@ -130,7 +130,7 @@ import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/sav
   ],
   entryComponents: [
     ConfirmComponent,
-    SaveSearchDialogComponent
+    PromptDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogComponent, DialogService, BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { SaveSearchDialogComponent } from './save-search-dialog.component';
+import { PromptDialogComponent } from './prompt-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ConfirmComponent', () => {
-  let component: SaveSearchDialogComponent;
-  let fixture: ComponentFixture<SaveSearchDialogComponent>;
+  let component: PromptDialogComponent;
+  let fixture: ComponentFixture<PromptDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SaveSearchDialogComponent],
+      declarations: [PromptDialogComponent],
       imports: [BootstrapModalModule.forRoot({ container: document.body }), ReactiveFormsModule],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SaveSearchDialogComponent);
+    fixture = TestBed.createComponent(PromptDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

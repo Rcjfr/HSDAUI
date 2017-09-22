@@ -7,7 +7,7 @@ import { ConfirmComponent } from '../../common/components/confirm/confirm.compon
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { SaveSearchDialogComponent } from 'app/components/save-search-dialog/save-search-dialog.component';
+import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
 import { AuthService } from 'app/common/services/auth.service';
 import { SearchData } from 'app/common/models';
@@ -120,7 +120,7 @@ export class AlertsSearchComponent implements OnInit {
 
   saveCriteria() {
     if (!this.selectedSearch) {
-      this.dialogService.addDialog(SaveSearchDialogComponent, {
+      this.dialogService.addDialog(PromptDialogComponent, {
         title: 'Save Search Filters',
         message: `What would you like to name this search?`
       }).subscribe(newName => {
