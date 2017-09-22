@@ -50,7 +50,7 @@ export class AlertsSearchComponent implements OnInit {
         this.savedSearchStateService.loadSearches(badgeId);
       }).subscribe();
 
-    this.savedSearches$ = this.savedSearchStateService.getSavedSearches();
+    this.savedSearches$ = this.savedSearchStateService.getSavedSearches().do(searches => this.selectDefaultSearch(searches));
 
     Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
       this.searchBySDA$.startWith(undefined),
@@ -98,6 +98,16 @@ export class AlertsSearchComponent implements OnInit {
       })
     } else {
       this.appStateService.saveSdaSearchCriteria(this.criteria);
+    }
+  }
+
+  selectDefaultSearch(searches) {
+    if (searches && searches instanceof List) {
+      const defaultItem = _.find(searches.toJS(), s => s.isDefault === true);
+      if (defaultItem) {
+        this.selectedSearch = defaultItem.searchId;
+      }
+      console.log(searches);
     }
   }
 
