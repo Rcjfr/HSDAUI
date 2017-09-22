@@ -107,7 +107,6 @@ export class AlertsSearchComponent implements OnInit {
       if (defaultItem) {
         this.selectedSearch = defaultItem.searchId;
       }
-      console.log(searches);
     }
   }
 
