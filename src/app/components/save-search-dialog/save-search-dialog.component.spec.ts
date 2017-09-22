@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DialogComponent, DialogService, BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { SaveSearchDialogComponent } from './save-search-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ConfirmComponent', () => {
   let component: SaveSearchDialogComponent;
@@ -8,11 +9,10 @@ describe('ConfirmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SaveSearchDialogComponent ],
-      imports: [
-        BootstrapModalModule.forRoot({container: document.body})],
+      declarations: [SaveSearchDialogComponent],
+      imports: [BootstrapModalModule.forRoot({ container: document.body }), ReactiveFormsModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('ConfirmComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
