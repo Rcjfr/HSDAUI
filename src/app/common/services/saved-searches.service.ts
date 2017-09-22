@@ -19,7 +19,7 @@ export class SavedSearchService {
 
     getSavedSearches(badgeNumber): Observable<ISavedSearch[]> {
         if (badgeNumber) {
-            return this.http.get<ISavedSearch[]>(`${this.endPointUrl}/users/${badgeNumber}/savedsearches`)
+            return this.http.get<ISavedSearch[]>(`${this.endPointUrl}users/${badgeNumber}/savedsearches`)
         }
     };
 }
