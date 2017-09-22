@@ -42,7 +42,7 @@ export class AlertEffects {
         })
         .catch((err) => {
           return Observable.from([
-            new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'),
+            new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft information. Please check the aircraft # or try again by clicking refresh button.'),
             new selectedAlert.LoadAircraftInfoCompleteAction(
               {
                 noseNumber: noseNumber,
