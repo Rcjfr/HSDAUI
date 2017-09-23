@@ -26,7 +26,7 @@ export class LookupDataEffects {
         new lookupData.LoadCorrosionTypesAction(),
         new lookupData.LoadDepartmentsAction(),
         new lookupData.LoadDetectionMethodsAction(),
-        new lookupData.LoadStationsAction(),
+        //new lookupData.LoadStationsAction(),
         new lookupData.LoadDamageTypesAction(),
         new lookupData.LoadCauseOfDamagesAction(),
         new lookupData.LoadFloorboardConditionsAction(),
@@ -83,6 +83,9 @@ export class LookupDataEffects {
     .ofType(lookupData.ActionTypes.LOAD_FLEET_CHECK_TYPES)
     .map((action: lookupData.LoadFleetCheckTypesAction) => action.payload)
     .switchMap((fleetType: string) => {
+      if (!fleetType) {
+        return of(new lookupData.LoadFleetCheckTypesCompleteAction([]));
+      }
       return this.checkTypesService.getFleetCheckTypes(fleetType)
         .map((response: models.ICheckType[]) => {
           return new lookupData.LoadFleetCheckTypesCompleteAction(response);
@@ -155,8 +158,9 @@ export class LookupDataEffects {
   @Effect()
   loadStations$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_STATIONS)
-    .switchMap(() => {
-      return this.stationService.getAllStations()
+    .map((action: lookupData.LoadStationsAction) => action.payload)
+    .switchMap((token: string) => {
+      return this.stationService.getStations(token)
         .map((response: models.IStation[]) => {
           return new lookupData.LoadStationsCompleteAction(response);
         })

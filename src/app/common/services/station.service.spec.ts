@@ -1,4 +1,4 @@
-﻿import { async, inject, TestBed } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { ATACodesService } from './ata-codes.service';
@@ -42,7 +42,7 @@ describe('StationService', () => {
           conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
         });
 
-        const result = service.getAllStations();
+        const result = service.getStations('A');
 
         result.subscribe(res => {
           expect(res).toBeTruthy();

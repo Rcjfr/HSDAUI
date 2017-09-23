@@ -45,7 +45,7 @@
         <aac-field-container required="true" label="Station:" [message]="displayMessage.station">
           <input type="text" tabindex='4' autocomplete="off" class="form-control" maxlength="3" formControlName="station" [typeahead]="stations$"
                  typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate"
-                 typeaheadOptionsLimit="10" typeaheadMinLength="1">
+                 typeaheadOptionsLimit="20" typeaheadMinLength="1">
         </aac-field-container>
       </div>
     </div>

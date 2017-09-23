@@ -14,6 +14,11 @@ export class AlertsComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-    this.loading$ = Observable.merge(this.appStateService.getLookupDataLoading(), this.appStateService.getUserLoading(), this.appStateService.getSdaLoading());
+    this.loading$ = Observable.combineLatest(
+      this.appStateService.getLookupDataLoading(),
+      this.appStateService.getUserLoading(),
+      this.appStateService.getSdaLoading(), (a, b, c) => {
+        return a || b || c;
+      });
   }
 }

@@ -49,7 +49,7 @@ export class AppStateService {
       //TODO: need to revisit for wildcard search
       //.map(station => station.filter(s => (query.length == 1 && s.stationIATACode.startsWith(query.toUpperCase())) ||
       //  (query.length > 1 && (queryExp.test(s.stationIATACode) || queryExp.test(s.stationDescription)))))
-      .map(station => station.filter(s => s.stationIATACode.startsWith(query.toUpperCase())))
+      //.map(station => station.filter(s => s.stationIATACode.startsWith(query.toUpperCase())))
       .map(d => d && d.toJS());
 
   }
@@ -142,6 +142,9 @@ export class AppStateService {
   loadFleetCheckTypes(fleet: string) {
     this.store.dispatch(new lookupDataActions.LoadFleetCheckTypesAction(fleet));
   }
+  loadStations(token: string) {
+    this.store.dispatch(new lookupDataActions.LoadStationsAction(token));
+  }
   loadLookupData() {
     this.store.dispatch(new lookupDataActions.LoadLookupDataAction());
   }
@@ -159,6 +162,11 @@ export class AppStateService {
   }
 
   getSdaLoading() {
-    return Observable.merge(this.getLookupDataLoading(), this.getUserLoading(), this.getSelectedAlertLoading());
+    return Observable.combineLatest(
+      this.getLookupDataLoading(),
+      this.getUserLoading(),
+      this.getSelectedAlertLoading(), (a, b, c) => {
+        return a || b || c;
+      });
   }
 }

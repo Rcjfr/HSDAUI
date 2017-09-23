@@ -57,10 +57,11 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
     })
-      .switchMap(token => this.appStateService.getStations(token))
-      //.do(d => console.log(d)) //TODO
-      ;
-
+      .switchMap(token => {
+        this.appStateService.loadStations(token);
+        return this.appStateService.getStations(token);
+      }
+      );
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -1,4 +1,4 @@
-﻿import { Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import * as models from '../models/index';
 
 
@@ -202,8 +202,7 @@ export class LoadDetectionMethodsFailAction implements Action {
 // Stations
 export class LoadStationsAction implements Action {
   public type = ActionTypes.LOAD_STATIONS;
-  public payload: any;
-  constructor() { }
+  constructor(public payload: string) { }
 }
 export class LoadStationsCompleteAction implements Action {
   public type = ActionTypes.LOAD_STATIONS_COMPLETE;
@@ -216,81 +215,81 @@ export class LoadStationsFailAction implements Action {
 
 // Damage Types
 export class LoadDamageTypesAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES;
-    public payload: any;
-    constructor() { }
+  public type = ActionTypes.LOAD_DAMAGE_TYPES;
+  public payload: any;
+  constructor() { }
 }
 export class LoadDamageTypesCompleteAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
-    constructor(public payload: models.IDamageType[]) { }
+  public type = ActionTypes.LOAD_DAMAGE_TYPES_COMPLETE;
+  constructor(public payload: models.IDamageType[]) { }
 }
 export class LoadDamageTypesFailAction implements Action {
-    public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_DAMAGE_TYPES_FAIL;
+  constructor(public payload: any) { }
 }
 
 
 // Cause Of Damages
 export class LoadCauseOfDamagesAction implements Action {
-    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES;
-    public payload: any;
-    constructor() { }
+  public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES;
+  public payload: any;
+  constructor() { }
 }
 export class LoadCauseOfDamagesCompleteAction implements Action {
-    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
-    constructor(public payload: models.ICauseOfDamage[]) { }
+  public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_COMPLETE;
+  constructor(public payload: models.ICauseOfDamage[]) { }
 }
 export class LoadCauseOfDamagesFailAction implements Action {
-    public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_CAUSE_OF_DAMAGES_FAIL;
+  constructor(public payload: any) { }
 }
 
 
 // Floorboard Condition
 export class LoadFloorboardConditionsAction implements Action {
-    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS;
-    public payload: any;
-    constructor() { }
+  public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS;
+  public payload: any;
+  constructor() { }
 }
 export class LoadFloorboardConditionsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE;
-    constructor(public payload: models.IFloorboardCondition[]) { }
+  public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_COMPLETE;
+  constructor(public payload: models.IFloorboardCondition[]) { }
 }
 export class LoadFloorboardConditionsFailAction implements Action {
-    public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_FLOORBOARD_CONDITIONS_FAIL;
+  constructor(public payload: any) { }
 }
 
 
 // Repair Documents
 export class LoadRepairDocumentsAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS;
-    public payload: any;
-    constructor() { }
+  public type = ActionTypes.LOAD_REPAIR_DOCUMENTS;
+  public payload: any;
+  constructor() { }
 }
 export class LoadRepairDocumentsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE;
-    constructor(public payload: models.IRepairDocument[]) { }
+  public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_COMPLETE;
+  constructor(public payload: models.IRepairDocument[]) { }
 }
 export class LoadRepairDocumentsFailAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_REPAIR_DOCUMENTS_FAIL;
+  constructor(public payload: any) { }
 }
 
 
 // Repair Description
 export class LoadRepairDescriptionsAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
-    public payload: any;
-    constructor() { }
+  public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS;
+  public payload: any;
+  constructor() { }
 }
 export class LoadRepairDescriptionsCompleteAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE;
-    constructor(public payload: models.IRepairDescription[]) { }
+  public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_COMPLETE;
+  constructor(public payload: models.IRepairDescription[]) { }
 }
 export class LoadRepairDescriptionsFailAction implements Action {
-    public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL;
-    constructor(public payload: any) { }
+  public type = ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL;
+  constructor(public payload: any) { }
 }
 
 // Reasons for change
