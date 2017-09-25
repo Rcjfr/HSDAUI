@@ -11,9 +11,7 @@ export class DetectionMethodService {
   private endPointUrl = `${environment.hsdaApiBaseUrl}detectionmethods`;
   constructor(private http: HttpClient) { }
 
-    getAllDetectionMethods(): Observable<IDetectionMethod[]> {
-      return this.http.get<IDetectionMethod[]>(this.endPointUrl).map(d=>d);
-    };
-
-
+  getAllDetectionMethods(): Observable<IDetectionMethod[]> {
+    return this.http.get<IDetectionMethod[]>(this.endPointUrl);
+  };
 }

@@ -12,8 +12,7 @@ export class StationService {
 
   getStations(token: string): Observable<IStation[]> {
     const url = `${this.endPointUrl}?token=${token}`;
+
     return this.http.get<IStation[]>(url);
-
   };
-
 }

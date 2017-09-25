@@ -59,9 +59,9 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     })
       .switchMap(token => {
         this.appStateService.loadStations(token);
+
         return this.appStateService.getStations(token);
-      }
-      );
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

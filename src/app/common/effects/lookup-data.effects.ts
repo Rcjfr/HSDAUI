@@ -11,7 +11,7 @@ import * as lookupData from '../actions/lookup-data';
 import { ATACodesService } from '../services/ata-codes.service';
 import * as models from '../models';
 import '../rxjs-extensions';
-import { from } from "rxjs/observable/from";
+import { from } from 'rxjs/observable/from';
 
 @Injectable()
 export class LookupDataEffects {
@@ -61,12 +61,13 @@ export class LookupDataEffects {
         this.reasonsForChangeService.getAllReasonsForChange(),
         this.dteStatusService.getAllDTEStatus(),
         this.repairInspectionStatusService.getAllRepairInspectionStatus()
-        ]
+      ]
       ).map((results: Array<any>) => {
-        console.log(results);
+        //console.log(results);
+
         return new lookupData.LoadAlertCodesCompleteAction(results[0]);
       }
-      )
+        )
     );
 
   @Effect()
@@ -117,6 +118,7 @@ export class LookupDataEffects {
       if (!fleetType) {
         return of(new lookupData.LoadFleetCheckTypesCompleteAction([]));
       }
+
       return this.checkTypesService.getFleetCheckTypes(fleetType)
         .map((response: models.ICheckType[]) => {
           return new lookupData.LoadFleetCheckTypesCompleteAction(response);
@@ -330,7 +332,7 @@ export class LookupDataEffects {
     });
 
 
-    constructor(private actions$: Actions,
+  constructor(private actions$: Actions,
     private alertCodesService: services.AlertCodeService,
     private ataCodesService: services.ATACodesService,
     private corrosionLevelService: services.CorrosionLevelService,
