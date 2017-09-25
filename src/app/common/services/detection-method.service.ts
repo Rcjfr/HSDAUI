@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { IDetectionMethod } from '../models/detection-method.model';
 import '../rxjs-extensions';
-
+import { Http } from '@angular/http';
 @Injectable()
 export class DetectionMethodService {
 
@@ -12,7 +12,7 @@ export class DetectionMethodService {
   constructor(private http: HttpClient) { }
 
     getAllDetectionMethods(): Observable<IDetectionMethod[]> {
-      return this.http.get(this.endPointUrl);
+      return this.http.get<IDetectionMethod[]>(this.endPointUrl).map(d=>d);
     };
 
 

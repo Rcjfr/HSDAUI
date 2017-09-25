@@ -12,7 +12,7 @@ export class CorrosionLevelService {
   constructor(private http: HttpClient) { }
 
     getAllCorrosionLevels(): Observable<ICorrosionLevel[]> {
-      return this.http.get(this.endPointUrl);
+      return this.http.get<ICorrosionLevel[]>(this.endPointUrl);
     };
 
 

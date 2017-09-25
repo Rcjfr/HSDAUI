@@ -11,7 +11,7 @@ export class ATACodesService {
   constructor(private http: HttpClient) { }
 
   getATACodes(): Observable<IATACode[]> {
-    return this.http.get(this.endPointUrl);
+    return this.http.get<IATACode[]>(this.endPointUrl);
   };
 
 }

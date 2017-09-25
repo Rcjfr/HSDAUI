@@ -12,7 +12,7 @@ export class DepartmentService {
   constructor(private http: HttpClient) { }
 
     getAllDepartments(): Observable<IDepartment[]> {
-      return this.http.get(this.endPointUrl);
+      return this.http.get<IDepartment[]>(this.endPointUrl);
     };
 
 }

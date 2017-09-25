@@ -14,11 +14,11 @@ export class CheckTypesService {
   constructor(private http: HttpClient) { }
 
   getAllCheckTypes(): Observable<ICheckType[]> {
-    return this.http.get(this.checkTypesEndPointUrl);
+    return this.http.get<ICheckType[]>(this.checkTypesEndPointUrl);
   };
 
   getFleetCheckTypes(fleetType: string): Observable<ICheckType[]> {
-    return this.http.get(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`);
+    return this.http.get<ICheckType[]>(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`);
   };
 
 

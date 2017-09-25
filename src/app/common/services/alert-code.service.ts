@@ -12,7 +12,7 @@ export class AlertCodeService {
   constructor(private http: HttpClient) { }
 
     getAllAlertCodes(): Observable<IAlertCode[]> {
-      return this.http.get(this.endPointUrl);
+      return this.http.get<IAlertCode[]>(this.endPointUrl);
     };
 
 }

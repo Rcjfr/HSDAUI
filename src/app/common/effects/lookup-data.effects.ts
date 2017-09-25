@@ -3,7 +3,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { ToastrService } from 'ngx-toastr';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { empty } from 'rxjs/Observable/empty';
 import { of } from 'rxjs/observable/of';
 import * as services from '../services/index';
@@ -11,6 +11,7 @@ import * as lookupData from '../actions/lookup-data';
 import { ATACodesService } from '../services/ata-codes.service';
 import * as models from '../models';
 import '../rxjs-extensions';
+import { from } from "rxjs/observable/from";
 
 @Injectable()
 export class LookupDataEffects {
@@ -37,6 +38,36 @@ export class LookupDataEffects {
         new lookupData.LoadRepairInspectionStatusAction()
       ]
       ));
+
+  @Effect()
+  loadLookupData$: Observable<Action> = this.actions$
+    .ofType(lookupData.ActionTypes.LOAD_LOOKUP_DATA)
+    .switchMap(() =>
+      //TODO: should use forkJoin but for somereason ,forkJoin and HttpClient not working well together.need to revisit
+      //not in use yet
+      Observable.combineLatest([
+        this.alertCodesService.getAllAlertCodes(),
+        this.ataCodesService.getATACodes(),
+        this.checkTypesService.getAllCheckTypes(),
+        this.corrosionLevelService.getAllCorrosionLevels(),
+        this.corrosionTypeService.getAllCorrosionTypes(),
+        this.departmentService.getAllDepartments(),
+        this.detectionMethodService.getAllDetectionMethods(),
+        this.damageTypesService.getAllDamageTypes(),
+        this.causeOfDamageService.getAllCauseOfDamages(),
+        this.floorboardConditionService.getAllfloorboardConditions(),
+        this.repairDocumentService.getAllRepairDocuments(),
+        this.repairDescriptionService.getAllRepairDescriptions(),
+        this.reasonsForChangeService.getAllReasonsForChange(),
+        this.dteStatusService.getAllDTEStatus(),
+        this.repairInspectionStatusService.getAllRepairInspectionStatus()
+        ]
+      ).map((results: Array<any>) => {
+        console.log(results);
+        return new lookupData.LoadAlertCodesCompleteAction(results[0]);
+      }
+      )
+    );
 
   @Effect()
   loadAlertCodes$: Observable<Action> = this.actions$
