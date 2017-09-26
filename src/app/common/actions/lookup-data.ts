@@ -74,7 +74,8 @@ export const ActionTypes = {
 
 
 
-  LOAD_LOOKUP_DATA: 'Load All Lookup Data'
+  LOAD_LOOKUP_DATA: 'Load All Lookup Data',
+  LOAD_LOOKUP_DATA_FAILED: 'Load All Lookup Data Failed'
 };
 
 // Alert Codes
@@ -344,6 +345,10 @@ export class LoadLookupDataAction implements Action {
   public payload: any;
   constructor() { }
 }
+export class LoadLookupDataFailedAction implements Action {
+  public type = ActionTypes.LOAD_LOOKUP_DATA_FAILED;
+  constructor(public payload: string) { }
+}
 
 
 export type Actions =
@@ -395,4 +400,5 @@ export type Actions =
   LoadRepairInspectionStatusAction |
   LoadRepairInspectionStatusCompleteAction |
   LoadRepairInspectionStatusFailAction |
-  LoadLookupDataAction;
+  LoadLookupDataAction |
+  LoadLookupDataFailedAction;

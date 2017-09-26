@@ -71,7 +71,12 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_DTE_STATUS:
     case lookupDataActions.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS:
       {
-        return state.merge({ loading: false }); //TODO: revisit this.
+        return state.merge({ loading: true });
+      }
+    case lookupDataActions.ActionTypes.LOAD_LOOKUP_DATA_FAILED:
+      {
+        return state;
+        //return state.merge({ loading: false });
       }
     case lookupDataActions.ActionTypes.LOAD_ALERT_CODES_COMPLETE:
       {

@@ -15,29 +15,29 @@ import { from } from 'rxjs/observable/from';
 
 @Injectable()
 export class LookupDataEffects {
-  @Effect()
-  loadLookupDatas$: Observable<Action> = this.actions$
-    .ofType(lookupData.ActionTypes.LOAD_LOOKUP_DATA)
-    .mergeMap(() =>
-      Observable.from([
-        new lookupData.LoadAlertCodesAction(),
-        new lookupData.LoadATACodesAction(),
-        new lookupData.LoadCheckTypesAction(),
-        new lookupData.LoadCorrosionLevelsAction(),
-        new lookupData.LoadCorrosionTypesAction(),
-        new lookupData.LoadDepartmentsAction(),
-        new lookupData.LoadDetectionMethodsAction(),
-        //new lookupData.LoadStationsAction(),
-        new lookupData.LoadDamageTypesAction(),
-        new lookupData.LoadCauseOfDamagesAction(),
-        new lookupData.LoadFloorboardConditionsAction(),
-        new lookupData.LoadRepairDocumentsAction(),
-        new lookupData.LoadRepairDescriptionsAction(),
-        new lookupData.LoadReasonsForChangeAction(),
-        new lookupData.LoadDTEStausAction(),
-        new lookupData.LoadRepairInspectionStatusAction()
-      ]
-      ));
+  //@Effect()
+  //loadLookupDatas$: Observable<Action> = this.actions$
+  //  .ofType(lookupData.ActionTypes.LOAD_LOOKUP_DATA)
+  //  .mergeMap(() =>
+  //    Observable.from([
+  //      new lookupData.LoadAlertCodesAction(),
+  //      new lookupData.LoadATACodesAction(),
+  //      new lookupData.LoadCheckTypesAction(),
+  //      new lookupData.LoadCorrosionLevelsAction(),
+  //      new lookupData.LoadCorrosionTypesAction(),
+  //      new lookupData.LoadDepartmentsAction(),
+  //      new lookupData.LoadDetectionMethodsAction(),
+  //      //new lookupData.LoadStationsAction(),
+  //      new lookupData.LoadDamageTypesAction(),
+  //      new lookupData.LoadCauseOfDamagesAction(),
+  //      new lookupData.LoadFloorboardConditionsAction(),
+  //      new lookupData.LoadRepairDocumentsAction(),
+  //      new lookupData.LoadRepairDescriptionsAction(),
+  //      new lookupData.LoadReasonsForChangeAction(),
+  //      new lookupData.LoadDTEStausAction(),
+  //      new lookupData.LoadRepairInspectionStatusAction()
+  //    ]
+  //    ));
 
   @Effect()
   loadLookupData$: Observable<Action> = this.actions$
@@ -62,12 +62,29 @@ export class LookupDataEffects {
         this.dteStatusService.getAllDTEStatus(),
         this.repairInspectionStatusService.getAllRepairInspectionStatus()
       ]
-      ).map((results: Array<any>) => {
+      ).mergeMap((results: Array<any>) => {
         //console.log(results);
-
-        return new lookupData.LoadAlertCodesCompleteAction(results[0]);
-      }
-        )
+        return [
+          new lookupData.LoadAlertCodesCompleteAction(results[0]),
+          new lookupData.LoadATACodesCompleteAction(results[1]),
+          new lookupData.LoadCheckTypesCompleteAction(results[2]),
+          new lookupData.LoadCorrosionLevelsCompleteAction(results[3]),
+          new lookupData.LoadCorrosionTypesCompleteAction(results[4]),
+          new lookupData.LoadDepartmentsCompleteAction(results[5]),
+          new lookupData.LoadDetectionMethodsCompleteAction(results[6]),
+          new lookupData.LoadDamageTypesCompleteAction(results[7]),
+          new lookupData.LoadCauseOfDamagesCompleteAction(results[8]),
+          new lookupData.LoadFloorboardConditionsCompleteAction(results[9]),
+          new lookupData.LoadRepairDocumentsCompleteAction(results[10]),
+          new lookupData.LoadRepairDescriptionsCompleteAction(results[11]),
+          new lookupData.LoadReasonsForChangeCompleteAction(results[12]),
+          new lookupData.LoadDTEStausCompleteAction(results[13]),
+          new lookupData.LoadRepairInspectionStatusCompleteAction(results[14])
+        ];
+        })
+        .catch((err) => {
+          return of(new lookupData.LoadLookupDataFailedAction('Failed to load Lookup data'));
+        })
     );
 
   @Effect()
@@ -323,7 +340,8 @@ export class LookupDataEffects {
     lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL,
     lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL,
     lookupData.ActionTypes.LOAD_DTE_STATUS_FAIL,
-    lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL
+    lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL,
+    lookupData.ActionTypes.LOAD_LOOKUP_DATA_FAILED
     )
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
