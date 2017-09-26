@@ -11,6 +11,7 @@ export class CheckBoxListValidators {
       if (c && (<Array<any>>c.value).length === 0) {
         return { 'required': true };
       }
+
       return null;
     };
   }
@@ -20,6 +21,7 @@ export class CheckBoxListValidators {
       if (selectedOptions && selectedOptions.length < count && count > 0) {
         return { 'minlength': true };
       }
+
       return null;
     };
   }
@@ -29,6 +31,7 @@ export class CheckBoxListValidators {
       if (selectedOptions && selectedOptions.length > count && count > 0) {
         return { 'maxlength': true };
       }
+
       return null;
     };
   }
@@ -62,7 +65,7 @@ export class CheckboxListComponent implements
   @Input() minLength = 0;
   @Input() maxLength = 0;
   @Input() colClass = 'col-sm-4';
-  @Input('tabindex') _tabindex = 0;
+  @Input() tabindex: Number = 0;
   public identifier = `checkbox-${counter++}`;
   private data: Array<any> = [];
   constructor(private el: ElementRef, private renderer: Renderer) {
@@ -84,6 +87,7 @@ export class CheckboxListComponent implements
         }
         const dummy = {};
         dummy[this.valueField] = o;
+
         return dummy;
       });
     } else {
@@ -120,11 +124,11 @@ export class CheckboxListComponent implements
   public registerOnTouched(fn: any) {
     this.propagateTouch = fn;
   }
-  private onTouch() {
+  public onTouch() {
     this.propagateTouch();
   }
   // change events from the textarea
-  private onChange(event) {
+  public onChange(event) {
 
     // get value from text area
     const newValue: number = parseInt(event.target.value, 10);
