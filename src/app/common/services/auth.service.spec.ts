@@ -3,7 +3,7 @@ import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from 
 import { MockBackend } from '@angular/http/testing';
 import { AuthService } from './auth.service';
 import { RouterModule } from '@angular/router';
-import { IUser } from "./../models";
+import { IUser } from './../models';
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({

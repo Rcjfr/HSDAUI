@@ -23,7 +23,6 @@ xdescribe('StationService', () => {
   });
   stationService = TestBed.get(StationService);
   httpMock = TestBed.get(HttpTestingController);
-  
 
   describe('getStations', () => {
     xit('should return error if stations request failed', (done) => {
@@ -33,7 +32,7 @@ xdescribe('StationService', () => {
           done();
         });
 
-      let stationsRequest = httpMock.expectOne('http://hsda.local.techops.aa.com/api/stations?query=D');
+      const stationsRequest = httpMock.expectOne('http://hsda.local.techops.aa.com/api/stations?query=D');
       stationsRequest.error(new ErrorEvent('ERROR_LOADING_STATIONS'));
 
       httpMock.verify();
@@ -43,17 +42,17 @@ xdescribe('StationService', () => {
         .subscribe((res: any) => {
           expect(res).toEqual(
             [{
-              "stationIATACode": "DFW",
-              "stationDescription": "Dallas"
+              'stationIATACode': 'DFW',
+              'stationDescription': 'Dallas'
             }]
           );
           done();
         });
 
-      let stationsRequest = httpMock.expectOne('http://hsda.local.techops.aa.com/api/stations?query=D');
+      const stationsRequest = httpMock.expectOne('http://hsda.local.techops.aa.com/api/stations?query=D');
       stationsRequest.flush([{
-        "stationIATACode": "DFW",
-        "stationDescription": "Dallas"
+        'stationIATACode': 'DFW',
+        'stationDescription': 'Dallas'
       }]);
       httpMock.verify();
     });
