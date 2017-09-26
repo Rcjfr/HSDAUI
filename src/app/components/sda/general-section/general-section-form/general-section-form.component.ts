@@ -13,7 +13,7 @@ import { Observable, Observer } from 'rxjs/Rx';
   templateUrl: './general-section-form.component.html',
   styleUrls: ['./general-section-form.component.less']
 })
-export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
@@ -39,11 +39,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
       originator: ['', [Validators.required, Validators.maxLength(50)]]
     });
-  }
-
-  ngAfterViewInit(): void {
-    console.log('sdaid:', this.sda.id);
-
   }
 
   ngOnInit() {
