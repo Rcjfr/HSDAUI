@@ -1,4 +1,4 @@
-﻿import { ActionReducer, Action } from '@ngrx/store';
+import { ActionReducer, Action } from '@ngrx/store';
 import * as models from '../models';
 import * as lookupDataActions from '../actions/lookup-data';
 import { List, Record } from 'immutable';
@@ -72,6 +72,11 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case lookupDataActions.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS:
       {
         return state.merge({ loading: true });
+      }
+    case lookupDataActions.ActionTypes.LOAD_LOOKUP_DATA_FAILED:
+      {
+        return state;
+        //return state.merge({ loading: false });
       }
     case lookupDataActions.ActionTypes.LOAD_ALERT_CODES_COMPLETE:
       {

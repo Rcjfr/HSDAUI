@@ -1,9 +1,9 @@
-﻿import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CheckboxContainerComponent } from './checkbox-container/checkbox-container.component';
 import { RadioContainerComponent } from './radio-container/radio-container.component';
-import { CheckBoxListComponent } from './check-box-list/check-box-list.component';
+import { CheckboxListComponent } from './checkbox-list/checkbox-list.component';
 import { FieldContainerComponent } from './field-container/field-container.component';
 import { LoadingComponent } from './loading/loading.component';
 
@@ -17,14 +17,14 @@ import { LoadingComponent } from './loading/loading.component';
     FieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
-    CheckBoxListComponent,
+    CheckboxListComponent,
     LoadingComponent
   ],
   declarations: [
     FieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
-    CheckBoxListComponent,
+    CheckboxListComponent,
     LoadingComponent
   ],
   providers: []

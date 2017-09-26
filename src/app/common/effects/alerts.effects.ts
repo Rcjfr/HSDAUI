@@ -120,17 +120,17 @@ export class AlertEffects {
   //  .ofType(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE)
   //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
 
-  @Effect({ dispatch: false })
+  @Effect()
   showToastrError$: any = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL
     )
-    .map((action: Action) => {
+    .switchMap((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
 
-      return null;
+      return of(new selectedAlert.OperationFailedAction());
     });
 
   @Effect({ dispatch: false })

@@ -3,7 +3,7 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { ToastrService } from 'ngx-toastr';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { empty } from 'rxjs/Observable/empty';
 import { of } from 'rxjs/observable/of';
 import * as services from '../services/index';
@@ -11,32 +11,81 @@ import * as lookupData from '../actions/lookup-data';
 import { ATACodesService } from '../services/ata-codes.service';
 import * as models from '../models';
 import '../rxjs-extensions';
+import { from } from 'rxjs/observable/from';
 
 @Injectable()
 export class LookupDataEffects {
+  //@Effect()
+  //loadLookupDatas$: Observable<Action> = this.actions$
+  //  .ofType(lookupData.ActionTypes.LOAD_LOOKUP_DATA)
+  //  .mergeMap(() =>
+  //    Observable.from([
+  //      new lookupData.LoadAlertCodesAction(),
+  //      new lookupData.LoadATACodesAction(),
+  //      new lookupData.LoadCheckTypesAction(),
+  //      new lookupData.LoadCorrosionLevelsAction(),
+  //      new lookupData.LoadCorrosionTypesAction(),
+  //      new lookupData.LoadDepartmentsAction(),
+  //      new lookupData.LoadDetectionMethodsAction(),
+  //      //new lookupData.LoadStationsAction(),
+  //      new lookupData.LoadDamageTypesAction(),
+  //      new lookupData.LoadCauseOfDamagesAction(),
+  //      new lookupData.LoadFloorboardConditionsAction(),
+  //      new lookupData.LoadRepairDocumentsAction(),
+  //      new lookupData.LoadRepairDescriptionsAction(),
+  //      new lookupData.LoadReasonsForChangeAction(),
+  //      new lookupData.LoadDTEStausAction(),
+  //      new lookupData.LoadRepairInspectionStatusAction()
+  //    ]
+  //    ));
+
   @Effect()
-  loadLookupDatas$: Observable<Action> = this.actions$
+  loadLookupData$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_LOOKUP_DATA)
-    .mergeMap(() =>
-      Observable.from([
-        new lookupData.LoadAlertCodesAction(),
-        new lookupData.LoadATACodesAction(),
-        new lookupData.LoadCheckTypesAction(),
-        new lookupData.LoadCorrosionLevelsAction(),
-        new lookupData.LoadCorrosionTypesAction(),
-        new lookupData.LoadDepartmentsAction(),
-        new lookupData.LoadDetectionMethodsAction(),
-        new lookupData.LoadStationsAction(),
-        new lookupData.LoadDamageTypesAction(),
-        new lookupData.LoadCauseOfDamagesAction(),
-        new lookupData.LoadFloorboardConditionsAction(),
-        new lookupData.LoadRepairDocumentsAction(),
-        new lookupData.LoadRepairDescriptionsAction(),
-        new lookupData.LoadReasonsForChangeAction(),
-        new lookupData.LoadDTEStausAction(),
-        new lookupData.LoadRepairInspectionStatusAction()
+    .switchMap(() =>
+      //TODO: should use forkJoin but for somereason ,forkJoin and HttpClient not working well together.need to revisit
+      //not in use yet
+      Observable.combineLatest([
+        this.alertCodesService.getAllAlertCodes(),
+        this.ataCodesService.getATACodes(),
+        this.checkTypesService.getAllCheckTypes(),
+        this.corrosionLevelService.getAllCorrosionLevels(),
+        this.corrosionTypeService.getAllCorrosionTypes(),
+        this.departmentService.getAllDepartments(),
+        this.detectionMethodService.getAllDetectionMethods(),
+        this.damageTypesService.getAllDamageTypes(),
+        this.causeOfDamageService.getAllCauseOfDamages(),
+        this.floorboardConditionService.getAllfloorboardConditions(),
+        this.repairDocumentService.getAllRepairDocuments(),
+        this.repairDescriptionService.getAllRepairDescriptions(),
+        this.reasonsForChangeService.getAllReasonsForChange(),
+        this.dteStatusService.getAllDTEStatus(),
+        this.repairInspectionStatusService.getAllRepairInspectionStatus()
       ]
-      ));
+      ).mergeMap((results: Array<any>) => {
+        //console.log(results);
+        return [
+          new lookupData.LoadAlertCodesCompleteAction(results[0]),
+          new lookupData.LoadATACodesCompleteAction(results[1]),
+          new lookupData.LoadCheckTypesCompleteAction(results[2]),
+          new lookupData.LoadCorrosionLevelsCompleteAction(results[3]),
+          new lookupData.LoadCorrosionTypesCompleteAction(results[4]),
+          new lookupData.LoadDepartmentsCompleteAction(results[5]),
+          new lookupData.LoadDetectionMethodsCompleteAction(results[6]),
+          new lookupData.LoadDamageTypesCompleteAction(results[7]),
+          new lookupData.LoadCauseOfDamagesCompleteAction(results[8]),
+          new lookupData.LoadFloorboardConditionsCompleteAction(results[9]),
+          new lookupData.LoadRepairDocumentsCompleteAction(results[10]),
+          new lookupData.LoadRepairDescriptionsCompleteAction(results[11]),
+          new lookupData.LoadReasonsForChangeCompleteAction(results[12]),
+          new lookupData.LoadDTEStausCompleteAction(results[13]),
+          new lookupData.LoadRepairInspectionStatusCompleteAction(results[14])
+        ];
+        })
+        .catch((err) => {
+          return of(new lookupData.LoadLookupDataFailedAction('Failed to load Lookup data'));
+        })
+    );
 
   @Effect()
   loadAlertCodes$: Observable<Action> = this.actions$
@@ -83,6 +132,10 @@ export class LookupDataEffects {
     .ofType(lookupData.ActionTypes.LOAD_FLEET_CHECK_TYPES)
     .map((action: lookupData.LoadFleetCheckTypesAction) => action.payload)
     .switchMap((fleetType: string) => {
+      if (!fleetType) {
+        return of(new lookupData.LoadFleetCheckTypesCompleteAction([]));
+      }
+
       return this.checkTypesService.getFleetCheckTypes(fleetType)
         .map((response: models.ICheckType[]) => {
           return new lookupData.LoadFleetCheckTypesCompleteAction(response);
@@ -155,8 +208,9 @@ export class LookupDataEffects {
   @Effect()
   loadStations$: Observable<Action> = this.actions$
     .ofType(lookupData.ActionTypes.LOAD_STATIONS)
-    .switchMap(() => {
-      return this.stationService.getAllStations()
+    .map((action: lookupData.LoadStationsAction) => action.payload)
+    .switchMap((token: string) => {
+      return this.stationService.getStations(token)
         .map((response: models.IStation[]) => {
           return new lookupData.LoadStationsCompleteAction(response);
         })
@@ -286,7 +340,8 @@ export class LookupDataEffects {
     lookupData.ActionTypes.LOAD_REPAIR_DESCRIPTIONS_FAIL,
     lookupData.ActionTypes.LOAD_REASONS_FOR_CHANGE_FAIL,
     lookupData.ActionTypes.LOAD_DTE_STATUS_FAIL,
-    lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL
+    lookupData.ActionTypes.LOAD_REPAIR_INSPECTION_STATUS_FAIL,
+    lookupData.ActionTypes.LOAD_LOOKUP_DATA_FAILED
     )
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
@@ -295,7 +350,7 @@ export class LookupDataEffects {
     });
 
 
-    constructor(private actions$: Actions,
+  constructor(private actions$: Actions,
     private alertCodesService: services.AlertCodeService,
     private ataCodesService: services.ATACodesService,
     private corrosionLevelService: services.CorrosionLevelService,

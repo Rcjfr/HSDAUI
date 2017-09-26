@@ -20,10 +20,16 @@ export const ActionTypes = {
   LOAD_SDA_FAIL: 'Load SDA Fail',
   LOAD_NEW_SDA: 'Load New SDA',
   SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria',
-  SET_SDA_NEW_STATUS: 'Set SDA new status'
+  SET_SDA_NEW_STATUS: 'Set SDA new status',
+  OPERATION_FAILED: 'General Operation Failed Message'
 
 };
 
+export class OperationFailedAction implements Action {
+  public type = ActionTypes.OPERATION_FAILED;
+  public payload: any
+  constructor() { }
+}
 
 export class LoadNoseNumbersAction implements Action {
   public type = ActionTypes.LOAD_NOSE_NUMBERS;
@@ -104,6 +110,7 @@ export class SetSdaNewStatusAction implements Action {
 }
 
 export type Actions =
+  OperationFailedAction |
   LoadNoseNumbersAction |
   LoadNoseNumbersCompleteAction |
   LoadNoseNumbersFailAction |

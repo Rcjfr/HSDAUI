@@ -1,4 +1,4 @@
-﻿
+
 import { Component, Input, forwardRef, ElementRef, Renderer, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
@@ -92,9 +92,9 @@ export class CheckBoxListComponent implements ControlValueAccessor, OnInit {
     this.propagateTouch();
   }
 
-  // change events from the textarea
+  // change events from the checkbox
   public onChange(event) {
-    // get value from text area
+    // get value from checkbox
     const newValue: any = event.target.value;
     const checked = event.target.checked;
     const item: any = this.source.find(d => d[this.valueField] === newValue);

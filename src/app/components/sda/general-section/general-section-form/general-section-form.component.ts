@@ -13,7 +13,7 @@ import { Observable, Observer } from 'rxjs/Rx';
   templateUrl: './general-section-form.component.html',
   styleUrls: ['./general-section-form.component.less']
 })
-export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
@@ -41,11 +41,6 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     });
   }
 
-  ngAfterViewInit(): void {
-    console.log('sdaid:', this.sda.id);
-
-  }
-
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
     this.alertCodes$ = this.appStateService.getAlertCodes(); // .map(d => d && d.toJS());
@@ -57,10 +52,11 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
     })
-      .switchMap(token => this.appStateService.getStations(token))
-      //.do(d => console.log(d)) //TODO
-      ;
+      .switchMap(token => {
+        this.appStateService.loadStations(token);
 
+        return this.appStateService.getStations(token);
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {

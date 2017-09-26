@@ -107,6 +107,10 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ newSdaStatus: act.payload });
       }
+    case selectedAlertActions.ActionTypes.OPERATION_FAILED:
+      {
+        return state.merge({ loading: false });
+      }
     default: {
       return state;
     }

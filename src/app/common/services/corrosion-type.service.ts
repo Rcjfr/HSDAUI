@@ -12,7 +12,7 @@ export class CorrosionTypeService {
   constructor(private http: HttpClient) { }
 
     getAllCorrosionTypes(): Observable<ICorrosionType[]> {
-      return this.http.get(this.endPointUrl);
+      return this.http.get<ICorrosionType[]>(this.endPointUrl);
     };
 
 }
