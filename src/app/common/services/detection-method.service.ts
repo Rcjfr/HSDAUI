@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment';
 import { IDetectionMethod } from '../models/detection-method.model';
 import '../rxjs-extensions';
-import { Http } from '@angular/http';
+
 @Injectable()
 export class DetectionMethodService {
 
