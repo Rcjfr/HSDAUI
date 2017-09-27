@@ -11,83 +11,86 @@
         Search by Create Date Range
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-date-range (update)="searchByDateRange$.next($event)"></aa-search-by-date-range>
+      <aa-search-by-date-range [(criteria)]="criteria"></aa-search-by-date-range>
     </accordion-group>
     <accordion-group #sdaFormGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by SDA Form
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-sda-form (update)="searchBySDA$.next($event)"></aa-search-by-sda-form>
+      <aa-search-by-sda-form [(criteria)]="criteria"></aa-search-by-sda-form>
     </accordion-group>
     <accordion-group #aircraftGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Aircraft
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-aircraft (update)="searchByAircraft$.next($event)"></aa-search-by-aircraft>
+      <aa-search-by-aircraft [(criteria)]="criteria"></aa-search-by-aircraft>
     </accordion-group>
     <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Maintenance Type
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-maintenance (update)="searchByMaintenance$.next($event)"></aa-search-by-maintenance>
+      <aa-search-by-maintenance [(criteria)]="criteria"></aa-search-by-maintenance>
     </accordion-group>
     <accordion-group #corrosionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Corrosion
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-corrosion (update)="searchByCorrosion$.next($event)"></aa-search-by-corrosion>
+      <aa-search-by-corrosion [(criteria)]="criteria"></aa-search-by-corrosion>
     </accordion-group>
     <accordion-group #cpcpDispositionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by CPCP Disposition
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-cpcp-disposition></aa-search-by-cpcp-disposition>
+      <!-- <aa-search-by-cpcp-disposition></aa-search-by-cpcp-disposition> -->
     </accordion-group>
     <accordion-group #defectGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Defect/Damage
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-defect (update)="searchByDefect$.next($event)"></aa-search-by-defect>
+      <aa-search-by-defect [(criteria)]="criteria"></aa-search-by-defect>
     </accordion-group>
     <accordion-group #correctiveGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Corrective Action
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': correctiveGroup?.isOpen, 'icon-add': !correctiveGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-corrective-action (update)="searchByCorrectiveAction$.next($event)"></aa-search-by-corrective-action>
+      <aa-search-by-corrective-action [(criteria)]="criteria"></aa-search-by-corrective-action>
     </accordion-group>
     <accordion-group #statusGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Status
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-status></aa-search-by-status>
+      <!-- <aa-search-by-status></aa-search-by-status> -->
     </accordion-group>
     <accordion-group #partGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search by Part
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': partGroup?.isOpen, 'icon-add': !partGroup?.isOpen}"></i>
       </div>
-      <aa-search-by-part (update)="searchByPart$.next($event)"></aa-search-by-part>
+      <aa-search-by-part [(criteria)]="criteria"></aa-search-by-part>
     </accordion-group>
     <accordion-group #optionGroup panelClass="panel-default search-panel">
       <div accordion-heading>
         Search Options
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
       </div>
-      <aa-search-options (update)="searchByOptions$.next($event)"></aa-search-options>
+      <aa-search-options [(criteria)]="criteria"></aa-search-options>
     </accordion-group>
   </accordion>
 
   <div class="row form-group" style="padding-top:15px;">
-    <div class="col-md-9"></div>
-    <div class="col-md-3">
+    <div class="col-md-10"></div>
+    <div class="col-md-1">
+      <button type="button" style="float:right;" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
+    </div>
+    <div class="col-md-1">
       <button type="submit" style="float:right;" class="btn btn-primary">Search</button>
     </div>
   </div>
@@ -103,15 +106,15 @@
         <div class="col-md-1"></div>
         <div class="col-md-6">
           <aac-field-container label="Search Name:">
-            <select class="form-control" name="selectedSearch" [(ngModel)]="selectedSearch">
-                <option value="" selected>(Create New)</option>
+            <select class="form-control" name="selectedSearch" [(ngModel)]="selectedSearch" (change)="onSearchChange()">
+                <option value='0' selected>(Create New)</option>
                 <option *ngFor="let search of savedSearches$ | async" [value]="search.searchId">{{getSearchDisplayName(search)}}</option>
               </select>
           </aac-field-container>
         </div>
         <div class="col-md-2">
           <aac-checkbox-container label="Default Search">
-            <input type="checkbox" name="isDefault" [(ngModel)]="isDefault"/>
+            <input type="checkbox" name="isDefault" [(ngModel)]="isDefault" />
           </aac-checkbox-container>
         </div>
         <div class="col-md-2">

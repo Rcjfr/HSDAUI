@@ -1,13 +1,13 @@
-﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+﻿import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'aa-search-by-aircraft',
   templateUrl: './search-by-aircraft.component.html',
   styleUrls: ['./search-by-aircraft.component.less']
 })
-export class SearchByAircraftComponent implements OnInit {
-  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+export class SearchByAircraftComponent implements OnInit, OnChanges {
+  @Input() criteria: any;
 
   aircraftForm = new FormGroup({
     aircraftNo: new FormControl(),
@@ -16,9 +16,19 @@ export class SearchByAircraftComponent implements OnInit {
     serialNo: new FormControl()
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
-    this.aircraftForm.valueChanges.subscribe(this.update);
+    this.aircraftForm.valueChanges.subscribe(s => this.criteria.searchByAircraft = s)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.criteria && changes.criteria.currentValue) {
+      if (changes.criteria.currentValue.searchByAircraft) {
+        this.aircraftForm.patchValue(changes.criteria.currentValue.searchByAircraft, {emitEvent: false});
+      } else {
+        this.aircraftForm.reset({}, {emitEvent: false});
+      }
+    }
   }
 }

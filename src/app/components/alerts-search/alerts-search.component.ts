@@ -11,6 +11,7 @@ import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialo
 import { List } from 'immutable';
 import { AuthService } from 'app/common/services/auth.service';
 import { SearchData } from 'app/common/models';
+import { ISavedSearch } from 'app/common/models/saved-search.model';
 
 @Component({
   selector: 'aa-alerts-search',
@@ -20,22 +21,12 @@ import { SearchData } from 'app/common/models';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
-  savedSearches$: Observable<List<SearchData>>;
+  savedSearches$: Observable<List<ISavedSearch>>;
+  savedSearches: List<ISavedSearch>;
+  selectedSearch: number;
 
-  //Search filters
-  searchByDateRange$: Subject<any> = new Subject();
-  searchBySDA$: Subject<any> = new Subject();
-  searchByAircraft$: Subject<any> = new Subject();
-  searchByPart$: Subject<any> = new Subject();
-  searchByCorrosion$: Subject<any> = new Subject();
-  searchByCorrectiveAction$: Subject<any> = new Subject();
-  searchByDefect$: Subject<any> = new Subject();
-  searchByMaintenance$: Subject<any> = new Subject();
-  searchByOptions$: Subject<any> = new Subject();
   criteria;
-  selectedSearch = '';
   isDefault = false;
-
   badgeNumber;
 
   constructor(private fb: FormBuilder,
@@ -46,29 +37,17 @@ export class AlertsSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.resetFilters();
+
     this.authService.badgeId()
       .map(badgeId => {
         this.badgeNumber = badgeId;
         this.savedSearchStateService.loadSearches(badgeId);
       }).subscribe();
 
-    this.savedSearches$ = this.savedSearchStateService.getSavedSearches().do(searches => this.selectDefaultSearch(searches));
-
-    Observable.combineLatest(this.searchByDateRange$.startWith(undefined),
-      this.searchBySDA$.startWith(undefined),
-      this.searchByAircraft$.startWith(undefined),
-      this.searchByPart$.startWith(undefined),
-      this.searchByCorrosion$.startWith(undefined),
-      this.searchByCorrectiveAction$.startWith(undefined),
-      this.searchByDefect$.startWith(undefined),
-      this.searchByMaintenance$.startWith(undefined),
-      this.searchByOptions$.startWith(undefined),
-      this.combineCriteria)
-      .subscribe(s => this.criteria = s);
-  }
-
-  combineCriteria(searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions) {
-      return { searchByDateRange, searchBySDA, searchByAircraft, searchByPart, searchByCorrosion, searchByCorrectiveAction, searchByDefect, searchByMaintenance, searchByOptions}
+    this.savedSearches$ = this.savedSearchStateService.getSavedSearches()
+      .do(s => this.selectDefaultSearch(s))
+      .do(s => this.savedSearches = s);
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -110,16 +89,52 @@ export class AlertsSearchComponent implements OnInit {
       const defaultItem = _.find(searches.toJS(), s => s.isDefault === true);
       if (defaultItem) {
         this.selectedSearch = defaultItem.searchId;
+        this.criteria = JSON.parse(defaultItem.criteria);
       }
     }
+  }
+
+  clearFilters() {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Clear Filters?',
+      message: `Are you sure you want to clear all of the search filters?`
+    }).filter(confirm => confirm === true).subscribe(confirm => {
+      this.resetFilters();
+      this.selectedSearch = 0;
+    });
+  }
+
+  resetFilters() {
+    this.criteria = {
+      searchByDateRange: undefined,
+      searchBySda: undefined,
+      searchByAircraft: undefined,
+      searchByMaintenance: undefined,
+      searcyByCorrosion: undefined,
+      searchByDefect: undefined,
+      searchByCorrectiveAction: undefined,
+      searchByPart: undefined,
+      searchByOptions: undefined
+    };
   }
 
   getSearchDisplayName(search: any) {
     return search.name + (search.isDefault ? ' (Default)' : '');
   }
 
+  onSearchChange() {
+    if (this.selectedSearch !== 0) {
+      if (this.savedSearches && this.savedSearches instanceof List) {
+        const search = this.savedSearches.find(i => i.searchId === +this.selectedSearch);
+        if (search) {
+          this.criteria = JSON.parse(search.criteria);
+        }
+      }
+    }
+  }
+
   saveCriteria() {
-    if (!this.selectedSearch) {
+    if (this.selectedSearch.toString() === '0') {
       this.dialogService.addDialog(PromptDialogComponent, {
         title: 'Save Search Filters',
         message: `What would you like to name this search?`

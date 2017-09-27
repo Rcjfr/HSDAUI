@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,8 +11,8 @@ import * as _ from 'lodash';
   templateUrl: './search-by-corrosion.component.html',
   styleUrls: ['./search-by-corrosion.component.less']
 })
-export class SearchByCorrosionComponent implements OnInit {
-  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+export class SearchByCorrosionComponent implements OnInit, OnChanges {
+  @Input() criteria: any;
 
   corrosionForm = new FormGroup({
     isWideSpreadCorrosion: new FormControl(),
@@ -32,12 +32,13 @@ export class SearchByCorrosionComponent implements OnInit {
 
   hideCorrosionTypeOther = true;
 
-  constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
+  constructor(private appStateService: AppStateService) { }
 
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.causeOfDamages$ = this.appStateService.getCauseOfDamages();
+
     this.corrosionForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
       form.corrosionType = _.compact(form.corrosionType);
@@ -51,11 +52,29 @@ export class SearchByCorrosionComponent implements OnInit {
       if (form.isPreviouslyBlended === false) {
         form.isPreviouslyBlended = null;
       }
-      this.update.emit(form);
+      this.criteria.searchByCorrosion = form;
     });
   }
 
-  onCorrosionTypeChange(event) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.criteria && changes.criteria.currentValue) {
+      if (changes.criteria.currentValue.searchByCorrosion) {
+        this.corrosionForm.patchValue(changes.criteria.currentValue.searchByCorrosion, { emitEvent: false });
+
+        //Corrosion Level checkbox array
+        const corrosionLevelArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
+        changes.criteria.currentValue.searchByCorrosion.corrosionLevel.forEach(element => {
+          corrosionLevelArray.push(new FormControl(element));
+        });
+
+        this.onCorrosionTypeChange();
+      } else {
+        this.corrosionForm.reset({}, { emitEvent: false });
+      }
+    }
+  }
+
+  onCorrosionTypeChange() {
     const corrosionType = this.corrosionForm.controls.corrosionType;
     if (corrosionType) {
       //If they select "Other" we need to display an extra textbox for the description
@@ -66,7 +85,7 @@ export class SearchByCorrosionComponent implements OnInit {
       }
     }
 
-    this.hideCorrosionTypeOther =  true;
+    this.hideCorrosionTypeOther = true;
   }
 
   onCorrosionLevelChange(id: string, isChecked: boolean) {
@@ -77,5 +96,13 @@ export class SearchByCorrosionComponent implements OnInit {
     } else {
       corrosionArray.removeAt(corrosionArray.controls.findIndex(x => x.value === id));
     }
+  }
+
+  corrosionLevelContains(id) {
+    if (_.includes(this.corrosionForm.controls.corrosionLevel.value, id)) {
+      return true;
+    }
+
+    return false;
   }
 }

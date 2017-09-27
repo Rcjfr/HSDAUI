@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -14,8 +14,8 @@ import { Observer } from 'rxjs/Rx';
   templateUrl: './search-by-sda-form.component.html',
   styleUrls: ['./search-by-sda-form.component.less']
 })
-export class SearchBySdaFormComponent implements OnInit, OnDestroy {
-  @Output() update: EventEmitter<any> = new EventEmitter<any>();
+export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() criteria: any;
 
   departments$: Observable<List<models.IDepartment>>;
   stations$: Observable<models.IStation[]>;
@@ -56,12 +56,28 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy {
     this.alertCodes$ = this.appStateService.getAlertCodes();
     this.departments$ = this.appStateService.getDepartments();
     this.checkTypes$ = this.appStateService.getCheckTypes();
-    this.sdaForm.valueChanges.subscribe(this.update);
+    this.sdaForm.valueChanges.subscribe(s => this.criteria.searchBySda = s)
   }
 
   ngOnDestroy(): void {
     // tslint:disable-next-line:no-unused-expression
     this.ataSubscription && this.ataSubscription.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.criteria && changes.criteria.currentValue) {
+      if (changes.criteria.currentValue.searchBySda) {
+        this.sdaForm.patchValue(changes.criteria.currentValue.searchBySda, {emitEvent: false});
+      } else {
+        this.sdaForm.reset({
+          alertCode: '',
+          department: '',
+          ataCode1: '',
+          ataCode2: '',
+          checkType: ''
+        }, {emitEvent: false});
+      }
+    }
   }
 
   onAlertCode1Change(alertCode1: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { AppStateService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
@@ -12,8 +12,8 @@ import { decimalsNumberMask } from '../../../common/masks';
     templateUrl: './search-by-defect.component.html',
     styleUrls: ['./search-by-defect.component.less']
 })
-export class SearchByDefectComponent implements OnInit {
-    @Output() update: EventEmitter<any> = new EventEmitter<any>();
+export class SearchByDefectComponent implements OnInit, OnChanges {
+    @Input() criteria: any;
 
     defectForm = new FormGroup({
         aircraftStation: new FormControl(),
@@ -32,16 +32,27 @@ export class SearchByDefectComponent implements OnInit {
     detectionMethods$: Observable<List<models.IDetectionMethod>>;
     damageTypes$: Observable<List<models.IDamageType>>;
     decimalsNumberMask = decimalsNumberMask;
+
     constructor(private appStateService: AppStateService) { }
 
     ngOnInit() {
         this.detectionMethods$ = this.appStateService.getDetectionMethods();
         this.damageTypes$ = this.appStateService.getDamageTypes();
+
         this.defectForm.valueChanges.subscribe(form => {
             form.damageType = _.compact(form.damageType);
             form.detectionMethod = _.compact(form.detectionMethod);
-         this.update.emit(form);
+         this.criteria.searchByDefect = form;
         });
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.criteria && changes.criteria.currentValue) {
+            if (changes.criteria.currentValue.searchByDefect) {
+                this.defectForm.patchValue(changes.criteria.currentValue.searchByDefect, { emitEvent: false });
+            } else {
+                this.defectForm.reset({}, { emitEvent: false });
+            }
+        }
+    }
 }
