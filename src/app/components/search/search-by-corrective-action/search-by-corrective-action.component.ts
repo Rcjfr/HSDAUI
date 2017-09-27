@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { ICorrosionLevel, IBaseLookUp } from '../../../common/models';
+import { ICorrosionLevel, IBaseLookUp, IYesNoBoth } from '../../../common/models';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '../../../common/models';
@@ -38,17 +38,16 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
     majorRepairDescription: string[] = [];
     repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
     repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
-    yesNoBothOptions: {
-        id: string;
-        description: string;
-    }[];
-
+    yesNoBothOptions$: Observable<IYesNoBoth[]>;
+    isDeferred: string[] = [];
+    isMajorRepair: string[] = [];
+    isExternallyVisible: string[] = [];
     constructor(private appStateService: AppStateService, private utilityService: UtilityService, private formBuilder: FormBuilder) { }
 
     ngOnInit() {
         this.repairDescriptionTypes$ = this.appStateService.getRepairDescriptions();
         this.repairDocumentTypes$ = this.appStateService.getRepairDocuments();
-        this.yesNoBothOptions = this.utilityService.getYesNoBothOptions();
+        this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
 
         this.correctiveActionForm.valueChanges.subscribe(form => {
             //Remove any empty selections from the multi-select dropdowns

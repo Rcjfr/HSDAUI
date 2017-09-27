@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { UtilityService } from '../../../common/services';
+import { IYesNoBoth } from '../../../common/models';
 import * as _ from 'lodash';
+import * as models from '../../../common/models';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'aa-search-by-maintenance',
@@ -20,15 +23,13 @@ export class SearchByMaintenanceComponent implements OnInit, OnChanges {
         micNo: new FormControl()
 
     });
-    yesNoBothOptions: {
-        id: string;
-        description: string;
-    }[];
+    yesNoBothOptions$: Observable<IYesNoBoth[]>;
+    lineMaintenance: string[] = [];
 
     constructor(private utilityService: UtilityService) { }
 
     ngOnInit() {
-        this.yesNoBothOptions = this.utilityService.getYesNoBothOptions();
+      this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
         this.maintenanceForm.valueChanges.subscribe(s => this.criteria.searchByMaintenance = s)
     }
 

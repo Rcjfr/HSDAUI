@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { AppStateService } from '../../../common/services';
+import { AppStateService, UtilityService } from '../../../common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { ICorrosionLevel, ICorrosionType, ICauseOfDamage } from '../../../common/models';
+import { ICorrosionLevel, ICorrosionType, ICauseOfDamage, IYesNoBoth } from '../../../common/models';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
+import * as models from '../../../common/models';
 
 @Component({
   selector: 'aa-search-by-corrosion',
@@ -15,29 +16,31 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
   @Input() criteria: any;
 
   corrosionForm = new FormGroup({
-    isWideSpreadCorrosion: new FormControl(),
-    isPreviouslyBlended: new FormControl(),
+    isWideSpreadCorrosion: new FormControl(''),
+    isPreviouslyBlended: new FormControl(''),
     corrosionTaskNo: new FormControl(),
     corrosionLevel: new FormArray([]),
     corrosionType: new FormControl(),
     causesOfDamage: new FormControl(),
     corrosionTypeOtherText: new FormControl()
   });
-
+  yesNoBothOptions$: Observable<IYesNoBoth[]>;
   corrosionTypes$: Observable<List<ICorrosionType>>;
   corrosionLevels$: Observable<List<ICorrosionLevel>>;
   causeOfDamages$: Observable<List<ICauseOfDamage>>;
   corrosionLevels: string[] = [];
   causeOfDamage: string[] = [];
-
+  isWideSpreadCorrosion: string[] = [];
+  isPreviouslyBlended: string[] = [];
   hideCorrosionTypeOther = true;
 
-  constructor(private appStateService: AppStateService) { }
+  constructor(private appStateService: AppStateService, private utilityService: UtilityService) { }
 
   ngOnInit() {
     this.corrosionLevels$ = this.appStateService.getCorrosionLevels();
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.causeOfDamages$ = this.appStateService.getCauseOfDamages();
+    this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
 
     this.corrosionForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
@@ -69,7 +72,10 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
 
         this.onCorrosionTypeChange();
       } else {
-        this.corrosionForm.reset({}, { emitEvent: false });
+        this.corrosionForm.reset({
+          isWideSpreadCorrosion: '',
+          isPreviouslyBlended: ''
+        }, { emitEvent: false });
       }
     }
   }

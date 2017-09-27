@@ -1,14 +1,20 @@
 <form [formGroup]="corrosionForm">
   <div class="row">
     <div class="col-md-6">
-      <aac-checkbox-container label="Widespread Corrosion">
-        <input type="checkbox" tabindex="23" formControlName="isWideSpreadCorrosion" />
-      </aac-checkbox-container>
+      <aac-field-container label="Widespread Corrosion:" for="isWideSpreadCorrosion">
+        <select class="form-control" tabindex='23' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
+         // <option value="">Select Widespread Corrosion</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
     <div class="col-md-6">
-      <aac-checkbox-container label="Corrosion Previously Blended">
-        <input type="checkbox" tabindex="24" formControlName="isPreviouslyBlended" />
-      </aac-checkbox-container>
+      <aac-field-container label="Corrosion Previously Blended:" for="isPreviouslyBlended">
+        <select class="form-control" tabindex='24' id="isPreviouslyBlended" formControlName="isPreviouslyBlended">
+         // <option value="">Select Corrosion Previously Blended</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
   </div>
 
