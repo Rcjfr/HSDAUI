@@ -29,22 +29,31 @@ export class SearchByMaintenanceComponent implements OnInit, OnChanges {
     constructor(private utilityService: UtilityService) { }
 
     ngOnInit() {
-      this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
+        this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
         this.maintenanceForm.valueChanges.subscribe(s => this.criteria.searchByMaintenance = s)
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.criteria && changes.criteria.currentValue) {
+            const maintenanceTypeArray = <FormArray>this.maintenanceForm.controls.defectDiscoveredDuring;
+
             if (changes.criteria.currentValue.searchByMaintenance) {
                 this.maintenanceForm.patchValue(changes.criteria.currentValue.searchByMaintenance, { emitEvent: false });
+                //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
+                while ((maintenanceTypeArray).length) {
+                    maintenanceTypeArray.removeAt(0);
+                }
 
                 //Maintenance type checkbox array
-                const maintenanceTypeArray = <FormArray>this.maintenanceForm.controls.defectDiscoveredDuring;
                 changes.criteria.currentValue.searchByMaintenance.defectDiscoveredDuring.forEach(element => {
                     maintenanceTypeArray.push(new FormControl(element));
                 });
             } else {
-                this.maintenanceForm.reset({lineMaintenance: ''}, { emitEvent: false });
+                this.maintenanceForm.reset({ lineMaintenance: '' }, { emitEvent: false });
+                //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
+                while ((maintenanceTypeArray).length) {
+                    maintenanceTypeArray.removeAt(0);
+                }
             }
         }
     }

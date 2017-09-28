@@ -59,11 +59,15 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.criteria && changes.criteria.currentValue) {
+            const repairArray = <FormArray>this.correctiveActionForm.controls.repairType;
+
             if (changes.criteria.currentValue.searchByCorrectiveAction) {
                 this.correctiveActionForm.patchValue(changes.criteria.currentValue.searchByCorrectiveAction, { emitEvent: false });
-
+                //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
+                while ((repairArray).length) {
+                    repairArray.removeAt(0);
+                }
                 //Repair Type checkboxes
-                const repairArray = <FormArray>this.correctiveActionForm.controls.repairType;
                 changes.criteria.currentValue.searchByCorrectiveAction.repairType.forEach(element => {
                     repairArray.push(new FormControl(element));
                 });
@@ -73,6 +77,10 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
                     isMajorRepair: '',
                     isExternallyVisible: ''
                 }, { emitEvent: false });
+                //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
+                while ((repairArray).length) {
+                    repairArray.removeAt(0);
+                }
             }
         }
     }

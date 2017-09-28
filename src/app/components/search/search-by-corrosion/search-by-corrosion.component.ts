@@ -61,11 +61,15 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.criteria && changes.criteria.currentValue) {
+      const corrosionLevelArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
+
       if (changes.criteria.currentValue.searchByCorrosion) {
         this.corrosionForm.patchValue(changes.criteria.currentValue.searchByCorrosion, { emitEvent: false });
-
+        //FormArray values are not clearing properly with reset()/patch(), see: https://github.com/angular/angular/pull/11051
+        while ((corrosionLevelArray).length) {
+          corrosionLevelArray.removeAt(0);
+        }
         //Corrosion Level checkbox array
-        const corrosionLevelArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
         changes.criteria.currentValue.searchByCorrosion.corrosionLevel.forEach(element => {
           corrosionLevelArray.push(new FormControl(element));
         });
@@ -76,6 +80,10 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
           isWideSpreadCorrosion: '',
           isPreviouslyBlended: ''
         }, { emitEvent: false });
+        //FormArray values are not clearing properly with reset()/patch(), see: https://github.com/angular/angular/pull/11051
+        while ((corrosionLevelArray).length) {
+          corrosionLevelArray.removeAt(0);
+        }
       }
     }
   }
