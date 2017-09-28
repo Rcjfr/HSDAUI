@@ -7,6 +7,7 @@ import { ISavedSearch } from 'app/common/models/saved-search.model';
 export interface State {
   loading: boolean;
   searches: List<ISavedSearch>;
+  currentSearchId: number;  //Current saved search (what's currently in the form - not neccesarily searched on yet so not always the criteria currently loaded in the results)
 }
 
 export function reducer(state: SearchData = new SearchData(), action: actions.Actions) {
@@ -35,8 +36,15 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
 
         return state.merge({
           loading: false,
-          searches: [...state.searches, act.payload]
+          searches: [...state.searches, act.payload],
+          currentSearchId: act.payload.searchId
         });
+      }
+    case actions.ActionTypes.SET_CURRENT_SEARCH_ID:
+      {
+        const act = action as actions.SetCurrentSearchId;
+
+        return state.merge({ currentSearchId: act.payload });
       }
     default: {
       return state;
@@ -46,3 +54,4 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
 
 // Selector Functions
 export const getSearches = (state: State) => state.searches;
+export const getCurrentSearchId = (state: State) => state.currentSearchId;

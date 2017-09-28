@@ -11,9 +11,21 @@ export class SavedSearchService {
 
     constructor(private http: HttpClient) { }
 
-    saveSearch(searchData: ISavedSearch): Observable<ISavedSearch> {
+    createSearch(searchData: ISavedSearch): Observable<ISavedSearch> {
         if (searchData) {
             return this.http.post<ISavedSearch>(`${this.endPointUrl}savedsearches`, searchData)
+        }
+    }
+
+    updateSearch(searchData: ISavedSearch): Observable<ISavedSearch> {
+        if (searchData) {
+            return this.http.put<ISavedSearch>(`${this.endPointUrl}savedsearches/${searchData.searchId}`, searchData)
+        }
+    }
+
+    deleteSearch(id: number): Observable<ISavedSearch> {
+        if (id) {
+            return this.http.delete<ISavedSearch>(`${this.endPointUrl}savedsearches/${id}`)
         }
     }
 

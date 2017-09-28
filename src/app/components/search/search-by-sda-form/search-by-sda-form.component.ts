@@ -49,9 +49,9 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe(data => this.ATACodes = data);
 
     this.stations$ = Observable.create((observer: Observer<string>) => {
-          observer.next(this.sdaForm.get('station').value);
-        }).distinctUntilChanged()
-          .switchMap(token => this.appStateService.getStations(token));
+      observer.next(this.sdaForm.get('station').value);
+    }).distinctUntilChanged()
+      .switchMap(token => this.appStateService.getStations(token));
 
     this.alertCodes$ = this.appStateService.getAlertCodes();
     this.departments$ = this.appStateService.getDepartments();
@@ -67,7 +67,16 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.criteria && changes.criteria.currentValue) {
       if (changes.criteria.currentValue.searchBySda) {
-        this.sdaForm.patchValue(changes.criteria.currentValue.searchBySda, {emitEvent: false});
+        this.sdaForm.patchValue(changes.criteria.currentValue.searchBySda, { emitEvent: false });
+
+        //Handle ATA Codes
+        if (changes.criteria.currentValue.searchBySda.ataCode1) {
+          this.loadAtaCodes2(changes.criteria.currentValue.searchBySda.ataCode1);
+
+          if (changes.criteria.currentValue.searchBySda.ataCode2) {
+            this.sdaForm.patchValue({ ataCode2: changes.criteria.currentValue.searchBySda.ataCode2 }, { emitEvent: false });
+          }
+        }
       } else {
         this.sdaForm.reset({
           alertCode: '',
@@ -75,15 +84,17 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
           ataCode1: '',
           ataCode2: '',
           checkType: ''
-        }, {emitEvent: false});
+        }, { emitEvent: false });
       }
     }
   }
 
   onAlertCode1Change(alertCode1: string) {
-    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
-
-    //reset ataCode2
+    this.loadAtaCodes2(alertCode1);
     this.sdaForm.controls['ataCode2'].setValue(null);
+  }
+
+  loadAtaCodes2(alertCode1: string) {
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
   }
 }

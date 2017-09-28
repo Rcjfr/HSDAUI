@@ -65,3 +65,4 @@ export const getUser = compose(fromLoggedInUser.getUser, getUserDataState);
 export const getUserLoading = compose(fromLoggedInUser.getLoading, getUserDataState);
 
 export const getSavedSearches = compose(fromSavedSearches.getSearches, getSavedSearchState);
+export const getCurrentSearchId = compose(fromSavedSearches.getCurrentSearchId, getSavedSearchState);

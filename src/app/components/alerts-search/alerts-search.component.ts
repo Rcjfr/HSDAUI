@@ -21,10 +21,13 @@ import { ISavedSearch } from 'app/common/models/saved-search.model';
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
+  //Store data
   savedSearches$: Observable<List<ISavedSearch>>;
   savedSearches: List<ISavedSearch>;
-  selectedSearch: number;
+  currentSearchId: number;
 
+  selectedSearch = 0;
+  searchFiltersOpen = false;
   criteria;
   isDefault = false;
   badgeNumber;
@@ -46,8 +49,13 @@ export class AlertsSearchComponent implements OnInit {
       }).subscribe();
 
     this.savedSearches$ = this.savedSearchStateService.getSavedSearches()
-      .do(s => this.selectDefaultSearch(s))
+      .do(s => this.selectSearch(s))
       .do(s => this.savedSearches = s);
+
+    this.savedSearchStateService.getCurrentSearchId()
+      .map(id => {
+        this.currentSearchId = id;
+      }).subscribe();
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -84,12 +92,23 @@ export class AlertsSearchComponent implements OnInit {
     }
   }
 
-  selectDefaultSearch(searches) {
+  selectSearch(searches) {
+    //Select the newly created search OR select the default search on load
     if (searches && searches instanceof List) {
-      const defaultItem = _.find(searches.toJS(), s => s.isDefault === true);
-      if (defaultItem) {
-        this.selectedSearch = defaultItem.searchId;
-        this.criteria = JSON.parse(defaultItem.criteria);
+      let search;
+      if (this.currentSearchId) {
+        search = _.find(searches.toJS(), s => s.searchId === this.currentSearchId);
+      } else {
+        search = _.find(searches.toJS(), s => s.isDefault === true);
+      }
+
+      if (search) {
+        this.selectedSearch = +search.searchId;
+        this.criteria = JSON.parse(search.criteria);
+        this.isDefault = search.isDefault;
+        this.searchFiltersOpen = true;
+      } else {
+        this.selectedSearch = 0;
       }
     }
   }
@@ -124,32 +143,58 @@ export class AlertsSearchComponent implements OnInit {
   }
 
   onSearchChange() {
+    this.selectedSearch = +this.selectedSearch; //Angular generates string values in *ngFor instead of numbers
     if (this.selectedSearch !== 0) {
       if (this.savedSearches && this.savedSearches instanceof List) {
-        const search = this.savedSearches.find(i => i.searchId === +this.selectedSearch);
+        const search = this.savedSearches.find(i => i.searchId === this.selectedSearch);
         if (search) {
+          this.savedSearchStateService.setCurrentSearchId(search.searchId);
           this.criteria = JSON.parse(search.criteria);
+          this.isDefault = search.isDefault;
         }
       }
     }
   }
 
-  saveCriteria() {
-    if (this.selectedSearch.toString() === '0') {
-      this.dialogService.addDialog(PromptDialogComponent, {
-        title: 'Save Search Filters',
-        message: `What would you like to name this search?`
-      }).subscribe(newName => {
-        if (newName) {
-          this.savedSearchStateService.saveSearch({
-            badgeNumber: this.badgeNumber,
-            criteria: JSON.stringify(this.criteria),
-            id: this.selectedSearch,
-            name: newName,
-            isDefault: this.isDefault
-          });
-        }
-      });
+  createSavedSearch() {
+    this.dialogService.addDialog(PromptDialogComponent, {
+      title: 'Create Saved Search',
+      message: `What would you like to name this search?`
+    }).subscribe(newName => {
+      if (newName) {
+        this.saveSearch(newName)
+      }
+    });
+  }
+
+  updateSavedSearch() {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Updated Saved Search',
+      message: `Are you sure you want to overwrite '${this.savedSearches.find(i => i.searchId === this.selectedSearch).name}' with current search filters?`
+    }).filter(confirm => confirm === true).subscribe(confirm => {
+      this.saveSearch(null);
+    });
+  }
+
+  saveSearch(newName) {
+    const search = {
+      badgeNumber: this.badgeNumber,
+      criteria: JSON.stringify(this.criteria),
+      searchId: this.selectedSearch,
+      name: (newName ? newName : this.savedSearches.find(i => i.searchId === this.selectedSearch).name),
+      isDefault: this.isDefault
     }
+
+    this.savedSearchStateService.saveSearch(search);
+  }
+
+  deleteSavedSearch() {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Delete Saved Search',
+      message: `Are you sure you want to delete '${this.savedSearches.find(i => i.searchId === this.selectedSearch).name}'?`
+    }).filter(confirm => confirm === true).subscribe(confirm => {
+      this.savedSearchStateService.setCurrentSearchId(undefined);
+      this.savedSearchStateService.deleteSearch(this.selectedSearch);
+    });
   }
 }

@@ -7,6 +7,7 @@ import * as searchesAlert from '../actions/saved-searches';
 import * as services from '../services';
 import '../rxjs-extensions';
 import { ISavedSearch } from 'app/common/models/saved-search.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
@@ -31,14 +32,47 @@ export class SavedSearchesEffects {
     .ofType(searchesAlert.ActionTypes.SAVE_SEARCH)
     .map((action: searchesAlert.SaveSearchAction) => action.payload)
     .switchMap((data: ISavedSearch) => {
-      return this.savedSearchService.saveSearch(data)
-        .map((updatedSearchData: ISavedSearch) => {
-          this.savedSearchStateService.loadSearches(updatedSearchData.badgeNumber);
+      if (data.searchId !== 0) {
+        return this.savedSearchService.updateSearch(data)
+          .map((updatedSearchData: ISavedSearch) => {
+            this.savedSearchStateService.loadSearches(updatedSearchData.badgeNumber);
+            this.toastr.success(data.name, 'Updated Search');
 
-          return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);
+            return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);
+          })
+          .catch((err) => {
+            return of(new searchesAlert.SaveSearchFailAction('Failed to save search.'));
+          });
+      } else {
+        return this.savedSearchService.createSearch(data)
+          .map((updatedSearchData: ISavedSearch) => {
+            this.savedSearchStateService.loadSearches(updatedSearchData.badgeNumber);
+            this.toastr.success(data.name, 'Created Search');
+
+            return new searchesAlert.SaveSearchCompleteAction(updatedSearchData);
+          })
+          .catch((err) => {
+            return of(new searchesAlert.SaveSearchFailAction('Failed to save search.'));
+          });
+      }
+    });
+
+  @Effect()
+  deleteSearch$: Observable<Action> = this.actions$
+    .ofType(searchesAlert.ActionTypes.DELETE_SEARCH)
+    .map((action: searchesAlert.DeleteSearchAction) => action.payload)
+    .switchMap((data: number) => {
+      return this.savedSearchService
+        .deleteSearch(data)
+        .switchMap(s => this.authStateService.badgeId())
+        .map((badgeId: string) => {
+          this.savedSearchStateService.loadSearches(badgeId);
+          this.toastr.success('', 'Deleted Search');
+
+          return new searchesAlert.DeleteSearchCompleteAction();
         })
         .catch((err) => {
-          return of(new searchesAlert.SaveSearchFailAction('Failed to save search.'));
+          return of(new searchesAlert.DeleteSearchFailAction('Failed to delete search.'));
         });
     });
 
@@ -46,7 +80,9 @@ export class SavedSearchesEffects {
   constructor(private actions$: Actions,
     private savedSearchStateService: services.SavedSearchStateService,
     private savedSearchService: services.SavedSearchService,
-    private appStateService: services.AppStateService) {
+    private appStateService: services.AppStateService,
+    private authStateService: services.AuthService,
+    private toastr: ToastrService) {
   }
 
 }

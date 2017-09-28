@@ -20,6 +20,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       return next.handle(authReq)
         .do((event) => {
           if (event instanceof HttpResponse) {
+            //Checking for 200 and empty body because SiteMinder is blocking the POST request
             if (event.status === 302 || (event.status === 200 && !event.body)) {
               this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
               setTimeout(() => location.reload(true), 1000);

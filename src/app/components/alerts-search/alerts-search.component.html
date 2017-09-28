@@ -95,11 +95,11 @@
     </div>
   </div>
 
-  <h2>Save Search Filters</h2>
+  <h2>Saved Search Filters</h2>
   <accordion>
-    <accordion-group #savedSearchesGroup panelClass="panel-default search-panel">
+    <accordion-group #savedSearchesGroup panelClass="panel-default search-panel" [isOpen]="searchFiltersOpen">
       <div accordion-heading>
-        Save Search Filters
+        Searches
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': savedSearchesGroup?.isOpen, 'icon-add': !savedSearchesGroup?.isOpen}"></i>
       </div>
       <div class="row form-group" style="padding-top:15px;">
@@ -118,7 +118,9 @@
           </aac-checkbox-container>
         </div>
         <div class="col-md-2">
-          <button type="button" (click)="saveCriteria()" class="btn btn-default">Save Current Criteria</button>
+          <button type="button" *ngIf="selectedSearch === 0" (click)="createSavedSearch()" class="btn btn-default">Save New Search</button>
+          <button type="button" *ngIf="selectedSearch !== 0" (click)="updateSavedSearch()" class="btn btn-default">Update This Search</button>
+          <button type="button" *ngIf="selectedSearch !== 0" (click)="deleteSavedSearch()" class="btn btn-default">Delete This Search</button>
         </div>
       </div>
     </accordion-group>
