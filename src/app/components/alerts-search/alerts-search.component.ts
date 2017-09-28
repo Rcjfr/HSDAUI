@@ -101,7 +101,8 @@ export class AlertsSearchComponent implements OnInit {
     }).filter(confirm => confirm === true).subscribe(confirm => {
       this.resetFilters();
       this.selectedSearch = 0;
-    });
+      });
+    window.scrollTo(0, 0);
   }
 
   resetFilters() {
