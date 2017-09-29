@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, AfterViewInit, ViewChildren, ElementRef, ViewChild } from '@angular/core';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -12,7 +12,8 @@ export interface ConfirmModel {
   templateUrl: './prompt-dialog.component.html',
   styleUrls: ['./prompt-dialog.component.less']
 })
-export class PromptDialogComponent extends DialogComponent<ConfirmModel, any> implements ConfirmModel {
+export class PromptDialogComponent extends DialogComponent<ConfirmModel, any> implements ConfirmModel, AfterViewInit {
+  @ViewChild('searchTitle') vcSearchTitle: ElementRef;
 
   title: string;
   message: string;
@@ -23,14 +24,18 @@ export class PromptDialogComponent extends DialogComponent<ConfirmModel, any> im
     super(dialogService);
 
     this.form = new FormGroup({
-      title: new FormControl('', [Validators.required])
+      searchTitle: new FormControl('', [Validators.required])
     });
   }
 
+  ngAfterViewInit() {
+    this.vcSearchTitle.nativeElement.focus();
+  }
+
   confirm() {
-    // we set dialog result as true on click on confirm button,
-    // then we can get dialog result from caller code
-    this.result = this.form.get('title').value;
-    this.close();
+    if (this.form.valid) {
+      this.result = this.form.get('searchTitle').value;
+      this.close();
+    }
   }
 }

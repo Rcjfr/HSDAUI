@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
         <p>{{message}}</p>
-        <input type="text" formControlName="title" />
+        <input #searchTitle type="text" formControlName="searchTitle" (keyup.enter)="confirm()"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="confirm()" [disabled]="form.invalid">OK</button>
