@@ -11,7 +11,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ScrollToModule } from 'ng2-scroll-to-el';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { AccordionModule, TypeaheadModule, TabsModule, ModalModule } from 'ngx-bootstrap';
+import { AccordionModule, TypeaheadModule, TabsModule, ModalModule, AlertModule } from 'ngx-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
@@ -43,6 +43,7 @@ import { SdaSearchModule } from './components/search/sda-search.module';
 import { AlertsSearchComponent } from './components/alerts-search/alerts-search.component';
 import { AlertsGridComponent } from './components/alerts-grid/alerts-grid.component';
 import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
+import { AlertsDashboardComponent } from './components/alerts-dashboard/alerts-dashboard.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialo
     AlertDetailComponent,
     AlertDetailViewComponent,
     AlertsSearchComponent,
-    AlertsGridComponent
+    AlertsGridComponent,
+    AlertsDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +88,7 @@ import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialo
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
+    AlertModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot(),
     ScrollToModule.forRoot(),

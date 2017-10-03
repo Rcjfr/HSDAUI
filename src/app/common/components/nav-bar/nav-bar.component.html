@@ -1,17 +1,47 @@
-<nav class="navbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand aa-brand" ui-sref="home">&nbsp;</a>
-        </div>
-        <!--<ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-        </ul>-->
-        <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-text" *ngIf="authService.displayName() | async">Welcome {{authService.displayName() | async}}</p></li>
-            <li><a href="{{authService.logOutUrl()}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+<nav class="navbar navbar-default navbar-fixed-top" style="background:#0078D2;color:white;">
+  <!-- navbar-fixed-top style="background:#0078D2;"-->
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand aa-brand" ui-sref="home" style="color:white;font-family:AmericanSans">Harmonized Structural Defect Alert</a>
+      
     </div>
-</nav>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li [routerLinkActive]="['active']"><a [routerLink]="['/dashboard']"><i class="icon-home"></i> Dashboard</a></li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a [routerLink]="['/alerts']">
+            <i class="icon-search"></i> Search
+          </a>
+        </li>
+        <li>
+          <a href="" (click)="newSda()">
+            <i class="icon-add"></i> New SDA
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon-help"></i> Help
+          </a>
+        </li>
 
+        <li><p class="navbar-text" *ngIf="authService.displayName() | async">Welcome {{authService.displayName() | async}}</p></li>
+        <li><a href="{{authService.logOutUrl()}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search by SDA ID...">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">Go!</button>
+          </span>
+        </div>
+        <!--<input type="text" class="form-control" placeholder="Search by SDA ID...">-->
+      </form>
+    </div>
+  </div>
+</nav>

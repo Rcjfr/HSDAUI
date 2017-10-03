@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services';
 
 @Component({
@@ -7,6 +7,12 @@ import { AuthService } from '../../services';
   styleUrls: ['./nav-bar.component.less']
 })
 export class NavBarComponent {
+    @Output() onNewSda = new EventEmitter();
     constructor(public authService: AuthService) {
+    }
+    newSda() {
+      this.onNewSda.emit();
+
+      return false;
     }
 }

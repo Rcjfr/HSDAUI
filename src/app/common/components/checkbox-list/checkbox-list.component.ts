@@ -58,10 +58,10 @@ export class CheckboxListComponent implements
   // , Validator
   , OnInit {
   @Input() source: Array<any>;
-  @Input() valueField: string;
-  @Input() labelField: string;
-  @Input() required: false;
-  @Input() returnValuesOnly: true; // value will be set to integer values of selected items
+  @Input() valueField = 'id';
+  @Input() labelField = 'description';
+  @Input() required = false;
+  @Input() returnValuesOnly = true; // value will be set to integer values of selected items
   @Input() minLength = 0;
   @Input() maxLength = 0;
   @Input() colClass = 'col-sm-4';
