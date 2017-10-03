@@ -30,7 +30,7 @@ export class SearchByMaintenanceComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.yesNoBothOptions$ = this.utilityService.getYesNoBothOptions();
-        this.maintenanceForm.valueChanges.subscribe(s => this.criteria.searchByMaintenance = s)
+      this.maintenanceForm.valueChanges.subscribe(s => this.criteria.searchByMaintenance = s)
     }
 
     ngOnChanges(changes: SimpleChanges) {

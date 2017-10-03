@@ -1,37 +1,38 @@
-﻿<div class="row  form-group">
-  <div class="col-md-2">
-    <aac-checkbox-container label="Open">
-      <input type="checkbox" tabindex="66" />
-    </aac-checkbox-container>
-  </div>
-  <div class="col-md-2">
-    <aac-checkbox-container label="Complete">
-      <input type="checkbox" tabindex="67" />
-    </aac-checkbox-container>
+<form [formGroup]="statusForm">
+  <div class="row  form-group">
+    <div class="col-md-2">
+      <aac-checkbox-container label="Open">
+        <input type="checkbox" tabindex="66" [checked]="statusContains(0)" (change)="onStatusChange(0, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-2">
+      <aac-checkbox-container label="Complete">
+        <input type="checkbox" tabindex="67" [checked]="statusContains(1)" (change)="onStatusChange(1, $event.target.checked)" />
+      </aac-checkbox-container>
 
+    </div>
+    <div class="col-md-2">
+      <aac-checkbox-container label="Audited">
+        <input type="checkbox" tabindex="68" [checked]="statusContains(2)" (change)="onStatusChange(2, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-2">
+      <aac-checkbox-container label="Rejected">
+        <input type="checkbox" tabindex="69" [checked]="statusContains(4)" (change)="onStatusChange(4, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-2">
+      <aac-checkbox-container label="Closed">
+        <input type="checkbox" tabindex="70" [checked]="statusContains(8)" (change)="onStatusChange(8, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-2">
+      <aac-checkbox-container label="Deleted">
+        <input type="checkbox" tabindex="71" [checked]="statusContains(16)" (change)="onStatusChange(16, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
   </div>
-  <div class="col-md-2">
-    <aac-checkbox-container label="Audited">
-      <input type="checkbox" tabindex="68" />
-    </aac-checkbox-container>
-  </div>
-  <div class="col-md-2">
-    <aac-checkbox-container label="Rejected">
-      <input type="checkbox" tabindex="69" />
-    </aac-checkbox-container>
-  </div>
-  <div class="col-md-2">
-    <aac-checkbox-container label="Closed">
-      <input type="checkbox" tabindex="70" />
-    </aac-checkbox-container>
-  </div>
-  <div class="col-md-2">
-    <aac-checkbox-container label="Deleted">
-      <input type="checkbox" tabindex="71" />
-    </aac-checkbox-container>
-  </div>
-</div>
-
+</form>
 
 
 

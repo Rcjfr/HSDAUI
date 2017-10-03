@@ -67,7 +67,7 @@
         Search by Status
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
       </div>
-      <!-- <aa-search-by-status></aa-search-by-status> -->
+       <aa-search-by-status [(criteria)]="criteria"></aa-search-by-status> 
     </accordion-group>
     <accordion-group #partGroup panelClass="panel-default search-panel">
       <div accordion-heading>
