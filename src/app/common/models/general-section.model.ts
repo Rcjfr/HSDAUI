@@ -11,6 +11,7 @@ export interface IGeneralSection {
   cycles?: string;
   fleet?: string;
   originator?: string;
+  originatorBadgeNo?: string;
   lineMaintenance?: boolean;
   alertCode?: number;
   ataCode1?: number;

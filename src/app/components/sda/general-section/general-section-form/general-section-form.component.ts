@@ -37,7 +37,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
         ]
       ],
       department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
-      originator: ['', [Validators.required, Validators.maxLength(50)]]
+      originator: ['', [Validators.required, Validators.maxLength(50)]],
+      originatorBadgeNo: ['', [Validators.required, Validators.maxLength(50)]]
     });
   }
 
@@ -81,6 +82,9 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       if (!this.sda.id) {
         this.authService.auditDisplayName().take(1).subscribe(u => {
           this.generalSectionFormGroup.patchValue({ originator: u });
+        });
+        this.authService.badgeId().take(1).subscribe(u => {
+          this.generalSectionFormGroup.patchValue({ originatorBadgeNo: u });
         });
       }
 
