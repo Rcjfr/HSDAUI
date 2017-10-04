@@ -43,11 +43,6 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult()
-      .do(d => {
-        if (d && d.totalRecords) {
-          this.scrollToService.scrollTo('#searchResults');
-        }
-      })
       .map(listResult => {
         if (listResult) {
           return listResult.toJS();

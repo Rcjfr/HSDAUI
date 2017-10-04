@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TextMaskModule } from 'angular2-text-mask';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { TypeaheadModule, TabsModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ng-pipes';
 import { FormControlsModule } from './../../common/components/form-controls.module';
 
@@ -18,6 +18,7 @@ import { SearchByDefectComponent } from './search-by-defect/search-by-defect.com
 import { SearchByCpcpDispositionComponent } from './search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 import { SearchByPartComponent } from './search-by-part/search-by-part.component';
 import { SearchOptionsComponent } from './search-options/search-options.component';
+import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { SearchOptionsComponent } from './search-options/search-options.componen
     TextMaskModule,
     NgPipesModule,
     TypeaheadModule.forRoot(),
+    TabsModule.forRoot(),
     FormControlsModule
   ],
   exports: [
@@ -43,7 +45,8 @@ import { SearchOptionsComponent } from './search-options/search-options.componen
     SearchByDefectComponent,
     SearchByCpcpDispositionComponent,
     SearchByPartComponent,
-    SearchOptionsComponent
+    SearchOptionsComponent,
+    SavedSearchesComponent
   ],
   declarations: [
     SearchByDateRangeComponent,
@@ -57,7 +60,8 @@ import { SearchOptionsComponent } from './search-options/search-options.componen
     SearchByDefectComponent,
     SearchByCpcpDispositionComponent,
     SearchByPartComponent,
-    SearchOptionsComponent
+    SearchOptionsComponent,
+    SavedSearchesComponent
   ],
   providers: []
 })

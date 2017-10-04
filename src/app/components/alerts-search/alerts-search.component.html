@@ -1,3 +1,7 @@
+<h1 class="page-header" style="padding-bottom:20px;">Saved Searches</h1>
+
+<aa-saved-searches [(criteria)]="criteria" [savedSearches]="savedSearches" [currentSearchId]="currentSearchId" [badgeNumber]="badgeNumber" (onSearchChange)="updateFilters($event)"></aa-saved-searches>
+
 <h1 class="page-header">Search Filters
   <h5 class="pull-right">
     <a href="" (click)="expandCollapseAll(true)">Expland All</a>
@@ -67,7 +71,7 @@
         Search by Status
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
       </div>
-       <aa-search-by-status [(criteria)]="criteria"></aa-search-by-status> 
+       <aa-search-by-status [(criteria)]="criteria"></aa-search-by-status>
     </accordion-group>
     <accordion-group #partGroup panelClass="panel-default search-panel">
       <div accordion-heading>
@@ -94,35 +98,4 @@
       <button type="submit" style="float:right;" class="btn btn-primary">Search</button>
     </div>
   </div>
-
-  <h2>Saved Search Filters</h2>
-  <accordion>
-    <accordion-group #savedSearchesGroup panelClass="panel-default search-panel" [isOpen]="searchFiltersOpen">
-      <div accordion-heading>
-        Searches
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': savedSearchesGroup?.isOpen, 'icon-add': !savedSearchesGroup?.isOpen}"></i>
-      </div>
-      <div class="row form-group" style="padding-top:15px;">
-        <div class="col-md-1"></div>
-        <div class="col-md-6">
-          <aac-field-container label="Search Name:">
-            <select class="form-control" name="selectedSearch" [(ngModel)]="selectedSearch" (change)="onSearchChange()">
-                <option value='0' selected>(Create New)</option>
-                <option *ngFor="let search of savedSearches$ | async" [value]="search.searchId">{{getSearchDisplayName(search)}}</option>
-              </select>
-          </aac-field-container>
-        </div>
-        <div class="col-md-2">
-          <aac-checkbox-container label="Default Search">
-            <input type="checkbox" name="isDefault" [(ngModel)]="isDefault" />
-          </aac-checkbox-container>
-        </div>
-        <div class="col-md-2">
-          <button type="button" *ngIf="selectedSearch === 0" (click)="createSavedSearch()" class="btn btn-default">Save New Search</button>
-          <button type="button" *ngIf="selectedSearch !== 0" (click)="updateSavedSearch()" class="btn btn-default">Update This Search</button>
-          <button type="button" *ngIf="selectedSearch !== 0" (click)="deleteSavedSearch()" class="btn btn-default">Delete This Search</button>
-        </div>
-      </div>
-    </accordion-group>
-  </accordion>
 </form>

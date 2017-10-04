@@ -1,0 +1,52 @@
+<tabset>
+    <tab heading="Existing Saved Searches">
+      <div class="panel panel-default">
+        <form [formGroup]="updateForm">
+          <div class="row form-group" style="padding-top:15px;">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <aac-field-container label="Search Name:">
+                <select class="form-control" name="selectedSearch" formControlName="selected" (change)="onSelectedChange()" [ngClass]="{'select-invalid': updateForm.get('selected').hasError('required')}">
+                  <option *ngFor="let search of savedSearches" [value]="search.searchId">{{getSearchDisplayName(search)}}</option>
+                </select>
+              </aac-field-container>
+            </div>
+            <div class="col-md-2">
+              <aac-checkbox-container label="Make Default">
+                <input type="checkbox" name="isDefault" formControlName="isDefault" />
+              </aac-checkbox-container>
+            </div>
+            <div class="col-md-2">
+              <button type="button" (click)="updateSavedSearch()" class="btn btn-primary" [disabled]="!updateForm.valid">Update This Search</button>
+            </div>
+            <div class="col-md-2">
+              <button type="button" (click)="deleteSavedSearch()" class="btn btn-default" [disabled]="!updateForm.valid">Delete This Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </tab>
+    <tab heading="Create New Saved Search">
+      <div class="panel panel-default">
+        <form [formGroup]="createForm">
+          <div class="row form-group" style="padding-top:15px;">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <aac-field-container label="Search Name:">
+                <input type="text" formControlName="name" />
+              </aac-field-container>
+            </div>
+            <div class="col-md-2">
+              <aac-checkbox-container label="Make Default">
+                <input type="checkbox" name="isDefault" formControlName="isDefault" />
+              </aac-checkbox-container>
+            </div>
+            <div class="col-md-2">
+              <button type="button" (click)="createSavedSearch()" class="btn btn-primary" [disabled]="!createForm.valid">Create New Search</button>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </form>
+      </div>
+    </tab>
+  </tabset>

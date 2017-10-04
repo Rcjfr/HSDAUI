@@ -3,16 +3,16 @@ import { SearchData } from 'app/common/models';
 import { ISavedSearch } from 'app/common/models/saved-search.model';
 
 export const ActionTypes = {
-  LOAD_SEARCHES: 'Load Search Filters',
-  LOAD_SEARCHES_COMPLETE: 'Load Search Filters Complete',
-  LOAD_SEARCHES_FAIL: 'Load Search Filters Fail',
-  SAVE_SEARCH: 'Save Search Filters',
-  SAVE_SEARCH_COMPLETE: 'Save Search Filters Complete',
-  SAVE_SEARCH_FAIL: 'Save Search Filters Fail',
-  SET_CURRENT_SEARCH_ID: 'Set Current Search ID',
-  DELETE_SEARCH: 'Delete Search Filters',
-  DELETE_SEARCH_COMPLETE: 'Delete Search Filters Complete',
-  DELETE_SEARCH_FAIL: 'Delete Search Filters Fail'
+  LOAD_SEARCHES: 'Load Saved Searches',
+  LOAD_SEARCHES_COMPLETE: 'Load Saved Searches Complete',
+  LOAD_SEARCHES_FAIL: 'Load Saved Searches Fail',
+  SAVE_SEARCH: 'Save Saved Search',
+  SAVE_SEARCH_COMPLETE: 'Save Saved Search Complete',
+  SAVE_SEARCH_FAIL: 'Save Saved Search Fail',
+  SET_CURRENT_SEARCH_ID: 'Set Current Saved Search ID',
+  DELETE_SEARCH: 'Delete Saved Search',
+  DELETE_SEARCH_COMPLETE: 'Delete Saved Search Complete',
+  DELETE_SEARCH_FAIL: 'Delete Saved Search Fail'
 };
 
 export class LoadSearchesAction implements Action {

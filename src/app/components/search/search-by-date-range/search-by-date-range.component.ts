@@ -25,6 +25,7 @@ export class SearchByDateRangeComponent implements OnInit, OnChanges {
       if (values && values.dateThrough) {
         values.dateThrough = moment(values.dateThrough).format('YYYY-MM-DD') + 'T00:00:00';
       }
+
       this.criteria.searchByDateRange = values;
     });
   }
@@ -35,9 +36,14 @@ export class SearchByDateRangeComponent implements OnInit, OnChanges {
          //Date pickers parsing
          if (changes.criteria.currentValue.searchByDateRange.dateFrom) {
           changes.criteria.currentValue.searchByDateRange.dateFrom = new Date(changes.criteria.currentValue.searchByDateRange.dateFrom);
+        } else {
+          changes.criteria.currentValue.searchByDateRange.dateFrom = undefined;
         }
+
         if (changes.criteria.currentValue.searchByDateRange.dateThrough) {
           changes.criteria.currentValue.searchByDateRange.dateThrough = new Date(changes.criteria.currentValue.searchByDateRange.dateThrough);
+        } else {
+          changes.criteria.currentValue.searchByDateRange.dateThrough = undefined;
         }
 
         this.dateRangeForm.patchValue(changes.criteria.currentValue.searchByDateRange, { emitEvent: false });
