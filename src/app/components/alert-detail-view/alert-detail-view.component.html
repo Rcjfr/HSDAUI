@@ -89,7 +89,7 @@
           <button type="submit" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
         </ng-container>
         <ng-container *ngIf="canArchiveSda() | async">
-          <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Archive SDA</button>
+          <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Delete SDA</button>
         </ng-container>
       </div>
     </div>
@@ -129,11 +129,11 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="comments">Comments:<span class="req" *ngIf="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted">*</span></label>
+            <label for="comments">{{sdaStatusForm.get('status').value===Status.Deleted ? 'Reason for Deletion':'Comments'}}:<span class="req" *ngIf="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted">*</span></label>
             <textarea class="form-control" id="comments" [required]="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted" formControlName="comments"></textarea>
             <div *ngIf="sdaStatusForm.get('comments').errors && (sdaStatusForm.get('comments').dirty || sdaStatusForm.get('comments').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('comments').errors.required">
-                Comments are required.
+                {{sdaStatusForm.get('status').value===Status.Deleted ? 'Reason for Deletion is':'Comments are'}} required.
               </div>
             </div>
           </div>
