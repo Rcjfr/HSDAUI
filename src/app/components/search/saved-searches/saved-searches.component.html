@@ -7,6 +7,7 @@
             <div class="col-md-5">
               <aac-field-container label="Search Name:">
                 <select class="form-control" name="selectedSearch" formControlName="selected" (change)="onSelectedChange()" [ngClass]="{'select-invalid': updateForm.get('selected').hasError('required')}">
+                  <option value="0"></option>
                   <option *ngFor="let search of savedSearches" [value]="search.searchId">{{getSearchDisplayName(search)}}</option>
                 </select>
               </aac-field-container>

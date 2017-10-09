@@ -32,7 +32,7 @@ export class SavedSearchesComponent implements OnInit, OnChanges {
     });
 
     this.updateForm = new FormGroup({
-      selected: new FormControl(undefined, [Validators.min(1)]),
+      selected: new FormControl(0, [Validators.min(1)]),
       isDefault: new FormControl()
     });
   }
@@ -77,6 +77,10 @@ export class SavedSearchesComponent implements OnInit, OnChanges {
           this.updateForm.patchValue({ isDefault: search.isDefault });
         }
       }
+    } else {
+      this.savedSearchStateService.setCurrentSearchId(0);
+      this.onSearchChange.emit(JSON.parse('{}'));
+      this.updateForm.patchValue({ isDefault: false });
     }
   }
 
