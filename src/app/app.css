@@ -10486,6 +10486,14 @@ input[type="checkbox"] {
     border-radius: 50%;
     background-color: #0078d2;
   }
+  .customComponent input[type="radio"]:disabled ~ label,
+  .customComponent input[type="checkbox"]:disabled ~ label {
+    cursor: not-allowed;
+  }
+  .customComponent input[type="radio"]:disabled ~ label span,
+  .customComponent input[type="checkbox"]:disabled ~ label span {
+    background-color: #EBEFF0;
+  }
 
   .customComponent input[type="radio"]:checked:hover ~ label .control,
   .customComponent input[type="radio"]:checked:focus ~ label .control,

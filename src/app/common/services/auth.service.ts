@@ -15,12 +15,14 @@ export class AuthService {
   readonly QC_Supervisor = 'QC_Supervisor';
   readonly QC_Manager = 'QC_Manager';
   readonly Reliability_Analyst = 'Reliability_Analyst';
+  readonly CPCP_Trained_Reviewing_Engineer = 'CPCP_Trained_Reviewing_Engineer';
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}users?ts=${(new Date()).getTime()}`;
   // Using Http here so that the HttpClient Interceptor do not intercept this api call
   constructor(private http: Http, private appStateService: AppStateService, private router: Router, private toastr: ToastrService) {
     this.currentUser$ = this.appStateService.getUser().filter(u => !!u).map(u => u && u.toJS());
   }
+
   loadLoggedInUser(): Observable<IUser> {
     return this.http.get(this.endPointUrl)
       .map((result) => result.json())
@@ -35,9 +37,11 @@ export class AuthService {
         return Observable.throw(err);
       });
   }
+
   isAuthenticated(): Observable<boolean> {
     return this.currentUser$.map(u => !!u);
   }
+
   requestHeaders(): Observable<HttpHeaders> {
     return this.accessToken().map(token => {
       const headers = new HttpHeaders();
@@ -47,6 +51,7 @@ export class AuthService {
       return headers;
     });
   }
+
   requestOptions(): Observable<RequestOptionsArgs> {
     return this.accessToken().map(token => {
       const headers = new Headers();
@@ -58,30 +63,38 @@ export class AuthService {
       return requestOptions;
     });
   }
+
   displayName(): Observable<string> {
     return this.currentUser$.map(u => `${u.sm_user_lastname}, ${u.sm_user_firstname}`);
   }
+
   auditDisplayName(): Observable<string> {
     return this.currentUser$.map(u => `${u.sm_user} - ${u.sm_user_lastname}, ${u.sm_user_firstname}`);
   }
   email(): Observable<string> {
     return this.currentUser$.map(u => u.sm_user_email);
   }
+
   badgeId(): Observable<string> {
     return this.currentUser$.map(u => u.sm_user);
   }
+
   roles(): Observable<string[]> {
     return this.currentUser$.map(u => u.roles);
   }
+
   hasRole(role: string): Observable<boolean> {
     return this.currentUser$.map(u => u.roles.indexOf(role) > -1);
   }
+
   hasAnyRole(roles: string[]): Observable<boolean> {
     return this.currentUser$.map(u => u.roles.some((role) => { return roles.indexOf(role) > -1 }));
   }
+
   accessToken(): Observable<string> {
     return this.currentUser$.map(u => u.access_token);
   }
+
   logOutUrl(): string {
     return environment.logoutUrl;
   }
@@ -93,13 +106,20 @@ export class AuthService {
       return qcPersonnel && !qcManager;
     });
   }
+
   isQCManager(): Observable<boolean> {
     return this.hasAnyRole([this.QC_Manager, this.QC_Supervisor]);
   }
+
   isQCPersonnel(): Observable<boolean> {
     return this.hasAnyRole([this.QC_Inspector, this.QC_Manager, this.QC_Supervisor]);
   }
+
   isReliabilityAnalyst(): Observable<boolean> {
     return this.hasRole(this.Reliability_Analyst);
+  }
+
+  isCPCPTrainedReviewingEngineer(): Observable<boolean> {
+    return this.hasRole(this.CPCP_Trained_Reviewing_Engineer);
   }
 }

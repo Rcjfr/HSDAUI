@@ -1,6 +1,6 @@
-﻿export interface ICPCPSection {
+export interface ICPCPSection {
   id?: number;
-  iscpcpRelatedEvent?: boolean;
+  isCPCPRelatedEvent?: boolean;
   isWideSpreadCorrosion?: boolean;
   corrosionLevel?: number;
   isPreviouslyBlended?: boolean;

@@ -55,7 +55,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     detectionMethod: null
   },
   cpcpSection: {
-    iscpcpRelatedEvent: null,
+    isCPCPRelatedEvent: null,
     isWideSpreadCorrosion: null,
     corrosionLevel: null,
     isPreviouslyBlended: null,
@@ -84,6 +84,9 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     majorRepairDescription: null,
     completedBy: null,
     completedDate: new Date()
+  },
+  cpcpDispositionSection: {
+
   },
   history: []
 });

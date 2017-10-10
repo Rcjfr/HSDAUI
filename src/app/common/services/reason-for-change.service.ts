@@ -18,7 +18,8 @@ export class ReasonForChangeService {
       { id: 1, description: 'Incorrect per Corrosion Level Block Diagram' },
       { id: 2, description: 'Evidence of a previous blend has been determined' },
       { id: 3, description: 'New limits have been defined' },
-      { id: 4, description: 'Pre-blended measurements indicate Level - 1; elected to replace part for company convenience' }
+      { id: 4, description: 'Pre-blended measurements indicate Level - 1; elected to replace part for company convenience' },
+      { id: 5, description: 'Other' }
     ]);
   };
 

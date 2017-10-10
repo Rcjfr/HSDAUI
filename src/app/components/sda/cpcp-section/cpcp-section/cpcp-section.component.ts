@@ -37,15 +37,13 @@ export class CpcpSectionComponent extends BaseFormComponent implements OnInit, O
     this.corrosionTypes$ = this.appStateService.getCorrosionTypes();
     this.floorboardConditions$ = this.appStateService.getFloorboardConditions();
     this.parent.addControl(this.formGroupName, this.formGroup);
-    //this.cpcpSectionGroup.get('iscpcpRelatedEvent').valueChanges
-    //  .subscribe(val => this.setCorrosionPreventionFields(val));
-    //this.cpcpSectionGroup.get('corrosionType').valueChanges
-    //  .subscribe(val => this.setCorrosionTypeFields(val));
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.formGroup.patchValue(newSda.cpcpSection || {});
+      this.formGroup.patchValue({ corrosionType: newSda.cpcpSection.corrosionType || '' });
+      this.formGroup.patchValue({ floorBoardCondition: newSda.cpcpSection.floorBoardCondition || '' });
       this.checkSDAFormStatus();
     }
   }

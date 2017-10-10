@@ -1,6 +1,6 @@
 import {
   Component, OnInit, Input, ViewChildren, ElementRef,
-  AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges
+  AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges, ChangeDetectorRef
 } from '@angular/core';
 import {
   FormBuilder,
@@ -60,7 +60,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
-    public appStateService: AppStateService, public authService: AuthService, private dialogService: DialogService) {
+    public appStateService: AppStateService, public authService: AuthService,
+    private dialogService: DialogService,
+    private cd: ChangeDetectorRef) {
     this.sdaForm = this.fb.group({
       status: ['', [Validators.required]],
     });
@@ -162,12 +164,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.statusModal.hide();
   }
 
-  saveAlert(newStatus: number) {
+  saveAlert(newStatus: number, showModal: boolean = true, modalTitle: string = null) {
     //this.sda.status = newStatus;
     this.sdaForm.patchValue({ status: newStatus });
     this.appStateService.setNewSdaStatus(newStatus);
     setTimeout(() => { //TODO: need to revisit to see if there is any better way
-      this.validateAlertData(newStatus);
+      this.validateAlertData(newStatus, showModal, modalTitle);
     }, 100);
   }
 
@@ -200,25 +202,33 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
   }
 
-  validateAlertData(newStatus: Status) {
-    this.sdaForm.updateValueAndValidity();
-    this.markAsDirty(this.sdaForm);
-    this.genericValidator.formSubmitted = true;
-    const messages = this.genericValidator.processMessages(this.sdaForm);
-    this.logErrors(this.sdaForm);
-    this.displayMessage$.next(messages);
-    if (!this.sdaForm.valid) {
+  validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
+    if (newStatus !== Status.Deleted &&
+      (newStatus === Status.Open ||
+      newStatus === Status.Complete ||
+      (newStatus === Status.Audited && this.sda.status === Status.Audited) ||
+      (newStatus === Status.Closed && this.sda.status === Status.Closed)
+    )
+      ) {
+      this.sdaForm.updateValueAndValidity();
+      this.markAsDirty(this.sdaForm);
+      this.genericValidator.formSubmitted = true;
+      const messages = this.genericValidator.processMessages(this.sdaForm);
       this.logErrors(this.sdaForm);
-      this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+      this.displayMessage$.next(messages);
+      if (!this.sdaForm.valid) {
+        this.logErrors(this.sdaForm);
+        this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
-      return;
+        return;
+      }
     }
     this.statusUpdatedOn = new Date();
     this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA (SDA ID:${this.sda.id})`;
-        this.statusModal.show();
+        this.showModal();
       } else {
         // User can not change UpdatedBy/Date.so no need to show the modal
         this.sda.statusUpdatedBy = this.statusUpdatedBy;
@@ -232,12 +242,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
           title: 'Confirm?',
           message: `Are you sure you want to accept the SDA (${this.sda.id}) without reqesting SDR?`
         }).filter(confirm => confirm === true).subscribe(confirm => {
-          this.statusModal.show();
+          this.showModal();
         });
 
         return;
       } else {
-        this.statusModal.show();
+        this.showModal();
       }
     } else {
       if (newStatus === Status.Complete) {
@@ -245,12 +255,28 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = this.sda.id ? `Audit SDA (SDA ID:${this.sda.id})` : 'Complete SDA';
       } else if (newStatus === Status.Deleted) {
-        this.sdaStatusTitle = `Delete/Archive SDA (SDA ID:${this.sda.id})`;
+        this.sdaStatusTitle = `Delete SDA (SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Rejected) {
         this.sdaStatusTitle = `Reject SDA (SDA ID:${this.sda.id})`;
       }
-      this.statusModal.show();
+      if (showModal) {
+        if (modalTitle) {
+          this.sdaStatusTitle = modalTitle;
+        }
+        this.showModal();
+      } else {
+        if (modalTitle) {
+          this.sda.comments = modalTitle;
+        }
+        this.sda.statusUpdatedBy = this.statusUpdatedBy;
+        this.sda.statusUpdatedOn = this.statusUpdatedOn;
+        this.saveAlertData();
+      }
     }
+  }
+  showModal(): void {
+    this.cd.detectChanges();
+    this.statusModal.show();
   }
 
   get tomorrow(): Date {
@@ -283,6 +309,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (correctiveActionData.completedDate) {
       correctiveActionData.completedDate = moment(correctiveActionData.completedDate).format('YYYY-MM-DD');
     }
+    const cpcpDispositionData = this.flatten(formData.cpcpDispositionSectionFormGroup);
     const sdaDetail: ISda = Object.assign({}, this.sda,
       {
         lastModifiedBy: this.lastModifiedBy,
@@ -304,7 +331,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (this.sdaForm.value.correctiveActionFormGroup) {
       sdaDetail.correctiveActionSection = correctiveActionData;
     }
+    if (this.sdaForm.value.cpcpDispositionSectionFormGroup) {
 
+      sdaDetail.cpcpDispositionSection = cpcpDispositionData;
+    }
     this.appStateService.saveSda(sdaDetail);
   }
 
@@ -372,6 +402,27 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         if (isQCInspector && (this.sda.id && this.currentStatus === Status.Open)) {
           return true;
         }
+
+        return false;
       });
+  }
+
+  isCPCPDispositionSectionEditable(): Observable<boolean> {
+    return this.authService.isCPCPTrainedReviewingEngineer().map(ok => {
+      return (ok && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
+        (this.sda.cpcpSection.corrosionLevel === 2 ||
+          this.sda.cpcpSection.corrosionLevel === 3) &&
+        (this.currentStatus === Status.Audited ||
+          this.currentStatus === Status.Closed));
+    });
+
+  }
+
+  isCPCPDispositionSectionVisible(): Observable<boolean> {
+    return this.isCPCPDispositionSectionEditable().map(ok => {
+      return ok || (this.sda.cpcpDispositionSection != null &&
+        this.sda.cpcpDispositionSection.isNonCPCPRelatedEvent != null &&
+        this.sda.history.some(s => s.status === Status.Audited || s.status === Status.Closed));
+    });
   }
 }
