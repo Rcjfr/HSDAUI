@@ -11,8 +11,7 @@ import { ISavedSearch } from 'app/common/models/saved-search.model';
   templateUrl: './saved-searches.component.html',
   styleUrls: ['./saved-searches.component.less']
 })
-export class SavedSearchesComponent implements OnInit, OnChanges {
-  @Input() savedSearches: List<ISavedSearch>;
+export class SavedSearchesComponent implements OnInit {
   @Input() criteria: any;
   @Input() currentSearchId: number;
   @Input() badgeNumber: string;
@@ -20,12 +19,18 @@ export class SavedSearchesComponent implements OnInit, OnChanges {
 
   createForm: FormGroup;
   updateForm: FormGroup;
+  savedSearches: List<ISavedSearch>;
 
   constructor(private savedSearchStateService: SavedSearchStateService,
     private dialogService: DialogService,
     private authService: AuthService) { }
 
   ngOnInit() {
+    this.savedSearchStateService.getSavedSearches()
+      .do(s => this.savedSearches = s)
+      .do(s => this.selectSearch(s))
+      .subscribe();
+
     this.createForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       isDefault: new FormControl()
@@ -37,15 +42,9 @@ export class SavedSearchesComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.savedSearches && changes.savedSearches.currentValue) {
-      this.selectSearch(changes.savedSearches.currentValue);
-    }
-  }
-
   selectSearch(searches) {
     //Select the newly created search OR select the default search on load
-    if (searches && searches instanceof List) {
+    if (this.updateForm && searches && searches instanceof List) {
       let search;
       if (this.currentSearchId) {
         search = searches.find(s => s.searchId === this.currentSearchId);
@@ -56,8 +55,13 @@ export class SavedSearchesComponent implements OnInit, OnChanges {
       if (search) {
         this.updateForm.patchValue({ selected: +search.searchId, isDefault: search.isDefault });
         this.onSearchChange.emit(JSON.parse(search.criteria));
+
+        if (search.isDefault) {
+          this.savedSearchStateService.setCurrentSearchId(search.searchId);
+        }
       } else {
-        this.updateForm.patchValue({ selected: 0 });
+        this.updateForm.patchValue({ selected: 0, isDefault: false });
+        this.savedSearchStateService.setCurrentSearchId(0);
       }
     }
   }
