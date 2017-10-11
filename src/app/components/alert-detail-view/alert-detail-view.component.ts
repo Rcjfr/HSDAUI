@@ -206,6 +206,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (newStatus !== Status.Deleted &&
       (newStatus === Status.Open ||
       newStatus === Status.Complete ||
+      (newStatus === Status.Audited && this.sda.status === Status.Open) ||
       (newStatus === Status.Audited && this.sda.status === Status.Audited) ||
       (newStatus === Status.Closed && this.sda.status === Status.Closed)
     )
