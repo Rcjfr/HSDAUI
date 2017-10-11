@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <aac-field-container label="Widespread Corrosion:" for="isWideSpreadCorrosion">
         <select class="form-control" tabindex='23' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
-         // <option value="">Select Widespread Corrosion</option>
+          <option value="">Select Widespread Corrosion</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
@@ -11,7 +11,7 @@
     <div class="col-md-6">
       <aac-field-container label="Corrosion Previously Blended:" for="isPreviouslyBlended">
         <select class="form-control" tabindex='24' id="isPreviouslyBlended" formControlName="isPreviouslyBlended">
-         // <option value="">Select Corrosion Previously Blended</option>
+          <option value="">Select Corrosion Previously Blended</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
       </aac-field-container>
@@ -30,7 +30,10 @@
         <div class="col-sm-8">
           <div *ngFor="let level of corrosionLevels$ | async">
             <aac-checkbox-container class="checkbox-group" label="{{level.description}}">
-              <input type="checkbox" [value]="level.id" [checked]="corrosionLevelContains(level.id)" (change)="onCorrosionLevelChange(level.id, $event.target.checked)" />
+              <input type="checkbox"
+                     [value]="level.id"
+                     [checked]="corrosionLevelContains(level.id)"
+                     (change)="onCorrosionLevelChange(level.id, $event.target.checked)" />
             </aac-checkbox-container>
           </div>
         </div>

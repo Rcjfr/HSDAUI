@@ -50,7 +50,7 @@
         Search by CPCP Disposition
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
       </div>
-      <!-- <aa-search-by-cpcp-disposition></aa-search-by-cpcp-disposition> -->
+       <aa-search-by-cpcp-disposition [(criteria)]="criteria"></aa-search-by-cpcp-disposition> 
     </accordion-group>
     <accordion-group #defectGroup panelClass="panel-default search-panel">
       <div accordion-heading>

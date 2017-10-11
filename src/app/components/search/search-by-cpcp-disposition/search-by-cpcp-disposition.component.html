@@ -1,108 +1,112 @@
-﻿<div class="row  form-group">
-  <div class="col-md-3">
-    <aac-checkbox-container label="Non-CPCP">
-      <input type="checkbox" tabindex="28" />
-    </aac-checkbox-container>
-
-
-    
-  </div>
-  <div class="col-md-3">
-    <aac-checkbox-container label="Review Complete">
-      <input type="checkbox" tabindex="29" />
-    </aac-checkbox-container>
-
-    
-  </div>
-  <div class="col-md-3">
-    <aac-checkbox-container label="Local Corrosion">
-      <input type="checkbox" tabindex="30" />
-    </aac-checkbox-container>
-    
-  </div>
-  <div class="col-md-3">
-    <aac-checkbox-container label="Widespread Corrosion">
-      <input type="checkbox" tabindex="31" />
-    </aac-checkbox-container>
+<form [formGroup]="cpcpDispositionForm">
+  <div class="row form-group">
+    <div class="col-md-6">
+      <aac-field-container label="Non-CPCP:" for="isNonCPCPRelatedEvent">
+        <select class="form-control" tabindex='28' id="isNonCPCPRelatedEvent" formControlName="isNonCPCPRelatedEvent">
+          <option value="">Select Non-CPCP</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
-</div>
-<div class="row  form-group">
-  <div class="col-md-6">
-    <div class="row form-group">
-      <label class="col-sm-4 control-label">Is CPCP Task # correct?</label>
-      <div class="col-sm-8">
-        <aac-radio-container label="Yes">
-          <input type="radio" value="1" tabindex="32" name="isCpcpTaskNumCorrect"/>
-        </aac-radio-container>
-        <aac-radio-container label="No">
-          <input type="radio" value="0" tabindex="32" name="isCpcpTaskNumCorrect"/>
-        </aac-radio-container>
+    <div class="col-md-6">
+      <aac-field-container label="Review Complete:" for="isReviewComplete">
+        <select class="form-control" tabindex='29' id="isReviewComplete" formControlName="isReviewComplete">
+          <option value="">Select Review Complete</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row form-group ">
+    <div class="col-md-3">
+      <aac-checkbox-container label="Local Corrosion">
+        <input type="checkbox" tabindex="30" [value]="0" [checked]="cpcpDispositionContains(0)" (change)="onCpcpDispositionChange(0, $event.target.checked)" />
+      </aac-checkbox-container>
 
-        
+    </div>
+    <div class="col-md-3">
+      <aac-checkbox-container label="Widespread Corrosion">
+        <input type="checkbox" tabindex="31" [value]="1" [checked]="cpcpDispositionContains(1)" (change)="onCpcpDispositionChange(1, $event.target.checked)" />
+      </aac-checkbox-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Is CPCP Task # correct?" for="isCorrosionTaskNoCorrect">
+        <select class="form-control" tabindex='32' id="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect">
+          <option value="">Select CPCP Task # correct</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row form-group">
+
+    <div class="col-md-6">
+      <aac-field-container label="Is Corrosion Level correct?" for="isCorrosionLevelCorrect">
+        <select class="form-control" tabindex='33' id="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect">
+          <option value="">Select Corrosion Level correct</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Corrected Corrosion Level:</label>
+        <div class="col-sm-8">
+          <div *ngFor="let level of corrosionLevels$ | async">
+            <div class="col-md-4">
+              <aac-checkbox-container class="checkbox-group" label="{{level.description}}">
+                <input type="checkbox"
+                       [value]="level.id"
+                       colClass="col-sm-1"
+                       [checked]="correctedCorrosionLevelContains(level.id)"
+                       (change)="onCorrectedCorrosionLevelChange(level.id, $event.target.checked)" />
+              </aac-checkbox-container>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="row form-group">
-      <label class="col-sm-4 control-label">Is Corrosion Level correct?</label>
-      <div class="col-sm-8">
-        <aac-radio-container label="Yes">
-          <input type="radio" value="1" tabindex="33" name="isCorrosionLevelCorrect" />
-        </aac-radio-container>
-        <aac-radio-container label="No">
-          <input type="radio" value="0" tabindex="33" name="isCorrosionLevelCorrect" />
-        </aac-radio-container>
-
-        
-      </div>
+  <div class="row  form-group">
+    <div class="col-md-6">
+      <aac-field-container label="Correct Task #:">
+        <input type="text" tabindex='35' maxlength="30" class="form-control" formControlName="correctedCorrosionTaskNo">
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Reason For Change?:">
+        <select class="form-control" multiple tabindex='36' formControlName="corrosionLevelChangeReason">
+          <option value=""> </option>
+          <option *ngFor="let ac of reasonsForChange$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
   </div>
-</div>
-<div class="row  form-group">
-  <div class="col-md-6">
-    <div class="row form-group">
-      <label class="col-sm-4 control-label">Corrected Corrosion Level:</label>
-      <div class="col-sm-8">
-        <aac-checkbox-list [source]="corrosionLevels$ | async"
-                           labelField="description"
-                           valueField="id"
-                           colClass="col-sm-3"
-                           tabindex="34">
-        </aac-checkbox-list>
-      </div>
+  <div class="row form-group ">
+    <div class="col-md-6">
+      <aac-field-container label="Engineering Comments:">
+        <textarea type="text" tabindex='37' class="form-control" maxlength="250" formControlName="engineeringComments"></textarea>
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="QC Feedback:">
+        <textarea type="text" tabindex='38' class="form-control" maxlength="250" formControlName="qCFeedback"></textarea>
+      </aac-field-container>
     </div>
   </div>
-  <div class="col-md-6">
-    <aac-field-container label="Correct Task #:">
-      <input type="text" tabindex='35' class="form-control">
-    </aac-field-container>
+  <div class="row form-group ">
+    <div class="col-md-6">
+      <aac-field-container label="QC Notified:" for="submittedToQC">
+        <select class="form-control" tabindex='39' id="submittedToQC" formControlName="submittedToQC">
+          <option value="">Select QC Notified</option>
+          <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+    <div class="col-md-6">
+      <aac-field-container label="Review Completed By:">
+        <input type="text" tabindex='40' class="form-control" maxlength="50" formControlName="reviewer">
+      </aac-field-container>
+    </div>
   </div>
-</div>
-<aac-field-container label="Reason For Change?:">
-  <select class="form-control" multiple tabindex='36'>
-    <option *ngFor="let ac of reasonsForChange$ | async" [value]="ac.id">{{ac.description}}</option>
-  </select>
-</aac-field-container>
-<aac-field-container label="Engineering Comments:">
-  <input type="text" tabindex='37' class="form-control">
-</aac-field-container>
-<aac-field-container label="Engineer Signature:" fieldGridColumnWidth="4">
-  <input type="text" tabindex='38' class="form-control">
-</aac-field-container>
-
-<div class="row  form-group">
-  <div class="col-md-12">Custom Searches:</div>
-  <div class="col-md-3">
-    <aac-radio-container label="All Dispositions">
-      <input type="radio" value="1" tabindex="39" name="customSearch" />
-    </aac-radio-container>
-    <aac-radio-container label="Open Dispositions">
-      <input type="radio" value="2" tabindex="39" name="customSearch" />
-    </aac-radio-container>
-    <aac-radio-container label="Closed Dispositions">
-      <input type="radio" value="3" tabindex="39" name="customSearch" />
-    </aac-radio-container>
-
-    
-  </div>
-</div>
+</form>
