@@ -18,7 +18,7 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
   cpcpDispositionForm = new FormGroup({
     isNonCPCPRelatedEvent: new FormControl(''),
     isReviewComplete: new FormControl(''),
-    isWideSpreadCorrosion: new FormArray([]),
+    isWideSpreadCorrosion: new FormControl(''),
     isCorrosionTaskNoCorrect: new FormControl(''),
     isCorrosionLevelCorrect: new FormControl(''),
     correctedCorrosionLevel: new FormArray([]),
@@ -60,6 +60,7 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
         this.cpcpDispositionForm.reset({
           isNonCPCPRelatedEvent: '',
           isReviewComplete: '',
+          isWideSpreadCorrosion: '',
           isCorrosionTaskNoCorrect: '',
           isCorrosionLevelCorrect: '',
           submittedToQC: ''
@@ -71,22 +72,6 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
     }
   }
 
-  onCpcpDispositionChange(id: string, isChecked: boolean) {
-    const corrosionArray = <FormArray>this.cpcpDispositionForm.controls.isWideSpreadCorrosion;
-
-    if (isChecked) {
-      corrosionArray.push(new FormControl(id));
-    } else {
-      corrosionArray.removeAt(corrosionArray.controls.findIndex(x => x.value === id));
-    }
-  }
-  cpcpDispositionContains(id) {
-    if (_.includes(this.cpcpDispositionForm.controls.isWideSpreadCorrosion.value, id)) {
-      return true;
-    }
-
-    return false;
-  }
   onCorrectedCorrosionLevelChange(id: string, isChecked: boolean) {
     const corrosionArray = <FormArray>this.cpcpDispositionForm.controls.correctedCorrosionLevel;
 
