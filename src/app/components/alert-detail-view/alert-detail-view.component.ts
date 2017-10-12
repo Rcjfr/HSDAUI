@@ -201,26 +201,25 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.saveAlertData();
     });
   }
-
-  validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
-    if (newStatus !== Status.Deleted &&
-      (newStatus === Status.Open ||
-      newStatus === Status.Complete ||
-      (newStatus === Status.Audited && this.sda.status === Status.Open) ||
-      (newStatus === Status.Audited && this.sda.status === Status.Audited) ||
-      (newStatus === Status.Closed && this.sda.status === Status.Closed)
-    )
-      ) {
-      this.sdaForm.updateValueAndValidity();
-      this.markAsDirty(this.sdaForm);
-      this.genericValidator.formSubmitted = true;
-      const messages = this.genericValidator.processMessages(this.sdaForm);
+  validateSdaForm(): boolean {
+    this.sdaForm.updateValueAndValidity();
+    this.markAsDirty(this.sdaForm);
+    this.genericValidator.formSubmitted = true;
+    const messages = this.genericValidator.processMessages(this.sdaForm);
+    this.logErrors(this.sdaForm);
+    this.displayMessage$.next(messages);
+    if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
-      this.displayMessage$.next(messages);
-      if (!this.sdaForm.valid) {
-        this.logErrors(this.sdaForm);
-        this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+      this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
+      return false;
+    }
+
+    return true;
+  }
+  validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
+    if (newStatus === Status.Open || newStatus === Status.Complete) {
+      if (!this.validateSdaForm()) {
         return;
       }
     }
@@ -285,7 +284,16 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     return new Date(tomorrow.valueOf());
   }
-
+  saveCPCPDispositionSection() {
+    this.sdaForm.patchValue({ status: this.currentStatus });
+    this.sda.statusUpdatedBy = this.statusUpdatedBy;
+    this.sda.statusUpdatedOn = this.statusUpdatedOn;
+    this.sda.comments = 'Update CPCP Disposition Section Details';
+    if (!this.validateSdaForm()) {
+      return;
+    }
+    this.saveAlertData();
+  }
   saveAlertData() {
     const formData = this.sdaForm.getRawValue();
     const generalSectionData = this.flatten(formData.generalSectionFormGroup);

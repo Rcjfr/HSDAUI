@@ -336,6 +336,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'isCorrosionTaskNoCorrect': {
       required: 'Is CPCP Task # Correct, is required.'
     },
+    'isCorrosionLevelCorrect': {
+      required: 'Is Corrosion Level Correct, is required.'
+    },
     'correctedCorrosionTaskNo': {
       required: 'CPCP Task # is required.',
       maxlength: 'CPCP Task # must not be more than 25 characters.'

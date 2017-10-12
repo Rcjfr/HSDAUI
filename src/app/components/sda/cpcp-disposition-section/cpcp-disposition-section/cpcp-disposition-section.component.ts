@@ -23,9 +23,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup = this.fb.group({
       isNonCPCPRelatedEvent: [false, []],
       isWideSpreadCorrosion: [undefined, [Validators.required]],
-      isCorrosionLevelCorrect: [true, [Validators.required]],
+      isCorrosionLevelCorrect: [undefined, [Validators.required]],
       correctedCorrosionLevel: [undefined, [Validators.required]],
-      isCorrosionTaskNoCorrect: [true, [Validators.required]],
+      isCorrosionTaskNoCorrect: [undefined, [Validators.required]],
       correctedCorrosionTaskNo: [undefined, [Validators.required]],
       corrosionLevelChangeReason: [undefined, []],
       corrosionLevelChangeReasonOtherText: ['', [Validators.maxLength(250)]],
@@ -94,15 +94,17 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
   }
   resetToDefaults(): void {
     this.formGroup.patchValue({
-      isCorrosionTaskNoCorrect: true,
+      isCorrosionTaskNoCorrect: undefined,
       correctedCorrosionTaskNo: this.sda.cpcpSection.corrosionTaskNo,
-      isCorrosionLevelCorrect: true,
+      isCorrosionLevelCorrect: undefined,
       correctedCorrosionLevel: this.sda.cpcpSection.corrosionLevel,
       corrosionLevelChangeReason: null,
       engineeringComments: '',
       qcFeedback: '',
       corrosionLevelChangeReasonOtherText: '',
-      isWideSpreadCorrosion: undefined
+      isWideSpreadCorrosion: undefined,
+      submittedToQC: false,
+      reviewer: ''
     });
   }
   resetToEmpty(): void {
@@ -115,7 +117,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       engineeringComments: undefined,
       qcFeedback: undefined,
       corrosionLevelChangeReasonOtherText: undefined,
-      isWideSpreadCorrosion: undefined
+      isWideSpreadCorrosion: undefined,
+      submittedToQC: false,
+      reviewer: ''
     });
   }
   updateNonCpcp(noncpcp: boolean): void {
@@ -125,8 +129,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('isReviewComplete').enable();
       this.formGroup.get('isReviewComplete').reset(false);
       this.formGroup.get('reviewer').enable();
-      this.formGroup.get('reviewer').reset(this.displayName);
-      this.formGroup.get('reviewerBadgeNo').reset(this.badgeNo);
+      //this.formGroup.get('reviewer').reset(this.displayName);
+      //this.formGroup.get('reviewerBadgeNo').reset(this.badgeNo);
       this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
       this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
     } else {

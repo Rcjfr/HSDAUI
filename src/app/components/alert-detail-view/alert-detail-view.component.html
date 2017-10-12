@@ -86,7 +86,7 @@
         </ng-container>
         <ng-container *ngIf="authService.isCPCPTrainedReviewingEngineer() | async">
           <!--Compliance Engg/Liasion Engg Actions-->
-          <button type="submit" *ngIf="isCPCPDispositionSectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveAlert(currentStatus, false,'Update CPCP Disposition Section Details')" tabindex="114">Save CPCP Disposition Details</button>
+          <button type="submit" *ngIf="isCPCPDispositionSectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveCPCPDispositionSection()" tabindex="114">Save CPCP Disposition Details</button>
         </ng-container>
         <ng-container *ngIf="canArchiveSda() | async">
           <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Delete SDA</button>

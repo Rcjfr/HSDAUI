@@ -41,6 +41,7 @@
             <aac-radio-container label="No">
               <input type="radio" [value]="false" tabindex="102" name="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect" />
             </aac-radio-container>
+            <div *ngIf="displayMessage.isCorrosionLevelCorrect" class="error">{{displayMessage.isCorrosionLevelCorrect}}</div>
           </div>
         </div>
         <div class="row form-group" [class.has-error]="displayMessage.isWideSpreadCorrosion">
