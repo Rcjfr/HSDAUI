@@ -81,6 +81,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       if (!isNonCPCPRelatedEvent) {
         if (isReviewComplete) {
           this.disableSection();
+          this.formGroup.get('reviewer').disable();
         }
       } else {
         this.formGroup.get('isReviewComplete').disable();
@@ -173,8 +174,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     const isNonCPCPRelatedEvent = this.formGroup.get('isNonCPCPRelatedEvent').value;
     if (!isNonCPCPRelatedEvent) {
       if (reviewComplete) {
-        this.disableSection();
-        this.formGroup.get('reviewer').disable();
+        //this.disableSection();
+        //this.formGroup.get('reviewer').disable();
         this.formGroup.get('reviewer').reset(this.displayName);
         this.formGroup.get('reviewerBadgeNo').reset(this.badgeNo);
       } else {
@@ -185,6 +186,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
         this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
       }
+      this.setFeedBackBehavior();
     }
 
 
@@ -195,8 +197,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('correctedCorrosionTaskNo').enable();
     } else {
       this.formGroup.get('correctedCorrosionTaskNo').disable();
+      this.formGroup.get('correctedCorrosionTaskNo').reset(this.sda.cpcpSection.corrosionTaskNo);
     }
-    this.setFeedBackBehavior();
+
   }
 
   updateIsCorrosionLevelCorrectBehavior(correstionLevelCorrect: boolean): void {
@@ -207,30 +210,37 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('correctedCorrosionLevel').disable();
       this.formGroup.get('corrosionLevelChangeReason').disable();
     }
-    this.setFeedBackBehavior();
+
   }
 
   setFeedBackBehavior() {
 
     const isCorrossionLevel: boolean = this.formGroup.get('isCorrosionTaskNoCorrect').value;
     const cpcpTaskCorrect: boolean = this.formGroup.get('isCorrosionLevelCorrect').value;
+    if (this.isReviewComplete()) {
+      this.formGroup.get('isCorrosionTaskNoCorrect').setValidators([Validators.required]);
+      this.formGroup.get('isCorrosionLevelCorrect').setValidators([Validators.required]);
 
-    if (!cpcpTaskCorrect || !isCorrossionLevel) {
-      this.formGroup.get('engineeringComments').setValidators([Validators.required,
-      Validators.maxLength(250)]);
-      this.formGroup.get('qcFeedback').setValidators([Validators.required,
-      Validators.maxLength(250)]);
+      if (!cpcpTaskCorrect || !isCorrossionLevel) {
+        this.formGroup.get('engineeringComments').setValidators([Validators.required,
+        Validators.maxLength(250)]);
+        this.formGroup.get('qcFeedback').setValidators([Validators.required,
+        Validators.maxLength(250)]);
 
+      } else {
+        this.formGroup.get('engineeringComments').clearValidators();
+        this.formGroup.get('qcFeedback').clearValidators();
+
+      }
+
+      if (this.formGroup.get('correctedCorrosionLevel').value !== this.sda.cpcpSection.corrosionLevel) {
+        this.formGroup.get('corrosionLevelChangeReason').setValidators([Validators.required]);
+      } else {
+        this.formGroup.get('corrosionLevelChangeReason').clearValidators();
+      }
     } else {
-      this.formGroup.get('engineeringComments').clearValidators();
-      this.formGroup.get('qcFeedback').clearValidators();
-
-    }
-
-    if (this.formGroup.get('correctedCorrosionLevel').value !== this.sda.cpcpSection.corrosionLevel) {
-      this.formGroup.get('corrosionLevelChangeReason').setValidators([Validators.required]);
-    } else {
-      this.formGroup.get('corrosionLevelChangeReason').clearValidators();
+      this.formGroup.get('isCorrosionTaskNoCorrect').clearValidators();
+      this.formGroup.get('isCorrosionLevelCorrect').clearValidators();
     }
 
 
@@ -238,6 +248,18 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup.get('qcFeedback').updateValueAndValidity();
   }
 
+  isReviewComplete(): boolean {
+    return this.formGroup.get('isReviewComplete').value === true;
+  }
+  isNonCPCPRelatedEvent(): boolean {
+    return this.formGroup.get('isNonCPCPRelatedEvent').value === true;
+  }
+  isCorrosionLevelCorrect(): boolean {
+    return this.formGroup.get('isCorrosionLevelCorrect').value === false;
+  }
+  isCorrosionTaskNoCorrect(): boolean {
+    return this.formGroup.get('isCorrosionTaskNoCorrect').value === false;
+  }
 
 
 }

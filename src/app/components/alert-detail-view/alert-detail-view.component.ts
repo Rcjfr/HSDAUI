@@ -218,7 +218,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return true;
   }
   validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
-    if (newStatus === Status.Open || newStatus === Status.Complete) {
+    if (newStatus === Status.Open || newStatus === Status.Complete || newStatus === Status.Audited) {
       if (!this.validateSdaForm()) {
         return;
       }

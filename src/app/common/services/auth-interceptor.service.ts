@@ -37,11 +37,18 @@ export class AuthInterceptorService implements HttpInterceptor {
           // for some reason, the 302 is not being captured above.
           // so for now,just capturing status == 0
           // any suggestions?
-          if (err instanceof HttpErrorResponse && err.status === 0) {
-            this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
-            setTimeout(() => location.reload(true), 1000);
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 0) {
+              this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
+              setTimeout(() => location.reload(true), 1000);
 
-            return;
+              return;
+            }
+            if (err.status === 401) {
+              this.toastr.error('User is unauthorized to perform the requested operation.', 'Unauthorized');
+
+              return;
+            }
           }
 
           return Observable.throw(err);

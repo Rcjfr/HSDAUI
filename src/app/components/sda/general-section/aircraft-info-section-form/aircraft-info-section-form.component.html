@@ -5,7 +5,7 @@
   </ng-template>
   <aac-field-container required="true" label="Aircraft #:" [message]="displayMessage.aircraftNo">
     <div class="input-group">
-      <input type="text" autocomplete="off" class="form-control" required
+      <input type="text" autocomplete="off" tabindex='6' class="form-control" required
              [typeahead]="noseNumbers$"
              formControlName="aircraftNo"
              (typeaheadOnSelect)="noseNumberOnSelect($event.value)"

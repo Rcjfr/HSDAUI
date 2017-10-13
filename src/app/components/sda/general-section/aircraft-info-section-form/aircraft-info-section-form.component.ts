@@ -22,6 +22,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   @Input()
   set aircraftInfo(info: IAircraftInfo) {
     if (this.formGroup && info) {
+      this.formGroup.get('aircraftNo').setValue(info.noseNumber);
       this.formGroup.get('manufacturer').setValue(info.manufacturer);
       this.formGroup.get('model').setValue(info.model);
       this.formGroup.get('serialNo').setValue(info.serialNo);
@@ -90,6 +91,6 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     }
   }
   noseNumberOnSelect(noseNumber: string) {
-    this.onNoseNumberChange.emit(noseNumber);
+    this.onNoseNumberChange.emit(noseNumber.toUpperCase());
   }
 }
