@@ -24,11 +24,11 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     super('cpcpDispositionSectionFormGroup', authService);
     this.formGroup = this.fb.group({
       isNonCPCPRelatedEvent: [false, []],
-      isWideSpreadCorrosion: [undefined, [Validators.required]],
-      isCorrosionLevelCorrect: [undefined, [Validators.required]],
-      correctedCorrosionLevel: [undefined, [Validators.required]],
-      isCorrosionTaskNoCorrect: [undefined, [Validators.required]],
-      correctedCorrosionTaskNo: [undefined, [Validators.required]],
+      isWideSpreadCorrosion: [undefined, []],
+      isCorrosionLevelCorrect: [undefined, []],
+      correctedCorrosionLevel: [undefined, []],
+      isCorrosionTaskNoCorrect: [undefined, []],
+      correctedCorrosionTaskNo: [undefined, []],
       corrosionLevelChangeReason: [undefined, []],
       corrosionLevelChangeReasonOtherText: ['', [Validators.maxLength(250)]],
 
@@ -222,6 +222,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     if (this.isReviewComplete()) {
       this.formGroup.get('isCorrosionTaskNoCorrect').setValidators([Validators.required]);
       this.formGroup.get('isCorrosionLevelCorrect').setValidators([Validators.required]);
+      this.formGroup.get('isWideSpreadCorrosion').setValidators([Validators.required]);
 
       if (!cpcpTaskCorrect || !isCorrossionLevel) {
         this.formGroup.get('engineeringComments').setValidators([Validators.required,
@@ -243,6 +244,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     } else {
       this.formGroup.get('isCorrosionTaskNoCorrect').clearValidators();
       this.formGroup.get('isCorrosionLevelCorrect').clearValidators();
+      this.formGroup.get('isWideSpreadCorrosion').clearValidators();
     }
 
     this.formGroup.get('engineeringComments').updateValueAndValidity();

@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthService {
   public currentUser$: Observable<IUser>;
   readonly QC_Inspector = 'QC_Inspector';
+  readonly Designated_Quality_Control = 'Designated_Quality_Control';
   readonly QC_Supervisor = 'QC_Supervisor';
   readonly QC_Manager = 'QC_Manager';
   readonly Reliability_Analyst = 'Reliability_Analyst';
@@ -112,7 +113,7 @@ export class AuthService {
   }
 
   isQCPersonnel(): Observable<boolean> {
-    return this.hasAnyRole([this.QC_Inspector, this.QC_Manager, this.QC_Supervisor]);
+    return this.hasAnyRole([this.QC_Inspector, this.Designated_Quality_Control, this.QC_Manager, this.QC_Supervisor]);
   }
 
   isReliabilityAnalyst(): Observable<boolean> {
