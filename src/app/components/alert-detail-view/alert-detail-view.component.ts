@@ -42,6 +42,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
   statusUpdatedOn: Date = this.lastModifiedOn;
+  saveCPCPSectionDetails = false;
+
   public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
@@ -285,11 +287,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return new Date(tomorrow.valueOf());
   }
   saveCPCPDispositionSection() {
+    this.saveCPCPSectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = this.statusUpdatedBy;
     this.sda.statusUpdatedOn = this.statusUpdatedOn;
     this.sda.comments = 'Update CPCP Disposition Section Details';
     if (!this.validateSdaForm()) {
+      this.saveCPCPSectionDetails = false;
+
       return;
     }
     this.saveAlertData();
@@ -340,9 +345,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (this.sdaForm.value.correctiveActionFormGroup) {
       sdaDetail.correctiveActionSection = correctiveActionData;
     }
-    if (this.sdaForm.value.cpcpDispositionSectionFormGroup) {
-
+    if (this.sdaForm.value.cpcpDispositionSectionFormGroup &&
+      this.saveCPCPSectionDetails) {
       sdaDetail.cpcpDispositionSection = cpcpDispositionData;
+    } else {
+      sdaDetail.cpcpDispositionSection = null;
     }
     this.appStateService.saveSda(sdaDetail);
   }

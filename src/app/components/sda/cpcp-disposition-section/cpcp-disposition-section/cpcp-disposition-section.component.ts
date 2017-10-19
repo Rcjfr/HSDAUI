@@ -46,12 +46,14 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.reasons$ = this.appStateService.getReasonsForChange();
 
     this.parent.addControl(this.formGroupName, this.formGroup);
-    this.formGroup.get('isCorrosionTaskNoCorrect').valueChanges.subscribe(val => this.updatecpcpTaskBehavior(val));
-    this.formGroup.get('isCorrosionLevelCorrect').valueChanges.subscribe(val => this.updateIsCorrosionLevelCorrectBehavior(val));
-    this.formGroup.get('isNonCPCPRelatedEvent').valueChanges.subscribe(val => this.updateNonCpcp(val));
+    this.formGroup.get('isCorrosionTaskNoCorrect').valueChanges.filter(v => this.editable).subscribe(val => this.updatecpcpTaskBehavior(val));
+    this.formGroup.get('isCorrosionLevelCorrect').valueChanges.filter(v => this.editable).subscribe(val => this.updateIsCorrosionLevelCorrectBehavior(val));
+    this.formGroup.get('isNonCPCPRelatedEvent').valueChanges.filter(v => this.editable).subscribe(val => {
+      this.updateNonCpcp(val);
+    });
 
-    this.formGroup.get('isReviewComplete').valueChanges.subscribe(val => this.updateReviewComplete(val));
-    this.formGroup.get('qcFeedback').valueChanges.subscribe(val => {
+    this.formGroup.get('isReviewComplete').valueChanges.filter(v => this.editable).subscribe(val => this.updateReviewComplete(val));
+    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => {
       if (!val) {
         this.formGroup.get('submittedToQC').disable();
       } else {
@@ -69,9 +71,10 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
+
       const newSda: models.ISda = changes.sda.currentValue;
       if (newSda.cpcpDispositionSection && newSda.cpcpDispositionSection.isNonCPCPRelatedEvent != null) {
-        this.formGroup.patchValue(newSda.cpcpDispositionSection);
+        this.formGroup.patchValue(newSda.cpcpDispositionSection, { emitEvent: false });
       } else {
         this.resetToDefaults();
       }
@@ -80,20 +83,27 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       const isNonCPCPRelatedEvent = this.formGroup.get('isNonCPCPRelatedEvent').value;
       this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
       this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
+      if (this.editable === false) {
+        this.formGroup.disable({ emitEvent: false });
+
+        return;
+      }
+      this.formGroup.get('isNonCPCPRelatedEvent').enable({ emitEvent: false });
+      this.formGroup.get('isReviewComplete').enable({ emitEvent: false });
+
       if (!isNonCPCPRelatedEvent) {
+
         if (isReviewComplete) {
           this.disableSection();
           this.formGroup.get('reviewer').disable();
         }
+
       } else {
         this.formGroup.get('isReviewComplete').disable();
         this.formGroup.get('reviewer').disable();
       }
-      if (this.editable === false) {
-        this.formGroup.disable();
-      }
-
     }
+
   }
 
   resetToDefaults(): void {
@@ -135,8 +145,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('isReviewComplete').enable();
       this.formGroup.get('isReviewComplete').reset(false);
       this.formGroup.get('reviewer').enable();
-      //this.formGroup.get('reviewer').reset(this.displayName);
-      //this.formGroup.get('reviewerBadgeNo').reset(this.badgeNo);
       this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
       this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
     } else {
@@ -160,6 +168,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup.get('qcFeedback').enable();
     this.formGroup.get('engineeringComments').enable();
     this.formGroup.get('submittedToQC').enable();
+
   }
 
   disableSection(): void {
@@ -191,7 +200,6 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
         this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
       }
-      this.setFeedBackBehavior();
     }
   }
 
@@ -212,43 +220,11 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     } else {
       this.formGroup.get('correctedCorrosionLevel').disable();
       this.formGroup.get('corrosionLevelChangeReason').disable();
+      this.formGroup.get('correctedCorrosionLevel').reset(this.sda.cpcpSection.corrosionLevel);
+      this.formGroup.get('corrosionLevelChangeReason').reset();
+      this.formGroup.get('corrosionLevelChangeReasonOtherText').reset();
     }
 
-  }
-
-  setFeedBackBehavior() {
-    const isCorrossionLevel: boolean = this.formGroup.get('isCorrosionTaskNoCorrect').value;
-    const cpcpTaskCorrect: boolean = this.formGroup.get('isCorrosionLevelCorrect').value;
-    if (this.isReviewComplete()) {
-      this.formGroup.get('isCorrosionTaskNoCorrect').setValidators([Validators.required]);
-      this.formGroup.get('isCorrosionLevelCorrect').setValidators([Validators.required]);
-      this.formGroup.get('isWideSpreadCorrosion').setValidators([Validators.required]);
-
-      if (!cpcpTaskCorrect || !isCorrossionLevel) {
-        this.formGroup.get('engineeringComments').setValidators([Validators.required,
-        Validators.maxLength(250)]);
-        this.formGroup.get('qcFeedback').setValidators([Validators.required,
-        Validators.maxLength(250)]);
-
-      } else {
-        this.formGroup.get('engineeringComments').clearValidators();
-        this.formGroup.get('qcFeedback').clearValidators();
-
-      }
-
-      if (this.formGroup.get('correctedCorrosionLevel').value !== this.sda.cpcpSection.corrosionLevel) {
-        this.formGroup.get('corrosionLevelChangeReason').setValidators([Validators.required]);
-      } else {
-        this.formGroup.get('corrosionLevelChangeReason').clearValidators();
-      }
-    } else {
-      this.formGroup.get('isCorrosionTaskNoCorrect').clearValidators();
-      this.formGroup.get('isCorrosionLevelCorrect').clearValidators();
-      this.formGroup.get('isWideSpreadCorrosion').clearValidators();
-    }
-
-    this.formGroup.get('engineeringComments').updateValueAndValidity();
-    this.formGroup.get('qcFeedback').updateValueAndValidity();
   }
 
   isReviewComplete(): boolean {
@@ -260,10 +236,14 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
   }
 
   isCorrosionLevelCorrect(): boolean {
-    return this.formGroup.get('isCorrosionLevelCorrect').value === false;
+    return this.formGroup.get('isCorrosionLevelCorrect').value === true;
   }
 
   isCorrosionTaskNoCorrect(): boolean {
-    return this.formGroup.get('isCorrosionTaskNoCorrect').value === false;
+    return this.formGroup.get('isCorrosionTaskNoCorrect').value === true;
   }
+
+
 }
+
+

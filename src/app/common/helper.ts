@@ -12,7 +12,7 @@ export class Helper {
       return date;
     }
     if (typeof key === 'string' && ((key.indexOf('Date') > -1))) {
-      return new Date(value);
+      return new Date(moment.utc(value).valueOf());
     }
 
     return value;

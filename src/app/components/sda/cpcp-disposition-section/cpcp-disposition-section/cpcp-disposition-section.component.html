@@ -14,18 +14,18 @@
           <label class="col-sm-4 control-label">Is CPCP Task # correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="100" name="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect" />
+              <input type="radio" [value]="true" tabindex="100" [required]="isReviewComplete()" name="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="100" name="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect" />
+              <input type="radio" [value]="false" tabindex="100" [required]="isReviewComplete()" name="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isCorrosionTaskNoCorrect" class="error">{{displayMessage.isCorrosionTaskNoCorrect}}</div>
           </div>
         </div>
       </div>
       <div class="col-md-8">
-        <aac-field-container [required]="!isNonCPCPRelatedEvent() && isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
-          <input type="text" tabindex='101' class="form-control" formControlName="correctedCorrosionTaskNo">
+        <aac-field-container [required]="isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
+          <input type="text" tabindex='101' [required]="isReviewComplete() && !isCorrosionTaskNoCorrect()" class="form-control" formControlName="correctedCorrosionTaskNo">
         </aac-field-container>
       </div>
     </div>
@@ -36,10 +36,10 @@
           <label class="col-sm-4 control-label">Is Corrosion Level correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="102" name="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect" />
+              <input type="radio" [value]="true" tabindex="102" [required]="isReviewComplete()"  name="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="102" name="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect" />
+              <input type="radio" [value]="false" tabindex="102" [required]="isReviewComplete()" name="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isCorrosionLevelCorrect" class="error">{{displayMessage.isCorrosionLevelCorrect}}</div>
           </div>
@@ -49,10 +49,10 @@
           <div class="col-sm-8">
             
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="106" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
+              <input type="radio" [value]="true" tabindex="106" [required]="isReviewComplete()" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="106" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
+              <input type="radio" [value]="false" tabindex="106" [required]="isReviewComplete()" name="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isWideSpreadCorrosion" class="error">{{displayMessage.isWideSpreadCorrosion}}</div>
           </div>
@@ -66,7 +66,7 @@
           <div class="row form-group">
             <div class="col-sm-12">
               <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
-                <input type="radio" [value]="ac.id" tabindex="103" name="correctedCorrosionLevel" formControlName="correctedCorrosionLevel" />
+                <input type="radio" [value]="ac.id" tabindex="103" [required]="isReviewComplete()" name="correctedCorrosionLevel" formControlName="correctedCorrosionLevel" />
               </aac-radio-container>
 
             </div>
@@ -81,7 +81,7 @@
 
             <div class="col-sm-12">
               <aac-radio-container *ngFor="let ac of reasons$ | async" [label]="ac.description">
-                <input type="radio" [value]="ac.id" tabindex="104" name="corrosionLevelChangeReason" formControlName="corrosionLevelChangeReason" />
+                <input type="radio" [value]="ac.id" tabindex="104" [required]="isReviewComplete() && isCorrosionLevelCorrect() === false"  name="corrosionLevelChangeReason" formControlName="corrosionLevelChangeReason" />
               </aac-radio-container>
               <div *ngIf="displayMessage.corrosionLevelChangeReason" class="error">{{displayMessage.corrosionLevelChangeReason}}</div>
             </div>
