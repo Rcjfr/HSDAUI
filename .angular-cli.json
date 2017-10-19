@@ -40,6 +40,7 @@
         "dev": "environments/environment.ts",
         "dev_env": "environments/environment.dev_env.ts",
         "qa": "environments/environment.qa.ts",
+        "stage": "environments/environment.stage.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
