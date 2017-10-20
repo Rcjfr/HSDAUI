@@ -34,13 +34,16 @@
                                [newSdaStus]="newSdaStus$ | async"
                                [errorMessages]="displayMessage$ | async">
     </aa-corrective-action-form>
-    
-    <!--<div class="panel-heading">Repair Details</div>
-    <aa-repair-details-section [parent]="sdaForm"
-                               [errorMessages]="displayMessage$ | async">
-    </aa-repair-details-section>
 
-    <div class="panel-heading">Damage Tolerance Evaluation</div>
+  <div class="panel-heading" *ngIf="showRepairDetails()">Repair Details</div>
+      <aa-repair-details-section *ngIf="showRepairDetails()"
+            [parent]="sdaForm"
+            [sda]="sda"
+            [newSdaStus]="newSdaStus$ | async"
+            [errorMessages]="displayMessage$ | async">
+  </aa-repair-details-section>
+
+    <!--<div class="panel-heading">Damage Tolerance Evaluation</div>
     <aa-damage-tolerance-evaluation [parent]="sdaForm"
                                     [errorMessages]="displayMessage$ | async">
     </aa-damage-tolerance-evaluation>-->

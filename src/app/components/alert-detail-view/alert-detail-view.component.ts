@@ -441,4 +441,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.sda.history.some(s => s.status === Status.Audited || s.status === Status.Closed));
     });
   }
+
+  public showRepairDetails(): boolean {
+    return this.sda.correctiveActionSection
+          && this.sda.correctiveActionSection.isMajorRepair
+          && this.currentStatus === Status.Closed;
+  }
 }
