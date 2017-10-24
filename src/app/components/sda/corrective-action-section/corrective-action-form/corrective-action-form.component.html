@@ -11,12 +11,14 @@
       <div class="col-sm-6">
         <aac-field-container label="Enter SCEPTRE Deferral Code:"
                              helptext="(MON, SAD, ROB, etc)"
+                             [required]="isDeferred() && !isSDAOpen()"
                              [message]="displayMessage.deferralCode">
           <input type="text" tabindex='56' class="form-control" [required]="isDeferred() && !isSDAOpen()" formControlName="deferralCode">
         </aac-field-container>
       </div>
       <div class="col-sm-4">
         <aac-field-container label="Deferral #:"
+                             [required]="isDeferred() && !isSDAOpen()"
                              [message]="displayMessage.deferralNo">
           <input type="text" tabindex='57' class="form-control" [required]="isDeferred() && !isSDAOpen()" formControlName="deferralNo">
         </aac-field-container>

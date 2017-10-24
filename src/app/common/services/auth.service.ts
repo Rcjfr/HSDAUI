@@ -17,6 +17,9 @@ export class AuthService {
   readonly QC_Manager = 'QC_Manager';
   readonly Reliability_Analyst = 'Reliability_Analyst';
   readonly CPCP_Trained_Reviewing_Engineer = 'CPCP_Trained_Reviewing_Engineer';
+  readonly Compliance_Engineer = 'Compliance_Engineer';
+  readonly Compliance_Engineering_Analyst = 'Compliance_Engineering_Analyst';
+  readonly Compliance_Engineering_Manager = 'Compliance_Engineering_Manager';
 
   private endPointUrl = `${environment.hsdaApiBaseUrl}users?ts=${(new Date()).getTime()}`;
   // Using Http here so that the HttpClient Interceptor do not intercept this api call
@@ -122,5 +125,9 @@ export class AuthService {
 
   isCPCPTrainedReviewingEngineer(): Observable<boolean> {
     return this.hasRole(this.CPCP_Trained_Reviewing_Engineer);
+  }
+
+  isComplianceEngineer(): Observable<boolean> {
+    return this.hasAnyRole([this.Compliance_Engineer, this.Compliance_Engineering_Analyst, this.Compliance_Engineering_Manager]);
   }
 }

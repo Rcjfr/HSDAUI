@@ -1,5 +1,5 @@
-﻿export interface ICorrectiveActionSection {
-  id?: number;
+export interface ICorrectiveActionSection {
+  versionID?: number;
   isDeferred?: boolean;
   deferralCode?: string;
   deferralNo?: string;

@@ -43,7 +43,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   lastModifiedOn: Date = new Date();
   statusUpdatedOn: Date = this.lastModifiedOn;
   saveCPCPSectionDetails = false;
-
+  saveDTESectionDetails = false;
   public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
@@ -212,7 +212,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.displayMessage$.next(messages);
     if (!this.sdaForm.valid) {
       this.logErrors(this.sdaForm);
-      this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
       return false;
     }
@@ -222,6 +221,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
     if (newStatus === Status.Open || newStatus === Status.Complete || newStatus === Status.Audited) {
       if (!this.validateSdaForm()) {
+        this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+
         return;
       }
     }
@@ -292,12 +293,31 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.sda.statusUpdatedBy = this.statusUpdatedBy;
     this.sda.statusUpdatedOn = this.statusUpdatedOn;
     this.sda.comments = 'Update CPCP Disposition Section Details';
-    if (!this.validateSdaForm()) {
+    this.validateSdaForm();
+    if (!this.sdaForm.get('cpcpDispositionSectionFormGroup').valid) {
       this.saveCPCPSectionDetails = false;
+      this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
       return;
     }
     this.saveAlertData();
+    this.saveCPCPSectionDetails = false;
+  }
+  saveDTESection() {
+    this.saveDTESectionDetails = true;
+    this.sdaForm.patchValue({ status: this.currentStatus });
+    this.sda.statusUpdatedBy = this.statusUpdatedBy;
+    this.sda.statusUpdatedOn = this.statusUpdatedOn;
+    this.sda.comments = 'Update Damage Tolerance Evaluation Details';
+    this.validateSdaForm();
+    if (!this.sdaForm.get('damageToleranceEvaluationGroup').valid) {
+      this.saveDTESectionDetails = false;
+      this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+
+      return;
+    }
+    this.saveAlertData();
+    this.saveDTESectionDetails = false;
   }
   saveAlertData() {
     const formData = this.sdaForm.getRawValue();
@@ -351,6 +371,16 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     } else {
       sdaDetail.cpcpDispositionSection = null;
     }
+    const dteSectionData = formData.damageToleranceEvaluationGroup;
+    if (this.sdaForm.value.damageToleranceEvaluationGroup &&
+      this.saveDTESectionDetails) {
+      sdaDetail.dteSection = dteSectionData;
+      sdaDetail.dteSection.updatedBy = this.lastModifiedBy;
+      sdaDetail.dteSection.updatedDate = this.lastModifiedOn;
+    } else {
+      sdaDetail.dteSection = null;
+    }
+
     this.appStateService.saveSda(sdaDetail);
   }
 
@@ -442,9 +472,25 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
   }
 
+  isDTESectionEditable(): Observable<boolean> {
+    return this.authService.isComplianceEngineer().map(ok => {
+      return (ok && (this.sda.correctiveActionSection.isMajorRepair) &&
+        (this.sda.status === Status.Closed));
+    });
+
+  }
+
+  isDTESectionVisible(): Observable<boolean> {
+    return this.isDTESectionEditable().map(ok => {
+      const hasOldData = (this.sda.dteSection != null && this.sda.history.some(s => s.status === Status.Closed))
+
+      return ok || hasOldData;
+    });
+  }
+
   public showRepairDetails(): boolean {
     return this.sda.correctiveActionSection
-          && this.sda.correctiveActionSection.isMajorRepair
-          && this.currentStatus === Status.Closed;
+      && this.sda.correctiveActionSection.isMajorRepair
+      && this.currentStatus === Status.Closed;
   }
 }

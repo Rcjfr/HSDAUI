@@ -1,4 +1,4 @@
-﻿import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -59,6 +59,10 @@ import { DamageToleranceEvaluationComponent } from './damage-tolerance-evaluatio
 import { RepairDetailsSectionComponent } from './repair-details-section/repair-details-section/repair-details-section.component';
 //Current Status Section
 import { CurrentStatusSectionComponent } from './current-status-section/current-status-section/current-status-section.component';
+import { DteThresholdItemComponent } from './damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
+import { DteThresholdItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+import { DteMonitorItemComponent } from './damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { DteMonitorItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 
 
 
@@ -121,7 +125,11 @@ import { CurrentStatusSectionComponent } from './current-status-section/current-
     CurrentStatusSectionComponent,
     CpcpDispositionSectionComponent,
     CpcpTaskDescriptionComponent,
-    DamageToleranceEvaluationComponent
+    DamageToleranceEvaluationComponent,
+    DteThresholdItemComponent,
+    DteThresholdItemsArrayComponent,
+    DteMonitorItemComponent,
+    DteMonitorItemsArrayComponent
   ],
   providers: []
 })

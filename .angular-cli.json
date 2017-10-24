@@ -18,7 +18,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "aa",
       "styles": [
         "app/app.css",
         "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",

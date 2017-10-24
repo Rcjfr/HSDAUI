@@ -88,5 +88,6 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
   cpcpDispositionSection: {
 
   },
+  dteSection: {},
   history: []
 });

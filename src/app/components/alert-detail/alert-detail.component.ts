@@ -79,10 +79,10 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
       } else {
         this.currentSdaId = 0;
       }
-      this.alertDetailView.clearForm();
+      this.alertDetailView && this.alertDetailView.clearForm();
       this.appStateService.loadSda(this.currentSdaId);
     });
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView.clearForm());
+    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView && this.alertDetailView.clearForm());
   }
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());

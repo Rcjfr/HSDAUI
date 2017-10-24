@@ -1,6 +1,8 @@
-﻿<aac-loading *ngIf="loading$ | async"></aac-loading>
-<aa-alert-detail-view [sda]="sda$ | async" 
-                      [loading]="loading$ | async"
-                      (onReset)="resetSda()"
-                      >
-</aa-alert-detail-view>
+<aac-loading *ngIf="loading$ | async"></aac-loading>
+<ng-container *ngIf="sda$ | async;let sda; else loading">
+  <aa-alert-detail-view [sda]="sda"
+                        [loading]="loading$ | async"
+                        (onReset)="resetSda()">
+  </aa-alert-detail-view>
+  <ng-template #loading><aac-loading></aac-loading></ng-template>
+</ng-container>

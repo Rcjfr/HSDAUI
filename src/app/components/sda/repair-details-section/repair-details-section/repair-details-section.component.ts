@@ -29,11 +29,6 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('repairDetailsSectionGroup', authService);
-  }
-
-  ngOnInit() {
-    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.repairDetailsSectionGroup = this.fb.group({
       engineeringAuthorization: ['', []],
       routineTaskCard: ['', []],
@@ -48,6 +43,12 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
       width: ['', []],
       isExternallyVisible: ['', []]
     });
+  }
+
+  ngOnInit() {
+    this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
+    this.repairDocuments$ = this.appStateService.getRepairDocuments();
+
     this.repairDetailsSectionGroup.disable();
     this.parent.addControl(this.formGroupName, this.repairDetailsSectionGroup);
   }

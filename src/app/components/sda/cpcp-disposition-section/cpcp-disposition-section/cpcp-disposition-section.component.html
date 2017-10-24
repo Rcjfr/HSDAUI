@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col-md-8">
-        <aac-field-container [required]="isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
+        <aac-field-container [required]="!isNonCPCPRelatedEvent() && isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
           <input type="text" tabindex='101' [required]="isReviewComplete() && !isCorrosionTaskNoCorrect()" class="form-control" formControlName="correctedCorrosionTaskNo">
         </aac-field-container>
       </div>

@@ -4,6 +4,7 @@ import { ICPCPSection } from './cpcp-section.model';
 import { ICPCPDispositionSection } from './cpcp-disposition-section.model';
 import { ICorrectiveActionSection } from './corrective-action-section.model';
 import { ISdaStatus } from './sda-status.model';
+import { IDTESection } from './dte-section.model';
 
 export interface ISda {
   id?: number;
@@ -22,5 +23,6 @@ export interface ISda {
   cpcpSection?: ICPCPSection;
   correctiveActionSection?: ICorrectiveActionSection;
   cpcpDispositionSection?: ICPCPDispositionSection;
+  dteSection?: IDTESection;
   history?: ISdaStatus[];
 }

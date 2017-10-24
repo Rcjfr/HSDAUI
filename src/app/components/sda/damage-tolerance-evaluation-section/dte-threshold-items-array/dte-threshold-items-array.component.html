@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">DTE Thresholds
+  <span class="pull-right">
+    <a href="#" *ngIf="editable && itemsFormArray.controls.length<5" (click)="addThresholdItem()">Add Another Threshold Item</a>
+    <p class="text-danger" *ngIf="editable && itemsFormArray.controls.length==5">Maximum of 5 items are allowed.</p>
+
+  </span>
+  </div>
+  <div class="panel-body">
+    <aa-dte-threshold-item *ngFor="let item of itemsFormArray.controls; let i=index"
+                           [index]="i"
+                           [item]="item"
+                           [message]="errorMessages && errorMessages[i]"
+                           [editable]="editable" (removed)="deleteThresholdItem($event)">
+    </aa-dte-threshold-item>
+
+  </div>
+</div>
+
+

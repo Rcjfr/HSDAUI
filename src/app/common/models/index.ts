@@ -26,3 +26,7 @@ export * from './sda-status.model';
 export * from './status';
 export * from './search-data.model';
 export * from './yes-no-both-options.model';
+export * from './dte-attachment.model';
+export * from './dte-monitor-item.model';
+export * from './dte-threshold-item.model';
+export * from './dte-section.model';

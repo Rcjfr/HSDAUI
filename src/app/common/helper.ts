@@ -11,6 +11,11 @@ export class Helper {
 
       return date;
     }
+
+    if (typeof key === 'string' && ((key === 'dueDate'))) {
+      return value;
+    }
+
     if (typeof key === 'string' && ((key.indexOf('Date') > -1))) {
       return new Date(moment.utc(value).valueOf());
     }

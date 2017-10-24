@@ -408,42 +408,62 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     dteStatus: {
       required: 'DTE Status is required.'
     },
+    'totalShipTime': {
+      required: 'Total Ship Time is required.',
+      pattern: 'Total Ship Time must be numeric.',
+      maxlength: 'Total Ship Time must not be more than 20 numbers.'
+    },
+    'cycles': {
+      required: 'Cycles is required.',
+      pattern: 'Cycles must be numeric.',
+      maxlength: 'Cycles must not be more than 20 numbers.'
+    },
     repairInspectionStatus: {
       required: 'Repair Inspection Status is required.'
+    },
+    isFatigueCritical: {
+      required: 'Fatigue Critical is required.'
     },
     stage1RTSDate: {
       required: 'Stage 1/RTS Date is required.'
     },
-    srNo: {
+    srNumber: {
       maxlength: 'SR # must not be more than 25 characters.'
     },
-    rdasNo: {
+    rdasNumber: {
       maxlength: 'RDAS # must not be more than 25 characters.'
     },
-    etdNo: {
+    etdNumber: {
       maxlength: 'ETD # must not be more than 25 characters.'
     },
-    esmSubItemNo: {
+    esmSubItemNumber: {
       maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
     },
-    thresholds: {
+    thresholdItems: {
       inspectionThreshold: {
+        required: 'Inspection Threshold is required.',
         maxlength: 'Inspection Threshold must not be more than 50 characters.'
       },
       inspectionInterval: {
+        required: 'Inspection Interval is required.',
         maxlength: 'Inspection Interval must not be more than 50 characters.'
       },
       inspectionMethod: {
+        required: 'Inspection Method is required.',
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
     monitorItems: {
-      fmrLogPageMon: {
+      monitorItemDescription: {
+        required: 'FMR/Logpage/Mon is required.',
         maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
       }
     },
-    dteComments: {
+    comments: {
       maxlength: 'DTE Comments must not be more than 500 characters.'
+    },
+    qcFeedback: {
+      maxlength: 'QC Feedback must not be more than 250 characters.'
     },
     updatedBy: {
       required: 'Updated By is required.',
@@ -453,7 +473,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Updated Date is required.',
       maxlength: 'Updated Date must not be more than 20 characters.'
     },
-    dteDueDate: {
+    dueDate: {
       required: 'Updated Date is required.',
       maxlength: 'Updated Date must not be more than 20 characters.'
     },

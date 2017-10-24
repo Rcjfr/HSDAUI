@@ -1,5 +1,5 @@
 export interface ICPCPDispositionSection {
-  id?: number;
+  versionID?: number;
   isNonCPCPRelatedEvent?: boolean;
   isWideSpreadCorrosion?: boolean;
   isCorrosionLevelCorrect?: boolean;

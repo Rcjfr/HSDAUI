@@ -208,7 +208,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('correctedCorrosionTaskNo').enable();
     } else {
       this.formGroup.get('correctedCorrosionTaskNo').disable();
-      this.formGroup.get('correctedCorrosionTaskNo').reset(this.sda.cpcpSection.corrosionTaskNo);
+      this.formGroup.get('correctedCorrosionTaskNo').reset(this.isNonCPCPRelatedEvent() ? undefined : this.sda.cpcpSection.corrosionTaskNo);
     }
 
   }
@@ -220,7 +220,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     } else {
       this.formGroup.get('correctedCorrosionLevel').disable();
       this.formGroup.get('corrosionLevelChangeReason').disable();
-      this.formGroup.get('correctedCorrosionLevel').reset(this.sda.cpcpSection.corrosionLevel);
+      this.formGroup.get('correctedCorrosionLevel').reset(this.isNonCPCPRelatedEvent() ? undefined : this.sda.cpcpSection.corrosionLevel);
       this.formGroup.get('corrosionLevelChangeReason').reset();
       this.formGroup.get('corrosionLevelChangeReasonOtherText').reset();
     }

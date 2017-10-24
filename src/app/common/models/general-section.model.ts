@@ -1,5 +1,5 @@
 export interface IGeneralSection {
-  id?: number;
+  versionID?: number;
   sdrNumber?: string;
   station?: string;
   department?: number;

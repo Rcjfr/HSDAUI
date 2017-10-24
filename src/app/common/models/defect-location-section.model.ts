@@ -1,5 +1,5 @@
-﻿export interface IDefectLocationSection {
-  id?: number;
+export interface IDefectLocationSection {
+  versionID?: number;
   damageType?: number;
   damageDescription?: string;
   length?: number;

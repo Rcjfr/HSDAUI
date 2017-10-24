@@ -1,5 +1,5 @@
 export interface ICPCPSection {
-  id?: number;
+  versionID?: number;
   isCPCPRelatedEvent?: boolean;
   isWideSpreadCorrosion?: boolean;
   corrosionLevel?: number;

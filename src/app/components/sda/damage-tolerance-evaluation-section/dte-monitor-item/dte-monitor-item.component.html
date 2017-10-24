@@ -1,0 +1,13 @@
+<div class="row" [formGroup]="item">
+  <div class="col-md-1">
+    <h4>{{index+1}}.</h4>
+  </div>
+  <div class="col-md-10">
+    <aac-field-container label="FMR/Logpage/MON:" [message]="message">
+      <input class="form-control" formControlName="monitorItemDescription">
+    </aac-field-container>
+  </div>
+  <div class="col-md-1">
+    <a href="#" *ngIf="editable"  (click)="remove()">Delete</a>
+  </div>
+</div>
