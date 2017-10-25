@@ -67,7 +67,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     floorBoardCondition: null
   },
   correctiveActionSection: {
-    isDeferred: false,
+    isDeferred: null,
     deferralCode: null,
     deferralNo: null,
     repairType: null,
@@ -80,7 +80,7 @@ export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
     isExternallyVisible: null,
     repairHeight: null,
     repairWidth: null,
-    isMajorRepair: false,
+    isMajorRepair: null,
     majorRepairDescription: null,
     completedBy: null,
     completedDate: new Date()

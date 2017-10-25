@@ -224,6 +224,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     }
   },
   'correctiveActionFormGroup': {
+    'isDeferred': {
+      required: 'Deferred is required.'
+    },
     'deferralCode': {
       required: 'Deferral Code is required.',
       pattern: 'Deferral Code must contain only alphabet characters.',
@@ -233,6 +236,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Deferral #  is required.',
       pattern: 'Deferral # must be alphanumeric.',
       maxlength: 'Deferral # must not be more than 15 characters. '
+    },
+    'isMajorRepair': {
+      required: 'Major Repair is required.'
     },
     'majorRepairDescription': {
       required: 'Repair Description is required.',

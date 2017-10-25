@@ -2,11 +2,21 @@
 
   <div class="row form-group">
 
-    <div class="col-sm-2">
-      <aac-checkbox-container label="Deferred">
-        <input type="checkbox" tabindex="55" formControlName="isDeferred" />
-      </aac-checkbox-container>
+     <div class="col-sm-2">
+        <label class="control-label">Deferred<span class="req" *ngIf="!isSDAOpen()">*</span></label>
+      </div>
+
+    <div class="col-sm-8">
+      <aac-radio-container label="Yes">
+        <input type="radio" [value]="true" tabindex="55" name="isDeferred" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
+      </aac-radio-container>
+      <aac-radio-container label="No">
+        <input type="radio" [value]="false" tabindex="55" name="isDeferred" [required]="!isSDAOpen()" formControlName="isDeferred" />
+      </aac-radio-container>
+       <div *ngIf="displayMessage.isDeferred" class="error">{{displayMessage.isDeferred}}</div>
     </div>
+  </div>
+  <div class="row form-group">
     <div [hidden]="!isDeferred()">
       <div class="col-sm-6">
         <aac-field-container label="Enter SCEPTRE Deferral Code:"
@@ -31,24 +41,32 @@
     </div>
   </div>
   <div class="row form-group">
+      <div class="col-sm-2">
+        <label class="control-label">Major Repair<span class="req" *ngIf="!isSDAOpen()">*</span></label>
+      </div>
+      <div class="col-sm-8">
+        <aac-radio-container label="Yes">
+          <input type="radio" [value]="true" tabindex="70" name="isMajorRepair" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+        </aac-radio-container>
+        <aac-radio-container label="No">
+          <input type="radio" [value]="false" tabindex="70" name="isMajorRepair" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+        </aac-radio-container>
+        <div *ngIf="displayMessage.isMajorRepair" class="error">{{displayMessage.isMajorRepair}}</div>
+      </div>
+   </div>
+   <div class="row form-group">
+      <div class="col-sm-12" [hidden]="correctiveActionFormGroup.get('isMajorRepair').value != true">
 
-    <div class="col-sm-2">
-      <aac-checkbox-container label="Major Repair">
-        <input type="checkbox" tabindex="70" value="1" formControlName="isMajorRepair" />
-      </aac-checkbox-container>
-    </div>
-    <div class="col-sm-10" [hidden]="correctiveActionFormGroup.get('isMajorRepair').value != true">
-
-      <aac-field-container helptext="If major, repair document must be an SRM Reference or an Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
-                           label="Description:"
-                           labelGridColumnWidth="2"
-                           [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()"
-                           [message]="displayMessage.majorRepairDescription">
-        <textarea tabindex='71' class="form-control"
-                  [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()" formControlName="majorRepairDescription"></textarea>
-      </aac-field-container>
-    </div>
-  </div>
+        <aac-field-container helptext="If major, repair document must be an SRM Reference or an Engineering Document (EO, EA,etc.) classified as Major.Contact Engineering for assistance if necessary."
+                             label="Description:"
+                             labelGridColumnWidth="2"
+                             [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()"
+                             [message]="displayMessage.majorRepairDescription">
+          <textarea tabindex='71' class="form-control"
+                    [required]="correctiveActionFormGroup.get('isMajorRepair').value === true && !isSDAOpen()" formControlName="majorRepairDescription"></textarea>
+        </aac-field-container>
+      </div>
+   </div>
   <!--<div class="row form-group">
     <div class="col-md-6">
       <aac-field-container label="Completed By:"
