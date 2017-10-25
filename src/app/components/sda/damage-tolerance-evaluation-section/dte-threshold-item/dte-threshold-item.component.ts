@@ -13,15 +13,15 @@ export class DteThresholdItemComponent implements OnInit {
 
   @Input() public message: any;
 
-  @Input() public item: FormGroup;
+  @Input() public item = new FormGroup({});
 
-  @Output() public removed: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public removed = new EventEmitter<number>();
 
   static initThreshold(val: IDTEThresholdItem): FormGroup {
     return new FormGroup({
-      inspectionThreshold: new FormControl(val.inspectionThreshold, [Validators.required, Validators.maxLength(50)]),
-      inspectionInterval: new FormControl(val.inspectionInterval, [Validators.required, Validators.maxLength(50)]),
-      inspectionMethod: new FormControl(val.inspectionMethod, [Validators.required, Validators.maxLength(50)])
+      inspectionThreshold: new FormControl(val.inspectionThreshold, [Validators.maxLength(50)]),
+      inspectionInterval: new FormControl(val.inspectionInterval, [Validators.maxLength(50)]),
+      inspectionMethod: new FormControl(val.inspectionMethod, [Validators.maxLength(50)])
     });
   }
 

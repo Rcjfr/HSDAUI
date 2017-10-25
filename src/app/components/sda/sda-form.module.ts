@@ -50,19 +50,19 @@ import { DefectivePartDescriptionComponent } from './corrective-action-section/d
 
 // CPCP Disposition Section
 import { CpcpDispositionSectionComponent } from './cpcp-disposition-section/cpcp-disposition-section/cpcp-disposition-section.component';
-import { CpcpTaskDescriptionComponent } from './cpcp-disposition-section/cpcp-task-description/cpcp-task-description.component';
+
 
 // Damage Tolerance Evaluation Section
 import { DamageToleranceEvaluationComponent } from './damage-tolerance-evaluation-section/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
+import { DteThresholdItemComponent } from './damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
+import { DteThresholdItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+import { DteMonitorItemComponent } from './damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { DteMonitorItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 
 //Repair Details Section
 import { RepairDetailsSectionComponent } from './repair-details-section/repair-details-section/repair-details-section.component';
 //Current Status Section
 import { CurrentStatusSectionComponent } from './current-status-section/current-status-section/current-status-section.component';
-import { DteThresholdItemComponent } from './damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
-import { DteThresholdItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
-import { DteMonitorItemComponent } from './damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
-import { DteMonitorItemsArrayComponent } from './damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 
 
 
@@ -99,9 +99,7 @@ import { DteMonitorItemsArrayComponent } from './damage-tolerance-evaluation-sec
     RepairDetailsSectionComponent,
     CurrentStatusSectionComponent,
     CpcpDispositionSectionComponent,
-    CpcpTaskDescriptionComponent,
-    DamageToleranceEvaluationComponent,
-
+    DamageToleranceEvaluationComponent
   ],
   declarations: [
     GeneralSectionFormComponent,
@@ -124,7 +122,6 @@ import { DteMonitorItemsArrayComponent } from './damage-tolerance-evaluation-sec
     RepairDetailsSectionComponent,
     CurrentStatusSectionComponent,
     CpcpDispositionSectionComponent,
-    CpcpTaskDescriptionComponent,
     DamageToleranceEvaluationComponent,
     DteThresholdItemComponent,
     DteThresholdItemsArrayComponent,

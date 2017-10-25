@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '../../base-form.component';
 import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
@@ -15,7 +15,7 @@ import { decimalsNumberMask } from '../../../../common/masks';
   templateUrl: './repair-details-section.component.html',
   styleUrls: ['./repair-details-section.component.less']
 })
-export class RepairDetailsSectionComponent extends BaseFormComponent implements OnInit, AfterViewInit {
+export class RepairDetailsSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   repairDescriptions$: Observable<List<models.IRepairDescription>>;
   repairDocuments$: Observable<List<models.IRepairDocument>>;
   createNumberMask = createNumberMask;
@@ -53,22 +53,24 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
     this.parent.addControl(this.formGroupName, this.repairDetailsSectionGroup);
   }
 
-  ngAfterViewInit() {
-    this.repairDetailsSectionGroup.patchValue(
-      {
-        engineeringAuthorization: this.sda.correctiveActionSection.engineeringAuthorization,
-        routineTaskCard: this.sda.generalSection.routineNo,
-        nonRoutine: this.sda.generalSection.nonRoutineNo,
-        repairDocumentType: this.sda.correctiveActionSection.repairDocumentType,
-        chapFigRepairText: this.sda.correctiveActionSection.chapFigRepairText,
-        repairDescriptionType: this.sda.correctiveActionSection.repairDescriptionType,
-        partNomenclature: this.sda.defectLocationSection.partDefective,
-        partNumber: this.sda.defectLocationSection.manufacturerPartNo,
-        partSerialNumber: this.sda.defectLocationSection.manufacturerSerialNo,
-        height: this.sda.correctiveActionSection.repairHeight,
-        width: this.sda.correctiveActionSection.repairWidth,
-        isExternallyVisible: this.sda.correctiveActionSection.isExternallyVisible
-      },
-      { emitEvent: false });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.sda) {
+      this.repairDetailsSectionGroup.patchValue(
+        {
+          engineeringAuthorization: this.sda.correctiveActionSection.engineeringAuthorization,
+          routineTaskCard: this.sda.generalSection.routineNo,
+          nonRoutine: this.sda.generalSection.nonRoutineNo,
+          repairDocumentType: this.sda.correctiveActionSection.repairDocumentType,
+          chapFigRepairText: this.sda.correctiveActionSection.chapFigRepairText,
+          repairDescriptionType: this.sda.correctiveActionSection.repairDescriptionType,
+          partNomenclature: this.sda.defectLocationSection.partDefective,
+          partNumber: this.sda.defectLocationSection.manufacturerPartNo,
+          partSerialNumber: this.sda.defectLocationSection.manufacturerSerialNo,
+          height: this.sda.correctiveActionSection.repairHeight,
+          width: this.sda.correctiveActionSection.repairWidth,
+          isExternallyVisible: this.sda.correctiveActionSection.isExternallyVisible
+        },
+        { emitEvent: false });
+    }
   }
 }

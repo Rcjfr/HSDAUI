@@ -26,6 +26,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 import { CustomValidators } from '../../common/validators/custom-validators';
 import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+
+
 @Component({
   selector: 'aa-alert-detail-view',
   templateUrl: './alert-detail-view.component.html',
@@ -47,6 +49,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   public Status = Status; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
+
   @ViewChild('statusModal') public statusModal: ModalDirective;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
@@ -203,6 +206,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.saveAlertData();
     });
   }
+
   validateSdaForm(): boolean {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
@@ -218,6 +222,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     return true;
   }
+
   validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
     if (newStatus === Status.Open || newStatus === Status.Complete || newStatus === Status.Audited) {
       if (!this.validateSdaForm()) {
@@ -277,6 +282,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
   }
+
   showModal(): void {
     this.cd.detectChanges();
     this.statusModal.show();
@@ -287,7 +293,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     return new Date(tomorrow.valueOf());
   }
+
   saveCPCPDispositionSection() {
+    this.saveDTESectionDetails = false;
     this.saveCPCPSectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = this.statusUpdatedBy;
@@ -303,7 +311,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveAlertData();
     this.saveCPCPSectionDetails = false;
   }
+
   saveDTESection() {
+    this.saveCPCPSectionDetails = false;
     this.saveDTESectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = this.statusUpdatedBy;
@@ -319,6 +329,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveAlertData();
     this.saveDTESectionDetails = false;
   }
+
   saveAlertData() {
     const formData = this.sdaForm.getRawValue();
     const generalSectionData = this.flatten(formData.generalSectionFormGroup);
@@ -365,20 +376,18 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (this.sdaForm.value.correctiveActionFormGroup) {
       sdaDetail.correctiveActionSection = correctiveActionData;
     }
-    if (this.sdaForm.value.cpcpDispositionSectionFormGroup &&
-      this.saveCPCPSectionDetails) {
+    sdaDetail.cpcpDispositionSection = null;
+    if (this.saveCPCPSectionDetails) {
       sdaDetail.cpcpDispositionSection = cpcpDispositionData;
-    } else {
-      sdaDetail.cpcpDispositionSection = null;
     }
-    const dteSectionData = formData.damageToleranceEvaluationGroup;
-    if (this.sdaForm.value.damageToleranceEvaluationGroup &&
-      this.saveDTESectionDetails) {
-      sdaDetail.dteSection = dteSectionData;
+
+    sdaDetail.dteSection = null;
+    if (this.saveDTESectionDetails) {
+      sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
+      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.inspectionInterval && t.inspectionMethod && t.inspectionThreshold);
+      sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
       sdaDetail.dteSection.updatedBy = this.lastModifiedBy;
       sdaDetail.dteSection.updatedDate = this.lastModifiedOn;
-    } else {
-      sdaDetail.dteSection = null;
     }
 
     this.appStateService.saveSda(sdaDetail);

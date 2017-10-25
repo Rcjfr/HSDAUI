@@ -17,7 +17,6 @@ import { AppStateService, AuthService } from '../../../../common/services';
 import { DteMonitorItemsArrayComponent } from '../dte-monitor-items-array/dte-monitor-items-array.component';
 import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dte-threshold-items-array.component';
 
-
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
   templateUrl: './damage-tolerance-evaluation.component.html',
@@ -51,7 +50,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       dteStatus: ['', [Validators.required]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(20)]],
       cycles: ['', [Validators.required, Validators.maxLength(20)]],
-      repairInspectionStatus: ['', [Validators.required]],
+      repairInspectionStatus: ['', []],
       isFatigueCritical: [undefined, [Validators.required]],
       stage1RTSDate: [null, [Validators.required]],
       stage1Duration: [6, [Validators.required]],
@@ -83,7 +82,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.patchValue({ updatedBy: this.displayName });
       }
     });
-
+    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => {
+      if (!val) {
+        this.formGroup.get('submittedToQC').disable();
+      } else {
+        this.formGroup.get('submittedToQC').enable();
+      }
+    });
     this.parent.addControl(this.formGroupName, this.formGroup);
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
@@ -130,14 +135,19 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
       } else {
+        this.formGroup.reset();
         this.formGroup.patchValue({
+          dteStatus: '',
+          repairInspectionStatus: '',
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
           updatedBy: this.displayName
         });
 
       }
-
+    }
+    if (!this.editable) {
+      this.formGroup.disable({ emitEvent: false });
     }
   }
 }

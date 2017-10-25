@@ -11,7 +11,7 @@
     <aa-dte-monitor-item *ngFor="let item of itemsFormArray.controls; let i=index"
                          [index]="i"
                          [item]="item"
-                         [message]="errorMessages && errorMessages[i] && errorMessages[i]?.fmrLogPageMon"
+                         [message]="errorMessages && errorMessages[i] && errorMessages[i]?.monitorItemDescription"
                          [editable]="editable" (removed)="deleteMonitorItem($event)">
     </aa-dte-monitor-item>
 

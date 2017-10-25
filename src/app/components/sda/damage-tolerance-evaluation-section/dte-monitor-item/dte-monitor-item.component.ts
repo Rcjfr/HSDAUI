@@ -15,20 +15,19 @@ export class DteMonitorItemComponent implements OnInit {
 
   @Input() public message: string;
 
-  @Input() public item: FormGroup;
+  @Input() public item = new FormGroup({});
 
-  @Output() public removed: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public removed = new EventEmitter<number>();
 
   static initMonitorItem(val: IDTEMonitorItem): FormGroup {
     return new FormGroup({
-      monitorItemDescription: new FormControl(val.monitorItemDescription, [Validators.required, Validators.maxLength(25)])
+      monitorItemDescription: new FormControl(val.monitorItemDescription, [Validators.maxLength(25)])
     });
   }
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   remove() {
     this.removed.emit(this.index);

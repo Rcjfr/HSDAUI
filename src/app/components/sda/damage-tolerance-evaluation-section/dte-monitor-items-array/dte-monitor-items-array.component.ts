@@ -16,13 +16,14 @@ export class DteMonitorItemsArrayComponent implements OnInit {
 
   @Input() errorMessages: any = {};
 
-  @Input() public itemsFormArray: FormArray;
+  @Input() public itemsFormArray = new FormArray([]);
 
   static buildItems(items: IDTEMonitorItem[]) {
     const fa = new FormArray(items.map(item => DteMonitorItemComponent.initMonitorItem(item)), ArrayValidators.maxLength(5));
 
     return fa;
   }
+
   constructor(private dialogService: DialogService) { }
 
   ngOnInit() {

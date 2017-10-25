@@ -24,9 +24,9 @@
     </div>
   </div>
 
-  
 
-  
+
+
 
 
   <div class="row">
@@ -57,7 +57,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container [required]="true" label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
-        <datetime [timepicker]="false" #stage1RTSDate [tabindex]='3' formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate [tabindex]='3' formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
 
     </div>
@@ -86,13 +86,13 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <aac-field-container label="Stage 2 Date:" [attr.for]="stage2Date.idDatePicker">
-        <datetime [timepicker]="false" #stage2Date [tabindex]='3' formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      <aac-field-container label="Stage 2 Approval Date:" [attr.for]="stage2Date.idDatePicker">
+        <datetime [timepicker]="false" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date [tabindex]='3' formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-md-6">
-      <aac-field-container label="Stage 3 Date:" [attr.for]="stage3Date.idDatePicker">
-        <datetime [timepicker]="false" #stage3Date [tabindex]='3' formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      <aac-field-container label="Stage 3 Approval Date:" [attr.for]="stage3Date.idDatePicker">
+        <datetime [timepicker]="false" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date [tabindex]='3' formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>
@@ -120,50 +120,22 @@
       </aac-field-container>
     </div>
   </div>
-  <aa-dte-threshold-items-array formArrayName="thresholdItems"
-                              [editable]="editable"
-                              [errorMessages]="displayMessage?.thresholdItems"
-                              [itemsFormArray]="formGroup.get('thresholdItems')">
-  </aa-dte-threshold-items-array>
-  <!--<div class="row well" [formGroup]="threshold" *ngFor="let threshold of formGroup.get('thresholds').controls;let i=index;">
-    <div class="col-md-4">
-      <aac-field-container label="Inspection Threshold:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionThreshold">
-        <input class="form-control" formControlName="inspectionThreshold">
-      </aac-field-container>
-    </div>
-    <div class="col-md-4">
-      <aac-field-container label="Inspection Interval:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionInterval">
-        <input class="form-control" formControlName="inspectionInterval">
-      </aac-field-container>
-    </div>
-    <div class="col-md-3">
-      <aac-field-container label="Inspection Method:" [message]="displayMessage.thresholds && displayMessage.thresholds[i] && displayMessage.thresholds[i].inspectionMethod">
-        <input class="form-control" formControlName="inspectionMethod">
-      </aac-field-container>
-    </div>
-    <div class="col-md-1">
-      <a href="#" (click)="deleteThreshold(i)">Delete</a>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel-group">
+        <aa-dte-threshold-items-array formArrayName="thresholdItems"
+                                      [editable]="editable"
+                                      [errorMessages]="displayMessage?.thresholdItems"
+                                      [itemsFormArray]="formGroup.get('thresholdItems')">
+        </aa-dte-threshold-items-array>
+        <aa-dte-monitor-items-array formArrayName="monitorItems"
+                                    [editable]="editable"
+                                    [errorMessages]="displayMessage?.monitorItems"
+                                    [itemsFormArray]="formGroup.get('monitorItems')">
+        </aa-dte-monitor-items-array>
+      </div>
     </div>
   </div>
-  <a href="#" (click)="addThreshold()">Add Another Threshold</a>-->
-
-  <aa-dte-monitor-items-array formArrayName="monitorItems"
-                              [editable]="editable"
-                              [errorMessages]="displayMessage?.monitorItems"
-               [itemsFormArray]="formGroup.get('monitorItems')">
-  </aa-dte-monitor-items-array>
-
-  <!--<div class="row well" [formGroup]="monitorItem" *ngFor="let monitorItem of formGroup.get('monitorItems').controls;let k=index">
-    <div class="col-md-6">
-      <aac-field-container label="FMR/Logpage/MON:" [message]="displayMessage.monitorItems && displayMessage.monitorItems[k] && displayMessage.monitorItems[k].fmrLogPageMon">
-        <input class="form-control" formControlName="fmrLogPageMon">
-      </aac-field-container>
-    </div>
-    <div class="col-md-6">
-      <a href="#" (click)="deleteMonitorItem(k)">Delete</a>
-    </div>
-  </div>
-  <a href="#" (click)="addMonitorItem()">Add Another Monitor Item</a>-->
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="DTE Comments:" [message]="displayMessage.comments">
