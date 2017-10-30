@@ -1,9 +1,10 @@
-﻿import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../app-state.service';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '../../models';
 import { AircraftInfoRecord, aircraftInfoFactory } from '../../reducers/models/aircraft-info';
 import { SdaRecord, sdaFactory } from '../../reducers/models/sda';
+import { UserRecordFactory, IUserRecord } from '../../reducers/models/user';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -89,5 +90,21 @@ export class MockAppStateService extends AppStateService {
 
   getDamageTypes() {
     return Observable.of(<List<models.IDamageType>>List.of());
+  }
+  getUser() {
+    return Observable.of(UserRecordFactory({
+      access_token: 'access_token',
+      roles: [],
+      sm_user: '00123456',
+      sm_user_email: 'testuser@aa.com',
+      sm_user_firstname: 'FirstName',
+      sm_user_lastname: 'LastName'
+    }))
+  }
+  getDTEStatus() {
+    return Observable.of(<List<models.IBaseLookUp>>List.of());
+  }
+  getRepairInspectionStatus() {
+    return Observable.of(<List<models.IBaseLookUp>>List.of());
   }
 }

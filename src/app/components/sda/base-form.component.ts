@@ -29,7 +29,6 @@ export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewI
   ngOnDestroy() {
     this.parent.removeControl(this.formGroupName);
     this.subscriptions.forEach(s => {
-      //console.log(s);
       s && s.unsubscribe();
     });
   }

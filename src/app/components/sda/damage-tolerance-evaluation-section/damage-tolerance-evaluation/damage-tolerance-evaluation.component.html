@@ -50,6 +50,7 @@
           <aac-radio-container label="No">
             <input type="radio" [value]="false" tabindex="36" name="isFatigueCritical" formControlName="isFatigueCritical" />
           </aac-radio-container>
+          <div *ngIf="displayMessage.isFatigueCritical" class="error">{{displayMessage.isFatigueCritical}}</div>
         </div>
       </div>
     </div>
@@ -83,6 +84,7 @@
         <input type="radio" [value]="24" tabindex="36" name="stage1Duration" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
+    <div *ngIf="displayMessage.stage1Duration" class="error">{{displayMessage.stage1Duration}}</div>
   </div>
   <div class="row">
     <div class="col-md-6">

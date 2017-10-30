@@ -17,7 +17,7 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
   @Input() errorMessages: any = {};
 
-  @Input() public itemsFormArray: FormArray;
+  @Input() public itemsFormArray = new FormArray([]);
 
   static buildItems(items: IDTEThresholdItem[]) {
     const fa = new FormArray(items.map(item => DteThresholdItemComponent.initThreshold(item)),

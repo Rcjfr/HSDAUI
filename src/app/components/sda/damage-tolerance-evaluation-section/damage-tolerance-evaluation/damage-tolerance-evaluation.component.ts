@@ -27,7 +27,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   dteStatus$: Observable<List<models.IBaseLookUp>>;
   repairInspectionStatus$: Observable<List<models.IBaseLookUp>>;
-  public uploader: FileUploader = new FileUploader({ url: '/api/attachments' });
+  public uploader = new FileUploader({ url: '/api/attachments' });
   displayName: string;
   createNumberMask = createNumberMask;
   public decimalNumberMask = createNumberMask({
@@ -50,12 +50,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       dteStatus: ['', [Validators.required]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(20)]],
       cycles: ['', [Validators.required, Validators.maxLength(20)]],
-      repairInspectionStatus: ['', []],
+      repairInspectionStatus: ['', [Validators.required]],
       isFatigueCritical: [undefined, [Validators.required]],
-      stage1RTSDate: [null, [Validators.required]],
+      stage1RTSDate: [undefined, [Validators.required]],
       stage1Duration: [6, [Validators.required]],
-      stage2Date: ['', []],
-      stage3Date: ['', []],
+      stage2Date: [undefined, []],
+      stage3Date: [undefined, []],
       srNumber: ['', [Validators.maxLength(25)]],
       rdasNumber: ['', [Validators.maxLength(25)]],
       etdNumber: ['', [Validators.maxLength(25)]],
@@ -78,9 +78,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
     this.authService.auditDisplayName().take(1).subscribe(u => {
       this.displayName = u;
-      if (this.sda.dteSection == null) {
-        this.formGroup.patchValue({ updatedBy: this.displayName });
-      }
     });
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => {
       if (!val) {
@@ -98,6 +95,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
       .mapTo(1).subscribe(v => {
+        dteDueDateControl.setValue('');
         if (stage1RTSDateControl.value == null) { return; }
         const stage1RTSDate = <Date>stage1RTSDateControl.value;
         const durationMonths = <number>durationControl.value;
@@ -127,24 +125,28 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       if (newSda.dteSection) {
-        this.formGroup.patchValue(newSda.dteSection || {});
+        this.formGroup.patchValue(newSda.dteSection);
         this.formGroup.patchValue({
-          dteStatus: newSda.dteSection.dteStatus || '',
+          dteStatus: newSda.dteSection.dteStatus,
           repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
         });
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
       } else {
-        this.formGroup.reset();
-        this.formGroup.patchValue({
+        this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
+          stage1Duration: 6,
+          stage1RTSDate: undefined,
+          stage2Date: undefined,
+          stage3Date: undefined,
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
-          updatedBy: this.displayName
+          updatedBy: '',
+          updatedDate: { value: new Date(), disabled: true },
         });
-
       }
+      this.formGroup.markAsPristine();
     }
     if (!this.editable) {
       this.formGroup.disable({ emitEvent: false });

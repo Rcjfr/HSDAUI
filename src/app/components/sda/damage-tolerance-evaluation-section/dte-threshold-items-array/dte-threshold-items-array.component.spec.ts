@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Rx';
 import { DteThresholdItemComponent } from './../dte-threshold-item/dte-threshold-item.component';
 import { DteThresholdItemsArrayComponent } from './dte-threshold-items-array.component';
 
-xdescribe('DteThresholdItemsArrayComponent', () => {
+describe('DteThresholdItemsArrayComponent', () => {
   let component: DteThresholdItemsArrayComponent;
   let fixture: ComponentFixture<DteThresholdItemsArrayComponent>;
 
@@ -37,5 +37,39 @@ xdescribe('DteThresholdItemsArrayComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should create new threshold item', () => {
+    component.addThresholdItem();
+    expect(component.itemsFormArray.controls.length).toEqual(1);
+  });
+
+  it('should be able to delete a threshold item when confirmed', () => {
+    const dialogService = fixture.debugElement.injector.get(DialogService);
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(true));
+    const existingItemCount = component.itemsFormArray.controls.length;
+    component.addThresholdItem();
+    component.deleteThresholdItem(0);
+    expect(component.itemsFormArray.controls.length).toEqual(existingItemCount);
+  });
+
+  it('should not delete a monitor item when not confirmed', () => {
+    const dialogService = fixture.debugElement.injector.get(DialogService);
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
+    const existingItemCount = component.itemsFormArray.controls.length;
+    component.addThresholdItem();
+    component.deleteThresholdItem(0);
+    expect(component.itemsFormArray.controls.length).toEqual(existingItemCount + 1);
+  });
+
+  it('should init a formArray', () => {
+    const formArray = DteThresholdItemsArrayComponent.buildItems([{ thresholdItemID: 1, inspectionInterval: 'test1', inspectionMethod: 'test2', inspectionThreshold: 'test3' }]);
+    expect(formArray.controls.length).toEqual(1);
+  });
+
+  it('should not be able to add more than 5 items', () => {
+    for (let i = 0; i < 6; i++) {
+      component.addThresholdItem();
+    }
+    expect(component.itemsFormArray.controls.length).toEqual(5);
   });
 });
