@@ -144,6 +144,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           cycles: newSda.generalSection.cycles,
           updatedBy: '',
           updatedDate: { value: new Date(), disabled: true },
+          thresholdItems: DteThresholdItemsArrayComponent.buildItems([{}]),
+          monitorItems: DteMonitorItemsArrayComponent.buildItems([{}]),
         });
       }
       this.formGroup.markAsPristine();

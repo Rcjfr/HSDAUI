@@ -433,6 +433,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     stage1RTSDate: {
       required: 'Stage 1/RTS Date is required.'
     },
+    stage1Duration: {
+      required: 'Stage 1 Duration is required.'
+    },
     srNumber: {
       maxlength: 'SR # must not be more than 25 characters.'
     },

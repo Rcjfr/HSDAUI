@@ -18,7 +18,7 @@ import { SdaListResult } from '../models';
 export class AlertEffects {
 
   @Effect()
-  loadNoseNumbers$: Observable<Action> = this.actions$
+  loadNoseNumbers$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS)
     .map((action: selectedAlert.LoadNoseNumbersAction) => action.payload)
     .switchMap((search: string) => {
@@ -32,7 +32,7 @@ export class AlertEffects {
     });
 
   @Effect()
-  loadAircraftInfo$: Observable<Action> = this.actions$
+  loadAircraftInfo$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO)
     .map((action: selectedAlert.LoadAircraftInfoAction) => action.payload)
     .switchMap((noseNumber: string) => {
@@ -54,7 +54,7 @@ export class AlertEffects {
     });
 
   @Effect()
-  saveSda$: Observable<Action> = this.actions$
+  saveSda$ = this.actions$
     .ofType(selectedAlert.ActionTypes.SAVE_SDA)
     .map((action: selectedAlert.SaveSdaAction) => action.payload)
     .switchMap((sda: models.ISda) => {
@@ -81,7 +81,7 @@ export class AlertEffects {
   //     // });
 
   @Effect()
-  loadSdas$: Observable<Action> = this.actions$
+  loadSdas$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDAS)
     .map((action: selectedAlert.LoadSdasAction) => action.payload)
     .withLatestFrom(this.appStateService.getSearchCriteria())
@@ -99,7 +99,7 @@ export class AlertEffects {
     });
 
   @Effect()
-  loadSda$: Observable<Action> = this.actions$
+  loadSda$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
     .map((action: selectedAlert.LoadSdaAction) => action.payload)
     .switchMap((sdaId: number) => {
@@ -121,7 +121,7 @@ export class AlertEffects {
   //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
 
   @Effect()
-  showToastrError$: any = this.actions$
+  showToastrError$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
@@ -134,7 +134,7 @@ export class AlertEffects {
     });
 
   @Effect({ dispatch: false })
-  showLoadSdaFailError$: any = this.actions$
+  showLoadSdaFailError$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA_FAIL)
     .map((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');

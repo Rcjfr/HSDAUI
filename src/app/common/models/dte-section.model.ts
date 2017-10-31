@@ -4,8 +4,8 @@ import { IDTEThresholdItem } from './dte-threshold-item.model';
 export interface IDTESection {
   versionID?: number;
   dteStatus?: number;
-  totalShipTime?: string;
-  cycles?: string;
+  totalShipTime?: number;
+  cycles?: number;
   repairInspectionStatus?: number;
   isFatigueCritical?: boolean;
   stage1RTSDate?: Date;

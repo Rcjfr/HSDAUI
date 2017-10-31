@@ -5,6 +5,7 @@ import * as models from '../../models';
 import { AircraftInfoRecord, aircraftInfoFactory } from '../../reducers/models/aircraft-info';
 import { SdaRecord, sdaFactory } from '../../reducers/models/sda';
 import { UserRecordFactory, IUserRecord } from '../../reducers/models/user';
+import { SdaSearchCriteria  } from '../../models/sda-search-criteria.model';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -106,5 +107,8 @@ export class MockAppStateService extends AppStateService {
   }
   getRepairInspectionStatus() {
     return Observable.of(<List<models.IBaseLookUp>>List.of());
+  }
+  getSearchCriteria() {
+    return Observable.of(<SdaSearchCriteria>{});
   }
 }
