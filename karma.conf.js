@@ -46,6 +46,7 @@ module.exports = function (config) {
     autoWatch: true,
     // browsers: ['Chrome'],  //Used for running locally
     browsers: ['PhantomJS'],  //Used during the builds
+    browserNoActivityTimeout: 100000, //Default 10000 is failing on build server
     singleRun: true, //This value is getting ignored when running 'ng test' for some reason. Using --single-run is working
     phantomjsLauncher: {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)

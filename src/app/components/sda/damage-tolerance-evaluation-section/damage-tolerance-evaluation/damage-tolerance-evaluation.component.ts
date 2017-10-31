@@ -133,6 +133,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
       } else {
+        this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
+        this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
@@ -143,9 +145,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
           updatedBy: '',
-          updatedDate: { value: new Date(), disabled: true },
-          thresholdItems: DteThresholdItemsArrayComponent.buildItems([{}]),
-          monitorItems: DteMonitorItemsArrayComponent.buildItems([{}]),
+          updatedDate: { value: new Date(), disabled: true }
         });
       }
       this.formGroup.markAsPristine();
