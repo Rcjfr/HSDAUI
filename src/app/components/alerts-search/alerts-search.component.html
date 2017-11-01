@@ -50,7 +50,7 @@
         Search by CPCP Disposition
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
       </div>
-       <aa-search-by-cpcp-disposition [(criteria)]="criteria"></aa-search-by-cpcp-disposition> 
+       <aa-search-by-cpcp-disposition [(criteria)]="criteria"></aa-search-by-cpcp-disposition>
     </accordion-group>
     <accordion-group #defectGroup panelClass="panel-default search-panel">
       <div accordion-heading>
@@ -86,6 +86,13 @@
         <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
       </div>
       <aa-search-options [(criteria)]="criteria"></aa-search-options>
+    </accordion-group>
+    <accordion-group #reportGroup panelClass="panel-default search-panel">
+      <div accordion-heading>
+        Report
+        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': reportGroup?.isOpen, 'icon-add': !reportGroup?.isOpen}"></i>
+      </div>
+      <aa-search-report [(criteria)]="criteria"></aa-search-report>
     </accordion-group>
   </accordion>
 

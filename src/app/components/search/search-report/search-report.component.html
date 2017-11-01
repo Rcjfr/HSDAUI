@@ -1,0 +1,51 @@
+﻿<div class="row" style="display: flex;align-items: center;">
+    <div class="col-md-1"></div>
+    <div class="col-md-4" style="border-right:0 none">
+        <h4 style="text-align:center">Available Filters</h4>
+        <div style="overflow-y: auto; height:300px;">
+            <ul style="margin:0;padding:0;list-style: none;">
+                <li *ngFor="let option of options" class="ui-helper-clearfix" (click)="highlightAvailableOption(option)" [ngClass]="{'ui-state-highlight':highlightedAvailableOption === option}">
+                    <div style="margin:8px 0 0 8px;float:left;">{{option.display}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div>
+            <div>
+                <a (click)="moveToAvailable()">
+                    <i class="fa fa-chevron-left fa-2x" style="float:left;padding-right:5px;"></i>
+                </a>
+            </div>
+            <div>
+                <a (click)="movetoSelected()">
+                    <i class="fa fa-chevron-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4 style="text-align:center">Selected Filters</h4>
+        <div style="overflow-y: auto; height:300px;">
+            <ul style="margin:0;padding:0;list-style: none;">
+                <li *ngFor="let option of selectedOptions" class="ui-helper-clearfix" (click)="highlightSelectedOption(option)" [ngClass]="{'ui-state-highlight':highlightedSelectedOption === option}">
+                    <div style="margin:8px 0 0 8px;float:left;">{{option.display}}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div>
+            <div>
+                <a (click)="moveUp()">
+                    <i class="fa fa-chevron-up fa-2x"></i>
+                </a>
+            </div>
+            <div>
+                <a (click)="moveDown()">
+                    <i class="fa fa-chevron-down fa-2x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

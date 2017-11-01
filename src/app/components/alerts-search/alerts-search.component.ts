@@ -109,7 +109,8 @@ export class AlertsSearchComponent implements OnInit {
       searchByDefect: undefined,
       searchByCorrectiveAction: undefined,
       searchByPart: undefined,
-      searchByOptions: undefined
+      searchByOptions: undefined,
+      searchByReport: undefined
     };
   }
 

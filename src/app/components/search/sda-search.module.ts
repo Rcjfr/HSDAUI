@@ -17,6 +17,7 @@ import { SearchByCorrectiveActionComponent } from './search-by-corrective-action
 import { SearchByDefectComponent } from './search-by-defect/search-by-defect.component';
 import { SearchByCpcpDispositionComponent } from './search-by-cpcp-disposition/search-by-cpcp-disposition.component';
 import { SearchByPartComponent } from './search-by-part/search-by-part.component';
+import { SearchReportComponent } from './search-report/search-report.component';
 import { SearchOptionsComponent } from './search-options/search-options.component';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 
@@ -45,6 +46,7 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
     SearchByDefectComponent,
     SearchByCpcpDispositionComponent,
     SearchByPartComponent,
+    SearchReportComponent,
     SearchOptionsComponent,
     SavedSearchesComponent
   ],
@@ -60,6 +62,7 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
     SearchByDefectComponent,
     SearchByCpcpDispositionComponent,
     SearchByPartComponent,
+    SearchReportComponent,
     SearchOptionsComponent,
     SavedSearchesComponent
   ],

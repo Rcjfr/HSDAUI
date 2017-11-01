@@ -9,6 +9,7 @@ type SdaSearchCriteriaProps = {
     searchByCorrectiveAction: SearchByCorrectiveAction;
     searchByDefect: SearchByDefect;
     searchByMaintenance: SearchByMaintenance;
+    searchByReport: SearchByReport;
 };
 
 const defaultProps = {
@@ -19,7 +20,8 @@ const defaultProps = {
     searchByCorrosion: undefined,
     searchByCorrectiveAction: undefined,
     searchByDefect: undefined,
-    searchByMaintenance: undefined
+    searchByMaintenance: undefined,
+    searchByReport: undefined
 };
 
 export class SdaSearchCriteria extends Record(defaultProps) {
@@ -31,6 +33,7 @@ export class SdaSearchCriteria extends Record(defaultProps) {
     searchByCorrectiveAction: SearchByCorrectiveAction;
     searchByDefect: SearchByDefect;
     searchByMaintenance: SearchByMaintenance;
+    searchByReport: SearchByReport;
 
     constructor(props: SdaSearchCriteriaProps = defaultProps) {
         super(props);
@@ -216,6 +219,7 @@ export class SearchByCorrectiveAction extends Record(CorrectiveActionDefaultProp
         super(props);
     }
 };
+
 //searchByDefect
 type searchByDefectProps = {
     aircraftStation: any;
@@ -265,7 +269,8 @@ export class SearchByDefect extends Record(DefectDefaultProps) {
         super(props);
     }
 }
-    //SearchByMaintenance
+
+//SearchByMaintenance
 type searchByMaintenanceProps = {
     lineMaintenance: any;
     defectDiscoveredDuring: any;
@@ -291,6 +296,23 @@ export class SearchByMaintenance extends Record(MaintenanceDefaultProps) {
     routineNo: any;
     nonRoutineNo: any;
     micNo: any;
+
+    constructor(props: searchByMaintenanceProps = MaintenanceDefaultProps) {
+        super(props);
+    }
+};
+
+//SearchByReport
+type searchByReportProps = {
+    filters: any
+};
+
+const SearchByReportProps = {
+    filters: undefined
+};
+
+export class SearchByReport extends Record(MaintenanceDefaultProps) {
+    filters: any
 
     constructor(props: searchByMaintenanceProps = MaintenanceDefaultProps) {
         super(props);
