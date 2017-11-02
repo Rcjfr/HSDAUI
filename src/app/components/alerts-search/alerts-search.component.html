@@ -87,14 +87,25 @@
       </div>
       <aa-search-options [(criteria)]="criteria"></aa-search-options>
     </accordion-group>
-    <accordion-group #reportGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Report
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': reportGroup?.isOpen, 'icon-add': !reportGroup?.isOpen}"></i>
-      </div>
-      <aa-search-report [(criteria)]="criteria"></aa-search-report>
-    </accordion-group>
+
+  <accordion-group #dteGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Search by DTE
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dteGroup?.isOpen, 'icon-add': !dteGroup?.isOpen}"></i>
+    </div>
+
+      <aa-search-by-dte [(criteria)]="criteria"></aa-search-by-dte>
+  </accordion-group>
+
+  <accordion-group #reportGroup panelClass="panel-default search-panel">
+    <div accordion-heading>
+      Report
+      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': reportGroup?.isOpen, 'icon-add': !reportGroup?.isOpen}"></i>
+    </div>
+    <aa-search-report [(criteria)]="criteria"></aa-search-report>
+  </accordion-group>
   </accordion>
+
 
   <div class="row form-group" style="padding-top:15px;">
     <div class="col-md-10"></div>

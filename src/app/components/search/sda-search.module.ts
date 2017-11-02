@@ -20,6 +20,7 @@ import { SearchByPartComponent } from './search-by-part/search-by-part.component
 import { SearchReportComponent } from './search-report/search-report.component';
 import { SearchOptionsComponent } from './search-options/search-options.component';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
+import { SearchByDteComponent } from './search-by-dte/search-by-dte.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
     SearchByPartComponent,
     SearchReportComponent,
     SearchOptionsComponent,
-    SavedSearchesComponent
+    SavedSearchesComponent,
+    SearchByDteComponent
   ],
   declarations: [
     SearchByDateRangeComponent,
@@ -64,7 +66,8 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
     SearchByPartComponent,
     SearchReportComponent,
     SearchOptionsComponent,
-    SavedSearchesComponent
+    SavedSearchesComponent,
+    SearchByDteComponent
   ],
   providers: []
 })

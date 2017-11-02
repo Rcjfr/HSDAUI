@@ -12,7 +12,8 @@ import {
     SearchBySdaFormComponent,
     SearchByStatusComponent,
     SearchOptionsComponent,
-    SearchReportComponent
+    SearchReportComponent,
+    SearchByDteComponent
 } from './';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -39,7 +40,8 @@ describe('SearchFilterComponents', () => {
                 SearchBySdaFormComponent,
                 SearchByStatusComponent,
                 SearchOptionsComponent,
-                SearchReportComponent
+                SearchReportComponent,
+                SearchByDteComponent
             ],
             imports: [
                 ReactiveFormsModule,
@@ -104,6 +106,10 @@ describe('SearchFilterComponents', () => {
 
     xit('SearchReportComponent should create', () => {
         expect(componentMaker(SearchReportComponent)).toBeTruthy();
+    });
+
+    xit('SearchByDTEComponent should create', () => {
+      expect(componentMaker(SearchByDteComponent)).toBeTruthy();
     });
 
     function componentMaker(componentName) {

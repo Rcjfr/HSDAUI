@@ -9,4 +9,5 @@ export * from './search-by-part/search-by-part.component';
 export * from './search-by-sda-form/search-by-sda-form.component';
 export * from './search-by-status/search-by-status.component';
 export * from './search-options/search-options.component';
+export * from './search-by-dte/search-by-dte.component';
 export * from './search-report/search-report.component';
