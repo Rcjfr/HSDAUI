@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component, Input, ElementRef, ViewChild, Renderer, OnInit, AfterContentInit, ContentChild
 } from '@angular/core';
 import {

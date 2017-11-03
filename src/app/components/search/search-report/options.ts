@@ -1,8 +1,10 @@
 export const ReportOptions: any[] = [
+  { key: 'status', display: 'Status' },
+
   //General Information
   { key: 'sdaId', display: 'SDA ID' },
   { key: 'status', display: 'SDA Status' },
-  { key: 'sdrNumber', display: 'SDA Number' },
+  { key: 'sdrNumber', display: 'SDR Number' },
   { key: 'lineMaintenance', display: 'Line Maintenance' },
   { key: 'createDate', display: 'Create Date' },
   { key: 'alertCode', display: 'Alert Code' },
@@ -109,4 +111,5 @@ export const ReportOptions: any[] = [
   { key: 'inspectionInterval', display: 'Inspection Interval' },
   { key: 'inspectionMethod', display: 'Inspection Method' },
   { key: 'monitorItemDescription', display: 'FMR/Logpage/MON' }
+
 ];

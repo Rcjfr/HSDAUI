@@ -474,11 +474,14 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   isCPCPDispositionSectionVisible(): Observable<boolean> {
-    return this.isCPCPDispositionSectionEditable().map(ok => {
-      return ok || (this.sda.cpcpDispositionSection != null &&
-        this.sda.cpcpDispositionSection.isNonCPCPRelatedEvent != null &&
-        this.sda.history.some(s => s.status === Status.Audited || s.status === Status.Closed));
-    });
+    //return this.isCPCPDispositionSectionEditable().map(ok => {
+    //  return ok || (this.sda.cpcpDispositionSection != null &&
+    //    this.sda.cpcpDispositionSection.isNonCPCPRelatedEvent != null &&
+    //    this.sda.history.some(s => s.status === Status.Audited || s.status === Status.Closed));
+    //});
+    return Observable.of(this.sda.cpcpSection.isCPCPRelatedEvent &&
+      (this.sda.cpcpSection.corrosionLevel === 2 || this.sda.cpcpSection.corrosionLevel === 3) &&
+      (this.currentStatus === Status.Audited || this.currentStatus === Status.Closed));
   }
 
   isDTESectionEditable(): Observable<boolean> {
@@ -490,11 +493,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   isDTESectionVisible(): Observable<boolean> {
-    return this.isDTESectionEditable().map(ok => {
-      const hasOldData = (this.sda.dteSection != null && this.sda.history.some(s => s.status === Status.Closed))
-
-      return ok || hasOldData;
-    });
+    //return this.isDTESectionEditable().map(ok => {
+    //  const hasOldData = (this.sda.dteSection != null && this.sda.history.some(s => s.status === Status.Closed))
+    //  return ok || hasOldData;
+    //});
+    return Observable.of(this.showRepairDetails());
   }
 
   public showRepairDetails(): boolean {

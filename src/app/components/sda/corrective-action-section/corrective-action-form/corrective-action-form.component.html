@@ -1,11 +1,9 @@
 <div class="panel-body" [formGroup]="correctiveActionFormGroup">
 
   <div class="row form-group">
-
      <div class="col-sm-2">
-        <label class="control-label">Deferred<span class="req" *ngIf="!isSDAOpen()">*</span></label>
+        <label class="control-label">Deferred<span class="req">*</span></label>
       </div>
-
     <div class="col-sm-8">
       <aac-radio-container label="Yes">
         <input type="radio" [value]="true" tabindex="55" name="isDeferred" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
@@ -42,7 +40,7 @@
   </div>
   <div class="row form-group">
       <div class="col-sm-2">
-        <label class="control-label">Major Repair<span class="req" *ngIf="!isSDAOpen()">*</span></label>
+        <label class="control-label">Major Repair<span class="req">*</span></label>
       </div>
       <div class="col-sm-8">
         <aac-radio-container label="Yes">

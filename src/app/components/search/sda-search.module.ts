@@ -1,6 +1,7 @@
-﻿import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PickListModule } from 'primeng/primeng';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TextMaskModule } from 'angular2-text-mask';
 import { TypeaheadModule, TabsModule } from 'ngx-bootstrap';
@@ -33,7 +34,8 @@ import { SearchByDteComponent } from './search-by-dte/search-by-dte.component';
     NgPipesModule,
     TypeaheadModule.forRoot(),
     TabsModule.forRoot(),
-    FormControlsModule
+    FormControlsModule,
+    PickListModule
   ],
   exports: [
     SearchByDateRangeComponent,
