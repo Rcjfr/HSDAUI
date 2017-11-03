@@ -103,9 +103,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         switch (dteStatus) {
           case 1: //Open
             {
-              const copiedDate = new Date(stage1RTSDate.getTime());
-              const dueDate = new Date(copiedDate.setMonth(copiedDate.getMonth() + durationMonths));
-              dteDueDateControl.setValue(moment(dueDate).format('MM/DD/YYYY'));
+              const dt = moment(stage1RTSDate).add(durationMonths, 'month').format('MM/DD/YYYY');
+              dteDueDateControl.setValue(dt);
               break;
             }
           case 2: //Closed
@@ -144,8 +143,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           stage3Date: undefined,
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
+          submittedToQC: false,
           updatedBy: '',
-          updatedDate: { value: new Date(), disabled: true }
+          updatedDate: { value: undefined, disabled: true }
         });
       }
       this.formGroup.markAsPristine();
