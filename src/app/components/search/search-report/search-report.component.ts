@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ReportOptions } from './options';
+import { IReportOption, ReportOptions } from './options';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,8 +11,8 @@ import * as _ from 'lodash';
 export class SearchReportComponent implements OnInit, OnChanges {
   @Input() criteria: any;
 
-  options: any[];
-  selectedOptions: any[];
+  options: IReportOption[];
+  selectedOptions: IReportOption[];
 
   constructor() { }
 
@@ -20,6 +20,11 @@ export class SearchReportComponent implements OnInit, OnChanges {
     this.options = ReportOptions;
     this.selectedOptions = [];
     this.criteria.searchByReport = { filters: [] };
+  }
+
+  onMoveToSource() {
+    this.options = _.differenceWith(ReportOptions, this.selectedOptions, _.isEqual);
+    this.setSearchByReportFilters(this.selectedOptions);
   }
 
   setSearchByReportFilters(options) {

@@ -1,4 +1,9 @@
-export const ReportOptions: any[] = [
+export interface IReportOption {
+  key: string;
+  display: string;
+}
+
+export const ReportOptions: IReportOption[] = [
   { key: 'status', display: 'Status' },
 
   //General Information

@@ -11,9 +11,9 @@
                 targetHeader="Display Columns"
                 [metaKeySelection]="false" [showSourceControls]="false"
                 (onMoveToTarget)="setSearchByReportFilters(selectedOptions)"
-                (onMoveToSource)="setSearchByReportFilters(selectedOptions)"
+                (onMoveToSource)="onMoveToSource()"
                 (onMoveAllToTarget)="setSearchByReportFilters(selectedOptions)"
-                (onMoveAllToSource)="setSearchByReportFilters(selectedOptions)"
+                (onMoveAllToSource)="onMoveToSource()"
                 (onTargetReorder)="setSearchByReportFilters(selectedOptions)"
                 >
       <ng-template let-sda pTemplate="item">
