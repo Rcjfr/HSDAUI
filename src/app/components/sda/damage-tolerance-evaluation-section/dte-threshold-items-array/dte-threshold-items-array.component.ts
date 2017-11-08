@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { ConfirmComponent } from '../../../../common/components/confirm/confirm.component';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { IDTEThresholdItem } from '../../../../common/models';
-import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
-import { ArrayValidators } from '../../../../common/validators/array-validators';
+import { IDTEThresholdItem } from '@app/common/models';
+import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
+import { ArrayValidators } from '@app/common/validators/array-validators';
 
 @Component({
   selector: 'aa-dte-threshold-items-array',

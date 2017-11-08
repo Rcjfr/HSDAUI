@@ -12,20 +12,20 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda, Status } from '../../common/models';
+import { ISda, Status } from '@app/common/models';
 import * as moment from 'moment';
-import { GenericValidator } from '../../common/validators/generic-validator';
+import { GenericValidator } from '@app/common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppStateService, AuthService } from '../../common/services';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
-import { CustomValidators } from '../../common/validators/custom-validators';
-import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 
 
 @Component({

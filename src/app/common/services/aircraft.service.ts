@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { IAircraftInfo } from '../models/aircraft-info.model';
+import { environment } from '@env/environment';
+import { IAircraftInfo } from '@app/common/models/aircraft-info.model';
 
 @Injectable()
 export class AircraftService {

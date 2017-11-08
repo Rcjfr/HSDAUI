@@ -6,8 +6,8 @@
     "ng": "ng",
     "start": "ng serve --output-hashing=all",
     "build": "ng build",
-    "test": "ng test",
-    "test-cc": "ng test --code-coverage",
+    "test": "ng test --browsers PhantomJS",
+    "test-cc": "ng test --code-coverage --browsers Chrome",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

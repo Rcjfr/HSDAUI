@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { IDTEThresholdItem } from '../../../../common/models';
+import { IDTEThresholdItem } from '@app/common/models';
 @Component({
   selector: 'aa-dte-threshold-item',
   templateUrl: './dte-threshold-item.component.html',

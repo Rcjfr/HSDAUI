@@ -1,9 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { FormControlsModule } from '../../common/components/form-controls.module';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
 import * as $ from 'jquery';
 import { AlertDetailComponent } from './alert-detail.component';
-import { ATACodesService } from '../../common/services/ata-codes.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { inject } from '@angular/core/testing';
@@ -12,8 +11,8 @@ import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule, TypeaheadMatch } from 'ngx-bootstrap';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
-import { AppStateService } from '../../common/services';
-import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
+import { AppStateService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;

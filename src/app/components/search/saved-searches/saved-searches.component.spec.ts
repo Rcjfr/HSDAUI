@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabsModule } from 'ngx-bootstrap';
 import { SavedSearchesComponent } from './saved-searches.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AppStateService, SavedSearchStateService, AuthService } from 'app/common/services';
-import { MockAppStateService } from 'app/common/services/mocks/mock-app-state.service';
-import { FormControlsModule } from 'app/common/components/form-controls.module';
-import { MockSavedSearchStateService } from 'app/common/services/mocks/mock-saved-search-state.service';
+import { AppStateService, SavedSearchStateService, AuthService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
+import { MockSavedSearchStateService } from '@app/common/services/mocks/mock-saved-search-state.service';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { MockAuthService } from 'app/common/services/mocks/mock-auth-service';
+import { MockAuthService } from '@app/common/services/mocks/mock-auth-service';
 
 describe('SavedSearchesComponent', () => {
   let component: SavedSearchesComponent;

@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { AccordionPanelComponent } from 'ngx-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AppStateService } from '../../common/services';
-import { SavedSearchStateService } from 'app/common/services/saved-searches-state.service';
-import { ConfirmComponent } from '../../common/components/confirm/confirm.component';
+import { AppStateService } from '@app/common/services';
+import { SavedSearchStateService } from '@app/common/services/saved-searches-state.service';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { PromptDialogComponent } from 'app/components/prompt-dialog/prompt-dialog.component';
+import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
-import { AuthService } from 'app/common/services/auth.service';
-import { SearchData } from 'app/common/models';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
+import { AuthService } from '@app/common/services/auth.service';
+import { SearchData } from '@app/common/models';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({

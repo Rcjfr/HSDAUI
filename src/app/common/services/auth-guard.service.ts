@@ -4,7 +4,7 @@ import {
   CanActivate, CanActivateChild, CanLoad
 } from '@angular/router';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '@app/common/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Rx';
 

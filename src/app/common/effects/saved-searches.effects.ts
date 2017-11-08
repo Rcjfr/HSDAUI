@@ -3,10 +3,10 @@ import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import * as searchesAlert from '../actions/saved-searches';
-import * as services from '../services';
-import '../rxjs-extensions';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
+import * as searchesAlert from '@app/common/actions/saved-searches';
+import * as services from '@app/common/services';
+import '@app/common/rxjs-extensions';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { ToastrService } from 'ngx-toastr';
 
 

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { IStation } from '../models/station.model';
-import '../rxjs-extensions';
+import { environment } from '@env/environment';
+import { IStation } from '@app/common/models/station.model';
+import '@app/common/rxjs-extensions';
 
 @Injectable()
 export class StationService {

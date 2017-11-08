@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { InjectionToken, SimpleChange } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { FormControlsModule } from '../../../../common/components/form-controls.module';
-import { AppStateService, AuthService } from '../../../../common/services';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
+import { AppStateService, AuthService } from '@app/common/services';
 import { HttpModule } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
-import { MockAppStateService } from '../../../../common/services/mocks/mock-app-state.service';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { BaseFormComponent } from '../../base-form.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { DamageToleranceEvaluationComponent } from './damage-tolerance-evaluation.component';
-import { DteMonitorItemsArrayComponent } from './../dte-monitor-items-array/dte-monitor-items-array.component';
-import { DteThresholdItemsArrayComponent } from './../dte-threshold-items-array/dte-threshold-items-array.component';
-import { DteThresholdItemComponent } from './../dte-threshold-item/dte-threshold-item.component';
-import { DteMonitorItemComponent } from './../dte-monitor-item/dte-monitor-item.component';
+import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
+import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
+import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
 
 describe('DamageToleranceEvaluationComponent', () => {
   let component: DamageToleranceEvaluationComponent;

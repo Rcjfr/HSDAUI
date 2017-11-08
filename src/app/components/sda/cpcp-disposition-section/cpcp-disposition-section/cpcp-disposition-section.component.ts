@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormControlName } from '@angular/forms';
-import { AppStateService, AuthService } from '../../../../common/services';
-import { BaseFormComponent } from '../../base-form.component';
+import { AppStateService, AuthService } from '@app/common/services';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../../common/models';
+import * as models from '@app/common/models';
 
 
 @Component({
@@ -15,8 +15,8 @@ import * as models from '../../../../common/models';
 export class CpcpDispositionSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;
 
-  corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
-  reasons$: Observable<List<models.IReasonForChange>>;
+  corrosionLevels$: Observable<models.IBaseLookUp[]>;
+  reasons$: Observable<models.IBaseLookUp[]>;
   badgeNo: string;
   displayName: string;
 

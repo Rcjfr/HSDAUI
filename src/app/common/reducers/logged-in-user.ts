@@ -1,6 +1,6 @@
-﻿import { ActionReducer, Action } from '@ngrx/store';
-import { IUserRecord, UserRecordFactory } from './models/user';
-import * as userActions from '../actions/logged-in-user';
+import { ActionReducer, Action } from '@ngrx/store';
+import { IUserRecord, UserRecordFactory } from '@app/common/reducers/models/user';
+import * as userActions from '@app/common/actions/logged-in-user';
 import { List, Record } from 'immutable';
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 

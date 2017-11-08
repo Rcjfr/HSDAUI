@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { ICorrosionLevel, IBaseLookUp, IYesNoBoth } from '../../../common/models';
+import { IBaseLookUp, IYesNoBoth } from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../common/models';
-import { AppStateService, UtilityService } from '../../../common/services';
+import * as models from '@app/common/models';
+import { AppStateService, UtilityService } from '@app/common/services';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -36,8 +36,8 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
     });
     repairDocumentType: string[] = [];
     majorRepairDescription: string[] = [];
-    repairDescriptionTypes$: Observable<List<models.IRepairDescription>>;
-    repairDocumentTypes$: Observable<List<models.IRepairDocument>>;
+    repairDescriptionTypes$: Observable<models.IBaseLookUp[]>;
+    repairDocumentTypes$: Observable<models.IBaseLookUp[]>;
     yesNoBothOptions$: Observable<IYesNoBoth[]>;
     isDeferred: string[] = [];
     isMajorRepair: string[] = [];

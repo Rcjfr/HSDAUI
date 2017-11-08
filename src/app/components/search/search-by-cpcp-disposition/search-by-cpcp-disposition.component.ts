@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AppStateService } from '../../../common/services';
+import { AppStateService } from '@app/common/services';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
-import { ICorrosionLevel, IReasonForChange } from '../../../common/models';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { UtilityService } from '../../../common/services';
-import { IYesNoBoth } from '../../../common/models';
+import { UtilityService } from '@app/common/services';
+import { IYesNoBoth, IBaseLookUp } from '@app/common/models';
 import * as _ from 'lodash';
 @Component({
   selector: 'aa-search-by-cpcp-disposition',
@@ -30,8 +29,8 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
     reviewer: new FormControl()
   });
   yesNoBothOptions$: Observable<IYesNoBoth[]>;
-  corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  reasonsForChange$: Observable<List<IReasonForChange>>;
+  corrosionLevels$: Observable<IBaseLookUp[]>;
+  reasonsForChange$: Observable<IBaseLookUp[]>;
   constructor(private appStateService: AppStateService, private utilityService: UtilityService) { }
 
   ngOnInit() {

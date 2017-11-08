@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/Observable/empty';
 import { of } from 'rxjs/observable/of';
-import * as userActions from '../actions/logged-in-user';
-import * as services from '../services';
-import * as models from '../models';
-import '../rxjs-extensions';
+import * as userActions from '@app/common/actions/logged-in-user';
+import * as services from '@app/common/services';
+import * as models from '@app/common/models';
+import '@app/common/rxjs-extensions';
 @Injectable()
 export class UserEffects {
 

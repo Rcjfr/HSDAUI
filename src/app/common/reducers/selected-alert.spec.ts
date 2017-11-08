@@ -1,11 +1,11 @@
 import * as fromSelectedAlert from './selected-alert';
-import * as selectedAlert from '../actions/selected-alert';
-import { aircraftInfoFactory } from './models/aircraft-info';
-import { sdaFactory } from './models/sda';
+import * as selectedAlert from '@app/common/actions/selected-alert';
+import { aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { sdaFactory } from '@app/common/reducers/models/sda';
 import { List } from 'immutable';
-import { ISda, ISdaListView, Status, IAircraftInfo } from '../models';
-import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
-import { SdaListResult, SdaSearchCriteria } from '../models';
+import { ISda, ISdaListView, Status, IAircraftInfo } from '@app/common/models';
+import { SavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
+import { SdaListResult, SdaSearchCriteria } from '@app/common/models';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {

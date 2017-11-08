@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, Input, EventEmitter, OnChanges, SimpleCha
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../common/models';
-import { AppStateService } from '../../../common/services';
+import * as models from '@app/common/models';
+import { AppStateService } from '@app/common/services';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
 import { Observer } from 'rxjs/Rx';
@@ -17,13 +17,13 @@ import { Observer } from 'rxjs/Rx';
 export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() criteria: any;
 
-  departments$: Observable<List<models.IDepartment>>;
+  departments$: Observable<models.IBaseLookUp[]>;
   stations$: Observable<models.IStation[]>;
   station: string;
-  alertCodes$: Observable<List<models.IAlertCode>>;
-  ATACodes$: Observable<List<models.IATACode>>;
+  alertCodes$: Observable<models.IBaseLookUp[]>;
+  ATACodes$: Observable<models.IATACode[]>;
   ATACodes: models.IATACode[];
-  checkTypes$: Observable<List<models.ICheckType>>;
+  checkTypes$: Observable<models.ICheckType[]>;
   ataCodes2: models.IATACode[];
   pipe = new FilterByPipe();
   ataSubscription: Subscription;
@@ -45,7 +45,6 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
     this.ataSubscription = this.appStateService.getATACodes()
-      .map(d => d && d.toJS())
       .subscribe(data => this.ATACodes = data);
 
     this.stations$ = Observable.create((observer: Observer<string>) => {
@@ -91,7 +90,7 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
 
   onAlertCode1Change(alertCode1: string) {
     this.loadAtaCodes2(alertCode1);
-    this.sdaForm.controls['ataCode2'].setValue(null);
+    this.sdaForm.controls['ataCode2'].setValue('');
   }
 
   loadAtaCodes2(alertCode1: string) {

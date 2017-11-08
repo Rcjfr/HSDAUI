@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Expressions } from '../../../../common/validators/generic-validator';
-import { BaseFormComponent } from '../../base-form.component';
+import { Expressions } from '@app/common/validators/generic-validator';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { TypeaheadMatch } from 'ngx-bootstrap';
-import { IAircraftInfo } from '../../../../common/models/aircraft-info.model';
-import { AppStateService, AuthService } from '../../../../common/services';
-import * as models from '../../../../common/models';
+import { IAircraftInfo } from '@app/common/models/aircraft-info.model';
+import { AppStateService, AuthService } from '@app/common/services';
+import * as models from '@app/common/models';
 import { Observable, Observer } from 'rxjs/Rx';
 
 

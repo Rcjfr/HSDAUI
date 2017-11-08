@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { BaseFormComponent } from '../../base-form.component';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { AppStateService, AuthService } from '../../../../common/services';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { decimalsNumberMask } from '../../../../common/masks';
-import * as models from '../../../../common/models';
+import { decimalsNumberMask } from '@app/common/masks';
+import * as models from '@app/common/models';
 @Component({
   selector: 'aa-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
   styleUrls: ['./defect-location-section-form.component.less']
 })
 export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
-  detectionMethods$: Observable<List<models.IDetectionMethod>>;
-  damageTypes$: Observable<List<models.IDamageType>>;
+  detectionMethods$: Observable<models.IBaseLookUp[]>;
+  damageTypes$: Observable<models.IBaseLookUp[]>;
   defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {

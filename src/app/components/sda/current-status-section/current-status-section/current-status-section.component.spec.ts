@@ -1,6 +1,6 @@
-﻿import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { FormControlsModule } from '../../../../common/components/form-controls.module';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { CurrentStatusSectionComponent } from './current-status-section.component';
 import { Component } from '@angular/core';

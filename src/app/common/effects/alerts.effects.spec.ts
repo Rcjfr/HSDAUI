@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed, async, inject } from '@angular/core/testing'
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
-import { AlertEffects } from './alerts.effects';
-import * as selectedAlert from '../actions/selected-alert';
-import * as services from '../services';
+import { AlertEffects } from '@app/common/effects/alerts.effects';
+import * as selectedAlert from '@app/common/actions/selected-alert';
+import * as services from '@app/common/services';
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
-import { MockAppStateService } from '../services/mocks/mock-app-state.service';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 describe('Alerts Effect', () => {

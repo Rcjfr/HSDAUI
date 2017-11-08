@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { FormControlsModule } from '../../../../common/components/form-controls.module';
-import { AppStateService } from '../../../../common/services';
-import { MockAppStateService } from '../../../../common/services/mocks/mock-app-state.service';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
+import { AppStateService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { ConfirmComponent } from '../../../../common/components/confirm/confirm.component';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 
 import { Observable } from 'rxjs/Rx';
 
-import { DteThresholdItemComponent } from './../dte-threshold-item/dte-threshold-item.component';
+import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteThresholdItemsArrayComponent } from './dte-threshold-items-array.component';
 
 describe('DteThresholdItemsArrayComponent', () => {

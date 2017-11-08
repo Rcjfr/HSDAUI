@@ -2,13 +2,13 @@ import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStra
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { BaseFormComponent } from '../../base-form.component';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { decimalsNumberMask } from '../../../../common/masks';
-import * as models from '../../../../common/models';
-import { AppStateService, AuthService } from '../../../../common/services';
+import { decimalsNumberMask } from '@app/common/masks';
+import * as models from '@app/common/models';
+import { AppStateService, AuthService } from '@app/common/services';
 
 @Component({
   selector: 'aa-corrective-action-repair-description',
@@ -18,8 +18,8 @@ import { AppStateService, AuthService } from '../../../../common/services';
 })
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   correctiveActionRepairDescriptionFormGroup: FormGroup;
-  repairDescriptions$: Observable<List<models.IRepairDescription>>;
-  repairDocuments$: Observable<List<models.IRepairDocument>>;
+  repairDescriptions$: Observable<models.IBaseLookUp[]>;
+  repairDocuments$: Observable<models.IBaseLookUp[]>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('correctiveActionRepairDescriptionFormGroup', authService);

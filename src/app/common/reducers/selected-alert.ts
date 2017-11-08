@@ -1,11 +1,11 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import { IAlert, ISdaListView, Status } from '../models';
-import { SdaRecord, sdaFactory } from './models/sda';
-import { SdaListResult, SdaSearchCriteria, IAircraftInfo } from '../models';
-import { AircraftInfoRecord, aircraftInfoFactory } from './models/aircraft-info';
-import { ATACodeRecord, ATACodeFactory } from './models/ata-code';
-import { SavedStateRecord, SavedStateFactory } from './models/saved-state';
-import * as selectedAlertActions from '../actions/selected-alert';
+import { IAlert, ISdaListView, Status } from '@app/common/models';
+import { SdaRecord, sdaFactory } from '@app/common/reducers/models/sda';
+import { SdaListResult, SdaSearchCriteria, IAircraftInfo } from '@app/common/models';
+import { AircraftInfoRecord, aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { ATACodeRecord, ATACodeFactory } from '@app/common/reducers/models/ata-code';
+import { SavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
+import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import { List, Record } from 'immutable';
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 

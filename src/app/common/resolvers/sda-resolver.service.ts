@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
@@ -10,8 +10,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
-import { AppStateService } from '../services';
-import { ISda } from '../models';
+import { AppStateService } from '@app/common/services';
+import { ISda } from '@app/common/models';
 
 @Injectable()
 export class SdaResolverService implements Resolve<ISda> {

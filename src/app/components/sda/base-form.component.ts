@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef, ViewChil
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
-import * as models from '../../common/models';
-import { AuthService } from '../../common/services';
+import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services';
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush
 })

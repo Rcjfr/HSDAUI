@@ -1,5 +1,5 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
-import {IATACode} from '../../models/ata-code.model';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import {IATACode} from '@app/common/models/ata-code.model';
 
 export interface ATACodeRecord extends TypedRecord<ATACodeRecord>, IATACode { }
 

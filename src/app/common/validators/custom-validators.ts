@@ -1,5 +1,5 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { Status } from '../models';
+import { Status } from '@app/common/models';
 
 export class CustomValidators {
 

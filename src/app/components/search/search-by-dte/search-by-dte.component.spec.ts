@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControlsModule } from 'app/common/components/form-controls.module';
-import { AppStateService, UtilityService } from 'app/common/services';
-import { MockAppStateService } from 'app/common/services/mocks/mock-app-state.service';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
+import { AppStateService, UtilityService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { SearchByDteComponent } from './search-by-dte.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

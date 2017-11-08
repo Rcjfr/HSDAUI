@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ISdaListView } from './../../common/models';
-import { SdaSearchCriteria } from './../../common/models';
+import { ISdaListView } from '@app/common/models';
+import { SdaSearchCriteria } from '@app/common/models';
 import { Subject } from 'rxjs/Rx';
-import { AppStateService } from '../../common/services';
+import { AppStateService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
-import { SdaListResult } from 'app/common/models/sda-list-result.model';
+import { SdaListResult } from '@app/common/models/sda-list-result.model';
 import * as _ from 'lodash';
 import { ScrollToService } from 'ng2-scroll-to-el';
 

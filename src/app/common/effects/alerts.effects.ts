@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/Observable/empty';
 import { of } from 'rxjs/observable/of';
-import * as selectedAlert from '../actions/selected-alert';
-import * as services from '../services';
-import * as models from '../models';
-import * as fromRoot from '../reducers';
-import '../rxjs-extensions';
-import { SdaListResult } from '../models';
+import * as selectedAlert from '@app/common/actions/selected-alert';
+import * as services from '@app/common/services';
+import * as models from '@app/common/models';
+import * as fromRoot from '@app/common/reducers';
+import '@app/common/rxjs-extensions';
+import { SdaListResult } from '@app/common/models';
 
 
 @Injectable()

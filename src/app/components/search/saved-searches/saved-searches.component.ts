@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SavedSearchStateService, AuthService } from 'app/common/services';
+import { SavedSearchStateService, AuthService } from '@app/common/services';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { List } from 'immutable';
-import { ConfirmComponent } from 'app/common/components/confirm/confirm.component';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
 
 @Component({
   selector: 'aa-saved-searches',

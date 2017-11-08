@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { AppStateService } from '../../../common/services';
+import { AppStateService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../common/models';
+import * as models from '@app/common/models';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as _ from 'lodash';
-import { decimalsNumberMask } from '../../../common/masks';
+import { decimalsNumberMask } from '@app/common/masks';
 
 @Component({
     selector: 'aa-search-by-defect',
@@ -29,8 +29,8 @@ export class SearchByDefectComponent implements OnInit, OnChanges {
         depthFrom: new FormControl(),
         depthTo: new FormControl()
     });
-    detectionMethods$: Observable<List<models.IDetectionMethod>>;
-    damageTypes$: Observable<List<models.IDamageType>>;
+    detectionMethods$: Observable<models.IBaseLookUp[]>;
+    damageTypes$: Observable<models.IBaseLookUp[]>;
     decimalsNumberMask = decimalsNumberMask;
 
     constructor(private appStateService: AppStateService) { }

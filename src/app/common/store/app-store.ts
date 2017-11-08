@@ -1,7 +1,7 @@
-﻿import * as fromSelectedAlert from '../reducers/selected-alert';
-import * as fromLookupData from '../reducers/lookup-data';
-import * as fromLoggedInUser from '../reducers/logged-in-user';
-import * as fromSavedSearches from '../reducers/saved-searches';
+import * as fromSelectedAlert from '@app/common/reducers/selected-alert';
+import * as fromLookupData from '@app/common/reducers/lookup-data';
+import * as fromLoggedInUser from '@app/common/reducers/logged-in-user';
+import * as fromSavedSearches from '@app/common/reducers/saved-searches';
 
 // App-State
 export interface AppStore {

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { BaseFormComponent } from '../../base-form.component';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { List } from 'immutable';
-import * as models from '../../../../common/models';
-import { AppStateService, AuthService } from '../../../../common/services';
+import * as models from '@app/common/models';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Observable, Observer } from 'rxjs/Rx';
 
 @Component({
@@ -14,12 +14,12 @@ import { Observable, Observer } from 'rxjs/Rx';
   styleUrls: ['./general-section-form.component.less']
 })
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
-  departments$: Observable<List<models.IDepartment>>;
+  departments$: Observable<models.IBaseLookUp[]>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
   aircraftInfo$: Observable<models.IAircraftInfo>;
-  alertCodes$: Observable<List<models.IAlertCode>>;
-  ATACodes$: Observable<List<models.IATACode>>;
+  alertCodes$: Observable<models.IBaseLookUp[]>;
+  ATACodes$: Observable<models.IATACode[]>;
   disableCreateDate = false;
   public today = new Date();
 
@@ -44,8 +44,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.generalSectionFormGroup);
-    this.alertCodes$ = this.appStateService.getAlertCodes(); // .map(d => d && d.toJS());
-    this.ATACodes$ = this.appStateService.getATACodes().map(d => d && d.toJS());
+    this.alertCodes$ = this.appStateService.getAlertCodes();
+    this.ATACodes$ = this.appStateService.getATACodes();
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);

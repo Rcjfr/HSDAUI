@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControlsModule } from '../../common/components/form-controls.module';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
 import {
     SearchByAircraftComponent,
     SearchByCorrectiveActionComponent,
@@ -17,8 +17,8 @@ import {
 } from './';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppStateService, UtilityService } from '../../common/services';
-import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
+import { AppStateService, UtilityService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { ToastrModule } from 'ngx-toastr';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';

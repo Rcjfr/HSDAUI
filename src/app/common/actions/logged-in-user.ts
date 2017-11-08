@@ -1,5 +1,5 @@
-﻿import { Action } from '@ngrx/store';
-import * as models from '../models/index';
+import { Action } from '@ngrx/store';
+import * as models from '@app/common/models/index';
 
 export const ActionTypes = {
   LOAD_USER: 'Load Logged In User Details',

@@ -3,7 +3,6 @@ import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions } from 
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MockBackend } from '@angular/http/testing';
-import { ATACodesService } from './ata-codes.service';
 import { RouterModule } from '@angular/router';
 import { StationService } from './station.service';
 
@@ -37,7 +36,7 @@ xdescribe('StationService', () => {
 
       httpMock.verify();
     });
-    xit('should return error if country request failed', (done) => {
+    xit('should return success', (done) => {
       stationService.getStations('D')
         .subscribe((res: any) => {
           expect(res).toEqual(

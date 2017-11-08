@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { BaseFormComponent } from '../../base-form.component';
-import * as models from '../../../../common/models';
-import { AuthService } from '../../../../common/services';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
+import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-cause-of-damage',
   templateUrl: './cause-of-damage-group.component.html',

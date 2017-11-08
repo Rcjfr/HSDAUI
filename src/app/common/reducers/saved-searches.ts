@@ -1,8 +1,8 @@
 import { ActionReducer, Action } from '@ngrx/store';
-import * as actions from '../actions/saved-searches';
-import { SearchData } from 'app/common/models/search-data.model';
+import * as actions from '@app/common/actions/saved-searches';
+import { SearchData } from '@app/common/models/search-data.model';
 import { List } from 'immutable';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
 
 export interface State {
   loading: boolean;

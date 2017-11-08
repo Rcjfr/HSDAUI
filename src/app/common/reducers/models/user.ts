@@ -1,5 +1,5 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
-import { IUser } from '../../models/user.model';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import { IUser } from '@app/common/models/user.model';
 
 export interface IUserRecord extends TypedRecord<IUserRecord>, IUser {  }
 

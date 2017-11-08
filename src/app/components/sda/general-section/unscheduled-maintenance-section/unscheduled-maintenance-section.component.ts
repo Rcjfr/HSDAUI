@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { BaseFormComponent } from '../../base-form.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import * as models from '../../../../common/models';
-import { AuthService } from '../../../../common/services';
+import { Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-unscheduled-maintenance-section',
   templateUrl: './unscheduled-maintenance-section.component.html',

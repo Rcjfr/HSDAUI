@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
-import { Helper } from 'app/common/helper';
+import { environment } from '@env/environment';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
+import { Helper } from '@app/common/helper';
 
 @Injectable()
 export class SavedSearchService {

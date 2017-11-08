@@ -1,5 +1,5 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
-import {IStation} from '../../models/station.model';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import {IStation} from '@app/common/models/station.model';
 
 export interface IStationRecord extends TypedRecord<IStationRecord>, IStation { }
 

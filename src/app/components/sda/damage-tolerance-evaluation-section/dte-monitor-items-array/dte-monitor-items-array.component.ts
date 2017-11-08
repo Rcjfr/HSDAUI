@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray } from '@angular/forms';
-import { ConfirmComponent } from '../../../../common/components/confirm/confirm.component';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { IDTEMonitorItem } from '../../../../common/models';
-import { DteMonitorItemComponent } from './../dte-monitor-item/dte-monitor-item.component';
-import { ArrayValidators } from '../../../../common/validators/array-validators';
+import { IDTEMonitorItem } from '@app/common/models';
+import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { ArrayValidators } from '@app/common/validators/array-validators';
 
 @Component({
   selector: 'aa-dte-monitor-items-array',

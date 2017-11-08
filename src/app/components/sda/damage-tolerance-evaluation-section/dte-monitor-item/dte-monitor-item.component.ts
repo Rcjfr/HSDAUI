@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { IDTEMonitorItem } from '../../../../common/models';
+import { IDTEMonitorItem } from '@app/common/models';
 
 @Component({
   selector: 'aa-dte-monitor-item',

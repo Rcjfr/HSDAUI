@@ -1,12 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { BaseFormComponent } from '../../base-form.component';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import { AppStateService, AuthService } from '../../../../common/services';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../../common/models';
+import * as models from '@app/common/models';
 
 @Component({
   selector: 'aa-cpcp-section-form',
@@ -14,9 +14,9 @@ import * as models from '../../../../common/models';
   styleUrls: ['./cpcp-section.component.less']
 })
 export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
-  corrosionTypes$: Observable<List<models.ICorrosionType>>;
-  corrosionLevels$: Observable<List<models.ICorrosionLevel>>;
-  floorboardConditions$: Observable<List<models.IFloorboardCondition>>;
+  corrosionTypes$: Observable<models.IBaseLookUp[]>;
+  corrosionLevels$: Observable<models.IBaseLookUp[]>;
+  floorboardConditions$: Observable<models.IBaseLookUp[]>;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('cpcpSectionGroup', authService);

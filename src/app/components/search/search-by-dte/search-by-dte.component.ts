@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { IBaseLookUp, IYesNoBoth } from '../../../common/models'
+import { IBaseLookUp, IYesNoBoth } from '@app/common/models'
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import * as models from '../../../common/models';
-import { AppStateService } from '../../../common/services';
+import * as models from '@app/common/models';
+import { AppStateService } from '@app/common/services';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { decimalsNumberMask } from '../../../common/masks';
+import { decimalsNumberMask } from '@app/common/masks';
 import * as _ from 'lodash';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 @Component({
@@ -52,8 +52,8 @@ export class SearchByDteComponent implements OnInit , OnChanges {
 
   dteStatus: string[] = [];
   repairInspectionStatus: string[] = [];
-  dteStatus$: Observable<List<models.IBaseLookUp>>;
-  repInspStatus$: Observable<List<models.IBaseLookUp>>;
+  dteStatus$: Observable<models.IBaseLookUp[]>;
+  repInspStatus$: Observable<models.IBaseLookUp[]>;
   data$: Observable<models.IBaseLookUp[]>;
   durationData$: Observable<models.IBaseLookUp[]>;
   submittedToQC$: Observable<models.IBaseLookUp[]>;

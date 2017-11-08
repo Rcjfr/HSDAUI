@@ -43,26 +43,5 @@ describe('CheckTypes Service (Mocked)', () => {
     expect(service).toBeDefined();
   })));
 
-  describe('getAllCheckTypes', () => {
-    xit('should return all Check types', async(inject(
-      [CheckTypesService, MockBackend], (service: CheckTypesService, mockBackend: MockBackend) => {
-
-      mockBackend.connections.subscribe(conn => {
-        conn.mockRespond(new Response(new ResponseOptions({ body: JSON.stringify(mockResponse) })));
-      });
-
-      const result = service.getAllCheckTypes();
-
-      result.subscribe(res => {
-        expect(res).toBeTruthy();
-        console.log('response', res);
-
-        //expect(res[0].Fleet).toEqual('A319');
-        //expect(res[0].Fleet).toEqual('A319');
-        //expect(res[0].CheckTypes.length).toEqual(4);
-      });
-
-    })));
-  });
 });
 

@@ -1,21 +1,21 @@
-﻿import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NavBarComponent } from '../../common/components/nav-bar/nav-bar.component';
-import { HeaderComponent } from '../../common/components/header/header.component';
+import { NavBarComponent } from '@app/common/components/nav-bar/nav-bar.component';
+import { HeaderComponent } from '@app/common/components/header/header.component';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from '../../app-routing.module';
+import { AppRoutingModule } from '@app/app-routing.module';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { FormControlsModule } from '../../common/components/form-controls.module';
+import { FormControlsModule } from '@app/common/components/form-controls.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AlertsSearchComponent } from '../alerts-search/alerts-search.component';
-import { AlertsComponent } from '../alerts/alerts.component';
-import { AlertDetailComponent } from '../alert-detail/alert-detail.component';
-import { AppStateService } from '../../common/services';
-import { MockAppStateService } from '../../common/services/mocks/mock-app-state.service';
+import { AlertsSearchComponent } from '@app/components/alerts-search/alerts-search.component';
+import { AlertsComponent } from '@app/components/alerts/alerts.component';
+import { AlertDetailComponent } from '@app/components/alert-detail/alert-detail.component';
+import { AppStateService } from '@app/common/services';
+import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({

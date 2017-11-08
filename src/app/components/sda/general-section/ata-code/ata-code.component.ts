@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { BaseFormComponent } from '../../base-form.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { List } from 'immutable';
-import * as models from '../../../../common/models';
+import * as models from '@app/common/models';
 import { FilterByPipe } from 'ng-pipes';
-import { AuthService } from '../../../../common/services';
+import { AuthService } from '@app/common/services';
 
 @Component({
   selector: 'aa-ata-code',

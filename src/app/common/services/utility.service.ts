@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import '../rxjs-extensions';
-import { IYesNoBoth } from '../models/yes-no-both-options.model';
+import '@app/common/rxjs-extensions';
+import { IYesNoBoth } from '@app/common/models/yes-no-both-options.model';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

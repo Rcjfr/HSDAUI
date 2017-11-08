@@ -1,11 +1,11 @@
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '@app/common/services/app-state.service';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
-import * as models from '../../models';
-import { AircraftInfoRecord, aircraftInfoFactory } from '../../reducers/models/aircraft-info';
-import { SdaRecord, sdaFactory } from '../../reducers/models/sda';
-import { UserRecordFactory, IUserRecord } from '../../reducers/models/user';
-import { SdaSearchCriteria  } from '../../models/sda-search-criteria.model';
+import * as models from '@app/common/models';
+import { AircraftInfoRecord, aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { SdaRecord, sdaFactory } from '@app/common/reducers/models/sda';
+import { UserRecordFactory, IUserRecord } from '@app/common/reducers/models/user';
+import { SdaSearchCriteria  } from '@app/common/models/sda-search-criteria.model';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -13,11 +13,11 @@ export class MockAppStateService extends AppStateService {
   }
 
   getAlertCodes() {
-    return Observable.of(<List<models.IAlertCode>>List.of());
+    return Observable.of([]);
   }
 
   getATACodes() {
-    const mockResponse = [
+    const mockResponse: models.IATACode[] = [
       {
         'primaryId': 32,
         'primaryCode': 'Landing Gear',
@@ -30,27 +30,27 @@ export class MockAppStateService extends AppStateService {
       }
     ];
 
-    return Observable.of(<List<models.IATACode>>List.of(...mockResponse));
+    return Observable.of(mockResponse);
   }
 
   getDepartments() {
-    return Observable.of(<List<models.IDepartment>>List.of());
+    return Observable.of([]);
   }
 
   getCheckTypes() {
-    return Observable.of(<List<models.ICheckType>>List.of());
+    return Observable.of([]);
   }
 
   getCorrosionTypes() {
-    return Observable.of(<List<models.ICorrosionType>>List.of());
+    return Observable.of([]);
   }
 
   getCorrosionLevels() {
-    return Observable.of(<List<models.ICorrosionLevel>>List.of());
+    return Observable.of([]);
   }
 
   getDetectionMethods() {
-    return Observable.of(<List<models.IDetectionMethod>>List.of());
+    return Observable.of([]);
   }
 
   getStations(query: string) {
@@ -74,23 +74,23 @@ export class MockAppStateService extends AppStateService {
   }
 
   getRepairDescriptions() {
-    return Observable.of(<List<models.IRepairDescription>>List.of());
+    return Observable.of([]);
   }
 
   getRepairDocuments() {
-    return Observable.of(<List<models.IRepairDocument>>List.of());
+    return Observable.of([]);
   }
 
   getCauseOfDamages() {
-    return Observable.of(<List<models.ICauseOfDamage>>List.of());
+    return Observable.of([]);
   }
 
   getReasonsForChange() {
-    return Observable.of(<List<models.IReasonForChange>>List.of());
+    return Observable.of([]);
   }
 
   getDamageTypes() {
-    return Observable.of(<List<models.IDamageType>>List.of());
+    return Observable.of([]);
   }
   getUser() {
     return Observable.of(UserRecordFactory({
@@ -103,10 +103,10 @@ export class MockAppStateService extends AppStateService {
     }))
   }
   getDTEStatus() {
-    return Observable.of(<List<models.IBaseLookUp>>List.of());
+    return Observable.of([]);
   }
   getRepairInspectionStatus() {
-    return Observable.of(<List<models.IBaseLookUp>>List.of());
+    return Observable.of([]);
   }
   getSearchCriteria() {
     return Observable.of(<SdaSearchCriteria>{});

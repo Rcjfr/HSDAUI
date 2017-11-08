@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import { UtilityService } from '../../../common/services';
-import { IYesNoBoth } from '../../../common/models';
+import { UtilityService } from '@app/common/services';
+import { IYesNoBoth } from '@app/common/models';
 import * as _ from 'lodash';
-import * as models from '../../../common/models';
+import * as models from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { AppStateService, UtilityService } from '../../../common/services';
+import { AppStateService, UtilityService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
-import { ICorrosionLevel, ICorrosionType, ICauseOfDamage, IYesNoBoth } from '../../../common/models';
+import { IBaseLookUp, IYesNoBoth } from '@app/common/models';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
-import * as models from '../../../common/models';
 
 @Component({
   selector: 'aa-search-by-corrosion',
@@ -25,9 +24,9 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
     corrosionTypeOtherText: new FormControl()
   });
   yesNoBothOptions$: Observable<IYesNoBoth[]>;
-  corrosionTypes$: Observable<List<ICorrosionType>>;
-  corrosionLevels$: Observable<List<ICorrosionLevel>>;
-  causeOfDamages$: Observable<List<ICauseOfDamage>>;
+  corrosionTypes$: Observable<IBaseLookUp[]>;
+  corrosionLevels$: Observable<IBaseLookUp[]>;
+  causeOfDamages$: Observable<IBaseLookUp[]>;
   corrosionLevels: string[] = [];
   causeOfDamage: string[] = [];
   isWideSpreadCorrosion: string[] = [];

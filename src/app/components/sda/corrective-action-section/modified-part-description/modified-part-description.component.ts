@@ -1,9 +1,9 @@
 
 import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { BaseFormComponent } from '../../base-form.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
-import * as models from '../../../../common/models';
-import { AuthService } from '../../../../common/services';
+import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-modified-part-description',
   templateUrl: './modified-part-description.component.html',

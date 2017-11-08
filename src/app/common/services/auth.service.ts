@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
-import { IUser } from './../models/user.model';
+import { IUser } from '@app/common/models/user.model';
 import { Observable } from 'rxjs/Rx';
-import { AppStateService } from './app-state.service';
-import { environment } from '../../../environments/environment';
+import { AppStateService } from '@app/common/services/app-state.service';
+import { environment } from '@env/environment';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';

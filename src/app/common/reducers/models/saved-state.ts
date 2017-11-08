@@ -1,5 +1,5 @@
-﻿import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
-import { ISavedState } from '../../models';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import { ISavedState } from '@app/common/models';
 
 export interface SavedStateRecord extends TypedRecord<SavedStateRecord>, ISavedState { }
 

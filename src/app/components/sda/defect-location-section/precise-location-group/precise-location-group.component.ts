@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { BaseFormComponent } from '../../base-form.component';
-import { GenericValidator, Expressions } from '../../../../common/validators/generic-validator';
-import { CustomValidators } from '../../../../common/validators/custom-validators';
-import * as models from '../../../../common/models';
-import { AuthService } from '../../../../common/services';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
+import { CustomValidators } from '@app/common/validators/custom-validators';
+import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-precise-location-group',
   templateUrl: './precise-location-group.component.html',

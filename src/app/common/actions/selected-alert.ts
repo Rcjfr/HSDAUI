@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import * as models from '../models/index';
-import { SdaListResult, SdaSearchCriteria } from 'app/common/models';
+import * as models from '@app/common/models/index';
+import { SdaListResult, SdaSearchCriteria } from '@app/common/models';
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',

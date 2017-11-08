@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppStateService, AuthService } from '../../common/services';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AlertsComponent } from './components/alerts/alerts.component';
-import { AlertDetailComponent } from './components/alert-detail/alert-detail.component';
-import { PendingChangesGuard } from './common/components/pending-changes.guard';
-import { SdaResolverService } from './common/resolvers/sda-resolver.service';
-import { AuthGuardService } from './common/services/auth-guard.service';
-import { AlertsDashboardComponent } from './components/alerts-dashboard/alerts-dashboard.component';
+import { AlertsComponent } from '@app/components/alerts/alerts.component';
+import { AlertDetailComponent } from '@app/components/alert-detail/alert-detail.component';
+import { PendingChangesGuard } from '@app/common/components/pending-changes.guard';
+import { SdaResolverService } from '@app/common/resolvers/sda-resolver.service';
+import { AuthGuardService } from '@app/common/services/auth-guard.service';
+import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alerts-dashboard.component';
 const routes: Routes = [
   {
     path: 'dashboard', component: AlertsDashboardComponent,

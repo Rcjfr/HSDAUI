@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { Helper } from '../helper';
-import * as models from '../models';
-import '../rxjs-extensions';
-import { AuthService } from './auth.service';
-import { SdaListResult } from 'app/common/models/sda-list-result.model';
+import { environment } from '@env/environment';
+import { Helper } from '@app/common/helper';
+import * as models from '@app/common/models';
+import '@app/common/rxjs-extensions';
+import { AuthService } from '@app/common/services/auth.service';
+import { SdaListResult } from '@app/common/models/sda-list-result.model';
 
 @Injectable()
 export class SdaService {

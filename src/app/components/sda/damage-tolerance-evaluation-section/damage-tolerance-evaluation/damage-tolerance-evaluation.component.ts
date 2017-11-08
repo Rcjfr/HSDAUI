@@ -1,21 +1,21 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
-import { BaseFormComponent } from '../../base-form.component';
-import { ConfirmComponent } from '../../../../common/components/confirm/confirm.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { Expressions } from '../../../../common/validators/generic-validator';
+import { Expressions } from '@app/common/validators/generic-validator';
 
 
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
-import * as models from '../../../../common/models';
-import { AppStateService, AuthService } from '../../../../common/services';
-import { DteMonitorItemsArrayComponent } from '../dte-monitor-items-array/dte-monitor-items-array.component';
-import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dte-threshold-items-array.component';
+import * as models from '@app/common/models';
+import { AppStateService, AuthService } from '@app/common/services';
+import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
+import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -25,8 +25,8 @@ import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dt
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;
 
-  dteStatus$: Observable<List<models.IBaseLookUp>>;
-  repairInspectionStatus$: Observable<List<models.IBaseLookUp>>;
+  dteStatus$: Observable<models.IBaseLookUp[]>;
+  repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
   public uploader = new FileUploader({ url: '/api/attachments' });
   displayName: string;
   createNumberMask = createNumberMask;

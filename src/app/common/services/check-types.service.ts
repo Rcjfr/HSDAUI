@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../../environments/environment';
-import { ICheckType } from '../models/check-type.model';
-import '../rxjs-extensions';
+import { environment } from '@env/environment';
+import { ICheckType } from '@app/common/models/check-type.model';
+import '@app/common/rxjs-extensions';
 
 
 @Injectable()
 export class CheckTypesService {
 
   private fleetTypesEndPointUrl = `${environment.hsdaApiBaseUrl}fleettypes`;
-  private checkTypesEndPointUrl = `${environment.hsdaApiBaseUrl}checktypes`;
   constructor(private http: HttpClient) { }
-
-  getAllCheckTypes(): Observable<ICheckType[]> {
-    return this.http.get<ICheckType[]>(this.checkTypesEndPointUrl);
-  };
 
   getFleetCheckTypes(fleetType: string): Observable<ICheckType[]> {
     return this.http.get<ICheckType[]>(`${this.fleetTypesEndPointUrl}/${fleetType}/check_types`);

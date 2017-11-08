@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
-import * as models from '../models/index';
-import * as loggedInUserActions from './logged-in-user';
-import { MockStore } from '../store/mock-store';
+import * as models from '@app/common/models/index';
+import * as loggedInUserActions from '@app/common/actions/logged-in-user';
+import { MockStore } from '@app/common/store/mock-store';
 describe('LoggedInUser Actions', () => {
   let action: loggedInUserActions.Actions;
   let mockStore: MockStore<any>;

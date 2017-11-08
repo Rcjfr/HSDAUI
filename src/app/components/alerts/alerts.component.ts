@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { AppStateService } from '../../common/services';
+import { AppStateService } from '@app/common/services';
 import { List } from 'immutable';
 
 @Component({

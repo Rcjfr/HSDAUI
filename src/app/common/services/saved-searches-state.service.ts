@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import * as searchesActions from '../actions/saved-searches';
+import * as searchesActions from '@app/common/actions/saved-searches';
 import { Store } from '@ngrx/store';
-import { AppStore } from '../store/app-store';
-import * as fromRoot from '../reducers';
+import { AppStore } from '@app/common/store/app-store';
+import * as fromRoot from '@app/common/reducers';
 
 @Injectable()
 export class SavedSearchStateService {

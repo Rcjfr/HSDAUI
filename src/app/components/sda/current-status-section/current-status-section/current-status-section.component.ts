@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BaseFormComponent } from '../../base-form.component';
+import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { AuthService } from '../../../../common/services';
+import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-current-status-section',
   templateUrl: './current-status-section.component.html',

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { SearchData } from 'app/common/models';
-import { ISavedSearch } from 'app/common/models/saved-search.model';
+import { SearchData } from '@app/common/models';
+import { ISavedSearch } from '@app/common/models/saved-search.model';
 
 export const ActionTypes = {
   LOAD_SEARCHES: 'Load Saved Searches',
