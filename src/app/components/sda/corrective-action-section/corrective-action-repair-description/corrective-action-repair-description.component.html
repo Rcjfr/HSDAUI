@@ -1,6 +1,6 @@
 <div [formGroup]="correctiveActionRepairDescriptionFormGroup">
-  <div class="row col-md-12">
-    <div class="col-md-6">
+  <div class="row col-sm-12">
+    <div class="col-sm-6">
       <div>
         <aac-field-container [required]="!isSDAOpen()" label="Description:" [message]="displayMessage.repairDescriptionType">
           <select class="form-control" tabindex='63' [required]="!isSDAOpen()"  id="repairDescriptionType" formControlName="repairDescriptionType">
@@ -12,8 +12,8 @@
     </div>
   </div>
 
-  <div class="row col-md-12">
-    <div class="col-md-6">
+  <div class="row col-sm-12">
+    <div class="col-sm-6">
       <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType">
         <select class="form-control" tabindex='64' id="repairDocumentType" formControlName="repairDocumentType">
           <option value="" selected>Select Repair Document</option>
@@ -21,13 +21,13 @@
         </select>
       </aac-field-container>
     </div>
-    <div class="col-md-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value">
+    <div class="col-sm-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value">
       <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [newSdaStus]="newSdaStus" [errorMessages]="displayMessage"></aa-corrective-action-chap>
 
     </div>
   </div>
-  <div class="row col-md-12">
-    <div class="col-md-6">
+  <div class="row col-sm-12">
+    <div class="col-sm-6">
       <aac-field-container label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization">
         <input type="text" tabindex='66' class="form-control" formControlName="engineeringAuthorization">
       </aac-field-container>
@@ -61,18 +61,18 @@
       <div>
       </div>
     </div>
-    <div class="row col-md-12">
-      <div class="col-md-6">
+    <div class="row col-sm-12">
+      <div class="col-sm-6">
         <h4>Approximate External Doubler Repair Dimensions</h4>
       </div>
     </div>
-    <div class="row col-md-12">
-      <div class="col-md-6">
+    <div class="row col-sm-12">
+      <div class="col-sm-6">
         <aac-field-container label="Height(in inches):" [message]="displayMessage.repairHeight">
           <input type="text" tabindex='68' class="form-control" id="repairHeight" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairHeight">
         </aac-field-container>
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <aac-field-container label="Width(in inches):" [message]="displayMessage.repairWidth">
           <input type="text" tabindex='69' class="form-control" id="repairWidth" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairWidth">
         </aac-field-container>

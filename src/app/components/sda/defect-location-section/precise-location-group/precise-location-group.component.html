@@ -1,23 +1,23 @@
-﻿<div [formGroup]="preciseLocationGroup">
+<div [formGroup]="preciseLocationGroup">
   <h4>Precise Location of Defect:</h4>
   <h5>(Enter From/To if Applicable)</h5>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <aac-field-container label="Aircraft Station:" [message]="displayMessage.aircraftStation"  helptext="(Body, Spar, Stab, Frame, etc.)"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
         <input type="text" tabindex='26' class="form-control" formControlName="aircraftStation"  >
       </aac-field-container>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <aac-field-container label="Stringer:" [message]="displayMessage.stringer"  labelGridColumnWidth="6" fieldGridColumnWidth="11">
         <input type="text" tabindex='27' class="form-control" formControlName="stringer" >
       </aac-field-container>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <aac-field-container label="WL:" [message]="displayMessage.waterLine" labelGridColumnWidth="6" fieldGridColumnWidth="11">
         <input type="text" tabindex='28' class="form-control" formControlName="waterLine"  >
       </aac-field-container>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <aac-field-container label="BL:" [message]="displayMessage.buttLine" labelGridColumnWidth="6" fieldGridColumnWidth="11">
         <input type="text" tabindex='29' class="form-control" formControlName="buttLine" >
       </aac-field-container>

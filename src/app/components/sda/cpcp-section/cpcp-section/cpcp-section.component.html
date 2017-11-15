@@ -1,6 +1,6 @@
 <div class="panel-body" [formGroup]="formGroup">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <div class="row form-group" [class.has-error]="displayMessage.isCPCPRelatedEvent">
         <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
         <div class="col-sm-8">
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="row" [hidden]="!isCPCPRelatedEvent()">
-    <div class="col-md-6" [class.has-error]="displayMessage.isWideSpreadCorrosion">
+    <div class="col-sm-6" [class.has-error]="displayMessage.isWideSpreadCorrosion">
       <div class="row form-group">
         <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
         <div class="col-sm-8">  
@@ -52,7 +52,7 @@
 
   <div class="row" [hidden]="!isCPCPRelatedEvent()">
 
-    <div class="col-md-6">
+    <div class="col-sm-6">
 
       <div class="row form-group" [class.has-error]="displayMessage.isPreviouslyBlended">
         <label class="col-sm-4 control-label">Corroded Area Previously Blended:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
@@ -68,7 +68,7 @@
       </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <aac-field-container [required]="areCPCPFieldsRequired()" label="Corrosion Task #:" [message]="displayMessage.corrosionTaskNo" >
         <input type="text" tabindex='40' class="form-control" [required]="areCPCPFieldsRequired()" formControlName="corrosionTaskNo">
       </aac-field-container>
@@ -76,7 +76,7 @@
   </div>
 
   <div class="row " [hidden]="!isCPCPRelatedEvent()">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <aac-field-container [required]="areCPCPFieldsRequired()" label="Type of Corrosion:" [message]="displayMessage.corrosionType">
         <select class="form-control" tabindex='41' id="corrosionType" [required]="areCPCPFieldsRequired()" formControlName="corrosionType">
           <option value="">Select Type of Corrosion </option>
@@ -85,7 +85,7 @@
       </aac-field-container>
 
     </div>
-    <div class="col-md-5">
+    <div class="col-sm-5">
       <div [hidden]="formGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeOtherText">
         <aac-field-container label="Description:" [required]="formGroup.get('corrosionType').value ==='5'" [message]="displayMessage.corrosionTypeOtherText">
           <textarea type="text" tabindex='42'cols="40" rows="5" class="form-control" [required]="formGroup.get('corrosionType').value ==='5'" formControlName="corrosionTypeOtherText"></textarea>
@@ -99,7 +99,7 @@
 
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <div  [hidden]="!isCPCPRelatedEvent()" [class.has-error]="displayMessage.floorBoardCondition">
         <aac-field-container label="Floorboard condition after mat is removed:" [message]="displayMessage.floorBoardCondition">
           <select class="form-control" tabindex='54' id="floorBoardCondition" formControlName="floorBoardCondition">

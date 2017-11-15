@@ -1,6 +1,6 @@
 <div class="panel-body" [formGroup]="formGroup">
   <div class="row form-group">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <aac-checkbox-container label="Non-CPCP">
         <input type="checkbox" tabindex="99" formControlName="isNonCPCPRelatedEvent" />
       </aac-checkbox-container>
@@ -9,7 +9,7 @@
   </div>
   <div>
     <div class="row form-group ">
-      <div class="col-md-4">
+      <div class="col-sm-4">
         <div class="row form-group">
           <label class="col-sm-4 control-label">Is CPCP Task # correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-sm-8">
         <aac-field-container [required]="!isNonCPCPRelatedEvent() && isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
           <input type="text" tabindex='101' [required]="isReviewComplete() && !isCorrosionTaskNoCorrect()" class="form-control" formControlName="correctedCorrosionTaskNo">
         </aac-field-container>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="row form-group ">
-      <div class="col-md-4">
+      <div class="col-sm-4">
         <div class="row form-group">
           <label class="col-sm-4 control-label">Is Corrosion Level correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
@@ -59,7 +59,7 @@
         </div>
       </div>
       <div>
-        <div class="col-md-4 ">
+        <div class="col-sm-4 ">
           <div class="row form-group">
             <label class="col-sm-12 control-label">Corrected Corrosion Level:<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           </div>
@@ -73,7 +73,7 @@
           </div>
           <h2><b>See GPM 09.09 for corrosion level determinations</b></h2>
         </div>
-        <div class="col-md-4">
+        <div class="col-sm-4">
           <div class="row form-group">
             <label class="col-sm-12 control-label">Reason for level change:<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete() && !isCorrosionLevelCorrect()">*</span></label>
           </div>
@@ -101,7 +101,7 @@
       </div>
     </div>
     <div class="row ">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <aac-field-container label="Engineering Comments:"
                              helptext="(Comments need to be 250 characters or less)"
                              [message]="displayMessage.engineeringComments">
@@ -109,7 +109,7 @@
         </textarea>
         </aac-field-container>
       </div>
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <aac-field-container label="QC Feedback:"
                              helptext="(Comments need to be 250 characters or less)"
                              [message]="displayMessage.qcFeedback">
@@ -120,19 +120,19 @@
     </div>
   </div>
   <div class="row form-group">
-    <div class="col-md-6">
+    <div class="col-sm-6">
       <aac-checkbox-container label="Submit to QC">
         <input type="checkbox" tabindex="112" formControlName="submittedToQC" />
       </aac-checkbox-container>
     </div>
   </div>
   <div class="row form-group">
-    <div class="col-md-2">
+    <div class="col-sm-2">
       <aac-checkbox-container label="Review Complete">
         <input type="checkbox" tabindex="110" formControlName="isReviewComplete" />
       </aac-checkbox-container>
     </div>
-    <div class="col-md-10">
+    <div class="col-sm-10">
       <aac-field-container label="" labelGridColumnWidth="1"
                            [message]="displayMessage.reviewer">
         <input type="text" tabindex="111" class="form-control" formControlName="reviewer">

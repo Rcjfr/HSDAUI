@@ -1,23 +1,23 @@
 <div class="row" [formGroup]="item">
-  <div class="col-md-1">
+  <div class="col-sm-1">
     <h4>{{index+1}}.</h4>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-4">
     <aac-field-container label="Inspection Threshold:" [message]="message?.inspectionThreshold">
       <input class="form-control" formControlName="inspectionThreshold">
     </aac-field-container>
   </div>
-  <div class="col-md-3">
+  <div class="col-sm-3">
     <aac-field-container label="Inspection Interval:" [message]="message?.inspectionInterval">
       <input class="form-control" formControlName="inspectionInterval">
     </aac-field-container>
   </div>
-  <div class="col-md-3">
+  <div class="col-sm-3">
     <aac-field-container label="Inspection Method:" [message]="message?.inspectionMethod">
       <input class="form-control" formControlName="inspectionMethod">
     </aac-field-container>
   </div>
-  <div class="col-md-1">
+  <div class="col-sm-1">
     <a href="#" *ngIf="editable"  (click)="remove()">Delete</a>
   </div>
 </div>

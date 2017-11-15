@@ -2,34 +2,34 @@
   
   <h4>Cause of Damage:</h4>
   <div class="row form-group">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Environment">
         <input type="checkbox" tabindex="43" formControlName="environment" />
       </aac-checkbox-container>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Lav/Galley Spill">
         <input type="checkbox" tabindex="44" formControlName="galleySpill" />
       </aac-checkbox-container>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Blocked Drain">
         <input type="checkbox" tabindex="45" formControlName="blockedDrain" />
       </aac-checkbox-container>
       </div>
   </div>
   <div class="row form-group">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Chemical Spill">
         <input type="checkbox" tabindex="46" formControlName="chemicalSpill" />
       </aac-checkbox-container>
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Wet Insulation Blanket">
         <input type="checkbox" tabindex="47" formControlName="wetInsulationBlanket" />
       </aac-checkbox-container>
       </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Missing/Deteriorated Floorboard Tape">
         <input type="checkbox" tabindex="48" formControlName="missingFloorBoardTape" />
       </aac-checkbox-container>
@@ -38,19 +38,19 @@
     </div>
   </div>
   <div class="row form-group">
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Correct Harware Not Installed">
         <input type="checkbox" tabindex="49" formControlName="hardwareNotInstalled" />
       </aac-checkbox-container>
       </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Deteriorated/Poor Sealing Practices">
         <input type="checkbox" tabindex="50" formControlName="poorSealingPractices" />
       </aac-checkbox-container>
 
 
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Missing Corrosion Inhibitor">
         <input type="checkbox" tabindex="51" formControlName="missingCorrosionInhibitor" />
       </aac-checkbox-container>
@@ -59,7 +59,7 @@
   </div>
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-sm-4">
       <aac-checkbox-container label="Other">
         <input type="checkbox" tabindex="52" formControlName="damageOther" />
       </aac-checkbox-container>
@@ -72,7 +72,7 @@
               class="error">{{displayMessage.message}}</span>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <aa-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
                                        [parent]="causeOfDamageGroup"
                                        [sda]="sda"
