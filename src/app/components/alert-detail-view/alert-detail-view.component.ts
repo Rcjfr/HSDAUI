@@ -207,6 +207,29 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
   }
 
+
+  confirmDeferralInf(newStatus: number) {
+
+    const correctiveActionFormGroup = this.sdaForm.get('correctiveActionFormGroup');
+
+    if ((correctiveActionFormGroup.get('isDeferred').value === false) && (correctiveActionFormGroup.get('isMajorRepair').value === true)) {
+
+      this.dialogService.addDialog(ConfirmComponent, {
+        title: 'Confirm?',
+        message: `Is there any additional follow up action associated with this Major Repair (i.e. damage tolerance evaluation, supplemental inspections, etc)?`
+      }).subscribe(confirm => {
+        if (confirm) {
+
+          this.sdaForm.get('correctiveActionFormGroup').patchValue({'isDeferred': true});
+        }else {
+         this.saveAlert(newStatus);
+        }
+      });
+    } else {
+      this.saveAlert(newStatus);
+    }
+  }
+
   validateSdaForm(): boolean {
     this.sdaForm.updateValueAndValidity();
     this.markAsDirty(this.sdaForm);
@@ -260,8 +283,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     } else {
       if (newStatus === Status.Complete) {
         this.sdaStatusTitle = 'Complete SDA ' + (this.sda.id ? `(SDA ID:${this.sda.id})` : '');
+
       } else if (newStatus === Status.Audited) {
         this.sdaStatusTitle = this.sda.id ? `Audit SDA (SDA ID:${this.sda.id})` : 'Complete SDA';
+
       } else if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete SDA (SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Rejected) {
