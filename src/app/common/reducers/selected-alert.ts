@@ -70,7 +70,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
-        return state.merge({ loading: false, sdaListResult: act.payload });
+        return state.merge({ loading: false, sdaListResult: new SdaListResult(act.payload) });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {

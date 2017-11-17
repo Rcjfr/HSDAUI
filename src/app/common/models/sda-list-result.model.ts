@@ -1,7 +1,7 @@
-﻿import { ISdaListView } from 'app/common/models';
+import { ISdaListView } from '@app/common/models';
 import { Record, List } from 'immutable';
 
-type SdaListResultProps = {
+export type SdaListResultProps = {
   totalRecords: number;
   records: ISdaListView[]
 };

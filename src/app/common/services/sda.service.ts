@@ -7,6 +7,7 @@ import * as models from '@app/common/models';
 import '@app/common/rxjs-extensions';
 import { AuthService } from '@app/common/services/auth.service';
 import { SdaListResult } from '@app/common/models/sda-list-result.model';
+import { SdaListResultProps } from '@app/common/models';
 
 @Injectable()
 export class SdaService {
@@ -25,7 +26,7 @@ export class SdaService {
     }
   };
 
-  searchSda(criteria): Observable<SdaListResult> {
+  searchSda(criteria): Observable<SdaListResultProps> {
     return this.http.post(this.endPointUrl + '/search', criteria);
   };
 

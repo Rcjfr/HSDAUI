@@ -11,7 +11,11 @@ export class Helper {
 
       return date;
     }
+    if (typeof key === 'string' && ((key === 'createDate'))) {
+      const date = new Date(moment(value).valueOf());
 
+      return date;
+    }
     if (typeof key === 'string' && ((key === 'dueDate'))) {
       return value;
     }
