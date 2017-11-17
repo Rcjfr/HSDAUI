@@ -196,6 +196,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.dialogService.addDialog(ConfirmComponent, {
       title: 'Confirm?',
       message: `Are you sure you want to request SDR for this SDA:${this.sda.id}?`
+
     }).filter(confirm => confirm === true).subscribe(confirm => {
       this.sda.generalSection.sdrNumber = 'Y';
       this.sdaForm.get('generalSectionFormGroup').patchValue({ 'sdrNumber': 'Y' });
@@ -208,15 +209,49 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
 
+  confirmInformation(newStatus: number) {
+    const cpcpSectionGroup = this.sdaForm.get('cpcpSectionGroup');
+
+    if (cpcpSectionGroup.get('isCPCPRelatedEvent').value) {
+      if (cpcpSectionGroup.get('corrosionLevel').value === 2) {
+        this.dialogService.addDialog(ConfirmComponent, {
+          title: 'Alert',
+          message: `Please ensure Engineering is contacted within 48 hours of this Level 2 CPCP finding.`,
+
+        }).filter(confirm => confirm === true).subscribe(confirm => {
+          this.confirmDeferralInf(newStatus);
+        });
+      } else if (cpcpSectionGroup.get('corrosionLevel').value === 3)  {
+        this.dialogService.addDialog(ConfirmComponent, {
+          title: 'Confirm?',
+          message: `This is a Level 3 corrosion finding.  Is this correct?`,
+          okButtonText: 'Yes',
+          cancelButtonText: 'No'
+        }).filter(confirm => confirm === true).subscribe(confirm => {
+          this.dialogService.addDialog(ConfirmComponent, {
+            title: 'Alert',
+            message: `CONTACT ENGINEERING IMMEDIATELY FOR A LEVEL 3 FINDING`
+          }).filter(isConfirm => isConfirm === true).subscribe(isConfirm => {
+            this.confirmDeferralInf(newStatus);
+          });
+        });
+      }
+    } else {
+      this.confirmDeferralInf(newStatus);
+      }
+  }
+
+
   confirmDeferralInf(newStatus: number) {
 
     const correctiveActionFormGroup = this.sdaForm.get('correctiveActionFormGroup');
 
     if ((correctiveActionFormGroup.get('isDeferred').value === false) && (correctiveActionFormGroup.get('isMajorRepair').value === true)) {
-
       this.dialogService.addDialog(ConfirmComponent, {
         title: 'Confirm?',
-        message: `Is there any additional follow up action associated with this Major Repair (i.e. damage tolerance evaluation, supplemental inspections, etc)?`
+        message: `Is there any additional follow up action associated with this Major Repair (i.e. damage tolerance evaluation, supplemental inspections, etc)?`,
+        okButtonText: 'Yes',
+        cancelButtonText: 'No'
       }).subscribe(confirm => {
         if (confirm) {
 

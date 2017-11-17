@@ -3,6 +3,8 @@ import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 export interface ConfirmModel {
   title: string;
   message: string;
+  okButtonText: string;
+  cancelButtonText: string;
 }
 @Component({
   selector: 'aa-confirm',
@@ -13,6 +15,8 @@ export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> imp
 
   title: string;
   message: string;
+  okButtonText = 'OK';
+  cancelButtonText  = 'Cancel';
 
   constructor(dialogService: DialogService) {
     super(dialogService);
