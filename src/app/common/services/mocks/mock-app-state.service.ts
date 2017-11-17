@@ -103,7 +103,15 @@ export class MockAppStateService extends AppStateService {
     }))
   }
   getDTEStatus() {
-    return Observable.of([]);
+    const mockResponse: models.IBaseLookUp[] = [
+          { 'id': 1, 'description': 'Open' },
+          { 'id': 2, 'description': 'Closed' },
+          { 'id': 3, 'description': 'TBD' }
+      ];
+
+      return Observable.of(mockResponse);
+
+
   }
   getRepairInspectionStatus() {
     return Observable.of([]);
