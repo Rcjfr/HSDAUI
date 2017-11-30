@@ -1,7 +1,7 @@
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 import { IAircraftInfo } from '@app/common/models/aircraft-info.model';
-export interface AircraftInfoRecord extends TypedRecord<AircraftInfoRecord>, IAircraftInfo { }
-export const aircraftInfoFactory = makeTypedFactory<IAircraftInfo, AircraftInfoRecord>({
+export interface IAircraftInfoRecord extends TypedRecord<IAircraftInfoRecord>, IAircraftInfo { }
+export const AircraftInfoFactory = makeTypedFactory<IAircraftInfo, IAircraftInfoRecord>({
     noseNumber: undefined,
     manufacturer: undefined,
     model: undefined,

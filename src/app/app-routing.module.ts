@@ -22,6 +22,15 @@ const routes: Routes = [
     canDeactivate: [PendingChangesGuard],
     children: []
   },
+  {
+    path: 'alerts/:id/original', component: AlertDetailComponent,
+    data: [{ original: true }],
+    children: []
+  },
+  {
+    path: 'alerts/:id/version/:version', component: AlertDetailComponent,
+    children: []
+  },
   { path: '', redirectTo: 'alerts', pathMatch: 'full' },
   { path: '*', redirectTo: 'alerts', pathMatch: 'full' }
 ];

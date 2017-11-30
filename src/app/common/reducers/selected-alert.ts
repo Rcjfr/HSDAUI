@@ -1,25 +1,28 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import { IAlert, ISdaListView, Status } from '@app/common/models';
-import { SdaRecord, sdaFactory } from '@app/common/reducers/models/sda';
-import { SdaListResult, SdaSearchCriteria, IAircraftInfo } from '@app/common/models';
-import { AircraftInfoRecord, aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { ISdaRecord, SdaFactory } from '@app/common/reducers/models/sda';
+import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
+import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
+
+import { ISdaListResult, IAircraftInfo } from '@app/common/models';
+import { IAircraftInfoRecord, AircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
 import { ATACodeRecord, ATACodeFactory } from '@app/common/reducers/models/ata-code';
-import { SavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
+import { ISavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
 import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import { List, Record } from 'immutable';
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
-  savedState: SavedStateRecord,
+  savedState: ISavedStateRecord,
   currentSdaId: number;
   loadNewSdaCounter: number,
-  sda: SdaRecord;
+  sda: ISdaRecord;
   newSdaStatus: Status;
   noseNumbers: List<IAircraftInfo>;
-  aircraftInfo: AircraftInfoRecord;
-  sdaListResult: SdaListResult
-  searchCriteria: SdaSearchCriteria
+  aircraftInfo: IAircraftInfoRecord;
+  sdaListResult: ISdaListResultRecord;
+  searchCriteria: ISearchCriteriaRecord;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
@@ -28,12 +31,12 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   savedState: null,
   loadNewSdaCounter: 0,
   currentSdaId: 0,
-  sda: sdaFactory(),
+  sda: SdaFactory(),
   newSdaStatus: Status.Open,
-  noseNumbers: List.of<AircraftInfoRecord>(),
-  aircraftInfo: aircraftInfoFactory(),
-  sdaListResult: new SdaListResult(),
-  searchCriteria: new SdaSearchCriteria()
+  noseNumbers: List.of<IAircraftInfo>(),
+  aircraftInfo: AircraftInfoFactory(),
+  sdaListResult: SdaListResultFactory(),
+  searchCriteria: SearchCriteriaRecordFactory()
 });
 
 function makeInitialState() {
@@ -56,13 +59,16 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdaCompleteAction;
 
-        return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status, sda: act.payload.id ? sdaFactory(act.payload) : sdaFactory() });
+        return state.merge({ loading: false, currentSdaId: act.payload.id, newSdaStatus: act.payload.status, sda: act.payload.id ? SdaFactory(act.payload) : SdaFactory() });
       }
-      case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
+    case selectedAlertActions.ActionTypes.SAVE_SDA_SEARCH_CRITERIA:
       {
-        return state.merge({ loading: false, searchCriteria: action.payload });
+        const act = action as selectedAlertActions.SaveSdaSearchCriteria;
+        const record = SearchCriteriaRecordFactory(act.payload);
+
+        return state.merge({ loading: false, searchCriteria: record });
       }
-      case selectedAlertActions.ActionTypes.LOAD_SDAS:
+    case selectedAlertActions.ActionTypes.LOAD_SDAS:
       {
         return state.merge({ loading: true });
       }
@@ -70,13 +76,13 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         const act = action as selectedAlertActions.LoadSdasCompleteAction;
 
-        return state.merge({ loading: false, sdaListResult: new SdaListResult(act.payload) });
+        return state.merge({ loading: false, sdaListResult: SdaListResultFactory(act.payload) });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadAircraftInfoCompleteAction;
 
-        return state.merge({ loading: false, aircraftInfo: aircraftInfoFactory(act.payload) });
+        return state.merge({ loading: false, aircraftInfo: AircraftInfoFactory(act.payload) });
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL:
     case selectedAlertActions.ActionTypes.SAVE_SDA_FAIL:
@@ -89,7 +95,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({
           loading: false,
-          sda: sdaFactory(act.payload.sda),
+          sda: SdaFactory(act.payload.sda),
           newSdaStatus: act.payload.sda.status,
           savedState: SavedStateFactory(act.payload),
           currentSdaId: act.payload.sdaId

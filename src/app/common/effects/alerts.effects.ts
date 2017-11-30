@@ -11,8 +11,7 @@ import * as services from '@app/common/services';
 import * as models from '@app/common/models';
 import * as fromRoot from '@app/common/reducers';
 import '@app/common/rxjs-extensions';
-import { SdaListResult, SdaListResultProps } from '@app/common/models';
-
+import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 
 @Injectable()
 export class AlertEffects {
@@ -90,7 +89,7 @@ export class AlertEffects {
       criteria.PageData = payload;
 
       return this.sdaService.searchSda(criteria)
-        .map((data: SdaListResultProps) => {
+        .map((data: models.ISdaListResult) => {
           return new selectedAlert.LoadSdasCompleteAction(data);
         })
         .catch((err) => {
@@ -102,13 +101,19 @@ export class AlertEffects {
   loadSda$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
     .map((action: selectedAlert.LoadSdaAction) => action.payload)
-    .switchMap((sdaId: number) => {
-      if (sdaId === 0) {
+    .switchMap((payload: ILoadSda) => {
+      if (payload.sdaId === 0) {
         return of(new selectedAlert.LoadSdaCompleteAction({}));
       }
 
-      return this.sdaService.getSda(sdaId)
+      return this.sdaService.getSda(payload)
         .map((data: models.ISda) => {
+          if (payload.original && !data) {
+            this.router.navigate(['/alerts', payload.sdaId]);
+
+            return new selectedAlert.LoadSdaCompleteAction({});
+          }
+
           return new selectedAlert.LoadSdaCompleteAction(data);
         })
         .catch((err) => {

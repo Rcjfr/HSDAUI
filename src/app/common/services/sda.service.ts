@@ -6,8 +6,8 @@ import { Helper } from '@app/common/helper';
 import * as models from '@app/common/models';
 import '@app/common/rxjs-extensions';
 import { AuthService } from '@app/common/services/auth.service';
-import { SdaListResult } from '@app/common/models/sda-list-result.model';
-import { SdaListResultProps } from '@app/common/models';
+import { ISdaListResult } from '@app/common/models';
+import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 
 @Injectable()
 export class SdaService {
@@ -26,12 +26,20 @@ export class SdaService {
     }
   };
 
-  searchSda(criteria): Observable<SdaListResultProps> {
-    return this.http.post(this.endPointUrl + '/search', criteria);
+  searchSda(criteria): Observable<ISdaListResult> {
+    return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
   };
 
-  getSda(sdaId: number): Observable<models.ISda> {
-    return this.http.get(`${this.endPointUrl}/${sdaId}`, { responseType: 'text' })
+  getSda(payload: ILoadSda): Observable<models.ISda> {
+    let url = `${this.endPointUrl}/${payload.sdaId}`;
+    if (payload.original) {
+      url = `${url}/original`;
+    }
+    if (payload.version) {
+      url = `${url}/version/${payload.version}`;
+    }
+
+    return this.http.get(url, { responseType: 'text' })
       .map((result) => Helper.Deserialize(result));
   };
 

@@ -2,6 +2,7 @@ import {
   Component, OnInit, Input, ViewChildren, ElementRef,
   AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges, ChangeDetectorRef
 } from '@angular/core';
+import { Location } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -37,6 +38,8 @@ import { ConfirmComponent } from '@app/common/components/confirm/confirm.compone
 export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   getCurrentSdaIdSubscription: Subscription;
   @Input() sda: ISda;
+  @Input() readOnly: boolean;
+  @Input() original: boolean;
   @Input() loading: boolean;
   @Output() onReset = new EventEmitter();
   currentSdaId: number;
@@ -66,7 +69,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
     public appStateService: AppStateService, public authService: AuthService,
-    private dialogService: DialogService,
+    private dialogService: DialogService, public location: Location,
     private cd: ChangeDetectorRef) {
     this.sdaForm = this.fb.group({
       status: ['', [Validators.required]],
@@ -221,7 +224,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         }).filter(confirm => confirm === true).subscribe(confirm => {
           this.confirmDeferralInf(newStatus);
         });
-      } else if (cpcpSectionGroup.get('corrosionLevel').value === 3)  {
+      } else if (cpcpSectionGroup.get('corrosionLevel').value === 3) {
         this.dialogService.addDialog(ConfirmComponent, {
           title: 'Confirm?',
           message: `This is a Level 3 corrosion finding.  Is this correct?`,
@@ -235,12 +238,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
             this.confirmDeferralInf(newStatus);
           });
         });
-      }else {
+      } else {
         this.confirmDeferralInf(newStatus);
-        }
+      }
     } else {
       this.confirmDeferralInf(newStatus);
-      }
+    }
   }
 
 
@@ -257,9 +260,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }).subscribe(confirm => {
         if (confirm) {
 
-          this.sdaForm.get('correctiveActionFormGroup').patchValue({'isDeferred': true});
-        }else {
-         this.saveAlert(newStatus);
+          this.sdaForm.get('correctiveActionFormGroup').patchValue({ 'isDeferred': true });
+        } else {
+          this.saveAlert(newStatus);
         }
       });
     } else {
@@ -566,5 +569,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return this.sda.correctiveActionSection
       && this.sda.correctiveActionSection.isMajorRepair
       && this.currentStatus === Status.Closed;
+  }
+
+  public hasOriginalVersion(): boolean {
+    return this.sda.history.some(s => s.status === Status.Closed) &&
+      this.sda.history[0].status !== Status.Closed;
   }
 }

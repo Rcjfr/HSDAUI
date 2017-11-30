@@ -1,11 +1,13 @@
 import * as fromSelectedAlert from './selected-alert';
 import * as selectedAlert from '@app/common/actions/selected-alert';
-import { aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
-import { sdaFactory } from '@app/common/reducers/models/sda';
+import { AircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { SdaFactory } from '@app/common/reducers/models/sda';
 import { List } from 'immutable';
 import { ISda, ISdaListView, Status, IAircraftInfo } from '@app/common/models';
-import { SavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
-import { SdaListResult, SdaSearchCriteria } from '@app/common/models';
+import { ISavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
+import { ISdaListResult } from '@app/common/models';
+import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
+import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
@@ -13,14 +15,14 @@ describe('selectedAlertReducer', () => {
     savedState: SavedStateFactory(),
     currentSdaId: 0,
     loadNewSdaCounter: 0,
-    sda: sdaFactory(),
+    sda: SdaFactory(),
     newSdaStatus: Status.Open,
     noseNumbers: List.of<IAircraftInfo>(),
-    aircraftInfo: aircraftInfoFactory(),
-    sdaListResult: new SdaListResult(),
-    searchCriteria: new SdaSearchCriteria()
+    aircraftInfo: AircraftInfoFactory(),
+    sdaListResult: SdaListResultFactory(),
+    searchCriteria: SearchCriteriaRecordFactory()
   };
-  const aircraftInfo = aircraftInfoFactory({
+  const aircraftInfo = AircraftInfoFactory({
     noseNumber: 'A330',
     model: 'A330',
     manufacturer: 'Airbus',

@@ -55,7 +55,9 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
     this.alertCodes$ = this.appStateService.getAlertCodes();
     this.departments$ = this.appStateService.getDepartments();
     this.checkTypes$ = this.appStateService.getCheckTypes();
-    this.sdaForm.valueChanges.subscribe(s => this.criteria.searchBySda = s)
+    this.sdaForm.valueChanges.subscribe(s =>
+      this.criteria.searchBySda = s
+    )
   }
 
   ngOnDestroy(): void {

@@ -25,6 +25,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeactivate {
   sda$: Observable<models.ISda>;
   currentSdaId = 0;
+  currentSdaVersion = 0;
+  isOriginalSda = false;
   newSdaSubscription: Subscription;
   savedStateSubscription: Subscription;
   loading$ = new BehaviorSubject(true);
@@ -73,14 +75,17 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.alertDetailView.clearForm();
       }
     });
-    this.route.params.select<string>('id').subscribe(id => {
+    Observable.combineLatest(this.route.params, this.route.data).subscribe(params => {
+      const id: string = params[0] && params[0]['id'];
+      this.currentSdaVersion = params[0] && params[0]['version'] || 0;
+      this.isOriginalSda = (params[1][0] && params[1][0]['original']) || false;
       if (id !== 'new') {
         this.currentSdaId = Number.parseInt(id);
       } else {
         this.currentSdaId = 0;
       }
       this.alertDetailView && this.alertDetailView.clearForm();
-      this.appStateService.loadSda(this.currentSdaId);
+      this.appStateService.loadSda({ sdaId: this.currentSdaId, version: this.currentSdaVersion, original: this.isOriginalSda });
     });
     this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView && this.alertDetailView.clearForm());
   }

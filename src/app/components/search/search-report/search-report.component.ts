@@ -28,17 +28,17 @@ export class SearchReportComponent implements OnInit, OnChanges {
   }
 
   setSearchByReportFilters(options) {
-    if (!this.criteria.SearchByReport) {
-      this.criteria.SearchByReport = { filters: options };
+    if (!this.criteria.searchByReport) {
+      this.criteria.searchByReport = { filters: options };
     } else {
-      this.criteria.SearchByReport.filters = options;
+      this.criteria.searchByReport.filters = options;
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.criteria && changes.criteria.currentValue) {
-      if (changes.criteria.currentValue.SearchByReport) {
-        this.selectedOptions = changes.criteria.currentValue.SearchByReport.filters;
+      if (changes.criteria.currentValue.searchByReport) {
+        this.selectedOptions = changes.criteria.currentValue.searchByReport.filters;
       } else {
         this.selectedOptions = [];
       }

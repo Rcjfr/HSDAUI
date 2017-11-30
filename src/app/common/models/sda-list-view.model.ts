@@ -7,4 +7,5 @@ export interface ISdaListView {
   station: string;
   routineNo: string;
   nonRoutineNo: string;
+  hasOriginal: boolean;
 }

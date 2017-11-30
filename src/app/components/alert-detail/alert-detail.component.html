@@ -1,6 +1,8 @@
 <aac-loading *ngIf="loading$ | async"></aac-loading>
 <ng-container *ngIf="sda$ | async;let sda; else loading">
   <aa-alert-detail-view [sda]="sda"
+                        [readOnly]="this.currentSdaVersion!=0 || this.isOriginalSda"
+                        [original]="this.isOriginalSda"
                         [loading]="loading$ | async"
                         (onReset)="resetSda()">
   </aa-alert-detail-view>

@@ -2,10 +2,11 @@ import { AppStateService } from '@app/common/services/app-state.service';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '@app/common/models';
-import { AircraftInfoRecord, aircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
-import { SdaRecord, sdaFactory } from '@app/common/reducers/models/sda';
+import { IAircraftInfoRecord, AircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
+import { ISdaRecord, SdaFactory } from '@app/common/reducers/models/sda';
 import { UserRecordFactory, IUserRecord } from '@app/common/reducers/models/user';
-import { SdaSearchCriteria  } from '@app/common/models/sda-search-criteria.model';
+import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
+
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -58,11 +59,11 @@ export class MockAppStateService extends AppStateService {
   }
 
   getAircraftInfo() {
-    return Observable.of(aircraftInfoFactory());
+    return Observable.of(AircraftInfoFactory());
   }
 
   getSelectedAlert() {
-    return Observable.of(sdaFactory());
+    return Observable.of(SdaFactory());
   }
 
   getSelectedAlertLoading() {
@@ -117,6 +118,6 @@ export class MockAppStateService extends AppStateService {
     return Observable.of([]);
   }
   getSearchCriteria() {
-    return Observable.of(<SdaSearchCriteria>{});
+    return Observable.of(SearchCriteriaRecordFactory());
   }
 }

@@ -1,7 +1,7 @@
 import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 import { ISda } from '@app/common/models';
-export interface SdaRecord extends TypedRecord<SdaRecord>, ISda { }
-export const sdaFactory = makeTypedFactory<ISda, SdaRecord>({
+export interface ISdaRecord extends TypedRecord<ISdaRecord>, ISda { }
+export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
   id: 0,
   historicId: '',
   workflowInstanceId: '',

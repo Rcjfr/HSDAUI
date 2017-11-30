@@ -1,25 +1,39 @@
 <h1 id='searchResults'>Search Results</h1>
 
-<p-dataTable [value]="(sdaListResult$ | async).records" [totalRecords]="(sdaListResult$ | async).totalRecords" [lazy]="true"
-  (onLazyLoad)="loadPageOfRecords($event)" [responsive]="true" [rows]="defaultPageSize" [paginator]="true" [sortField]="defaultSortColumn"
-  [sortOrder]="defaultSortOrder">
-  <p-header>SDAs</p-header>
-  <p-column field="id" header="SDA ID" [sortable]="true" [filter]="true">
+<p-dataTable #dataTable [value]="(sdaListResult$ | async).records"
+             [totalRecords]="(sdaListResult$ | async).totalRecords"
+             [lazy]="true"
+             (onLazyLoad)="loadPageOfRecords($event)"
+             [responsive]="true"
+             [rows]="defaultPageSize"
+             [paginator]="true"
+             [sortField]="defaultSortColumn"
+             [sortOrder]="defaultSortOrder">
+  <p-column field="id" header="SDA ID" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
-      <a [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+      <a title='View Current' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+      <a title='View Original' *ngIf="record.hasOriginal" class="pull-right" [routerLink]="['/alerts', record[col.field],'original']">[Original]</a>
     </ng-template>
   </p-column>
-  <p-column field="aircraftNo" header="Aircraft #" [sortable]="true" [filter]="true"></p-column>
-  <p-column field="createDate" header="Create Date" [sortable]="true" [filter]="true">
+  <p-column field="aircraftNo" header="Aircraft #" [sortable]="true"></p-column>
+  <p-column field="createDate" header="Create Date" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
       {{record[col.field] | date:'shortDate' }}
     </ng-template>
   </p-column>
-  <p-column field="statusText" header="Form Status" [sortable]="true" [filter]="true"></p-column>
-  <p-column field="station" header="Station" [sortable]="true" [filter]="true"></p-column>
-  <p-column field="routineNo" header="Routine #" [sortable]="true" [filter]="true"></p-column>
-  <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true" [filter]="true"></p-column>
+  <p-column field="statusText" header="Form Status" [sortable]="true"></p-column>
+  <p-column field="station" header="Station" [sortable]="true"></p-column>
+  <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
+  <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>
+<!--TODO: need to update primeng version in future to make this content dynamic-->
+  <!--<ng-template pTemplate="paginatorLeft" let-totalRecords="dataTable.totalRecords" let-fromRecords="dataTable.rows * (dataTable.page)+1" let-toRecords="Math.min(dataTable.rows * (dataTable.page+1),dataTable.totalRecords)">
+    <span>
+      Showing {{fromRecords}} to {{toRecords}} of {{totalRecords}} results
+    </span>
+  </ng-template>-->
+
+
 </p-dataTable>
 <div class="row form-group">
-  &nbsp;
+
 </div>

@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 import * as models from '@app/common/models/index';
-import { SdaListResult, SdaSearchCriteria, SdaListResultProps } from '@app/common/models';
+import { ISdaListResult } from '@app/common/models';
+import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
+import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
@@ -18,6 +20,9 @@ export const ActionTypes = {
   LOAD_SDA: 'Load SDA',
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
   LOAD_SDA_FAIL: 'Load SDA Fail',
+  LOAD_SDA_ORIGINAL: 'Load SDA Original',
+  LOAD_SDA_ORIGINAL_COMPLETE: 'Load SDA Original Complete',
+  LOAD_SDA_ORIGINAL_FAIL: 'Load SDA Original Fail',
   LOAD_NEW_SDA: 'Load New SDA',
   SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria',
   SET_SDA_NEW_STATUS: 'Set SDA new status',
@@ -33,7 +38,10 @@ export class OperationFailedAction implements Action {
 
 export class LoadNoseNumbersAction implements Action {
   public type = ActionTypes.LOAD_NOSE_NUMBERS;
-  constructor(public payload: string) { }
+  public payload: string
+  constructor(token: string) {
+    this.payload = token;
+  }
 }
 export class LoadNoseNumbersCompleteAction implements Action {
   public type = ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE;
@@ -72,15 +80,12 @@ export class SaveSdaFailAction implements Action {
 
 export class LoadSdasAction implements Action {
   public type = ActionTypes.LOAD_SDAS;
-  constructor(public payload: any) { }
+  constructor(public payload: models.ILazyLoadEvent) { }
 }
-export class SaveSdaSearchCriteria implements Action {
-  public type = ActionTypes.SAVE_SDA_SEARCH_CRITERIA;
-  constructor(public payload: SdaSearchCriteria) { }
-}
+
 export class LoadSdasCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDAS_COMPLETE;
-  constructor(public payload: SdaListResultProps) { }
+  constructor(public payload: ISdaListResult) { }
 }
 export class LoadSdasFailAction implements Action {
   public type = ActionTypes.LOAD_SDAS_FAIL;
@@ -89,7 +94,7 @@ export class LoadSdasFailAction implements Action {
 
 export class LoadSdaAction implements Action {
   public type = ActionTypes.LOAD_SDA;
-  constructor(public payload: number) { }
+  constructor(public payload: ILoadSda) { }
 }
 export class LoadSdaCompleteAction implements Action {
   public type = ActionTypes.LOAD_SDA_COMPLETE;
@@ -99,6 +104,7 @@ export class LoadSdaFailAction implements Action {
   public type = ActionTypes.LOAD_SDA_FAIL;
   constructor(public payload: any) { }
 }
+
 export class LoadNewSdaAction implements Action {
   public type = ActionTypes.LOAD_NEW_SDA;
   public payload: any
@@ -107,6 +113,11 @@ export class LoadNewSdaAction implements Action {
 export class SetSdaNewStatusAction implements Action {
   public type = ActionTypes.SET_SDA_NEW_STATUS;
   constructor(public payload: models.Status) { }
+}
+
+export class SaveSdaSearchCriteria implements Action {
+  public type = ActionTypes.SAVE_SDA_SEARCH_CRITERIA;
+  constructor(public payload: ISearchCriteria) { }
 }
 
 export type Actions =

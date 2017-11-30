@@ -6,8 +6,9 @@ import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import * as lookupDataActions from '@app/common/actions/lookup-data';
 import * as userActions from '@app/common/actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda, ISavedState, Status, IAircraftInfo } from '@app/common/models';
+import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent } from '@app/common/models';
 import { List } from 'immutable';
+import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 
 @Injectable()
 export class AppStateService {
@@ -145,7 +146,7 @@ export class AppStateService {
     this.loadNewSdaSubject.next({ load: true });
   }
 
-  loadSdaList(pageData): void {
+  loadSdaList(pageData: ILazyLoadEvent): void {
     this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
   }
 
@@ -153,8 +154,9 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));
   }
 
-  loadSda(sdaId: number): void {
-    this.store.dispatch(new selectedAlertActions.LoadSdaAction(sdaId));
+  loadSda(payload: number | ILoadSda): void {
+    const pl = typeof payload === 'number' ? { sdaId: payload, version: 0, original: false } : payload;
+    this.store.dispatch(new selectedAlertActions.LoadSdaAction(pl));
   }
 
   loadAircraftInfo(noseNumber: string): void {

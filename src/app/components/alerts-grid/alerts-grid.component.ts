@@ -1,21 +1,16 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ISdaListView } from '@app/common/models';
-import { SdaSearchCriteria } from '@app/common/models';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
+import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
-import { SdaListResult } from '@app/common/models/sda-list-result.model';
+import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
 import * as _ from 'lodash';
 import { ScrollToService } from 'ng2-scroll-to-el';
+import { DataGrid } from 'primeng/primeng';
 
-export interface LazyLoadEvent {
-  first?: number;
-  rows?: number;
-  sortField?: string;
-  sortOrder?: number;
-}
+
 
 @Component({
   selector: 'aa-alerts-grid',
@@ -23,11 +18,12 @@ export interface LazyLoadEvent {
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit, OnDestroy {
-  sdaListResult$: Observable<SdaListResult>;
+  @ViewChild('dataTable') dataTable: DataGrid;
+  sdaListResult$: Observable<ISdaListResultRecord>;
   criteriaSubscription: Subscription;
-
+  Math = Math;
   searchCriteria;
-  sdaListResult = new SdaListResult({
+  sdaListResult = SdaListResultFactory({
     totalRecords: 0,
     records: []
   });
@@ -52,11 +48,11 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
         if (listResult) {
           return listResult;
         } else {
-          return new SdaListResult();
+          return SdaListResultFactory();
         }
       });
 
-      this.criteriaSubscription = this.appStateService.getSearchCriteria()
+    this.criteriaSubscription = this.appStateService.getSearchCriteria()
       .subscribe(criteria => {
         if (criteria) {
           let hasCriteria = false;
@@ -79,7 +75,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     this.criteriaSubscription.unsubscribe();
   }
 
-  loadPageOfRecords(pageData: LazyLoadEvent) {
+  loadPageOfRecords(pageData: ILazyLoadEvent) {
     // PrimeNG will fire this event the first time the table loads. We don't want to fire off a second service call to get results since that was already triggered
     if (this.skipNextLoad) {
       this.skipNextLoad = false;
@@ -88,7 +84,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  getPageData(pageData) {
+  getPageData(pageData: ILazyLoadEvent): ILazyLoadEvent {
     if (!pageData) {
       return this.getDefaultPageData();
     }
@@ -96,7 +92,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     return pageData;
   }
 
-  getDefaultPageData() {
+  getDefaultPageData(): ILazyLoadEvent {
     return {
       first: 0,
       rows: this.defaultPageSize,

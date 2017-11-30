@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { SearchData } from '@app/common/models';
+import { ISearchData } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 
 export const ActionTypes = {
@@ -17,12 +17,15 @@ export const ActionTypes = {
 
 export class LoadSearchesAction implements Action {
   public type = ActionTypes.LOAD_SEARCHES;
-  constructor(public payload: string) { }
+  public payload: string
+  constructor(badgeNo: string) {
+    this.payload = badgeNo;
+  }
 }
 
 export class LoadSearchesCompleteAction implements Action {
   public type = ActionTypes.LOAD_SEARCHES_COMPLETE;
-  constructor(public payload: any[]) { }
+  constructor(public payload: ISavedSearch[]) { }
 }
 
 export class LoadSearchesFailAction implements Action {
@@ -45,16 +48,23 @@ export class SaveSearchFailAction implements Action {
 
 export class SetCurrentSearchId implements Action {
   public type = ActionTypes.SET_CURRENT_SEARCH_ID;
-  constructor(public payload: any) { }
+  public payload: number;
+  constructor(searchId: number) {
+    this.payload = searchId;
+  }
 }
 
 export class DeleteSearchAction implements Action {
   public type = ActionTypes.DELETE_SEARCH;
-  constructor(public payload: number) { }
+  public payload: number
+  constructor(searchId: number) {
+    this.payload = searchId;
+  }
 }
 export class DeleteSearchCompleteAction implements Action {
   public type = ActionTypes.DELETE_SEARCH_COMPLETE;
-  constructor() {}
+  public payload: any;
+  constructor() { }
 }
 export class DeleteSearchFailAction implements Action {
   public type = ActionTypes.DELETE_SEARCH_FAIL;
@@ -63,10 +73,10 @@ export class DeleteSearchFailAction implements Action {
 
 
 export type Actions =
-LoadSearchesAction |
-LoadSearchesCompleteAction |
-LoadSearchesFailAction |
-SaveSearchAction |
-SaveSearchCompleteAction |
-SaveSearchFailAction |
-SetCurrentSearchId;
+  LoadSearchesAction |
+  LoadSearchesCompleteAction |
+  LoadSearchesFailAction |
+  SaveSearchAction |
+  SaveSearchCompleteAction |
+  SaveSearchFailAction |
+  SetCurrentSearchId;

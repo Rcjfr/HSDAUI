@@ -1,8 +1,10 @@
 import { ActionReducer, Action } from '@ngrx/store';
 import * as actions from '@app/common/actions/saved-searches';
-import { SearchData } from '@app/common/models/search-data.model';
+import { ISearchData } from '@app/common/models/search-data.model';
 import { List } from 'immutable';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
+import { SearchDataRecordFactory, ISearchDataRecord } from '@app/common/reducers/models/search-data';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
@@ -10,7 +12,19 @@ export interface State {
   currentSearchId: number;  //Current saved search (what's currently in the form - not neccesarily searched on yet so not always the criteria currently loaded in the results)
 }
 
-export function reducer(state: SearchData = new SearchData(), action: actions.Actions) {
+export interface StateRecord extends TypedRecord<StateRecord>, State { }
+
+export const stateFactory = makeTypedFactory<State, StateRecord>({
+  loading: false,
+  searches: <List<ISavedSearch>>List.of(),
+  currentSearchId: undefined
+});
+
+function makeInitialState() {
+  return stateFactory();
+}
+
+export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: actions.Actions) => {
   switch (action.type) {
     case actions.ActionTypes.LOAD_SEARCHES:
       {
@@ -36,7 +50,7 @@ export function reducer(state: SearchData = new SearchData(), action: actions.Ac
 
         return state.merge({
           loading: false,
-          searches: [...state.searches, act.payload],
+          searches: [...state.searches.toArray(), act.payload],
           currentSearchId: act.payload.searchId
         });
       }

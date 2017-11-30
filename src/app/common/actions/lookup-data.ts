@@ -19,7 +19,7 @@ export const ActionTypes = {
 
 export class LoadFleetCheckTypesAction implements Action {
   public type = ActionTypes.LOAD_FLEET_CHECK_TYPES;
-  public payload: any;
+  public payload: string;
   constructor(fleetType: string) {
     this.payload = fleetType;
   }

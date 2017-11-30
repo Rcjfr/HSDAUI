@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { ISda, ILazyLoadEvent, ISdaListResult } from '@app/common/models';
 describe('Alerts Effect', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
@@ -121,6 +122,43 @@ describe('Alerts Effect', () => {
       })
   );
 
+  it('Call saveSDA Success action after saveSDA',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+        const mockResponse: ISda = {
+          id: 1
+        };
+        spyOn(_sdaService, 'saveSda')
+          .and.returnValue(Observable.of(mockResponse));
+        spyOn(_appStateService, 'notifySavedSda');
+        _runner.queue(new selectedAlert.SaveSdaAction(mockResponse));
+        _alertEffects.saveSda$.subscribe((result: selectedAlert.SaveSdaCompleteAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE);
+          expect(result.payload).toBeTruthy();
+          expect(result.payload.sdaId).toEqual(1);
+        });
+      })
+  );
+
+  it('Call saveSDA Failure action after saveSDA',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+        const mockResponse: ISda = {
+          id: 1
+        };
+        spyOn(_sdaService, 'saveSda')
+          .and.returnValue(Observable.throw('ERROR'));
+        _runner.queue(new selectedAlert.SaveSdaAction(mockResponse));
+        _alertEffects.saveSda$.subscribe((result: selectedAlert.SaveSdaFailAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.SAVE_SDA_FAIL);
+          expect(result.payload).toEqual('Failed to save SDA.');
+        });
+      })
+  );
 
   it('Call Show Toastr error after any fail actions',
     inject([EffectsRunner, AlertEffects, services.AircraftService, ToastrService],
@@ -134,7 +172,136 @@ describe('Alerts Effect', () => {
       })
   );
 
-  it('Call Load SDA Fail error',
+  it('Call loadSDAS Success action after loadSDAs',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+        const mockData: ILazyLoadEvent = {
+          first: 0,
+          rows: 20,
+          sortField: '',
+          sortOrder: 0
+        };
+        const mockResponse: ISdaListResult = {
+          totalRecords: 20,
+          records: []
+        };
+        spyOn(_sdaService, 'searchSda')
+          .and.returnValue(Observable.of(mockResponse));
+
+        _runner.queue(new selectedAlert.LoadSdasAction(mockData));
+        _alertEffects.loadSdas$.subscribe((result: selectedAlert.LoadSdasCompleteAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDAS_COMPLETE);
+          expect(result.payload).toBeTruthy();
+          expect(result.payload.totalRecords).toEqual(20);
+        });
+      })
+  );
+
+  it('Call loadSDAS Failure action after loadSDAS',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+        const mockData: ILazyLoadEvent = {
+          first: 0,
+          rows: 20,
+          sortField: '',
+          sortOrder: 0
+        };
+        spyOn(_sdaService, 'searchSda')
+          .and.returnValue(Observable.throw('ERROR'));
+        _runner.queue(new selectedAlert.LoadSdasAction(mockData));
+        _alertEffects.loadSdas$.subscribe((result: selectedAlert.LoadSdasFailAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDAS_FAIL);
+          expect(result.payload).toEqual('Failed to load SDAs.');
+        });
+      })
+  );
+
+
+  it('Call loadSDA Success action after loadSDA',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+
+        const mockResponse: ISda = {
+          id: 1
+        };
+        spyOn(_sdaService, 'getSda')
+          .and.returnValue(Observable.of(mockResponse));
+
+        _runner.queue(new selectedAlert.LoadSdaAction({ sdaId: 1, version: 0, original: false }));
+        _alertEffects.loadSda$.subscribe((result: selectedAlert.LoadSdaCompleteAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDA_COMPLETE);
+          expect(result.payload).toBeTruthy();
+          expect(result.payload.id).toEqual(1);
+        });
+      })
+  );
+
+  it('Call loadSDA Success action after loadSDA(new)',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+
+        const mockResponse: ISda = {
+
+        };
+        spyOn(_sdaService, 'getSda')
+          .and.returnValue(Observable.of(mockResponse));
+
+        _runner.queue(new selectedAlert.LoadSdaAction({ sdaId: 0, version: 0, original: false }));
+        _alertEffects.loadSda$.subscribe((result: selectedAlert.LoadSdaCompleteAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDA_COMPLETE);
+          expect(result.payload).toBeTruthy();
+          expect(result.payload.id).toBeUndefined();
+        });
+      })
+  );
+  it('Call loadSDA Success action after loadSDA(without original version)',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+
+        const mockResponse: ISda = {
+
+        };
+        spyOn(_sdaService, 'getSda')
+          .and.returnValue(Observable.of(null));
+        const router = TestBed.get(Router);
+        const navigateSpy = spyOn(router, 'navigate');
+
+        _runner.queue(new selectedAlert.LoadSdaAction({ sdaId: 1, version: 0, original: true }));
+        _alertEffects.loadSda$.subscribe((result: selectedAlert.LoadSdaCompleteAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDA_COMPLETE);
+          expect(result.payload).toBeTruthy();
+          expect(result.payload.id).toBeUndefined();
+          expect(navigateSpy).toHaveBeenCalledWith(['/alerts', 1]);
+        });
+      })
+  );
+
+  it('Call loadSDA Failure action after loadSDA',
+    inject([
+      EffectsRunner, AlertEffects, services.SdaService, services.AppStateService
+    ],
+      (_runner, _alertEffects: AlertEffects, _sdaService, _appStateService) => {
+        spyOn(_sdaService, 'getSda')
+          .and.returnValue(Observable.throw('ERROR'));
+        _runner.queue(new selectedAlert.LoadSdaAction({ sdaId: 1, version: 0, original: false }));
+        _alertEffects.loadSda$.subscribe((result: selectedAlert.LoadSdaFailAction) => {
+          expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_SDA_FAIL);
+          expect(result.payload).toEqual('Failed to load SDA.');
+        });
+      })
+  );
+
+  it('Call Show Load SDA Fail error',
     inject([EffectsRunner, AlertEffects, services.AircraftService, ToastrService],
       (_runner, _alertEffects, _aircraftService, _toaster) => {
         const router = TestBed.get(Router);

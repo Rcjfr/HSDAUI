@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
 import { AuthService } from '@app/common/services/auth.service';
-import { SearchData } from '@app/common/models';
+import { ISearchData } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
 
@@ -105,7 +105,7 @@ export class AlertsSearchComponent implements OnInit {
       searchBySda: undefined,
       searchByAircraft: undefined,
       searchByMaintenance: undefined,
-      searcyByCorrosion: undefined,
+      searchByCorrosion: undefined,
       searchByDefect: undefined,
       searchByCorrectiveAction: undefined,
       searchByPart: undefined,
