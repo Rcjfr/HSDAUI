@@ -529,7 +529,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   isCPCPDispositionSectionEditable(): Observable<boolean> {
     return this.authService.isCPCPTrainedReviewingEngineer().map(ok => {
-      return (ok && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
+      return (ok && !this.readOnly && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
         (this.sda.cpcpSection.corrosionLevel === 2 ||
           this.sda.cpcpSection.corrosionLevel === 3) &&
         (this.currentStatus === Status.Audited ||
@@ -551,7 +551,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   isDTESectionEditable(): Observable<boolean> {
     return this.authService.isComplianceEngineer().map(ok => {
-      return (ok && (this.sda.correctiveActionSection.isMajorRepair) &&
+      return (ok && !this.readOnly && (this.sda.correctiveActionSection.isMajorRepair) &&
         (this.sda.status === Status.Closed));
     });
 
