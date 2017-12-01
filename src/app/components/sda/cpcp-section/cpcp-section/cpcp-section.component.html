@@ -5,10 +5,10 @@
         <label class="col-sm-4 control-label">Is this a CPCP related event?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="36" name="isCPCPRelatedEvent" [required]="!isSDAOpen()"  formControlName="isCPCPRelatedEvent"/>
+            <input type="radio" [value]="true" tabindex="36" [required]="!isSDAOpen()"  formControlName="isCPCPRelatedEvent"/>
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="36" name="isCPCPRelatedEvent" [required]="!isSDAOpen()" formControlName="isCPCPRelatedEvent" />
+            <input type="radio" [value]="false" tabindex="36" [required]="!isSDAOpen()" formControlName="isCPCPRelatedEvent" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isCPCPRelatedEvent" class="error">{{displayMessage.isCPCPRelatedEvent}}</div>
         </div>
@@ -21,10 +21,10 @@
         <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
         <div class="col-sm-8">  
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="37" name="isWideSpreadCorrosion" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
+            <input type="radio" [value]="true" tabindex="37" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="37" name="isWideSpreadCorrosion" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
+            <input type="radio" [value]="false" tabindex="37" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isWideSpreadCorrosion" class="error">{{displayMessage.isWideSpreadCorrosion}}</div>
         </div>
@@ -37,7 +37,7 @@
           <div class="col-sm-8">
 
             <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
-              <input type="radio" [value]="ac.id" tabindex="38" name="corrosionLevel" [required]="areCPCPFieldsRequired()" formControlName="corrosionLevel" />
+              <input type="radio" [value]="ac.id" tabindex="38" [required]="areCPCPFieldsRequired()" formControlName="corrosionLevel" />
             </aac-radio-container>
             <span *ngIf="displayMessage.corrosionLevel" class="help-block">{{displayMessage.corrosionLevel}}</span>
           </div>
@@ -58,10 +58,10 @@
         <label class="col-sm-4 control-label">Corroded Area Previously Blended:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="39" name="isPreviouslyBlended" [required]="areCPCPFieldsRequired()" formControlName="isPreviouslyBlended" />
+            <input type="radio" [value]="true" tabindex="39" [required]="areCPCPFieldsRequired()" formControlName="isPreviouslyBlended" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="39" name="isPreviouslyBlended" [required]="areCPCPFieldsRequired()" formControlName="isPreviouslyBlended" />
+            <input type="radio" [value]="false" tabindex="39" [required]="areCPCPFieldsRequired()" formControlName="isPreviouslyBlended" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isPreviouslyBlended" class="error">{{displayMessage.isPreviouslyBlended}}</div>
         </div>

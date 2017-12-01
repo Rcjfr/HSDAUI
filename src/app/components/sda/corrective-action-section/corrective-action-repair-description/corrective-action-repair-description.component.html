@@ -48,10 +48,10 @@
           <label class="col-sm-4 control-label">Externally Visible?<span class="req" *ngIf="!isSDAOpen()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="true" tabindex="67" [required]="!isSDAOpen()" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="67" [required]="!isSDAOpen()" name="isExternallyVisible" formControlName="isExternallyVisible" />
+              <input type="radio" [value]="false" tabindex="67" [required]="!isSDAOpen()" formControlName="isExternallyVisible" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isExternallyVisible" class="error">{{displayMessage.isExternallyVisible}}</div>
           </div>

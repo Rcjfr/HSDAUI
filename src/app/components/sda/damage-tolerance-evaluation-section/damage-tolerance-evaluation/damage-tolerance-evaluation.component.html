@@ -45,10 +45,10 @@
         <label class="col-sm-4 control-label">Fatigue Critical<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="36" name="isFatigueCritical" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="true" tabindex="36" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="36" name="isFatigueCritical" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="false" tabindex="36" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isFatigueCritical" class="error">{{displayMessage.isFatigueCritical}}</div>
         </div>
@@ -66,22 +66,22 @@
   <div class="row form-group">
     <div class="col-sm-3">
       <aac-radio-container label="6 Months">
-        <input type="radio" [value]="6" tabindex="36" name="stage1Duration" formControlName="stage1Duration" />
+        <input type="radio" [value]="6" tabindex="36" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="12 Months">
-        <input type="radio" [value]="12" tabindex="36" name="stage1Duration" formControlName="stage1Duration" />
+        <input type="radio" [value]="12" tabindex="36" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="18 Months">
-        <input type="radio" [value]="18" tabindex="36" name="stage1Duration" formControlName="stage1Duration" />
+        <input type="radio" [value]="18" tabindex="36" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="24 Months">
-        <input type="radio" [value]="24" tabindex="36" name="stage1Duration" formControlName="stage1Duration" />
+        <input type="radio" [value]="24" tabindex="36" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
   </div>

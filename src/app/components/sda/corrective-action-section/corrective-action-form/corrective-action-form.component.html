@@ -6,10 +6,10 @@
       </div>
     <div class="col-sm-8">
       <aac-radio-container label="Yes">
-        <input type="radio" [value]="true" tabindex="55" name="isDeferred" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
+        <input type="radio" [value]="true" tabindex="55" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
       </aac-radio-container>
       <aac-radio-container label="No">
-        <input type="radio" [value]="false" tabindex="55" name="isDeferred" [required]="!isSDAOpen()" formControlName="isDeferred" />
+        <input type="radio" [value]="false" tabindex="55" [required]="!isSDAOpen()" formControlName="isDeferred" />
       </aac-radio-container>
        <div *ngIf="displayMessage.isDeferred" class="error">{{displayMessage.isDeferred}}</div>
     </div>
@@ -44,10 +44,10 @@
       </div>
       <div class="col-sm-8">
         <aac-radio-container label="Yes">
-          <input type="radio" [value]="true" tabindex="70" name="isMajorRepair" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+          <input type="radio" [value]="true" tabindex="70" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
         </aac-radio-container>
         <aac-radio-container label="No">
-          <input type="radio" [value]="false" tabindex="70" name="isMajorRepair" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+          <input type="radio" [value]="false" tabindex="70" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
         </aac-radio-container>
         <div *ngIf="displayMessage.isMajorRepair" class="error">{{displayMessage.isMajorRepair}}</div>
       </div>
