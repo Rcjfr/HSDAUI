@@ -16,6 +16,7 @@ export class SavedSearchesComponent implements OnInit {
   @Input() currentSearchId: number;
   @Input() badgeNumber: string;
   @Output() onSearchChange = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter();
 
   createForm: FormGroup;
   updateForm: FormGroup;
@@ -70,6 +71,9 @@ export class SavedSearchesComponent implements OnInit {
     return search.name + (search.isDefault ? ' (Default)' : '');
   }
 
+  onSearchAlerts() {
+    this.onSearch.emit();
+  }
   onSelectedChange() {
     const selectedSearch = +this.updateForm.controls.selected.value;
     if (selectedSearch !== 0) {

@@ -238,9 +238,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
             this.confirmDeferralInf(newStatus);
           });
         });
-      } else {
+      }else {
         this.confirmDeferralInf(newStatus);
-      }
+        }
     } else {
       this.confirmDeferralInf(newStatus);
     }

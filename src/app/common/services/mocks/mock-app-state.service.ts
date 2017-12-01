@@ -1,3 +1,4 @@
+import { Status } from '@app/common/models/status';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
@@ -119,5 +120,17 @@ export class MockAppStateService extends AppStateService {
   }
   getSearchCriteria() {
     return Observable.of(SearchCriteriaRecordFactory());
+  }
+
+  getNewSdaStatus() {
+    return Observable.of(<Status>{});
+  }
+
+  getFloorboardConditions() {
+    return Observable.of([]);
+  }
+
+  setNewSdaStatus(status: Status) {
+    return null;
   }
 }

@@ -4,7 +4,7 @@
         <form [formGroup]="updateForm">
           <div class="row form-group" style="padding-top:15px;">
             <div class="col-md-1"></div>
-            <div class="col-md-5">
+            <div class="col-md-4">
               <aac-field-container label="Search Name:">
                 <select class="form-control" name="selectedSearch" formControlName="selected" (change)="onSelectedChange()" [ngClass]="{'select-invalid': updateForm.get('selected').hasError('required')}">
                   <option value="0"></option>
@@ -17,11 +17,10 @@
                 <input type="checkbox" name="isDefault" formControlName="isDefault" />
               </aac-checkbox-container>
             </div>
-            <div class="col-md-2">
-              <button type="button" (click)="updateSavedSearch()" class="btn btn-primary" [disabled]="!updateForm.valid">Update This Search</button>
-            </div>
-            <div class="col-md-2">
-              <button type="button" (click)="deleteSavedSearch()" class="btn btn-default" [disabled]="!updateForm.valid">Delete This Search</button>
+            <div class="col-md-5">
+                <button type="button" (click)="onSearchAlerts()" class="btn btn-primary" [disabled]="!updateForm.valid">Search</button>
+                <button type="button" (click)="updateSavedSearch()" class="btn btn-primary" [disabled]="!updateForm.valid">Update This Search</button>
+                <button type="button" (click)="deleteSavedSearch()" class="btn btn-default" [disabled]="!updateForm.valid">Delete This Search</button>
             </div>
           </div>
         </form>
