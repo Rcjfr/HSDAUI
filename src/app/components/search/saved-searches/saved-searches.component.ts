@@ -1,3 +1,4 @@
+import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
 import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SavedSearchStateService, AuthService } from '@app/common/services';
@@ -16,11 +17,12 @@ export class SavedSearchesComponent implements OnInit {
   @Input() currentSearchId: number;
   @Input() badgeNumber: string;
   @Output() onSearchChange = new EventEmitter<string>();
-  @Output() onSearch = new EventEmitter();
+  @Output() onSearch = new EventEmitter<string>();
 
   createForm: FormGroup;
   updateForm: FormGroup;
   savedSearches: List<ISavedSearch>;
+  selectedSearchCriteria: any;
 
   constructor(private savedSearchStateService: SavedSearchStateService,
     private dialogService: DialogService,
@@ -58,6 +60,7 @@ export class SavedSearchesComponent implements OnInit {
         this.onSearchChange.emit(JSON.parse(search.criteria));
 
         if (search.isDefault) {
+          this.selectedSearchCriteria = search;
           this.savedSearchStateService.setCurrentSearchId(search.searchId);
         }
       } else {
@@ -72,17 +75,19 @@ export class SavedSearchesComponent implements OnInit {
   }
 
   onSearchAlerts() {
-    this.onSearch.emit();
-  }
+
+      this.onSearch.emit(JSON.parse(this.selectedSearchCriteria.criteria));
+      this.updateForm.patchValue({ isDefault: this.selectedSearchCriteria.isDefault });
+}
   onSelectedChange() {
     const selectedSearch = +this.updateForm.controls.selected.value;
     if (selectedSearch !== 0) {
       if (this.savedSearches && this.savedSearches instanceof List) {
-        const search = this.savedSearches.find(i => i.searchId === selectedSearch);
-        if (search) {
-          this.savedSearchStateService.setCurrentSearchId(search.searchId);
-          this.onSearchChange.emit(JSON.parse(search.criteria));
-          this.updateForm.patchValue({ isDefault: search.isDefault });
+        this.selectedSearchCriteria = this.savedSearches.find(i => i.searchId === selectedSearch);
+        if (this.selectedSearchCriteria) {
+          this.savedSearchStateService.setCurrentSearchId(this.selectedSearchCriteria.searchId);
+          this.onSearchChange.emit(JSON.parse(this.selectedSearchCriteria.criteria));
+          this.updateForm.patchValue({ isDefault: this.selectedSearchCriteria.isDefault });
         }
       }
     } else {

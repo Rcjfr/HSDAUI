@@ -14,6 +14,7 @@ import { ISearchData } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
 
+
 @Component({
   selector: 'aa-alerts-search',
   templateUrl: './alerts-search.component.html',
@@ -53,6 +54,53 @@ export class AlertsSearchComponent implements OnInit {
       .map(id => {
         this.currentSearchId = id;
       }).subscribe();
+  }
+
+  deserializeDate(object, key) {
+    if (object) {
+      object[key] = object[key] ? new Date(object[key]) : undefined;
+      }
+  }
+  isSearchModified(savedCriteria: any) {
+
+    this.deserializeDate(savedCriteria.searchByDateRange, 'dateFrom');
+    this.deserializeDate(savedCriteria.searchByDateRange, 'dateThrough');
+    this.deserializeDate(savedCriteria.searchByDTE, 'stage1RTSDateFrom');
+    this.deserializeDate(savedCriteria.searchByDTE, 'stage1RTSDateTo');
+    this.deserializeDate(savedCriteria.searchByDTE, 'stage2DateFrom');
+    this.deserializeDate(savedCriteria.searchByDTE, 'stage2DateTo');
+    this.deserializeDate(savedCriteria.searchByDTE, 'stage3DateFrom');
+    this.deserializeDate(savedCriteria.searchByDTE, 'Stage3DateTo');
+    this.deserializeDate(savedCriteria.searchByDTE, 'updatedDateFrom');
+    this.deserializeDate(savedCriteria.searchByDTE, 'updatedDateTo');
+    this.deserializeDate(savedCriteria.searchByDTE, 'dueDateFrom');
+    this.deserializeDate(savedCriteria.searchByDTE, 'dueDateTo');
+
+    if (JSON.stringify(savedCriteria) === JSON.stringify(this.criteria)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  runSavedSearch(criteria) {
+    if (this.isSearchModified(criteria)) {
+      this.dialogService
+        .addDialog(ConfirmComponent, {
+          title: 'Confirm',
+          message:
+            'You have unsaved criteria in the saved search. Search results will not include the updated criteria if the search is not saved. Do you want to continue with the search?',
+          okButtonText: 'Yes',
+          cancelButtonText: 'No'
+        })
+        .filter(confirm => confirm === true)
+        .subscribe(confirm => {
+          this.updateFilters(criteria);
+          this.searchAlerts();
+        });
+    } else {
+      this.searchAlerts();
+    }
   }
 
   expandCollapseAll(expandAll: boolean) {
@@ -110,7 +158,8 @@ export class AlertsSearchComponent implements OnInit {
       searchByCorrectiveAction: undefined,
       searchByPart: undefined,
       searchByOptions: undefined,
-      searchByReport: undefined
+      searchByReport: undefined,
+      searchByDTE: undefined
     };
   }
 

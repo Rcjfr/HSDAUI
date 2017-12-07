@@ -39,4 +39,12 @@ describe('SavedSearchesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('should call Search Alerts', () => {
+    spyOn(component.onSearch, 'emit' );
+    component.onSearchAlerts();
+    expect(component.onSearch.emit).toHaveBeenCalled();
+  });
+
+
 });

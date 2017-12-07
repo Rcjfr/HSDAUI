@@ -133,7 +133,10 @@ describe('AlertDetailViewComponent', () => {
 
     fixture = TestBed.createComponent(AlertDetailViewComponent);
     component = fixture.componentInstance;
-    component.sda = {id: 0, correctiveActionSection : {completedBy: null}, generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
+    component.sda = {id: 0, history: [{status: 1, versionID: null, statusText: null, statusUpdatedBy: null, statusUpdatedOn: null , version: null, lastModifiedBy: null,
+       lastModifiedOn: null}], correctiveActionSection : {completedBy: null},
+     generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
+    //component.sda = {id: 0, correctiveActionSection : {completedBy: null}, generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
     fixture.detectChanges();
     dialogService = fixture.debugElement.injector.get(DialogService);
     cpcpSectionGroup = component.sdaForm.get('cpcpSectionGroup');
@@ -154,7 +157,7 @@ describe('AlertDetailViewComponent', () => {
   //  delay(1000);
   // });
 
-  xit('should create', () => {
+  it('should create', () => {
     //TODO:work on checking ngonit call also.
     //spyOn(component, 'ngOnInit')//.and.callThrough();
    // fixture.detectChanges();
@@ -162,7 +165,7 @@ describe('AlertDetailViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should call  confirmDeferralInf when CPCP related event is No', () => {
+  it('should call  confirmDeferralInf when CPCP related event is No', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(false);
      fixture.detectChanges();
      spyOn(component, 'confirmDeferralInf').and.returnValue(Observable.of(false));
@@ -170,7 +173,7 @@ describe('AlertDetailViewComponent', () => {
      expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
    });
 
-  xit('should call  confirmDeferralInf when corrosion level 1 is selected', () => {
+  it('should call  confirmDeferralInf when corrosion level 1 is selected', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
      cpcpSectionGroup.get('corrosionLevel').setValue(1);
      fixture.detectChanges();
@@ -181,7 +184,7 @@ describe('AlertDetailViewComponent', () => {
      expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
    });
 
-xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
+it('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
      cpcpSectionGroup.get('corrosionLevel').setValue(2);
      fixture.detectChanges();
@@ -191,7 +194,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
      expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
    });
-   xit('should show corrosionLevel 2 dialogue box and OK is clicked', () => {
+   it('should show corrosionLevel 2 dialogue box and OK is clicked', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
      cpcpSectionGroup.get('corrosionLevel').setValue(2);
      fixture.detectChanges();
@@ -204,7 +207,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(component.statusModal.show).toHaveBeenCalledTimes(0);
    });
 
-   xit('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Ok', () => {
+   it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Ok', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
      cpcpSectionGroup.get('corrosionLevel').setValue(3);
      fixture.detectChanges();
@@ -215,7 +218,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
    });
 
-   xit('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Cancel', () => {
+   it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Cancel', () => {
      cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
      cpcpSectionGroup.get('corrosionLevel').setValue(3);
      fixture.detectChanges();
@@ -226,7 +229,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
    });
 
-   xit('should show differal Information dialogue box and No is clicked', () => {
+   it('should show differal Information dialogue box and No is clicked', () => {
      correctiveActionFormGroup.get('isDeferred').setValue(false);
      correctiveActionFormGroup.get('isMajorRepair').setValue(true);
      fixture.detectChanges();
@@ -238,7 +241,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
    });
 
-   xit('should Call  saveAlert without any Confirm box, if isMajorRepair is No', () => {
+   it('should Call  saveAlert without any Confirm box, if isMajorRepair is No', () => {
      correctiveActionFormGroup.get('isMajorRepair').setValue(false);
      fixture.detectChanges();
      spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
@@ -249,7 +252,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
    });
 
 
-   xit('should show differal Information dialogue box and No is clicked', () => {
+   it('should show differal Information dialogue box and No is clicked', () => {
      correctiveActionFormGroup.get('isDeferred').setValue(false);
      correctiveActionFormGroup.get('isMajorRepair').setValue(true);
      fixture.detectChanges();
@@ -261,7 +264,7 @@ xit('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
      expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
    });
 
-   xit('should show differal Information dialogue box and Yes is clicked', () => {
+   it('should show differal Information dialogue box and Yes is clicked', () => {
      correctiveActionFormGroup.get('isDeferred').setValue(false);
      correctiveActionFormGroup.get('isMajorRepair').setValue(true);
      fixture.detectChanges();
