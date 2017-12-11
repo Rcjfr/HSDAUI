@@ -1,3 +1,4 @@
+import { getSearchCriteria } from './../../../common/reducers/selected-alert';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabsModule } from 'ngx-bootstrap';
 import { SavedSearchesComponent } from './saved-searches.component';
@@ -40,10 +41,11 @@ describe('SavedSearchesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should call Search Alerts', () => {
-    spyOn(component.onSearch, 'emit' );
+  it('should call Search Alerts', () => {
+    component.selectedSearchCriteria = { criteria: '{}'};
+      spyOn(component.onSearch, 'emit' );
     component.onSearchAlerts();
-    expect(component.onSearch.emit).toHaveBeenCalled();
+    expect(component.onSearch.emit).toHaveBeenCalledWith({});
   });
 
 
