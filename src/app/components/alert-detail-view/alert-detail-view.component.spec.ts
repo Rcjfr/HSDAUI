@@ -1,6 +1,6 @@
 import { of } from 'rxjs/observable/of';
 import { observable } from 'rxjs/symbol/observable';
-import { delay } from 'rxjs/operators';
+//import { delay } from 'rxjs/operators';
 import { setTimeout } from 'timers';
 import { DialogModule } from 'primeng/primeng';
 import { debug } from 'util';
@@ -59,7 +59,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import * as services from '@app/common/services';
 import { HttpModule } from '@angular/http';
 import { DialogService, DialogComponent } from 'ng2-bootstrap-modal';
-import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 
 describe('AlertDetailViewComponent', () => {
@@ -69,18 +69,18 @@ describe('AlertDetailViewComponent', () => {
   let cpcpSectionGroup: any;
   let correctiveActionFormGroup: any;
   let orignalTimeOutInterval: number;
-  beforeAll(function(done) {
+  beforeAll(function (done) {
     orignalTimeOutInterval = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 320000;
     done();
   });
 
-  afterAll(function() {
+  afterAll(function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = orignalTimeOutInterval;
   });
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertDetailViewComponent,
+      declarations: [AlertDetailViewComponent,
         CurrentStatusSectionComponent,
         RepairDetailsSectionComponent,
         GeneralSectionFormComponent,
@@ -129,22 +129,26 @@ describe('AlertDetailViewComponent', () => {
         NgPipesModule, TextMaskModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AlertDetailViewComponent);
     component = fixture.componentInstance;
-    component.sda = {id: 0, history: [{status: 1, versionID: null, statusText: null, statusUpdatedBy: null, statusUpdatedOn: null , version: null, lastModifiedBy: null,
-       lastModifiedOn: null}], correctiveActionSection : {completedBy: null},
-     generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
+    component.sda = {
+      id: 0, history: [{
+        status: 1, versionID: null, statusText: null, statusUpdatedBy: null, statusUpdatedOn: null, version: null, lastModifiedBy: null,
+        lastModifiedOn: null
+      }], correctiveActionSection: { completedBy: null },
+      generalSection: {}, defectLocationSection: {}, cpcpSection: {}
+    };
     //component.sda = {id: 0, correctiveActionSection : {completedBy: null}, generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
     fixture.detectChanges();
     dialogService = fixture.debugElement.injector.get(DialogService);
     cpcpSectionGroup = component.sdaForm.get('cpcpSectionGroup');
     correctiveActionFormGroup = component.sdaForm.get('correctiveActionFormGroup');
   }
-));
+  ));
 
- //TODO: Work on cleaning the objects from memory.
+  //TODO: Work on cleaning the objects from memory.
   // afterEach(() => {
   //   fixture.destroy();
   //   fixture = null;
@@ -160,117 +164,117 @@ describe('AlertDetailViewComponent', () => {
   it('should create', () => {
     //TODO:work on checking ngonit call also.
     //spyOn(component, 'ngOnInit')//.and.callThrough();
-   // fixture.detectChanges();
-   // expect(component.ngOnInit).toHaveBeenCalledTimes(1);
+    // fixture.detectChanges();
+    // expect(component.ngOnInit).toHaveBeenCalledTimes(1);
     expect(component).toBeTruthy();
   });
 
   it('should call  confirmDeferralInf when CPCP related event is No', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(false);
-     fixture.detectChanges();
-     spyOn(component, 'confirmDeferralInf').and.returnValue(Observable.of(false));
-     component.confirmInformation(0);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
-   });
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(false);
+    fixture.detectChanges();
+    spyOn(component, 'confirmDeferralInf').and.returnValue(Observable.of(false));
+    component.confirmInformation(0);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
+  });
 
   it('should call  confirmDeferralInf when corrosion level 1 is selected', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
-     cpcpSectionGroup.get('corrosionLevel').setValue(1);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog');
-     spyOn(component, 'confirmDeferralInf');
-     component.confirmInformation(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(0);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
-   });
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
+    cpcpSectionGroup.get('corrosionLevel').setValue(1);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog');
+    spyOn(component, 'confirmDeferralInf');
+    component.confirmInformation(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(0);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
+  });
 
-it('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
-     cpcpSectionGroup.get('corrosionLevel').setValue(2);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
-     spyOn(component, 'confirmDeferralInf');
-     component.confirmInformation(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
-   });
-   it('should show corrosionLevel 2 dialogue box and OK is clicked', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
-     cpcpSectionGroup.get('corrosionLevel').setValue(2);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(true));
-     spyOn(component.statusModal, 'show').and.returnValue(Observable.of(false));
-     spyOn(component, 'confirmDeferralInf');
-     component.confirmInformation(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
-     expect(component.statusModal.show).toHaveBeenCalledTimes(0);
-   });
+  it('should show corrosionLevel 2 dialogue box and cancel is clicked', () => {
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
+    cpcpSectionGroup.get('corrosionLevel').setValue(2);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
+    spyOn(component, 'confirmDeferralInf');
+    component.confirmInformation(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
+  });
+  it('should show corrosionLevel 2 dialogue box and OK is clicked', () => {
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
+    cpcpSectionGroup.get('corrosionLevel').setValue(2);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(true));
+    spyOn(component.statusModal, 'show').and.returnValue(Observable.of(false));
+    spyOn(component, 'confirmDeferralInf');
+    component.confirmInformation(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
+    expect(component.statusModal.show).toHaveBeenCalledTimes(0);
+  });
 
-   it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Ok', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
-     cpcpSectionGroup.get('corrosionLevel').setValue(3);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(true));
-     spyOn(component, 'confirmDeferralInf');
-     component.confirmInformation(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(2);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
-   });
+  it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Ok', () => {
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
+    cpcpSectionGroup.get('corrosionLevel').setValue(3);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(true));
+    spyOn(component, 'confirmDeferralInf');
+    component.confirmInformation(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(2);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(1);
+  });
 
-   it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Cancel', () => {
-     cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
-     cpcpSectionGroup.get('corrosionLevel').setValue(3);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(false));
-     spyOn(component, 'confirmDeferralInf');
-     component.confirmInformation(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(2);
-     expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
-   });
+  it('should show corrosionLevel 3 dialogue box and Yes is clicked and Contact Engineering is Cancel', () => {
+    cpcpSectionGroup.get('isCPCPRelatedEvent').setValue(true);
+    cpcpSectionGroup.get('corrosionLevel').setValue(3);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(false));
+    spyOn(component, 'confirmDeferralInf');
+    component.confirmInformation(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(2);
+    expect(component.confirmDeferralInf).toHaveBeenCalledTimes(0);
+  });
 
-   it('should show differal Information dialogue box and No is clicked', () => {
-     correctiveActionFormGroup.get('isDeferred').setValue(false);
-     correctiveActionFormGroup.get('isMajorRepair').setValue(true);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
-     spyOn(component, 'saveAlert');
-     component.confirmDeferralInf(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
-     expect(component.saveAlert).toHaveBeenCalledTimes(1);
-     expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
-   });
+  it('should show differal Information dialogue box and No is clicked', () => {
+    correctiveActionFormGroup.get('isDeferred').setValue(false);
+    correctiveActionFormGroup.get('isMajorRepair').setValue(true);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
+    spyOn(component, 'saveAlert');
+    component.confirmDeferralInf(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
+    expect(component.saveAlert).toHaveBeenCalledTimes(1);
+    expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
+  });
 
-   it('should Call  saveAlert without any Confirm box, if isMajorRepair is No', () => {
-     correctiveActionFormGroup.get('isMajorRepair').setValue(false);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
-     spyOn(component, 'saveAlert');
-     component.confirmDeferralInf(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(0);
-     expect(component.saveAlert).toHaveBeenCalledTimes(1);
-   });
+  it('should Call  saveAlert without any Confirm box, if isMajorRepair is No', () => {
+    correctiveActionFormGroup.get('isMajorRepair').setValue(false);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
+    spyOn(component, 'saveAlert');
+    component.confirmDeferralInf(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(0);
+    expect(component.saveAlert).toHaveBeenCalledTimes(1);
+  });
 
 
-   it('should show differal Information dialogue box and No is clicked', () => {
-     correctiveActionFormGroup.get('isDeferred').setValue(false);
-     correctiveActionFormGroup.get('isMajorRepair').setValue(true);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
-     spyOn(component, 'saveAlert');
-     component.confirmDeferralInf(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
-     expect(component.saveAlert).toHaveBeenCalledTimes(1);
-     expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
-   });
+  it('should show differal Information dialogue box and No is clicked', () => {
+    correctiveActionFormGroup.get('isDeferred').setValue(false);
+    correctiveActionFormGroup.get('isMajorRepair').setValue(true);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValue(Observable.of(false));
+    spyOn(component, 'saveAlert');
+    component.confirmDeferralInf(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
+    expect(component.saveAlert).toHaveBeenCalledTimes(1);
+    expect(correctiveActionFormGroup.get('isDeferred').value).toBeFalsy();
+  });
 
-   it('should show differal Information dialogue box and Yes is clicked', () => {
-     correctiveActionFormGroup.get('isDeferred').setValue(false);
-     correctiveActionFormGroup.get('isMajorRepair').setValue(true);
-     fixture.detectChanges();
-     spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(false));
-     component.confirmDeferralInf(0);
-     expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
-     expect(correctiveActionFormGroup.get('isDeferred').value).toBeTruthy();
-   });
+  it('should show differal Information dialogue box and Yes is clicked', () => {
+    correctiveActionFormGroup.get('isDeferred').setValue(false);
+    correctiveActionFormGroup.get('isMajorRepair').setValue(true);
+    fixture.detectChanges();
+    spyOn(dialogService, 'addDialog').and.returnValues(Observable.of(true), Observable.of(false));
+    component.confirmDeferralInf(0);
+    expect(dialogService.addDialog).toHaveBeenCalledTimes(1);
+    expect(correctiveActionFormGroup.get('isDeferred').value).toBeTruthy();
+  });
 });

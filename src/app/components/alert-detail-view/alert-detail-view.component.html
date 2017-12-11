@@ -1,5 +1,6 @@
 <h1 class="page-header" *ngIf="!sda.id">Create new SDA</h1>
-<h1 class="page-header" *ngIf="sda.id">Edit/View SDA(SDA ID:{{sda.id}})
+<h1 class="page-header" *ngIf="sda.id">
+  Edit/View SDA(SDA ID:{{sda.id}})
   <ng-container *ngIf="original">
     - Original
   </ng-container>
@@ -110,7 +111,7 @@
             <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Delete SDA</button>
           </ng-container>
         </ng-container>
-          </div>
+      </div>
     </div>
   </div>
 

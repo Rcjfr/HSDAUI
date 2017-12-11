@@ -1,0 +1,9 @@
+<ng-container [formGroup]="formGroup">
+  <aac-checkbox-list [source]="source"
+                    labelField="description"
+                    valueField="id"
+                    (blur)="onTouch()"
+                    formControlName="_control"
+                    colClass="col-sm-3">
+  </aac-checkbox-list>
+</ng-container>

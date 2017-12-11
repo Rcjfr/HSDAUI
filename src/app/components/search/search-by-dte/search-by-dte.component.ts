@@ -54,9 +54,7 @@ export class SearchByDteComponent implements OnInit , OnChanges {
   repairInspectionStatus: string[] = [];
   dteStatus$: Observable<models.IBaseLookUp[]>;
   repInspStatus$: Observable<models.IBaseLookUp[]>;
-  data$: Observable<models.IBaseLookUp[]>;
   durationData$: Observable<models.IBaseLookUp[]>;
-  submittedToQC$: Observable<models.IBaseLookUp[]>;
 
   decimalsNumberMask = decimalsNumberMask;
   public numberMask = createNumberMask({
@@ -71,15 +69,11 @@ export class SearchByDteComponent implements OnInit , OnChanges {
 
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repInspStatus$ = this.appStateService.getRepairInspectionStatus();
-    this.data$ = Observable.of([{ id: 1, description: 'Yes' }, { id: 0, description: 'No' }]);
-    this.submittedToQC$ = Observable.of([{ id: 1, description: 'Yes' }, { id: 0, description: 'No' }]);
     this.durationData$ = Observable.of([{ id: 6, description: '6' }, { id: 12, description: '12' }, { id: 18, description: '18' }, { id: 24, description: '24' }]);
     this.dteForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
       form.dteStatus = _.compact(form.dteStatus);
       form.repairInspectionStatus = _.compact(form.repairInspectionStatus);
-      form.isFatigueCritical = form.isFatigueCritical && form.isFatigueCritical.map(s => s === 1);
-      form.submittedToQC = form.submittedToQC && form.submittedToQC.map(s => s === 1);
       this.criteria.searchByDTE = form;
     });
 

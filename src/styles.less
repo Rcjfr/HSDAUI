@@ -341,6 +341,11 @@ span.error, div.error{
   }
 }
 
+@media print {
+  div.panel-body {
+    /*page-break-inside: avoid;*/ /*TODO:Azeet*/
+  }
+}
 
 /*PrimeNG Datatable Styles*/
 .ui-column-title{
@@ -348,4 +353,5 @@ span.error, div.error{
   font-weight:bold;
   padding:5px;
 }
+
 
