@@ -202,7 +202,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
     }).filter(confirm => confirm === true).subscribe(confirm => {
       this.sda.generalSection.sdrNumber = 'Y';
-      this.sdaForm.get('generalSectionFormGroup').patchValue({ 'sdrNumber': 'Y' });
+      this.sda.hasSDRRequested = true;
+      this.sdaForm.get('generalSectionFormGroup').patchValue({
+        'sdrNumber': 'Y'
+      });
       this.sdaForm.patchValue({ status: this.currentStatus });
       this.sda.statusUpdatedBy = this.lastModifiedBy;
       this.sda.statusUpdatedOn = new Date();
@@ -238,7 +241,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
             this.confirmDeferralInf(newStatus);
           });
         });
-      }else {
+      } else {
         this.confirmDeferralInf(newStatus);
         }
     } else {
@@ -295,7 +298,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
     this.statusUpdatedOn = new Date();
-    this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
+    this.sdaStatusForm.patchValue({status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA (SDA ID:${this.sda.id})`;
@@ -574,5 +577,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   public hasOriginalVersion(): boolean {
     return this.sda.history.some(s => s.status === Status.Closed) &&
       this.sda.history[0].status !== Status.Closed;
+  }
+
+  public areCommentsRequired(): boolean {
+    return this.sdaStatusForm.get('status').value === Status.Rejected ||
+           this.sdaStatusForm.get('status').value === Status.Deleted ||
+           (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
   }
 }

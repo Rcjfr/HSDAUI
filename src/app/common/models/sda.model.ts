@@ -18,6 +18,7 @@ export interface ISda {
   statusUpdatedOn?: Date;
   comments?: string;
   status?: number;
+  hasSDRRequested?: boolean;
   generalSection?: IGeneralSection;
   defectLocationSection?: IDefectLocationSection;
   cpcpSection?: ICPCPSection;

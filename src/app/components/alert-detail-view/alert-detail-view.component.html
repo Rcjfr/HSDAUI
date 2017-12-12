@@ -90,14 +90,14 @@
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="confirmInformation(Status.Audited)" tabindex="114">Complete SDA</button>
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Complete || currentStatus == Status.Audited || currentStatus == Status.Closed)" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
           </ng-container>
           <ng-container *ngIf="authService.isReliabilityAnalyst() | async">
             <!--Reliability Analyst Actions-->
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed)" [disabled]="!canRequestSdr()" (click)="requestSdrNumber()" tabindex="114">Require SDR</button>
             <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="114">Reject SDA</button>
             <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="114">Accept SDA</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Closed" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>
+            <!--<button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Closed" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>-->
           </ng-container>
           <ng-container *ngIf="authService.isCPCPTrainedReviewingEngineer() | async">
             <!--CPCP Engineer Actions-->
@@ -149,8 +149,8 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="comments">{{sdaStatusForm.get('status').value===Status.Deleted ? 'Reason for Deletion':'Comments'}}:<span class="req" *ngIf="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted">*</span></label>
-            <textarea class="form-control" id="comments" [required]="sdaStatusForm.get('status').value===Status.Rejected || sdaStatusForm.get('status').value===Status.Deleted" formControlName="comments"></textarea>
+            <label for="comments">{{sdaStatusForm.get('status').value===Status.Deleted ? 'Reason for Deletion':'Comments'}}:<span class="req" *ngIf="areCommentsRequired()">*</span></label>
+            <textarea class="form-control" id="comments" [required]="areCommentsRequired()" formControlName="comments"></textarea>
             <div *ngIf="sdaStatusForm.get('comments').errors && (sdaStatusForm.get('comments').dirty || sdaStatusForm.get('comments').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('comments').errors.required">
                 {{sdaStatusForm.get('status').value===Status.Deleted ? 'Reason for Deletion is':'Comments are'}} required.

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChildren, ChangeDetectionStrategy, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
@@ -12,7 +12,7 @@ import { AuthService } from '@app/common/services';
   styleUrls: ['./corrective-action-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit, OnChanges {
+export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit, OnChanges, OnDestroy {
   correctiveActionFormGroup: FormGroup;
 
   constructor(private fb: FormBuilder, authService: AuthService) {
@@ -42,6 +42,18 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
 
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
+    this.subscriptions.push(this.correctiveActionFormGroup.get('isDeferred').valueChanges.filter((v: boolean) => !v).subscribe(
+      v => {
+        this.correctiveActionFormGroup.patchValue({
+          deferralCode : '',
+          deferralNo : ''
+        });
+      }
+    ));
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
 
   isDeferred(): boolean {

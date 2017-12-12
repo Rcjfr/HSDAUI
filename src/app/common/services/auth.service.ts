@@ -115,6 +115,10 @@ export class AuthService {
     return this.hasAnyRole([this.QC_Manager, this.QC_Supervisor]);
   }
 
+  isQCSupervisor(): Observable<boolean> {
+    return this.hasAnyRole([this.QC_Supervisor]);
+  }
+
   isQCPersonnel(): Observable<boolean> {
     return this.hasAnyRole([this.QC_Inspector, this.Designated_Quality_Control, this.QC_Manager, this.QC_Supervisor]);
   }
