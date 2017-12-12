@@ -21,6 +21,7 @@ export interface IGeneralSection {
   checkType?: number;
   routineNo?: string;
   nonRoutineNo?: string;
+  esmReference?: string;
   micNo?: string;
   createDate?: Date;
 }

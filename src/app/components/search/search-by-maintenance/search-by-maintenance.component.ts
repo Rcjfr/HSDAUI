@@ -20,7 +20,8 @@ export class SearchByMaintenanceComponent implements OnInit, OnChanges {
         unscheduledMaintenanceDescription: new FormControl(),
         routineNo: new FormControl(),
         nonRoutineNo: new FormControl(),
-        micNo: new FormControl()
+        micNo: new FormControl(),
+        esmReference: new FormControl()
 
     });
     yesNoBothOptions$: Observable<IYesNoBoth[]>;

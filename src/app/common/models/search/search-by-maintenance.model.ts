@@ -5,4 +5,5 @@ export interface ISearchByMaintenance {
   routineNo: any;
   nonRoutineNo: any;
   micNo: any;
+  esmReference: any;
 }

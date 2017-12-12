@@ -20,6 +20,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'defectDiscoveredDuring', display: 'Defect Discovered During' },
   { key: 'unscheduledMaintenanceDescription', display: 'Unscheduled Maintenance Description' },
   { key: 'nonRoutineNo', display: 'Non-Routine #' },
+  { key: 'esmReference', display: 'ESM Reference #' },
   { key: 'micNo', display: 'MIC #' },
   { key: 'checkType', display: 'Check Type' },
   { key: 'routineNo', display: 'Routine #' },

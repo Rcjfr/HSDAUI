@@ -81,11 +81,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'routineNo': {
           pattern: 'Routine # must contain only alphanumerics.',
-          maxlength: 'Routine # must not be more than 50 characters.  '
+          maxlength: 'Routine # must not be more than 50 characters.'
         },
         'nonRoutineNo': {
           pattern: 'Non-Routine # must contain only alphanumerics.',
-          maxlength: 'Non-Routine # must not be more than 50 characters. '
+          maxlength: 'Non-Routine # must not be more than 50 characters.'
+        },
+        'esmReference': {
+          maxlength: 'ESM Reference # must not be more than 50 characters.'
         }
       },
       'unscheduledMaintenanceGroup': {

@@ -22,6 +22,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     this.formGroup = this.fb.group({
       checkType: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],
+      esmReference: ['', [Validators.maxLength(50)]],
       routineNo: ['', [Validators.maxLength(50)]]
     },
       {

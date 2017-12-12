@@ -34,6 +34,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     checkType: null,
     routineNo: null,
     nonRoutineNo: null,
+    esmReference: null,
     micNo: null,
     createDate: new Date((new Date()).setHours(0, 0, 0, 0)),
   },
