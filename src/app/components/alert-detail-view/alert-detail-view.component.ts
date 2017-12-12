@@ -300,7 +300,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.statusUpdatedOn = new Date();
     this.sdaStatusForm.patchValue({status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
-      if (this.sda.status === Status.Complete || this.sda.status === Status.Closed) {  //Reopening the form
+      if (this.sda.status === Status.Complete ||
+          this.sda.status === Status.Audited ||
+          this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA (SDA ID:${this.sda.id})`;
         this.showModal();
       } else {
