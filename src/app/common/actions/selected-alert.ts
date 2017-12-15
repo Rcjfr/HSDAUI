@@ -17,6 +17,11 @@ export const ActionTypes = {
   LOAD_SDAS: 'Load SDAs',
   LOAD_SDAS_COMPLETE: 'Load SDAs Complete',
   LOAD_SDAS_FAIL: 'Load SDAs Fail',
+
+  EXPORT_SDAS: 'Export SDAs',
+  EXPORT_SDAS_COMPLETE: 'Export SDAs Complete',
+  EXPORT_SDAS_FAIL: 'Export SDAs Fail',
+
   LOAD_SDA: 'Load SDA',
   LOAD_SDA_COMPLETE: 'Load SDA Complete',
   LOAD_SDA_FAIL: 'Load SDA Fail',
@@ -92,6 +97,23 @@ export class LoadSdasFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class ExportSdasAction implements Action {
+  public type = ActionTypes.EXPORT_SDAS;
+  constructor(public payload: any) { }
+}
+
+export class ExportSdasCompleteAction implements Action {
+  public type = ActionTypes.EXPORT_SDAS_COMPLETE;
+  public payload: any
+  constructor() { }
+}
+export class ExportSdasFailAction implements Action {
+  public type = ActionTypes.EXPORT_SDAS_FAIL;
+  constructor(public payload: any) { }
+}
+
+
+
 export class LoadSdaAction implements Action {
   public type = ActionTypes.LOAD_SDA;
   constructor(public payload: ILoadSda) { }
@@ -135,6 +157,9 @@ export type Actions =
   SaveSdaSearchCriteria |
   LoadSdasCompleteAction |
   LoadSdasFailAction |
+  ExportSdasAction |
+  ExportSdasCompleteAction |
+  ExportSdasFailAction |
   LoadSdaAction |
   LoadSdaCompleteAction |
   LoadSdaFailAction |

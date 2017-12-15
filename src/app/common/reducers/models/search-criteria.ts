@@ -15,7 +15,7 @@ export const SearchCriteriaRecordFactory = makeTypedFactory<ISearchCriteria, ISe
   searchByMaintenance: undefined,
   searchByOptions: undefined,
   searchByPart: undefined,
-  searchByReport: undefined,
+  reportColumns: undefined,
   searchBySda: undefined,
   searchByStatus: undefined
 });

@@ -44,8 +44,8 @@
   <div class="row form-group">
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Corrosion Type:" for="corrosionType">
-          <select class="form-control" multiple tabindex='27' id="corrosionType" [(ngModel)]="corrosionType"
+        <aac-field-container label="Corrosion Type:">
+          <select class="form-control" multiple tabindex='27' 
                 formControlName="corrosionType" (change)="onCorrosionTypeChange()">
             <option value=""> </option>
             <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
@@ -57,8 +57,8 @@
     </div>
     <div class="col-md-6">
       <div>
-        <aac-field-container label="Cause of Damage:" for="causeOfDamage">
-          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28' id="causeOfDamage"
+        <aac-field-container label="Cause of Damage:">
+          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28'
               formControlName="causesOfDamage">
             <option value=""> </option>
             <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>

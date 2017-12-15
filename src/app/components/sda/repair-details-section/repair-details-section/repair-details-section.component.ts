@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
@@ -13,7 +13,8 @@ import { decimalsNumberMask } from '@app/common/masks';
 @Component({
   selector: 'aa-repair-details-section',
   templateUrl: './repair-details-section.component.html',
-  styleUrls: ['./repair-details-section.component.less']
+  styleUrls: ['./repair-details-section.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RepairDetailsSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   repairDescriptions$: Observable<models.IBaseLookUp[]>;

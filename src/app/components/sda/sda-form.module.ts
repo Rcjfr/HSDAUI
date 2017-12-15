@@ -9,7 +9,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 
 import { FormControlsModule } from '@app/common/components/form-controls.module';
 
-import { BaseFormComponent} from './base-form.component';
+import { BaseFormComponent } from './base-form.component';
 
 // General Section
 import { GeneralSectionFormComponent } from '@app/components/sda/general-section/general-section-form/general-section-form.component';
@@ -41,7 +41,7 @@ import { CauseOfDamageDescriptionComponent } from '@app/components/sda/cpcp-sect
 
 import { CorrectiveActionFormGroupComponent } from '@app/components/sda/corrective-action-section/corrective-action-form/corrective-action-form.component';
 import {
-CorrectiveActionRepairDescriptionComponent
+  CorrectiveActionRepairDescriptionComponent
 } from '@app/components/sda/corrective-action-section/corrective-action-repair-description/corrective-action-repair-description.component';
 import { CorrectiveActionOptionsComponent } from '@app/components/sda/corrective-action-section/corrective-action-options/corrective-action-options.component';
 import { CorrectiveActionChapComponent } from '@app/components/sda/corrective-action-section/corrective-action-chap/corrective-action-chap.component';

@@ -68,7 +68,7 @@ export class SearchByMaintenanceComponent implements OnInit, OnChanges {
         }
     }
 
-    maintenanceContains(id) {
+    maintenanceContains(id: string) {
         if (_.includes(this.maintenanceForm.controls.defectDiscoveredDuring.value, id)) {
             return true;
         }

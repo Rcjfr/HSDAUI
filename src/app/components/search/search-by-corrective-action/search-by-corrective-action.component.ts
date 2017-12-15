@@ -85,7 +85,7 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
         }
     }
 
-    onDefectChange(id: string, isChecked: boolean) {
+    onDefectChange(id: number, isChecked: boolean) {
         const repairArray = <FormArray>this.correctiveActionForm.controls.repairType;
 
         if (isChecked) {
@@ -95,7 +95,7 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
         }
     }
 
-    defectContains(id) {
+    defectContains(id: number) {
         if (_.includes(this.correctiveActionForm.controls.repairType.value, id)) {
             return true;
         }

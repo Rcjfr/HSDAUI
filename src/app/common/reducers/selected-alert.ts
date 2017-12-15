@@ -69,8 +69,13 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
         return state.merge({ loading: false, searchCriteria: record });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS:
+    case selectedAlertActions.ActionTypes.EXPORT_SDAS:
       {
         return state.merge({ loading: true });
+      }
+    case selectedAlertActions.ActionTypes.EXPORT_SDAS_COMPLETE:
+      {
+        return state.merge({ loading: false});
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {

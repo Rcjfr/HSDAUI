@@ -107,13 +107,13 @@
   </accordion>
 
 
-  <div class="row form-group" style="padding-top:15px;">
-    <div class="col-md-10"></div>
-    <div class="col-md-1">
-      <button type="button" style="float:right;" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
-    </div>
-    <div class="col-md-1">
-      <button type="submit" style="float:right;" class="btn btn-primary">Search</button>
+  <div class="row form-group">
+    <div class="col-sm-12">
+      <div class="pull-right">
+        <button type="button" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
+        <button type="button" class="btn btn-primary" (click)="searchAlerts(true)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
     </div>
   </div>
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { AppStateService, AuthService } from '@app/common/services';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
@@ -10,7 +10,8 @@ import * as models from '@app/common/models';
 @Component({
   selector: 'aa-cpcp-disposition-section',
   templateUrl: './cpcp-disposition-section.component.html',
-  styleUrls: ['./cpcp-disposition-section.component.less']
+  styleUrls: ['./cpcp-disposition-section.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CpcpDispositionSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;

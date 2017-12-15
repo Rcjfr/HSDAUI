@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { CustomValidators } from '@app/common/validators/custom-validators';
@@ -11,7 +11,8 @@ import { Observable, Observer } from 'rxjs/Rx';
 @Component({
   selector: 'aa-general-section-form',
   templateUrl: './general-section-form.component.html',
-  styleUrls: ['./general-section-form.component.less']
+  styleUrls: ['./general-section-form.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
   departments$: Observable<models.IBaseLookUp[]>;

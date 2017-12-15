@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { CustomValidators } from '@app/common/validators/custom-validators';
@@ -12,7 +12,8 @@ import * as models from '@app/common/models';
 @Component({
   selector: 'aa-defect-location-section-form',
   templateUrl: './defect-location-section-form.component.html',
-  styleUrls: ['./defect-location-section-form.component.less']
+  styleUrls: ['./defect-location-section-form.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
   detectionMethods$: Observable<models.IBaseLookUp[]>;

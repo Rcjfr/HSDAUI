@@ -4,9 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Rx';
 import * as models from '@app/common/models';
 import { AuthService } from '@app/common/services';
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
+
 export abstract class BaseFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() sda: models.ISda;
   @Input() newSdaStus: models.Status;

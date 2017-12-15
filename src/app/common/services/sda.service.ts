@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '@env/environment';
 import { Helper } from '@app/common/helper';
@@ -8,7 +8,9 @@ import '@app/common/rxjs-extensions';
 import { AuthService } from '@app/common/services/auth.service';
 import { ISdaListResult } from '@app/common/models';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
-
+import { ResponseContentType } from '@angular/http';
+import { IReportOption, ReportOptions } from '@app/components/search/search-report/options';
+import { saveAs } from 'file-saver';
 @Injectable()
 export class SdaService {
 
@@ -26,8 +28,31 @@ export class SdaService {
     }
   };
 
-  searchSda(criteria): Observable<ISdaListResult> {
+  searchSda(criteria: any, exportToExcel: boolean = false): Observable<ISdaListResult> {
+    if (exportToExcel) {
+      if (!criteria.reportColumns || criteria.reportColumns.length === 0) {
+        criteria.reportColumns = ReportOptions;
+      }
+      const headers = new HttpHeaders({
+        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
+
+      return this.http.post(this.endPointUrl + '/search', criteria,
+        {
+          headers: headers,
+          responseType: 'blob'
+        }).do(blob => {
+          saveAs(new Blob([blob]), 'SDAReport.xlsx');
+          //let a = document.createElement("a");
+          //a.href = URL.createObjectURL(blob);
+          //a.download = 'SDAReport.xlsx';
+          //document.body.appendChild(a);
+          //a.click();
+        }).mapTo(null);
+    }
+
     return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
+
   };
 
   getSda(payload: ILoadSda): Observable<models.ISda> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
@@ -11,7 +11,8 @@ import * as models from '@app/common/models';
 @Component({
   selector: 'aa-cpcp-section-form',
   templateUrl: './cpcp-section.component.html',
-  styleUrls: ['./cpcp-section.component.less']
+  styleUrls: ['./cpcp-section.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CpcpSectionComponent extends BaseFormComponent implements OnInit, OnChanges {
   corrosionTypes$: Observable<models.IBaseLookUp[]>;

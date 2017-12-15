@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '@app/common/models';
@@ -6,7 +6,8 @@ import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-cause-of-damage-description',
   templateUrl: './cause-of-damage-description.component.html',
-  styleUrls: ['./cause-of-damage-description.component.less']
+  styleUrls: ['./cause-of-damage-description.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CauseOfDamageDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   causeOfDamageDescriptionGroup: FormGroup;

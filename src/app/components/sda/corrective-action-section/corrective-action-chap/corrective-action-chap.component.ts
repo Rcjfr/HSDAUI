@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '@app/common/models';
@@ -6,7 +6,8 @@ import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-corrective-action-chap',
   templateUrl: './corrective-action-chap.component.html',
-  styleUrls: ['./corrective-action-chap.component.less']
+  styleUrls: ['./corrective-action-chap.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CorrectiveActionChapComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   correctiveActionChapFormGroup: FormGroup;

@@ -116,9 +116,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.authService.auditDisplayName().take(1).subscribe(s => {
       this.lastModifiedBy = s;
       this.statusUpdatedBy = s;
-      if (!this.sda.id) { //in case of new sda
-        this.sda.correctiveActionSection.completedBy = s;
-      }
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { List } from 'immutable';
@@ -9,7 +9,8 @@ import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-ata-code',
   templateUrl: './ata-code.component.html',
-  styleUrls: ['./ata-code.component.less']
+  styleUrls: ['./ata-code.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() ATACodes: models.IATACode[];

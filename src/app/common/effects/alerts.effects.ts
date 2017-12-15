@@ -98,6 +98,20 @@ export class AlertEffects {
     });
 
   @Effect()
+  exportSdas$ = this.actions$
+    .ofType(selectedAlert.ActionTypes.EXPORT_SDAS)
+    .map((action: selectedAlert.ExportSdasAction) => action.payload)
+    .switchMap(searchCriteria => {
+      return this.sdaService.searchSda(searchCriteria, true)
+        .map((data: any) => {
+          return new selectedAlert.ExportSdasCompleteAction();
+        })
+        .catch((err) => {
+          return of(new selectedAlert.ExportSdasFailAction('Failed to export SDAs.'));
+        });
+    });
+
+  @Effect()
   loadSda$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA)
     .map((action: selectedAlert.LoadSdaAction) => action.payload)
@@ -130,7 +144,8 @@ export class AlertEffects {
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
-    selectedAlert.ActionTypes.LOAD_SDAS_FAIL
+    selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
+    selectedAlert.ActionTypes.EXPORT_SDAS_FAIL
     )
     .switchMap((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');

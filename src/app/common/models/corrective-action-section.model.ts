@@ -15,6 +15,4 @@ export interface ICorrectiveActionSection {
   repairWidth?: number;
   isMajorRepair?: boolean;
   majorRepairDescription?: string;
-  completedBy?: string;
-  completedDate?: Date;
 }

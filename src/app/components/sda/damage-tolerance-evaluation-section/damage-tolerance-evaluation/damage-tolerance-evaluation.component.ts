@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader } from 'ng2-file-upload';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
@@ -20,7 +20,8 @@ import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tole
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
   templateUrl: './damage-tolerance-evaluation.component.html',
-  styleUrls: ['./damage-tolerance-evaluation.component.less']
+  styleUrls: ['./damage-tolerance-evaluation.component.less'],
+changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;

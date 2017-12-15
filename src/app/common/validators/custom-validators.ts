@@ -1,5 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { Status } from '@app/common/models';
+import * as moment from 'moment';
 
 export class CustomValidators {
 
@@ -14,9 +15,9 @@ export class CustomValidators {
     };
   }
   static validateFutureDate(c: AbstractControl): { [key: string]: boolean } | null {
-
-    const date = <Date>c.value;
-    if (date > new Date()) {
+    const date = moment(<Date>c.value).startOf('day');
+    const toDay = moment().startOf('day');
+    if (date > toDay) {
       return { 'future': true };
     }
 

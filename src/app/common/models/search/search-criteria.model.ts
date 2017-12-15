@@ -12,7 +12,7 @@ export interface ISearchCriteria {
   searchByMaintenance: search.ISearchByMaintenance;
   searchByOptions: search.ISearchByOptions,
   searchByPart: search.ISearchByPart,
-  searchByReport: search.ISearchByReport;
+  reportColumns: search.IReportColumn[];
   searchBySda: search.ISearchBySda;
   searchByStatus: search.ISearchByStatus;
 }

@@ -38,7 +38,7 @@ export class SearchByStatusComponent implements OnInit, OnChanges {
     }
   }
 
-  onStatusChange(id: string, isChecked: boolean) {
+  onStatusChange(id: number, isChecked: boolean) {
         const statusArray = <FormArray>this.statusForm.controls.status;
         if (isChecked) {
             statusArray.push(new FormControl(id));
@@ -47,7 +47,7 @@ export class SearchByStatusComponent implements OnInit, OnChanges {
         }
     }
 
-    statusContains(id) {
+    statusContains(id: number) {
         if (_.includes(this.statusForm.controls.status.value, id)) {
             return true;
         }

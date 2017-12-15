@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChildren, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, FormGroup, Validators, FormControlName } from '@angular/forms';
 import * as models from '@app/common/models';
@@ -7,7 +7,8 @@ import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-defective-part-description',
   templateUrl: './defective-part-description.component.html',
-  styleUrls: ['./defective-part-description.component.less']
+  styleUrls: ['./defective-part-description.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefectivePartDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   defectivePartDescriptionGroup: FormGroup;

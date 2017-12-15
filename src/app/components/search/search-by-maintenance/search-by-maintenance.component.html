@@ -2,12 +2,12 @@
   <div class="row  form-group">
     <div class="col-md-4">
       <aac-checkbox-container label="Unscheduled Maintenance">
-        <input type="checkbox" tabindex="16" [value]="U" [checked]="maintenanceContains('U')" (change)="onMaintenanceChange('U', $event.target.checked)"/>
+        <input type="checkbox" tabindex="16" value="U" [checked]="maintenanceContains('U')" (change)="onMaintenanceChange('U', $event.target.checked)"/>
       </aac-checkbox-container>
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Scheduled Maintenance">
-        <input type="checkbox" tabindex="17"  [value]="S" [checked]="maintenanceContains('S')" (change)="onMaintenanceChange('S', $event.target.checked)"/>
+        <input type="checkbox" tabindex="17"  value="S" [checked]="maintenanceContains('S')" (change)="onMaintenanceChange('S', $event.target.checked)"/>
       </aac-checkbox-container>
     </div>
     <div class="col-md-4">

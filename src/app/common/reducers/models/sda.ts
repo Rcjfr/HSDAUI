@@ -82,9 +82,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     repairHeight: null,
     repairWidth: null,
     isMajorRepair: null,
-    majorRepairDescription: null,
-    completedBy: null,
-    completedDate: new Date()
+    majorRepairDescription: null
   },
   cpcpDispositionSection: {
 

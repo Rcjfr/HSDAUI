@@ -54,15 +54,8 @@ export class AppStateService {
   }
 
   getStations(query: string): Observable<IStation[]> {
-    const queryExp = new RegExp(query, 'ig');
-
     return this.store.select(fromRoot.getStations)
-      //TODO: need to revisit for wildcard search
-      //.map(station => station.filter(s => (query.length == 1 && s.stationIATACode.startsWith(query.toUpperCase())) ||
-      //  (query.length > 1 && (queryExp.test(s.stationIATACode) || queryExp.test(s.stationDescription)))))
-      //.map(station => station.filter(s => s.stationIATACode.startsWith(query.toUpperCase())))
       .map(d => d && d.toJS());
-
   }
 
   getNoseNumbers(): Observable<Array<IAircraftInfo>> {
@@ -152,6 +145,10 @@ export class AppStateService {
 
   saveSdaSearchCriteria(criteria): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));
+  }
+
+  exportSDA(criteria): void {
+    this.store.dispatch(new selectedAlertActions.ExportSdasAction(criteria));
   }
 
   loadSda(payload: number | ILoadSda): void {

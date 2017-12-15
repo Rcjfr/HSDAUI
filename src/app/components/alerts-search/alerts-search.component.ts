@@ -41,10 +41,10 @@ export class AlertsSearchComponent implements OnInit {
     this.resetFilters();
 
     this.authService.badgeId()
-    .map(badgeId => {
-      this.badgeNumber = badgeId;
-      this.savedSearchStateService.loadSearches(badgeId);
-    }).subscribe();
+      .map(badgeId => {
+        this.badgeNumber = badgeId;
+        this.savedSearchStateService.loadSearches(badgeId);
+      }).subscribe();
 
     this.savedSearchStateService.getSavedSearches()
       .do(s => this.savedSearches = s)
@@ -59,7 +59,7 @@ export class AlertsSearchComponent implements OnInit {
   deserializeDate(object, key) {
     if (object) {
       object[key] = object[key] ? new Date(object[key]) : undefined;
-      }
+    }
   }
   isSearchModified(savedCriteria: any) {
 
@@ -89,7 +89,7 @@ export class AlertsSearchComponent implements OnInit {
         .addDialog(ConfirmComponent, {
           title: 'Confirm',
           message:
-            'You have unsaved criteria in the saved search. Search results will not include the updated criteria if the search is not saved. Do you want to continue with the search?',
+          'You have unsaved criteria in the saved search. Search results will not include the updated criteria if the search is not saved. Do you want to continue with the search?',
           okButtonText: 'Yes',
           cancelButtonText: 'No'
         })
@@ -109,7 +109,7 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
-  searchAlerts() {
+  searchAlerts(excel: boolean = false) {
     let hasCriteria = false;
     const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
     _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
@@ -133,8 +133,14 @@ export class AlertsSearchComponent implements OnInit {
         message: 'Please input at least one search filter.'
       })
     } else {
-      this.appStateService.saveSdaSearchCriteria(this.criteria);
+      if (excel) {
+        this.appStateService.exportSDA(this.criteria);
+      } else {
+        this.appStateService.saveSdaSearchCriteria(this.criteria);
+      }
     }
+
+    return false;
   }
 
   clearFilters() {

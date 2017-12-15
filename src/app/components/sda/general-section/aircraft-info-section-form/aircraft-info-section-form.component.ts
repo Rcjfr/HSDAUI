@@ -19,6 +19,7 @@ import { Observable, Observer } from 'rxjs/Rx';
 export class AircraftInfoSectionFormComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Output() onNoseNumberChange = new EventEmitter();
   noseNumbers$: Observable<models.IAircraftInfo[]>;
+  loading$: Observable<boolean>;
   @Input()
   set aircraftInfo(info: IAircraftInfo) {
     if (this.formGroup && info) {
@@ -70,6 +71,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
   ngOnInit(): void {
     this.parent.addControl(this.formGroupName, this.formGroup);
+    this.loading$ = this.appStateService.getSelectedAlertLoading();
     this.noseNumbers$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.formGroup.get('aircraftNo').value);
     })

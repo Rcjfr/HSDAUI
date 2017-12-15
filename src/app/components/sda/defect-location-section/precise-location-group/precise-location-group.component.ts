@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
@@ -8,7 +8,8 @@ import { AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-precise-location-group',
   templateUrl: './precise-location-group.component.html',
-  styleUrls: ['./precise-location-group.component.less']
+  styleUrls: ['./precise-location-group.component.less'],
+changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PreciseLocationGroupComponent extends BaseFormComponent implements OnInit, OnChanges {
   preciseLocationGroup: FormGroup;

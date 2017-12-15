@@ -34,8 +34,8 @@
 
     </div>
     <div class="col-md-6">
-      <aac-field-container label="How Detected:" for="detected" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
-        <select multiple tabindex='45' class="form-control" id="detected" [(ngModel)]="detected" formControlName="detectionMethod">
+      <aac-field-container label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
+        <select multiple tabindex='45' class="form-control" formControlName="detectionMethod">
           <option value=""></option>
           <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>

@@ -184,7 +184,7 @@ describe('Saved Searches Actions', () => {
           searchByCorrectiveAction: undefined,
           searchByDefect: undefined,
           searchByMaintenance: undefined,
-          searchByReport: undefined,
+          reportColumns: undefined,
           searchByCpcpDisposition: undefined,
           searchByDTE: undefined,
           searchByOptions: undefined,
