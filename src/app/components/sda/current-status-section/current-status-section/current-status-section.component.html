@@ -17,6 +17,8 @@
         <th>
           Comments
         </th>
+        <th>
+        </th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -44,13 +46,63 @@
         </td>
         <td>{{stat.comments}}</td>
         <td>
-          <!--Changelog Links goes here-->
-          
+        <div *ngIf="stat.version>1">
+            <a title='Change Log' (click)="showModal(sda.id, stat.version);" href="javascript:void(0)" class="pull-left" >Change Log</a>
+
+        <!-- <button type="button" class="btn btn-default" ng-click="showModal(sda.id, stat.version); ">Change Log</button> -->
+        </div>
         </td>
       </tr>
     </tbody>
   </table>
-
-
-
 </div>
+<div bsModal #statusModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+   <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title pull-left">Change Log: SDA ID {{sda.id}}</h4>
+
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Old Value</th>
+              <th>New Value</th>
+              <th>Changed On</th>
+              <th>Changed By</th>
+            </tr>
+          </thead>
+          <tbody >
+              <tr *ngFor="let change of changeLog$ | async">
+                <td >
+                    {{this.changeLogDisplayAttribute(change.attributeName)}}
+                </td>
+                <td>
+                    {{change.oldValue}}
+                </td>
+                <td>
+                    {{change.newValue}}
+                </td>
+                <td>
+                    {{formatDate(change.statusUpdatedOn)}}
+                </td>
+                <td>
+                    {{change.statusUpdatedBy}}
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" (click)="hideStatusModal()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

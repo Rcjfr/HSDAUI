@@ -133,4 +133,9 @@ export class MockAppStateService extends AppStateService {
   setNewSdaStatus(status: Status) {
     return null;
   }
+
+  getChangeLog() {
+        return Observable.of([]);
+      }
+
 }

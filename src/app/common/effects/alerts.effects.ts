@@ -12,6 +12,7 @@ import * as models from '@app/common/models';
 import * as fromRoot from '@app/common/reducers';
 import '@app/common/rxjs-extensions';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
+import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
 
 @Injectable()
 export class AlertEffects {
@@ -49,6 +50,22 @@ export class AlertEffects {
                 model: '', serialNo: '', totalShipTime: ''
               })]);
 
+        });
+    });
+
+  @Effect()
+  loadChangelog$ = this.actions$
+    .ofType(selectedAlert.ActionTypes.LOAD_CHANGE_LOG)
+    .map((action: selectedAlert.LoadChangeLogAction) => action.payload)
+    .switchMap((payload: ILoadChangeLog) => {
+      return this.changeLogService.getChangeLog(payload.sdaId, payload.version)
+        .map((changeLogInfo: models.IChangeLog[]) => {
+          return new selectedAlert.LoadChangeLogCompleteAction(changeLogInfo);
+        })
+        .catch((err) => {
+          return Observable.from([
+            new selectedAlert.LoadChangeLogFailAction('Failed to load change log information. Please check sdaid / Version #  or try again by clicking refresh button.')
+            ]);
         });
     });
 
@@ -166,6 +183,7 @@ export class AlertEffects {
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,
+    private changeLogService: services.ChangeLog,
     private appStateService: services.AppStateService,
     private router: Router,
     private toastr: ToastrService) {

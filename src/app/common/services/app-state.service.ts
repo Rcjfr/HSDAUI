@@ -6,9 +6,10 @@ import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import * as lookupDataActions from '@app/common/actions/lookup-data';
 import * as userActions from '@app/common/actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent } from '@app/common/models';
+import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent, IChangeLog } from '@app/common/models';
 import { List } from 'immutable';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
+import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
 
 @Injectable()
 export class AppStateService {
@@ -61,6 +62,11 @@ export class AppStateService {
   getNoseNumbers(): Observable<Array<IAircraftInfo>> {
     return this.store.select(fromRoot.getNoseNumbers).map(d => d && d.toJS());
   }
+
+  getChangeLog(): Observable<Array<IChangeLog>> {
+    return this.store.select(fromRoot.getChangeLog).map(d => d && d.toJS());
+  }
+
 
   getDamageTypes() {
     return this.store.select(fromRoot.getDamageTypes);
@@ -161,9 +167,17 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction(noseNumber));
   }
 
+
+
+  loadChangelog(changelog: ILoadChangeLog) {
+    this.store.dispatch(new selectedAlertActions.LoadChangeLogAction(changelog));
+  }
+
   loadNoseNumbers(filter: string = '') {
     this.store.dispatch(new selectedAlertActions.LoadNoseNumbersAction(filter));
   }
+
+
 
   loadFleetCheckTypes(fleet: string) {
     this.store.dispatch(new lookupDataActions.LoadFleetCheckTypesAction(fleet));

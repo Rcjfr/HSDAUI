@@ -3,6 +3,7 @@ import * as models from '@app/common/models/index';
 import { ISdaListResult } from '@app/common/models';
 import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
+import { ILoadChangeLog } from '@app/common/models/payload/change-log.model'
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
@@ -31,7 +32,10 @@ export const ActionTypes = {
   LOAD_NEW_SDA: 'Load New SDA',
   SAVE_SDA_SEARCH_CRITERIA: 'Update SDA Search Criteria',
   SET_SDA_NEW_STATUS: 'Set SDA new status',
-  OPERATION_FAILED: 'General Operation Failed Message'
+  OPERATION_FAILED: 'General Operation Failed Message',
+  LOAD_CHANGE_LOG: 'Load Change log Info',
+  LOAD_CHANGE_LOG_COMPLETE: 'Load Change log Info complete',
+  LOAD_CHANGE_LOG_FAIL: 'Load Change log Info fail'
 
 };
 
@@ -67,6 +71,19 @@ export class LoadAircraftInfoCompleteAction implements Action {
 }
 export class LoadAircraftInfoFailAction implements Action {
   public type = ActionTypes.LOAD_AIRCRAFT_INFO_FAIL;
+  constructor(public payload: any) { }
+}
+
+export class LoadChangeLogAction implements Action {
+  public type = ActionTypes.LOAD_CHANGE_LOG;
+  constructor(public payload: ILoadChangeLog) { }
+}
+export class LoadChangeLogCompleteAction implements Action {
+  public type = ActionTypes.LOAD_CHANGE_LOG_COMPLETE;
+  constructor(public payload: Array<models.IChangeLog>) { }
+}
+export class LoadChangeLogFailAction implements Action {
+  public type = ActionTypes.LOAD_CHANGE_LOG_FAIL;
   constructor(public payload: any) { }
 }
 
@@ -164,5 +181,9 @@ export type Actions =
   LoadSdaCompleteAction |
   LoadSdaFailAction |
   LoadNewSdaAction |
-  SetSdaNewStatusAction;
+  SetSdaNewStatusAction |
+  LoadChangeLogAction |
+  LoadChangeLogCompleteAction |
+  LoadChangeLogFailAction
+  ;
 

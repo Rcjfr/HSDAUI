@@ -2,10 +2,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-import { TypeaheadModule } from 'ngx-bootstrap';
+import { ModalModule, TypeaheadModule } from 'ngx-bootstrap';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NgPipesModule } from 'ng-pipes';
 import { FileUploadModule } from 'ng2-file-upload';
+
 
 import { FormControlsModule } from '@app/common/components/form-controls.module';
 
@@ -78,7 +79,8 @@ import { CurrentStatusSectionComponent } from '@app/components/sda/current-statu
     TypeaheadModule.forRoot(),
     TextMaskModule,
     NgPipesModule,
-    FileUploadModule
+    FileUploadModule,
+    ModalModule.forRoot()
   ],
   exports: [
     GeneralSectionFormComponent,

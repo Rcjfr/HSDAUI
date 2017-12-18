@@ -3,7 +3,7 @@ import * as selectedAlert from '@app/common/actions/selected-alert';
 import { AircraftInfoFactory } from '@app/common/reducers/models/aircraft-info';
 import { SdaFactory } from '@app/common/reducers/models/sda';
 import { List } from 'immutable';
-import { ISda, ISdaListView, Status, IAircraftInfo } from '@app/common/models';
+import { ISda, ISdaListView, Status, IAircraftInfo, IChangeLog } from '@app/common/models';
 import { ISavedStateRecord, SavedStateFactory } from '@app/common/reducers/models/saved-state';
 import { ISdaListResult } from '@app/common/models';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
@@ -18,6 +18,7 @@ describe('selectedAlertReducer', () => {
     sda: SdaFactory(),
     newSdaStatus: Status.Open,
     noseNumbers: List.of<IAircraftInfo>(),
+    changeLogs: List.of<IChangeLog>(),
     aircraftInfo: AircraftInfoFactory(),
     sdaListResult: SdaListResultFactory(),
     searchCriteria: SearchCriteriaRecordFactory()

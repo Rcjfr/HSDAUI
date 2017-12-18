@@ -10,5 +10,6 @@ export * from './saved-searches.service';
 export * from './saved-searches-state.service';
 export * from './utility.service';
 export * from './lookup-data.service';
+export * from './changelog.service';
 
 

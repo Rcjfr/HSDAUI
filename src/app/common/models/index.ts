@@ -1,4 +1,5 @@
 export * from './aircraft-info.model';
+export * from './change-log.model';
 export * from './alert.model';
 export * from './alert-result.model';
 export * from './ata-code.model';
