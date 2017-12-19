@@ -155,43 +155,34 @@
   <div class="row form-group">
     <div class="col-sm-12">
       <h3>Attachments:</h3>
-      <p>Queue length: {{ uploader?.queue?.length }}</p>
       <table class="table">
         <thead>
           <tr>
             <th width="50%">Name</th>
             <th>Size</th>
-            <th>Progress</th>
-            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of uploader.queue">
-            <td><strong>{{ item?.file?.name }}</strong></td>
-            <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-            <td *ngIf="uploader.options.isHTML5">
-              <div class="progress" style="margin-bottom: 0;">
-                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-              </div>
-            </td>
-            <td class="text-center">
-              <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-              <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-              <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-            </td>
+          <tr *ngFor="let attachment of getAttachments().controls;let j=index">
+            <td><strong>
+              <a href="/{{attachment.get('attachmentPath').value}}" target="_blank">{{ attachment.get('attachmentName').value }}</a>
+              </strong></td>
+            <td nowrap>{{ attachment.get('attachmentSize').value | byteFmt: 2 }}</td>
             <td nowrap>
               <button type="button" class="btn btn-danger btn-xs"
-                      (click)="item.remove()">
+                      (click)="deleteAttachment(j)" *ngIf="editable">
                 <span class="glyphicon glyphicon-trash"></span> Remove
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-
+      <div class="progress" *ngIf="uploader.progress > 0 && uploader.progress < 100">
+        <div class="progress-bar"  role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+      </div>
       <div>
-        <label class="btn btn-primary btn-file">
+        <label class="btn btn-primary btn-file" *ngIf="editable">
           Add Attachment <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
         </label>
       </div>

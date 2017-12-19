@@ -11,7 +11,7 @@ export class StationService {
   constructor(private http: HttpClient) { }
 
   getStations(token: string): Observable<IStation[]> {
-    const url = `${this.endPointUrl}?token=${token}`;
+    const url = `${this.endPointUrl}?query=${token}`;
 
     return this.http.get<IStation[]>(url);
   };

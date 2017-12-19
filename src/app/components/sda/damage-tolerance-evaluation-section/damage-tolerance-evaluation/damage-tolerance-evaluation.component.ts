@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
-import { FileUploader } from 'ng2-file-upload';
+import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
+
+import { environment } from '@env/environment';
 
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { Expressions } from '@app/common/validators/generic-validator';
@@ -21,14 +23,14 @@ import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tole
   selector: 'aa-damage-tolerance-evaluation',
   templateUrl: './damage-tolerance-evaluation.component.html',
   styleUrls: ['./damage-tolerance-evaluation.component.less'],
-changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;
 
   dteStatus$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  public uploader = new FileUploader({ url: '/api/attachments' });
+  public uploader = new FileUploader({ autoUpload: true });
   displayName: string;
   createNumberMask = createNumberMask;
   public decimalNumberMask = createNumberMask({
@@ -87,6 +89,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.get('submittedToQC').enable();
       }
     });
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploader.onCompleteItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+      const arr = this.getAttachments();
+      const responseData = JSON.parse(response);
+      arr.push(this.initAttachment(item.file.name, item.file.size, responseData[0]));
+    };
     this.parent.addControl(this.formGroupName, this.formGroup);
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
@@ -124,6 +134,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
+      this.uploader.setOptions({ url: `${environment.hsdaApiBaseUrl}sda/${newSda.id}/attachments` });
+
       if (newSda.dteSection) {
         this.formGroup.patchValue(newSda.dteSection);
         this.formGroup.patchValue({
@@ -132,6 +144,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         });
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
+        const arr = this.getAttachments();
+        for (const attachment of newSda.dteSection.attachments) {
+          arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath));
+        }
       } else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
@@ -154,5 +170,33 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (!this.editable) {
       this.formGroup.disable({ emitEvent: false });
     }
+  }
+
+  initAttachment(fileName: string, fileSize: number, filePath: string) {
+    return this.fb.group({
+      attachmentID: ['', [Validators.maxLength(50)]],
+      attachmentName: [fileName, [Validators.maxLength(50)]],
+      attachmentSize: [fileSize, [Validators.maxLength(50)]],
+      attachmentPath: [filePath, [Validators.maxLength(50)]]
+    });
+  }
+
+  deleteAttachment(index: number) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: 'Are you sure you want to delete this attachment?'
+    })
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+          const arr = this.getAttachments();
+          arr.removeAt(index);
+        }
+      });
+
+    return false;
+  }
+
+  getAttachments(): FormArray {
+    return <FormArray>this.formGroup.get('attachments');
   }
 }

@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogService } from 'ng2-bootstrap-modal';
+import { NgPipesModule } from 'ng-pipes';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -23,6 +24,7 @@ describe('DamageToleranceEvaluationComponent', () => {
   let fixture: ComponentFixture<DamageToleranceEvaluationComponent>;
   const sda1 = {
     dteSection: {
+      attachments: [],
       monitorItems: [
         {
           monitorItemID: 3,
@@ -70,7 +72,7 @@ describe('DamageToleranceEvaluationComponent', () => {
         DteThresholdItemComponent,
         DteMonitorItemComponent],
       imports: [
-        ReactiveFormsModule, FormsModule, FormControlsModule, ToastrModule.forRoot(),
+        ReactiveFormsModule, FormsModule, FormControlsModule, ToastrModule.forRoot(), NgPipesModule,
         NKDatetimeModule, TextMaskModule, FileUploadModule, HttpModule, RouterTestingModule
       ]
     })
