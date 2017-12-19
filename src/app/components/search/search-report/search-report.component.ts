@@ -32,6 +32,7 @@ export class SearchReportComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.options = ReportOptions;
     if (changes.criteria && changes.criteria.currentValue) {
       if (changes.criteria.currentValue.reportColumns) {
         this.selectedOptions = changes.criteria.currentValue.reportColumns;
