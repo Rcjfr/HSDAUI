@@ -1,6 +1,6 @@
 import { IChangeLog } from '@app/common/models/change-log.model';
 import { IReportOption, ReportOptions } from '@app/components/search/search-report/options';
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { List } from 'immutable';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
   selector: 'aa-current-status-section',
   templateUrl: './current-status-section.component.html',
   styleUrls: ['./current-status-section.component.less'],
-
+changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
   @ViewChild('statusModal') public statusModal: ModalDirective;
