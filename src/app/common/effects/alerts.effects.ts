@@ -162,6 +162,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
+    selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
     selectedAlert.ActionTypes.EXPORT_SDAS_FAIL
     )
     .switchMap((action: Action) => {

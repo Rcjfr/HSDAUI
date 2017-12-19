@@ -6,9 +6,6 @@ export interface IReportOption {
 }
 
 export const ReportOptions: IReportOption[] = [
-  //version Information
-  { key: 'SdaVersionID', display: 'Version ID', dbField: 'SDA_VERSION_ID' },
-  { key: 'COMMENTS', display: 'Comments', dbField: 'COMMENTS' },
   //General Information
   { key: 'ID', display: 'SDA ID', dbField: 'ID' },
   { key: 'HistoricId', display: 'Historic SDA ID', dbField: 'HISTORIC_ID' },
@@ -16,7 +13,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'StatusUpdatedOn', display: 'Last Updated On', dbField: 'STATUS_UPDATED_ON', format: 'M/d/yyyy hh:mm:ss' },
   { key: 'Status', display: 'Current Status', dbField: 'STATUS_DESC' },
   { key: 'SdrNumber', display: 'SDR Number', dbField: 'SDR_NMBR' },
-  { key: 'Station', display: 'Station', dbField: '' },
+  { key: 'Station', display: 'Station', dbField: 'AIRLN_BUSISTN_CD' },
 
   { key: 'Department', display: 'Department', dbField: 'MNTNC_DEPT_DESC' },
   { key: 'AircraftNo', display: 'Nose Number', dbField: 'AIRCRFT_NBR' },
@@ -37,7 +34,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'RoutineNo', display: 'Routine #', dbField: 'SCHD_MNTNC_RTN_TASK_CARD_TXT'},
   { key: 'NonRoutineNo', display: 'Non-Routine #', dbField: 'SCHD_MNTNC_NONRTN_TASKCARD_TXT' },
   { key: 'ESMReference', display: 'ESM Reference #', dbField: 'SCHD_MNTNC_ESM_REFERENCE_TXT' },
-  { key: 'MicNo', display: 'MIC #', dbField: '' },
+  { key: 'MicNo', display: 'MIC #', dbField: 'MTNC_INCDNT_CHK_TXT' },
   { key: 'CreateDate', display: 'Create Date', format: 'M/d/yyyy', dbField: 'CREATEDATE' },
 
 
@@ -96,7 +93,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'IsCorrosionTaskNoCorrect', display: 'Is CPCP Task # correct?', dbField: 'IS_CORRISION_TASK_NO_CORRECT'},
   { key: 'CorrectedCorrosionTaskNo', display: 'Corrected CPCP Task #' , dbField: 'CORRECTED_CORROSION_TASK_NO'},
   { key: 'CorrosionLevelChangeReason', display: 'Reason for level change', dbField: ''},
-  { key: 'CorrosionLevelChangeReasonOtherText', display: 'Reason for level change(Other) - Description', dbField: 'CORROSION_LEVEL_CHANGE_REASON_DESC'},
+  { key: 'CorrosionLevelChangeReasonOtherText', display: 'Reason for level change(Other) - Description', dbField: 'CORROSION_LEVEL_CHANGE_REASON_OTHER_TEXT'},
   { key: 'EngineeringComments', display: 'Engineering Comments' , dbField: 'ENGINEERING_COMMENTS'},
   { key: 'QCFeedback', display: 'QC Feedback(CPCP Disposition)', dbField:  'QC_FEEDBACK'},
   { key: 'isReviewComplete', display: 'Review Complete(CPCP Disposition)?', dbField: 'IS_REVIEW_COMPLETE'},

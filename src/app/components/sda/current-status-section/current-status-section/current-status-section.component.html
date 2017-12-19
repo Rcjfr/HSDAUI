@@ -17,8 +17,6 @@
         <th>
           Comments
         </th>
-        <th>
-        </th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -48,8 +46,6 @@
         <td>
         <div *ngIf="stat.version>1">
             <a title='Change Log' (click)="showModal(sda.id, stat.version);" href="javascript:void(0)" class="pull-left" >Change Log</a>
-
-        <!-- <button type="button" class="btn btn-default" ng-click="showModal(sda.id, stat.version); ">Change Log</button> -->
         </div>
         </td>
       </tr>
@@ -105,4 +101,3 @@
     </div>
   </div>
 </div>
-

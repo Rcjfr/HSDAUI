@@ -7,7 +7,7 @@ import { IAircraftInfoRecord, AircraftInfoFactory } from '@app/common/reducers/m
 import { ISdaRecord, SdaFactory } from '@app/common/reducers/models/sda';
 import { UserRecordFactory, IUserRecord } from '@app/common/reducers/models/user';
 import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
-
+import { IChangeLog } from '@app/common/models/change-log.model';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -135,7 +135,7 @@ export class MockAppStateService extends AppStateService {
   }
 
   getChangeLog() {
-        return Observable.of([]);
+        return Observable.of(List<IChangeLog>());
       }
 
 }

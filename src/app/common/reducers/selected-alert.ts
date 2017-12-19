@@ -117,10 +117,6 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, changeLogs: List.of(...act.payload) });
       }
-      case selectedAlertActions.ActionTypes.LOAD_CHANGE_LOG_FAIL:
-      {
-        return state.merge({ loading: false });
-      }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadNoseNumbersCompleteAction;

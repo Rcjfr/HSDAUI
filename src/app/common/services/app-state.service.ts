@@ -63,8 +63,8 @@ export class AppStateService {
     return this.store.select(fromRoot.getNoseNumbers).map(d => d && d.toJS());
   }
 
-  getChangeLog(): Observable<Array<IChangeLog>> {
-    return this.store.select(fromRoot.getChangeLog).map(d => d && d.toJS());
+    getChangeLog(): Observable<List<IChangeLog>> {
+    return this.store.select(fromRoot.getChangeLog);
   }
 
 

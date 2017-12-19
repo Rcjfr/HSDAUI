@@ -1,7 +1,7 @@
 import { IChangeLog } from '@app/common/models/change-log.model';
 import { IReportOption, ReportOptions } from '@app/components/search/search-report/options';
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
-
+import { List } from 'immutable';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -19,9 +19,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
   @ViewChild('statusModal') public statusModal: ModalDirective;
-  changeLog$: Observable<models.IChangeLog[]>;
-  result: models.IChangeLog[];
-  reportOptions: IReportOption[];
+  changeLog$: Observable<List<models.IChangeLog>>;
   constructor(private fb: FormBuilder, authService: AuthService,
     private appStateService: AppStateService
   ) {
@@ -29,11 +27,12 @@ export class CurrentStatusSectionComponent extends BaseFormComponent implements 
   }
   ngOnInit() {
     this.changeLog$ = this.appStateService.getChangeLog();
-    this.reportOptions = ReportOptions;
   }
 
  changeLogDisplayAttribute(attribute: string): string {
-  return ReportOptions.find( (option) => option.dbField === attribute ) ? ReportOptions.find( (option) => option.dbField === attribute ).display : attribute
+  const attributeColumn = ReportOptions.find( (option) => option.dbField === attribute )
+
+  return attributeColumn ? attributeColumn.display : attribute
  }
   ngOnDestroy() {
     super.ngOnDestroy();
