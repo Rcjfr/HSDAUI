@@ -17,13 +17,13 @@ export class SearchReportComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    this.options = ReportOptions;
+    this.options = _.clone(ReportOptions);
     this.selectedOptions = [];
     this.criteria.reportColumns = [];
   }
 
   onMoveToSource() {
-    this.options = _.differenceWith(ReportOptions, this.selectedOptions, _.isEqual);
+    this.options = _.differenceWith(_.clone(ReportOptions), this.selectedOptions, _.isEqual);
     this.setSearchByReportFilters(this.selectedOptions);
   }
 
@@ -39,7 +39,7 @@ export class SearchReportComponent implements OnInit, OnChanges {
       } else {
         this.selectedOptions = [];
       }
-      this.options = _.differenceWith(ReportOptions, this.selectedOptions, _.isEqual);
+      this.options = _.differenceWith(_.clone(ReportOptions), this.selectedOptions, _.isEqual);
     }
   }
 }
