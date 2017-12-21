@@ -1,3 +1,4 @@
+import { ChangeLog } from '@app/common/services/changelog.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ import { HeaderComponent } from '@app/common/components/header/header.component'
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { AlertsComponent } from '@app/components/alerts/alerts.component';
 import { AlertDetailComponent } from '@app/components/alert-detail/alert-detail.component';
+import { ChangeLogModalComponent } from '@app/components/change-log-modal/change-log-modal.component';
 import { SdaResolverService } from '@app/common/resolvers/sda-resolver.service';
 import * as services from '@app/common/services';
 import { PendingChangesGuard } from '@app/common/components/pending-changes.guard';
@@ -55,6 +57,7 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
     HeaderComponent,
     AlertsComponent,
     AlertDetailComponent,
+    ChangeLogModalComponent,
     AlertDetailViewComponent,
     AlertsSearchComponent,
     AlertsGridComponent,
@@ -121,6 +124,7 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
   ],
   entryComponents: [
     ConfirmComponent,
+    ChangeLogModalComponent,
     PromptDialogComponent
   ],
   bootstrap: [AppComponent]

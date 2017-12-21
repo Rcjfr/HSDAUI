@@ -65,7 +65,7 @@
     </aa-cpcp-disposition-section>
     <div class="panel-heading" *ngIf="sda.id">Status History</div>
     <aa-current-status-section *ngIf="sda.id" [parent]="sdaForm"
-                               [sda]="sda"
+                               [sda]="sda" (onChangeLog)="changeLog($event)"
                                [errorMessages]="displayMessage$ | async">
     </aa-current-status-section>
   </div>
@@ -110,12 +110,17 @@
           <ng-container *ngIf="canArchiveSda() | async">
             <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Delete SDA</button>
           </ng-container>
+
+          <ng-container >
+            <button type="submit" *ngIf="sda.history.length >1"  class="btn btn-primary btn-lg" (click)="completeChangeLog()" tabindex="114">View Full Change Log</button>
+          </ng-container>
         </ng-container>
       </div>
     </div>
   </div>
 
 </form>
+<aa-change-log-modal [changeLog]="changeLog$" [sdaID]="sda.id" ></aa-change-log-modal>
 <div bsModal #statusModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

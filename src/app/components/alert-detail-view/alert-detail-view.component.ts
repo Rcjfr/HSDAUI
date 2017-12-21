@@ -1,3 +1,5 @@
+import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
+import { IChangeLog } from '@app/common/models/change-log.model';
 import {
   Component, OnInit, Input, ViewChildren, ElementRef,
   AfterViewInit, ChangeDetectionStrategy, ContentChildren, ViewChild, AfterContentInit, EventEmitter, Output, HostListener, OnDestroy, OnChanges, SimpleChanges, ChangeDetectorRef
@@ -27,7 +29,8 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 import { CustomValidators } from '@app/common/validators/custom-validators';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
-
+import { List } from 'immutable';
+import {ChangeLogModalComponent} from '../change-log-modal/change-log-modal.component';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -54,6 +57,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   public newSdaStus$: Observable<Status>;
 
   @ViewChild('statusModal') public statusModal: ModalDirective;
+  @ViewChild(ChangeLogModalComponent) changeLogComponent: ChangeLogModalComponent;
 
   // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
@@ -65,6 +69,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   displayMessage$ = new BehaviorSubject<any>({});
 
   private genericValidator: GenericValidator;
+  changeLog$: Observable<List<IChangeLog>>;
 
   constructor(private toastr: ToastrService,
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
@@ -117,6 +122,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.lastModifiedBy = s;
       this.statusUpdatedBy = s;
     });
+    this.changeLog$ = this.appStateService.getChangeLog();
   }
 
   ngOnDestroy() {
@@ -505,6 +511,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   formatDate(date: Date): string {
     return moment(date).format('LLL');
   }
+
+  completeChangeLog() {
+    this.appStateService.loadChangelog({ sdaId: this.sda.id, version: 0 });
+    this.changeLogComponent.showModal();
+  }
+
+  changeLog(result: ILoadChangeLog) {
+    this.appStateService.loadChangelog({ sdaId: result.sdaId, version: result.version });
+    this.changeLogComponent.showModal();
+  }
+
 
   canArchiveSda(): Observable<boolean> {
     return Observable.combineLatest(

@@ -12,6 +12,7 @@ import { AlertDetailViewComponent } from '@app/components/alert-detail-view/aler
 import { CurrentStatusSectionComponent } from '@app/components/sda/current-status-section/current-status-section/current-status-section.component';
 import { RepairDetailsSectionComponent } from '@app/components/sda/repair-details-section/repair-details-section/repair-details-section.component';
 import { GeneralSectionFormComponent } from '@app/components/sda/general-section/general-section-form/general-section-form.component';
+import {ChangeLogModalComponent} from '../change-log-modal/change-log-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgPipesModule } from 'ng-pipes';
@@ -90,6 +91,7 @@ describe('AlertDetailViewComponent', () => {
         CorrectiveActionFormGroupComponent,
         DamageToleranceEvaluationComponent,
         AtaCodeComponent,
+        ChangeLogModalComponent,
         AircraftInfoSectionFormComponent,
         DefectDiscoveredDuringSectionFormComponent,
         PreciseLocationGroupComponent,

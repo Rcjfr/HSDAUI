@@ -1,15 +1,9 @@
-import { IChangeLog } from '@app/common/models/change-log.model';
-import { IReportOption, ReportOptions } from '@app/components/search/search-report/options';
-import { Component, ViewChild, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { List } from 'immutable';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
-
-import { ModalDirective } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 import { AppStateService, AuthService } from '@app/common/services';
-import * as models from '@app/common/models';
-import { Observable } from 'rxjs/Observable';
+import {ILoadSda} from '@app/common/models/payload/load-sda.model';
 
 @Component({
   selector: 'aa-current-status-section',
@@ -18,36 +12,27 @@ import { Observable } from 'rxjs/Observable';
 changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrentStatusSectionComponent extends BaseFormComponent implements OnInit, OnDestroy {
-  @ViewChild('statusModal') public statusModal: ModalDirective;
-  changeLog$: Observable<List<models.IChangeLog>>;
+
+  @Output() onChangeLog = new EventEmitter<ILoadSda>();
+
   constructor(private fb: FormBuilder, authService: AuthService,
     private appStateService: AppStateService
   ) {
     super('currentStatusSectionGroup', authService);
   }
-  ngOnInit() {
-    this.changeLog$ = this.appStateService.getChangeLog();
-  }
+  ngOnInit() { }
 
- changeLogDisplayAttribute(attribute: string): string {
-  const attributeColumn = ReportOptions.find( (option) => option.dbField === attribute )
 
-  return attributeColumn ? attributeColumn.display : attribute
- }
   ngOnDestroy() {
     super.ngOnDestroy();
   }
 
 
   showModal(id: number, versionNum: number): void {
-    this.appStateService.loadChangelog({ sdaId: id, version: versionNum });
-    this.statusModal.show();
-
+    this.onChangeLog.emit({ sdaId: id, version: versionNum});
     };
 
-  hideStatusModal() {
-    this.statusModal.hide();
-  }
+
   formatDate(date: Date): string {
     return moment(date).format('LLL');
   }
