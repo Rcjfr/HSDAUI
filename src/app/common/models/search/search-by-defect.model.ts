@@ -5,6 +5,7 @@ export interface ISearchByDefect {
   buttLine: any;
   damageType: any;
   detectionMethod: any;
+  detectionMethodOtherDescription: any;
   lengthFrom: any;
   lengthTo: any;
   widthFrom: any;

@@ -54,6 +54,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'PartTT', display: 'Part TT', dbField: 'DEFCT_PART_TTL_TM_QTY' },
   { key: 'PartTSO', display: 'Part TSO', dbField: 'DEFCT_PART_TTL_SNCE_OVRHAL_QTY' },
   { key: 'DetectionMethod', display: 'How Detected', dbField: 'DEFECT_DETECTED_DESC' },
+  { key: 'DetectionMethodOtherDescription', display: 'How Detected(Other)', dbField: 'DEFECT_DETECTED_OTHER_TEXT' },
 
   //Corrosion Prevention Control Program
   { key: 'IsCPCPRelatedEvent', display: 'Is CPCP related event?', dbField: 'IS_CPCP_RELATED' },

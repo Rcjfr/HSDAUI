@@ -22,6 +22,7 @@ export class SearchByDefectComponent implements OnInit, OnChanges {
         buttLine: new FormControl(),
         damageType: new FormControl(),
         detectionMethod: new FormControl(),
+        detectionMethodOtherDescription: new FormControl(),
         lengthFrom: new FormControl(),
         lengthTo: new FormControl(),
         widthFrom: new FormControl(),

@@ -185,7 +185,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'detectionMethod': {
       required: 'How Detected is required.'
 
+    },
+    'detectionMethodOtherDescription': {
+      required: 'Detection Method(Other) description is required.',
+      maxlength: 'Detection Method(Other) description must not be more than 50 characters.'
+
     }
+
   },
   cpcpSectionGroup: {
     isCPCPRelatedEvent: {

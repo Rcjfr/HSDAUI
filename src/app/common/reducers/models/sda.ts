@@ -53,7 +53,8 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     manufacturerSerialNo: null,
     partTT: null,
     partTSO: null,
-    detectionMethod: null
+    detectionMethod: null,
+    detectionMethodOtherDescription: null
   },
   cpcpSection: {
     isCPCPRelatedEvent: null,

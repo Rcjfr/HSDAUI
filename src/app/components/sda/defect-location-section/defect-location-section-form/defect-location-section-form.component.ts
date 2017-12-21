@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { CustomValidators } from '@app/common/validators/custom-validators';
@@ -15,14 +15,14 @@ import * as models from '@app/common/models';
   styleUrls: ['./defect-location-section-form.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges, AfterViewInit {
+export class DefectLocationSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges, OnDestroy {
   detectionMethods$: Observable<models.IBaseLookUp[]>;
   damageTypes$: Observable<models.IBaseLookUp[]>;
-  defectLocationSectionFormGroup: FormGroup;
   decimalsNumberMask = decimalsNumberMask;
+  public DETECTION_METHOD_OTHER = '9';
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('defectLocationSectionFormGroup', authService);
-    this.defectLocationSectionFormGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
       damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
       length: ['', [Validators.required]],
@@ -33,25 +33,33 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
       manufacturerSerialNo: ['', [Validators.maxLength(50)]],
       partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
       partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
-      detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]]
+      detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
+      detectionMethodOtherDescription: ['', [Validators.maxLength(50)]]
     });
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.defectLocationSectionFormGroup.patchValue(newSda.defectLocationSection);
-      this.defectLocationSectionFormGroup.patchValue({ damageType: newSda.defectLocationSection.damageType || '' });
-      this.defectLocationSectionFormGroup.patchValue({ detectionMethod: newSda.defectLocationSection.detectionMethod || '' });
+      this.formGroup.patchValue(newSda.defectLocationSection);
+      this.formGroup.patchValue({ damageType: newSda.defectLocationSection.damageType || '' });
+      this.formGroup.patchValue({ detectionMethod: newSda.defectLocationSection.detectionMethod || '' });
 
       this.checkSDAFormStatus();
     }
   }
 
-  ngAfterViewInit(): void { }
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 
   ngOnInit() {
     this.detectionMethods$ = this.appStateService.getDetectionMethods();
     this.damageTypes$ = this.appStateService.getDamageTypes();
-    this.parent.addControl(this.formGroupName, this.defectLocationSectionFormGroup);
+    this.subscriptions.push(this.formGroup.get('detectionMethod').valueChanges.subscribe(v => {
+      if (v === this.DETECTION_METHOD_OTHER) {
+        this.formGroup.get('detectionMethodOtherDescription').patchValue('');
+      }
+    }));
+    this.parent.addControl(this.formGroupName, this.formGroup);
   }
 }

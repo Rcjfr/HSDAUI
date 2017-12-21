@@ -15,4 +15,5 @@ export interface IDefectLocationSection {
   partTT?: number;
   partTSO?: number;
   detectionMethod?: number;
+  detectionMethodOtherDescription?: string;
 }
