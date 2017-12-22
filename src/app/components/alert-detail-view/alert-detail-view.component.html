@@ -120,7 +120,7 @@
   </div>
 
 </form>
-<aa-change-log-modal [changeLog]="changeLog$" [sdaID]="sda.id" ></aa-change-log-modal>
+<aa-change-log-modal [changeLog]="changeLog$ | async" [sdaID]="sda.id" ></aa-change-log-modal>
 <div bsModal #statusModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

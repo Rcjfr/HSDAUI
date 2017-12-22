@@ -1,10 +1,10 @@
-<div bsModal #changeLogModal="bs-modal"  class="modal fade modal-height-80" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
-  <div class="modal-dialog modal-lg modal-height-100" >
-   <div class="modal-content modal-height-100" >
-     <div class="modal-header modal-height-10">
+<div bsModal #changeLogModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg" >
+   <div class="modal-content" >
+     <div class="modal-header">
        <h4 class="modal-title pull-left">Change Log: SDA ID: {{sdaID}}</h4>
      </div>
-     <div class="modal-body modal-height-70">
+     <div class="modal-body">
        <table class="table">
          <thead>
            <tr>
@@ -15,22 +15,22 @@
              <th class="col-width-23">Changed By</th>
            </tr>
          </thead>
-         <tbody class="modal-scroll" >
+         <tbody>
 
-          <tr *ngFor="let change of changeLog| async">
-               <td class="col-width-14" >
+          <tr *ngFor="let change of changeLog">
+               <td>
                    {{this.changeLogDisplayAttribute(change.attributeName)}}
                </td>
-               <td class="col-width-20">
+               <td>
                    {{change.oldValue}}
                </td>
-               <td class="col-width-20">
+               <td>
                    {{change.newValue}}
                </td>
-               <td class="col-width-23">
+               <td>
                    {{formatDate(change.statusUpdatedOn)}}
                </td>
-               <td class="col-width-23">
+               <td>
                    {{change.statusUpdatedBy}}
                </td>
              </tr>
@@ -38,7 +38,7 @@
            </tbody>
        </table>
      </div>
-     <div class="modal-footer modal-height-20">
+     <div class="modal-footer">
        <button type="button" class="btn btn-default" (click)="hideModal()">
          Close
        </button>
