@@ -37,7 +37,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       qcFeedback: ['', []],
       isReviewComplete: [false, []],
       reviewer: ['', [Validators.maxLength(50)]],
-      reviewerBadgeNo: ['', []],
+      reviewerBadgeNo: ['', [Validators.maxLength(50)]],
       submittedToQC: [false, []]
     });
   }
@@ -61,7 +61,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.formGroup.get('submittedToQC').enable();
       }
     });
-    this.authService.auditDisplayName().take(1).subscribe(u => {
+    this.authService.displayName().take(1).subscribe(u => {
       this.displayName = u;
     });
     this.authService.badgeId().take(1).subscribe(u => {
@@ -97,11 +97,13 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         if (isReviewComplete) {
           this.disableSection();
           this.formGroup.get('reviewer').disable();
+          this.formGroup.get('reviewerBadgeNo').disable();
         }
 
       } else {
         this.formGroup.get('isReviewComplete').disable();
         this.formGroup.get('reviewer').disable();
+        this.formGroup.get('reviewerBadgeNo').disable();
       }
     }
 
@@ -119,7 +121,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       corrosionLevelChangeReasonOtherText: '',
       isWideSpreadCorrosion: undefined,
       submittedToQC: false,
-      reviewer: ''
+      reviewer: '',
+      reviewerBadgeNo: ''
     });
   }
 
@@ -135,7 +138,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       corrosionLevelChangeReasonOtherText: undefined,
       isWideSpreadCorrosion: undefined,
       submittedToQC: false,
-      reviewer: ''
+      reviewer: '',
+      reviewerBadgeNo: ''
     });
   }
 
@@ -146,6 +150,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('isReviewComplete').enable();
       this.formGroup.get('isReviewComplete').reset(false);
       this.formGroup.get('reviewer').enable();
+      this.formGroup.get('reviewerBadgeNo').enable();
       this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
       this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);
     } else {
@@ -154,7 +159,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('isReviewComplete').disable();
       this.formGroup.get('isReviewComplete').reset(true);
       this.formGroup.get('reviewer').disable();
+      this.formGroup.get('reviewerBadgeNo').disable();
       this.formGroup.get('reviewer').reset('Review not required');
+      this.formGroup.get('reviewerBadgeNo').reset('Review not required');
     }
   }
 
@@ -197,6 +204,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.enableSection();
         this.formGroup.get('reviewer').enable();
         this.formGroup.get('reviewer').reset(undefined);
+        this.formGroup.get('reviewerBadgeNo').enable();
         this.formGroup.get('reviewerBadgeNo').reset(undefined);
         this.updatecpcpTaskBehavior(this.formGroup.get('isCorrosionTaskNoCorrect').value);
         this.updateIsCorrosionLevelCorrectBehavior(this.formGroup.get('isCorrosionLevelCorrect').value);

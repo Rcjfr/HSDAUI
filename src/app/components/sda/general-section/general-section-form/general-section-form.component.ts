@@ -81,7 +81,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
       this.generalSectionFormGroup.get('sdaId').disable();
       this.generalSectionFormGroup.get('sdrNumber').disable();
       if (!this.sda.id) {
-        this.authService.auditDisplayName().take(1).subscribe(u => {
+        this.authService.displayName().take(1).subscribe(u => {
           this.generalSectionFormGroup.patchValue({ originator: u });
         });
         this.authService.badgeId().take(1).subscribe(u => {

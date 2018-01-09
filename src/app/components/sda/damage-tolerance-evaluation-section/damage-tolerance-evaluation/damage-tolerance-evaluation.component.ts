@@ -66,7 +66,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       comments: ['', [Validators.maxLength(500)]],
       qcFeedback: ['', [Validators.maxLength(250)]],
       submittedToQC: [false, []],
-      updatedBy: [{ value: '', disabled: true }, []],
+      updatedByEmpID: [{ value: '', disabled: true }, []],
+      updatedByName: [{ value: '', disabled: true }, []],
       updatedDate: new FormControl({ value: new Date(), disabled: true }),
       dueDate: new FormControl({ value: '', disabled: true }),
       thresholdItems: DteThresholdItemsArrayComponent.buildItems([{}]),
@@ -130,7 +131,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
       });
   }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
@@ -142,6 +142,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           dteStatus: newSda.dteSection.dteStatus,
           repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
         });
+        if (newSda.dteSection.updatedBy ) {
+          const index = newSda.dteSection.updatedBy.indexOf('-')
+          this.formGroup.patchValue({
+            updatedByEmpID : newSda.dteSection.updatedBy.slice(0, index - 1),
+            updatedByName: newSda.dteSection.updatedBy.slice(index + 2, newSda.dteSection.updatedBy.length)
+          });
+      }
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
         const arr = this.getAttachments();
@@ -161,7 +168,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
           submittedToQC: false,
-          updatedBy: '',
+          updatedByName: '',
+          updatedByEmpID: '',
           updatedDate: { value: undefined, disabled: true }
         });
       }

@@ -47,7 +47,7 @@
         <div class="row form-group" [class.has-error]="displayMessage.isWideSpreadCorrosion">
           <label class="col-sm-4 control-label">Widespread Corrosion?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
-            
+
             <aac-radio-container label="Yes">
               <input type="radio" [value]="true" tabindex="106" [required]="isReviewComplete()" formControlName="isWideSpreadCorrosion" />
             </aac-radio-container>
@@ -81,7 +81,7 @@
 
             <div class="col-sm-12">
               <aac-radio-container *ngFor="let ac of reasons$ | async" [label]="ac.description">
-                <input type="radio" [value]="ac.id" tabindex="104" [required]="isReviewComplete() && isCorrosionLevelCorrect() === false"  
+                <input type="radio" [value]="ac.id" tabindex="104" [required]="isReviewComplete() && isCorrosionLevelCorrect() === false"
 				formControlName="corrosionLevelChangeReason" />
               </aac-radio-container>
               <div *ngIf="displayMessage.corrosionLevelChangeReason" class="error">{{displayMessage.corrosionLevelChangeReason}}</div>
@@ -136,11 +136,20 @@
     <div class="col-sm-10">
       <aac-field-container label="" labelGridColumnWidth="1"
                            [message]="displayMessage.reviewer">
-        <input type="text" tabindex="111" class="form-control" formControlName="reviewer">
+
+        <div >
+            <div class="col-sm-4 padding-0">
+              <input type="text" tabindex='13' class="form-control" placeholder="Employee ID" formControlName="reviewerBadgeNo">
+             </div>
+             <div class="col-sm-1 padding-0 width-20">_</div>
+             <div class="col-sm-7 padding-0">
+              <input type="text" tabindex='13' class="form-control"  placeholder="Last Name, First Name" formControlName="reviewer" >
+            </div>
+          </div>
       </aac-field-container>
     </div>
 
   </div>
-  
+
 </div>
 

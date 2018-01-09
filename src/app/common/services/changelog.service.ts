@@ -7,11 +7,11 @@ import { Helper } from '@app/common/helper';
 
 @Injectable()
 export class ChangeLog {
-  private endPointUrl = `${environment.hsdaApiBaseUrl}changelog`;
+  private endPointUrl = `${environment.hsdaApiBaseUrl}sda`;
   constructor(private http: HttpClient) { }
 
   getChangeLog(id: number, version: number): Observable<IChangeLog[]> {
-    return this.http.get(`${this.endPointUrl}/${id}/version/${version}`, { responseType: 'text' })
+    return this.http.get(`${this.endPointUrl}/${id}/version/${version}/changelog`, { responseType: 'text' })
     .map((result) => Helper.Deserialize(result));
   };
 

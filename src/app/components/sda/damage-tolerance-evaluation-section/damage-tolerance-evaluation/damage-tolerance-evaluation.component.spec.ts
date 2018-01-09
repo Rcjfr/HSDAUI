@@ -100,7 +100,7 @@ describe('DamageToleranceEvaluationComponent', () => {
     });
     fixture.detectChanges();
     expect(component).toBeTruthy();
-    expect(component.formGroup.get('updatedBy').value).toBe('00123456 - LASTNAME, FIRSTNAME'); //default value
+    expect(component.formGroup.get('updatedByEmpID').value).toBe('00123456'); //default value
     component.formGroup.get('qcFeedback').setValue('testing');
     expect(component.formGroup.get('submittedToQC').disabled).toBeFalsy();
     component.formGroup.get('qcFeedback').setValue('');
@@ -120,7 +120,7 @@ describe('DamageToleranceEvaluationComponent', () => {
     expect(component).toBeTruthy();
 
     expect(component.formGroup.get('stage1Duration').value).toBe(6); //default value
-    expect(component.formGroup.get('updatedBy').value).toBe(''); //default value
+    expect(component.formGroup.get('updatedByEmpID').value).toBe(''); //default value
     expect(component.formGroup.get('totalShipTime').value).toBe('15574.11'); //default value from general section
     expect(component.formGroup.get('cycles').value).toBe('6207'); //default value from general section
 

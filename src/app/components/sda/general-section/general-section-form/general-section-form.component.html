@@ -79,8 +79,16 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator">
-        <input type="text" tabindex='13' class="form-control" formControlName="originator">
+      <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator || displayMessage.originatorBadgeNo">
+        <div >
+          <div class="col-sm-4 padding-0">
+            <input type="text" tabindex='13' class="form-control" placeholder="Employee ID" formControlName="originatorBadgeNo">
+           </div>
+           <div class="col-sm-1 padding-0">_</div>
+           <div class="col-sm-7 padding-0">
+            <input type="text" tabindex='13' class="form-control" formControlName="originator" placeholder="Last Name, First Name">
+          </div>
+        </div>
       </aac-field-container>
     </div>
   </div>

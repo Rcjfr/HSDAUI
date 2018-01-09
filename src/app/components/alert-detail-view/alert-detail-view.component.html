@@ -134,11 +134,24 @@
         <form novalidate [formGroup]="sdaStatusForm">
           <div class="form-group">
             <label for="completedBy">Completed By:<span class="req">*</span></label>
-            <input type="text" id="completedBy" [attr.disabled]="canEditCompletedBy()?null:''" class="form-control" formControlName="completedBy" />
+            <div class="row">
+              <div class="col-sm-4 padding-right-0">
+                <input type="text" id="completedBy" [attr.disabled]="canEditCompletedBy()?null:''" class="form-control" formControlName="completedBy" placeholder="Employee ID" />
+              </div>
+              <div class="col-sm-1 padding-0">_</div>
+              <div class="col-sm-7 padding-left-0">
+                <input type="text" id="completedByName" [attr.disabled]="canEditCompletedBy()?null:''" class="form-control" formControlName="completedByName" placeholder="Last Name, First Name" />
+              </div>
+            </div>
             <div *ngIf="sdaStatusForm.get('completedBy').errors && (sdaStatusForm.get('completedBy').dirty || sdaStatusForm.get('completedBy').touched)" class="error">
               <div [hidden]="!sdaStatusForm.get('completedBy').errors.required">
-                Completed By is required.
+                Employee ID is required.
               </div>
+            </div>
+            <div *ngIf="sdaStatusForm.get('completedByName').errors && (sdaStatusForm.get('completedByName').dirty || sdaStatusForm.get('completedByName').touched)" class="error">
+                <div [hidden]="!sdaStatusForm.get('completedByName').errors.required">
+                  Employee Name is required.
+                </div>
             </div>
           </div>
           <div class="form-group">

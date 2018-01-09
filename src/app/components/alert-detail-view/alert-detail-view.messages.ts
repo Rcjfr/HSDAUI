@@ -31,8 +31,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     }
     ,
     'originator': {
-      required: 'Originator is required.',
-      maxlength: 'Originator must not be more than 50 characters.'
+      required: 'Name is required.',
+      maxlength: 'Name must not be more than 50 characters.'
+    },
+    'originatorBadgeNo': {
+      required: 'Employee ID is required.',
+      maxlength: 'Employee ID must not be more than 50 characters.'
     },
     'aircraftInfoSectionFormGroup': {
       'aircraftNo': {

@@ -47,6 +47,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   @Output() onReset = new EventEmitter();
   currentSdaId: number;
   lastModifiedBy: string;
+  statusUpdatedByName: string;
   statusUpdatedBy: string;
   lastModifiedOn: Date = new Date();
   statusUpdatedOn: Date = this.lastModifiedOn;
@@ -82,6 +83,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.sdaStatusForm = this.fb.group({
       status: ['', [Validators.required]],
       completedBy: ['', [Validators.required]],
+      completedByName: ['', [Validators.required]],
       completedOn: ['', [Validators.required, CustomValidators.validateFutureDate]],
       comments: ['', []],
     });
@@ -120,8 +122,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.newSdaStus$ = this.appStateService.getNewSdaStatus();
     this.authService.auditDisplayName().take(1).subscribe(s => {
       this.lastModifiedBy = s;
+      //TODO: use slice for names ex. str.slice(0, str.indexOf(',')) once we get validation of id.
+    });
+
+    this.authService.displayName().take(1).subscribe(s => {
+      this.statusUpdatedByName = s;
+    });
+
+    this.authService.badgeId().take(1).subscribe(s => {
       this.statusUpdatedBy = s;
     });
+
     this.changeLog$ = this.appStateService.getChangeLog();
   }
 
@@ -190,7 +201,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (!this.sdaStatusForm.valid) {
       return;
     }
-    this.sda.statusUpdatedBy = this.sdaStatusForm.get('completedBy').value;
+    this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
     this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
 
     this.sda.comments = this.sdaStatusForm.get('comments').value;
@@ -301,7 +312,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
     this.statusUpdatedOn = new Date();
-    this.sdaStatusForm.patchValue({status: newStatus, completedBy: this.lastModifiedBy, completedOn: this.statusUpdatedOn, comments: '' });
+    this.sdaStatusForm.patchValue({status: newStatus, completedBy: this.statusUpdatedBy, completedByName: this.statusUpdatedByName , completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete ||
           this.sda.status === Status.Audited ||
@@ -310,7 +321,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.showModal();
       } else {
         // User can not change UpdatedBy/Date.so no need to show the modal
-        this.sda.statusUpdatedBy = this.statusUpdatedBy;
+        this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`
         this.sda.statusUpdatedOn = this.statusUpdatedOn;
         this.saveAlertData();
       }
@@ -349,7 +360,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         if (modalTitle) {
           this.sda.comments = modalTitle;
         }
-        this.sda.statusUpdatedBy = this.statusUpdatedBy;
+        this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
         this.sda.statusUpdatedOn = this.statusUpdatedOn;
         this.saveAlertData();
       }
@@ -371,7 +382,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveDTESectionDetails = false;
     this.saveCPCPSectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
-    this.sda.statusUpdatedBy = this.statusUpdatedBy;
+    this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
     this.sda.statusUpdatedOn = this.statusUpdatedOn;
     this.sda.comments = 'Update CPCP Disposition Section Details';
     this.validateSdaForm();
@@ -389,7 +400,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveCPCPSectionDetails = false;
     this.saveDTESectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
-    this.sda.statusUpdatedBy = this.statusUpdatedBy;
+    this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
     this.sda.statusUpdatedOn = this.statusUpdatedOn;
     this.sda.comments = 'Update Damage Tolerance Evaluation Details';
     this.validateSdaForm();
