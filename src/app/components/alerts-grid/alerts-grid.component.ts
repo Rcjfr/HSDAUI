@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
 import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 import { Subject } from 'rxjs/Rx';
-import { AppStateService } from '@app/common/services';
+import { AppStateService, SdaExportService } from '@app/common/services';
 import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
@@ -35,7 +35,8 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   defaultSortOrder = -1;
 
 
-  constructor(private appStateService: AppStateService, private scrollToService: ScrollToService) { }
+  constructor(private appStateService: AppStateService, private scrollToService: ScrollToService
+    , private sdaExportService: SdaExportService) { }
 
   ngOnInit() {
     this.sdaListResult$ = this.appStateService.getSdaListResult()
@@ -99,5 +100,11 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
       sortField: this.defaultSortColumn,
       sortOrder: this.defaultSortOrder
     }
+  }
+
+  exportPdf(sdaId: number): boolean {
+    this.sdaExportService.exportSda([sdaId]);
+
+    return false;
   }
 }

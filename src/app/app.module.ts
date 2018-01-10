@@ -114,6 +114,7 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
     services.SavedSearchStateService,
     services.UtilityService,
     services.LookupDataService,
+    services.SdaExportService,
     services.ChangeLog,
     PendingChangesGuard,
     SdaResolverService, {

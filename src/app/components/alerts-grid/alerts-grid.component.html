@@ -11,6 +11,7 @@
              [sortOrder]="defaultSortOrder">
   <p-column field="id" header="SDA ID" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
+      <a title='Export as PDF' href="" (click)="exportPdf(record[col.field])"><i class="fa fa-file-pdf-o" ></i></a> 
       <a title='View Current' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
       <a title='View Original' *ngIf="record.hasOriginal" class="pull-right" [routerLink]="['/alerts', record[col.field],'original']">[Original]</a>
     </ng-template>
@@ -21,7 +22,7 @@
       {{record[col.field] | date:'shortDate' }}
     </ng-template>
   </p-column>
-  <p-column field="statusText" header="Form Status" [sortable]="true"></p-column>
+  <p-column field="statusDesc" header="Form Status" [sortable]="true"></p-column>
   <p-column field="station" header="Station" [sortable]="true"></p-column>
   <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
   <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>

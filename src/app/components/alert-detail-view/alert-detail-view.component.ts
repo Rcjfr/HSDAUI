@@ -23,7 +23,7 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AppStateService, AuthService } from '@app/common/services';
+import { AppStateService, AuthService, SdaExportService } from '@app/common/services';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
@@ -76,6 +76,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     private fb: FormBuilder, private elRef: ElementRef, private router: Router,
     public appStateService: AppStateService, public authService: AuthService,
     private dialogService: DialogService, public location: Location,
+    private sdaExportService: SdaExportService,
     private cd: ChangeDetectorRef) {
     this.sdaForm = this.fb.group({
       status: ['', [Validators.required]],
@@ -610,5 +611,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return this.sdaStatusForm.get('status').value === Status.Rejected ||
            this.sdaStatusForm.get('status').value === Status.Deleted ||
            (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
+  }
+
+  public exportPdf(sdaId: number): void {
+    this.sdaExportService.exportSda([sdaId]);
   }
 }

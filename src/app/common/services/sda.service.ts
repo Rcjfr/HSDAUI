@@ -68,4 +68,8 @@ export class SdaService {
       .map((result) => Helper.Deserialize(result));
   };
 
+  exportSda(id: number): Observable<models.ISdaListView> {
+    return this.http.get<models.ISdaListView>(`${this.endPointUrl}/${id}/export`);
+  }
+
 }

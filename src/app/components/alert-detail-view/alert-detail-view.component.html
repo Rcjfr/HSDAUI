@@ -73,6 +73,8 @@
     <div class="col-sm-12">
       <div class="pull-right hidden-print">
         <a class="btn btn-default btn-lg" [routerLink]="['/alerts']">Cancel</a>
+        <button type="button" class="btn btn-primary btn-lg" tabindex="114" title="Export as PDF" (click)="exportPdf(sda.id)"><i class="fa fa-file-pdf-o"></i> Export</button>
+
         <a class="btn btn-default btn-lg" *ngIf="hasOriginalVersion()" [routerLink]="['/alerts',sda.id,'original']">View Original</a>
         <a class="btn btn-default btn-lg" *ngIf="original" [routerLink]="['/alerts',sda.id]">View Current</a>
         <!--<button type="button" class="btn btn-default btn-lg" tabindex="114" (click)="location.back()">Cancel</button>-->
@@ -111,8 +113,8 @@
             <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="114">Delete SDA</button>
           </ng-container>
 
-          <ng-container >
-            <button type="submit" *ngIf="sda.history.length >1"  class="btn btn-primary btn-lg" (click)="completeChangeLog()" tabindex="114">View Full Change Log</button>
+          <ng-container>
+            <button type="submit" *ngIf="sda.history.length >1" class="btn btn-primary btn-lg" (click)="completeChangeLog()" tabindex="114">View Full Change Log</button>
           </ng-container>
         </ng-container>
       </div>

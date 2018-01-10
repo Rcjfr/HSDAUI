@@ -97,9 +97,9 @@ export const ReportOptions: IReportOption[] = [
   { key: 'CorrosionLevelChangeReasonOtherText', display: 'Reason for level change(Other) - Description', dbField: 'CORROSION_LEVEL_CHANGE_REASON_OTHER_TEXT'},
   { key: 'EngineeringComments', display: 'Engineering Comments' , dbField: 'ENGINEERING_COMMENTS'},
   { key: 'QCFeedback', display: 'QC Feedback(CPCP Disposition)', dbField:  'QC_FEEDBACK'},
-  { key: 'isReviewComplete', display: 'Review Complete(CPCP Disposition)?', dbField: 'IS_REVIEW_COMPLETE'},
-  { key: 'reviewer', display: 'Reviewer(CPCP Disposition)', dbField: 'REVIEWER'},
-  { key: 'submittedToQC', display: 'Submitted to QC(CPCP Disposition)?', dbField: 'SUBMITTED_TO_QC'},
+  { key: 'IsReviewComplete', display: 'Review Complete(CPCP Disposition)?', dbField: 'IS_REVIEW_COMPLETE'},
+  { key: 'Reviewer', display: 'Reviewer(CPCP Disposition)', dbField: 'REVIEWER'},
+  { key: 'SubmittedToQC', display: 'Submitted to QC(CPCP Disposition)?', dbField: 'SUBMITTED_TO_QC'},
 
   //DTE
   { key: 'DTEStatus', display: 'DTE Status', dbField: 'DTE_STATUS_DESC'},

@@ -12,7 +12,7 @@ import { AlertDetailViewComponent } from '@app/components/alert-detail-view/aler
 import { CurrentStatusSectionComponent } from '@app/components/sda/current-status-section/current-status-section/current-status-section.component';
 import { RepairDetailsSectionComponent } from '@app/components/sda/repair-details-section/repair-details-section/repair-details-section.component';
 import { GeneralSectionFormComponent } from '@app/components/sda/general-section/general-section-form/general-section-form.component';
-import {ChangeLogModalComponent} from '../change-log-modal/change-log-modal.component';
+import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgPipesModule } from 'ng-pipes';
@@ -62,7 +62,7 @@ import { HttpModule } from '@angular/http';
 import { DialogService, DialogComponent } from 'ng2-bootstrap-modal';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('AlertDetailViewComponent', () => {
   let component: AlertDetailViewComponent;
   let fixture: ComponentFixture<AlertDetailViewComponent>;
@@ -118,6 +118,7 @@ describe('AlertDetailViewComponent', () => {
         FormControlsModule,
         FileUploadModule,
         HttpModule,
+        HttpClientTestingModule,
         ModalModule.forRoot(),
         AlertModule.forRoot(),
         TypeaheadModule.forRoot(),
@@ -129,7 +130,7 @@ describe('AlertDetailViewComponent', () => {
         }),
         NKDatetimeModule,
         NgPipesModule, TextMaskModule],
-      providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService]
+      providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService, services.SdaExportService, services.SdaService]
     })
       .compileComponents();
 
@@ -139,7 +140,7 @@ describe('AlertDetailViewComponent', () => {
       id: 0, history: [{
         status: 1, versionID: null, statusText: null, statusUpdatedBy: null, statusUpdatedOn: null, version: null, lastModifiedBy: null,
         lastModifiedOn: null
-      }], correctiveActionSection: {  },
+      }], correctiveActionSection: {},
       generalSection: {}, defectLocationSection: {}, cpcpSection: {}
     };
     //component.sda = {id: 0, correctiveActionSection : {completedBy: null}, generalSection: {}, defectLocationSection: {}, cpcpSection: {} };
