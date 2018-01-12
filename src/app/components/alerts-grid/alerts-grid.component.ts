@@ -67,7 +67,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
           if (hasCriteria) {
             this.appStateService.loadSdaList(this.getDefaultPageData());
           }
-          this.skipNextLoad = true;
+          //this.skipNextLoad = true;
         }
       });
   }
@@ -81,7 +81,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     if (this.skipNextLoad) {
       this.skipNextLoad = false;
     } else {
-      this.appStateService.loadSdaList(this.getPageData(pageData));
+    this.appStateService.loadSdaList(this.getPageData(pageData));
     }
   }
 

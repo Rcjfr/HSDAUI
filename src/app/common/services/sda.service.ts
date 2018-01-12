@@ -23,7 +23,7 @@ export class SdaService {
       return this.http.put(`${this.endPointUrl}/${sda.id}`, sda, { responseType: 'text' })
         .map((result) => Helper.Deserialize(result));
     } else {
-      return this.http.post(`${this.endPointUrl}/internal`, sda, { responseType: 'text' })
+      return this.http.post(`${this.endPointUrl}`, sda, { responseType: 'text' })
         .map((result) => Helper.Deserialize(result));
     }
   };
