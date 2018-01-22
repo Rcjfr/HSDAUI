@@ -2,6 +2,7 @@
 
 export const Expressions = {
   Alphanumerics: '[a-zA-Z0-9]+',
+  AlphanumericsComma: '[a-zA-Z0-9, ]+',
   Alphabets: '[a-zA-Z]+',
   Numerics: '[0-9]+',
   Decimals: '[0-9]+(\.[0-9]+)?'

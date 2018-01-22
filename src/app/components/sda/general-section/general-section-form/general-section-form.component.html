@@ -79,14 +79,15 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <aac-field-container required="true" label="Originator:" [message]="displayMessage.originator || displayMessage.originatorBadgeNo">
+      <aac-field-container  required="true" label="Originator:" [message]="displayMessage.originator || displayMessage.originatorBadgeNo">
         <div >
           <div class="col-sm-4 padding-0">
-            <input type="text" tabindex='13' class="form-control" placeholder="Employee ID" formControlName="originatorBadgeNo">
+            <input type="text" tabindex='13' #originatorBadgeNo  class="form-control" placeholder="Employee ID" formControlName="originatorBadgeNo"  (change)="confirmEmployeeId($event.target.value)">
            </div>
            <div class="col-sm-1 padding-0">_</div>
            <div class="col-sm-7 padding-0">
-            <input type="text" tabindex='13' class="form-control" formControlName="originator" placeholder="Last Name, First Name">
+
+            <input type="text" tabindex='13' #originator class="form-control" placeholder="Last Name, First Name" formControlName="originator"   (change)="confirmEmployeeName($event.target.value)"  >
           </div>
         </div>
       </aac-field-container>

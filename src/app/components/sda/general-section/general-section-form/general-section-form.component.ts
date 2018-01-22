@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { CustomValidators } from '@app/common/validators/custom-validators';
@@ -7,6 +7,8 @@ import { List } from 'immutable';
 import * as models from '@app/common/models';
 import { AppStateService, AuthService } from '@app/common/services';
 import { Observable, Observer } from 'rxjs/Rx';
+import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
+import { DialogService } from 'ng2-bootstrap-modal';
 
 @Component({
   selector: 'aa-general-section-form',
@@ -15,6 +17,8 @@ import { Observable, Observer } from 'rxjs/Rx';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GeneralSectionFormComponent extends BaseFormComponent implements OnInit, OnChanges {
+  @ViewChild('originatorBadgeNo') origBadgeNo: ElementRef;
+  @ViewChild('originator') origName: ElementRef;
   departments$: Observable<models.IBaseLookUp[]>;
   stations$: Observable<models.IStation[]>;
   generalSectionFormGroup: FormGroup;
@@ -24,7 +28,10 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   disableCreateDate = false;
   public today = new Date();
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
+
+  constructor(private fb: FormBuilder, private appStateService: AppStateService,
+    private dialogService: DialogService,
+     authService: AuthService) {
     super('generalSectionFormGroup', authService);
     this.generalSectionFormGroup = this.fb.group({
       sdaId: new FormControl({ value: '', disabled: true }),
@@ -38,9 +45,10 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
         ]
       ],
       department: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
-      originator: ['', [Validators.required, Validators.maxLength(50)]],
-      originatorBadgeNo: ['', [Validators.required, Validators.maxLength(50)]]
+      originator: ['', [Validators.required, Validators.maxLength(50),  Validators.pattern(Expressions.AlphanumericsComma)] ],
+      originatorBadgeNo: ['', [Validators.required, Validators.maxLength(15),  Validators.pattern(Expressions.AlphanumericsComma)]]
     });
+
   }
 
   ngOnInit() {
@@ -94,5 +102,25 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
 
   populateAircraftInfo(noseNumber: string) {
     this.appStateService.loadAircraftInfo(noseNumber);
+  }
+
+  confirmEmployeeId(id) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: `Are you sure originator Employee ID is correct?`
+    }).filter( confirm => confirm !== true ).subscribe(confirm => {
+        this.generalSectionFormGroup.patchValue({originatorBadgeNo: ''});
+        this.origBadgeNo.nativeElement.focus();
+    });
+  }
+
+  confirmEmployeeName(name) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm?',
+      message: `Are you sure Employee Name is correct?`
+    }).filter( confirm => confirm !== true ).subscribe(confirm => {
+        this.generalSectionFormGroup.patchValue({originator: ''});
+        this.origName.nativeElement.focus();
+    });
   }
 }

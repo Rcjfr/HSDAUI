@@ -17,7 +17,7 @@ import {
 } from '@angular/forms';
 import { ISda, Status } from '@app/common/models';
 import * as moment from 'moment';
-import { GenericValidator } from '@app/common/validators/generic-validator';
+import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
@@ -83,8 +83,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
     this.sdaStatusForm = this.fb.group({
       status: ['', [Validators.required]],
-      completedBy: ['', [Validators.required]],
-      completedByName: ['', [Validators.required]],
+      completedBy: ['', [Validators.required, Validators.maxLength(15),  Validators.pattern(Expressions.AlphanumericsComma) ]],
+      completedByName: ['', [Validators.required, Validators.maxLength(50),  Validators.pattern(Expressions.AlphanumericsComma)]],
       completedOn: ['', [Validators.required, CustomValidators.validateFutureDate]],
       comments: ['', []],
     });
@@ -202,12 +202,27 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     if (!this.sdaStatusForm.valid) {
       return;
     }
+
+    if ((this.sdaStatusForm.get('completedBy').value !== this.statusUpdatedBy) ||
+        (this.sdaStatusForm.get('completedByName').value !== this.statusUpdatedByName)) {
+      this.dialogService.addDialog(ConfirmComponent, {
+        title: 'Confirm?',
+        message: `Are you sure Completed By is correct?`
+      }).filter( confirm => confirm === true).subscribe(confirm => {
+        this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
+        this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
+        this.sda.comments = this.sdaStatusForm.get('comments').value;
+        this.hideStatusModal();
+        this.saveAlertData();
+      });
+    } else {
     this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
     this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
 
     this.sda.comments = this.sdaStatusForm.get('comments').value;
     this.hideStatusModal();
     this.saveAlertData();
+    }
   }
 
   requestSdrNumber() {

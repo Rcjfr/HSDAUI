@@ -17,6 +17,7 @@ import { Store } from '@ngrx/store';
 import { MockStore } from '@app/common/store/mock-store';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { MockComponent } from 'ng2-mock-component';
+import { DialogService } from 'ng2-bootstrap-modal';
 
 describe('GeneralSectionFormComponent', () => {
   let component: GeneralSectionFormComponent;
@@ -25,7 +26,7 @@ describe('GeneralSectionFormComponent', () => {
 
   beforeEach(async(() => {
      TestBed.configureTestingModule({
-         providers: [{ provide: AppStateService, useClass: MockAppStateService }],
+         providers: [{ provide: AppStateService, useClass: MockAppStateService }, DialogService],
        declarations: [GeneralSectionFormComponent, TestComponentWrapperComponent ],
       schemas: [ NO_ERRORS_SCHEMA ],
       imports: [
