@@ -72,9 +72,9 @@
 
     </div>
     <div class="col-sm-6">
-      <div [hidden]="formGroup.get('detectionMethod').value !=DETECTION_METHOD_OTHER " [class.has-error]="displayMessage.detectionMethodOtherDescription">
-        <aac-field-container label="Description:" [required]="formGroup.get('detectionMethod').value ===DETECTION_METHOD_OTHER" [message]="displayMessage.detectionMethodOtherDescription">
-          <textarea type="text" tabindex='42' cols="40" rows="5" class="form-control" [required]="formGroup.get('detectionMethod').value ===DETECTION_METHOD_OTHER" formControlName="detectionMethodOtherDescription"></textarea>
+      <div [hidden]="formGroup.get('detectionMethod').value !=DETECTION_METHOD_OTHER" [class.has-error]="displayMessage.detectionMethodOtherDescription">
+        <aac-field-container label="Description:" [required]="formGroup.get('detectionMethod').value == DETECTION_METHOD_OTHER" [message]="displayMessage.detectionMethodOtherDescription">
+          <textarea type="text" tabindex='42' cols="40" rows="5" class="form-control" [required]="formGroup.get('detectionMethod').value == DETECTION_METHOD_OTHER" formControlName="detectionMethodOtherDescription"></textarea>
         </aac-field-container>
       </div>
     </div>

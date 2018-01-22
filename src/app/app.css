@@ -9487,14 +9487,14 @@ h6 {
 }
 
 .section + .section {
-  background: url(assets/shadow-down.png) no-repeat 50% top / 100% 5px;
+  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px;
   border-top: 1px dotted transparent;
   margin-top: 40px;
   padding-top: 40px;
 }
 
 .lt-ie9 .section + .section {
-  background: url(assets/shadow-down.png) no-repeat 50% top;
+  background: url(../app/assets/shadow-down.png) no-repeat 50% top;
 }
 
 .section .section + .section {
@@ -10074,7 +10074,7 @@ ol.list-alpha-upper {
   }
 
 .toolbar {
-  background: url(assets/shadow-down.png) no-repeat 50% top / 100% 5px, url(/assets/shadow-down.png) no-repeat 50% bottom / 100% 5px;
+  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px, url(../app/assets/shadow-down.png) no-repeat 50% bottom / 100% 5px;
   border-bottom: 1px dotted transparent;
   border-top: 1px dotted transparent;
   margin-top: 20px;
@@ -10087,12 +10087,12 @@ ol.list-alpha-upper {
 }
 
 .lt-ie9 .toolbar {
-  background: url(assets/shadow-down.png) no-repeat 50% top;
+  background: url(../app/assets/shadow-down.png) no-repeat 50% top;
   position: relative;
 }
 
   .lt-ie9 .toolbar:before {
-    background: url(assets/shadow-down.png) no-repeat 50% bottom;
+    background: url(../app/assets/shadow-down.png) no-repeat 50% bottom;
     position: absolute;
     content: " ";
     width: 100%;
@@ -10375,7 +10375,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .shadow-separator-line {
-  background: url(assets/shadow-down.png) no-repeat 50% top / 100% 5px;
+  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px;
   padding-top: 30px;
   padding-bottom: 0px;
   margin-top: 30px;
@@ -10383,7 +10383,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 [class*="shadow"][class*="-down"] {
-  background: url('assets/shadow-down.png') no-repeat 50% top / 100% 5px;
+  background: url('../app/assets/shadow-down.png') no-repeat 50% top / 100% 5px;
   border-top: 1px dotted transparent;
   margin-top: 20px;
   padding-top: 20px;
@@ -11357,21 +11357,21 @@ ul.dropdown-menu {
 
 @font-face {
   font-family: 'Code New Roman';
-  src: url('assets/code-new-roman/Code New Roman.otf');
+  src: url('../app/assets/code-new-roman/Code New Roman.otf');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Code New Roman';
-  src: url('assets/code-new-roman/Code New Roman i.otf');
+  src: url('../app/assets/code-new-roman/Code New Roman i.otf');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Code New Roman';
-  src: url('assets/code-new-roman/Code New Roman b.otf');
+  src: url('../app/assets/code-new-roman/Code New Roman b.otf');
   font-weight: 700;
   font-style: normal;
 }
@@ -11451,7 +11451,7 @@ body,
 
 .dw-loading > .dw-loading-body:before {
   content: ' ';
-  background-image: url(assets/loading_AA_logo.png);
+  background-image: url(../app/assets/loading_AA_logo.png);
   height: 96px;
   width: 122px;
   display: block;

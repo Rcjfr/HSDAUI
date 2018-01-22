@@ -73,7 +73,7 @@
     <div class="col-sm-12">
       <div class="pull-right hidden-print">
         <a class="btn btn-default btn-lg" [routerLink]="['/alerts']">Cancel</a>
-        <button type="button" class="btn btn-primary btn-lg" tabindex="114" title="Export as PDF" (click)="exportPdf(sda.id)"><i class="fa fa-file-pdf-o"></i> Convert to PDF</button>
+        <button type="button" class="btn btn-primary btn-lg" *ngIf="sda.id" tabindex="114" title="Export as PDF" (click)="exportPdf(sda.id)"><i class="fa fa-file-pdf-o"></i> Convert to PDF</button>
 
         <a class="btn btn-default btn-lg" *ngIf="hasOriginalVersion()" [routerLink]="['/alerts',sda.id,'original']">View Original</a>
         <a class="btn btn-default btn-lg" *ngIf="original" [routerLink]="['/alerts',sda.id]">View Current</a>
@@ -89,7 +89,7 @@
           <ng-container *ngIf="authService.isQCManager() | async">
             <!--QC Manager/Supervisor Actions-->
             <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="114" (click)="onReset.emit()">Reset</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="confirmInformation(Status.Audited)" tabindex="114">Complete SDA</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="confirmInformation(Status.Complete)" tabindex="114">Complete SDA</button>
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="114">Save SDA Details</button>
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="114">Complete Audit</button>
             <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Complete || currentStatus == Status.Audited || currentStatus == Status.Closed)" (click)="saveAlert(Status.Open)" tabindex="114">Reopen SDA</button>

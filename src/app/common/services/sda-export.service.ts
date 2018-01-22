@@ -76,7 +76,7 @@ export class SdaExportService {
 
                   {
                     colSpan: 2,
-                    text: 'For reporting criteria, procedures, and responsibilities, see MPPM section detailing Major Repair Reporting',
+                    text: 'For reporting criteria, procedures, and responsibilities, see GPM section detailing Major Repair Reporting',
                     style: 'subheader',
                     alignment: 'center'
                   },
@@ -107,8 +107,8 @@ export class SdaExportService {
                   [
                     `Page ${currentPage} of ${pageCount}`,
 
-                    { fontSize: 9, text: 'Immediately Fax form to reliability at Dialnet (480) 693-7155, \nand co-mail entire form to PHX/HG-REL', alignment: 'center' },
-                    { text: 'ME-0308 (99-2000-3-0008) \nR1 12/10', alignment: 'right' }
+                    { fontSize: 9, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N.Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'center' },
+                    { text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
                   ]
                 ]
               },
