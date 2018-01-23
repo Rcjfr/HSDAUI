@@ -19,6 +19,7 @@ export interface IGeneralSection {
   defectDiscoveredDuring?: string;
   unscheduledMaintenanceDescription?: string;
   checkType?: number;
+  checkTypeOtherText?: string;
   routineNo?: string;
   nonRoutineNo?: string;
   esmReference?: string;

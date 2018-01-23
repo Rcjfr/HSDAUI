@@ -31,6 +31,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DefectDiscoveredDuring', display: 'Defect Discovered During', dbField: 'DEFCT_DSCVR_IND' },
   { key: 'UnscheduledMaintenanceDescription', display: 'Unscheduled Maintenance Description', dbField: 'UNSCHDLD_MNTNC_DESC' },
   { key: 'CheckType', display: 'Check Type', dbField: 'CHECK_TYPE_DESC' },
+  { key: 'checkTypeOtherText', display: 'Other Check Type', dbField: 'MNTNC_CHK_TYPE_OTHER_DESC' },
   { key: 'RoutineNo', display: 'Routine #', dbField: 'SCHD_MNTNC_RTN_TASK_CARD_TXT'},
   { key: 'NonRoutineNo', display: 'Non-Routine #', dbField: 'SCHD_MNTNC_NONRTN_TASKCARD_TXT' },
   { key: 'ESMReference', display: 'ESM Reference #', dbField: 'SCHD_MNTNC_ESM_REFERENCE_TXT' },

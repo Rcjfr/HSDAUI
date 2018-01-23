@@ -23,6 +23,7 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
       checkType: ['', [Validators.required]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],
       esmReference: ['', [Validators.maxLength(50)]],
+      checkTypeOtherText: ['', [Validators.maxLength(50)]],
       routineNo: ['', [Validators.maxLength(50)]]
     },
       {

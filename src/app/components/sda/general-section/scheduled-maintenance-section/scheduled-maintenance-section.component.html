@@ -5,6 +5,11 @@
       <option *ngFor="let fc of checkTypes$ | async" [value]="fc.id">{{fc.description}}</option>
     </select>
   </aac-field-container>
+<div [hidden]="formGroup.get('checkType').value !='22'" [class.has-error]="displayMessage.checkTypeOtherText" >
+  <aac-field-container label="Description:" [required]="formGroup.get('checkType').value =='22'" [message]="displayMessage.checkTypeOtherText">
+    <textarea type="text" tabindex='19'cols="40" rows="5" class="form-control" [required]="formGroup.get('checkType').value =='22'" formControlName="checkTypeOtherText"></textarea>
+  </aac-field-container>
+</div>
   <aac-field-container label="ESM Reference #:" [message]="displayMessage.esmReference">
     <input type="text" tabindex='19' class="form-control" formControlName="esmReference">
   </aac-field-container>

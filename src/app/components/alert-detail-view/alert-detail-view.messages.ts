@@ -85,6 +85,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         'checkType': {
           required: 'Check Type is required.'
         },
+        'checkTypeOtherText': {
+          required: 'Check Type(Other) description is required.',
+          maxlength: 'Check Type(Other) description must not be more than 50 characters.'
+        },
         'routineNo': {
           pattern: 'Routine # must contain only alphanumerics.',
           maxlength: 'Routine # must not be more than 50 characters.'

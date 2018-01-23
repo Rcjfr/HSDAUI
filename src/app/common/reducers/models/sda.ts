@@ -32,6 +32,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     defectDiscoveredDuring: null,
     unscheduledMaintenanceDescription: null,
     checkType: null,
+    checkTypeOtherText: null,
     routineNo: null,
     nonRoutineNo: null,
     esmReference: null,
