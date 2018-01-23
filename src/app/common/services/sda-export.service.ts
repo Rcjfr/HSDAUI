@@ -101,14 +101,14 @@ export class SdaExportService {
           columns: [
             {
               table: {
-                widths: ['15%', '55%', '30%'],
+                widths: ['15%', '60%', '25%'],
 
                 body: [
                   [
                     `Page ${currentPage} of ${pageCount}`,
 
-                    { fontSize: 9, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N.Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'center' },
-                    { text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
+                    { fontSize: 8, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N.Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'center' },
+                    { fontSize: 8, text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
                   ]
                 ]
               },
@@ -142,7 +142,13 @@ export class SdaExportService {
         small: {
           fontSize: 8
         },
-        icon: { font: 'Fontello' }
+        icon: { font: 'Fontello' },
+        helpText: {
+          fontSize: 16,
+          color: '#000000',
+          padding: [10, 10, 10, 10],
+          fillColor: '#D3D3D3'
+        }
       }
     };
     // sdas = [113234, 112234];
@@ -659,8 +665,8 @@ export class SdaExportService {
                   ]
                 }, this.new_line,
                 {
-                  fontSize: 16,
-                  color: '#ff0000',
+                  //color: '#ff0000',
+                  style: 'helpText',
                   text: 'See GPM 09.09 for corrosion level determinations'
                 }
 
