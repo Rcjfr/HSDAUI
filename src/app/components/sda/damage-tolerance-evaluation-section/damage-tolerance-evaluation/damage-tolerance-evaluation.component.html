@@ -166,7 +166,7 @@
         <tbody>
           <tr *ngFor="let attachment of getAttachments().controls;let j=index">
             <td><strong>
-              <a href="/{{attachment.get('attachmentPath').value}}" target="_blank">{{ attachment.get('attachmentName').value }}</a>
+              <a (click)="downloadAttachment(sda.id, attachment.get('attachmentPath').value, attachment.get('attachmentName').value)" href="{{hsdaApiBaseUrl}}sda/{{sda.id}}/attachments/{{attachment.get('attachmentPath').value}}/{{ attachment.get('attachmentName').value }}" target="_blank">{{ attachment.get('attachmentName').value }}</a>
               </strong></td>
             <td nowrap>{{ attachment.get('attachmentSize').value | byteFmt: 2 }}</td>
             <td nowrap>

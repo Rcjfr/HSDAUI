@@ -72,4 +72,13 @@ export class SdaService {
     return this.http.get<models.ISdaListView>(`${this.endPointUrl}/${id}/export`);
   }
 
+  downloadAttachment(id: number, attachmentPath: string, attachmentName: string): Observable<any> {
+    return this.http.get(`${this.endPointUrl}/${id}/attachments/${attachmentPath}/${attachmentName}`,
+      {
+        responseType: 'blob'
+      }).do(blob => {
+        saveAs(new Blob([blob]), attachmentName);
+      }).mapTo(null);
+  }
+
 }

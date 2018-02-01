@@ -103,7 +103,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
   }
 
   exportPdf(sdaId: number): boolean {
-    this.sdaExportService.exportSda([sdaId]);
+    this.appStateService.exportPDF([sdaId]);
 
     return false;
   }

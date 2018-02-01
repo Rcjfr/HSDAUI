@@ -629,6 +629,6 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   public exportPdf(sdaId: number): void {
-    this.sdaExportService.exportSda([sdaId]);
+    this.appStateService.exportPDF([sdaId]);
   }
 }

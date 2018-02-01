@@ -21,7 +21,7 @@ describe('Alerts Effect', () => {
       ToastrModule.forRoot(),
     ],
     providers: [
-      AlertEffects, services.AircraftService, services.SdaService, services.AuthService, services.ChangeLog,
+      AlertEffects, services.AircraftService, services.SdaService, services.AuthService, services.ChangeLog, services.SdaExportService,
       { 'provide': HttpClient, 'useValue': null },
       { 'provide': Http, 'useValue': null },
       { provide: services.AppStateService, useClass: MockAppStateService },

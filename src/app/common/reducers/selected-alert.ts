@@ -52,6 +52,8 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
     case selectedAlertActions.ActionTypes.SAVE_SDA:
     case selectedAlertActions.ActionTypes.LOAD_SDA:
+    case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT:
+    case selectedAlertActions.ActionTypes.EXPORT_PDF:
       {
         return state.merge({ loading: true });
       }
@@ -95,6 +97,8 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL:
     case selectedAlertActions.ActionTypes.SAVE_SDA_FAIL:
+    case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_PDF_COMPLETE:
       {
         return state.merge({ loading: false });
       }

@@ -33,6 +33,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   public uploader = new FileUploader({ autoUpload: true });
   displayName: string;
   createNumberMask = createNumberMask;
+  public hsdaApiBaseUrl = environment.hsdaApiBaseUrl;
   public decimalNumberMask = createNumberMask({
     prefix: '',
     allowDecimal: true,
@@ -142,13 +143,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           dteStatus: newSda.dteSection.dteStatus,
           repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
         });
-        if (newSda.dteSection.updatedBy ) {
+        if (newSda.dteSection.updatedBy) {
           const index = newSda.dteSection.updatedBy.indexOf('-')
           this.formGroup.patchValue({
-            updatedByEmpID : newSda.dteSection.updatedBy.slice(0, index - 1),
+            updatedByEmpID: newSda.dteSection.updatedBy.slice(0, index - 1),
             updatedByName: newSda.dteSection.updatedBy.slice(index + 2, newSda.dteSection.updatedBy.length)
           });
-      }
+        }
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
         const arr = new FormArray([]);
@@ -201,6 +202,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           arr.removeAt(index);
         }
       });
+
+    return false;
+  }
+
+  downloadAttachment(sdaid: number, attachmentPath: string, attachmentName: string) {
+    this.appStateService.downloadAttachment(sdaid, attachmentPath, attachmentName);
 
     return false;
   }

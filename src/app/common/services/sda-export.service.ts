@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
-import { ILookupData, ISdaListView, IBaseLookUp } from '@app/common/models';
+import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 import { SdaService } from '@app/common/services/sda.service';
 import * as constants from '@app/common/constants';
@@ -41,7 +41,7 @@ export class SdaExportService {
   constructor(private sdaService: SdaService) {
     this.pdf = pdfMake;
   }
-  exportSda(sdas: number[]): void {
+  exportSda(sdas: number[]): Observable<any> {
     const dd = {
       info: {
         title: 'Structural Defect Alert',
@@ -50,11 +50,11 @@ export class SdaExportService {
         keywords: 'SDA, HSDA, Defect'
       },
       // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-      pageMargins: [20, 100, 20, 60],
+      pageMargins: [20, 80, 20, 35],
       pageSize: 'LETTER',
 
       header: {
-        margin: 25,
+        margin: [25, 25, 25, 25],
         columns: [
           {
 
@@ -105,10 +105,10 @@ export class SdaExportService {
 
                 body: [
                   [
-                    `Page ${currentPage} of ${pageCount}`,
+                    { text: `Page ${currentPage} of ${pageCount}`, fontSize: 6, },
 
-                    { fontSize: 8, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N.Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'center' },
-                    { fontSize: 8, text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
+                    { fontSize: 6, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N. Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'left' },
+                    { fontSize: 6, text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
                   ]
                 ]
               },
@@ -120,31 +120,48 @@ export class SdaExportService {
       content: [],
       styles: {
         header: {
-          fontSize: 20,
-          bold: true,
+          fontSize: 18,
+          bold: false,
 
         },
         subheader: {
-          fontSize: 8,
+          fontSize: 7,
           bold: true,
 
         },
         sectionHeader: {
-          fontSize: 10,
+          fontSize: 11,
           bold: true,
           color: '#ffffff',
           background: '#000000',
-          fillColor: '#000000'
+          fillColor: '#000000',
+          alignment: 'center'
         },
         quote: {
           italics: true
         },
-        small: {
+        regular: {
           fontSize: 8
+        },
+        bold: {
+          bold: true
+        },
+        fieldValue: {
+          fontSize: 8,
+          decoration: 'underline',
+          //decorationColor: 'blue',
+          //decorationStyle: 'dashed'
+        },
+        underline: {
+          decoration: 'underline',
+          decorationStyle: 'dashed'
+        },
+        small: {
+          fontSize: 6
         },
         icon: { font: 'Fontello' },
         helpText: {
-          fontSize: 16,
+          fontSize: 12,
           color: '#000000',
           padding: [10, 10, 10, 10],
           fillColor: '#D3D3D3'
@@ -153,12 +170,17 @@ export class SdaExportService {
     };
     // sdas = [113234, 112234];
     const final = Observable.combineLatest(sdas.map((sdaId, idx) => this.getSdaPdf(sdaId, idx)));
-    final.subscribe(result => {
+
+    return final.do(result => {
       dd.content = [result];
       this.pdf.createPdf(dd).download(sdas.length === 1 ? `${sdas[0]}.pdf` : 'sda.pdf');
-    }, err => {
-      console.log(err);
     })
+      .catch(e => {
+        console.error(e);
+
+        return Observable.of('ERROR');
+      })
+      .mapTo(null);
     //Single
     //  this.getSdaPdf(sdas[0]).subscribe(result => {
     //    dd.content = [result];
@@ -168,6 +190,7 @@ export class SdaExportService {
 
   getSdaPdf(sdaId: number, idx: number): Observable<any> {
     return this.sdaService.exportSda(sdaId).map(sda => {
+
       return [
         idx > 0 ? {
           text: '', pageBreak: 'before'
@@ -175,28 +198,27 @@ export class SdaExportService {
         {
 
           table: {
-            widths: ['33%', '33%', '*'], heights: 40,
+            widths: ['33%', '33%', '*'], heights: 15,
             body: [
               [
-                { text: `SDR Number${this.new_line}${this.new_line}${sda.sdrNumber || ''}`, alignment: 'center' },
-                { text: `ATA Code${this.new_line}${this.new_line}${sda.ataCode1}-${sda.ataCode1Desc} ${sda.ataCode2 % 100}-${sda.ataCode2Desc}`, alignment: 'center' },
-                { text: `Alert Code${this.new_line}${this.new_line}${sda.alertCodeDesc}`, alignment: 'center' }
+                { text: `SDR Number${this.new_line}${sda.sdrNumber || ''}`, alignment: 'center', style: 'regular' },
+                { text: `ATA Code${this.new_line}${sda.ataCode1}-${sda.ataCode1Desc} ${sda.ataCode2 % 100}-${sda.ataCode2Desc}`, alignment: 'center', style: 'regular' },
+                { text: `Alert Code${this.new_line}${sda.alertCodeDesc}`, alignment: 'center', style: 'regular' }
               ],
 
             ]
           }
         },
-        this.new_line,
+        //this.new_line,
         this.getGeneralSection(sda),
-        this.new_line,
+        //this.new_line,
         this.getDefectLocationSection(sda),
-        this.new_line,
+        //this.new_line,
         this.getCPCPSection(sda),
-        this.new_line,
+        //this.new_line,
         this.getCorrectiveActionSection(sda),
-        this.new_line,
         this.getCPCPDispositionSection(sda),
-        this.new_line,
+        this.getRepairDetailsSection(sda),
         this.getDTESection(sda)
       ]
     })
@@ -204,73 +226,83 @@ export class SdaExportService {
 
   getGeneralSection(sda: ISdaListView) {
     return {
-      //layout: 'lightHorizontalLines',
+      layout: 'noBorders',
+      margin: [0, 3, 0, 0],
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
-        headerRows: 1,
+
+        style: 'regular',
+        widths: ['20%', '30%', '20%', '30%'],
+        headerRows: 0,
         body: [
-          [{ text: 'General Section', style: 'sectionHeader', colSpan: 4, margin: [2, 2, 2, 2] }, {}, {}, {}],
           [
-            { text: 'SDA ID' }, { text: sda.id },
-            { text: 'Line Maintenance' }, { text: sda.lineMaintenance ? this.icon_ok_squared : this.icon_check_empty, style: 'icon', alignment: 'center' },
+            this.getLabel('SDA ID:'),
+            this.getFieldValue(sda.id),
+            this.getLabel('Line Maintenance:'),
+            { text: sda.lineMaintenance ? this.icon_ok_squared : this.icon_check_empty, style: 'icon', alignment: 'center' },
           ],
           [
-            { text: 'Create Date' }, { text: moment(sda.createDate).format('MM/DD/YYYY') },
-            { text: 'Station' }, { text: sda.station },
+            this.getLabel('Create Date:'),
+            this.getFieldValue(moment(sda.createDate).format('MM/DD/YYYY')),
+            this.getLabel('Station:'),
+            this.getFieldValue(sda.station),
           ],
           [
-            { text: 'Department' }, { text: sda.departmentDesc },
+            this.getLabel('Department:'),
+            this.getFieldValue(sda.departmentDesc),
             {
-              text: ['Defect Discovered during', this.new_line,
-                { text: sda.defectDiscoveredDuring === 'U' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' Unscheduled Maintenance', fontSize: 8 },
-                ' ',
-                { text: sda.defectDiscoveredDuring === 'S' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' Scheduled Maintenance  ', fontSize: 8 }
+              text: [
+                { text: 'Defect Discovered during:', style: 'regular' }
               ], colSpan: 2
             }
           ],
           [
-            { text: 'Aircraft #' }, { text: sda.aircraftNo }, {
-              text: sda.defectDiscoveredDuring === 'S' ? 'Check Type' : 'Description'
-            }, {
-              text: sda.defectDiscoveredDuring === 'S' ? sda.checkTypeDesc || '' : sda.unscheduledMaintenanceDescription || ''
-            }
+            this.getLableFieldValue('Aircraft Nose #:', sda.aircraftNo, 50),
+            this.getLableFieldValue('Fleet:', sda.fleet, 78),
+            {
+              text: [
+                { text: sda.defectDiscoveredDuring === 'U' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
+                { text: ' Unscheduled Maintenance', style: 'regular' },
+              ], colSpan: 2
+            }, {}
           ],
           [
-            { text: 'Aircraft Manufacturer:' }, { text: sda.manufacturer }, {
-              text: sda.defectDiscoveredDuring === 'S' ? 'ESM Reference #' : ''
-            }, {
-              text: sda.defectDiscoveredDuring === 'S' ? sda.esmReference || '' : ''
-            }
+            this.getLabel('AC Manufacturer:'),
+            this.getFieldValue(sda.manufacturer),
+            this.getLabel('Description:'),
+            this.getFieldValue(sda.unscheduledMaintenanceDescription || ' ')
           ],
           [
-            { text: 'Aircraft Model/Series:' }, { text: sda.model }, {
-              text: sda.defectDiscoveredDuring === 'S' ? ['Generated By Document:', this.new_line, 'Routine #'] : ['Non-Routine #']
-            }, {
-              text: sda.defectDiscoveredDuring === 'S' ? sda.routineNo || '' : sda.nonRoutineNo || ''
-            }
+            this.getLabel('AC Model/Series:'),
+            this.getFieldValue(sda.model),
+            this.getLableFieldValue('Non-Routine #: ', sda.defectDiscoveredDuring === 'U' ? sda.nonRoutineNo || ' ' : ' ', 50),
+            this.getLableFieldValue('MIC #: ', sda.micNo || ' ', 78, 40),
           ],
           [
-            { text: 'Serial #:' }, { text: sda.serialNo }, {
-              text: sda.defectDiscoveredDuring === 'S' ? 'Non-Routine #' : 'MIC #'
-            }, {
-              text: sda.defectDiscoveredDuring === 'S' ? sda.nonRoutineNo || '' : sda.micNo || ''
-            }
+            this.getLabel('Serial #:'),
+            this.getFieldValue(sda.serialNo),
+            {
+              text: [
+                { text: sda.defectDiscoveredDuring === 'S' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
+                { text: ' Scheduled Maintenance', style: 'regular' },
+              ], colSpan: 2
+            }, {}
           ],
           [
-            { text: 'Total Ship Time:' }, { text: sda.totalShipTime }, {}, {}
+            this.getLableFieldValue('Total Ship Time:', sda.totalShipTime, 50, 70),
+            this.getLableFieldValue('Cycles:', sda.cycles, 78, 40),
+            this.getLableFieldValue('Check Type:', sda.checkTypeDesc || ' ', 50),
+            this.getLableFieldValue('ESM Reference #:', sda.esmReference || ' ', 78)
           ],
-          [{ text: 'Cycles:' }, { text: sda.cycles }, {}, {}],
           [
-            { text: 'Fleet:' }, { text: sda.fleet }, {}, {}
+            this.getLabel('Originator:'),
+            this.getFieldValue(`${sda.originatorBadgeNo} - ${sda.originator}`),
+            { text: 'Generated By Document:', style: 'regular', colSpan: 2 }, {}
+          ],
+          [
+            {}, {},
+            this.getLableFieldValue(`Routine #:`, sda.routineNo || ' ', 50),
+            this.getLableFieldValue(`Non-Routine #:`, sda.defectDiscoveredDuring === 'S' ? sda.nonRoutineNo || ' ' : ' ', 78),
           ]
-          ,
-          [
-            { text: 'Originator:' }, { text: sda.originator }, {}, {}
-          ]
-
         ]
       }
 
@@ -279,73 +311,65 @@ export class SdaExportService {
 
   getDefectLocationSection(sda: ISdaListView) {
     return {
+      layout: 'noBorders',
+      margin: [0, 3, 0, 0],
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
+        fontSize: 6,
+        widths: ['20%', '30%', '20%', '30%'],
         headerRows: 1,
         body: [
           [{
             text: 'Description and Location of Defects or Damage',
             style: 'sectionHeader',
             colSpan: 4,
-            margin: [2, 2, 2, 2]
+            margin: [1, 1, 1, 1]
           }, {}, {}, {}],
           [
-            { text: 'Damage Type' }, { text: sda.damageTypeDesc },
-            { text: 'Defect Size(in inches)', colSpan: 2 }
+            this.getLabel('Damage Type:'),
+            this.getFieldValue(sda.damageTypeDesc),
+            {
+              //alignment: 'justify',
+              colSpan: 2,
+              columns: [
+                this.getLabel('Defect Size:(in inches)', 130),
+                this.getLabel('Length: '),
+                this.getFieldValue(sda.length.toFixed(2), 20),
+                this.getLabel('Width: '),
+                this.getFieldValue(sda.width.toFixed(2), 20),
+                this.getLabel('Depth: '),
+                this.getFieldValue(sda.depth.toFixed(2), 20)
+              ]
+              , style: 'regular'
+            }
           ],
-          [{ text: 'Damage Description', rowSpan: 3 },
-          { text: sda.damageDescription, rowSpan: 3 },
-          { text: 'Length' }, { text: sda.length }],
-          ['', '', { text: 'Width' }, { text: sda.width }],
-          ['', '', { text: 'Depth' }, { text: sda.depth }],
+          [
+            this.getLabel('Damage Description:'),
+            { ...this.getFieldValue(sda.damageDescription, 455), colSpan: 3 },
+            {}, {}],
           [
             {
-              text: ['Precise Location of Defect:', this.new_line, { text: '(Enter From/To if Applicable)', fontSize: 8 }],
-              colSpan: 4
+              text: ['Precise Location of Defect:', { text: '(Enter From/To if Applicable)' }],
+              colSpan: 4, style: ['regular', 'bold'], fontSize: 10
             }, '', '', ''
           ],
           [
-            {
-              text: ['Aircraft Station:', this.new_line, { text: sda.aircraftStation, fontSize: 8 }]
-            },
-            { text: ['Stringer:', this.new_line, { text: sda.stringer, fontSize: 8 }] },
-            { text: ['WL:', this.new_line, { text: sda.waterLine, fontSize: 8 }] },
-            { text: ['BL:', this.new_line, { text: sda.buttLine, fontSize: 8 }] }
+            this.getLableFieldValue(`Aircraft Station: `, sda.aircraftStation || ' ', 50),
+            this.getLableFieldValue(`Stringer: `, sda.stringer || ' ', 50),
+            this.getLableFieldValue(`WL: `, sda.waterLine || ' ', 50),
+            this.getLableFieldValue(`BL: `, sda.buttLine || ' ', 50),
           ],
           [
-            { text: 'MFG Part #:' }, { text: sda.manufacturerPartNo || '' },
-            { text: 'Part Defective:' }, { text: sda.partDefective || '' }
+            this.getLabel('MFG Part #:'),
+            this.getFieldValue(sda.manufacturerPartNo || ' '),
+            this.getLabel('Part Defective:'),
+            this.getFieldValue(sda.partDefective || ' ')
           ],
           [
-            {
-              colSpan: 4,
-              layout: 'noBorders',
-              table: {
-                headerRows: 0,
-                margin: [0, 0, 0, 0],
-                widths: ['16%', '17%', '16%', '17%', '16%', '18%'],
-                body: [
-                  [
-                    { text: 'MFG Serial #:' }, { text: sda.manufacturerSerialNo || '' },
-                    { text: 'Part TT:' }, { text: sda.partTT || '' },
-                    { text: 'Part TSO:' }, { text: sda.partTSO || '' },
-                  ]
-                ]
-              }
-            }, '', '', ''
-          ],
-          [
-            { text: 'How Detected:' },
-            {
-              text: [sda.detectionMethodDesc,
-              {
-                text: sda.detectionMethodDesc === 'Other' ? `(${sda.detectionMethodOtherDescription})` : ''
-              }
-              ], colSpan: 3
-            },
-            {}, ''
-          ],
+            this.getLableFieldValue('MFG Serial #:', sda.manufacturerSerialNo || ' ', 50, 50),
+            this.getLableFieldValue('Part TT:', sda.partTT || ' ', 50, 30),
+            this.getLableFieldValue('Part TSO:', sda.partTSO || ' ', 50, 40),
+            this.getLableFieldValue('How Detected:', `${sda.detectionMethodDesc}${sda.detectionMethodDesc === 'Other' ? '(' + sda.detectionMethodOtherDescription + ')' : ''}`, 90, 70),
+          ]
         ]
       }
     };
@@ -353,30 +377,32 @@ export class SdaExportService {
   getCPCPSection(sda: ISdaListView) {
 
     return {
+      layout: 'noBorders',
+      margin: [0, 3, 0, 0],
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
+        fontSize: 6,
+        widths: ['20%', '30%', '20%', '30%'],
         headerRows: 1,
         body: [
           [{
             text: 'Corrosion Prevention Control Program',
             style: 'sectionHeader',
             colSpan: 4,
-            margin: [2, 2, 2, 2]
+            margin: [1, 1, 1, 1]
           }, {}, {}, {}],
+          //[
+          //  { text: 'Is this a CPCP related event?' },
+          //  {
+          //    text: this.getBooleanContent(sda.isCPCPRelatedEvent), colSpan: 3
+          //  },
+          //  '', ''
+          //],
           [
-            { text: 'Is this a CPCP related event?' },
+            this.getLabel('Widespread Corrosion?'),
             {
-              text: this.getBooleanContent(sda.isCPCPRelatedEvent), colSpan: 3
+              text: this.getBooleanContent(sda.isWideSpreadCorrosion), style: 'regular'
             },
-            '', ''
-          ],
-          [
-            { text: 'Widespread Corrosion?' },
-            {
-              text: this.getBooleanContent(sda.isWideSpreadCorrosion)
-            },
-            { text: 'Corrosion Level' },
+            this.getLabel('Corrosion Level:'),
             {
               text: [
                 { text: sda.corrosionLevel === 1 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
@@ -388,29 +414,22 @@ export class SdaExportService {
                 { text: sda.corrosionLevel === 3 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
                 { text: ' 3' },
                 ' ',
-              ]
+              ], style: 'regular'
             },
           ],
           [
-            { text: 'Corroded Area Previously Blended?' },
+            this.getLabel('Corroded Area Previously Blended?'),
             {
-              text: this.getBooleanContent(sda.isPreviouslyBlended)
+              text: this.getBooleanContent(sda.isPreviouslyBlended), style: 'regular'
             },
-            { text: 'Corrosion Task #' },
-            {
-              text: sda.corrosionTaskNo || ''
-            },
+            this.getLabel('Corrosion Task #:'),
+            this.getFieldValue(sda.corrosionTaskNo || ' ')
           ],
           [
-            { text: 'Type of Corrosion' },
-            {
-              text: [
-                sda.corrosionTypeDesc || '',
-                { text: sda.corrosionTypeDesc === 'Other' ? `(${sda.corrosionTypeOtherText})` : '' }
-
-              ],
-              colSpan: 3
-            }, '', ''
+            this.getLabel('Type of Corrosion:'),
+            this.getFieldValue(`${sda.corrosionTypeDesc}${sda.corrosionTypeDesc === 'Other' ? '(' + sda.corrosionTypeOtherText + ')' : ''}`),
+            this.getLabel('Floorboard condition after mat is removed:'),
+            this.getFieldValue(sda.floorBoardConditionDesc || ' ')
           ],
           [
             {
@@ -421,60 +440,70 @@ export class SdaExportService {
                 widths: ['33%', '33%', '34%'],
                 body: [
                   [
-                    { text: 'Cause of Damage:', colSpan: 3 }, '', ''
+                    { text: 'Cause of Damage:', colSpan: 3, style: ['regular', 'bold'], fontSize: 10 }, '', ''
                   ],
                   [
                     {
-                      text: this.getCauseOfDamageContent(1, 'Environment', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(1, 'Environment', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(2, 'Lav/Galley Spill', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(2, 'Lav/Galley Spill', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(4, 'Blocked Drain', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(4, 'Blocked Drain', sda.causesOfDamage), style: 'regular'
                     }
                   ],
                   [
                     {
-                      text: this.getCauseOfDamageContent(8, 'Chemical Spill', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(8, 'Chemical Spill', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(16, 'Wet Insulation Blanket', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(16, 'Wet Insulation Blanket', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(32, 'Missing/Deteriorated Floorboard Tape', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(32, 'Missing/Deteriorated Floorboard Tape', sda.causesOfDamage), style: 'regular'
                     }
                   ],
                   [
                     {
-                      text: this.getCauseOfDamageContent(64, 'Correct Harware Not Installed', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(64, 'Correct Harware Not Installed', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(128, 'Deteriorated/Poor Sealing Practices', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(128, 'Deteriorated/Poor Sealing Practices', sda.causesOfDamage), style: 'regular'
                     },
                     {
-                      text: this.getCauseOfDamageContent(256, 'Missing Corrosion Inhibitor', sda.causesOfDamage)
+                      text: this.getCauseOfDamageContent(256, 'Missing Corrosion Inhibitor', sda.causesOfDamage), style: 'regular'
                     }
                   ],
+                  //[
+                  //  {
+                  //    text: this.getCauseOfDamageContent(512, 'Other', sda.causesOfDamage), style: 'regular'
+                  //  },
+                  // { ...this.getFieldValue(sda.causeOfDamageOtherText || ' ', 300), colSpan: 2 },
+                  //  , {}
+                  //],
                   [
                     {
-                      text: this.getCauseOfDamageContent(512, 'Other', sda.causesOfDamage)
-                    },
-                    {
-                      text: sda.causeOfDamageOtherText || '',
-                      colSpan: 2
-                    }, {}
+                      colSpan: 3,
+                      style: 'regular',
+                      columns: [
+                        //...this.getCauseOfDamageContent(512, 'Other', sda.causesOfDamage),
+                        // tslint:disable-next-line:no-bitwise
+                        { text: ((sda.causesOfDamage & 512) === 512) ? this.icon_ok_squared : this.icon_check_empty, style: 'icon', width: 9 }, { text: ` Other`, style: 'regular', width: 30 },
+                        {
+                          stack: [
+                            this.getLabel(sda.causeOfDamageOtherText || ' '),
+                            this.getLine(520)
+                          ]
+                        }
+                      ]
+                    }, {}, {}
                   ]
                 ]
               }, colSpan: 4
             }, '', '', ''
           ],
-          [
-            { text: 'Floorboard condition after mat is removed:' },
-            {
-              text: sda.floorBoardConditionDesc || '', colSpan: 3
-            }, '', ''
-          ],
+
         ]
       }
     };
@@ -482,139 +511,135 @@ export class SdaExportService {
 
   getCorrectiveActionSection(sda: ISdaListView) {
     const content = {
+      layout: 'noBorders',
+      margin: [0, 3, 0, 0],
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
+        fontSize: 6,
+        widths: ['25%', '15%', '35%', '25%'],
         headerRows: 1,
         body: [
           [{
-            text: 'Corrective Action',
+            text: 'Corrective Actions',
             style: 'sectionHeader',
             colSpan: 4,
-            margin: [2, 2, 2, 2]
+            margin: [1, 1, 1, 1]
           }, {}, {}, {}
           ],
           [
-            { text: 'Deferred' },
+            this.getLabel('Deferred?'),
             {
               text: this.getBooleanContent(sda.isDeferred),
-              colSpan: 3
-            }, '', ''
-          ],
-          [
-            { text: 'SCEPTRE Deferral Code' },
-            {
-              text: sda.deferralCode || ''
+              style: 'regular'
             },
-            { text: 'Deferral #' },
-            {
-              text: sda.deferralNo || ''
-            }
+            this.getLableFieldValue('SCEPTRE Deferral Code:', sda.deferralCode || ' '),
+            this.getLableFieldValue('Deferral #:', sda.deferralNo || ' ', 65)
           ],
           [
             {
-              text: [
-                { text: sda.repairType === 1 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' Defective Part Replaced With Identical Part #' },
-                ' ',
-                { text: sda.repairType === 2 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' Modified Part # Installed' },
-                ' ',
-                { text: sda.repairType === 3 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' Repaired (Describe)' },
-              ], colSpan: 4
-            }, '', '', ''
+              colSpan: 4,
+              style: 'regular',
+              columns: [
+                { text: sda.repairType === 1 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon', width: 10 },
+                { text: ' Defective Part Replaced With Identical Part #', width: 175 },
+                {
+                  stack: [
+                    this.getLabel(sda.defectivePartDescription || ' '),
+                    this.getLine(385)
+                  ]
+                }
+              ]
+            }, {}, {}
+          ],
+          [
+            {
+              colSpan: 4,
+              style: 'regular',
+              columns: [
+                { text: sda.repairType === 2 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon', width: 10 },
+                { text: 'Modified Part # Installed', width: 175 },
+                {
+                  stack: [
+                    this.getLabel(sda.modifiedPartDescription || ' '),
+                    this.getLine(385)
+                  ]
+                }
+              ]
+            }, {}, {}
+          ],
+          [
+            {
+              colSpan: 4,
+              style: 'regular',
+              columns: [
+                { text: sda.repairType === 3 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon', width: 10 },
+                { text: 'Repaired (Describe)', width: 175 },
+              ]
+            }, {}, {}
           ]
         ]
       }
     };
-    if (sda.repairType === 1) {
-      content.table.body.push([
-        { text: 'Description' },
-        {
-          text: sda.defectivePartDescription || '',
-          colSpan: 3
-        },
-      ]);
-    }
-
-    if (sda.repairType === 2) {
-      content.table.body.push([
-        { text: 'Description' },
-        {
-          text: sda.modifiedPartDescription || '',
-          colSpan: 3
-        },
-      ]);
-    }
-
-    if (sda.repairType === 3) {
-      content.table.body.push([
-        { text: 'Description' },
-        {
-          text: sda.repairDescriptionTypeDesc || '',
-          colSpan: 3
-        },
-      ]);
-      content.table.body.push([
-        { text: 'Repair Document:' },
-        {
-          text: sda.repairDocumentTypeDesc || '',
-        },
-        { text: 'Chap/Fig/Repair:' },
-        {
-          text: sda.chapFigRepairText || '',
-        }
-      ]);
-      content.table.body.push([
-        { text: 'Engineering Authorization (EA):' },
-        {
-          text: sda.engineeringAuthorization || '',
-        },
-        { text: 'Externally Visible?' },
-        {
-          text: this.getBooleanContent(sda.isExternallyVisible)
-        }
-      ]);
-      content.table.body.push([
-        { text: 'Approximate External Doubler Repair Dimensions', colSpan: 4 }, {}, {}, {}
-      ]);
-      content.table.body.push([
-        { text: 'Height(in inches):' },
-        {
-          text: sda.repairHeight || '',
-        },
-        { text: 'Width(in inches):' },
-        {
-          text: sda.repairWidth || '',
-        }
-      ]);
-    }
+    //if (sda.repairType === 3) {
     content.table.body.push([
-      { text: 'Major Repair:' },
+      this.getLabel('Description:'),
+      { ...this.getFieldValue(sda.repairDescriptionTypeDesc || ' ', 350), colSpan: 3 },
+      {}, {}
+    ]);
+
+    content.table.body.push([
+      this.getLabel('Engineering Authorization (EA):'),
+      { ...this.getFieldValue(sda.engineeringAuthorization || ' '), colSpan: 2 }, {},
       {
-        text: this.getBooleanContent(sda.isMajorRepair),
-        colSpan: 3
-      }, '', ''
+        text: [
+          this.getLabel('Externally Visible?'), ' ',
+          {
+            text: this.getBooleanContent(sda.isExternallyVisible), style: 'regular'
+          }], style: 'regular'
+      }
     ]);
     content.table.body.push([
-      { text: 'Description' },
+      { ...this.getLabel('Approximate External Doubler Repair Dimensions'), colSpan: 2 },
+      {},
+      this.getLableFieldValue('Height(in inches):', sda.repairHeight ? sda.repairHeight.toFixed(2) : ' '),
+      this.getLableFieldValue('Width(in inches):', sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ', 60),
+    ]);
+
+    //}
+    content.table.body.push([
+      this.getLabel('Major Repair?'),
       {
-        text: sda.majorRepairDescription || '', colSpan: 3
-      }, {}, {}
+        text: this.getBooleanContent(sda.isMajorRepair),
+        style: 'regular'
+      },
+      { ...this.getFieldValue(sda.majorRepairDescription || ' ', 330), colSpan: 2 }
+      , ''
+    ]);
+
+    content.table.body.push([
+      this.getLabel('Repair Document:'),
+      this.getFieldValue(sda.repairDocumentTypeDesc || ' ', 75),
+      this.getLabel('Chap/Fig/Repair:'),
+      this.getFieldValue(sda.chapFigRepairText || ' ', 130)
+    ]);
+    content.table.body.push([{}, {}, {}, {}]);
+    content.table.body.push([
+      { text: [{ text: sda.completedBy || '' }, this.new_line, { text: 'QC Inspector Stamp or Signature and Employee Number'.padEnd(70), decoration: 'overline', bold: true }], colSpan: 3, style: 'regular' }, {}, {},
+      { text: [{ text: sda.completedOn ? moment(sda.completedOn).format('MM/DD/YYYY') : '' }, this.new_line, { text: 'Date'.padEnd(62), decoration: 'overline', bold: true }], colSpan: 1, style: 'regular' }
     ]);
 
     return content;
   }
   getCPCPDispositionSection(sda: ISdaListView) {
     const content = {
+      layout: 'noBorders',
+      pageBreak: 'before',
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
+        fontSize: 6,
+        widths: ['20%', '30%', '20%', '30%'],
         headerRows: 1,
         body: [
           [{
-            text: 'CPCP Disposition',
+            text: `CPCP Disposition for SDA ID #: ${sda.id}`,
             style: 'sectionHeader',
             colSpan: 4,
             margin: [2, 2, 2, 2]
@@ -625,29 +650,22 @@ export class SdaExportService {
                 { text: sda.isNonCPCPRelatedEvent === true ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' },
                 ' ',
                 { text: 'Non-CPCP' },
-              ], colSpan: 4
+              ], colSpan: 4, style: 'regular'
             }, '', '', ''
           ],
           [
+            this.getLabel('Is CPCP Task # correct?'),
+
             {
-              text: 'Is CPCP Task # correct?'
+              text: this.getBooleanContent(sda.isCorrosionTaskNoCorrect), style: 'regular'
             },
-            {
-              text: this.getBooleanContent(sda.isCorrosionTaskNoCorrect)
-            },
-            {
-              text: 'Corrected CPCP Task #:'
-            },
-            {
-              text: sda.correctedCorrosionTaskNo || ''
-            }
+            this.getLabel('Corrected CPCP Task #:'),
+            this.getFieldValue(sda.correctedCorrosionTaskNo || ' ', 135)
           ],
           [
+            this.getLabel('Is Corrosion Level correct?'),
             {
-              text: 'Is Corrosion Level correct?'
-            },
-            {
-              text: this.getBooleanContent(sda.isCorrosionLevelCorrect)
+              text: this.getBooleanContent(sda.isCorrosionLevelCorrect), style: 'regular'
             },
             {
               text: ['Corrected Corrosion Level:', this.new_line,
@@ -671,11 +689,10 @@ export class SdaExportService {
                 }
 
               ],
-              rowSpan: 1
+              rowSpan: 1, style: 'regular'
             }
             ,
             {
-              fontSize: 8,
               text: [
                 'Reason for level change:', this.new_line,
                 { text: sda.corrosionLevelChangeReason === 1 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
@@ -688,26 +705,31 @@ export class SdaExportService {
                 { text: ' Pre-blended measurements indicate Level - 1; elected to replace part for company convenience' }, this.new_line,
                 { text: sda.corrosionLevelChangeReason === 5 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
                 { text: ' Other' }, sda.corrosionLevelChangeReasonOtherText ? `(${sda.corrosionLevelChangeReasonOtherText})` : '', this.new_line,
-              ], rowSpan: 1
+              ], rowSpan: 1, style: 'regular'
             }
           ],
           [
+            this.getLabel('Widespread Corrosion?'),
             {
-              text: 'Widespread Corrosion?'
-            },
-            {
-              text: this.getBooleanContent(sda.isCPCPDWideSpreadCorrosion), colSpan: 3
+              text: this.getBooleanContent(sda.isCPCPDWideSpreadCorrosion), colSpan: 3, style: 'regular'
             }, '', ''
           ],
           [
-            'Engineering Comments', sda.engineeringComments || '',
-            'QC Feedback', sda.qcFeedback || ''
+            this.getLabel('Engineering Comments'),
+            { ...this.getFieldValue(sda.engineeringComments || ' ', 430), colSpan: 3 },
+            {}, {}
+          ],
+          [
+            this.getLabel('QC Feedback'),
+            { ...this.getFieldValue(sda.qcFeedback || ' ', 430), colSpan: 3 },
+            {}, {}
           ],
           [
             {
               colSpan: 4,
+              style: 'regular',
               text: [
-                { text: sda.submittedToQC ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, ' Submit to QC'
+                { text: sda.submittedToQC ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, ' Submitted to QC'
               ]
             }, '', '', ''
           ],
@@ -715,12 +737,69 @@ export class SdaExportService {
             {
               text: [
                 { text: sda.isReviewComplete === true ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, ' Review Complete'
-              ]
+              ], style: 'regular'
             },
-            {
-              text: sda.reviewer || '', colSpan: 3
-            }, '', ''
+            { ...this.getFieldValue(sda.reviewerBadgeNo ? `${sda.reviewerBadgeNo} - ${sda.reviewer}` : ' ', 430), colSpan: 3 },
+            '', ''
           ]
+        ]
+      }
+    };
+
+    return content;
+  }
+  getRepairDetailsSection(sda: ISdaListView) {
+    const content = {
+      layout: 'noBorders',
+      pageBreak: 'before',
+      table: {
+        fontSize: 6,
+        widths: ['20%', '30%', '20%', '30%'],
+        headerRows: 1,
+        body: [
+          [{
+            text: `Repair Details for SDA ID #: ${sda.id}`,
+            style: 'sectionHeader',
+            colSpan: 4,
+            margin: [2, 2, 2, 2]
+          }, {}, {}, {}],
+          [
+            this.getLabel('Engineering Authorization (EA):'),
+            this.getFieldValue(sda.engineeringAuthorization || ' '),
+            this.getLabel('Routine Task Card #:'),
+            this.getFieldValue(sda.routineNo || ' ')
+          ],
+          [
+            this.getLabel('Non-Routine #:'),
+            this.getFieldValue(sda.nonRoutineNo || ' '),
+            this.getLabel('Externally Visible?'),
+            { text: this.getBooleanContent(sda.isExternallyVisible), style: 'regular' }
+          ],
+          [
+            this.getLabel('Repair Document:'),
+            this.getFieldValue(sda.repairDocumentTypeDesc || ' '),
+            this.getLabel('Chap/Fig/Repair:'),
+            this.getFieldValue(sda.chapFigRepairText || ' ')
+          ],
+          [
+            this.getLabel('Repair Description:'),
+            this.getFieldValue(sda.repairDescriptionTypeDesc || ' '),
+            this.getLabel('Part Nomenclature:'),
+            this.getFieldValue(sda.partDefective || ' ')
+          ],
+          [
+            this.getLabel('Part Number:'),
+            this.getFieldValue(sda.manufacturerPartNo || ' '),
+            this.getLabel('Part Serial Number:'),
+            this.getFieldValue(sda.manufacturerSerialNo || ' ')
+          ],
+          [
+            this.getLabel('Height(in inches):'),
+            this.getFieldValue(sda.repairHeight ? sda.repairHeight.toFixed(2) : ' '),
+            this.getLabel('Width(in inches):'),
+            this.getFieldValue(sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ')
+          ],
+
         ]
       }
     };
@@ -729,70 +808,91 @@ export class SdaExportService {
   }
   getDTESection(sda: ISdaListView) {
     const content = {
+      layout: 'noBorders',
+      margin: [0, 5, 0, 0],
       table: {
-        fontSize: 8,
-        widths: ['25%', '25%', '25%', '25%'],
+        fontSize: 6,
+        widths: ['20%', '30%', '20%', '30%'],
         headerRows: 1,
         body: [
           [{
-            text: 'Damage Tolerance Evaluation',
+            text: `Damage Tolerance Evaluation for SDA ID #: ${sda.id}`,
             style: 'sectionHeader',
             colSpan: 4,
             margin: [2, 2, 2, 2]
           }, {}, {}, {}],
           [
-            { text: 'DTE Status:' }, { colSpan: 3, text: sda.dteStatusDesc || '' }, '', ''
+            this.getLabel('DTE Status:'),
+            this.getFieldValue(sda.dteStatusDesc || ' ')
+            , '', ''
           ],
           [
-            { text: 'Total Ship Time:' }, { text: sda.dteTotalShipTime || '', colSpan: 3 }, '', ''
+            this.getLabel('Total Ship Time:'),
+            this.getFieldValue(sda.dteTotalShipTime || ' ')
+            , '', ''
           ],
           [
-            { text: 'Cycles:' }, { text: sda.dteCycles || '', colSpan: 3 }, '', ''
+            this.getLabel('Cycles:'),
+            this.getFieldValue(sda.dteCycles || ' ')
+
+            , '', ''
           ],
           [
-            { text: 'Repair Insp. Status:' }, { text: sda.repairInspectionStatusDesc || '', colSpan: 3 }, '', ''
+            this.getLabel('Repair Insp. Status:'),
+            this.getFieldValue(sda.repairInspectionStatusDesc || ' ')
+            , '', ''
           ],
           [
-            { text: 'Fatigue Critical?' }, {
-              text: this.getBooleanContent(sda.isFatigueCritical), colSpan: 3
+            this.getLabel('Fatigue Critical?'),
+            {
+              text: this.getBooleanContent(sda.isFatigueCritical), style: 'regular'
             }, {}, {}
           ],
           [
-            { text: 'Stage 1/RTS Date:' }, { text: sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY') : '', colSpan: 3 }, {}, {}
+            this.getLabel('Stage 1/RTS Date:'),
+            this.getFieldValue(sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY') : ' ')
+            , {}, {}
           ],
           [
             {
               text: [
                 { text: sda.stage1Duration === 6 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 6 Months' }]
+                { text: ' 6 Months' }], style: 'regular'
             },
             {
               text: [
                 { text: sda.stage1Duration === 12 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 12 Months' }]
+                { text: ' 12 Months' }], style: 'regular'
             },
             {
               text: [
                 { text: sda.stage1Duration === 18 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 18 Months' }]
+                { text: ' 18 Months' }], style: 'regular'
             },
             {
               text: [
                 { text: sda.stage1Duration === 24 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 24 Months' }]
+                { text: ' 24 Months' }], style: 'regular'
             }
           ],
           [
-            { text: 'Stage 2 Approval Date:' }, { text: sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY') : '' },
-            { text: 'Stage 3 Approval Date:' }, { text: sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY') : '' }
+            this.getLabel('Stage 2 Approval Date:'),
+            this.getFieldValue(sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY') : ' '),
+            this.getLabel('Stage 3 Approval Date:'),
+            this.getFieldValue(sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY') : ' ')
+
           ],
           [
-            { text: 'SR #' }, { text: sda.srNumber || '' },
-            { text: 'RDAS #:' }, { text: sda.rdasNumber || '' },
+            this.getLabel('SR #:'),
+            this.getFieldValue(sda.srNumber || ' '),
+            this.getLabel('RDAS #:'),
+            this.getFieldValue(sda.rdasNumber || ' ')
           ],
           [
-            { text: 'ETD #:' }, { text: sda.etdNumber || '' },
-            { text: 'ESM Sub/Item #:' }, { text: sda.esmSubItemNumber || '' },
+            this.getLabel('ETD #:'),
+            this.getFieldValue(sda.etdNumber || ' '),
+            this.getLabel('ESM Sub/Item #:'),
+            this.getFieldValue(sda.esmSubItemNumber || ' ')
           ],
           [
             this.getDTEThresholdsConent(sda)
@@ -801,18 +901,23 @@ export class SdaExportService {
             this.getDTEMonitorItemsConent(sda)
           ],
           [
-            { text: 'DTE Comments:' }, { text: sda.dteComments || '' },
+            this.getLabel('DTE Comments:'),
+            { ...this.getFieldValue(sda.dteComments || ' ', 400), colSpan: 3 },
+            {}, {}
+          ],
+          [
+            this.getLabel('QC Feedback:'),
+            { ...this.getFieldValue(sda.dteqcFeedback || ' ', 400), colSpan: 3 },
+            {}, {}
+          ],
+          [
             {
+              colSpan: 4,
+              style: 'regular',
               text: [
-                'QC Feedback:'
-                , this.new_line,
-                , this.new_line,
-                , this.new_line,
-                { text: sda.dteSubmittedToQC === true ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' },
-                ' ',
-                { text: 'Submit to QC' },
+                { text: sda.dteSubmittedToQC ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, ' Submitted to QC'
               ]
-            }, { text: sda.dteqcFeedback || '' },
+            }, '', '', ''
           ],
           [
             {
@@ -824,9 +929,12 @@ export class SdaExportService {
                 widths: ['16%', '17%', '16%', '17%', '16%', '18%'],
                 body: [
                   [
-                    { text: 'Major Repair Updated By:' }, { text: sda.dteUpdatedBy || '' },
-                    { text: 'Major Repair Updated Date:' }, { text: sda.dteUpdatedDate ? moment(sda.dteUpdatedDate).format('MM/DD/YYYY hh:mm A') : '' },
-                    { text: 'DTE Due Date:' }, { text: sda.dueDate || '' },
+                    this.getLabel('Major Repair Updated By:'),
+                    this.getFieldValue(sda.dteUpdatedBy || ' ', 75),
+                    this.getLabel('Major Repair Updated Date:'),
+                    this.getFieldValue(sda.dteUpdatedDate ? moment(sda.dteUpdatedDate).format('MM/DD/YYYY hh:mm A') : ' ', 75),
+                    this.getLabel('DTE Due Date:'),
+                    this.getFieldValue(sda.dueDate || ' ', 75),
                   ]
                 ]
               }
@@ -842,22 +950,25 @@ export class SdaExportService {
   getDTEThresholdsConent(sda: ISdaListView) {
     const content = {
       colSpan: 4,
+      margin: 0,
       table: {
-        fontSize: 8,
+        style: 'regular',
         widths: ['10%', '30%', '30%', '30%'],
         headerRows: 2,
         body: [
           [
-            { text: 'DTE Thresholds', colSpan: 4 }, '', '', ''
+            { text: 'DTE Thresholds', colSpan: 4, style: 'regular', fillColor: '#C0C0C0' }, '', '', ''
           ],
           [
-            '', 'Inspection Threshold', 'Inspection Interval', 'Inspection Method'
+            '', { text: 'Inspection Threshold', style: 'regular' },
+            { text: 'Inspection Interval', style: 'regular' },
+            { text: 'Inspection Method', style: 'regular' }
           ],
-          ['1', sda.dteInspectionThreshold1 || '', sda.dteInspectionInterval1 || '', sda.dteInspectionMethod1 || ''],
-          ['2', sda.dteInspectionThreshold2 || '', sda.dteInspectionInterval2 || '', sda.dteInspectionMethod2 || ''],
-          ['3', sda.dteInspectionThreshold3 || '', sda.dteInspectionInterval3 || '', sda.dteInspectionMethod3 || ''],
-          ['4', sda.dteInspectionThreshold4 || '', sda.dteInspectionInterval4 || '', sda.dteInspectionMethod4 || ''],
-          ['5', sda.dteInspectionThreshold5 || '', sda.dteInspectionInterval5 || '', sda.dteInspectionMethod5 || ''],
+          ['1.', { text: sda.dteInspectionThreshold1 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval1 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod1 || '', style: 'fieldValue' }],
+          ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval2 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod2 || '', style: 'fieldValue' }],
+          ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval3 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod3 || '', style: 'fieldValue' }],
+          ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval4 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod4 || '', style: 'fieldValue' }],
+          ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval5 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod5 || '', style: 'fieldValue' }],
         ]
       }
     };
@@ -869,22 +980,24 @@ export class SdaExportService {
   getDTEMonitorItemsConent(sda: ISdaListView) {
     const content = {
       colSpan: 4,
+      margin: 0,
+      padding: 0,
       table: {
-        fontSize: 8,
+        fontSize: 6,
         widths: ['10%', '90%'],
         headerRows: 2,
         body: [
           [
-            { text: 'DTE Monitor Items', colSpan: 2 }, ''
+            { text: 'DTE Monitor Items', colSpan: 2, style: 'regular', fillColor: '#C0C0C0' }, ''
           ],
           [
-            '', 'FMR/Logpage/MON'
+            '', { text: 'FMR/Logpage/MON', style: 'regular' }
           ],
-          ['1', sda.dteMonitorItem1 || ''],
-          ['2', sda.dteMonitorItem2 || ''],
-          ['3', sda.dteMonitorItem3 || ''],
-          ['4', sda.dteMonitorItem4 || ''],
-          ['5', sda.dteMonitorItem5 || ''],
+          ['1.', { text: sda.dteMonitorItem1 || '', style: 'fieldValue' }],
+          ['2.', { text: sda.dteMonitorItem2 || '', style: 'fieldValue' }],
+          ['3.', { text: sda.dteMonitorItem3 || '', style: 'fieldValue' }],
+          ['4.', { text: sda.dteMonitorItem4 || '', style: 'fieldValue' }],
+          ['5.', { text: sda.dteMonitorItem5 || '', style: 'fieldValue' }],
         ]
       }
     };
@@ -895,7 +1008,7 @@ export class SdaExportService {
   getCauseOfDamageContent(val: number, text: string, currentVal: number): Array<any> {
     const content = [
       // tslint:disable-next-line:no-bitwise
-      { text: ((currentVal & val) === val) ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, ' ', { text: text },
+      { text: ((currentVal & val) === val) ? this.icon_ok_squared : this.icon_check_empty, style: 'icon' }, { text: ` ${text}`, style: 'regular' },
     ]
 
     return content;
@@ -909,5 +1022,52 @@ export class SdaExportService {
       { text: val === false ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
       { text: ' No' }
     ]
+  }
+
+  padContent(val: number | string, maxLength: number = 50): any {
+    //return val.toString().padEnd(maxLength);
+    //return [
+    //  { text: val, style: 'fieldValue' },this.new_line,
+    //  {text:' '.padEnd(maxLength),decoration:'underline'}
+    //]
+    return [
+      { text: val, style: 'fieldValue', width: maxLength }
+
+    ]
+  }
+  getLableFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0, ) {
+    return {
+      columns: [
+        this.getLabel(label, labelLength),
+        {
+          stack: [
+            { text: val, style: 'regular' },
+            this.getLine(maxLength)
+          ]
+        }
+      ]
+    };
+  }
+  getLabel(label: string, width: number = 0) {
+    if (width) {
+      return { text: label, style: 'regular', width: width };
+    }
+
+    return { text: label, style: 'regular' };
+  }
+  getLine(maxLength: number) {
+    return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.5 }] }
+  }
+  getFieldValue(val: number | string, maxLength: number = 160) {
+    return {
+      columns: [
+        {
+          stack: [
+            { text: val, style: 'regular' },
+            this.getLine(maxLength)
+          ]
+        }
+      ]
+    }
   }
 }

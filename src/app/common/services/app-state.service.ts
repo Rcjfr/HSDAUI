@@ -63,7 +63,7 @@ export class AppStateService {
     return this.store.select(fromRoot.getNoseNumbers).map(d => d && d.toJS());
   }
 
-    getChangeLog(): Observable<List<IChangeLog>> {
+  getChangeLog(): Observable<List<IChangeLog>> {
     return this.store.select(fromRoot.getChangeLog);
   }
 
@@ -214,5 +214,12 @@ export class AppStateService {
       this.getSelectedAlertLoading(), (a, b, c) => {
         return a || b || c;
       });
+  }
+
+  downloadAttachment(sdaid: number, attachmentPath: string, attachmentName: string) {
+    this.store.dispatch(new selectedAlertActions.DownloadAttachmentAction({ sdaId: sdaid, attachmentPath: attachmentPath, attachmentName: attachmentName }));
+  }
+  exportPDF(sdas: [number]) {
+    this.store.dispatch(new selectedAlertActions.ExportPDFAction(sdas));
   }
 }

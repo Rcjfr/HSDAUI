@@ -3,7 +3,8 @@ import * as models from '@app/common/models/index';
 import { ISdaListResult } from '@app/common/models';
 import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
-import { ILoadChangeLog } from '@app/common/models/payload/change-log.model'
+import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
+import { IDownloadAttachment } from '@app/common/models/payload/download-attachment.model';
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
@@ -35,7 +36,15 @@ export const ActionTypes = {
   OPERATION_FAILED: 'General Operation Failed Message',
   LOAD_CHANGE_LOG: 'Load Change log Info',
   LOAD_CHANGE_LOG_COMPLETE: 'Load Change log Info complete',
-  LOAD_CHANGE_LOG_FAIL: 'Load Change log Info fail'
+  LOAD_CHANGE_LOG_FAIL: 'Load Change log Info fail',
+
+  DOWNLOAD_ATTACHMENT: 'Download SDA Attachment',
+  DOWNLOAD_ATTACHMENT_COMPLETE: 'Download SDA Attachment complete',
+  DOWNLOAD_ATTACHMENT_FAIL: 'Download SDA Attachment fail',
+
+  EXPORT_PDF: 'Export PDF',
+  EXPORT_PDF_COMPLETE: 'Export PDF Complete',
+  EXPORT_PDF_FAIL: 'Export PDF Fail',
 
 };
 
@@ -129,8 +138,6 @@ export class ExportSdasFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-
-
 export class LoadSdaAction implements Action {
   public type = ActionTypes.LOAD_SDA;
   constructor(public payload: ILoadSda) { }
@@ -159,6 +166,36 @@ export class SaveSdaSearchCriteria implements Action {
   constructor(public payload: ISearchCriteria) { }
 }
 
+export class DownloadAttachmentAction implements Action {
+  public type = ActionTypes.DOWNLOAD_ATTACHMENT;
+  constructor(public payload: IDownloadAttachment) { }
+}
+
+export class DownloadAttachmentCompleteAction implements Action {
+  public type = ActionTypes.DOWNLOAD_ATTACHMENT_COMPLETE;
+  public payload: any;
+  constructor() { }
+}
+export class DownloadAttachmentFailAction implements Action {
+  public type = ActionTypes.DOWNLOAD_ATTACHMENT_FAIL;
+  constructor(public payload: any) { }
+}
+
+export class ExportPDFAction implements Action {
+  public type = ActionTypes.EXPORT_PDF;
+  constructor(public payload: number[]) { }
+}
+
+export class ExportPDFCompleteAction implements Action {
+  public type = ActionTypes.EXPORT_PDF_COMPLETE;
+  public payload: any;
+  constructor() { }
+}
+export class ExportPDFFailAction implements Action {
+  public type = ActionTypes.EXPORT_PDF_FAIL;
+  constructor(public payload: any) { }
+}
+
 export type Actions =
   OperationFailedAction |
   LoadNoseNumbersAction |
@@ -184,6 +221,11 @@ export type Actions =
   SetSdaNewStatusAction |
   LoadChangeLogAction |
   LoadChangeLogCompleteAction |
-  LoadChangeLogFailAction
+  LoadChangeLogFailAction |
+  DownloadAttachmentAction |
+  DownloadAttachmentCompleteAction |
+  DownloadAttachmentFailAction |
+  ExportPDFAction |
+  ExportPDFCompleteAction |
+  ExportPDFFailAction
   ;
-

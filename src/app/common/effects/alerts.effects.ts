@@ -13,6 +13,7 @@ import * as fromRoot from '@app/common/reducers';
 import '@app/common/rxjs-extensions';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
+import { IDownloadAttachment } from '@app/common/models/payload/download-attachment.model';
 
 @Injectable()
 export class AlertEffects {
@@ -157,13 +158,43 @@ export class AlertEffects {
   //  .map((action: selectedAlert.SaveSdaCompleteAction) =>this.toastr.success('SDA Details saved successfully.', 'Success'));
 
   @Effect()
+  exportPDF$ = this.actions$.
+    ofType(selectedAlert.ActionTypes.EXPORT_PDF)
+    .map((action: selectedAlert.ExportPDFAction) => action.payload)
+    .switchMap((payload: number[]) => {
+      return this.sdaExportService.exportSda(payload)
+        .map((data: any) => {
+          return new selectedAlert.ExportPDFCompleteAction();
+        })
+        .catch((err) => {
+          return of(new selectedAlert.ExportPDFFailAction('Failed to export to PDF.Please contact Administrator.'));
+        });
+    });
+
+  @Effect()
+  downloadAttachment$ = this.actions$.
+    ofType(selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT)
+    .map((action: selectedAlert.DownloadAttachmentAction) => action.payload)
+    .switchMap((payload: IDownloadAttachment) => {
+      return this.sdaService.downloadAttachment(payload.sdaId, payload.attachmentPath, payload.attachmentName)
+        .map((data: any) => {
+          return new selectedAlert.DownloadAttachmentCompleteAction();
+        })
+        .catch((err) => {
+          return of(new selectedAlert.DownloadAttachmentFailAction('Failed to download attachment.Please contact Administrator.'));
+        });
+    });
+  ;
+  @Effect()
   showToastrError$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
     selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
-    selectedAlert.ActionTypes.EXPORT_SDAS_FAIL
+    selectedAlert.ActionTypes.EXPORT_SDAS_FAIL,
+    selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL,
+    selectedAlert.ActionTypes.EXPORT_PDF_FAIL
     )
     .switchMap((action: Action) => {
       this.toastr.error(<string>action.payload, 'ERROR');
@@ -184,6 +215,7 @@ export class AlertEffects {
   constructor(private actions$: Actions,
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,
+    private sdaExportService: services.SdaExportService,
     private changeLogService: services.ChangeLog,
     private appStateService: services.AppStateService,
     private router: Router,
