@@ -78,6 +78,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DefectivePartDescription', display: 'Defective Part Description', dbField: 'DEFECTIVE_PART_DESCRIPTION' },
   { key: 'ModifiedPartDescription', display: 'Modified Part Description', dbField: 'MODIFIED_PART_DESCRIPTION' },
   { key: 'RepairDescriptionType', display: 'Repaired Description Type', dbField: 'REPAIR_DESCRIPTION_TYPE_DESC' },
+  { key: 'repairDescriptionOtherText', display: 'Repaired EmpowerMX Description', dbField: 'REPAIR_DESCRIPTION_OTHER_TEXT' },
   { key: 'RepairDocumentType', display: 'Repair Document', dbField: 'REPAIR_DOCUMENT_TYPE_DESC' },
   { key: 'ChapFigRepairText', display: 'Chap/Fig/Repair', dbField: 'CHAP_FIG_REPAIR_TEXT' },
   { key: 'EngineeringAuthorization', display: 'Engineering Authorization (EA)', dbField: 'ENGG_AUTHORIZATION' },

@@ -77,6 +77,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     defectivePartDescription: null,
     modifiedPartDescription: null,
     repairDescriptionType: null,
+    repairDescriptionOtherText: null,
     repairDocumentType: null,
     chapFigRepairText: null,
     engineeringAuthorization: null,

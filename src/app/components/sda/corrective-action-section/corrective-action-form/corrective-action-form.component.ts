@@ -5,7 +5,7 @@ import { GenericValidator, Expressions } from '@app/common/validators/generic-va
 import { CustomValidators } from '@app/common/validators/custom-validators';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import * as models from '@app/common/models';
-import { AuthService } from '@app/common/services';
+import { AppStateService, AuthService } from '@app/common/services';
 @Component({
   selector: 'aa-corrective-action-form',
   templateUrl: './corrective-action-form.component.html',
@@ -14,8 +14,8 @@ import { AuthService } from '@app/common/services';
 })
 export class CorrectiveActionFormGroupComponent extends BaseFormComponent implements OnInit, OnChanges, OnDestroy {
   correctiveActionFormGroup: FormGroup;
-
-  constructor(private fb: FormBuilder, authService: AuthService) {
+  repairDocuments$: Observable<models.IBaseLookUp[]>;
+  constructor(private fb: FormBuilder, authService: AuthService , private appStateService: AppStateService) {
     super('correctiveActionFormGroup', authService);
     this.correctiveActionFormGroup = this.fb.group({
       deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
@@ -23,25 +23,25 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
       isDeferred: [null, []],
       isMajorRepair: [null, []],
       majorRepairDescription: ['', [Validators.maxLength(250)]],
+      repairDocumentType: ['', [Validators.required]],
+      chapFigRepairText: ['', []],
       completedBy: ['', [Validators.maxLength(50)]],
       completedDate: [new Date(), []]
-    },
-      //{
-      //    validator: CustomValidators.validateCorrectiveActionFormFields
-      //    }
-    );
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       this.correctiveActionFormGroup.patchValue(newSda.correctiveActionSection || {});
+      this.correctiveActionFormGroup.patchValue({ repairDocumentType: changes.sda.currentValue.correctiveActionSection.repairDocumentType || '' });
       this.checkSDAFormStatus();
     }
   }
 
   ngOnInit() {
     this.parent.addControl(this.formGroupName, this.correctiveActionFormGroup);
+    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.subscriptions.push(this.correctiveActionFormGroup.get('isDeferred').valueChanges.filter((v: boolean) => !v).subscribe(
       v => {
         this.correctiveActionFormGroup.patchValue({

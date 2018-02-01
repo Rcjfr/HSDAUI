@@ -19,27 +19,22 @@ import { AppStateService, AuthService } from '@app/common/services';
 export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
   correctiveActionRepairDescriptionFormGroup: FormGroup;
   repairDescriptions$: Observable<models.IBaseLookUp[]>;
-  repairDocuments$: Observable<models.IBaseLookUp[]>;
   decimalsNumberMask = decimalsNumberMask;
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('correctiveActionRepairDescriptionFormGroup', authService);
+
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       status: ['', []],
       repairDescriptionType: ['', []], //Validators.required
-      repairDocumentType: ['', []],
-      chapFigRepairText: ['', [Validators.maxLength(30)]],
+      repairDescriptionOtherText: ['', [Validators.maxLength(50)]],
       engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
       isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]
-    },
-      {
-        validator: CustomValidators.validateCorrectiveActionRepairFields
-      });
+    });
   }
   ngOnInit() {
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
-    this.repairDocuments$ = this.appStateService.getRepairDocuments();
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
       this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))

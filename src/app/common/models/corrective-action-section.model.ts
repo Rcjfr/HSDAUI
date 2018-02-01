@@ -7,6 +7,7 @@ export interface ICorrectiveActionSection {
   defectivePartDescription?: string;
   modifiedPartDescription?: string;
   repairDescriptionType?: number;
+  repairDescriptionOtherText?: string;
   repairDocumentType?: number;
   chapFigRepairText?: string;
   engineeringAuthorization?: string;

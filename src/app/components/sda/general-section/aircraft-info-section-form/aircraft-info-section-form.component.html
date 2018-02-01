@@ -1,9 +1,9 @@
 <div [formGroup]="formGroup">
-  
+
   <ng-template #customAircraftItemTemplate let-model="item" let-index="index">
     <span><b>{{model.noseNumber}}</b>:{{model.model}}</span>
   </ng-template>
-  <aac-field-container required="true" label="Aircraft #:" [message]="displayMessage.aircraftNo">
+  <aac-field-container required="true" label="Aircraft Nose #:" [message]="displayMessage.aircraftNo">
     <div class="input-group">
       <input type="text" autocomplete="off" tabindex='6' class="form-control" required
              [typeahead]="noseNumbers$"
@@ -31,7 +31,7 @@
   <aac-field-container required="true" label="Serial #:" [message]="displayMessage.serialNo">
     <input type="text" tabindex='9' readonly class="form-control" formControlName="serialNo">
   </aac-field-container>
-  
+
   <aac-field-container required="true" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
     <input type="text" tabindex='10' readonly class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
   </aac-field-container>
@@ -42,5 +42,5 @@
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
     <input type="text" tabindex='12' readonly class="form-control" formControlName="fleet">
   </aac-field-container>
-  
+
 </div>

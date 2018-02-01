@@ -42,9 +42,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'aircraftInfoSectionFormGroup': {
       'aircraftNo': {
-        required: 'Aircraft # is required.',
-        pattern: 'Aircraft # must be alphanumeric.',
-        maxlength: 'Aircraft # must not be more than 5 characters.'
+        required: 'Aircraft Nose # is required.',
+        pattern: 'Aircraft Nose # must be alphanumeric.',
+        maxlength: 'Aircraft Nose # must not be more than 5 characters.'
       },
       'manufacturer': {
         required: 'Manufacturer is required.',
@@ -263,6 +263,15 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Repair Description is required.',
       maxlength: 'Repair Description must not be more than 250 characters.'
     },
+    'repairDocumentType': {
+      required: 'Repair Document is required.'
+    },
+    'correctiveActionChapFormGroup': {
+      'chapFigRepairText': {
+        required: 'Chap/Fig/Repair is required.',
+        maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
+      }
+    },
     'correctiveActionOptionFormGroup': {
       'repairType': {
         required: 'Repair Type is required.'
@@ -284,16 +293,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         atleastone: 'Repair Document or Engineering  Authorization is required.',
         'repairDescriptionType': {
           required: 'Description is required.'
-
         },
-        'repairDocumentType': {
-
-        },
-        'correctiveActionChapFormGroup': {
-          'chapFigRepairText': {
-            required: 'Chap/Fig/Repair is required.',
-            maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
-          }
+        'repairDescriptionOtherText': {
+          required: 'EmpowerMX Description is required.',
+          maxlength: 'EmpowerMX Description must not be more than 50 characters.',
         },
         'engineeringAuthorization': {
 

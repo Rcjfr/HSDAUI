@@ -10,22 +10,16 @@
         </aac-field-container>
       </div>
     </div>
-  </div>
 
-  <div class="row col-sm-12">
     <div class="col-sm-6">
-      <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType">
-        <select class="form-control" tabindex='64' id="repairDocumentType" formControlName="repairDocumentType">
-          <option value="" selected>Select Repair Document</option>
-          <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
-        </select>
-      </aac-field-container>
-    </div>
-    <div class="col-sm-5" *ngIf="correctiveActionRepairDescriptionFormGroup.get('repairDocumentType').value">
-      <aa-corrective-action-chap [parent]="correctiveActionRepairDescriptionFormGroup" [sda]="sda" [newSdaStus]="newSdaStus" [errorMessages]="displayMessage"></aa-corrective-action-chap>
-
+      <div>
+        <aac-field-container [hidden]="correctiveActionRepairDescriptionFormGroup.get('repairDescriptionType').value!=18" label="EmpowerMX Description:"  [required]="correctiveActionRepairDescriptionFormGroup.get('repairDescriptionType').value==18" [message]="displayMessage.repairDescriptionOtherText" >
+          <input type="text" tabindex='65' [required]="correctiveActionRepairDescriptionFormGroup.get('repairDescriptionType').value==18" class="form-control" id="repairDescriptionOtherText"   formControlName="repairDescriptionOtherText">
+        </aac-field-container>
+      </div>
     </div>
   </div>
+
   <div class="row col-sm-12">
     <div class="col-sm-6">
       <aac-field-container label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization">
