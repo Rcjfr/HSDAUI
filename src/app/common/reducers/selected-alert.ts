@@ -52,6 +52,8 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
     case selectedAlertActions.ActionTypes.SAVE_SDA:
     case selectedAlertActions.ActionTypes.LOAD_SDA:
+    case selectedAlertActions.ActionTypes.LOAD_SDAS:
+    case selectedAlertActions.ActionTypes.EXPORT_SDAS:
     case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT:
     case selectedAlertActions.ActionTypes.EXPORT_PDF:
       {
@@ -73,11 +75,6 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
         const record = SearchCriteriaRecordFactory(act.payload);
 
         return state.merge({ loading: false, searchCriteria: record });
-      }
-    case selectedAlertActions.ActionTypes.LOAD_SDAS:
-    case selectedAlertActions.ActionTypes.EXPORT_SDAS:
-      {
-        return state.merge({ loading: true });
       }
     case selectedAlertActions.ActionTypes.EXPORT_SDAS_COMPLETE:
       {

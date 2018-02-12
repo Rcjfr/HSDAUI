@@ -196,6 +196,105 @@ describe('Saved Searches Actions', () => {
       expect(action.payload.pageData).toBeUndefined();
     });
 
+  it('ExportPDFAction should handle EXPORT_PDF action',
+    () => {
+      const action = new selectedAlertActions.ExportPDFAction([1234]);
 
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_PDF);
+      expect(action.payload[0]).toBe(1234);
+    });
+
+  it('ExportPDFCompleteAction should handle EXPORT_PDF_COMPLETE action',
+    () => {
+      const action = new selectedAlertActions.ExportPDFCompleteAction();
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_PDF_COMPLETE);
+      expect(action.payload).toBeUndefined();
+    });
+
+  it('ExportPDFFailAction should handle EXPORT_PDF_FAIL action',
+    () => {
+      const action = new selectedAlertActions.ExportPDFFailAction('ERROR');
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_PDF_FAIL);
+      expect(action.payload).toBe('ERROR');
+    });
+
+  it('DownloadAttachmentAction should handle DOWNLOAD_ATTACHMENT action',
+    () => {
+      const action = new selectedAlertActions.DownloadAttachmentAction({ attachmentName: 'scanned.pdf', sdaId: 1234, attachmentPath: '3af3a145-95a7-46e2-a632-85a3e111bb91' });
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT);
+      expect(action.payload.attachmentName).toBe('scanned.pdf');
+    });
+
+  it('DownloadAttachmentCompleteAction should handle DOWNLOAD_ATTACHMENT_COMPLETE action',
+    () => {
+      const action = new selectedAlertActions.DownloadAttachmentCompleteAction();
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT_COMPLETE);
+      expect(action.payload).toBeUndefined();
+    });
+
+  it('DownloadAttachmentFailAction should handle DOWNLOAD_ATTACHMENT_FAIL action',
+    () => {
+      const action = new selectedAlertActions.DownloadAttachmentFailAction('ERROR');
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL);
+      expect(action.payload).toBe('ERROR');
+    });
+
+  it('LoadChangeLogAction should handle LOAD_CHANGE_LOG action',
+    () => {
+      const action = new selectedAlertActions.LoadChangeLogAction({ sdaId: 1234, version: 3 });
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.LOAD_CHANGE_LOG);
+      expect(action.payload.sdaId).toBe(1234);
+    });
+
+  it('LoadChangeLogCompleteAction should handle LOAD_CHANGE_LOG_COMPLETE action',
+    () => {
+      const changeLog: models.IChangeLog = {
+        attributeName: 'Aircraft #', comments: '', newValue: '123',
+        oldValue: '234', sdaID: 1234, sdaVersionId: 3456, status: 0,
+        statusDesc: 'Open', statusUpdatedBy: '', statusUpdatedOn: new Date(), version: 3
+      };
+      const action = new selectedAlertActions.LoadChangeLogCompleteAction([changeLog]);
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.LOAD_CHANGE_LOG_COMPLETE);
+      expect(action.payload[0].attributeName).toBe('Aircraft #');
+    });
+
+  it('LoadChangeLogFailAction should handle LOAD_CHANGE_LOG_FAIL action',
+    () => {
+      const action = new selectedAlertActions.LoadChangeLogFailAction('ERROR');
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.LOAD_CHANGE_LOG_FAIL);
+      expect(action.payload).toBe('ERROR');
+    });
+
+  it('ExportSdasAction should handle EXPORT_SDAS action',
+    () => {
+      const action = new selectedAlertActions.ExportSdasAction({});
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_SDAS);
+      expect(action.payload).not.toBeNull();
+    });
+
+  it('ExportSdasCompleteAction should handle EXPORT_SDAS_COMPLETE action',
+    () => {
+      const action = new selectedAlertActions.ExportSdasCompleteAction();
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_SDAS_COMPLETE);
+      expect(action.payload).toBeUndefined();
+    });
+
+  it('ExportSdasFailAction should handle EXPORT_SDAS_FAIL action',
+    () => {
+      const action = new selectedAlertActions.ExportSdasFailAction('ERROR');
+
+      expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_SDAS_FAIL);
+      expect(action.payload).toBe('ERROR');
+    });
 
 });

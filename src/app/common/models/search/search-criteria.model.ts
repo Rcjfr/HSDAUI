@@ -10,8 +10,8 @@ export interface ISearchCriteria {
   searchByDefect: search.ISearchByDefect;
   searchByDTE: search.ISearchByDTE;
   searchByMaintenance: search.ISearchByMaintenance;
-  searchByOptions: search.ISearchByOptions,
-  searchByPart: search.ISearchByPart,
+  searchByOptions: search.ISearchByOptions;
+  searchByPart: search.ISearchByPart;
   reportColumns: search.IReportColumn[];
   searchBySda: search.ISearchBySda;
   searchByStatus: search.ISearchByStatus;

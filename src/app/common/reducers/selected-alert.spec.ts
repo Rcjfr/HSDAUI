@@ -8,6 +8,8 @@ import { ISavedStateRecord, SavedStateFactory } from '@app/common/reducers/model
 import { ISdaListResult } from '@app/common/models';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
 import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
+import * as TypeMoq from 'typemoq';
+import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
 
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
@@ -33,13 +35,13 @@ describe('selectedAlertReducer', () => {
     fleet: '330'
   });
 
-  xit('SelectedAlert Reducer Initial State', () => {
+  it('SelectedAlert Reducer Initial State', () => {
     const state = fromSelectedAlert.reducer(undefined, { type: null, payload: null });
     expect(state.loading).toEqual(false);
     expect(state.noseNumbers.size).toEqual(0);
   });
 
-  xit('SelectedAlert Reducer Load Aircraft Info Success', () => {
+  it('SelectedAlert Reducer Load Aircraft Info Success', () => {
     let state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
       new selectedAlert.LoadAircraftInfoAction('A330'));
@@ -56,7 +58,7 @@ describe('selectedAlertReducer', () => {
     expect(state.loading).toEqual(false);
   });
 
-  xit('SelectedAlert Reducer Load Nose Numbers Info Success', () => {
+  it('SelectedAlert Reducer Load Nose Numbers Info Success', () => {
     let state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
       new selectedAlert.LoadNoseNumbersAction('A'));
@@ -83,9 +85,63 @@ describe('selectedAlertReducer', () => {
     expect(state.loading).toEqual(false);
   });
 
-  xit('selectedAlert Reducer Other', () => {
-    // let state  = fromSelectedAlert.reducer({type:'some other action',});
+  it('LOAD_CHANGE_LOG,LOAD_AIRCRAFT_INFO,SAVE_SDA,LOAD_SDA,DOWNLOAD_ATTACHMENT,EXPORT_PDF Actions', () => {
+    const state = fromSelectedAlert.reducer(fromSelectedAlert.stateFactory(initialState),
+      new selectedAlert.LoadChangeLogAction({ sdaId: 1234, version: 4 }));
+    expect(state.loading).toEqual(true);
+  });
+  it('LOAD_SDA_COMPLETE Action(Existing SDA)', () => {
+    const state = fromSelectedAlert.reducer(fromSelectedAlert.stateFactory(initialState),
+      new selectedAlert.LoadSdaCompleteAction({ id: 1234, status: 1 }));
 
-    // expect(state.loading).toEqual(false);
+    expect(state.loading).toEqual(false);
+    expect(state.currentSdaId).toEqual(1234);
+    expect(state.newSdaStatus).toEqual(1);
+    expect(state.sda.id).toEqual(1234);
+  });
+
+  it('LOAD_SDA_COMPLETE Action(New SDA)', () => {
+    const state = fromSelectedAlert.reducer(fromSelectedAlert.stateFactory(initialState),
+      new selectedAlert.LoadSdaCompleteAction({}));
+
+    expect(state.loading).toEqual(false);
+    expect(state.currentSdaId).toBeUndefined();
+    expect(state.newSdaStatus).toBeUndefined();
+    expect(state.sda.id).toBe(0);
+  });
+
+  it('LOAD_NEW_SDA Action', () => {
+
+    const state = fromSelectedAlert.reducer(fromSelectedAlert.stateFactory(initialState),
+      new selectedAlert.LoadNewSdaAction());
+
+    expect(state.loadNewSdaCounter).toEqual(initialState.currentSdaId + 1);
+
+  });
+
+  it('SAVE_SDA_SEARCH_CRITERIA Action', () => {
+    // const mock: TypeMoq.IMock<ISearchCriteria> = TypeMoq.Mock.ofType<ISearchCriteria>(); // TODO
+    const criteria: ISearchCriteria = {
+      pageData: undefined,
+      reportColumns: undefined,
+      searchByAircraft: undefined,
+      searchByCorrectiveAction: undefined,
+      searchByCorrosion: undefined,
+      searchByCpcpDisposition: undefined,
+      searchByDateRange: undefined,
+      searchByDefect: undefined,
+      searchByDTE: undefined,
+      searchByMaintenance: undefined,
+      searchByOptions: undefined,
+      searchByPart: undefined,
+      searchBySda: undefined,
+      searchByStatus: undefined
+    };
+    const state = fromSelectedAlert.reducer(fromSelectedAlert.stateFactory(initialState),
+      new selectedAlert.SaveSdaSearchCriteria(criteria)); //mock.object
+
+    expect(state.loading).toEqual(false);
+    expect(state.searchCriteria).not.toBeUndefined(false);
+
   });
 });
