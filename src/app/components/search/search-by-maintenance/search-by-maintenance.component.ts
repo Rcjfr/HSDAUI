@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import * as models from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 
+
 @Component({
     selector: 'aa-search-by-maintenance',
     templateUrl: './search-by-maintenance.component.html',
