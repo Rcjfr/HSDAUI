@@ -5,6 +5,5 @@
 
 export const environment = {
   production: false,
-  hsdaApiBaseUrl: 'http://hsda.local.techops.aa.com/api/',
-  logoutUrl: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget=https://newjetnet.aa.com'
+  hsdaApiBaseUrl: 'http://hsda.local.techops.aa.com/api/'
 };

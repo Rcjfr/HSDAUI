@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import { AppStateService } from '@app/common/services/app-state.service';
+import { AuthService } from '@app/common/services/auth.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 //https://github.com/bpampuch/pdfmake/issues/948#issuecomment-293542550
 //https://github.com/bpampuch/pdfmake/issues/948
@@ -33,13 +34,15 @@ pdfMake.fonts = {
 @Injectable()
 export class SdaExportService {
   pdf: any;
+  isQCPersonnel = false;
   icon_check_empty = '';
   icon_circle_empty = '';
   icon_ok_squared = '';
   icon_dot_circled = '';
   new_line = '\n';
-  constructor(private sdaService: SdaService) {
+  constructor(private sdaService: SdaService, private authService: AuthService) {
     this.pdf = pdfMake;
+    authService.isQCPersonnel().take(1).subscribe(u => this.isQCPersonnel = u);
   }
   exportSda(sdas: number[]): Observable<any> {
     const dd = {
@@ -191,7 +194,7 @@ export class SdaExportService {
   getSdaPdf(sdaId: number, idx: number): Observable<any> {
     return this.sdaService.exportSda(sdaId).map(sda => {
 
-      return [
+      const pdfDefinition: Array<any> = [
         idx > 0 ? {
           text: '', pageBreak: 'before'
         } : {},
@@ -205,22 +208,21 @@ export class SdaExportService {
                 { text: `ATA Code${this.new_line}${sda.ataCode1}-${sda.ataCode1Desc} ${sda.ataCode2 % 100}-${sda.ataCode2Desc}`, alignment: 'center', style: 'regular' },
                 { text: `Alert Code${this.new_line}${sda.alertCodeDesc}`, alignment: 'center', style: 'regular' }
               ],
-
             ]
           }
         },
-        //this.new_line,
         this.getGeneralSection(sda),
-        //this.new_line,
         this.getDefectLocationSection(sda),
-        //this.new_line,
         this.getCPCPSection(sda),
-        //this.new_line,
         this.getCorrectiveActionSection(sda),
-        this.getCPCPDispositionSection(sda),
-        this.getRepairDetailsSection(sda),
-        this.getDTESection(sda)
-      ]
+      ];
+      if (!this.isQCPersonnel) {
+        pdfDefinition.push(this.getCPCPDispositionSection(sda));
+        pdfDefinition.push(this.getRepairDetailsSection(sda));
+        pdfDefinition.push(this.getDTESection(sda));
+      }
+
+      return pdfDefinition;
     })
   }
 
@@ -231,7 +233,7 @@ export class SdaExportService {
       table: {
 
         style: 'regular',
-        widths: ['20%', '30%', '20%', '30%'],
+        widths: ['20%', '30%', '25%', '25%'],
         headerRows: 0,
         body: [
           [
@@ -244,7 +246,7 @@ export class SdaExportService {
             this.getLabel('Create Date:'),
             this.getFieldValue(moment(sda.createDate).format('MM/DD/YYYY')),
             this.getLabel('Station:'),
-            this.getFieldValue(sda.station),
+            this.getFieldValue(sda.station, 133),
           ],
           [
             this.getLabel('Department:'),
@@ -256,8 +258,8 @@ export class SdaExportService {
             }
           ],
           [
-            this.getLableFieldValue('Aircraft Nose #:', sda.aircraftNo, 50),
-            this.getLableFieldValue('Fleet:', sda.fleet, 78),
+            this.getLableFieldValue('Aircraft Nose #:', sda.aircraftNo, 50, 60),
+            this.getLableFieldValue('Fleet:', sda.fleet, 130, 30),
             {
               text: [
                 { text: sda.defectDiscoveredDuring === 'U' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
@@ -269,13 +271,13 @@ export class SdaExportService {
             this.getLabel('AC Manufacturer:'),
             this.getFieldValue(sda.manufacturer),
             this.getLabel('Description:'),
-            this.getFieldValue(sda.unscheduledMaintenanceDescription || ' ')
+            this.getFieldValue(sda.unscheduledMaintenanceDescription || ' ', 133)
           ],
           [
             this.getLabel('AC Model/Series:'),
             this.getFieldValue(sda.model),
-            this.getLableFieldValue('Non-Routine #: ', sda.defectDiscoveredDuring === 'U' ? sda.nonRoutineNo || ' ' : ' ', 50),
-            this.getLableFieldValue('MIC #: ', sda.micNo || ' ', 78, 40),
+            this.getLableFieldValue('Non-Routine #: ', sda.defectDiscoveredDuring === 'U' ? sda.nonRoutineNo || ' ' : ' ', 60, 63),
+            this.getLableFieldValue('MIC #: ', sda.micNo || ' ', 103, 30),
           ],
           [
             this.getLabel('Serial #:'),
@@ -288,10 +290,10 @@ export class SdaExportService {
             }, {}
           ],
           [
-            this.getLableFieldValue('Total Ship Time:', sda.totalShipTime, 50, 70),
-            this.getLableFieldValue('Cycles:', sda.cycles, 78, 40),
-            this.getLableFieldValue('Check Type:', sda.checkTypeDesc || ' ', 50),
-            this.getLableFieldValue('ESM Reference #:', sda.esmReference || ' ', 78)
+            this.getLableFieldValue('Total Ship Time:', sda.totalShipTime, 48, 62),
+            this.getLableFieldValue('Cycles:', sda.cycles, 125, 35),
+            this.getLableFieldValue('Check Type:', sda.checkTypeDesc || ' ', 78, 55),
+            this.getLableFieldValue('ESM Reference #:', sda.esmReference || ' ', 68, 65)
           ],
           [
             this.getLabel('Originator:'),
@@ -300,8 +302,8 @@ export class SdaExportService {
           ],
           [
             {}, {},
-            this.getLableFieldValue(`Routine #:`, sda.routineNo || ' ', 50),
-            this.getLableFieldValue(`Non-Routine #:`, sda.defectDiscoveredDuring === 'S' ? sda.nonRoutineNo || ' ' : ' ', 78),
+            this.getLableFieldValue(`Routine #:`, sda.routineNo || ' ', 83, 50),
+            this.getLableFieldValue(`Non-Routine #:`, sda.defectDiscoveredDuring === 'S' ? sda.nonRoutineNo || ' ' : ' ', 78, 55),
           ]
         ]
       }
@@ -331,20 +333,20 @@ export class SdaExportService {
               //alignment: 'justify',
               colSpan: 2,
               columns: [
-                this.getLabel('Defect Size:(in inches)', 130),
+                this.getLabel('Defect Size:(in inches)', 100),
                 this.getLabel('Length: '),
-                this.getFieldValue(sda.length.toFixed(2), 20),
+                this.getFieldValue(sda.length.toFixed(2), 30),
                 this.getLabel('Width: '),
-                this.getFieldValue(sda.width.toFixed(2), 20),
+                this.getFieldValue(sda.width.toFixed(2), 30),
                 this.getLabel('Depth: '),
-                this.getFieldValue(sda.depth.toFixed(2), 20)
+                this.getFieldValue(sda.depth.toFixed(2), 30)
               ]
               , style: 'regular'
             }
           ],
           [
             this.getLabel('Damage Description:'),
-            { ...this.getFieldValue(sda.damageDescription, 455), colSpan: 3 },
+            { ...this.getFieldValue(sda.damageDescription, 453), colSpan: 3 },
             {}, {}],
           [
             {
@@ -353,10 +355,10 @@ export class SdaExportService {
             }, '', '', ''
           ],
           [
-            this.getLableFieldValue(`Aircraft Station: `, sda.aircraftStation || ' ', 50),
-            this.getLableFieldValue(`Stringer: `, sda.stringer || ' ', 50),
-            this.getLableFieldValue(`WL: `, sda.waterLine || ' ', 50),
-            this.getLableFieldValue(`BL: `, sda.buttLine || ' ', 50),
+            this.getLableFieldValue(`Aircraft Station: `, sda.aircraftStation || ' ', 50, 60),
+            this.getLableFieldValue(`Stringer: `, sda.stringer || ' ', 125, 35),
+            this.getLableFieldValue(`WL: `, sda.waterLine || ' ', 95, 20),
+            this.getLableFieldValue(`BL: `, sda.buttLine || ' ', 135, 25),
           ],
           [
             this.getLabel('MFG Part #:'),
@@ -365,15 +367,16 @@ export class SdaExportService {
             this.getFieldValue(sda.partDefective || ' ')
           ],
           [
-            this.getLableFieldValue('MFG Serial #:', sda.manufacturerSerialNo || ' ', 50, 50),
-            this.getLableFieldValue('Part TT:', sda.partTT || ' ', 50, 30),
-            this.getLableFieldValue('Part TSO:', sda.partTSO || ' ', 50, 40),
+            this.getLableFieldValue('MFG Serial #:', sda.manufacturerSerialNo || ' ', 60, 50),
+            this.getLableFieldValue('Part TT:', sda.partTT || ' ', 130, 30),
+            this.getLableFieldValue('Part TSO:', sda.partTSO || ' ', 73, 40),
             this.getLableFieldValue('How Detected:', `${sda.detectionMethodDesc}${sda.detectionMethodDesc === 'Other' ? '(' + sda.detectionMethodOtherDescription + ')' : ''}`, 90, 70),
           ]
         ]
       }
     };
   }
+
   getCPCPSection(sda: ISdaListView) {
 
     return {
@@ -406,13 +409,13 @@ export class SdaExportService {
             {
               text: [
                 { text: sda.corrosionLevel === 1 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 1' },
+                { text: ' 1   ' },
                 ' ',
                 { text: sda.corrosionLevel === 2 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 2' },
+                { text: ' 2   ' },
                 ' ',
                 { text: sda.corrosionLevel === 3 ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-                { text: ' 3' },
+                { text: ' 3   ' },
                 ' ',
               ], style: 'regular'
             },
@@ -493,7 +496,7 @@ export class SdaExportService {
                         {
                           stack: [
                             this.getLabel(sda.causeOfDamageOtherText || ' '),
-                            this.getLine(520)
+                            this.getLine(530)
                           ]
                         }
                       ]
@@ -629,6 +632,7 @@ export class SdaExportService {
 
     return content;
   }
+
   getCPCPDispositionSection(sda: ISdaListView) {
     const content = {
       layout: 'noBorders',
@@ -748,6 +752,7 @@ export class SdaExportService {
 
     return content;
   }
+
   getRepairDetailsSection(sda: ISdaListView) {
     const content = {
       layout: 'noBorders',
@@ -806,6 +811,7 @@ export class SdaExportService {
 
     return content;
   }
+
   getDTESection(sda: ISdaListView) {
     const content = {
       layout: 'noBorders',
@@ -1035,6 +1041,7 @@ export class SdaExportService {
 
     ]
   }
+
   getLableFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0, ) {
     return {
       columns: [
@@ -1048,6 +1055,7 @@ export class SdaExportService {
       ]
     };
   }
+
   getLabel(label: string, width: number = 0) {
     if (width) {
       return { text: label, style: 'regular', width: width };
@@ -1055,9 +1063,11 @@ export class SdaExportService {
 
     return { text: label, style: 'regular' };
   }
+
   getLine(maxLength: number) {
     return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.5 }] }
   }
+
   getFieldValue(val: number | string, maxLength: number = 160) {
     return {
       columns: [

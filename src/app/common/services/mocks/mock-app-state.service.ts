@@ -101,17 +101,18 @@ export class MockAppStateService extends AppStateService {
       sm_user: '00123456',
       sm_user_email: 'testuser@aa.com',
       sm_user_firstname: 'FirstName',
-      sm_user_lastname: 'LastName'
+      sm_user_lastname: 'LastName',
+      sm_logout_url: ''
     }))
   }
   getDTEStatus() {
     const mockResponse: models.IBaseLookUp[] = [
-          { 'id': 1, 'description': 'Open' },
-          { 'id': 2, 'description': 'Closed' },
-          { 'id': 3, 'description': 'TBD' }
-      ];
+      { 'id': 1, 'description': 'Open' },
+      { 'id': 2, 'description': 'Closed' },
+      { 'id': 3, 'description': 'TBD' }
+    ];
 
-      return Observable.of(mockResponse);
+    return Observable.of(mockResponse);
 
 
   }
@@ -135,7 +136,7 @@ export class MockAppStateService extends AppStateService {
   }
 
   getChangeLog() {
-        return Observable.of(List<IChangeLog>());
-      }
+    return Observable.of(List<IChangeLog>());
+  }
 
 }

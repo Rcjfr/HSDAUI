@@ -99,8 +99,8 @@ export class AuthService {
     return this.currentUser$.map(u => u.access_token);
   }
 
-  logOutUrl(): string {
-    return environment.logoutUrl;
+  logOutUrl(): Observable<string> {
+    return this.currentUser$.map(u => u.sm_logout_url);
   }
 
   isQCInspector(): Observable<boolean> {
