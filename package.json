@@ -80,6 +80,7 @@
     "tslint": "~5.1.0",
     "typemoq": "^2.1.0",
     "typescript": "~2.2.0",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.10.0"
   }
 }
