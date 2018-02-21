@@ -17,9 +17,9 @@ export class PreciseLocationGroupComponent extends BaseFormComponent implements 
     super('preciseLocationGroup', authService);
     this.preciseLocationGroup = this.fb.group({
       aircraftStation: ['', [Validators.maxLength(50)]],
-      stringer: ['', [Validators.maxLength(25)]],
-      waterLine: ['', [Validators.maxLength(25)]],
-      buttLine: ['', [Validators.maxLength(25)]]
+      stringer: ['', [Validators.maxLength(100)]],
+      waterLine: ['', [Validators.maxLength(100)]],
+      buttLine: ['', [Validators.maxLength(100)]]
     },
       {
         validator: CustomValidators.validatePreciseLocationGroupFields

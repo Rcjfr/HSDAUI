@@ -27,7 +27,7 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
       status: ['', []],
       repairDescriptionType: ['', []], //Validators.required
       repairDescriptionOtherText: ['', [Validators.maxLength(50)]],
-      engineeringAuthorization: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Alphanumerics)]],
+      engineeringAuthorization: ['', [Validators.maxLength(50), Validators.pattern(Expressions.Alphanumerics)]],
       isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]

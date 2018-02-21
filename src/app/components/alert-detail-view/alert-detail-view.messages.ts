@@ -149,40 +149,40 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'aircraftStation': {
 
         pattern: 'Station must be alphanumeric.',
-        maxlength: 'Station must not be more than 50 characters.'
+        maxlength: 'Station must not be more than 100 characters.'
       },
       'stringer': {
 
         pattern: 'Stringer must be alphanumeric.',
-        maxlength: 'Stringer must not be more than 25 characters.'
+        maxlength: 'Stringer must not be more than 100 characters.'
       },
       'waterLine': {
 
         pattern: 'WL must be alphanumeric.',
-        maxlength: 'WL must not be more than 25 characters.'
+        maxlength: 'WL must not be more than 100 characters.'
       },
       'buttLine': {
 
         pattern: 'BL must be alphanumeric.',
-        maxlength: 'BL must not be more than 25 characters.'
+        maxlength: 'BL must not be more than 100 characters.'
       }
     },
     'manufacturerPartNo': {
 
       pattern: 'MFG Part # must be alphanumeric.',
-      maxlength: 'MFG Part # must not be more than 50 characters.'
+      maxlength: 'MFG Part # must not be more than 100 characters.'
     }
     ,
     'partDefective': {
       required: 'Part Defective is required.',
-      maxlength: 'Part Defective must not be more than 50 characters.',
+      maxlength: 'Part Defective must not be more than 100 characters.',
       pattern: 'Part Defective must be alphanumeric.'
     }
     ,
     'manufacturerSerialNo': {
 
       pattern: 'MFG Serial # must be alphanumeric.',
-      maxlength: 'MFG Serial # must not be more than 50 characters.'
+      maxlength: 'MFG Serial # must not be more than 100 characters.'
     },
     'partTT': {
       pattern: 'Part TT must be numeric.',
@@ -269,7 +269,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'correctiveActionChapFormGroup': {
       'chapFigRepairText': {
         required: 'Chap/Fig/Repair is required.',
-        maxlength: 'Chap/Fig/Repair must not be more than 30 characters.',
+        maxlength: 'Chap/Fig/Repair must not be more than 50 characters.',
       }
     },
     'correctiveActionOptionFormGroup': {
@@ -279,13 +279,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'modifiedPartDescriptionGroup': {
         'modifiedPartDescription': {
           required: 'Description is required.',
-          maxlength: 'Description must not be more than 30 characters.',
+          maxlength: 'Description must not be more than 100 characters.',
         }
       },
       'defectivePartDescriptionGroup': {
         'defectivePartDescription': {
           required: 'Description is required.',
-          maxlength: 'Description must not be more than 30 characters.',
+          maxlength: 'Description must not be more than 100 characters.',
           pattern: 'Description must be alphanumeric.'
         }
       },
@@ -300,7 +300,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'engineeringAuthorization': {
 
-          maxlength: 'Engineering  Authorization must not be more than 25 characters.',
+          maxlength: 'Engineering  Authorization must not be more than 50 characters.',
           pattern: 'Engineering  Authorization must be alphanumeric.'
 
         },

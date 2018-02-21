@@ -19,7 +19,7 @@ export class CorrectiveActionFormGroupComponent extends BaseFormComponent implem
     super('correctiveActionFormGroup', authService);
     this.correctiveActionFormGroup = this.fb.group({
       deferralCode: ['', [Validators.maxLength(3), Validators.pattern(Expressions.Alphabets)]],
-      deferralNo: ['', [Validators.maxLength(15), Validators.pattern(Expressions.Alphanumerics)]],
+      deferralNo: ['', [Validators.maxLength(50), Validators.pattern(Expressions.Alphanumerics)]],
       isDeferred: [null, []],
       isMajorRepair: [null, []],
       majorRepairDescription: ['', [Validators.maxLength(250)]],

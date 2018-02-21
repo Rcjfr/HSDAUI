@@ -14,7 +14,7 @@ export class CorrectiveActionChapComponent extends BaseFormComponent implements 
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('correctiveActionChapFormGroup', authService);
     this.correctiveActionChapFormGroup = this.fb.group({
-      chapFigRepairText: ['', [Validators.maxLength(30), Validators.required]]
+      chapFigRepairText: ['', [Validators.maxLength(50), Validators.required]]
     });
   }
   ngOnInit() {
