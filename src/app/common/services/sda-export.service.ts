@@ -5,6 +5,7 @@ import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/mode
 import { Observable } from 'rxjs/Observable';
 import { SdaService } from '@app/common/services/sda.service';
 import * as constants from '@app/common/constants';
+import * as _ from 'lodash';
 import * as moment from 'moment';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
@@ -604,7 +605,7 @@ export class SdaExportService {
       { ...this.getLabel('Approximate External Doubler Repair Dimensions'), colSpan: 2 },
       {},
       this.getLableFieldValue('Height(in inches):', sda.repairHeight ? sda.repairHeight.toFixed(2) : ' '),
-      this.getLableFieldValue('Width(in inches):', sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ', 60),
+      this.getLableFieldValue('Width(in inches):', sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ', 60)
     ]);
 
     //}
@@ -621,13 +622,15 @@ export class SdaExportService {
     content.table.body.push([
       this.getLabel('Repair Document:'),
       this.getFieldValue(sda.repairDocumentTypeDesc || ' ', 75),
-      this.getLabel('Chap/Fig/Repair:'),
-      this.getFieldValue(sda.chapFigRepairText || ' ', 130)
+      { ...this.getLableFieldValue('Chap/Fig/Repair:', sda.chapFigRepairText || ' ', 260, 70), colSpan: 2 },
+      {}
+      //this.getLabel('Chap/Fig/Repair:'),
+      //this.getFieldValue(sda.chapFigRepairText || ' ', 130)
     ]);
     content.table.body.push([{}, {}, {}, {}]);
     content.table.body.push([
-      { text: [{ text: sda.completedBy || '' }, this.new_line, { text: 'QC Inspector Stamp or Signature and Employee Number'.padEnd(70), decoration: 'overline', bold: true }], colSpan: 3, style: 'regular' }, {}, {},
-      { text: [{ text: sda.completedOn ? moment(sda.completedOn).format('MM/DD/YYYY') : '' }, this.new_line, { text: 'Date'.padEnd(62), decoration: 'overline', bold: true }], colSpan: 1, style: 'regular' }
+      { text: [{ text: sda.completedBy || '' }, this.new_line, { text: _.padEnd('QC Inspector Stamp or Signature and Employee Number', 70), decoration: 'overline', bold: true }], colSpan: 3, style: 'regular' }, {}, {},
+      { text: [{ text: sda.completedOn ? moment(sda.completedOn).format('MM/DD/YYYY') : '' }, this.new_line, { text: _.padEnd('Date', 62), decoration: 'overline', bold: true }], colSpan: 1, style: 'regular' }
     ]);
 
     return content;
@@ -1031,10 +1034,10 @@ export class SdaExportService {
   }
 
   padContent(val: number | string, maxLength: number = 50): any {
-    //return val.toString().padEnd(maxLength);
+    //return _.padEnd(val.toString(),maxLength);
     //return [
     //  { text: val, style: 'fieldValue' },this.new_line,
-    //  {text:' '.padEnd(maxLength),decoration:'underline'}
+    //  {text:_.padEnd(' ',maxLength),decoration:'underline'}
     //]
     return [
       { text: val, style: 'fieldValue', width: maxLength }
