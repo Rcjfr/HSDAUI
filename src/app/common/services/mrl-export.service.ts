@@ -170,7 +170,7 @@ export class MrlExportService {
               { text: listview.ataCode2 || '' ,  style: 'regular' },
               { text: listview.station || '',  style: 'regular' },
               { text: listview.checkTypeDesc || '', style: 'regular' },
-              { text: `L=${listview.length.toFixed(3)}", W=${listview.width.toFixed(3)}", D=${listview.depth.toFixed(3)}", ${listview.damageTypeDesc}`, style: 'regular' },
+              { text: `L=${listview.length.toFixed(3)}", W=${listview.width.toFixed(3)}", D=${listview.depth.toFixed(4)}", ${listview.damageTypeDesc}`, style: 'regular'  },
               { text: listview.partDefective || '', style: 'regular' },
               { text: listview.aircraftStation || '', style: 'regular' },
               { text: listview.stringer || '', style: 'regular' },

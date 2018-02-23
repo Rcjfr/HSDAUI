@@ -431,7 +431,7 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Type of Corrosion:'),
-            this.getFieldValue(`${sda.corrosionTypeDesc}${sda.corrosionTypeDesc === 'Other' ? '(' + sda.corrosionTypeOtherText + ')' : ''}`),
+            this.getFieldValue(`${sda.corrosionTypeDesc || ''}${sda.corrosionTypeDesc === 'Other' ? '(' + sda.corrosionTypeOtherText + ')' : ''}`),
             this.getLabel('Floorboard condition after mat is removed:'),
             this.getFieldValue(sda.floorBoardConditionDesc || ' ')
           ],

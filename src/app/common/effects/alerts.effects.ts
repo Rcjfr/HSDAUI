@@ -122,10 +122,25 @@ export class AlertEffects {
     .map((action: selectedAlert.ExportMrlPdfAction) => action.payload)
     .switchMap(searchCriteria => {
        return this.sdaService.searchSda(searchCriteria)
-        .map((searchResult: models.ISdaListResult) => {
-           this.mrlExportService.exportMrlPdf(searchResult);
+        .switchMap((searchResult: models.ISdaListResult) => {
+            if (searchResult.records.length === 0) {
+              return this.aircraftService.getAircraftInfo(searchCriteria.searchByAircraft.aircraftNo)
+              .switchMap((aircraftInfo: models.IAircraftInfo) => {
+                    this.mrlExportService.exportMrlPdf(searchResult);
 
-            return new selectedAlert.ExportMrlPdfCompleteAction();
+                     return Observable.from([ new selectedAlert.ExportMrlPdfCompleteAction()]);
+              })
+              .catch((err) => {
+                return Observable.from([
+                  new selectedAlert.LoadAircraftInfoFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.')])
+            })
+          } else {
+
+             this.mrlExportService.exportMrlPdf(searchResult);
+
+             return Observable.from([new selectedAlert.ExportMrlPdfCompleteAction()]);
+          }
+
         })
         .catch((err) => {
           console.log(err);
@@ -133,8 +148,6 @@ export class AlertEffects {
           return of(new selectedAlert.ExportMrlPdfFailAction('Failed to generate Major Repair List.'));
         });
     });
-
-
 
   @Effect()
   exportSdas$ = this.actions$
