@@ -28,6 +28,16 @@
             <i class="icon-add"></i> New SDA
           </a>
         </li>
+        <li [routerLinkActive]="['active']">
+              <a class="btn-secondary dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="glyphicon-file"></i>Reports
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <ul>
+                  <li  class="dropdown-item" ><a [routerLink]="['/reports/mrl']">MRL Report</a></li>
+                </ul>
+              </div>
+          </li>
         <li>
           <a href="#">
             <i class="icon-help"></i> Help

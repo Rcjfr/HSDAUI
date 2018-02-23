@@ -12,5 +12,3 @@ export * from './search-by-report.model';
 export * from './search-by-sda.model';
 export * from './search-by-status.model';
 export * from './report-column.model';
-
-

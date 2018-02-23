@@ -1,4 +1,4 @@
 export interface ISearchByDateRange {
-  dateFrom: any;
-  dateThrough: any;
+  dateFrom?: any;
+  dateThrough?: any;
 }

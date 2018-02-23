@@ -1,5 +1,5 @@
 export interface ISearchByPart {
-  manufacturerPartNo: any;
-  manufacturerSerialNo: any;
-  partDefective: any;
+  manufacturerPartNo?: any;
+  manufacturerSerialNo?: any;
+  partDefective?: any;
 }

@@ -20,6 +20,10 @@ export const ActionTypes = {
   LOAD_SDAS_COMPLETE: 'Load SDAs Complete',
   LOAD_SDAS_FAIL: 'Load SDAs Fail',
 
+  EXPORT_MRL_PDF: 'Export Major Repair List PDF',
+  EXPORT_MRL_PDF_COMPLETE: 'Export Major Repair List PDF Complete',
+  EXPORT_MRL_PDF_FAIL: 'Export Major Repair List PDF Fail',
+
   EXPORT_SDAS: 'Export SDAs',
   EXPORT_SDAS_COMPLETE: 'Export SDAs Complete',
   EXPORT_SDAS_FAIL: 'Export SDAs Fail',
@@ -123,6 +127,21 @@ export class LoadSdasFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class ExportMrlPdfAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_PDF;
+  constructor(public payload:  ISearchCriteria ) { }
+}
+
+export class  ExportMrlPdfCompleteAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_PDF_COMPLETE;
+  constructor() { }
+}
+
+export class ExportMrlPdfFailAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_PDF_FAIL;
+  constructor(public payload:  any ) { }
+}
+
 export class ExportSdasAction implements Action {
   public type = ActionTypes.EXPORT_SDAS;
   constructor(public payload: any) { }
@@ -211,6 +230,9 @@ export type Actions =
   SaveSdaSearchCriteria |
   LoadSdasCompleteAction |
   LoadSdasFailAction |
+  ExportMrlPdfAction|
+  ExportMrlPdfCompleteAction|
+  ExportMrlPdfFailAction|
   ExportSdasAction |
   ExportSdasCompleteAction |
   ExportSdasFailAction |

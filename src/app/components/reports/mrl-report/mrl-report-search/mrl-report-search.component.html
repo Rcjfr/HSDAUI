@@ -1,0 +1,59 @@
+<form novalidate  [formGroup]="mrlReportSearchForm">
+    <div class="panel panel-info">
+    <div class="panel-heading">Search</div>
+    <div class="panel-body form-group">
+    <div class="row">
+        <div class="col-sm-6">
+          <div>
+            <aac-field-container label="Create Date Start:" [attr.for]="fromDate.idDatePicker">
+              <datetime [timepicker]="false" #fromDate [tabindex]='1' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
+                formControlName="dateFrom"></datetime>
+            </aac-field-container>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div>
+            <aac-field-container label="Create Date Finish:" [attr.for]="toDate.idDatePicker">
+              <datetime [timepicker]="false" #toDate [tabindex]='2' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
+                formControlName="dateThrough"></datetime>
+            </aac-field-container>
+          </div>
+        </div>
+      </div>
+      <div class="row form-group">
+          <div class="col-sm-6">
+            <div>
+                <ng-template #customAircraftItemTemplate let-model="item" let-index="index">
+                    <span><b>{{model.noseNumber}}</b>:{{model.model}}</span>
+                  </ng-template>
+                <aac-field-container [required]="true" label="Aircraft Nose #:" [message]="noseValidator()">
+                        <input type="text" autocomplete="off" tabindex='3' class="form-control"
+                               [typeahead]="noseNumbers$"
+                               formControlName="aircraftNo"
+                               typeaheadOptionField="noseNumber" [typeaheadItemTemplate]="customAircraftItemTemplate"
+                               typeaheadOptionsLimit="50" typeaheadMinLength="1"
+                               >
+                  </aac-field-container>
+
+          </div>
+          </div>
+          <div class="col-sm-6">
+            <div>
+                <aac-checkbox-container label="MON Status:">
+                    <input type="checkbox" tabindex="4" formControlName="monStatus" />
+                  </aac-checkbox-container>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="pull-right hidden-print">
+                <button type="button" (click)="showMrlreport()" class="btn btn-primary"
+                >View MRL Report</button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+ </form>

@@ -12,6 +12,9 @@ const routes: Routes = [
     children: []
   },
   {
+    path: 'reports', loadChildren: '@app/components/reports/sda-reports.module#SdaReportsModule'
+  },
+  {
     path: 'alerts', component: AlertsComponent,
     children: []
   },

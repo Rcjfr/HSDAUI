@@ -1,3 +1,3 @@
 export interface ISearchByStatus {
-  status: any;
+  status?: any;
 }

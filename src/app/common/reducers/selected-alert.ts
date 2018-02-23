@@ -39,6 +39,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   changeLogs: List.of<IChangeLog>(),
   aircraftInfo: AircraftInfoFactory(),
   sdaListResult: SdaListResultFactory(),
+  //mrlSearchResult: SdaListResultFactory(),
   searchCriteria: SearchCriteriaRecordFactory()
 });
 
@@ -86,6 +87,12 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, sdaListResult: SdaListResultFactory(act.payload) });
       }
+
+      case selectedAlertActions.ActionTypes.EXPORT_MRL_PDF_COMPLETE:
+      {
+        return state.merge({ loading: false });
+      }
+
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadAircraftInfoCompleteAction;

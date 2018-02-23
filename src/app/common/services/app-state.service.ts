@@ -149,6 +149,10 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
   }
 
+  loadMajorRepairList(criteria): void {
+    this.store.dispatch(new selectedAlertActions.ExportMrlPdfAction(criteria));
+  }
+
   saveSdaSearchCriteria(criteria): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));
   }
@@ -156,6 +160,7 @@ export class AppStateService {
   exportSDA(criteria): void {
     this.store.dispatch(new selectedAlertActions.ExportSdasAction(criteria));
   }
+
 
   loadSda(payload: number | ILoadSda): void {
     const pl = typeof payload === 'number' ? { sdaId: payload, version: 0, original: false } : payload;

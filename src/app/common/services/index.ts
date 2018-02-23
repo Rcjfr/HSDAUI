@@ -11,6 +11,7 @@ export * from './saved-searches-state.service';
 export * from './utility.service';
 export * from './lookup-data.service';
 export * from './changelog.service';
-export * from './sda-export.service'
+export * from './sda-export.service';
+export * from './mrl-export.service';
 
 

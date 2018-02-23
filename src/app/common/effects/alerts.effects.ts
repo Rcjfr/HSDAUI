@@ -115,6 +115,27 @@ export class AlertEffects {
         });
     });
 
+
+    @Effect()
+    exportMrlPDF$ = this.actions$
+    .ofType(selectedAlert.ActionTypes.EXPORT_MRL_PDF)
+    .map((action: selectedAlert.ExportMrlPdfAction) => action.payload)
+    .switchMap(searchCriteria => {
+       return this.sdaService.searchSda(searchCriteria)
+        .map((searchResult: models.ISdaListResult) => {
+           this.mrlExportService.exportMrlPdf(searchResult);
+
+            return new selectedAlert.ExportMrlPdfCompleteAction();
+        })
+        .catch((err) => {
+          console.log(err);
+
+          return of(new selectedAlert.ExportMrlPdfFailAction('Failed to generate Major Repair List.'));
+        });
+    });
+
+
+
   @Effect()
   exportSdas$ = this.actions$
     .ofType(selectedAlert.ActionTypes.EXPORT_SDAS)
@@ -128,6 +149,8 @@ export class AlertEffects {
           return of(new selectedAlert.ExportSdasFailAction('Failed to export SDAs.'));
         });
     });
+
+
 
   @Effect()
   loadSda$ = this.actions$
@@ -191,6 +214,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
+    selectedAlert.ActionTypes.EXPORT_MRL_PDF_FAIL,
     selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
     selectedAlert.ActionTypes.EXPORT_SDAS_FAIL,
     selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL,
@@ -216,6 +240,7 @@ export class AlertEffects {
     private aircraftService: services.AircraftService,
     private sdaService: services.SdaService,
     private sdaExportService: services.SdaExportService,
+    private mrlExportService: services.MrlExportService,
     private changeLogService: services.ChangeLog,
     private appStateService: services.AppStateService,
     private router: Router,
