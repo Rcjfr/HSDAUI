@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class AuthService {
   public currentUser$: Observable<IUser>;
+  readonly HSDA_End_Users = 'HSDA_End_Users';
   readonly QC_Inspector = 'QC_Inspector';
   readonly Designated_Quality_Control = 'Designated_Quality_Control';
   readonly QC_Supervisor = 'QC_Supervisor';

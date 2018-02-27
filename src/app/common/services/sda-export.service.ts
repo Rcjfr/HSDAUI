@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { SdaService } from '@app/common/services/sda.service';
 import * as constants from '@app/common/constants';
 import * as _ from 'lodash';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import { AppStateService } from '@app/common/services/app-state.service';
@@ -35,6 +35,7 @@ pdfMake.fonts = {
 @Injectable()
 export class SdaExportService {
   pdf: any;
+  CST = 'America/Chicago';
   isQCPersonnel = false;
   icon_check_empty = '';
   icon_circle_empty = '';
@@ -43,7 +44,13 @@ export class SdaExportService {
   new_line = '\n';
   constructor(private sdaService: SdaService, private authService: AuthService) {
     this.pdf = pdfMake;
-    authService.isQCPersonnel().take(1).subscribe(u => this.isQCPersonnel = u);
+    authService.hasAnyRole([authService.HSDA_End_Users,
+      authService.Reliability_Analyst,
+      authService.CPCP_Trained_Reviewing_Engineer,
+      authService.Compliance_Engineer,
+      authService.Compliance_Engineering_Analyst,
+      authService.Compliance_Engineering_Manager
+    ]).take(1).subscribe(u => this.isQCPersonnel = !u);
   }
   exportSda(sdas: number[]): Observable<any> {
     const dd = {
@@ -630,7 +637,7 @@ export class SdaExportService {
     content.table.body.push([{}, {}, {}, {}]);
     content.table.body.push([
       { text: [{ text: sda.completedBy || '' }, this.new_line, { text: _.padEnd('QC Inspector Stamp or Signature and Employee Number', 70), decoration: 'overline', bold: true }], colSpan: 3, style: 'regular' }, {}, {},
-      { text: [{ text: sda.completedOn ? moment(sda.completedOn).format('MM/DD/YYYY') : '' }, this.new_line, { text: _.padEnd('Date', 62), decoration: 'overline', bold: true }], colSpan: 1, style: 'regular' }
+      { text: [{ text: sda.completedOn ? moment.utc(sda.completedOn).tz(this.CST).format('MM/DD/YYYY') : '' }, this.new_line, { text: _.padEnd('Date', 62), decoration: 'overline', bold: true }], colSpan: 1, style: 'regular' }
     ]);
 
     return content;
@@ -859,7 +866,7 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Stage 1/RTS Date:'),
-            this.getFieldValue(sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.stage1RTSDate ? moment.utc(sda.stage1RTSDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
             , {}, {}
           ],
           [
@@ -886,9 +893,9 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Stage 2 Approval Date:'),
-            this.getFieldValue(sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY') : ' '),
+            this.getFieldValue(sda.stage2Date ? moment.utc(sda.stage2Date).tz(this.CST).format('MM/DD/YYYY') : ' '),
             this.getLabel('Stage 3 Approval Date:'),
-            this.getFieldValue(sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.stage3Date ? moment.utc(sda.stage3Date).tz(this.CST).format('MM/DD/YYYY') : ' ')
 
           ],
           [
@@ -941,7 +948,7 @@ export class SdaExportService {
                     this.getLabel('Major Repair Updated By:'),
                     this.getFieldValue(sda.dteUpdatedBy || ' ', 75),
                     this.getLabel('Major Repair Updated Date:'),
-                    this.getFieldValue(sda.dteUpdatedDate ? moment(sda.dteUpdatedDate).format('MM/DD/YYYY hh:mm A') : ' ', 75),
+                    this.getFieldValue(sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY hh:mm A') : ' ', 75),
                     this.getLabel('DTE Due Date:'),
                     this.getFieldValue(sda.dueDate || ' ', 75),
                   ]

@@ -39,6 +39,7 @@
     "karma-trx-reporter": "^0.2.9",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.14",
     "ng-pipes": "^0.1.2",
     "ng2-bootstrap-modal": "^1.0.1",
     "ng2-datetime": "^1.4.0",

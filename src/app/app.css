@@ -8453,8 +8453,8 @@ h2 {
   */
 @font-face {
   font-family: "American Icons";
-  src: url('../app/assets/american-icons-v4.eot');
-  src: url('../app/assets/american-icons-v4.eot?#iefix') format('eot'), url('../app/assets/american-icons-v4.woff') format('woff'), url('../app/assets/american-icons-v4.ttf') format('truetype'), url('../app/assets/american-icons-v4.svg#american-icons') format('svg');
+  src: url('assets/american-icons-v4.eot');
+  src: url('assets/american-icons-v4.eot?#iefix') format('eot'), url('assets/american-icons-v4.woff') format('woff'), url('assets/american-icons-v4.ttf') format('truetype'), url('assets/american-icons-v4.svg#american-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -9487,14 +9487,14 @@ h6 {
 }
 
 .section + .section {
-  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px;
+  background: url('assets/shadow-down.png') no-repeat 50% top / 100% 5px;
   border-top: 1px dotted transparent;
   margin-top: 40px;
   padding-top: 40px;
 }
 
 .lt-ie9 .section + .section {
-  background: url(../app/assets/shadow-down.png) no-repeat 50% top;
+  background: url('assets/shadow-down.png') no-repeat 50% top;
 }
 
 .section .section + .section {
@@ -10074,7 +10074,7 @@ ol.list-alpha-upper {
   }
 
 .toolbar {
-  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px, url(../app/assets/shadow-down.png) no-repeat 50% bottom / 100% 5px;
+  background: url('assets/shadow-down.png') no-repeat 50% top / 100% 5px, url('assets/shadow-down.png') no-repeat 50% bottom / 100% 5px;
   border-bottom: 1px dotted transparent;
   border-top: 1px dotted transparent;
   margin-top: 20px;
@@ -10087,12 +10087,12 @@ ol.list-alpha-upper {
 }
 
 .lt-ie9 .toolbar {
-  background: url(../app/assets/shadow-down.png) no-repeat 50% top;
+  background: url('assets/shadow-down.png') no-repeat 50% top;
   position: relative;
 }
 
   .lt-ie9 .toolbar:before {
-    background: url(../app/assets/shadow-down.png) no-repeat 50% bottom;
+    background: url('assets/shadow-down.png') no-repeat 50% bottom;
     position: absolute;
     content: " ";
     width: 100%;
@@ -10375,7 +10375,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .shadow-separator-line {
-  background: url(../app/assets/shadow-down.png) no-repeat 50% top / 100% 5px;
+  background: url('assets/shadow-down.png') no-repeat 50% top / 100% 5px;
   padding-top: 30px;
   padding-bottom: 0px;
   margin-top: 30px;
@@ -10383,7 +10383,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 [class*="shadow"][class*="-down"] {
-  background: url('../app/assets/shadow-down.png') no-repeat 50% top / 100% 5px;
+  background: url('assets/shadow-down.png') no-repeat 50% top / 100% 5px;
   border-top: 1px dotted transparent;
   margin-top: 20px;
   padding-top: 20px;
@@ -11356,64 +11356,67 @@ ul.dropdown-menu {
 }
 
 @font-face {
-  font-family: 'Code New Roman';
-  src: url('../app/assets/code-new-roman/Code New Roman.otf');
+  font-family: 'Code_New_Roman';
+  src: url('assets/code-new-roman/Code_New_Roman.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
+
 @font-face {
-  font-family: 'Code New Roman';
-  src: url('../app/assets/code-new-roman/Code New Roman i.otf');
+  font-family: 'Code_New_Roman_i';
+  src: url('assets/code-new-roman/Code_New_Roman_i.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
 }
 
+
 @font-face {
-  font-family: 'Code New Roman';
-  src: url('../app/assets/code-new-roman/Code New Roman b.otf');
+  font-family: 'Code_New_Roman_b';
+  src: url('assets/code-new-roman/Code_New_Roman_b.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
+
 @font-face {
   font-family: 'AmericanSans';
-  src: url('../app/assets/AmericanSans-Regular.woff');
+  src: url('assets/AmericanSans-Regular.woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'AmericanSans Light';
-  src: url('../app/assets/AmericanSans-Light.woff');
+  src: url('assets/AmericanSans-Light.woff');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'AmericanSans Light Italic';
-  src: url('../app/assets/AmericanSans-LightItalic.woff');
+  src: url('assets/AmericanSans-LightItalic.woff');
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'AmericanSans Medium';
-  src: url('../app/assets/AmericanSans-Medium.woff');
+  src: url('assets/AmericanSans-Medium.woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'AmericanSans Medium Italic';
-  src: url('../app/assets/AmericanSans-MediumItalic.woff');
+  src: url('assets/AmericanSans-MediumItalic.woff');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'AmericanSans Bold';
-  src: url('../app/assets/AmericanSans-Bold.woff');
+  src: url('assets/AmericanSans-Bold.woff');
   font-weight: 700;
   font-style: normal;
 }
@@ -11451,7 +11454,7 @@ body,
 
 .dw-loading > .dw-loading-body:before {
   content: ' ';
-  background-image: url(../app/assets/loading_AA_logo.png);
+  background-image: url('assets/loading_AA_logo.png');
   height: 96px;
   width: 122px;
   display: block;
