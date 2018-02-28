@@ -4,7 +4,7 @@ import { environment } from '@env/environment';
 import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 import * as constants from '@app/common/constants';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import * as models from '@app/common/models';
@@ -19,11 +19,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Injectable()
 export class MrlExportService {
   pdf: any;
+  CST = 'America/Chicago';
   constructor() {
     this.pdf = pdfMake;
   }
   exportMrlPdf(searchResult: models.ISdaListResult): any {
-
     const dd = {
       info: {
         title: 'Major Repair List',
@@ -65,7 +65,7 @@ export class MrlExportService {
           }
         ]
       },
-      footer: function (currentPage, pageCount) {
+      footer: (currentPage, pageCount) => {
         return {
           margin: [30, 5, 25 , 5],
           columns: [
@@ -75,7 +75,7 @@ export class MrlExportService {
 
                 body: [
                   [
-                    { fontSize: 6, text: moment(Date.now()).format('dddd, LL'), alignment: 'left' },
+                    { fontSize: 6, text: moment.utc(new Date).tz(this.CST).format('dddd, LL') , alignment: 'left' },
                     { fontSize: 6, text: '* Any comments after || denotes historical data.', alignment: 'center', bold: true },
                     { text: `Page ${currentPage} of ${pageCount}`, fontSize: 6, alignment: 'right' }
                   ]
@@ -166,7 +166,7 @@ export class MrlExportService {
             [
               { text: listview.id || '', style: 'regular' },
               { text: listview.sdrNumber || '',  style: 'regular' },
-              { text: listview.completedOn ? moment(listview.completedOn).format('MM/DD/YY') : '', style: 'regular' },
+              { text: listview.completedOn ? moment.utc(listview.completedOn).tz(this.CST).format('MM/DD/YY') : '', style: 'regular' },
               { text: listview.ataCode2 || '' ,  style: 'regular' },
               { text: listview.station || '',  style: 'regular' },
               { text: listview.checkTypeDesc || '', style: 'regular' },
