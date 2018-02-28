@@ -5,6 +5,7 @@ import { ISearchCriteria } from '@app/common/models/search/search-criteria.model
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
 import { IDownloadAttachment } from '@app/common/models/payload/download-attachment.model';
+import { IAircraftInfoPayload } from '@app/common/models/payload/aircraft-info-payload.model';
 
 export const ActionTypes = {
   LOAD_NOSE_NUMBERS: 'Load Nose Numbers',
@@ -76,7 +77,7 @@ export class LoadNoseNumbersFailAction implements Action {
 
 export class LoadAircraftInfoAction implements Action {
   public type = ActionTypes.LOAD_AIRCRAFT_INFO;
-  constructor(public payload: string) { }
+  constructor(public payload: IAircraftInfoPayload) { }
 }
 export class LoadAircraftInfoCompleteAction implements Action {
   public type = ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE;

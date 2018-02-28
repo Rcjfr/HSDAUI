@@ -44,7 +44,7 @@ describe('selectedAlertReducer', () => {
   it('SelectedAlert Reducer Load Aircraft Info Success', () => {
     let state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),
-      new selectedAlert.LoadAircraftInfoAction('A330'));
+      new selectedAlert.LoadAircraftInfoAction({ noseNumber: 'A330', flightDate: new Date() }));
     expect(state.loading).toEqual(true);
     state = fromSelectedAlert.reducer(
       fromSelectedAlert.stateFactory(initialState),

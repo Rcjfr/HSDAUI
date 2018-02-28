@@ -167,9 +167,9 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.LoadSdaAction(pl));
   }
 
-  loadAircraftInfo(noseNumber: string): void {
+  loadAircraftInfo(noseNumber: string, flightDate: Date): void {
     if (!noseNumber) { return; }
-    this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction(noseNumber));
+    this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction({ noseNumber: noseNumber, flightDate: flightDate }));
   }
 
 

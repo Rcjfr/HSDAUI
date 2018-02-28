@@ -14,6 +14,7 @@ import '@app/common/rxjs-extensions';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
 import { IDownloadAttachment } from '@app/common/models/payload/download-attachment.model';
+import { IAircraftInfoPayload } from '@app/common/models/payload/aircraft-info-payload.model';
 
 @Injectable()
 export class AlertEffects {
@@ -36,8 +37,8 @@ export class AlertEffects {
   loadAircraftInfo$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO)
     .map((action: selectedAlert.LoadAircraftInfoAction) => action.payload)
-    .switchMap((noseNumber: string) => {
-      return this.aircraftService.getAircraftInfo(noseNumber)
+    .switchMap((payLoad: IAircraftInfoPayload) => {
+      return this.aircraftService.getAircraftInfo(payLoad)
         .map((aircraftInfo: models.IAircraftInfo) => {
           return new selectedAlert.LoadAircraftInfoCompleteAction(aircraftInfo);
         })
@@ -46,7 +47,7 @@ export class AlertEffects {
             new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft information. Please check the aircraft # or try again by clicking refresh button.'),
             new selectedAlert.LoadAircraftInfoCompleteAction(
               {
-                noseNumber: noseNumber,
+                noseNumber: payLoad.noseNumber,
                 cycles: '', fleet: '', manufacturer: '',
                 model: '', serialNo: '', totalShipTime: ''
               })]);

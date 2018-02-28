@@ -26,6 +26,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   alertCodes$: Observable<models.IBaseLookUp[]>;
   ATACodes$: Observable<models.IATACode[]>;
   disableCreateDate = false;
+  noseNumber = '';
   public today = new Date();
 
 
@@ -58,7 +59,12 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-
+    const createDateControl = this.generalSectionFormGroup.get('createDate');
+    createDateControl.valueChanges.subscribe(v => {
+      if (!this.disableCreateDate && !createDateControl.errors) {
+        this.populateAircraftInfo(this.noseNumber);
+      }
+    });
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
     })
@@ -72,6 +78,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
+      this.noseNumber = newSda.generalSection.aircraftNo;
       this.generalSectionFormGroup.patchValue(newSda.generalSection);
       this.generalSectionFormGroup.patchValue({ sdaId: newSda.id === 0 ? '' : newSda.id });
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
@@ -101,7 +108,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   }
 
   populateAircraftInfo(noseNumber: string) {
-    this.appStateService.loadAircraftInfo(noseNumber);
+    this.noseNumber = noseNumber;
+    this.appStateService.loadAircraftInfo(noseNumber, this.generalSectionFormGroup.get('createDate').value);
   }
 
   confirmEmployeeId(id) {

@@ -279,13 +279,13 @@ export class SdaExportService {
             this.getLabel('AC Manufacturer:'),
             this.getFieldValue(sda.manufacturer),
             this.getLabel('Description:'),
-            this.getFieldValue(sda.unscheduledMaintenanceDescription || ' ', 133)
+            this.getFieldValue(sda.unscheduledMaintenanceDescription, 133)
           ],
           [
             this.getLabel('AC Model/Series:'),
             this.getFieldValue(sda.model),
             this.getLableFieldValue('Non-Routine #: ', sda.defectDiscoveredDuring === 'U' ? sda.nonRoutineNo || ' ' : ' ', 60, 63),
-            this.getLableFieldValue('MIC #: ', sda.micNo || ' ', 103, 30),
+            this.getLableFieldValue('MIC #: ', sda.micNo, 103, 30),
           ],
           [
             this.getLabel('Serial #:'),
@@ -300,8 +300,8 @@ export class SdaExportService {
           [
             this.getLableFieldValue('Total Ship Time:', sda.totalShipTime, 48, 62),
             this.getLableFieldValue('Cycles:', sda.cycles, 125, 35),
-            this.getLableFieldValue('Check Type:', sda.checkTypeDesc || ' ', 78, 55),
-            this.getLableFieldValue('ESM Reference #:', sda.esmReference || ' ', 68, 65)
+            this.getLableFieldValue('Check Type:', sda.checkTypeDesc, 78, 55),
+            this.getLableFieldValue('ESM Reference #:', sda.esmReference, 68, 65)
           ],
           [
             this.getLabel('Originator:'),
@@ -310,7 +310,7 @@ export class SdaExportService {
           ],
           [
             {}, {},
-            this.getLableFieldValue(`Routine #:`, sda.routineNo || ' ', 83, 50),
+            this.getLableFieldValue(`Routine #:`, sda.routineNo, 83, 50),
             this.getLableFieldValue(`Non-Routine #:`, sda.defectDiscoveredDuring === 'S' ? sda.nonRoutineNo || ' ' : ' ', 78, 55),
           ]
         ]
@@ -363,22 +363,22 @@ export class SdaExportService {
             }, '', '', ''
           ],
           [
-            this.getLableFieldValue(`Aircraft Station: `, sda.aircraftStation || ' ', 50, 60),
-            this.getLableFieldValue(`Stringer: `, sda.stringer || ' ', 125, 35),
-            this.getLableFieldValue(`WL: `, sda.waterLine || ' ', 95, 20),
-            this.getLableFieldValue(`BL: `, sda.buttLine || ' ', 135, 25),
+            this.getLableFieldValue(`Aircraft Station: `, sda.aircraftStation, 50, 60),
+            this.getLableFieldValue(`Stringer: `, sda.stringer, 125, 35),
+            this.getLableFieldValue(`WL: `, sda.waterLine, 95, 20),
+            this.getLableFieldValue(`BL: `, sda.buttLine, 135, 25),
           ],
           [
             this.getLabel('MFG Part #:'),
-            this.getFieldValue(sda.manufacturerPartNo || ' '),
+            this.getFieldValue(sda.manufacturerPartNo),
             this.getLabel('Part Defective:'),
-            this.getFieldValue(sda.partDefective || ' ')
+            this.getFieldValue(sda.partDefective)
           ],
           [
-            this.getLableFieldValue('MFG Serial #:', sda.manufacturerSerialNo || ' ', 60, 50),
-            this.getLableFieldValue('Part TT:', sda.partTT || ' ', 130, 30),
-            this.getLableFieldValue('Part TSO:', sda.partTSO || ' ', 73, 40),
-            this.getLableFieldValue('How Detected:', `${sda.detectionMethodDesc}${sda.detectionMethodDesc === 'Other' ? '(' + sda.detectionMethodOtherDescription + ')' : ''}`, 90, 70),
+            this.getLableFieldValue('MFG Serial #:', sda.manufacturerSerialNo, 60, 50),
+            this.getLableFieldValue('Part TT:', sda.partTT, 130, 30),
+            this.getLableFieldValue('Part TSO:', sda.partTSO, 73, 40),
+            this.getLableFieldValue('How Detected:', `${sda.detectionMethodDesc || ''}${sda.detectionMethodDesc === 'Other' ? '(' + sda.detectionMethodOtherDescription + ')' : ''}`, 90, 70),
           ]
         ]
       }
@@ -434,13 +434,13 @@ export class SdaExportService {
               text: this.getBooleanContent(sda.isPreviouslyBlended), style: 'regular'
             },
             this.getLabel('Corrosion Task #:'),
-            this.getFieldValue(sda.corrosionTaskNo || ' ')
+            this.getFieldValue(sda.corrosionTaskNo)
           ],
           [
             this.getLabel('Type of Corrosion:'),
             this.getFieldValue(`${sda.corrosionTypeDesc || ''}${sda.corrosionTypeDesc === 'Other' ? '(' + sda.corrosionTypeOtherText + ')' : ''}`),
             this.getLabel('Floorboard condition after mat is removed:'),
-            this.getFieldValue(sda.floorBoardConditionDesc || ' ')
+            this.getFieldValue(sda.floorBoardConditionDesc)
           ],
           [
             {
@@ -490,7 +490,7 @@ export class SdaExportService {
                   //  {
                   //    text: this.getCauseOfDamageContent(512, 'Other', sda.causesOfDamage), style: 'regular'
                   //  },
-                  // { ...this.getFieldValue(sda.causeOfDamageOtherText || ' ', 300), colSpan: 2 },
+                  // { ...this.getFieldValue(sda.causeOfDamageOtherText, 300), colSpan: 2 },
                   //  , {}
                   //],
                   [
@@ -503,7 +503,7 @@ export class SdaExportService {
                         { text: ((sda.causesOfDamage & 512) === 512) ? this.icon_ok_squared : this.icon_check_empty, style: 'icon', width: 9 }, { text: ` Other`, style: 'regular', width: 30 },
                         {
                           stack: [
-                            this.getLabel(sda.causeOfDamageOtherText || ' '),
+                            this.getLabel(sda.causeOfDamageOtherText),
                             this.getLine(530)
                           ]
                         }
@@ -542,8 +542,8 @@ export class SdaExportService {
               text: this.getBooleanContent(sda.isDeferred),
               style: 'regular'
             },
-            this.getLableFieldValue('SCEPTRE Deferral Code:', sda.deferralCode || ' '),
-            this.getLableFieldValue('Deferral #:', sda.deferralNo || ' ', 65)
+            this.getLableFieldValue('SCEPTRE Deferral Code:', sda.deferralCode),
+            this.getLableFieldValue('Deferral #:', sda.deferralNo, 65)
           ],
           [
             {
@@ -554,7 +554,7 @@ export class SdaExportService {
                 { text: ' Defective Part Replaced With Identical Part #', width: 175 },
                 {
                   stack: [
-                    this.getLabel(sda.defectivePartDescription || ' '),
+                    this.getLabel(sda.defectivePartDescription),
                     this.getLine(385)
                   ]
                 }
@@ -570,7 +570,7 @@ export class SdaExportService {
                 { text: 'Modified Part # Installed', width: 175 },
                 {
                   stack: [
-                    this.getLabel(sda.modifiedPartDescription || ' '),
+                    this.getLabel(sda.modifiedPartDescription),
                     this.getLine(385)
                   ]
                 }
@@ -593,13 +593,13 @@ export class SdaExportService {
     //if (sda.repairType === 3) {
     content.table.body.push([
       this.getLabel('Description:'),
-      { ...this.getFieldValue(sda.repairDescriptionTypeDesc || ' ', 350), colSpan: 3 },
+      { ...this.getFieldValue(sda.repairDescriptionTypeDesc, 350), colSpan: 3 },
       {}, {}
     ]);
 
     content.table.body.push([
       this.getLabel('Engineering Authorization (EA):'),
-      { ...this.getFieldValue(sda.engineeringAuthorization || ' '), colSpan: 2 }, {},
+      { ...this.getFieldValue(sda.engineeringAuthorization), colSpan: 2 }, {},
       {
         text: [
           this.getLabel('Externally Visible?'), ' ',
@@ -622,17 +622,17 @@ export class SdaExportService {
         text: this.getBooleanContent(sda.isMajorRepair),
         style: 'regular'
       },
-      { ...this.getFieldValue(sda.majorRepairDescription || ' ', 330), colSpan: 2 }
+      { ...this.getFieldValue(sda.majorRepairDescription, 330), colSpan: 2 }
       , ''
     ]);
 
     content.table.body.push([
       this.getLabel('Repair Document:'),
-      this.getFieldValue(sda.repairDocumentTypeDesc || ' ', 75),
-      { ...this.getLableFieldValue('Chap/Fig/Repair:', sda.chapFigRepairText || ' ', 260, 70), colSpan: 2 },
+      this.getFieldValue(sda.repairDocumentTypeDesc, 75),
+      { ...this.getLableFieldValue('Chap/Fig/Repair:', sda.chapFigRepairText, 260, 70), colSpan: 2 },
       {}
       //this.getLabel('Chap/Fig/Repair:'),
-      //this.getFieldValue(sda.chapFigRepairText || ' ', 130)
+      //this.getFieldValue(sda.chapFigRepairText, 130)
     ]);
     content.table.body.push([{}, {}, {}, {}]);
     content.table.body.push([
@@ -674,7 +674,7 @@ export class SdaExportService {
               text: this.getBooleanContent(sda.isCorrosionTaskNoCorrect), style: 'regular'
             },
             this.getLabel('Corrected CPCP Task #:'),
-            this.getFieldValue(sda.correctedCorrosionTaskNo || ' ', 135)
+            this.getFieldValue(sda.correctedCorrosionTaskNo, 135)
           ],
           [
             this.getLabel('Is Corrosion Level correct?'),
@@ -730,12 +730,12 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Engineering Comments'),
-            { ...this.getFieldValue(sda.engineeringComments || ' ', 430), colSpan: 3 },
+            { ...this.getFieldValue(sda.engineeringComments, 430), colSpan: 3 },
             {}, {}
           ],
           [
             this.getLabel('QC Feedback'),
-            { ...this.getFieldValue(sda.qcFeedback || ' ', 430), colSpan: 3 },
+            { ...this.getFieldValue(sda.qcFeedback, 430), colSpan: 3 },
             {}, {}
           ],
           [
@@ -780,33 +780,33 @@ export class SdaExportService {
           }, {}, {}, {}],
           [
             this.getLabel('Engineering Authorization (EA):'),
-            this.getFieldValue(sda.engineeringAuthorization || ' '),
+            this.getFieldValue(sda.engineeringAuthorization),
             this.getLabel('Routine Task Card #:'),
-            this.getFieldValue(sda.routineNo || ' ')
+            this.getFieldValue(sda.routineNo)
           ],
           [
             this.getLabel('Non-Routine #:'),
-            this.getFieldValue(sda.nonRoutineNo || ' '),
+            this.getFieldValue(sda.nonRoutineNo),
             this.getLabel('Externally Visible?'),
             { text: this.getBooleanContent(sda.isExternallyVisible), style: 'regular' }
           ],
           [
             this.getLabel('Repair Document:'),
-            this.getFieldValue(sda.repairDocumentTypeDesc || ' '),
+            this.getFieldValue(sda.repairDocumentTypeDesc),
             this.getLabel('Chap/Fig/Repair:'),
-            this.getFieldValue(sda.chapFigRepairText || ' ')
+            this.getFieldValue(sda.chapFigRepairText)
           ],
           [
             this.getLabel('Repair Description:'),
-            this.getFieldValue(sda.repairDescriptionTypeDesc || ' '),
+            this.getFieldValue(sda.repairDescriptionTypeDesc),
             this.getLabel('Part Nomenclature:'),
-            this.getFieldValue(sda.partDefective || ' ')
+            this.getFieldValue(sda.partDefective)
           ],
           [
             this.getLabel('Part Number:'),
-            this.getFieldValue(sda.manufacturerPartNo || ' '),
+            this.getFieldValue(sda.manufacturerPartNo),
             this.getLabel('Part Serial Number:'),
-            this.getFieldValue(sda.manufacturerSerialNo || ' ')
+            this.getFieldValue(sda.manufacturerSerialNo)
           ],
           [
             this.getLabel('Height(in inches):'),
@@ -839,23 +839,23 @@ export class SdaExportService {
           }, {}, {}, {}],
           [
             this.getLabel('DTE Status:'),
-            this.getFieldValue(sda.dteStatusDesc || ' ')
+            this.getFieldValue(sda.dteStatusDesc)
             , '', ''
           ],
           [
             this.getLabel('Total Ship Time:'),
-            this.getFieldValue(sda.dteTotalShipTime || ' ')
+            this.getFieldValue(sda.dteTotalShipTime)
             , '', ''
           ],
           [
             this.getLabel('Cycles:'),
-            this.getFieldValue(sda.dteCycles || ' ')
+            this.getFieldValue(sda.dteCycles)
 
             , '', ''
           ],
           [
             this.getLabel('Repair Insp. Status:'),
-            this.getFieldValue(sda.repairInspectionStatusDesc || ' ')
+            this.getFieldValue(sda.repairInspectionStatusDesc)
             , '', ''
           ],
           [
@@ -900,15 +900,15 @@ export class SdaExportService {
           ],
           [
             this.getLabel('SR #:'),
-            this.getFieldValue(sda.srNumber || ' '),
+            this.getFieldValue(sda.srNumber),
             this.getLabel('RDAS #:'),
-            this.getFieldValue(sda.rdasNumber || ' ')
+            this.getFieldValue(sda.rdasNumber)
           ],
           [
             this.getLabel('ETD #:'),
-            this.getFieldValue(sda.etdNumber || ' '),
+            this.getFieldValue(sda.etdNumber),
             this.getLabel('ESM Sub/Item #:'),
-            this.getFieldValue(sda.esmSubItemNumber || ' ')
+            this.getFieldValue(sda.esmSubItemNumber)
           ],
           [
             this.getDTEThresholdsConent(sda)
@@ -918,12 +918,12 @@ export class SdaExportService {
           ],
           [
             this.getLabel('DTE Comments:'),
-            { ...this.getFieldValue(sda.dteComments || ' ', 400), colSpan: 3 },
+            { ...this.getFieldValue(sda.dteComments, 400), colSpan: 3 },
             {}, {}
           ],
           [
             this.getLabel('QC Feedback:'),
-            { ...this.getFieldValue(sda.dteqcFeedback || ' ', 400), colSpan: 3 },
+            { ...this.getFieldValue(sda.dteqcFeedback, 400), colSpan: 3 },
             {}, {}
           ],
           [
@@ -946,11 +946,11 @@ export class SdaExportService {
                 body: [
                   [
                     this.getLabel('Major Repair Updated By:'),
-                    this.getFieldValue(sda.dteUpdatedBy || ' ', 75),
+                    this.getFieldValue(sda.dteUpdatedBy, 75),
                     this.getLabel('Major Repair Updated Date:'),
                     this.getFieldValue(sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY hh:mm A') : ' ', 75),
                     this.getLabel('DTE Due Date:'),
-                    this.getFieldValue(sda.dueDate || ' ', 75),
+                    this.getFieldValue(sda.dueDate, 75),
                   ]
                 ]
               }
@@ -1047,7 +1047,7 @@ export class SdaExportService {
     //  {text:_.padEnd(' ',maxLength),decoration:'underline'}
     //]
     return [
-      { text: val, style: 'fieldValue', width: maxLength }
+      { text: val || '', style: 'fieldValue', width: maxLength }
 
     ]
   }
@@ -1058,7 +1058,7 @@ export class SdaExportService {
         this.getLabel(label, labelLength),
         {
           stack: [
-            { text: val, style: 'regular' },
+            { text: val || '', style: 'regular' },
             this.getLine(maxLength)
           ]
         }
@@ -1068,10 +1068,10 @@ export class SdaExportService {
 
   getLabel(label: string, width: number = 0) {
     if (width) {
-      return { text: label, style: 'regular', width: width };
+      return { text: label || '', style: 'regular', width: width };
     }
 
-    return { text: label, style: 'regular' };
+    return { text: label || '', style: 'regular' };
   }
 
   getLine(maxLength: number) {
@@ -1083,7 +1083,7 @@ export class SdaExportService {
       columns: [
         {
           stack: [
-            { text: val, style: 'regular' },
+            { text: val || '', style: 'regular' },
             this.getLine(maxLength)
           ]
         }

@@ -51,10 +51,10 @@ describe('Saved Searches Actions', () => {
 
   it('LoadAircraftInfoAction should handle LOAD_AIRCRAFT_INFO action',
     () => {
-      const action = new selectedAlertActions.LoadAircraftInfoAction('3');
+      const action = new selectedAlertActions.LoadAircraftInfoAction({ noseNumber: '3', flightDate: new Date() });
 
       expect(action.type).toBe(selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO);
-      expect(action.payload).toBe('3');
+      expect(action.payload.noseNumber).toBe('3');
     });
 
   it('LoadAircraftInfoCompleteAction should handle LOAD_AIRCRAFT_INFO_COMPLETE action',

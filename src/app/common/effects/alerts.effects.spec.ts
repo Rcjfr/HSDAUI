@@ -84,7 +84,7 @@ describe('Alerts Effect', () => {
         };
         spyOn(_aircraftService, 'getAircraftInfo')
           .and.returnValue(Observable.of(mockResponse));
-        _runner.queue(new selectedAlert.LoadAircraftInfoAction('A330'));
+        _runner.queue(new selectedAlert.LoadAircraftInfoAction({ noseNumber: 'A330', flightDate: new Date() }));
         _alertEffects.loadAircraftInfo$.subscribe((result: selectedAlert.LoadAircraftInfoCompleteAction) => {
           expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE);
           expect(result.payload).toBeTruthy();
@@ -110,7 +110,7 @@ describe('Alerts Effect', () => {
         };
         spyOn(_aircraftService, 'getAircraftInfo')
           .and.returnValue(Observable.throw('ERROR'));
-        _runner.queue(new selectedAlert.LoadAircraftInfoAction('A330'));
+        _runner.queue(new selectedAlert.LoadAircraftInfoAction({ noseNumber: 'A330', flightDate: new Date() }));
         _alertEffects.loadAircraftInfo$.take(1).subscribe((result: selectedAlert.LoadAircraftInfoFailAction) => {
           expect(result.type).toEqual(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL);
           expect(result.payload).toEqual('Failed to load aircraft information. Please check the aircraft # or try again by clicking refresh button.');
