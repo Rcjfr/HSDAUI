@@ -25,6 +25,11 @@ export const ActionTypes = {
   EXPORT_MRL_PDF_COMPLETE: 'Export Major Repair List PDF Complete',
   EXPORT_MRL_PDF_FAIL: 'Export Major Repair List PDF Fail',
 
+
+  EXPORT_MRL_EXCEL: 'Export Major Repair List Excel',
+  EXPORT_MRL_EXCEL_COMPLETE: 'Export Major Repair List Excel Complete',
+  EXPORT_MRL_EXCEL_FAIL: 'Export Major Repair List Excel Fail',
+
   EXPORT_SDAS: 'Export SDAs',
   EXPORT_SDAS_COMPLETE: 'Export SDAs Complete',
   EXPORT_SDAS_FAIL: 'Export SDAs Fail',
@@ -143,6 +148,23 @@ export class ExportMrlPdfFailAction implements Action {
   constructor(public payload:  any ) { }
 }
 
+
+export class ExportMrlExcelAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_EXCEL;
+  constructor(public payload:  ISearchCriteria ) { }
+}
+
+export class  ExportMrlExcelCompleteAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_EXCEL_COMPLETE;
+  constructor() { }
+}
+
+export class ExportMrlExcelFailAction implements Action {
+  public type = ActionTypes.EXPORT_MRL_EXCEL_FAIL;
+  constructor(public payload:  any ) { }
+}
+
+
 export class ExportSdasAction implements Action {
   public type = ActionTypes.EXPORT_SDAS;
   constructor(public payload: any) { }
@@ -234,6 +256,9 @@ export type Actions =
   ExportMrlPdfAction|
   ExportMrlPdfCompleteAction|
   ExportMrlPdfFailAction|
+  ExportMrlExcelAction|
+  ExportMrlExcelCompleteAction|
+  ExportMrlExcelFailAction|
   ExportSdasAction |
   ExportSdasCompleteAction |
   ExportSdasFailAction |
@@ -251,4 +276,4 @@ export type Actions =
   ExportPDFAction |
   ExportPDFCompleteAction |
   ExportPDFFailAction
-  ;
+;

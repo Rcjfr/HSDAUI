@@ -150,6 +150,54 @@ export class AlertEffects {
         });
     });
 
+
+    @Effect()
+    exportMrlExcel$ = this.actions$
+    .ofType(selectedAlert.ActionTypes.EXPORT_MRL_EXCEL)
+    .map((action: selectedAlert.ExportMrlExcelAction) => action.payload)
+    .switchMap(searchCriteria => {
+       return this.sdaService.exportMrlExcel(searchCriteria)
+              .map(result => {
+                return  new selectedAlert.ExportMrlExcelCompleteAction();
+              })
+        .catch((err) => {
+          if (err.status === 400) {
+
+            return of(new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.'));
+
+           // const reader = new FileReader();
+
+            //return of(new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.'));
+
+            // reader.onload =  () => {
+            //   const message = JSON.parse(reader.result).message;
+            //  // console.log(message)
+            //     if (message === 'Failed to verify Aircraft Nose#') {
+            //       console.log(message);
+
+            //       return of(new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.'));
+
+            //     //  return new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.');
+            //     }
+
+            //    // return new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.');
+            // };
+            // reader.readAsText(err.error);
+            // console.log(reader.result);
+            // const message = JSON.parse(reader.result).message;
+            // if (message === 'Failed to verify Aircraft Nose#') {
+            //         console.log(message);
+
+            //         return of(new selectedAlert.ExportMrlExcelFailAction('Failed to verify Aircraft Nose#. Please check the aircraft Nose # or try again later.'));
+
+            //       }
+
+          }
+
+          return of(new selectedAlert.ExportMrlExcelFailAction('Failed to generate Major Repair List.'));
+        });
+    });
+
   @Effect()
   exportSdas$ = this.actions$
     .ofType(selectedAlert.ActionTypes.EXPORT_SDAS)
@@ -229,6 +277,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
     selectedAlert.ActionTypes.EXPORT_MRL_PDF_FAIL,
+    selectedAlert.ActionTypes.EXPORT_MRL_EXCEL_FAIL,
     selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
     selectedAlert.ActionTypes.EXPORT_SDAS_FAIL,
     selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL,

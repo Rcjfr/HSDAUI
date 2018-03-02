@@ -23,4 +23,9 @@ export class MrlReportMainComponent implements OnInit {
      this.appStateService.loadMajorRepairList(criteria);
   }
 
+  loadMrlExcelData(criteria: ISearchCriteria) {
+
+    this.appStateService.exportMRLExcel(criteria);
+ }
+
 }

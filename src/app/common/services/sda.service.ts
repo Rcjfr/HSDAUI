@@ -55,6 +55,23 @@ export class SdaService {
 
   };
 
+
+  exportMrlExcel(criteria: any): Observable<any> {
+
+    const headers = new HttpHeaders({
+        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
+
+      return this.http.post(this.endPointUrl + '/ExportMrlExcel', criteria,
+        {
+          headers: headers,
+          responseType: 'blob'
+        }).do(blob => {
+          saveAs(new Blob([blob]), 'MRLReport.xlsx');
+        })
+        .mapTo(null);
+  };
+
   getSda(payload: ILoadSda): Observable<models.ISda> {
     let url = `${this.endPointUrl}/${payload.sdaId}`;
     if (payload.original) {

@@ -34,7 +34,8 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
 
   mrlReportSearchForm: FormGroup;
   formSubmitted: boolean;
-  @Output() onShowMrl = new EventEmitter<ISearchCriteria>();
+  @Output() onShowMrlPdf = new EventEmitter<ISearchCriteria>();
+  @Output() onShowMrlExcel = new EventEmitter<ISearchCriteria>();
   loading$: Observable<boolean>;
   noseNumbers$: Observable<models.IAircraftInfo[]>;
   constructor(public appStateService: AppStateService) {
@@ -67,7 +68,7 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
       sortOrder: this.defaultSortOrder
     }
   }
-  showMrlreport() {
+  showMrlreport(isExcel = false ) {
     this.formSubmitted = true;
     this.markAsDirty(this.mrlReportSearchForm);
     if (this.mrlReportSearchForm.valid) {
@@ -75,7 +76,11 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
       this.searchCriteria.searchByDateRange = {dateFrom: this.mrlReportSearchForm.controls.dateFrom.value, dateThrough: this.mrlReportSearchForm.controls.dateThrough.value};
       this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1 , deferralCode: this.mrlReportSearchForm.controls.monStatus.value ? 'MON' : null};
       this.searchCriteria.pageData = this.getDefaultPageData();
-      this.onShowMrl.emit(this.searchCriteria);
+      if (isExcel) {
+        this.onShowMrlExcel.emit(this.searchCriteria);
+      } else {
+        this.onShowMrlPdf.emit(this.searchCriteria);
+      }
     }
   }
 

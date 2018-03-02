@@ -153,6 +153,10 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.ExportMrlPdfAction(criteria));
   }
 
+  exportMRLExcel(criteria): void {
+    this.store.dispatch(new selectedAlertActions.ExportMrlExcelAction(criteria));
+  }
+
   saveSdaSearchCriteria(criteria): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaSearchCriteria(criteria));
   }

@@ -92,6 +92,10 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       {
         return state.merge({ loading: false });
       }
+      case selectedAlertActions.ActionTypes.EXPORT_MRL_EXCEL_COMPLETE:
+      {
+        return state.merge({ loading: false });
+      }
 
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
