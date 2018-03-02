@@ -6,10 +6,10 @@
       </div>
     <div class="col-sm-8">
       <aac-radio-container label="Yes">
-        <input type="radio" [value]="true" tabindex="55" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
+        <input type="radio" [value]="true" tabindex="61" [required]="!isSDAOpen()"  formControlName="isDeferred"/>
       </aac-radio-container>
       <aac-radio-container label="No">
-        <input type="radio" [value]="false" tabindex="55" [required]="!isSDAOpen()" formControlName="isDeferred" />
+        <input type="radio" [value]="false" tabindex="61" [required]="!isSDAOpen()" formControlName="isDeferred" />
       </aac-radio-container>
        <div *ngIf="displayMessage.isDeferred" class="error">{{displayMessage.isDeferred}}</div>
     </div>
@@ -21,14 +21,14 @@
                              helptext="(MON, SAD, ROB, etc)"
                              [required]="isDeferred()"
                              [message]="displayMessage.deferralCode">
-          <input type="text" tabindex='56' class="form-control" [required]="isDeferred()" formControlName="deferralCode">
+          <input type="text" tabindex='62' class="form-control" [required]="isDeferred()" formControlName="deferralCode">
         </aac-field-container>
       </div>
       <div class="col-sm-4">
         <aac-field-container label="Deferral #:"
                              [required]="isDeferred()"
                              [message]="displayMessage.deferralNo">
-          <input type="text" tabindex='57' class="form-control" [required]="isDeferred()" formControlName="deferralNo">
+          <input type="text" tabindex='63' class="form-control" [required]="isDeferred()" formControlName="deferralNo">
         </aac-field-container>
       </div>
     </div>
@@ -44,10 +44,10 @@
       </div>
       <div class="col-sm-8">
         <aac-radio-container label="Yes">
-          <input type="radio" [value]="true" tabindex="70" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+          <input type="radio" [value]="true" tabindex="73" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
         </aac-radio-container>
         <aac-radio-container label="No">
-          <input type="radio" [value]="false" tabindex="70" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
+          <input type="radio" [value]="false" tabindex="73" [required]="!isSDAOpen()" formControlName="isMajorRepair" />
         </aac-radio-container>
         <div *ngIf="displayMessage.isMajorRepair" class="error">{{displayMessage.isMajorRepair}}</div>
       </div>
@@ -60,7 +60,7 @@
                              labelGridColumnWidth="2"
                              [required]="correctiveActionFormGroup.get('isMajorRepair').value === true "
                              [message]="displayMessage.majorRepairDescription">
-          <textarea tabindex='71' class="form-control"
+          <textarea tabindex='74' class="form-control"
                     [required]="correctiveActionFormGroup.get('isMajorRepair').value === true" formControlName="majorRepairDescription"></textarea>
         </aac-field-container>
       </div>
@@ -68,7 +68,7 @@
    <div class="row form-group">
     <div class="col-sm-6">
       <aac-field-container label="Repair Document:" helptext="(eg. SRM, AARD,EO etc)" [message]="displayMessage.repairDocumentType" required="true">
-        <select class="form-control" tabindex='64' id="repairDocumentType" [required]="!isSDAOpen()" formControlName="repairDocumentType">
+        <select class="form-control" tabindex='75' id="repairDocumentType" [required]="!isSDAOpen()" formControlName="repairDocumentType">
           <option value="" selected>Select Repair Document</option>
           <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>

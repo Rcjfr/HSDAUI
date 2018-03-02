@@ -4,7 +4,6 @@
       <aac-field-container label="SDR Number:" [message]="displayMessage.sdrNumber">
         <input type="text" tabindex="1" class="form-control" formControlName="sdrNumber" >
       </aac-field-container>
-
     </div>
     <div class="col-sm-6">
       <aac-checkbox-container label="Line Maintenance">
@@ -17,7 +16,6 @@
       <aac-field-container label="Create Date:" [attr.for]="sdaCreateDate.idDatePicker" [message]="displayMessage.createDate" required="true">
         <datetime [timepicker]="false" #sdaCreateDate [readonly]="disableCreateDate?'':null" [tabindex]='3' formControlName="createDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"></datetime>
       </aac-field-container>
-
     </div>
     <div class="col-sm-6">
       <aac-field-container required="true"

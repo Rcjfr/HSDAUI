@@ -2,19 +2,19 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Engineering Authorization (EA):" [message]="displayMessage.engineeringAuthorization">
-        <input type="text" tabindex='87' class="form-control" formControlName="engineeringAuthorization">
+        <input type="text" tabindex='77' class="form-control" formControlName="engineeringAuthorization">
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Routine Task Card #:" [message]="displayMessage.routineTaskCard">
-        <input type="text" tabindex='88' class="form-control" formControlName="routineTaskCard">
+        <input type="text" tabindex='78' class="form-control" formControlName="routineTaskCard">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Non-Routine #:" [message]="displayMessage.nonRoutine">
-        <input type="text" tabindex='89' class="form-control" formControlName="nonRoutine">
+        <input type="text" tabindex='79' class="form-control" formControlName="nonRoutine">
       </aac-field-container>
     </div>
     <div class="col-sm-6">
@@ -22,10 +22,10 @@
         <label class="col-sm-4 control-label">Externally Visible?</label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="90" formControlName="isExternallyVisible" />
+            <input type="radio" [value]="true" tabindex="80" formControlName="isExternallyVisible" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="90" formControlName="isExternallyVisible" />
+            <input type="radio" [value]="false" tabindex="80" formControlName="isExternallyVisible" />
           </aac-radio-container>
         </div>
       </div>
@@ -34,7 +34,7 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Repair Document:" [message]="displayMessage.repairDocumentType">
-        <select class="form-control" tabindex='91' id="repairDocumentType" formControlName="repairDocumentType">
+        <select class="form-control" tabindex='81' id="repairDocumentType" formControlName="repairDocumentType">
           <option value="">Select</option>
           <option *ngFor="let item of repairDocuments$ | async" [value]="item.id">{{item.description}}</option>
         </select>
@@ -42,7 +42,7 @@
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Chap/Fig/Repair:" [message]="displayMessage.chapFigRepairText">
-        <input type="text" tabindex='92' class="form-control" formControlName="chapFigRepairText">
+        <input type="text" tabindex='82' class="form-control" formControlName="chapFigRepairText">
       </aac-field-container>
     </div>
   </div>
@@ -50,7 +50,7 @@
     <div class="col-sm-6">
       <div>
         <aac-field-container label="Repair Description:" [message]="displayMessage.repairDescriptionType">
-          <select class="form-control" tabindex='93' id="repairDescriptionType" formControlName="repairDescriptionType">
+          <select class="form-control" tabindex='83' id="repairDescriptionType" formControlName="repairDescriptionType">
             <option value="">Select</option>
             <option *ngFor="let item of repairDescriptions$ | async" [value]="item.id">{{item.description}}</option>
           </select>
@@ -59,31 +59,31 @@
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Part Nomenclature:" [message]="displayMessage.partNomenclature">
-        <input type="text" tabindex='94' class="form-control" formControlName="partNomenclature">
+        <input type="text" tabindex='84' class="form-control" formControlName="partNomenclature">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Part Number:" [message]="displayMessage.partNumber">
-        <input type="text" tabindex='95' class="form-control" formControlName="partNumber">
+        <input type="text" tabindex='85' class="form-control" formControlName="partNumber">
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Part Serial Number:" [message]="displayMessage.partSerialNumber">
-        <input type="text" tabindex='96' class="form-control" formControlName="partSerialNumber">
+        <input type="text" tabindex='86' class="form-control" formControlName="partSerialNumber">
       </aac-field-container>
     </div>
   </div>
   <div class="row ">
     <div class="col-sm-6">
       <aac-field-container label="Height(in inches):" [message]="displayMessage.height">
-        <input type="text" tabindex='97' class="form-control" id="height" [textMask]="{mask: numberMask}" formControlName="height">
+        <input type="text" tabindex='87' class="form-control" id="height" [textMask]="{mask: numberMask}" formControlName="height">
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Width(in inches):" [message]="displayMessage.width">
-        <input type="text" tabindex='98' class="form-control" id="width" [textMask]="{mask: numberMask}" formControlName="width">
+        <input type="text" tabindex='88' class="form-control" id="width" [textMask]="{mask: numberMask}" formControlName="width">
       </aac-field-container>
     </div>
   </div>
