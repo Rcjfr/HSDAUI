@@ -25,9 +25,9 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
     this.formGroup = this.fb.group({
       damageType: ['', [Validators.required, Validators.maxLength(250)]],
       damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
-      length: ['', [Validators.required]],
-      width: ['', [Validators.required]],
-      depth: ['', [Validators.required]],
+      length: [null, [Validators.required]],
+      width: [null, [Validators.required]],
+      depth: [null, [Validators.required]],
       manufacturerPartNo: ['', [Validators.maxLength(100)]],
       partDefective: ['', [Validators.required, Validators.maxLength(100)]],
       manufacturerSerialNo: ['', [Validators.maxLength(100)]],
