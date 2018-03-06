@@ -59,12 +59,11 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-    const createDateControl = this.generalSectionFormGroup.get('createDate');
-    createDateControl.valueChanges.subscribe(v => {
-      if (!this.disableCreateDate && !createDateControl.errors) {
-        this.populateAircraftInfo(this.noseNumber);
-      }
-    });
+    //UNCOMMENT when we have historical time/cycles
+    //const createDateControl = this.generalSectionFormGroup.get('createDate');
+    //createDateControl.valueChanges.subscribe(v => {
+    //  this.populateAircraftInfo(this.noseNumber);
+    //});
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
     })
@@ -108,6 +107,9 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   }
 
   populateAircraftInfo(noseNumber: string) {
+    if (this.generalSectionFormGroup.get('createDate').disabled) {
+      return;
+    }
     this.noseNumber = noseNumber;
     this.appStateService.loadAircraftInfo(noseNumber, this.generalSectionFormGroup.get('createDate').value);
   }

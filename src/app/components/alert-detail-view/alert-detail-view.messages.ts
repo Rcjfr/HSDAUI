@@ -104,6 +104,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'unscheduledMaintenanceGroup': {
         atleastone: 'Non-Routine # or MIC # is required.',
         'unscheduledMaintenanceDescription': {
+          maxlength: 'Description must not be more than 250 characters.',
           required: 'Description is required.'
         },
         'nonRoutineNo': {
@@ -235,7 +236,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     causeOfDamageGroup: {
       atleastone: 'At least one cause of damage must be selected',
       causeOfDamageDescriptionGroup: {
-        'damageDescription': {
+        'causeOfDamageOtherText': {
           required: 'Description is required.',
           maxlength: 'Description must not be more than 250 characters.'
         }

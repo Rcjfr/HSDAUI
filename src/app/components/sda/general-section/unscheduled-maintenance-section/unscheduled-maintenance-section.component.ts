@@ -15,7 +15,7 @@ export class UnscheduledMaintenanceSectionComponent extends BaseFormComponent im
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('unscheduledMaintenanceGroup', authService);
     this.formGroup = this.fb.group({
-      unscheduledMaintenanceDescription: ['', [Validators.required]],
+      unscheduledMaintenanceDescription: ['', [Validators.required, Validators.maxLength(250)]],
       nonRoutineNo: ['', [Validators.maxLength(50)]],
       micNo: ['', [Validators.maxLength(50)]]
     },

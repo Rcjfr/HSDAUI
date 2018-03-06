@@ -13,11 +13,9 @@ import { AuthService } from '@app/common/services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CauseOfDamageGroupComponent extends BaseFormComponent implements OnDestroy, OnInit, OnChanges {
-  causeOfDamageGroup: FormGroup;
-
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('causeOfDamageGroup', authService);
-    this.causeOfDamageGroup = this.fb.group({
+    this.formGroup = this.fb.group({
       status: [''],
       environment: ['', []],
       galleySpill: ['', []],
@@ -34,14 +32,14 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
   }
 
   ngOnInit() {
-    this.parent.addControl(this.formGroupName, this.causeOfDamageGroup);
+    this.parent.addControl(this.formGroupName, this.formGroup);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
       if (newSda.cpcpSection) {
-        this.causeOfDamageGroup.patchValue({
+        this.formGroup.patchValue({
           environment: this.isChecked(newSda.cpcpSection.causesOfDamage, 1),
           galleySpill: this.isChecked(newSda.cpcpSection.causesOfDamage, 2),
           blockedDrain: this.isChecked(newSda.cpcpSection.causesOfDamage, 4),
@@ -57,12 +55,12 @@ export class CauseOfDamageGroupComponent extends BaseFormComponent implements On
 
     }
     if (changes.newSdaStus) {
-      this.causeOfDamageGroup.patchValue({ status: changes.newSdaStus.currentValue });
+      this.formGroup.patchValue({ status: changes.newSdaStus.currentValue });
     }
   }
 
   isChecked(val: number, check: number) {
-    /* tslint:disable */ return val & check; /* tslint:disable */
+    /* tslint:disable */ return !!(val & check); /* tslint:disable */
   }
   ngOnDestroy(): void {
     super.ngOnDestroy();

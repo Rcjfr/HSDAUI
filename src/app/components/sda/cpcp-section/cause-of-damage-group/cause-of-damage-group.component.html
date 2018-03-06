@@ -1,4 +1,4 @@
-<div [formGroup]="causeOfDamageGroup">
+<div [formGroup]="formGroup">
   
   <h4>Cause of Damage:</h4>
   <div class="row form-group">
@@ -67,17 +67,16 @@
       
       <div>
         <span *ngIf="displayMessage.message &&
-                  (causeOfDamageGroup.get( 'damageOther').touched ||
-                   causeOfDamageGroup.get('damageOther').dirty) "
+                  (formGroup.get( 'damageOther').touched ||
+                   formGroup.get('damageOther').dirty) "
               class="error">{{displayMessage.message}}</span>
       </div>
     </div>
     <div class="col-sm-8">
-      <aa-cause-of-damage-description *ngIf="causeOfDamageGroup.get('damageOther').value == true"
-                                       [parent]="causeOfDamageGroup"
-                                       [sda]="sda"
-                                       [errorMessages]="displayMessage"
-                                       >
+      <aa-cause-of-damage-description *ngIf="formGroup.get('damageOther').value == true"
+                                      [parent]="formGroup"
+                                      [sda]="sda"
+                                      [errorMessages]="displayMessage">
 
       </aa-cause-of-damage-description>
     </div>
