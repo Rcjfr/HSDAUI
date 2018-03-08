@@ -165,9 +165,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let attachment of getAttachments().controls;let j=index">
-            <td><strong>
-              <a (click)="downloadAttachment(sda.id, attachment.get('attachmentPath').value, attachment.get('attachmentName').value)" href="{{hsdaApiBaseUrl}}sda/{{sda.id}}/attachments/{{attachment.get('attachmentPath').value}}/{{ attachment.get('attachmentName').value }}" target="_blank">{{ attachment.get('attachmentName').value }}</a>
-              </strong></td>
+            <td>
+              <strong>
+                <a (click)="downloadAttachment(sda.id, attachment.get('attachmentPath').value, attachment.get('attachmentName').value)" href="{{hsdaApiBaseUrl}}sda/{{sda.id}}/attachments/{{attachment.get('attachmentPath').value}}/{{ attachment.get('attachmentName').value }}" target="_blank">{{ attachment.get('attachmentName').value }}</a>
+              </strong>
+            </td>
             <td nowrap>{{ attachment.get('attachmentSize').value | byteFmt: 2 }}</td>
             <td nowrap>
               <button type="button" class="btn btn-danger btn-xs"
@@ -178,12 +180,9 @@
           </tr>
         </tbody>
       </table>
-      <div class="progress" *ngIf="uploader.progress > 0 && uploader.progress < 100">
-        <div class="progress-bar"  role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-      </div>
       <div>
         <label class="btn btn-primary btn-file" *ngIf="editable" [tabindex]="125">
-          Add Attachment <input type="file"  ng2FileSelect [uploader]="uploader" style="display: none;">
+          Add Attachment <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
         </label>
       </div>
 
@@ -193,13 +192,13 @@
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container class="col-sm-12 padding-0" label="Major Repair Updated By:" [message]="displayMessage.updatedBy">
-        <div padding-0 >
+        <div padding-0>
           <div class="col-sm-4 padding-0">
-            <input type="text"  class="form-control" tabindex="126" formControlName="updatedByEmpID" placeholder="Employee ID" >
-           </div>
-           <div class="col-sm-2 padding-0 width-20">_</div>
-           <div class="col-sm-6 padding-0">
-            <input type="text"  class="form-control" tabindex="127"  placeholder="Last Name, First Name" formControlName="updatedByName" >
+            <input type="text" class="form-control" tabindex="126" formControlName="updatedByEmpID" placeholder="Employee ID">
+          </div>
+          <div class="col-sm-2 padding-0 width-20">_</div>
+          <div class="col-sm-6 padding-0">
+            <input type="text" class="form-control" tabindex="127" placeholder="Last Name, First Name" formControlName="updatedByName">
           </div>
         </div>
       </aac-field-container>

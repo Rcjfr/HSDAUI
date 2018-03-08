@@ -199,7 +199,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'detectionMethodOtherDescription': {
       required: 'Detection Method(Other) description is required.',
-      maxlength: 'Detection Method(Other) description must not be more than 50 characters.'
+      maxlength: 'Detection Method(Other) description must not be more than 250 characters.'
 
     }
 
@@ -255,7 +255,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'deferralNo': {
       required: 'Deferral #  is required.',
       pattern: 'Deferral # must be alphanumeric.',
-      maxlength: 'Deferral # must not be more than 15 characters. '
+      maxlength: 'Deferral # must not be more than 50 characters. '
     },
     'isMajorRepair': {
       required: 'Major Repair is required.'
@@ -270,7 +270,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     'correctiveActionChapFormGroup': {
       'chapFigRepairText': {
         required: 'Chap/Fig/Repair is required.',
-        maxlength: 'Chap/Fig/Repair must not be more than 50 characters.',
+        maxlength: 'Chap/Fig/Repair must not be more than 100 characters.',
       }
     },
     'correctiveActionOptionFormGroup': {
@@ -280,13 +280,13 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       'modifiedPartDescriptionGroup': {
         'modifiedPartDescription': {
           required: 'Description is required.',
-          maxlength: 'Description must not be more than 100 characters.',
+          maxlength: 'Description must not be more than 250 characters.',
         }
       },
       'defectivePartDescriptionGroup': {
         'defectivePartDescription': {
           required: 'Description is required.',
-          maxlength: 'Description must not be more than 100 characters.',
+          maxlength: 'Description must not be more than 250 characters.',
           pattern: 'Description must be alphanumeric.'
         }
       },
@@ -297,11 +297,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'repairDescriptionOtherText': {
           required: 'EmpowerMX Description is required.',
-          maxlength: 'EmpowerMX Description must not be more than 50 characters.',
+          maxlength: 'EmpowerMX Description must not be more than 250 characters.',
         },
         'engineeringAuthorization': {
 
-          maxlength: 'Engineering  Authorization must not be more than 50 characters.',
+          maxlength: 'Engineering  Authorization must not be more than 100 characters.',
           pattern: 'Engineering  Authorization must be alphanumeric.'
 
         },

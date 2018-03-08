@@ -17,7 +17,7 @@ export class ModifiedPartDescriptionComponent extends BaseFormComponent implemen
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('modifiedPartDescriptionGroup', authService);
     this.modifiedPartDescriptionGroup = this.fb.group({
-      modifiedPartDescription: ['', [Validators.maxLength(30), Validators.required]]
+      modifiedPartDescription: ['', [Validators.maxLength(250), Validators.required]]
     });
   }
   ngOnChanges(changes: SimpleChanges) {

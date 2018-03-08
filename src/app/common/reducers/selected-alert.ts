@@ -15,6 +15,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
+  loadingText: string;
   savedState: ISavedStateRecord,
   currentSdaId: number;
   loadNewSdaCounter: number,
@@ -30,6 +31,7 @@ export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
+  loadingText: 'Loading',
   savedState: null,
   loadNewSdaCounter: 0,
   currentSdaId: 0,
@@ -55,10 +57,17 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_SDA:
     case selectedAlertActions.ActionTypes.LOAD_SDAS:
     case selectedAlertActions.ActionTypes.EXPORT_SDAS:
-    case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT:
     case selectedAlertActions.ActionTypes.EXPORT_PDF:
       {
-        return state.merge({ loading: true });
+        return state.merge({ loading: true, loadingText: 'Loading' });
+      }
+    case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT:
+      {
+        return state.merge({ loading: true, loadingText: 'Downloading' });
+      }
+    case selectedAlertActions.ActionTypes.UPLOAD_ATTACHMENT:
+      {
+        return state.merge({ loading: true, loadingText: 'Uploading' });
       }
     case selectedAlertActions.ActionTypes.LOAD_NEW_SDA:
       {
@@ -79,7 +88,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
       }
     case selectedAlertActions.ActionTypes.EXPORT_SDAS_COMPLETE:
       {
-        return state.merge({ loading: false});
+        return state.merge({ loading: false });
       }
     case selectedAlertActions.ActionTypes.LOAD_SDAS_COMPLETE:
       {
@@ -88,11 +97,11 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
         return state.merge({ loading: false, sdaListResult: SdaListResultFactory(act.payload) });
       }
 
-      case selectedAlertActions.ActionTypes.EXPORT_MRL_PDF_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_MRL_PDF_COMPLETE:
       {
         return state.merge({ loading: false });
       }
-      case selectedAlertActions.ActionTypes.EXPORT_MRL_EXCEL_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_MRL_EXCEL_COMPLETE:
       {
         return state.merge({ loading: false });
       }
@@ -106,6 +115,7 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL:
     case selectedAlertActions.ActionTypes.SAVE_SDA_FAIL:
     case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT_COMPLETE:
+    case selectedAlertActions.ActionTypes.UPLOAD_ATTACHMENT_COMPLETE:
     case selectedAlertActions.ActionTypes.EXPORT_PDF_COMPLETE:
       {
         return state.merge({ loading: false });
@@ -163,4 +173,5 @@ export const getNoseNumbers = (state: State) => state.noseNumbers;
 export const getChangeLog = (state: State) => state.changeLogs;
 export const getSearchCriteria = (state: State) => state.searchCriteria;
 export const getNewSdaStatus = (state: State) => state.newSdaStatus;
+export const getLoadingText = (state: State) => state.loadingText;
 

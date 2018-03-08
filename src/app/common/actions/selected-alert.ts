@@ -48,6 +48,10 @@ export const ActionTypes = {
   LOAD_CHANGE_LOG_COMPLETE: 'Load Change log Info complete',
   LOAD_CHANGE_LOG_FAIL: 'Load Change log Info fail',
 
+  UPLOAD_ATTACHMENT: 'Upload SDA Attachment',
+  UPLOAD_ATTACHMENT_COMPLETE: 'Upload SDA Attachment complete',
+  UPLOAD_ATTACHMENT_FAIL: 'Upload SDA Attachment fail',
+
   DOWNLOAD_ATTACHMENT: 'Download SDA Attachment',
   DOWNLOAD_ATTACHMENT_COMPLETE: 'Download SDA Attachment complete',
   DOWNLOAD_ATTACHMENT_FAIL: 'Download SDA Attachment fail',
@@ -208,6 +212,21 @@ export class SaveSdaSearchCriteria implements Action {
   constructor(public payload: ISearchCriteria) { }
 }
 
+export class UploadAttachmentAction implements Action {
+  public type = ActionTypes.UPLOAD_ATTACHMENT;
+  constructor() { }
+}
+
+export class UploadAttachmentCompleteAction implements Action {
+  public type = ActionTypes.UPLOAD_ATTACHMENT_COMPLETE;
+  public payload: any;
+  constructor() { }
+}
+export class UploadAttachmentFailAction implements Action {
+  public type = ActionTypes.UPLOAD_ATTACHMENT_FAIL;
+  constructor(public payload: any) { }
+}
+
 export class DownloadAttachmentAction implements Action {
   public type = ActionTypes.DOWNLOAD_ATTACHMENT;
   constructor(public payload: IDownloadAttachment) { }
@@ -273,6 +292,9 @@ export type Actions =
   DownloadAttachmentAction |
   DownloadAttachmentCompleteAction |
   DownloadAttachmentFailAction |
+  UploadAttachmentAction |
+  UploadAttachmentCompleteAction |
+  UploadAttachmentFailAction |
   ExportPDFAction |
   ExportPDFCompleteAction |
   ExportPDFFailAction

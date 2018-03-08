@@ -1,4 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppStateService } from '@app/common/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'aac-loading',
@@ -6,10 +8,11 @@
   styleUrls: ['./loading.component.less']
 })
 export class LoadingComponent implements OnInit {
-
-  constructor() { }
+  public loadingText$: Observable<string>;
+  constructor(private appStateService: AppStateService) { }
 
   ngOnInit() {
+    this.loadingText$ = this.appStateService.getLoadingText();
   }
 
 }

@@ -155,7 +155,7 @@ describe('Alerts Effect', () => {
         _runner.queue(new selectedAlert.SaveSdaAction(mockResponse));
         _alertEffects.saveSda$.subscribe((result: selectedAlert.SaveSdaFailAction) => {
           expect(result.type).toEqual(selectedAlert.ActionTypes.SAVE_SDA_FAIL);
-          expect(result.payload).toEqual('Failed to save SDA.');
+          expect(result.payload).toContain('Failed to save SDA.');
         });
       })
   );

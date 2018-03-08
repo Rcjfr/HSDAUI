@@ -16,7 +16,7 @@ export class PreciseLocationGroupComponent extends BaseFormComponent implements 
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('preciseLocationGroup', authService);
     this.preciseLocationGroup = this.fb.group({
-      aircraftStation: ['', [Validators.maxLength(50)]],
+      aircraftStation: ['', [Validators.maxLength(100)]],
       stringer: ['', [Validators.maxLength(100)]],
       waterLine: ['', [Validators.maxLength(100)]],
       buttLine: ['', [Validators.maxLength(100)]]

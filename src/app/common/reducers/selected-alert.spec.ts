@@ -14,6 +14,7 @@ import { ISearchCriteria } from '@app/common/models/search/search-criteria.model
 describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
+    loadingText: 'Loading',
     savedState: SavedStateFactory(),
     currentSdaId: 0,
     loadNewSdaCounter: 0,

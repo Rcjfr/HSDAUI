@@ -30,7 +30,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   dteStatus$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  public uploader = new FileUploader({ autoUpload: true });
+  public uploader = new FileUploader({ autoUpload: true, maxFileSize: 5 * 1024 * 1024 });
   displayName: string;
   createNumberMask = createNumberMask;
   public hsdaApiBaseUrl = environment.hsdaApiBaseUrl;
@@ -93,11 +93,17 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
+      this.appStateService.uploadAttachment();
+    };
+    this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+      console.log('Error during attachment upload.Please try again.', response);
+      this.appStateService.uploadAttachmentFail('Error during attachment upload.Please try again.');
     };
     this.uploader.onCompleteItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       const arr = this.getAttachments();
       const responseData = JSON.parse(response);
       arr.push(this.initAttachment(item.file.name, item.file.size, responseData[0]));
+      this.appStateService.uploadAttachmentComplete();
     };
     this.parent.addControl(this.formGroupName, this.formGroup);
     const dteStatusControl = this.formGroup.get('dteStatus');

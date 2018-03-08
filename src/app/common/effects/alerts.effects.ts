@@ -83,7 +83,7 @@ export class AlertEffects {
           return new selectedAlert.SaveSdaCompleteAction({ sda: updatedSda, sdaId: updatedSda.id, newSda: !sda.id, Timestamp: new Date() });
         })
         .catch((err) => {
-          return of(new selectedAlert.SaveSdaFailAction('Failed to save SDA.'));
+          return of(new selectedAlert.SaveSdaFailAction(`Failed to save SDA.${err.error || 'Please contact application administrator.'}`));
         });
     });
 
@@ -281,6 +281,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
     selectedAlert.ActionTypes.EXPORT_SDAS_FAIL,
     selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL,
+    selectedAlert.ActionTypes.UPLOAD_ATTACHMENT_FAIL,
     selectedAlert.ActionTypes.EXPORT_PDF_FAIL
     )
     .switchMap((action: Action) => {

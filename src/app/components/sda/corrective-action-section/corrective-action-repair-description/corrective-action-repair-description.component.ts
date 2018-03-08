@@ -26,8 +26,8 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     this.correctiveActionRepairDescriptionFormGroup = this.fb.group({
       status: ['', []],
       repairDescriptionType: ['', []], //Validators.required
-      repairDescriptionOtherText: ['', [Validators.maxLength(50)]],
-      engineeringAuthorization: ['', [Validators.maxLength(50), Validators.pattern(Expressions.Alphanumerics)]],
+      repairDescriptionOtherText: ['', [Validators.maxLength(250)]],
+      engineeringAuthorization: ['', [Validators.maxLength(100), Validators.pattern(Expressions.Alphanumerics)]],
       isExternallyVisible: ['', []], //Validators.required
       repairHeight: ['', []],
       repairWidth: ['', []]

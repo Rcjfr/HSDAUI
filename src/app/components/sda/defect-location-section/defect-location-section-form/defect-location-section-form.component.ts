@@ -23,7 +23,7 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
   constructor(private fb: FormBuilder, private appStateService: AppStateService, authService: AuthService) {
     super('defectLocationSectionFormGroup', authService);
     this.formGroup = this.fb.group({
-      damageType: ['', [Validators.required, Validators.maxLength(250)]],
+      damageType: ['', [Validators.required]],
       damageDescription: ['', [Validators.required, Validators.maxLength(250)]],
       length: [null, [Validators.required]],
       width: [null, [Validators.required]],
@@ -34,7 +34,7 @@ export class DefectLocationSectionFormComponent extends BaseFormComponent implem
       partTT: ['', [Validators.maxLength(25), Validators.pattern(Expressions.Numerics)]],
       partTSO: ['', [Validators.pattern(Expressions.Numerics), Validators.maxLength(25)]],
       detectionMethod: ['', [Validators.required, Validators.pattern(Expressions.Alphanumerics)]],
-      detectionMethodOtherDescription: ['', [Validators.maxLength(50)]]
+      detectionMethodOtherDescription: ['', [Validators.maxLength(250)]]
     });
   }
   ngOnChanges(changes: SimpleChanges) {

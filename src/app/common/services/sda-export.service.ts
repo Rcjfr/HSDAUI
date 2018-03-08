@@ -1047,7 +1047,7 @@ export class SdaExportService {
     //  {text:_.padEnd(' ',maxLength),decoration:'underline'}
     //]
     return [
-      { text: val || '', style: 'fieldValue', width: maxLength }
+      { text: val || ' ', style: 'fieldValue', width: maxLength }
 
     ]
   }
@@ -1058,7 +1058,7 @@ export class SdaExportService {
         this.getLabel(label, labelLength),
         {
           stack: [
-            { text: val || '', style: 'regular' },
+            { text: val || ' ', style: 'regular' },
             this.getLine(maxLength)
           ]
         }
@@ -1068,10 +1068,10 @@ export class SdaExportService {
 
   getLabel(label: string, width: number = 0) {
     if (width) {
-      return { text: label || '', style: 'regular', width: width };
+      return { text: label || ' ', style: 'regular', width: width };
     }
 
-    return { text: label || '', style: 'regular' };
+    return { text: label || ' ', style: 'regular' };
   }
 
   getLine(maxLength: number) {
@@ -1083,7 +1083,7 @@ export class SdaExportService {
       columns: [
         {
           stack: [
-            { text: val || '', style: 'regular' },
+            { text: val || ' ', style: 'regular' },
             this.getLine(maxLength)
           ]
         }

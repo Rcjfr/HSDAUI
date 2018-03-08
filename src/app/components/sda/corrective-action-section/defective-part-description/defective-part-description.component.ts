@@ -17,7 +17,7 @@ export class DefectivePartDescriptionComponent extends BaseFormComponent impleme
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('defectivePartDescriptionGroup', authService);
     this.defectivePartDescriptionGroup = this.fb.group({
-      defectivePartDescription: ['', [Validators.maxLength(30), Validators.required]]
+      defectivePartDescription: ['', [Validators.maxLength(250), Validators.required]]
     });
   }
   ngOnChanges(changes: SimpleChanges) {

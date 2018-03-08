@@ -165,6 +165,16 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.ExportSdasAction(criteria));
   }
 
+  uploadAttachment(): void {
+    this.store.dispatch(new selectedAlertActions.UploadAttachmentAction());
+  }
+  uploadAttachmentComplete(): void {
+    this.store.dispatch(new selectedAlertActions.UploadAttachmentCompleteAction());
+  }
+  uploadAttachmentFail(message: string): void {
+    this.store.dispatch(new selectedAlertActions.UploadAttachmentFailAction(message));
+  }
+
 
   loadSda(payload: number | ILoadSda): void {
     const pl = typeof payload === 'number' ? { sdaId: payload, version: 0, original: false } : payload;
@@ -215,7 +225,9 @@ export class AppStateService {
   getNewSdaStatus() {
     return this.store.select(fromRoot.getNewSdaStatus);
   }
-
+  getLoadingText() {
+    return this.store.select(fromRoot.getLoadingText);
+  }
   getSdaLoading() {
     return Observable.combineLatest(
       this.getLookupDataLoading(),

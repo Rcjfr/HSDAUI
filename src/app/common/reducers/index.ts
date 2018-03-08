@@ -41,6 +41,7 @@ export const getNoseNumbers = compose(fromSelectedAlert.getNoseNumbers, getSelec
 export const getChangeLog = compose(fromSelectedAlert.getChangeLog, getSelectedAlertState);
 export const getCurrentSdaId = compose(fromSelectedAlert.getCurrentSdaId, getSelectedAlertState);
 export const getNewSdaStatus = compose(fromSelectedAlert.getNewSdaStatus, getSelectedAlertState);
+export const getLoadingText = compose(fromSelectedAlert.getLoadingText, getSelectedAlertState);
 
 export const getLookupDataLoading = compose(fromLookupData.getLoading, getLookupDataState);
 export const getAlertCodes = compose(fromLookupData.getAlertCodes, getLookupDataState);
