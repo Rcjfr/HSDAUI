@@ -29,15 +29,15 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       isCorrosionLevelCorrect: [undefined, []],
       correctedCorrosionLevel: [undefined, []],
       isCorrosionTaskNoCorrect: [undefined, []],
-      correctedCorrosionTaskNo: [undefined, []],
+      correctedCorrosionTaskNo: [undefined, [Validators.maxLength(25)]],
       corrosionLevelChangeReason: [undefined, []],
       corrosionLevelChangeReasonOtherText: ['', [Validators.maxLength(250)]],
 
-      engineeringComments: ['', []],
-      qcFeedback: ['', []],
+      engineeringComments: ['', [Validators.maxLength(500)]],
+      qcFeedback: ['', [Validators.maxLength(500)]],
       isReviewComplete: [false, []],
       reviewer: ['', [Validators.maxLength(50)]],
-      reviewerBadgeNo: ['', [Validators.maxLength(50)]],
+      reviewerBadgeNo: ['', [Validators.maxLength(10)]],
       submittedToQC: [false, []]
     });
   }

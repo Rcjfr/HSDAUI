@@ -220,7 +220,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     corrosionTaskNo: {
       required: 'Corrosion Task # required.',
       pattern: 'Corrosion Task # must be alphanumeric.',
-      maxlength: 'Corrosion Task # must not be more than 25 numbers.'
+      maxlength: 'Corrosion Task # must not be more than 25 characters.'
 
     },
     corrosionType: {
@@ -228,7 +228,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     corrosionTypeOtherText: {
       required: 'Description is  required.',
-      maxlength: 'Description must be not more than 250 numbers.'
+      maxlength: 'Description must be not more than 250 characters.'
     },
     floorBoardCondition: {
       //  required: ' Floorboard condition after mat is removed is  required.',
@@ -384,14 +384,19 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'engineeringComments': {
       required: 'Engineering Comments is required.',
-      maxlength: 'Engineering Comments must not be more than 250 characters.'
+      maxlength: 'Engineering Comments must not be more than 500 characters.'
     },
     'qcFeedback': {
       required: 'QC Feedback is required.',
-      maxlength: 'QC Feedback must not be more than 250 characters.'
+      maxlength: 'QC Feedback must not be more than 500 characters.'
     },
     'reviewer': {
-      maxlength: 'Review Complete must not be more than 50 characters.'
+      maxlength: 'Reviewer must not be more than 50 characters.',
+      required: 'Reviewer is required.'
+    },
+    'reviewerBadgeNo': {
+      maxlength: 'Reviewer BadgeNo must not be more than 10 characters.',
+      required: 'Reviewer BadgeNo is required.'
     }
 
   },

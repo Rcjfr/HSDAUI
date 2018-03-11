@@ -105,7 +105,7 @@ export class AlertEffects {
     .withLatestFrom(this.appStateService.getSearchCriteria())
     .switchMap(([payload, searchCriteria]) => {
       const criteria = searchCriteria.toJS();
-      criteria.PageData = payload;
+      criteria.pageData = payload;
 
       return this.sdaService.searchSda(criteria)
         .map((data: models.ISdaListResult) => {

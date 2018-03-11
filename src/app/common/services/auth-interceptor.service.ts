@@ -21,7 +21,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         .do((event) => {
           if (event instanceof HttpResponse) {
             //Checking for 200 and empty body because SiteMinder is blocking the POST request
-            if (event.status === 302 || (event.status === 200 && !event.body)) {
+            if (event.status === 302 || !event.body) {
               this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
               setTimeout(() => location.reload(true), 1000);
 
@@ -38,7 +38,14 @@ export class AuthInterceptorService implements HttpInterceptor {
           // so for now,just capturing status == 0
           // any suggestions?
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 0) {
+            //"Unexpected token < in JSON at position 0"[this happens when SM redirects an AJAX call to SM login page]
+            if (!err.ok ||
+              err.status === 0 ||
+              err.message.indexOf('parsing') || //"Http failure during parsing for https://hsda.stage.techops.aa.com/api/sda/search"
+              (err.error.error &&
+                err.error.error.message &&
+                err.error.error.message.indexOf('JSON'))
+            ) {
               this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
               setTimeout(() => location.reload(true), 1000);
 

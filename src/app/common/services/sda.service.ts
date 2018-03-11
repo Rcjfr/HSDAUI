@@ -11,6 +11,7 @@ import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ResponseContentType } from '@angular/http';
 import { IReportOption, ReportOptions } from '@app/components/search/search-report/options';
 import { saveAs } from 'file-saver';
+import { of } from 'rxjs/observable/of';
 @Injectable()
 export class SdaService {
 
@@ -29,6 +30,18 @@ export class SdaService {
   };
 
   searchSda(criteria: any, exportToExcel: boolean = false): Observable<ISdaListResult> {
+    let hasSearchCriteria = false;
+    for (const propertyName in criteria) {
+      if (typeof criteria[propertyName] !== 'undefined' &&
+        propertyName.indexOf('search') > -1) {
+        hasSearchCriteria = true;
+        break;
+      }
+    }
+    if (!hasSearchCriteria) {
+      return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
+    }
+
     if (exportToExcel) {
       if (!criteria.reportColumns || criteria.reportColumns.length === 0) {
         criteria.reportColumns = ReportOptions;
@@ -52,24 +65,23 @@ export class SdaService {
     }
 
     return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
-
   };
 
 
   exportMrlExcel(criteria: any): Observable<any> {
 
     const headers = new HttpHeaders({
-        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      });
+      'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    });
 
-      return this.http.post(this.endPointUrl + '/ExportMrlExcel', criteria,
-        {
-          headers: headers,
-          responseType: 'blob'
-        }).do(blob => {
-          saveAs(new Blob([blob]), 'MRLReport.xlsx');
-        })
-        .mapTo(null);
+    return this.http.post(this.endPointUrl + '/ExportMrlExcel', criteria,
+      {
+        headers: headers,
+        responseType: 'blob'
+      }).do(blob => {
+        saveAs(new Blob([blob]), 'MRLReport.xlsx');
+      })
+      .mapTo(null);
   };
 
   getSda(payload: ILoadSda): Observable<models.ISda> {
