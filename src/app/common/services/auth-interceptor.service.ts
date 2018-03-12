@@ -39,13 +39,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           // any suggestions?
           if (err instanceof HttpErrorResponse) {
             //"Unexpected token < in JSON at position 0"[this happens when SM redirects an AJAX call to SM login page]
-            if (!err.ok ||
-              err.status === 0 ||
-              err.message.indexOf('parsing') || //"Http failure during parsing for https://hsda.stage.techops.aa.com/api/sda/search"
-              (err.error.error &&
-                err.error.error.message &&
-                err.error.error.message.indexOf('JSON'))
-            ) {
+            if (err.status === 302 || err.status === 200 || err.status === 0) {
               this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
               setTimeout(() => location.reload(true), 1000);
 
