@@ -399,7 +399,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveCPCPSectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
-    this.sda.statusUpdatedOn = this.statusUpdatedOn;
+    this.sda.statusUpdatedOn = new Date();
     this.sda.comments = 'Update CPCP Disposition Section Details';
     this.validateSdaForm();
     if (!this.sdaForm.get('cpcpDispositionSectionFormGroup').valid) {
@@ -417,7 +417,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveDTESectionDetails = true;
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
-    this.sda.statusUpdatedOn = this.statusUpdatedOn;
+    this.sda.statusUpdatedOn = new Date();
     this.sda.comments = 'Update Damage Tolerance Evaluation Details';
     this.validateSdaForm();
     if (!this.sdaForm.get('damageToleranceEvaluationGroup').valid) {
