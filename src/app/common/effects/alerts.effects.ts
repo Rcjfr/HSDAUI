@@ -125,7 +125,10 @@ export class AlertEffects {
        return this.sdaService.searchSda(searchCriteria)
         .switchMap((searchResult: models.ISdaListResult) => {
             if (searchResult.records.length === 0) {
-              return this.aircraftService.getAircraftInfo(searchCriteria.searchByAircraft.aircraftNo)
+
+              const aircraftPayload: IAircraftInfoPayload = {noseNumber: searchCriteria.searchByAircraft.aircraftNo, flightDate: new Date() }
+
+              return this.aircraftService.getAircraftInfo(aircraftPayload)
               .switchMap((aircraftInfo: models.IAircraftInfo) => {
                     this.mrlExportService.exportMrlPdf(searchResult);
 
