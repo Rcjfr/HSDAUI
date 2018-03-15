@@ -3,20 +3,23 @@
 /*************************************************************
 // OFF-CANVAS MENU STYLES
 *************************************************************/
-@navbar-aa-height: 55px;
+@navbar-aa-height: 40px;
 @navbar-aa-icon-width: 20px;
 @zindex-navbar: 1;
 
 .aa-brand {
   font-size: 28px;
-  height:40px;
+  height: @navbar-aa-height;
+  min-height: @navbar-aa-height;
+  max-height: @navbar-aa-height;
   /*width:324px;*/
   background: url('../../../assets/aa-logo-hc.png');
   background-size: 220px 34px;
   background-repeat: no-repeat;
-  padding-left:218px;
+  padding-left: 218px;
   margin: 5px;
   margin-left: -5px !important;
+
   img {
     display: inline;
   }
@@ -97,10 +100,11 @@
 }
 
 
-@media (max-width:480px) {
-  .aa-brand  {
-    margin-left:5px !important;
+@media (max-width:1700px) {
+  .aa-brand {
+    margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -110,10 +114,11 @@
   }
 }
 
-@media (max-width:400px) {
+@media (max-width:1700px) {
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -127,6 +132,7 @@
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -140,6 +146,7 @@
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -153,6 +160,7 @@
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -166,6 +174,7 @@
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
@@ -179,11 +188,65 @@
   .aa-brand {
     margin-left: 5px !important;
   }
+
   .aa-brand .full-title {
     display: none;
   }
 
   .aa-brand .short-title {
     display: inline;
+  }
+}
+
+/*@media(max-width:1350px) {
+  .navbar-collapse {
+    width: auto;
+    
+  }
+}*/
+
+@media (max-width: 1350px) {
+  .navbar-header {
+    float: none;
+  }
+
+  .navbar-left, .navbar-right {
+    float: none !important;
+  }
+
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px;
+  }
+
+  .navbar-collapse.collapse {
+    display: none !important;
+  }
+
+  .navbar-nav {
+    float: none !important;
+    margin-top: 7.5px;
+  }
+
+  .navbar-nav > li {
+    float: none;
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .collapse.in {
+    display: block !important;
   }
 }
