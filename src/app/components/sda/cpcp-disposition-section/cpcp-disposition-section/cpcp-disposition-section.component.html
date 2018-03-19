@@ -104,7 +104,7 @@
     <div class="row ">
       <div class="col-sm-6">
         <aac-field-container label="Engineering Comments:"
-                             helptext="(Comments need to be 250 characters or less)"
+                             helptext="(Comments need to be 500 characters or less)"
                              [message]="displayMessage.engineeringComments">
           <textarea tabindex='138' cols="40" rows="5" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" class="form-control" formControlName="engineeringComments">
         </textarea>
@@ -112,7 +112,7 @@
       </div>
       <div class="col-sm-6">
         <aac-field-container label="QC Feedback:"
-                             helptext="(Comments need to be 250 characters or less)"
+                             helptext="(Comments need to be 500 characters or less)"
                              [message]="displayMessage.qcFeedback">
           <textarea tabindex='139' cols="40" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" rows="5" class="form-control" formControlName="qcFeedback">
         </textarea>
