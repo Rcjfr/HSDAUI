@@ -65,6 +65,8 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
           });
 
           if (hasCriteria) {
+
+            this.dataTable.rows = this.defaultPageSize;
             this.appStateService.loadSdaList(this.getDefaultPageData());
           }
           //this.skipNextLoad = true;
