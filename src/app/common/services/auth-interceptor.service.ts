@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { AuthService } from '@app/common/services/auth.service';
@@ -8,10 +8,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {
+  constructor(private injector: Injector, private router: Router, private toastr: ToastrService) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.authService.accessToken().flatMap(token => {
+    const authService: AuthService = this.injector.get(AuthService);
+
+    return authService.accessToken().flatMap(token => {
 
       const authReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)

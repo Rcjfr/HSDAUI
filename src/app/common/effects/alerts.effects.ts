@@ -286,9 +286,10 @@ export class AlertEffects {
     selectedAlert.ActionTypes.DOWNLOAD_ATTACHMENT_FAIL,
     selectedAlert.ActionTypes.UPLOAD_ATTACHMENT_FAIL,
     selectedAlert.ActionTypes.EXPORT_PDF_FAIL
-    )
-    .switchMap((action: Action) => {
-      this.toastr.error(<string>action.payload, 'ERROR');
+  )
+    .map(toPayload)
+    .switchMap((payload: string) => {
+      this.toastr.error(payload, 'ERROR');
 
       return of(new selectedAlert.OperationFailedAction());
     });
@@ -296,8 +297,9 @@ export class AlertEffects {
   @Effect({ dispatch: false })
   showLoadSdaFailError$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_SDA_FAIL)
-    .map((action: Action) => {
-      this.toastr.error(<string>action.payload, 'ERROR');
+    .map(toPayload)
+    .map((payload: string) => {
+      this.toastr.error(payload, 'ERROR');
       this.router.navigate(['/alerts']);
 
       return null;

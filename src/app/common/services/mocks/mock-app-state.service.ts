@@ -8,6 +8,8 @@ import { ISdaRecord, SdaFactory } from '@app/common/reducers/models/sda';
 import { UserRecordFactory, IUserRecord } from '@app/common/reducers/models/user';
 import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
 import { IChangeLog } from '@app/common/models/change-log.model';
+import { Store } from '@ngrx/store';
+import { of } from 'rxjs/observable/of';
 
 export class MockAppStateService extends AppStateService {
   constructor() {
@@ -15,7 +17,9 @@ export class MockAppStateService extends AppStateService {
   }
 
   getAlertCodes() {
-    return Observable.of([]);
+    const mockResponse: models.IBaseLookUp[] = [];
+
+    return of(mockResponse);
   }
 
   getATACodes() {
@@ -99,6 +103,7 @@ export class MockAppStateService extends AppStateService {
       access_token: 'access_token',
       roles: [],
       sm_user: '00123456',
+      sm_timetoexpire: 0,
       sm_user_email: 'testuser@aa.com',
       sm_user_firstname: 'FirstName',
       sm_user_lastname: 'LastName',

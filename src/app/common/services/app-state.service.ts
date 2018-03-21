@@ -6,10 +6,15 @@ import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import * as lookupDataActions from '@app/common/actions/lookup-data';
 import * as userActions from '@app/common/actions/logged-in-user';
 import { Observable, Subject } from 'rxjs/Rx';
-import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent, IChangeLog } from '@app/common/models';
+import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent, IChangeLog, IBaseLookUp, IATACode, ICheckType } from '@app/common/models';
 import { List } from 'immutable';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
+import { IAircraftInfoRecord } from '@app/common/reducers/models/aircraft-info';
+import { ISdaRecord } from '@app/common/reducers/models/sda';
+import { ISdaListResultRecord } from '@app/common/reducers/models/sda-list-result';
+import { ISearchCriteriaRecord } from '@app/common/reducers/models/search-criteria';
+import { IUserRecord } from '@app/common/reducers/models/user';
 
 @Injectable()
 export class AppStateService {
@@ -18,39 +23,39 @@ export class AppStateService {
 
   constructor(private store: Store<AppStore>) { }
 
-  getLookupDataLoading() {
+  getLookupDataLoading(): Observable<boolean> {
     return this.store.select(fromRoot.getLookupDataLoading);
   }
 
-  getAlertCodes() {
+  getAlertCodes(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getAlertCodes);
   }
 
-  getATACodes() {
+  getATACodes(): Observable<IATACode[]> {
     return this.store.select(fromRoot.getATACodes);
   }
 
-  getDepartments() {
+  getDepartments(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDepartments);
   }
 
-  getFleetCheckTypes() {
+  getFleetCheckTypes(): Observable<List<ICheckType>> {
     return this.store.select(fromRoot.getFleetCheckTypes);
   }
 
-  getCheckTypes() {
+  getCheckTypes(): Observable<ICheckType[]> {
     return this.store.select(fromRoot.getCheckTypes);
   }
 
-  getCorrosionLevels() {
+  getCorrosionLevels(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getCorrosionLevels);
   }
 
-  getCorrosionTypes() {
+  getCorrosionTypes(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getCorrosionTypes);
   }
 
-  getDetectionMethods() {
+  getDetectionMethods(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDetectionMethods);
   }
 
@@ -68,44 +73,44 @@ export class AppStateService {
   }
 
 
-  getDamageTypes() {
+  getDamageTypes(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDamageTypes);
   }
-  getCauseOfDamages() {
+  getCauseOfDamages(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getCauseOfDamages);
   }
 
-  getFloorboardConditions() {
+  getFloorboardConditions(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getFloorboardConditions);
   }
 
-  getRepairDescriptions() {
+  getRepairDescriptions(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getRepairDescriptions);
   }
-  getRepairDocuments() {
+  getRepairDocuments(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getRepairDocuments);
   }
 
-  getReasonsForChange() {
+  getReasonsForChange(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getReasonsForChange);
   }
 
-  getDTEStatus() {
+  getDTEStatus(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDTEStatus);
   }
-  getRepairInspectionStatus() {
+  getRepairInspectionStatus(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-  getAircraftInfo() {
+  getAircraftInfo(): Observable<IAircraftInfoRecord> {
     return this.store.select(fromRoot.getAircraftInfo);
   }
 
-  getSelectedSda() {
+  getSelectedSda(): Observable<ISdaRecord> {
     return this.store.select(fromRoot.getSelectedSda);
   }
 
-  getSelectedAlertLoading() {
+  getSelectedAlertLoading(): Observable<boolean> {
     return this.store.select(fromRoot.getSelectedAlertLoading);
   }
 
@@ -114,22 +119,22 @@ export class AppStateService {
     return this.savedSdaSubject.asObservable();
   }
 
-  getCurrentSdaId() {
+  getCurrentSdaId(): Observable<number> {
     return this.store.select(fromRoot.getCurrentSdaId);
   }
 
   getLoadNewSdaState() {
     return this.loadNewSdaSubject.asObservable();
   }
-  getSdaListResult() {
+  getSdaListResult(): Observable<ISdaListResultRecord> {
     return this.store.select(fromRoot.getSdaListResult);
   }
 
-  getSearchCriteria() {
+  getSearchCriteria(): Observable<ISearchCriteriaRecord> {
     return this.store.select(fromRoot.getSearchCriteria);
   }
 
-  getUser() {
+  getUser(): Observable<IUserRecord> {
     return this.store.select(fromRoot.getUser);
   }
 
@@ -214,7 +219,7 @@ export class AppStateService {
     this.store.dispatch(new userActions.LoadUserAction());
   }
 
-  getUserLoading() {
+  getUserLoading(): Observable<boolean> {
     return this.store.select(fromRoot.getUserLoading);
   }
 
@@ -222,10 +227,10 @@ export class AppStateService {
     return this.store.dispatch(new selectedAlertActions.SetSdaNewStatusAction(status));
   }
 
-  getNewSdaStatus() {
+  getNewSdaStatus(): Observable<Status> {
     return this.store.select(fromRoot.getNewSdaStatus);
   }
-  getLoadingText() {
+  getLoadingText(): Observable<string> {
     return this.store.select(fromRoot.getLoadingText);
   }
   getSdaLoading() {

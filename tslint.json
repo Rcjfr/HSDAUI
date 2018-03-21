@@ -100,8 +100,18 @@
       "check-separator",
       "check-type"
     ],
-    "directive-selector": [true, "attribute", ["aa", "aac"], "camelCase"],
-    "component-selector": [true, "element", ["aa", "aac", "test"], "kebab-case"],   //TODO: need to make a decision about the TestComponentWrapperComponent and keeping "test"
+    "directive-selector": [
+      true,
+      "attribute",
+      [ "aa", "aac" ],
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      [ "aa", "aac", "test" ],
+      "kebab-case"
+    ], //TODO: need to make a decision about the TestComponentWrapperComponent and keeping "test"
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
@@ -112,9 +122,9 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     // "no-access-missing-member": true,    //TODO - NEEDS TO BE TURNED BACK ON
-    "templates-use-public": true,
-    "invoke-injectable": true,
-     //Propose adding:
+    //"templates-use-public": true, //Looks like they are dropped,https://github.com/mgechev/codelyzer/issues/264
+    //"invoke-injectable": true,
+    //Propose adding:
     "newline-before-return": true,
     "no-consecutive-blank-lines": [
       true,

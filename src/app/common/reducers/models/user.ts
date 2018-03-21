@@ -5,6 +5,7 @@ export interface IUserRecord extends TypedRecord<IUserRecord>, IUser { }
 
 export const UserRecordFactory = makeTypedFactory<IUser, IUserRecord>({
   sm_user: '',
+  sm_timetoexpire: 0,
   sm_user_email: '',
   sm_user_firstname: '',
   sm_user_lastname: '',

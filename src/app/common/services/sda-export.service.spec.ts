@@ -7,6 +7,7 @@ import { AuthService } from '@app/common/services/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpModule } from '@angular/http';
 import { AppStateService } from '@app/common/services';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 describe('SdaExportService', () => {
   beforeEach(() => {
@@ -15,6 +16,7 @@ describe('SdaExportService', () => {
         SdaService, SdaExportService],
       imports: [
         RouterTestingModule,
+        NgIdleKeepaliveModule.forRoot(),
         HttpModule,
         ToastrModule.forRoot(),
         HttpClientTestingModule

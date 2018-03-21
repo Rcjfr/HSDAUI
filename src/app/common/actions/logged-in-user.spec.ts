@@ -21,6 +21,7 @@ describe('LoggedInUser Actions', () => {
     () => {
       const user: models.IUser = {
         sm_user: '00123456',
+        sm_timetoexpire: 0,
         sm_user_email: 'firstname.lastname@aa.com',
         sm_user_firstname: 'FirstName',
         sm_user_lastname: 'LastName',

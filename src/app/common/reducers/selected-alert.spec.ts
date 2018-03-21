@@ -37,7 +37,7 @@ describe('selectedAlertReducer', () => {
   });
 
   it('SelectedAlert Reducer Initial State', () => {
-    const state = fromSelectedAlert.reducer(undefined, { type: null, payload: null });
+    const state = fromSelectedAlert.reducer(undefined, { type: null});
     expect(state.loading).toEqual(false);
     expect(state.noseNumbers.size).toEqual(0);
   });

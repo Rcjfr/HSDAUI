@@ -7,9 +7,8 @@ import { List } from 'immutable';
 import { ToastrService } from 'ngx-toastr';
 import '@app/common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
-import { AppStateService } from '@app/common/services';
+import { AppStateService, AuthService } from '@app/common/services';
 import { Subscription } from 'rxjs/Rx';
-import '@ngrx/core/add/operator/select';
 import { ComponentCanDeactivate } from '@app/common/components/pending-changes.guard';
 import { AlertDetailViewComponent } from '@app/components/alert-detail-view/alert-detail-view.component';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
@@ -35,12 +34,13 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
+    private authService: AuthService,
     private router: Router
   ) { }
   // @HostListener allows us to also guard against browser refresh, close, etc.
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
-    return !this.alertDetailView.sdaForm.dirty;
+    return this.authService.hasSessionTimedOut || !this.alertDetailView.sdaForm.dirty;
   }
 
   ngOnInit(): void {

@@ -45,11 +45,11 @@ export class SdaExportService {
   constructor(private sdaService: SdaService, private authService: AuthService) {
     this.pdf = pdfMake;
     authService.hasAnyRole([authService.HSDA_End_Users,
-      authService.Reliability_Analyst,
-      authService.CPCP_Trained_Reviewing_Engineer,
-      authService.Compliance_Engineer,
-      authService.Compliance_Engineering_Analyst,
-      authService.Compliance_Engineering_Manager
+    authService.Reliability_Analyst,
+    authService.CPCP_Trained_Reviewing_Engineer,
+    authService.Compliance_Engineer,
+    authService.Compliance_Engineering_Analyst,
+    authService.Compliance_Engineering_Manager
     ]).take(1).subscribe(u => this.isQCPersonnel = !u);
   }
   exportSda(sdas: number[]): Observable<any> {
@@ -521,7 +521,7 @@ export class SdaExportService {
   }
 
   getCorrectiveActionSection(sda: ISdaListView) {
-    const content = {
+    const content: any = {
       layout: 'noBorders',
       margin: [0, 3, 0, 0],
       table: {

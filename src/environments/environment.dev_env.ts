@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  hsdaApiBaseUrl: '/api/'
+  hsdaApiBaseUrl: '/api/',
+  sessionTimeOut: 15 //In Seconds
 };

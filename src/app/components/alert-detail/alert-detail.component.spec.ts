@@ -13,6 +13,7 @@ import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
 import { AppStateService } from '@app/common/services';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
@@ -26,6 +27,7 @@ describe('AlertDetailComponent', () => {
         ReactiveFormsModule, FormsModule, FormControlsModule,
         HttpModule,
         NKDatetimeModule,
+        NgIdleKeepaliveModule.forRoot(),
         TypeaheadModule.forRoot(),
         // StoreModule.provideStore(reducer),
         ToastrModule.forRoot()

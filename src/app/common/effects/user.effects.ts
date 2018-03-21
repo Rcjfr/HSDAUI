@@ -26,7 +26,15 @@ export class UserEffects {
           return of(new userActions.LoadUserFailAction('Failed to load logged in user'));
         });
     });
+  @Effect()
+  showToastrError$ = this.actions$
+    .ofType(userActions.ActionTypes.LOAD_USER_FAIL)
+    .map(toPayload)
+    .switchMap((payload: string) => {
+      this.toastr.error(payload, 'ERROR');
 
+      return of(new userActions.OperationFailedAction());
+    });
   constructor(private actions$: Actions,
     private authService: services.AuthService,
     private router: Router,

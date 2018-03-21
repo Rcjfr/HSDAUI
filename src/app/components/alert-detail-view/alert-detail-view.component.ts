@@ -30,7 +30,7 @@ import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 import { CustomValidators } from '@app/common/validators/custom-validators';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { List } from 'immutable';
-import {ChangeLogModalComponent} from '../change-log-modal/change-log-modal.component';
+import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.component';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -83,8 +83,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     });
     this.sdaStatusForm = this.fb.group({
       status: ['', [Validators.required]],
-      completedBy: ['', [Validators.required, Validators.maxLength(15),  Validators.pattern(Expressions.AlphanumericsComma) ]],
-      completedByName: ['', [Validators.required, Validators.maxLength(50),  Validators.pattern(Expressions.AlphanumericsComma)]],
+      completedBy: ['', [Validators.required, Validators.maxLength(15), Validators.pattern(Expressions.AlphanumericsComma)]],
+      completedByName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(Expressions.AlphanumericsComma)]],
       completedOn: ['', [Validators.required, CustomValidators.validateFutureDate]],
       comments: ['', []],
     });
@@ -204,11 +204,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
 
     if ((this.sdaStatusForm.get('completedBy').value !== this.statusUpdatedBy) ||
-        (this.sdaStatusForm.get('completedByName').value !== this.statusUpdatedByName)) {
+      (this.sdaStatusForm.get('completedByName').value !== this.statusUpdatedByName)) {
       this.dialogService.addDialog(ConfirmComponent, {
         title: 'Confirm?',
         message: `Are you sure Completed By is correct?`
-      }).filter( confirm => confirm === true).subscribe(confirm => {
+      }).filter(confirm => confirm === true).subscribe(confirm => {
         this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
         this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
         this.sda.comments = this.sdaStatusForm.get('comments').value;
@@ -216,12 +216,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         this.saveAlertData();
       });
     } else {
-    this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
-    this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
+      this.sda.statusUpdatedBy = `${this.sdaStatusForm.get('completedBy').value} - ${this.sdaStatusForm.get('completedByName').value}`;
+      this.sda.statusUpdatedOn = new Date(this.sdaStatusForm.get('completedOn').value);
 
-    this.sda.comments = this.sdaStatusForm.get('comments').value;
-    this.hideStatusModal();
-    this.saveAlertData();
+      this.sda.comments = this.sdaStatusForm.get('comments').value;
+      this.hideStatusModal();
+      this.saveAlertData();
     }
   }
 
@@ -273,7 +273,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         });
       } else {
         this.confirmDeferralInf(newStatus);
-        }
+      }
     } else {
       this.confirmDeferralInf(newStatus);
     }
@@ -320,7 +320,20 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   validateAlertData(newStatus: Status, showModal: boolean, modalTitle: string) {
-    if (newStatus === Status.Open || newStatus === Status.Complete || newStatus === Status.Audited) {
+    if (newStatus === Status.Open) {
+      if (this.sda.status === Status.Complete ||
+        this.sda.status === Status.Audited ||
+        this.sda.status === Status.Closed) {
+        //no need to validate the form as its a SDA Reopen Action
+      } else {
+        if (!this.validateSdaForm()) {
+          this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
+
+          return;
+        }
+      }
+    }
+    if (newStatus === Status.Complete || newStatus === Status.Audited) {
       if (!this.validateSdaForm()) {
         this.toastr.error('Details entered are invalid. Please correct and try again.', 'Error');
 
@@ -328,11 +341,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     }
     this.statusUpdatedOn = new Date();
-    this.sdaStatusForm.patchValue({status: newStatus, completedBy: this.statusUpdatedBy, completedByName: this.statusUpdatedByName , completedOn: this.statusUpdatedOn, comments: '' });
+    this.sdaStatusForm.patchValue({ status: newStatus, completedBy: this.statusUpdatedBy, completedByName: this.statusUpdatedByName, completedOn: this.statusUpdatedOn, comments: '' });
     if (newStatus === Status.Open) {
       if (this.sda.status === Status.Complete ||
-          this.sda.status === Status.Audited ||
-          this.sda.status === Status.Closed) {  //Reopening the form
+        this.sda.status === Status.Audited ||
+        this.sda.status === Status.Closed) {  //Reopening the form
         this.sdaStatusTitle = `Reopen SDA (SDA ID:${this.sda.id})`;
         this.showModal();
       } else {
@@ -624,8 +637,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
 
   public areCommentsRequired(): boolean {
     return this.sdaStatusForm.get('status').value === Status.Rejected ||
-           this.sdaStatusForm.get('status').value === Status.Deleted ||
-           (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
+      this.sdaStatusForm.get('status').value === Status.Deleted ||
+      (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
   }
 
   public exportPdf(sdaId: number): void {

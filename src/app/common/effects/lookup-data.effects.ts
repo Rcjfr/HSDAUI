@@ -66,8 +66,9 @@ export class LookupDataEffects {
     lookupData.ActionTypes.LOAD_FLEET_CHECK_TYPES_FAIL,
     lookupData.ActionTypes.LOAD_LOOKUP_DATA_FAILED
     )
-    .map((action: Action) => {
-      this.toastr.error(<string>action.payload, 'ERROR');
+    .map(toPayload)
+    .map((payload: string) => {
+      this.toastr.error(payload, 'ERROR');
 
       return null;
     });

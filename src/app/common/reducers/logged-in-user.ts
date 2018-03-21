@@ -30,6 +30,10 @@ export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeIni
 
         return state.merge({ loading: false, user: UserRecordFactory(act.payload) });
       }
+    case userActions.ActionTypes.OPERATION_FAILED:
+      {
+        return state.merge({ loading: false });
+      }
     default: {
       return state;
     }

@@ -2,7 +2,7 @@ import { ChangeLog } from '@app/common/services/changelog.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, ApplicationRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -47,6 +47,9 @@ import { AlertsGridComponent } from '@app/components/alerts-grid/alerts-grid.com
 import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alerts-dashboard.component';
 
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { MomentModule } from 'angular2-moment';
+import { environment } from '@env/environment';
 
 @NgModule({
   declarations: [
@@ -95,12 +98,17 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
     TabsModule.forRoot(),
     ToastrModule.forRoot(),
     ScrollToModule.forRoot(),
-    StoreModule.provideStore(reducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),  //for debugging
-    EffectsModule.run(AlertEffects),
-    EffectsModule.run(LookupDataEffects),
-    EffectsModule.run(UserEffects),
-    EffectsModule.run(SavedSearchesEffects)
+    StoreModule.forRoot(reducer),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
+    EffectsModule.forRoot([
+      AlertEffects,
+      LookupDataEffects,
+      UserEffects,
+      SavedSearchesEffects
+
+    ]),
+    MomentModule,
+    NgIdleKeepaliveModule.forRoot()
   ],
   providers: [
     services.AuthService,
@@ -118,7 +126,8 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
     services.MrlExportService,
     services.ChangeLog,
     PendingChangesGuard,
-    SdaResolverService, {
+    SdaResolverService,
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: services.AuthInterceptorService,
       multi: true
@@ -131,4 +140,10 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(applicationRef: ApplicationRef) {
+    //for supporting ng2-bootstrap-modal in angualar 5
+    //TODO: migrate to https://github.com/KevCJones/ngx-simple-modal
+    Object.defineProperty(applicationRef, '_rootComponents', { get: () => applicationRef['components'] });
+  }
+}

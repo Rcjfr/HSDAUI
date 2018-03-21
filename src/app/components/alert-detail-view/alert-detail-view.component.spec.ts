@@ -63,6 +63,7 @@ import { DialogService, DialogComponent } from 'ng2-bootstrap-modal';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 describe('AlertDetailViewComponent', () => {
   let component: AlertDetailViewComponent;
   let fixture: ComponentFixture<AlertDetailViewComponent>;
@@ -129,6 +130,7 @@ describe('AlertDetailViewComponent', () => {
           enableHtml: true,
         }),
         NKDatetimeModule,
+        NgIdleKeepaliveModule.forRoot(),
         NgPipesModule, TextMaskModule],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService, services.SdaExportService, services.SdaService]
     })

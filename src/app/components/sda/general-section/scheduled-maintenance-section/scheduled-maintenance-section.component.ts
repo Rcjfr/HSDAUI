@@ -36,6 +36,9 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     this.parent.addControl(this.formGroupName, this.formGroup);
     this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
+  IsCheckTypeOther(): boolean {
+    return this.formGroup.get('checkType').value === 99
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;

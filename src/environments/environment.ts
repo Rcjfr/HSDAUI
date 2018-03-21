@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  hsdaApiBaseUrl: 'http://hsda.local.techops.aa.com/api/'
+  hsdaApiBaseUrl: 'http://hsda.local.techops.aa.com/api/',
+  sessionTimeOut: 3 //In Seconds
 };

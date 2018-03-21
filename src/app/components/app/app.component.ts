@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppStateService, AuthService } from '@app/common/services';
 import { Router, NavigationEnd } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'aa-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit {
 
   constructor(private appStateService: AppStateService,
     private authService: AuthService,
-    private router: Router, private toastr: ToastrService) { }
+    private router: Router, private toastr: ToastrService
+    ) {  }
 
   ngOnInit(): void {
     this.appStateService.loadUser();
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+    this.authService.setupIdleTimer();
   }
 
   loadNewSda() {

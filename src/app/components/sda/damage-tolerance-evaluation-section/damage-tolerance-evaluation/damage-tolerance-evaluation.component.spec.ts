@@ -4,11 +4,13 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, FormControl }
 import { FormControlsModule } from '@app/common/components/form-controls.module';
 import { AppStateService, AuthService } from '@app/common/services';
 import { HttpModule } from '@angular/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TextMaskModule } from 'angular2-text-mask';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { NgPipesModule } from 'ng-pipes';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
@@ -73,7 +75,7 @@ describe('DamageToleranceEvaluationComponent', () => {
         DteMonitorItemComponent],
       imports: [
         ReactiveFormsModule, FormsModule, FormControlsModule, ToastrModule.forRoot(), NgPipesModule,
-        NKDatetimeModule, TextMaskModule, FileUploadModule, HttpModule, RouterTestingModule
+        NKDatetimeModule, TextMaskModule, FileUploadModule, HttpModule, RouterTestingModule, NgIdleKeepaliveModule.forRoot(), HttpClientTestingModule
       ]
     })
       .compileComponents();

@@ -4,7 +4,8 @@ import * as models from '@app/common/models/index';
 export const ActionTypes = {
   LOAD_USER: 'Load Logged In User Details',
   LOAD_USER_COMPLETE: 'Load Logged In User Details Complete',
-  LOAD_USER_FAIL: 'Load Logged In User Details Fail'
+  LOAD_USER_FAIL: 'Load Logged In User Details Fail',
+  OPERATION_FAILED: 'General Operation Failed Message',
 };
 
 
@@ -22,10 +23,17 @@ export class LoadUserFailAction implements Action {
   constructor(public payload: any) { }
 }
 
+export class OperationFailedAction implements Action {
+  public type = ActionTypes.OPERATION_FAILED;
+  public payload: any
+  constructor() { }
+}
+
 
 
 export type Actions =
   LoadUserAction |
   LoadUserCompleteAction |
-  LoadUserFailAction;
+  LoadUserFailAction |
+  OperationFailedAction;
 
