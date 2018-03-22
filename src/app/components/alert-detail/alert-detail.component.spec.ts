@@ -14,13 +14,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppStateService } from '@app/common/services';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
-
+import { ConfirmationService } from 'primeng/api';
 describe('AlertDetailComponent', () => {
   let component: AlertDetailComponent;
   let fixture: ComponentFixture<AlertDetailComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: AppStateService, useClass: MockAppStateService }],
+      providers: [{ provide: AppStateService, useClass: MockAppStateService }, ConfirmationService],
       declarations: [AlertDetailComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [

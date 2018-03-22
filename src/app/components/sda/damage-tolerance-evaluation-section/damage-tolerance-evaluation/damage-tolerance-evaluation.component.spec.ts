@@ -20,6 +20,7 @@ import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolera
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { ConfirmationService } from 'primeng/api';
 
 describe('DamageToleranceEvaluationComponent', () => {
   let component: DamageToleranceEvaluationComponent;
@@ -67,7 +68,7 @@ describe('DamageToleranceEvaluationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, DialogService, AuthService,
-        ToastrService],
+        ToastrService, ConfirmationService],
       declarations: [DamageToleranceEvaluationComponent,
         DteMonitorItemsArrayComponent,
         DteThresholdItemsArrayComponent,

@@ -18,13 +18,20 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { InputTextModule, ButtonModule, DataTableModule, DialogModule, DataGridModule } from 'primeng/primeng';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { DataTableModule } from 'primeng/datatable';
+import { DialogModule } from 'primeng/dialog';
+import { DataGridModule } from 'primeng/datagrid';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/components/app/app.component';
 import { NavBarComponent } from '@app/common/components/nav-bar/nav-bar.component';
 import { HeaderComponent } from '@app/common/components/header/header.component';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
+import { AlertComponent } from '@app/common/components/alert/alert.component';
 import { AlertsComponent } from '@app/components/alerts/alerts.component';
 import { AlertDetailComponent } from '@app/components/alert-detail/alert-detail.component';
 import { ChangeLogModalComponent } from '@app/components/change-log-modal/change-log-modal.component';
@@ -56,6 +63,7 @@ import { environment } from '@env/environment';
     AppComponent,
     NavBarComponent,
     ConfirmComponent,
+    AlertComponent,
     PromptDialogComponent,
     HeaderComponent,
     AlertsComponent,
@@ -90,6 +98,7 @@ import { environment } from '@env/environment';
     DataTableModule,
     DialogModule,
     DataGridModule,
+    ConfirmDialogModule,
 
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
@@ -131,10 +140,12 @@ import { environment } from '@env/environment';
       provide: HTTP_INTERCEPTORS,
       useClass: services.AuthInterceptorService,
       multi: true
-    }
+    },
+    ConfirmationService
   ],
   entryComponents: [
     ConfirmComponent,
+    AlertComponent,
     ChangeLogModalComponent,
     PromptDialogComponent
   ],

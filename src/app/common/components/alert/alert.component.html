@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title"><i [ngClass]="'fa'" [class]="icon" *ngIf="icon"></i> {{title || 'Alert'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div>
+        <span [innerHTML]="message"></span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-lg btn-primary" (click)="confirm()">{{okButtonText}}</button>
+    </div>
+  </div>
+</div>

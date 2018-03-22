@@ -8,11 +8,13 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpModule } from '@angular/http';
 import { AppStateService } from '@app/common/services';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { ConfirmationService } from 'primeng/api';
+import { DialogService } from 'ng2-bootstrap-modal';
 import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.service';
 describe('SdaExportService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: AppStateService, useClass: MockAppStateService }, AuthService,
+      providers: [ConfirmationService, DialogService, { provide: AppStateService, useClass: MockAppStateService }, AuthService,
         SdaService, SdaExportService],
       imports: [
         RouterTestingModule,

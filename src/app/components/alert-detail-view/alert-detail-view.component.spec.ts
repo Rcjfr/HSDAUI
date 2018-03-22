@@ -64,6 +64,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { ConfirmationService } from 'primeng/api';
 describe('AlertDetailViewComponent', () => {
   let component: AlertDetailViewComponent;
   let fixture: ComponentFixture<AlertDetailViewComponent>;
@@ -132,7 +133,7 @@ describe('AlertDetailViewComponent', () => {
         NKDatetimeModule,
         NgIdleKeepaliveModule.forRoot(),
         NgPipesModule, TextMaskModule],
-      providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService, services.SdaExportService, services.SdaService]
+      providers: [{ provide: AppStateService, useClass: MockAppStateService }, services.AuthService, DialogService, services.SdaExportService, services.SdaService, ConfirmationService]
     })
       .compileComponents();
 

@@ -16,6 +16,8 @@ import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.s
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ISda, ILazyLoadEvent, ISdaListResult, IAircraftInfo } from '@app/common/models';
+import { ConfirmationService } from 'primeng/api';
+import { DialogService } from 'ng2-bootstrap-modal';
 describe('Alerts Effect', () => {
   let effects: AlertEffects;
   let actions: Observable<any>;
@@ -27,7 +29,7 @@ describe('Alerts Effect', () => {
         NgIdleKeepaliveModule.forRoot()
       ],
       providers: [
-        AlertEffects,
+        AlertEffects, ConfirmationService, DialogService,
         provideMockActions(() => actions),
         services.AircraftService, services.SdaService, services.AuthService, services.ChangeLog, services.MrlExportService, services.SdaExportService,
         { 'provide': HttpClient, 'useValue': null },

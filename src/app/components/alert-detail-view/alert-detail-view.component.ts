@@ -60,8 +60,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   @ViewChild('statusModal') public statusModal: ModalDirective;
   @ViewChild(ChangeLogModalComponent) changeLogComponent: ChangeLogModalComponent;
 
-  // @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
-  // @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];
+  /* @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];*/
+  /* @ContentChildren(FormControlName, {read:ElementRef, descendants:true}) formInputElements: ElementRef[];*/
   sdaForm: FormGroup;
   sdaStatusForm: FormGroup;
   public sdaStatusTitle = '';
