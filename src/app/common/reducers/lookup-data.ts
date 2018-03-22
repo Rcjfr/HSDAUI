@@ -22,7 +22,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
 function makeInitialState() {
   return stateFactory();
 }
-export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: lookupDataActions.Actions) => {
+export function reducer(state: StateRecord = makeInitialState(), action: lookupDataActions.Actions): StateRecord {
 
   switch (action.type) {
     case lookupDataActions.ActionTypes.LOAD_LOOKUP_DATA:

@@ -24,7 +24,7 @@ function makeInitialState() {
   return stateFactory();
 }
 
-export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: actions.Actions) => {
+export function reducer(state: StateRecord = makeInitialState(), action: actions.Actions): StateRecord {
   switch (action.type) {
     case actions.ActionTypes.LOAD_SEARCHES:
       {

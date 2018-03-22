@@ -18,7 +18,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
 function makeInitialState() {
   return stateFactory();
 }
-export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: userActions.Actions) => {
+export function reducer(state: StateRecord = makeInitialState(), action: userActions.Actions): StateRecord {
   switch (action.type) {
     case userActions.ActionTypes.LOAD_USER:
       {

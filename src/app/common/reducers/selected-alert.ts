@@ -49,7 +49,7 @@ function makeInitialState() {
   return stateFactory();
 }
 
-export const reducer: ActionReducer<StateRecord> = (state: StateRecord = makeInitialState(), action: selectedAlertActions.Actions) => {
+export function reducer(state: StateRecord = makeInitialState(), action: selectedAlertActions.Actions): StateRecord {
   switch (action.type) {
     case selectedAlertActions.ActionTypes.LOAD_CHANGE_LOG:
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO:
