@@ -5,7 +5,9 @@ export const ActionTypes = {
   LOAD_USER: 'Load Logged In User Details',
   LOAD_USER_COMPLETE: 'Load Logged In User Details Complete',
   LOAD_USER_FAIL: 'Load Logged In User Details Fail',
+  LOGOUT: 'Logout User',
   OPERATION_FAILED: 'General Operation Failed Message',
+
 };
 
 
@@ -29,11 +31,18 @@ export class OperationFailedAction implements Action {
   constructor() { }
 }
 
+export class LogOutAction implements Action {
+  public type = ActionTypes.LOGOUT;
+  public payload: any
+  constructor() { }
+}
+
 
 
 export type Actions =
   LoadUserAction |
   LoadUserCompleteAction |
   LoadUserFailAction |
-  OperationFailedAction;
+  OperationFailedAction |
+  LogOutAction;
 

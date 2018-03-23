@@ -58,7 +58,7 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container [required]="true" label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
-        <datetime [timepicker]="false" [tabindex]='94' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate [tabindex]='3' formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]='94' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
 
     </div>
@@ -88,12 +88,12 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Stage 2 Approval Date:" [attr.for]="stage2Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="96" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date [tabindex]='3' formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="96" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Stage 3 Approval Date:" [attr.for]="stage3Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="97" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date [tabindex]='3' formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="97" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>

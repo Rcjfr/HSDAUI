@@ -218,6 +218,9 @@ export class AppStateService {
   loadUser() {
     this.store.dispatch(new userActions.LoadUserAction());
   }
+  logout() {
+    this.store.dispatch(new userActions.LogOutAction());
+  }
 
   getUserLoading(): Observable<boolean> {
     return this.store.select(fromRoot.getUserLoading);

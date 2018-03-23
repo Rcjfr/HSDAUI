@@ -5,10 +5,12 @@ import { AuthService } from '@app/common/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AppStateService } from '@app/common/services/app-state.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private injector: Injector, private router: Router, private toastr: ToastrService) {
+  constructor(private injector: Injector, private router: Router, private toastr: ToastrService,
+    private appStateService: AppStateService) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authService: AuthService = this.injector.get(AuthService);
@@ -24,8 +26,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           if (event instanceof HttpResponse) {
             //Checking for 200 and empty body because SiteMinder is blocking the POST request
             if (event.status === 302 || !event.body) {
-              this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
-              setTimeout(() => location.reload(true), 1000);
+              this.appStateService.logout();
 
               return;
             }
@@ -42,8 +43,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             //"Unexpected token < in JSON at position 0"[this happens when SM redirects an AJAX call to SM login page]
             if (err.status === 302 || err.status === 200 || err.status === 0) {
-              this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
-              setTimeout(() => location.reload(true), 1000);
+              this.appStateService.logout();
 
               return;
             }

@@ -11,7 +11,7 @@ export interface AlertModel {
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.less']
 })
-export class AlertComponent extends DialogComponent<AlertModel, void> implements AlertModel {
+export class AlertComponent extends DialogComponent<AlertModel, boolean> implements AlertModel {
 
   title: string;
   message: string;
@@ -22,6 +22,7 @@ export class AlertComponent extends DialogComponent<AlertModel, void> implements
   }
 
   confirm() {
+    this.result = true;
     this.close();
   }
 }

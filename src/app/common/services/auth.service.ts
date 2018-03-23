@@ -27,7 +27,7 @@ export class AuthService {
   readonly Compliance_Engineering_Analyst = 'Compliance_Engineering_Analyst';
   readonly Compliance_Engineering_Manager = 'Compliance_Engineering_Manager';
   public hasSessionTimedOut = false;
-  timeOutDuration = 60;
+  timeOutDuration = 600;
   private endPointUrl = `${environment.hsdaApiBaseUrl}users?ts=${(new Date()).getTime()}`;
   // Using Http here so that the HttpClient Interceptor do not intercept this api call
   constructor(private http: Http, private appStateService: AppStateService,
@@ -42,14 +42,14 @@ export class AuthService {
   }
   setupIdleTimer() {
     // https://hackedbychinese.github.io/ng2-idle/
-    this.idle.setIdle((environment.sessionTimeOut - 1) * 60); // after 14 minutes of inactivity, idle timer starts
+    this.idle.setIdle(environment.sessionTimeOut - this.timeOutDuration); // after 14 minutes of inactivity, idle timer starts
     this.idle.setTimeout(this.timeOutDuration); // timeout dialogue shown for 1 minute before redirecting to SM Login
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
     this.idle.onTimeout.subscribe(() => {
       console.log('User session timed out.');
       this.hasSessionTimedOut = true;
       //this.toastr.warning('User session timed out. Redirecting to login page...', 'Error');
-      this.logOutUrl().subscribe(url => location.href = url);
+      this.appStateService.logout();
     });
     this.idle.onIdleEnd.subscribe(() => {
       console.log('No longer idle.');
@@ -59,12 +59,16 @@ export class AuthService {
     this.idle.onTimeoutWarning.subscribe((countdown) => {
       console.log('You will time out in ' + countdown + ' seconds!');
       if (countdown !== this.timeOutDuration) { return; }
+      this.idle.clearInterrupts();
       this.dialogService.addDialog(AlertComponent, {
         title: 'Session Expiring',
         message: `<h5>Your session is about to expire.Click button below to extend your session.</h5>`,
         okButtonText: 'Extend my session',
         icon: 'fa fa-sign-out'
-      }, { closeByClickingOutside: true });
+      }, { closeByClickingOutside: false }).subscribe(ok => {
+        this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+        this.idle.interrupt();
+        });
       //this.confirmationService.confirm({
       //  header: 'Session Expiring',
       //  message: '<h3>Your session is about to expire.Click button below to extend your session.</h3>',
@@ -79,13 +83,12 @@ export class AuthService {
 
 
     });
-    this.keepalive.interval(2 * environment.sessionTimeOut / 3 * 60); //if user is active, keep the siteminder session alive for every 10 minutes(2/3 of 15 minutes SM Session timeout)
+    this.keepalive.interval(2 * environment.sessionTimeOut / 3 ); //if user is active, keep the siteminder session alive for every 10 minutes(2/3 of 15 minutes SM Session timeout)
     this.keepalive.request(this.endPointUrl); // access api/users so that the siteminder session gets extended on server as well
     this.keepalive.onPingResponse.subscribe((renewedUserSession: HttpResponse<any>) => {
       if (renewedUserSession.type !== 0 && !renewedUserSession.body) { //TODO:have to monitor this on QA
         this.hasSessionTimedOut = true;
-        this.toastr.warning('User session timed out. Redirecting to login page...', 'Error');
-        this.logOutUrl().subscribe(url => location.href = url);
+        this.appStateService.logout();
 
         return;
       }

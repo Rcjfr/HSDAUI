@@ -26,6 +26,17 @@ export class UserEffects {
           return of(new userActions.LoadUserFailAction('Failed to load logged in user'));
         });
     });
+
+  @Effect()
+  logOut$ = this.actions$
+    .ofType(userActions.ActionTypes.LOGOUT)
+    .switchMap(() => this.authService.logOutUrl())
+    .delay(1000)
+    .do(url => {
+      this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
+      location.href = url;
+    });
+
   @Effect()
   showToastrError$ = this.actions$
     .ofType(userActions.ActionTypes.LOAD_USER_FAIL)
