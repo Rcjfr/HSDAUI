@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Widespread Corrosion:" for="isWideSpreadCorrosion">
-        <select class="form-control" tabindex='23' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
+        <select class="form-control" tabindex='37' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
           <option value="">Select Widespread Corrosion</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Corrosion Previously Blended:" for="isPreviouslyBlended">
-        <select class="form-control" tabindex='24' id="isPreviouslyBlended" formControlName="isPreviouslyBlended">
+        <select class="form-control" tabindex='38' id="isPreviouslyBlended" formControlName="isPreviouslyBlended">
           <option value="">Select Corrosion Previously Blended</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Corrosion Task #:">
-        <input type="text" tabindex='25' class="form-control" formControlName="corrosionTaskNo">
+        <input type="text" tabindex='39' class="form-control" formControlName="corrosionTaskNo">
       </aac-field-container>
     </div>
     <div class="col-md-6">
@@ -29,7 +29,7 @@
         <label class="col-sm-4 control-label">Corrosion Level:</label>
         <div class="col-sm-8">
           <div *ngFor="let level of corrosionLevels$ | async">
-            <aac-checkbox-container class="checkbox-group" label="{{level.description}}">
+            <aac-checkbox-container class="checkbox-group"  tabindex='40' label="{{level.description}}">
               <input type="checkbox"
                      [value]="level.id"
                      [checked]="corrosionLevelContains(level.id)"
@@ -45,12 +45,12 @@
     <div class="col-md-6">
       <div>
         <aac-field-container label="Corrosion Type:">
-          <select class="form-control" multiple tabindex='27' 
+          <select class="form-control" multiple tabindex='41'
                 formControlName="corrosionType" (change)="onCorrosionTypeChange()">
             <option value=""> </option>
             <option *ngFor="let ac of corrosionTypes$ | async" [value]="ac.id">{{ac.description}}</option>
           </select>
-          <input type="text" placeholder="Other description" tabindex="25" class="form-control" maxlength="250"
+          <input type="text"  placeholder="Other description" tabindex="42" class="form-control" maxlength="250"
             *ngIf="!hideCorrosionTypeOther" formControlName="corrosionTypeOtherText" />
         </aac-field-container>
       </div>
@@ -58,7 +58,7 @@
     <div class="col-md-6">
       <div>
         <aac-field-container label="Cause of Damage:">
-          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='28'
+          <select [(ngModel)]="causeOfDamage" class="form-control" multiple tabindex='43'
               formControlName="causesOfDamage">
             <option value=""> </option>
             <option *ngFor="let ac of causeOfDamages$ | async" [value]="ac.id">{{ac.description}}</option>

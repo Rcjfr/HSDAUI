@@ -3,22 +3,22 @@
   <div class="row">
     <div class="col-md-3">
       <aac-field-container label="Aircraft Station:" helptext="(Body, Spar, Stab, Frame, etc.)" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='40' class="form-control" formControlName="aircraftStation">
+        <input type="text" tabindex='56' class="form-control" formControlName="aircraftStation">
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="Stringer:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='41' class="form-control" formControlName="stringer">
+        <input type="text" tabindex='57' class="form-control" formControlName="stringer">
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="WL:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='42' class="form-control" formControlName="waterLine">
+        <input type="text" tabindex='58' class="form-control" formControlName="waterLine">
       </aac-field-container>
     </div>
     <div class="col-md-3">
       <aac-field-container label="BL:" labelGridColumnWidth="6" fieldGridColumnWidth="11">
-        <input type="text" tabindex='43' class="form-control" formControlName="buttLine">
+        <input type="text" tabindex='59' class="form-control" formControlName="buttLine">
       </aac-field-container>
 
     </div>
@@ -26,7 +26,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Damage Type:">
-        <select class="form-control" tabindex='44' multiple="" formControlName="damageType">
+        <select class="form-control" tabindex='60' multiple="" formControlName="damageType">
           <option value=""></option>
           <option *ngFor="let ac of damageTypes$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="How Detected:" helptext="(Visual, Eddy Current, Ultrasonic, X-Ray, Dye Penetrant, etc.)">
-        <select multiple tabindex='45' class="form-control" formControlName="detectionMethod">
+        <select multiple tabindex='61' class="form-control" formControlName="detectionMethod">
           <option value=""></option>
           <option *ngFor="let ac of detectionMethods$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -48,7 +48,7 @@
     <div class="col-md-6">
 
       <aac-field-container label="How Detected(Other):">
-        <input type="text" tabindex='46' class="form-control" formControlName="detectionMethodOtherDescription">
+        <input type="text" tabindex='62' class="form-control" formControlName="detectionMethodOtherDescription">
       </aac-field-container>
     </div>
   </div>
@@ -60,36 +60,36 @@
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Length From (in inches):">
-        <input type="text" tabindex='46' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthFrom">
+        <input type="text" tabindex='63' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Length To (in inches):">
-        <input type="text" tabindex='47' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthTo">
+        <input type="text" tabindex='64' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="lengthTo">
       </aac-field-container>
     </div>
   </div>
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Width From (in inches):">
-        <input type="text" tabindex='48' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthFrom">
+        <input type="text" tabindex='65' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Width To (in inches):">
-        <input type="text" tabindex='49' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthTo">
+        <input type="text" tabindex='66' class="form-control" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="widthTo">
       </aac-field-container>
     </div>
   </div>
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Depth From (in inches):">
-        <input type="text" tabindex='50' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthFrom">
+        <input type="text" tabindex='67' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Depth To (in inches):">
-        <input type="text" tabindex='51' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthTo">
+        <input type="text" tabindex='68' class="form-control" [textMask]="{mask: decimalsNumberMask(4,3)}" formControlName="depthTo">
       </aac-field-container>
     </div>
   </div>

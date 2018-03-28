@@ -1,12 +1,12 @@
 <tabset>
-    <tab heading="Existing Saved Searches">
+    <tab heading="Existing Saved Searches" tabindex="1" >
       <div class="panel panel-default">
         <form [formGroup]="updateForm">
           <div class="row form-group" style="padding-top:15px;">
             <div class="col-md-1"></div>
             <div class="col-md-4">
               <aac-field-container label="Search Name:">
-                <select class="form-control" name="selectedSearch" formControlName="selected" (change)="onSelectedChange()" [ngClass]="{'select-invalid': updateForm.get('selected').hasError('required')}">
+                <select class="form-control" tabindex="2" name="selectedSearch" formControlName="selected" (change)="onSelectedChange()" [ngClass]="{'select-invalid': updateForm.get('selected').hasError('required')}">
                   <option value="0"></option>
                   <option *ngFor="let search of savedSearches" [value]="search.searchId">{{getSearchDisplayName(search)}}</option>
                 </select>
@@ -14,35 +14,35 @@
             </div>
             <div class="col-md-2">
               <aac-checkbox-container label="Make Default">
-                <input type="checkbox" name="isDefault" formControlName="isDefault" />
+                <input type="checkbox" tabindex="3" name="isDefault" formControlName="isDefault" />
               </aac-checkbox-container>
             </div>
             <div class="col-md-5">
-                <button type="button" (click)="onSearchAlerts()" class="btn btn-primary" [disabled]="!updateForm.valid">Run Saved Search</button>
-                <button type="button" (click)="updateSavedSearch()" class="btn btn-primary" [disabled]="!updateForm.valid">Update This Search</button>
-                <button type="button" (click)="deleteSavedSearch()" class="btn btn-default" [disabled]="!updateForm.valid">Delete This Search</button>
+                <button type="button" tabindex="4" (click)="onSearchAlerts()" class="btn btn-primary" [disabled]="!updateForm.valid">Run Saved Search</button>
+                <button type="button" tabindex="5" (click)="updateSavedSearch()" class="btn btn-primary" [disabled]="!updateForm.valid">Update This Search</button>
+                <button type="button" tabindex="6" (click)="deleteSavedSearch()" class="btn btn-default" [disabled]="!updateForm.valid">Delete This Search</button>
             </div>
           </div>
         </form>
       </div>
     </tab>
-    <tab heading="Create New Saved Search">
+    <tab heading="Create New Saved Search" tabindex="7" >
       <div class="panel panel-default">
         <form [formGroup]="createForm">
           <div class="row form-group" style="padding-top:15px;">
             <div class="col-md-1"></div>
             <div class="col-md-5">
               <aac-field-container label="Search Name:">
-                <input type="text" formControlName="name" />
+                <input type="text" tabindex="8" formControlName="name" />
               </aac-field-container>
             </div>
             <div class="col-md-2">
               <aac-checkbox-container label="Make Default">
-                <input type="checkbox" name="isDefault" formControlName="isDefault" />
+                <input type="checkbox" tabindex="9" name="isDefault" formControlName="isDefault" />
               </aac-checkbox-container>
             </div>
             <div class="col-md-2">
-              <button type="button" (click)="createSavedSearch()" class="btn btn-primary" [disabled]="!createForm.valid">Create New Search</button>
+              <button type="button" tabindex="10" (click)="createSavedSearch()" class="btn btn-primary" [disabled]="!createForm.valid">Create New Search</button>
             </div>
             <div class="col-md-2"></div>
           </div>

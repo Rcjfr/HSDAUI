@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Deferred:" for="isDeferred">
-        <select class="form-control" tabindex='49' id="isDeferred" formControlName="isDeferred">
+        <select class="form-control" tabindex='69' id="isDeferred" formControlName="isDeferred">
           <option value="">Select Deferred</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -11,43 +11,43 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Deferral Code:">
-        <input type="text" tabindex='50' maxlength="3" class="form-control" formControlName="deferralCode">
+        <input type="text" tabindex='70' maxlength="3" class="form-control" formControlName="deferralCode">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-checkbox-container label="Defective Part Replaced with Identical Part #">
-        <input type="checkbox" tabindex="51" [value]="1" [checked]="defectContains(1)" (change)="onDefectChange(1, $event.target.checked)" />
+        <input type="checkbox" tabindex="71" [value]="1" [checked]="defectContains(1)" (change)="onDefectChange(1, $event.target.checked)" />
       </aac-checkbox-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Identical Part #:">
-        <input type="text" tabindex='52' class="form-control" formControlName="defectivePartDescription">
+        <input type="text" tabindex='72' class="form-control" formControlName="defectivePartDescription">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-checkbox-container label="Modified Part # Installed">
-        <input type="checkbox" tabindex="53" [value]="2" [checked]="defectContains(2)" (change)="onDefectChange(2, $event.target.checked)" />
+        <input type="checkbox" tabindex="73" [value]="2" [checked]="defectContains(2)" (change)="onDefectChange(2, $event.target.checked)" />
       </aac-checkbox-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Modified Part #:">
-        <input type="text" tabindex='54' class="form-control" formControlName="modifiedPartDescription">
+        <input type="text" tabindex='74' class="form-control" formControlName="modifiedPartDescription">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-checkbox-container label="Repaired">
-          <input type="checkbox" tabindex="55" [value]="3" [checked]="defectContains(3)" (change)="onDefectChange(3, $event.target.checked)" />
+          <input type="checkbox" tabindex="75" [value]="3" [checked]="defectContains(3)" (change)="onDefectChange(3, $event.target.checked)" />
       </aac-checkbox-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Repaired Desc:">
-        <select class="form-control" multiple tabindex='56' formControlName="repairDescriptionType">
+        <select class="form-control" multiple tabindex='76' formControlName="repairDescriptionType">
           <option value=""> </option>
           <option *ngFor="let option of repairDescriptionTypes$ | async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -57,7 +57,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Major Repair:" for="isMajorRepair">
-        <select class="form-control" tabindex='57' id="isMajorRepair" formControlName="isMajorRepair">
+        <select class="form-control" tabindex='77' id="isMajorRepair" formControlName="isMajorRepair">
           <option value="">Select Major Repair</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -65,14 +65,14 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Major Repair Desc:">
-        <input type="text" tabindex='58' class="form-control" formControlName="majorRepairDescription">
+        <input type="text" tabindex='78' class="form-control" formControlName="majorRepairDescription">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Repair Document:">
-        <select class="form-control" multiple tabindex='59' formControlName="repairDocumentType">
+        <select class="form-control" multiple tabindex='79' formControlName="repairDocumentType">
           <option value=""></option>
           <option *ngFor="let type of repairDocumentTypes$ | async" [value]="type.id">{{type.description}}</option>
         </select>
@@ -82,7 +82,7 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Externally Visible?" for="isExternallyVisible">
-        <select class="form-control" tabindex='60' id="isExternallyVisible" formControlName="isExternallyVisible">
+        <select class="form-control" tabindex='80' id="isExternallyVisible" formControlName="isExternallyVisible">
           <option value="">Select Externally Visible</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -98,14 +98,14 @@
     <div class="col-md-6">
       <div>
         <aac-field-container label="Height From (in inches):">
-          <input type="text" tabindex='61' class="form-control" formControlName="repairHeightFrom">
+          <input type="text" tabindex='81' class="form-control" formControlName="repairHeightFrom">
         </aac-field-container>
       </div>
     </div>
     <div class="col-md-6">
       <div>
         <aac-field-container label="Height To (in inches):">
-          <input type="text" tabindex='62' class="form-control" formControlName="repairHeightTo">
+          <input type="text" tabindex='82' class="form-control" formControlName="repairHeightTo">
         </aac-field-container>
       </div>
     </div>
@@ -113,24 +113,24 @@
   <div class="row ">
     <div class="col-md-6">
       <aac-field-container label="Width From (in inches):">
-        <input type="text" tabindex='63' class="form-control" formControlName="repairWidthFrom">
+        <input type="text" tabindex='83' class="form-control" formControlName="repairWidthFrom">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Width To (in inches):">
-        <input type="text" tabindex='64' class="form-control" formControlName="repairWidthTo">
+        <input type="text" tabindex='84' class="form-control" formControlName="repairWidthTo">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Chap/Fig/Repair:">
-        <input type="text" tabindex='65' class="form-control" formControlName="chapFigRepairText">
+        <input type="text" tabindex='85' class="form-control" formControlName="chapFigRepairText">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Deferral #:">
-        <input type="text" tabindex='66' class="form-control" formControlName="deferralNo">
+        <input type="text" tabindex='86' class="form-control" formControlName="deferralNo">
       </aac-field-container>
     </div>
   </div>

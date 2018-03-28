@@ -1,19 +1,19 @@
 <h1 class="page-header" style="padding-bottom:20px;">Saved Searches</h1>
 
-<aa-saved-searches [(criteria)]="criteria" [currentSearchId]="currentSearchId" [badgeNumber]="badgeNumber" (onSearch)="runSavedSearch($event)" (onSearchChange)="updateFilters($event)"></aa-saved-searches>
+<aa-saved-searches [(criteria)]="criteria"  [currentSearchId]="currentSearchId" [badgeNumber]="badgeNumber" (onSearch)="runSavedSearch($event)" (onSearchChange)="updateFilters($event)"></aa-saved-searches>
 
 <h1 class="page-header">Search Filters
   <h5 class="pull-right">
-    <a href="" (click)="expandCollapseAll(true)">Expland All</a>
-    <a href="" (click)="expandCollapseAll(false)">Collapse All</a>
+    <a href="" (click)="expandCollapseAll(true)" tabindex="11" >Expland All</a>
+    <a href="" (click)="expandCollapseAll(false)" tabindex="12" >Collapse All</a>
   </h5>
 </h1>
 <form novalidate (submit)="searchAlerts()">
   <accordion>
-    <accordion-group #dateRangeGroup panelClass="panel-default search-panel">
+    <accordion-group #dateRangeGroup panelClass="panel-default search-panel" >
       <div accordion-heading>
         Search by Create Date Range
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
+        <i class="pull-right float-xs-right" tabindex="13"  [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
       </div>
       <aa-search-by-date-range [(criteria)]="criteria"></aa-search-by-date-range>
     </accordion-group>
@@ -110,9 +110,9 @@
   <div class="row form-group">
     <div class="col-sm-12">
       <div class="pull-right">
-        <button type="button" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
-        <button type="button" class="btn btn-primary" (click)="searchAlerts(true)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="button" class="btn btn-default" tabindex="132" (click)="clearFilters()">Clear Filters</button>
+        <button type="button" class="btn btn-primary" tabindex="131" (click)="searchAlerts(true)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
+        <button type="submit" class="btn btn-primary" tabindex="130" >Search</button>
       </div>
     </div>
   </div>

@@ -2,17 +2,17 @@
   <div class="row  form-group">
     <div class="col-md-4">
       <aac-checkbox-container label="Unscheduled Maintenance">
-        <input type="checkbox" tabindex="16" value="U" [checked]="maintenanceContains('U')" (change)="onMaintenanceChange('U', $event.target.checked)"/>
+        <input type="checkbox" tabindex="29" value="U" [checked]="maintenanceContains('U')" (change)="onMaintenanceChange('U', $event.target.checked)"/>
       </aac-checkbox-container>
     </div>
     <div class="col-md-4">
       <aac-checkbox-container label="Scheduled Maintenance">
-        <input type="checkbox" tabindex="17"  value="S" [checked]="maintenanceContains('S')" (change)="onMaintenanceChange('S', $event.target.checked)"/>
+        <input type="checkbox" tabindex="30"  value="S" [checked]="maintenanceContains('S')" (change)="onMaintenanceChange('S', $event.target.checked)"/>
       </aac-checkbox-container>
     </div>
     <div class="col-md-4">
       <aac-field-container label="Line Maintenance:" for="lineMaintenance">
-        <select class="form-control" tabindex='18' id="lineMaintenance" formControlName="lineMaintenance">
+        <select class="form-control" tabindex='31' id="lineMaintenance" formControlName="lineMaintenance">
           <option value="">Select Line Maintenance</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -23,24 +23,24 @@
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="Unscheduled Maintenance Description:">
-        <textarea tabindex='19' maxlength="250" class="form-control" formControlName="unscheduledMaintenanceDescription"></textarea>
+        <textarea tabindex='32' maxlength="250" class="form-control" formControlName="unscheduledMaintenanceDescription"></textarea>
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Routine #:">
-        <input type="text" tabindex='20' class="form-control" formControlName="routineNo">
+        <input type="text" tabindex='33' class="form-control" formControlName="routineNo">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <aac-field-container label="MIC #:">
-        <input type="text" tabindex='21' class="form-control" formControlName="micNo">
+        <input type="text" tabindex='34' class="form-control" formControlName="micNo">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Non-Routine #:">
-        <input type="text" tabindex='22' class="form-control" formControlName="nonRoutineNo">
+        <input type="text" tabindex='35' class="form-control" formControlName="nonRoutineNo">
       </aac-field-container>
     </div>
   </div>
@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="ESM Reference #:">
-        <input type="text" tabindex='22' class="form-control" formControlName="esmReference">
+        <input type="text" tabindex='36' class="form-control" formControlName="esmReference">
       </aac-field-container>
     </div>
   </div>

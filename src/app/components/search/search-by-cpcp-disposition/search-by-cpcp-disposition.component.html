@@ -2,7 +2,7 @@
   <div class="row form-group">
     <div class="col-md-6">
       <aac-field-container label="Non-CPCP:" for="isNonCPCPRelatedEvent">
-        <select class="form-control" tabindex='28' id="isNonCPCPRelatedEvent" formControlName="isNonCPCPRelatedEvent">
+        <select class="form-control" tabindex='44' id="isNonCPCPRelatedEvent" formControlName="isNonCPCPRelatedEvent">
           <option value="">Select Non-CPCP</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Review Complete:" for="isReviewComplete">
-        <select class="form-control" tabindex='29' id="isReviewComplete" formControlName="isReviewComplete">
+        <select class="form-control" tabindex='45' id="isReviewComplete" formControlName="isReviewComplete">
           <option value="">Select Review Complete</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -20,7 +20,7 @@
   <div class="row form-group ">
     <div class="col-md-6">
       <aac-field-container label="Widespread Corrosion:" for="isWideSpreadCorrosion">
-        <select class="form-control" tabindex='30' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
+        <select class="form-control" tabindex='46' id="isWideSpreadCorrosion" formControlName="isWideSpreadCorrosion">
           <option value="">Select Widespread Corrosion</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -28,7 +28,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Is CPCP Task # correct?" for="isCorrosionTaskNoCorrect">
-        <select class="form-control" tabindex='31' id="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect">
+        <select class="form-control" tabindex='47' id="isCorrosionTaskNoCorrect" formControlName="isCorrosionTaskNoCorrect">
           <option value="">Select CPCP Task # correct</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -39,7 +39,7 @@
 
     <div class="col-md-6">
       <aac-field-container label="Is Corrosion Level correct?" for="isCorrosionLevelCorrect">
-        <select class="form-control" tabindex='32' id="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect">
+        <select class="form-control" tabindex='48' id="isCorrosionLevelCorrect" formControlName="isCorrosionLevelCorrect">
           <option value="">Select Corrosion Level correct</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -52,7 +52,7 @@
           <div *ngFor="let level of corrosionLevels$ | async">
             <div class="col-md-4">
               <aac-checkbox-container class="checkbox-group" label="{{level.description}}">
-                <input type="checkbox"
+                <input type="checkbox"  tabindex='49'
                        [value]="level.id"
                        colClass="col-sm-1"
                        [checked]="correctedCorrosionLevelContains(level.id)"
@@ -67,12 +67,12 @@
   <div class="row  form-group">
     <div class="col-md-6">
       <aac-field-container label="Correct Task #:">
-        <input type="text" tabindex='33' maxlength="30" class="form-control" formControlName="correctedCorrosionTaskNo">
+        <input type="text" tabindex='50' maxlength="30" class="form-control" formControlName="correctedCorrosionTaskNo">
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="Reason For Change?:">
-        <select class="form-control" multiple tabindex='34' formControlName="corrosionLevelChangeReason">
+        <select class="form-control" multiple tabindex='51' formControlName="corrosionLevelChangeReason">
           <option value=""> </option>
           <option *ngFor="let ac of reasonsForChange$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -82,19 +82,19 @@
   <div class="row form-group ">
     <div class="col-md-6">
       <aac-field-container label="Engineering Comments:">
-        <textarea type="text" tabindex='35' class="form-control" maxlength="250" formControlName="engineeringComments"></textarea>
+        <textarea type="text" tabindex='52' class="form-control" maxlength="250" formControlName="engineeringComments"></textarea>
       </aac-field-container>
     </div>
     <div class="col-md-6">
       <aac-field-container label="QC Feedback:">
-        <textarea type="text" tabindex='36' class="form-control" maxlength="250" formControlName="qCFeedback"></textarea>
+        <textarea type="text" tabindex='53' class="form-control" maxlength="250" formControlName="qCFeedback"></textarea>
       </aac-field-container>
     </div>
   </div>
   <div class="row form-group ">
     <div class="col-md-6">
       <aac-field-container label="QC Notified:" for="submittedToQC">
-        <select class="form-control" tabindex='37' id="submittedToQC" formControlName="submittedToQC">
+        <select class="form-control" tabindex='54' id="submittedToQC" formControlName="submittedToQC">
           <option value="">Select QC Notified</option>
           <option *ngFor="let option of yesNoBothOptions$| async" [value]="option.id">{{option.description}}</option>
         </select>
@@ -102,7 +102,7 @@
     </div>
     <div class="col-md-6">
       <aac-field-container label="Review Completed By:">
-        <input type="text" tabindex='38' class="form-control" maxlength="50" formControlName="reviewer">
+        <input type="text" tabindex='55' class="form-control" maxlength="50" formControlName="reviewer">
       </aac-field-container>
     </div>
   </div>

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4">
         <aac-field-container label="SDA ID:">
-          <input type="text" tabindex='3' formControlName="id">
+          <input type="text" tabindex='15' formControlName="id">
         </aac-field-container>
       </div>
       <div class="col-md-4">
@@ -11,14 +11,14 @@
           <ng-template #customItemTemplate let-model="item" let-index="index">
             <span><b>{{model.stationIATACode}}</b>:{{model.stationDescription}}</span>
           </ng-template>
-          <input type="text" tabindex='7' autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$"
+          <input type="text" tabindex='7' tabindex='16' autocomplete="off" class="form-control" name="station" id="station" maxlength="3" [typeahead]="stations$"
             typeaheadOptionField="stationIATACode" [typeaheadItemTemplate]="customItemTemplate" typeaheadOptionsLimit="10"
             formControlName="station" />
         </aac-field-container>
       </div>
       <div class="col-md-4">
         <aac-field-container label="Alert Code:">
-          <select tabindex="10" class="form-control" formControlName="alertCode">
+          <select tabindex="17" class="form-control" formControlName="alertCode">
         <option value="">Select Alert Code</option>
         <option *ngFor="let ac of alertCodes$ | async" [value]="ac.id">{{ac.description}}</option>
       </select>
@@ -28,15 +28,15 @@
     <div class="row">
       <div class="col-md-4">
         <aac-field-container label="SDR #:">
-          <input type="text" tabindex='4' formControlName="sdrNumber">
+          <input type="text" tabindex='18' formControlName="sdrNumber">
         </aac-field-container>
         <aac-field-container label="Originator:">
-          <input type="text" tabindex='5' class="form-control" formControlName="originator">
+          <input type="text" tabindex='19' class="form-control" formControlName="originator">
         </aac-field-container>
       </div>
       <div class="col-md-4">
         <aac-field-container label="Department:">
-          <select tabindex="8" class="form-control" formControlName="department">
+          <select tabindex="20" class="form-control" formControlName="department">
         <option value="">Select Department</option>
         <option *ngFor="let d of departments$ | async" [value]="d.id">{{d.description}}</option>
       </select>
@@ -44,13 +44,13 @@
       </div>
       <div class="col-md-4">
         <aac-field-container label="ATA Code 1:">
-          <select tabindex="11" (change)='onAlertCode1Change($event.target.value)' class="form-control" formControlName="ataCode1">
+          <select tabindex="21" (change)='onAlertCode1Change($event.target.value)' class="form-control" formControlName="ataCode1">
         <option value="">Select ATA Code 1</option>
         <option *ngFor="let ac of (ATACodes | uniq:'primaryCode')" [value]="ac.primaryCode">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
       </select>
         </aac-field-container>
         <aac-field-container label="ATA Code 2:">
-          <select tabindex="12" class="form-control" formControlName="ataCode2">
+          <select tabindex="22" class="form-control" formControlName="ataCode2">
         <option value="">Select ATA Code 2</option>
         <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryId">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
       </select>
@@ -60,12 +60,12 @@
     <div class="row">
       <div class="col-md-4">
         <aac-field-container label="Fleet:">
-          <input type="text" tabindex='6' formControlName="fleet">
+          <input type="text" tabindex='23' formControlName="fleet">
         </aac-field-container>
       </div>
       <div class="col-md-4">
         <aac-field-container label="Check Type:">
-          <select tabindex="9" class="form-control" formControlName="checkType">
+          <select tabindex="24" class="form-control" formControlName="checkType">
         <option value="">Select Check Type</option>
         <option *ngFor="let fc of checkTypes$ | async" [value]="fc.id">{{fc.description}}</option>
       </select>
