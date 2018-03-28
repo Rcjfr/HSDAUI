@@ -47,7 +47,7 @@
     "ng2-datetime": "^1.4.0",
     "ng2-file-upload": "^1.2.1",
     "ng2-scroll-to-el": "^1.0.0",
-    "ngx-bootstrap": "2.0.0-beta.11",
+    "ngx-bootstrap": "2.0.3",
     "ngx-toastr": "^6.1.2",
     "pdfmake": "^0.1.34",
     "primeng": "^5.2.3",

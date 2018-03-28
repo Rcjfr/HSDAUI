@@ -4,7 +4,7 @@ export interface ISdaRecord extends TypedRecord<ISdaRecord>, ISda { }
 export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
   id: 0,
   historicId: '',
-  workflowInstanceId: '',
+  workflowInstanceId: '00000000-0000-0000-0000-000000000000',
   versionID: 0,
   version: 1,
   lastModifiedBy: '',

@@ -25,7 +25,8 @@ describe('LoggedInUser Actions', () => {
         sm_user_email: 'firstname.lastname@aa.com',
         sm_user_firstname: 'FirstName',
         sm_user_lastname: 'LastName',
-        sm_logout_url: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget=https://newjetnet.aa.com',
+        sm_logout_url: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget=http://hsda.dev.techops.aa.com',
+        sm_login_url: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?TARGET=$SM$http://hsda.dev.techops.aa.com',
         access_token: 'TOKEN', roles: ['QC_Inspector']
       };
       action = new loggedInUserActions.LoadUserCompleteAction(user);

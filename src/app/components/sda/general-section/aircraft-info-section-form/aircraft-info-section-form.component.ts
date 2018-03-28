@@ -20,6 +20,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   @Output() onNoseNumberChange = new EventEmitter();
   noseNumbers$: Observable<models.IAircraftInfo[]>;
   loading$: Observable<boolean>;
+  public noseNumbersLoading = false;
   @Input()
   set aircraftInfo(info: IAircraftInfo) {
     if (this.formGroup && info) {
@@ -81,6 +82,11 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
         return this.appStateService.getNoseNumbers();
       });
   }
+
+  changeTypeaheadLoading(e: boolean): void {
+    this.noseNumbersLoading = e;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
@@ -93,6 +99,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     }
   }
   noseNumberOnSelect(noseNumber: string) {
+    if (noseNumber.length < 3) { return; }
     this.onNoseNumberChange.emit(noseNumber.toUpperCase());
   }
 }

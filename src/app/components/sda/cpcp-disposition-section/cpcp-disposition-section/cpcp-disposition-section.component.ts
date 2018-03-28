@@ -78,6 +78,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
         this.formGroup.patchValue(newSda.cpcpDispositionSection, { emitEvent: false });
       } else {
         this.resetToDefaults();
+        this.formGroup.patchValue({ isReviewComplete: undefined });
       }
 
       const isReviewComplete = this.formGroup.get('isReviewComplete').value;

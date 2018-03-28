@@ -107,7 +107,8 @@ export class MockAppStateService extends AppStateService {
       sm_user_email: 'testuser@aa.com',
       sm_user_firstname: 'FirstName',
       sm_user_lastname: 'LastName',
-      sm_logout_url: ''
+      sm_logout_url: '',
+      sm_login_url: ''
     }))
   }
   getDTEStatus() {

@@ -36,12 +36,12 @@ export class SavedSearchesComponent implements OnInit {
 
     this.createForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      isDefault: new FormControl()
+      isDefault: new FormControl(false)
     });
 
     this.updateForm = new FormGroup({
       selected: new FormControl(0, [Validators.min(1)]),
-      isDefault: new FormControl()
+      isDefault: new FormControl(false)
     });
   }
 

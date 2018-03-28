@@ -11,5 +11,6 @@ export const UserRecordFactory = makeTypedFactory<IUser, IUserRecord>({
   sm_user_lastname: '',
   access_token: '',
   sm_logout_url: '',
+  sm_login_url: '',
   roles: []
 });

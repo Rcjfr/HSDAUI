@@ -8,14 +8,14 @@
       <input type="text" autocomplete="off" tabindex='6' class="form-control" required
              [typeahead]="noseNumbers$"
              formControlName="aircraftNo"
+             (typeaheadLoading)="changeTypeaheadLoading($event)"
              (typeaheadOnSelect)="noseNumberOnSelect($event.value)"
              typeaheadOptionField="noseNumber" [typeaheadItemTemplate]="customAircraftItemTemplate"
              (change)="noseNumberOnSelect($event.target.value)"
-             typeaheadOptionsLimit="50" typeaheadMinLength="1"
-             >
+             typeaheadOptionsLimit="50" typeaheadMinLength="1">
 
       <div class="input-group-addon">
-        <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="loading$|async" (click)="noseNumberOnSelect(formGroup.get('aircraftNo').value)"></span>
+        <span class="glyphicon glyphicon-refresh" [class.glyphicon-refresh-animate]="noseNumbersLoading" (click)="noseNumberOnSelect(formGroup.get('aircraftNo').value)"></span>
       </div>
     </div>
     <!--<input type="text" class="form-control" autocomplete="off" tabindex='6' formControlName="aircraftNo"/>-->

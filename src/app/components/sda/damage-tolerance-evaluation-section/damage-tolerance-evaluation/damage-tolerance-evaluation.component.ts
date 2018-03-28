@@ -191,7 +191,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   initAttachment(fileName: string, fileSize: number, filePath: string) {
     return this.fb.group({
-      attachmentID: ['', [Validators.maxLength(50)]],
+      attachmentID: [0, [Validators.maxLength(50)]],
       attachmentName: [fileName, [Validators.maxLength(50)]],
       attachmentSize: [fileSize, [Validators.maxLength(50)]],
       attachmentPath: [filePath, [Validators.maxLength(50)]]

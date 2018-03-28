@@ -174,6 +174,10 @@ export class AuthService {
     return this.currentUser$.map(u => u.sm_logout_url);
   }
 
+  logInUrl(): Observable<string> {
+    return this.currentUser$.map(u => u.sm_login_url);
+  }
+
   isQCInspector(): Observable<boolean> {
     return Observable.combineLatest(this.isQCPersonnel(), this.isQCManager()).map(latestValues => {
       const [qcPersonnel, qcManager] = latestValues;
