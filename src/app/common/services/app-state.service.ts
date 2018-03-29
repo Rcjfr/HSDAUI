@@ -241,6 +241,9 @@ export class AppStateService {
   getLoadingText(): Observable<string> {
     return this.store.select(fromRoot.getLoadingText);
   }
+  getNoseNumbersLoading(): Observable<boolean> {
+    return this.store.select(fromRoot.getNoseNumbersLoading);
+  }
   getSdaLoading() {
     return Observable.combineLatest(
       this.getLookupDataLoading(),

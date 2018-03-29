@@ -75,6 +75,10 @@ export class MockAppStateService extends AppStateService {
     return Observable.of(false);
   }
 
+  getNoseNumbersLoading() {
+    return Observable.of(false);
+  }
+
   getFleetCheckTypes() {
     return Observable.of(<List<models.ICheckType>>List.of());
   }

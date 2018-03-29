@@ -20,7 +20,6 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   @Output() onNoseNumberChange = new EventEmitter();
   noseNumbers$: Observable<models.IAircraftInfo[]>;
   loading$: Observable<boolean>;
-  public noseNumbersLoading = false;
   @Input()
   set aircraftInfo(info: IAircraftInfo) {
     if (this.formGroup && info) {
@@ -72,7 +71,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
   ngOnInit(): void {
     this.parent.addControl(this.formGroupName, this.formGroup);
-    this.loading$ = this.appStateService.getSelectedAlertLoading();
+    this.loading$ = this.appStateService.getNoseNumbersLoading();
     this.noseNumbers$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.formGroup.get('aircraftNo').value);
     })
@@ -81,10 +80,6 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
 
         return this.appStateService.getNoseNumbers();
       });
-  }
-
-  changeTypeaheadLoading(e: boolean): void {
-    this.noseNumbersLoading = e;
   }
 
   ngOnChanges(changes: SimpleChanges) {

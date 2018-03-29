@@ -15,6 +15,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
+  noseNumbersLoading: boolean
   loadingText: string;
   savedState: ISavedStateRecord,
   currentSdaId: number;
@@ -38,6 +39,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   sda: SdaFactory(),
   newSdaStatus: Status.Open,
   noseNumbers: List.of<IAircraftInfo>(),
+  noseNumbersLoading: false,
   changeLogs: List.of<IChangeLog>(),
   aircraftInfo: AircraftInfoFactory(),
   sdaListResult: SdaListResultFactory(),
@@ -139,11 +141,19 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
 
         return state.merge({ loading: false, changeLogs: List.of(...act.payload) });
       }
+    case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS:
+      {
+        return state.merge({ noseNumbersLoading: true });
+      }
+    case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_FAIL:
+      {
+        return state.merge({ noseNumbersLoading: false });
+      }
     case selectedAlertActions.ActionTypes.LOAD_NOSE_NUMBERS_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadNoseNumbersCompleteAction;
 
-        return state.merge({ loading: false, noseNumbers: List.of(...act.payload) });
+        return state.merge({ noseNumbersLoading: false, noseNumbers: List.of(...act.payload) });
       }
     case selectedAlertActions.ActionTypes.SET_SDA_NEW_STATUS:
       {
@@ -165,6 +175,7 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
 export const getSelectedSda = (state: State) => state.sda;
 export const getSdaListResult = (state: State) => state.sdaListResult;
 export const getLoading = (state: State) => state.loading;
+export const getNoseNumbersLoading = (state: State) => state.noseNumbersLoading;
 export const getSavedState = (state: State) => state.savedState;
 export const getLoadNewSdaState = (state: State) => state.loadNewSdaCounter;
 export const getCurrentSdaId = (state: State) => state.currentSdaId;

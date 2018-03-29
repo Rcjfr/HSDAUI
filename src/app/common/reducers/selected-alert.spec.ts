@@ -15,6 +15,7 @@ describe('selectedAlertReducer', () => {
   const initialState: fromSelectedAlert.State = {
     loading: false,
     loadingText: 'Loading',
+    noseNumbersLoading: false,
     savedState: SavedStateFactory(),
     currentSdaId: 0,
     loadNewSdaCounter: 0,
@@ -37,7 +38,7 @@ describe('selectedAlertReducer', () => {
   });
 
   it('SelectedAlert Reducer Initial State', () => {
-    const state = fromSelectedAlert.reducer(undefined, { type: null});
+    const state = fromSelectedAlert.reducer(undefined, { type: null });
     expect(state.loading).toEqual(false);
     expect(state.noseNumbers.size).toEqual(0);
   });

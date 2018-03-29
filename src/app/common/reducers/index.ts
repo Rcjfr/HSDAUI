@@ -42,6 +42,8 @@ export const getSdaListResult = createSelector(getSelectedAlertState, fromSelect
 export const getSearchCriteria = createSelector(getSelectedAlertState, fromSelectedAlert.getSearchCriteria);
 export const getAircraftInfo = createSelector(getSelectedAlertState, fromSelectedAlert.getAircraftInfo);
 export const getSelectedAlertLoading = createSelector(getSelectedAlertState, fromSelectedAlert.getLoading);
+export const getNoseNumbersLoading = createSelector(getSelectedAlertState, fromSelectedAlert.getNoseNumbersLoading);
+
 export const getSelectedAlertSavedState = createSelector(getSelectedAlertState, fromSelectedAlert.getSavedState);
 export const getLoadNewSdaState = createSelector(getSelectedAlertState, fromSelectedAlert.getLoadNewSdaState);
 export const getNoseNumbers = createSelector(getSelectedAlertState, fromSelectedAlert.getNoseNumbers);
