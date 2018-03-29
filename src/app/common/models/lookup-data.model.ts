@@ -18,5 +18,6 @@ export interface ILookupData {
   repairInspectionStatus: IBaseLookUp[];
   ataCodes: IATACode[];
   checkTypes: ICheckType[];
+  sdaStatus: IBaseLookUp[];
 }
 

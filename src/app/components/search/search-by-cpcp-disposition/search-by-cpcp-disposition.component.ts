@@ -20,7 +20,7 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
     isWideSpreadCorrosion: new FormControl(''),
     isCorrosionTaskNoCorrect: new FormControl(''),
     isCorrosionLevelCorrect: new FormControl(''),
-    correctedCorrosionLevel: new FormArray([]),
+    correctedCorrosionLevel: new FormControl([]),
     correctedCorrosionTaskNo: new FormControl(),
     corrosionLevelChangeReason: new FormControl(),
     engineeringComments: new FormControl(),
@@ -44,17 +44,8 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.criteria && changes.criteria.currentValue) {
-      const corrosionArray = <FormArray>this.cpcpDispositionForm.controls.isWideSpreadCorrosion;
-
       if (changes.criteria.currentValue.searchByCpcpDisposition) {
         this.cpcpDispositionForm.patchValue(changes.criteria.currentValue.searchByCpcpDisposition, { emitEvent: false });
-        while ((corrosionArray).length) {
-          corrosionArray.removeAt(0);
-        }
-        //Repair Type checkboxes
-        changes.criteria.currentValue.searchByCpcpDisposition.isWideSpreadCorrosion.forEach(element => {
-          corrosionArray.push(new FormControl(element));
-        });
       } else {
         this.cpcpDispositionForm.reset({
           isNonCPCPRelatedEvent: '',
@@ -62,30 +53,10 @@ export class SearchByCpcpDispositionComponent implements OnInit, OnChanges {
           isWideSpreadCorrosion: '',
           isCorrosionTaskNoCorrect: '',
           isCorrosionLevelCorrect: '',
-          submittedToQC: ''
+          submittedToQC: '',
+          correctedCorrosionLevel: []
         }, { emitEvent: false });
-        while ((corrosionArray).length) {
-          corrosionArray.removeAt(0);
-        }
       }
     }
-  }
-
-  onCorrectedCorrosionLevelChange(id: string, isChecked: boolean) {
-    const corrosionArray = <FormArray>this.cpcpDispositionForm.controls.correctedCorrosionLevel;
-
-    if (isChecked) {
-      corrosionArray.push(new FormControl(id));
-    } else {
-      corrosionArray.removeAt(corrosionArray.controls.findIndex(x => x.value === id));
-    }
-  }
-
-  correctedCorrosionLevelContains(id) {
-    if (_.includes(this.cpcpDispositionForm.controls.correctedCorrosionLevel.value, id)) {
-      return true;
-    }
-
-    return false;
   }
 }

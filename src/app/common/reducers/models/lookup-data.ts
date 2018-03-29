@@ -19,5 +19,6 @@ alertCodes: [],
   repairDocumentTypes: [],
   repairInspectionStatus: [],
   ataCodes: [],
-  checkTypes: []
+  checkTypes: [],
+  sdaStatus: []
 });

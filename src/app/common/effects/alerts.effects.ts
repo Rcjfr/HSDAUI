@@ -269,7 +269,7 @@ export class AlertEffects {
           return new selectedAlert.DownloadAttachmentCompleteAction();
         })
         .catch((err) => {
-          return of(new selectedAlert.DownloadAttachmentFailAction('Failed to download attachment.Please contact Administrator.'));
+          return of(new selectedAlert.DownloadAttachmentFailAction('Failed to download attachment.Please try again after sometime or contact Administrator.'));
         });
     });
   ;

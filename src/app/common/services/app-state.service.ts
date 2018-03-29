@@ -98,6 +98,11 @@ export class AppStateService {
   getDTEStatus(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDTEStatus);
   }
+
+  getSdaStatus(): Observable<IBaseLookUp[]> {
+    return this.store.select(fromRoot.getSdaStatus);
+  }
+
   getRepairInspectionStatus(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }

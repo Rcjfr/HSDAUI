@@ -18,7 +18,7 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
     isWideSpreadCorrosion: new FormControl(''),
     isPreviouslyBlended: new FormControl(''),
     corrosionTaskNo: new FormControl(),
-    corrosionLevel: new FormArray([]),
+    corrosionLevel: new FormControl([]),
     corrosionType: new FormControl(),
     causesOfDamage: new FormControl(),
     corrosionTypeOtherText: new FormControl()
@@ -45,35 +45,14 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
       //Remove any empty selections from the multi-select dropdowns
       form.corrosionType = _.compact(form.corrosionType);
       form.causesOfDamage = _.compact(form.causesOfDamage);
-
-      //These are temporarily checkboxes until we convert them to dropdowns
-      //We want to pass null instead of false if unchecked
-      if (form.isWideSpreadCorrosion === false) {
-        form.isWideSpreadCorrosion = null;
-      }
-      if (form.isPreviouslyBlended === false) {
-        form.isPreviouslyBlended = null;
-      }
       this.criteria.searchByCorrosion = form;
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.criteria && changes.criteria.currentValue) {
-      const corrosionLevelArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
-
       if (changes.criteria.currentValue.searchByCorrosion) {
         this.corrosionForm.patchValue(changes.criteria.currentValue.searchByCorrosion, { emitEvent: false });
-        //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
-        while ((corrosionLevelArray).length) {
-          corrosionLevelArray.removeAt(0);
-        }
-
-        //Corrosion Level checkbox array
-        changes.criteria.currentValue.searchByCorrosion.corrosionLevel.forEach(element => {
-          corrosionLevelArray.push(new FormControl(element));
-        });
-
         this.onCorrosionTypeChange();
       } else {
         this.corrosionForm.reset({
@@ -81,10 +60,6 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
           isPreviouslyBlended: ''
         }, { emitEvent: false });
         this.hideCorrosionTypeOther  = true;
-        //FormArray values are not clearing properly after reset()/patch(), see: https://github.com/angular/angular/pull/11051
-        while ((corrosionLevelArray).length) {
-          corrosionLevelArray.removeAt(0);
-        }
       }
     }
   }
@@ -101,23 +76,5 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
     }
 
     this.hideCorrosionTypeOther = true;
-  }
-
-  onCorrosionLevelChange(id: string, isChecked: boolean) {
-    const corrosionArray = <FormArray>this.corrosionForm.controls.corrosionLevel;
-
-    if (isChecked) {
-      corrosionArray.push(new FormControl(id));
-    } else {
-      corrosionArray.removeAt(corrosionArray.controls.findIndex(x => x.value === id));
-    }
-  }
-
-  corrosionLevelContains(id) {
-    if (_.includes(this.corrosionForm.controls.corrosionLevel.value, id)) {
-      return true;
-    }
-
-    return false;
   }
 }
