@@ -13,6 +13,8 @@ import { AuthService } from '@app/common/services/auth.service';
 import { ISearchData } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
+import { Helper } from '@app/common/helper';
+import * as moment from 'moment';
 
 
 @Component({
@@ -63,24 +65,29 @@ export class AlertsSearchComponent implements OnInit {
   }
   isSearchModified(savedCriteria: any) {
 
-    this.deserializeDate(savedCriteria.searchByDateRange, 'dateFrom');
-    this.deserializeDate(savedCriteria.searchByDateRange, 'dateThrough');
-    this.deserializeDate(savedCriteria.searchByDTE, 'stage1RTSDateFrom');
-    this.deserializeDate(savedCriteria.searchByDTE, 'stage1RTSDateTo');
-    this.deserializeDate(savedCriteria.searchByDTE, 'stage2DateFrom');
-    this.deserializeDate(savedCriteria.searchByDTE, 'stage2DateTo');
-    this.deserializeDate(savedCriteria.searchByDTE, 'stage3DateFrom');
-    this.deserializeDate(savedCriteria.searchByDTE, 'Stage3DateTo');
-    this.deserializeDate(savedCriteria.searchByDTE, 'updatedDateFrom');
-    this.deserializeDate(savedCriteria.searchByDTE, 'updatedDateTo');
-    this.deserializeDate(savedCriteria.searchByDTE, 'dueDateFrom');
-    this.deserializeDate(savedCriteria.searchByDTE, 'dueDateTo');
-
-    if (JSON.stringify(savedCriteria) === JSON.stringify(this.criteria)) {
-      return false;
-    } else {
-      return true;
+    if (this.criteria && this.criteria.searchByDateRange) {
+      this.criteria.searchByDateRange.dateFrom = this.criteria.searchByDateRange.dateFrom ? moment(this.criteria.searchByDateRange.dateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDateRange.dateThrough = this.criteria.searchByDateRange.dateThrough ? moment(this.criteria.searchByDateRange.dateThrough).format('YYYY-MM-DD') + 'T00:00:00' : '';
     }
+
+    if (this.criteria && this.criteria.searchByDTE) {
+      this.criteria.searchByDTE.stage1RTSDateFrom = this.criteria.searchByDTE.stage1RTSDateFrom ? moment(this.criteria.searchByDTE.stage1RTSDateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.stage1RTSDateTo = this.criteria.searchByDTE.stage1RTSDateTo ? moment(this.criteria.searchByDTE.stage1RTSDateTo).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.stage2DateFrom = this.criteria.searchByDTE.stage2DateFrom ? moment(this.criteria.searchByDTE.stage2DateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.stage2DateTo = this.criteria.searchByDTE.stage2DateTo ? moment(this.criteria.searchByDTE.stage2DateTo).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.stage3DateFrom = this.criteria.searchByDTE.stage3DateFrom ? moment(this.criteria.searchByDTE.stage3DateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.Stage3DateTo = this.criteria.searchByDTE.Stage3DateTo ? moment(this.criteria.searchByDTE.Stage3DateTo).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.updatedDateFrom = this.criteria.searchByDTE.updatedDateFrom ? moment(this.criteria.searchByDTE.updatedDateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.updatedDateTo = this.criteria.searchByDTE.updatedDateTo ? moment(this.criteria.searchByDTE.updatedDateTo).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.dueDateFrom = this.criteria.searchByDTE.dueDateFrom ? moment(this.criteria.searchByDTE.dueDateFrom).format('YYYY-MM-DD') + 'T00:00:00' : '';
+      this.criteria.searchByDTE.dueDateTo = this.criteria.searchByDTE.dueDateTo ? moment(this.criteria.searchByDTE.dueDateTo).format('YYYY-MM-DD') + 'T00:00:00' : '';
+    }
+
+    if (_.isEqual(Helper.RemoveNulls(savedCriteria), Helper.RemoveNulls(this.criteria))) {
+      return false;
+    }
+
+     return true;
   }
 
   runSavedSearch(criteria) {

@@ -34,10 +34,11 @@ describe('AlertsSearchComponent', () => {
 
   it('should run saved search when criteria are not changed', () => {
     const alertSearch = new AlertsSearchComponent(null, null, null, null, null);
+ //   const dialogueService = new DialogService(null, null, null, null);
     alertSearch.criteria = {
       'searchByDateRange' : {
-        'dateFrom': new Date('2017-10-31T00:00:00'),
-       'dateThrough': new Date('2017-12-01T00:00:00')}
+        'dateFrom': '2017-10-31T00:00:00',
+       'dateThrough': '2017-12-01T00:00:00'}
       }
       const savedCriteria = {
        'searchByDateRange' : {
@@ -45,6 +46,7 @@ describe('AlertsSearchComponent', () => {
         'dateThrough': '2017-12-01T00:00:00'}
       }
       spyOn(alertSearch, 'searchAlerts');
+    //  spyOn(dialogueService, 'addDialog').and.returnValue(Observable.of(true));
       alertSearch.runSavedSearch(savedCriteria);
       expect(alertSearch.searchAlerts).toHaveBeenCalledTimes(1);
  })

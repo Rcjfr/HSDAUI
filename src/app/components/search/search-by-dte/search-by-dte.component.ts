@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { decimalsNumberMask } from '@app/common/masks';
 import * as _ from 'lodash';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import * as moment from 'moment';
+
 @Component({
   selector: 'aa-search-by-dte',
   templateUrl: './search-by-dte.component.html',
@@ -74,8 +76,46 @@ export class SearchByDteComponent implements OnInit , OnChanges {
       //Remove any empty selections from the multi-select dropdowns
       form.dteStatus = _.compact(form.dteStatus);
       form.repairInspectionStatus = _.compact(form.repairInspectionStatus);
+      if (form && form.stage1RTSDateFrom) {
+        form.stage1RTSDateFrom = moment(form.stage1RTSDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.stage1RTSDateTo) {
+        form.stage1RTSDateTo = moment(form.stage1RTSDateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.stage2DateFrom) {
+        form.stage2DateFrom = moment(form.stage2DateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.stage2DateTo) {
+        form.stage2DateTo = moment(form.stage2DateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.stage3DateFrom) {
+        form.stage3DateFrom = moment(form.stage3DateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.Stage3DateTo) {
+        form.Stage3DateTo = moment(form.Stage3DateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.updatedDateFrom) {
+        form.updatedDateFrom = moment(form.updatedDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.updatedDateTo) {
+        form.updatedDateTo = moment(form.updatedDateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.dueDateFrom) {
+        form.dueDateFrom = moment(form.dueDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.dueDateTo) {
+        form.dueDateTo = moment(form.dueDateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
       this.criteria.searchByDTE = form;
+
     });
+
+    // this.dteForm.valueChanges.subscribe(values => {
+    // });
 
   }
 

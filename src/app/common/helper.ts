@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-
+import * as _ from 'lodash';
 export class Helper {
   public static Deserialize(data: string): any {
     return JSON.parse(data, Helper.ReviveDateTime);
@@ -25,5 +25,29 @@ export class Helper {
     }
 
     return value;
+  }
+
+public static RemoveNulls(criteriaObj: Object) {
+  const criteriaObject = {} ;
+  const criteria = _.pickBy(criteriaObj, _.identity)
+  _.forIn(criteria, (value, key) => {
+      const final = _.omitBy(value,  function(x: any) {
+      const check = x === null ||
+      x === '' ||
+      x === undefined ||
+      (_.isObject(x) && _.isEmpty(x)) ||
+      (_.isArray(x) && x.length === 0);
+
+     return check;
+     } )
+
+     if (!_.isEmpty(final)) {
+      criteriaObject[key] = final
+     }
+
+  })
+
+  return criteriaObject;
+
   }
 }

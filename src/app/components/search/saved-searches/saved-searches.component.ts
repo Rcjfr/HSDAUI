@@ -6,6 +6,7 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { List } from 'immutable';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
+import { Helper } from '@app/common/helper';
 
 @Component({
   selector: 'aa-saved-searches',
@@ -87,7 +88,7 @@ export class SavedSearchesComponent implements OnInit {
         if (this.selectedSearchCriteria) {
           this.savedSearchStateService.setCurrentSearchId(this.selectedSearchCriteria.searchId);
           this.onSearchChange.emit(JSON.parse(this.selectedSearchCriteria.criteria));
-          this.updateForm.patchValue({ isDefault: this.selectedSearchCriteria.isDefault });
+         this.updateForm.patchValue({ isDefault: this.selectedSearchCriteria.isDefault });
         }
       }
     } else {
@@ -101,7 +102,7 @@ export class SavedSearchesComponent implements OnInit {
     if (this.createForm.valid) {
       const search = {
         badgeNumber: this.badgeNumber,
-        criteria: JSON.stringify(this.criteria),
+        criteria: JSON.stringify(Helper.RemoveNulls(this.criteria)),
         searchId: 0,
         name: this.createForm.controls.name.value,
         isDefault: this.createForm.controls.isDefault.value
@@ -121,7 +122,7 @@ export class SavedSearchesComponent implements OnInit {
       }).filter(confirm => confirm === true).subscribe(confirm => {
         const search = {
           badgeNumber: this.badgeNumber,
-          criteria: JSON.stringify(this.criteria),
+          criteria: JSON.stringify(Helper.RemoveNulls(this.criteria)),
           searchId: +this.updateForm.controls.selected.value,
           name: name,
           isDefault: this.updateForm.controls.isDefault.value
