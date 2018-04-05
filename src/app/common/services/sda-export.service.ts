@@ -629,7 +629,7 @@ export class SdaExportService {
     content.table.body.push([
       this.getLabel('Repair Document:'),
       this.getFieldValue(sda.repairDocumentTypeDesc, 75),
-      { ...this.getLableFieldValue('Chap/Fig/Repair:', sda.chapFigRepairText, 260, 70), colSpan: 2 },
+      { ...this.getLableFieldValue('Repair Reference:', sda.chapFigRepairText, 260, 70), colSpan: 2 },
       {}
       //this.getLabel('Chap/Fig/Repair:'),
       //this.getFieldValue(sda.chapFigRepairText, 130)
@@ -793,7 +793,7 @@ export class SdaExportService {
           [
             this.getLabel('Repair Document:'),
             this.getFieldValue(sda.repairDocumentTypeDesc),
-            this.getLabel('Chap/Fig/Repair:'),
+            this.getLabel('Repair Reference:'),
             this.getFieldValue(sda.chapFigRepairText)
           ],
           [
@@ -946,7 +946,7 @@ export class SdaExportService {
                 body: [
                   [
                     this.getLabel('Major Repair Updated By:'),
-                    this.getFieldValue(sda.dteUpdatedBy, 75),
+                    this.getFieldValue(`${sda.dteUpdatedByBadgeNo} - ${sda.dteUpdatedBy}`, 75),
                     this.getLabel('Major Repair Updated Date:'),
                     this.getFieldValue(sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY hh:mm A') : ' ', 75),
                     this.getLabel('DTE Due Date:'),

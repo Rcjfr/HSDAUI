@@ -12,7 +12,7 @@ import {
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { Output, Input } from '@angular/core';
 import { AppStateService, AuthService } from '@app/common/services';
-import { IAircraftInfo } from '@app/common/models/aircraft-info.model';
+import { IAircraftInfo, Status } from '@app/common/models';
 import * as models from '@app/common/models';
 import { Observable, Observer } from 'rxjs/Rx';
 import { Expressions } from '@app/common/validators/generic-validator';
@@ -75,6 +75,7 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
       this.searchCriteria.searchByAircraft = {aircraftNo: this.mrlReportSearchForm.controls.aircraftNo.value};
       this.searchCriteria.searchByDateRange = {dateFrom: this.mrlReportSearchForm.controls.dateFrom.value, dateThrough: this.mrlReportSearchForm.controls.dateThrough.value};
       this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1 , deferralCode: this.mrlReportSearchForm.controls.monStatus.value ? 'MON' : null};
+      this.searchCriteria.searchByStatus = { status: Status.Closed };
       this.searchCriteria.pageData = this.getDefaultPageData();
       if (isExcel) {
         this.onShowMrlExcel.emit(this.searchCriteria);

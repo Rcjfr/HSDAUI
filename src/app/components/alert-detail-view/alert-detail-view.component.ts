@@ -499,7 +499,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
       sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.inspectionInterval && t.inspectionMethod && t.inspectionThreshold);
       sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
-      sdaDetail.dteSection.updatedBy = this.lastModifiedBy;
+      sdaDetail.dteSection.updatedByBadgeNo = this.statusUpdatedBy;
+      sdaDetail.dteSection.updatedBy = this.statusUpdatedByName;
       sdaDetail.dteSection.updatedDate = this.lastModifiedOn;
     }
 

@@ -80,7 +80,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'RepairDescriptionType', display: 'Repaired Description Type', dbField: 'REPAIR_DESCRIPTION_TYPE_DESC' },
   { key: 'RepairDescriptionOtherText', display: 'Repaired EmpowerMX Description', dbField: 'REPAIR_DESCRIPTION_OTHER_TEXT' },
   { key: 'RepairDocumentType', display: 'Repair Document', dbField: 'REPAIR_DOCUMENT_TYPE_DESC' },
-  { key: 'ChapFigRepairText', display: 'Chap/Fig/Repair', dbField: 'CHAP_FIG_REPAIR_TEXT' },
+  { key: 'ChapFigRepairText', display: 'Repair Reference', dbField: 'CHAP_FIG_REPAIR_TEXT' },
   { key: 'EngineeringAuthorization', display: 'Engineering Authorization (EA)', dbField: 'ENGG_AUTHORIZATION' },
   { key: 'IsExternallyVisible', display: 'Externally Visible?', dbField: 'IS_EXTERNALLY_VISIBLE' },
   { key: 'RepairHeight', display: 'Repair Height (inches)', dbField: 'HEIGHT' },

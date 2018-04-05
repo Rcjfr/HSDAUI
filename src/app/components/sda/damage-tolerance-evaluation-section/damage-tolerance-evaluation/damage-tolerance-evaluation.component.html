@@ -1,25 +1,16 @@
 <div class="panel-body" [formGroup]="formGroup">
-  <div class="row">
-    <div class="col-sm-8">
-      <aac-field-container [required]="true"  labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
-        <select class="form-control" tabindex='89' formControlName="dteStatus">
-          <option value="">Select DTE Status </option>
-          <option *ngFor="let ac of dteStatus$ | async" [value]="ac.id">{{ac.description}}</option>
-        </select>
-      </aac-field-container>
-    </div>
-  </div>
+
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
-        <input type="text" tabindex='90' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
+        <input type="text" tabindex='89' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Cycles:" [message]="displayMessage.cycles">
-        <input type="text" tabindex='91' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
+        <input type="text" tabindex='90' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
       </aac-field-container>
     </div>
   </div>
@@ -32,7 +23,7 @@
   <div class="row form-group">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Repair Insp. Status:" [message]="displayMessage.repairInspectionStatus">
-        <select class="form-control" tabindex='92' formControlName="repairInspectionStatus">
+        <select class="form-control" tabindex='91' formControlName="repairInspectionStatus">
           <option value="">Select Repair Inspection Status</option>
           <option *ngFor="let ac of repairInspectionStatus$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -45,10 +36,10 @@
         <label class="col-sm-4 control-label">Fatigue Critical<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="93" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="true" tabindex="92" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="93" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="false" tabindex="92" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isFatigueCritical" class="error">{{displayMessage.isFatigueCritical}}</div>
         </div>
@@ -58,7 +49,7 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container [required]="true" label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
-        <datetime [timepicker]="false" [tabindex]='94' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]='93' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
 
     </div>
@@ -66,58 +57,58 @@
   <div class="row form-group">
     <div class="col-sm-3">
       <aac-radio-container label="6 Months">
-        <input type="radio" [value]="6" tabindex="95" formControlName="stage1Duration" />
+        <input type="radio" [value]="6" tabindex="94" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="12 Months">
-        <input type="radio" [value]="12" tabindex="95" formControlName="stage1Duration" />
+        <input type="radio" [value]="12" tabindex="94" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="18 Months">
-        <input type="radio" [value]="18" tabindex="95" formControlName="stage1Duration" />
+        <input type="radio" [value]="18" tabindex="94" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
     <div class="col-sm-3">
       <aac-radio-container label="24 Months">
-        <input type="radio" [value]="24" tabindex="95" formControlName="stage1Duration" />
+        <input type="radio" [value]="24" tabindex="94" formControlName="stage1Duration" />
       </aac-radio-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="Stage 2 Approval Date:" [attr.for]="stage2Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="96" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="95" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="Stage 3 Approval Date:" [attr.for]="stage3Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="97" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="96" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="SR #:" [message]="displayMessage.srNumber">
-        <input class="form-control" formControlName="srNumber" tabindex="98">
+        <input class="form-control" formControlName="srNumber" tabindex="97">
       </aac-field-container>
     </div>
     <div class="col-sm-4">
       <aac-field-container label="RDAS #:" [message]="displayMessage.rdasNumber">
-        <input class="form-control" formControlName="rdasNumber" tabindex="99">
+        <input class="form-control" formControlName="rdasNumber" tabindex="98">
       </aac-field-container>
     </div>
     <div class="col-sm-4">
       <aac-field-container label="ETD #:" [message]="displayMessage.etdNumber">
-        <input class="form-control" formControlName="etdNumber" tabindex="100">
+        <input class="form-control" formControlName="etdNumber" tabindex="99">
       </aac-field-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="ESM Sub/Item #:" [message]="displayMessage.esmSubItemNumber">
-        <input class="form-control" formControlName="esmSubItemNumber" tabindex="101">
+        <input class="form-control" formControlName="esmSubItemNumber" tabindex="100">
       </aac-field-container>
     </div>
   </div>
@@ -140,18 +131,36 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="DTE Comments:" [message]="displayMessage.comments">
-        <textarea class="form-control" tabindex="122" rows="5" cols="50" formControlName="comments"></textarea>
+        <textarea class="form-control" tabindex="121" rows="5" cols="50" formControlName="comments"></textarea>
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="QC Feedback:" [message]="displayMessage.qcFeedback">
-        <textarea class="form-control" rows="5" cols="50" tabindex="123" formControlName="qcFeedback"></textarea>
+        <textarea class="form-control" rows="5" cols="50" tabindex="122" formControlName="qcFeedback"></textarea>
       </aac-field-container>
-      <aac-checkbox-container label="Submit to QC">
+      <!-- <aac-checkbox-container label="Submit to QC">
         <input type="checkbox" tabindex="124" formControlName="submittedToQC" />
+      </aac-checkbox-container> -->
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-sm-6">
+      <aac-checkbox-container label="Submit to QC">
+        <input type="checkbox" tabindex="123" formControlName="submittedToQC" />
       </aac-checkbox-container>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <aac-field-container [required]="true"  labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
+        <select class="form-control" tabindex='124' formControlName="dteStatus">
+          <option value="">Select DTE Status </option>
+          <option *ngFor="let ac of dteStatus$ | async" [value]="ac.id">{{ac.description}}</option>
+        </select>
+      </aac-field-container>
+    </div>
+  </div>
+
   <div class="row form-group">
     <div class="col-sm-12">
       <h3>Attachments:</h3>

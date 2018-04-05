@@ -122,6 +122,7 @@ export interface ISdaListView {
   esmSubItemNumber: string,
   dteComments: string,
   dteUpdatedBy: string,
+  dteUpdatedByBadgeNo: string,
   dteUpdatedDate: Date,
   dueDate: string,
   dteqcFeedback: string,

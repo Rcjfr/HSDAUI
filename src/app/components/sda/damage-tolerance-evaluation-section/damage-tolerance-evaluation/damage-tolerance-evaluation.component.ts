@@ -151,10 +151,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
         });
         if (newSda.dteSection.updatedBy) {
-          const index = newSda.dteSection.updatedBy.indexOf('-')
           this.formGroup.patchValue({
-            updatedByEmpID: newSda.dteSection.updatedBy.slice(0, index - 1),
-            updatedByName: newSda.dteSection.updatedBy.slice(index + 2, newSda.dteSection.updatedBy.length)
+            updatedByEmpID: newSda.dteSection.updatedByBadgeNo,
+            updatedByName: newSda.dteSection.updatedBy
           });
         }
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems));

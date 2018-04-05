@@ -269,8 +269,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     },
     'correctiveActionChapFormGroup': {
       'chapFigRepairText': {
-        required: 'Chap/Fig/Repair is required.',
-        maxlength: 'Chap/Fig/Repair must not be more than 100 characters.',
+        required: 'Repair Reference is required.',
+        maxlength: 'Repair Reference must not be more than 100 characters.',
       }
     },
     'correctiveActionOptionFormGroup': {
@@ -414,7 +414,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
 
     },
     'chapFigRepairText': {
-      maxlength: 'Chap/Fig/Repair must not be more than 25 characters.'
+      maxlength: 'Repair Reference must not be more than 25 characters.'
     },
     'repairDescriptionType': {
 
