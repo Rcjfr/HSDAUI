@@ -26,8 +26,7 @@ export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
 
   //Store data
-  savedSearches: List<ISavedSearch>;
-  currentSearchId: number;
+    currentSearchId: number;
 
   badgeNumber;
   criteria;
@@ -47,10 +46,6 @@ export class AlertsSearchComponent implements OnInit {
         this.badgeNumber = badgeId;
         this.savedSearchStateService.loadSearches(badgeId);
       }).subscribe();
-
-    this.savedSearchStateService.getSavedSearches()
-      .do(s => this.savedSearches = s)
-      .subscribe();
 
     this.savedSearchStateService.getCurrentSearchId()
       .map(id => {

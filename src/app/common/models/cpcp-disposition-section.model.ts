@@ -15,4 +15,5 @@ export interface ICPCPDispositionSection {
   reviewer?: string;
   reviewerBadgeNo?: string;
   submittedToQC?: boolean;
+  submitToQC?: boolean;
 }

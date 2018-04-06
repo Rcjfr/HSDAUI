@@ -139,7 +139,7 @@ describe('Alerts Effect', () => {
 
         actions = new ReplaySubject(1);
         (<ReplaySubject<any>>actions).next(new selectedAlert.SaveSdaAction(mockResponse));
-        effects.saveSda$.subscribe(result => {
+        effects.saveSda$.subscribe((result: selectedAlert.SaveSdaCompleteAction) => {
           expect(result.type).toBe(selectedAlert.ActionTypes.SAVE_SDA_COMPLETE);
         });
       })
@@ -147,7 +147,7 @@ describe('Alerts Effect', () => {
 
   it('Call saveSDA Failure action after saveSDA',
     inject([
-       services.SdaService, services.AppStateService
+      services.SdaService, services.AppStateService
     ],
       (_sdaService, _appStateService) => {
         const mockResponse: ISda = {
@@ -155,11 +155,11 @@ describe('Alerts Effect', () => {
         };
         spyOn(_sdaService, 'saveSda')
           .and.returnValue(Observable.throw('ERROR'));
-          actions = new ReplaySubject(1);
-          (<ReplaySubject<any>>actions).next(new selectedAlert.SaveSdaAction(mockResponse));
-          effects.saveSda$.subscribe(result => {
-            expect(result.type).toBe(selectedAlert.ActionTypes.SAVE_SDA_FAIL);
-          });
+        actions = new ReplaySubject(1);
+        (<ReplaySubject<any>>actions).next(new selectedAlert.SaveSdaAction(mockResponse));
+        effects.saveSda$.subscribe((result: selectedAlert.SaveSdaFailAction) => {
+          expect(result.type).toBe(selectedAlert.ActionTypes.SAVE_SDA_FAIL);
+        });
       })
   );
 
@@ -170,7 +170,7 @@ describe('Alerts Effect', () => {
 
         actions = new ReplaySubject(1);
         (<ReplaySubject<any>>actions).next(new selectedAlert.LoadAircraftInfoFailAction('Failed to load aircraft Info.'));
-        effects.saveSda$.subscribe(result => {
+        effects.saveSda$.subscribe((result: selectedAlert.OperationFailedAction) => {
           expect(result.type).toBe(selectedAlert.ActionTypes.OPERATION_FAILED);
           expect(_toaster.error).toHaveBeenCalledWith('Failed to load aircraft Info.', 'ERROR');
         });
@@ -214,16 +214,16 @@ describe('Alerts Effect', () => {
         };
         spyOn(_sdaService, 'searchSda')
           .and.returnValue(Observable.throw('ERROR'));
-          actions = hot('--a-', { a: new selectedAlert.LoadSdasAction(mockData) });
-          const expected = cold('--b', { b: new selectedAlert.LoadSdasFailAction('Failed to load SDAs.') });
-          expect(effects.loadSdas$).toBeObservable(expected);
+        actions = hot('--a-', { a: new selectedAlert.LoadSdasAction(mockData) });
+        const expected = cold('--b', { b: new selectedAlert.LoadSdasFailAction('Failed to load SDAs.') });
+        expect(effects.loadSdas$).toBeObservable(expected);
       })
   );
 
 
   it('Call loadSDA Success action after loadSDA',
     inject([
-       services.SdaService, services.AppStateService
+      services.SdaService, services.AppStateService
     ],
       (_sdaService, _appStateService) => {
 
@@ -258,7 +258,7 @@ describe('Alerts Effect', () => {
   );
   it('Call loadSDA Success action after loadSDA(without original version)',
     inject([
-       services.SdaService, services.AppStateService
+      services.SdaService, services.AppStateService
     ],
       (_sdaService, _appStateService) => {
 
@@ -279,7 +279,7 @@ describe('Alerts Effect', () => {
 
   it('Call loadSDA Failure action after loadSDA',
     inject([
-       services.SdaService, services.AppStateService
+      services.SdaService, services.AppStateService
     ],
       (_sdaService, _appStateService) => {
         spyOn(_sdaService, 'getSda')
@@ -297,11 +297,11 @@ describe('Alerts Effect', () => {
         spyOn(_toaster, 'error').and.returnValue(null);
         const navigateSpy = spyOn(router, 'navigate');
         actions = new ReplaySubject(1);
-          (<ReplaySubject<any>>actions).next(new selectedAlert.LoadSdaFailAction('Failed to load sda Info.'));
-          effects.showLoadSdaFailError$.subscribe(result => {
-            expect(_toaster.error).toHaveBeenCalledWith('Failed to load sda Info.', 'ERROR');
-            expect(navigateSpy).toHaveBeenCalledWith(['/alerts']);
-          });
+        (<ReplaySubject<any>>actions).next(new selectedAlert.LoadSdaFailAction('Failed to load sda Info.'));
+        effects.showLoadSdaFailError$.subscribe(result => {
+          expect(_toaster.error).toHaveBeenCalledWith('Failed to load sda Info.', 'ERROR');
+          expect(navigateSpy).toHaveBeenCalledWith(['/alerts']);
+        });
       })
   );
 

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import * as models from '@app/common/models';
 import { List } from 'immutable';
 import { ToastrService } from 'ngx-toastr';
-import '@app/common/rxjs-extensions';
 import { of } from 'rxjs/observable/of';
 import { AppStateService, AuthService } from '@app/common/services';
 import { Subscription } from 'rxjs/Rx';

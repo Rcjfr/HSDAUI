@@ -67,6 +67,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       comments: ['', [Validators.maxLength(500)]],
       qcFeedback: ['', [Validators.maxLength(250)]],
       submittedToQC: [false, []],
+      submitToQC: [false, []],
       updatedByEmpID: [{ value: '', disabled: true }, []],
       updatedByName: [{ value: '', disabled: true }, []],
       updatedDate: new FormControl({ value: new Date(), disabled: true }),
@@ -86,9 +87,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => {
       if (!val) {
-        this.formGroup.get('submittedToQC').disable();
+        this.formGroup.get('submitToQC').disable();
       } else {
-        this.formGroup.get('submittedToQC').enable();
+        this.formGroup.get('submitToQC').enable();
       }
     });
     this.uploader.onAfterAddingFile = (file) => {
@@ -175,7 +176,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           stage3Date: undefined,
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
-          submittedToQC: false,
+          submitToQC: false,
           updatedByName: '',
           updatedByEmpID: '',
           updatedDate: { value: undefined, disabled: true }

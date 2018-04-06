@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '@env/environment';
 import { IStation } from '@app/common/models/station.model';
-import '@app/common/rxjs-extensions';
+
 
 @Injectable()
 export class StationService {

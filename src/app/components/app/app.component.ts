@@ -24,7 +24,13 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
-    this.authService.setupIdleTimer();
+    this.appStateService.getUser().filter(u => !!u)
+      .subscribe(u => {
+        this.authService.sessionTimeOut = u.sm_session_timeout;
+        this.authService.idleThreshold = u.sm_idle_threshold;
+        this.authService.keepAliveInterval = u.sm_keepalive_interval;
+        this.authService.setupIdleTimer();
+      });
   }
 
   loadNewSda() {

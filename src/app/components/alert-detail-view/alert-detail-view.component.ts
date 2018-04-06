@@ -15,7 +15,7 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda, Status } from '@app/common/models';
+import { ISda, Status, Source } from '@app/common/models';
 import * as moment from 'moment';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
@@ -31,6 +31,9 @@ import { CustomValidators } from '@app/common/validators/custom-validators';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { List } from 'immutable';
 import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.component';
+import * as _ from 'lodash';
+import { map, throttleTime, mapTo } from 'rxjs/operators';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -54,8 +57,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   saveCPCPSectionDetails = false;
   saveDTESectionDetails = false;
   public Status = Status; // to make it available in template
+  public Source = Source; // to make it available in template
   public currentStatus: number;
   public newSdaStus$: Observable<Status>;
+  sdrRequestPending = false;
 
   @ViewChild('statusModal') public statusModal: ModalDirective;
   @ViewChild(ChangeLogModalComponent) changeLogComponent: ChangeLogModalComponent;
@@ -94,6 +99,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   ngOnChanges(changes: SimpleChanges) {
     this.currentSdaId = this.sda.id;
     this.currentStatus = this.sda.status;
+    if (changes.sda) {
+      this.sdrRequestPending = false;
+    }
   }
 
   ngAfterContentInit(): void {
@@ -102,15 +110,17 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     // Watch for the blur event from any input element on the form.
     const controlBlurs: Observable<any>[] = formElements
       .map((formControl: any) => {
-        return Observable.fromEvent(formControl, 'blur');
+        return fromEvent(formControl, 'blur');
       }
       );
 
     // Merge the blur event observable with the valueChanges observable
     //Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges, ...controlBlurs)
     Observable.merge(this.sdaForm.valueChanges, this.sdaForm.statusChanges)
-      .mapTo(1)
-      .throttleTime(500)
+      .pipe(
+      mapTo(1),
+      throttleTime(500)
+      )
       .subscribe(value => {
         const messages = this.genericValidator.processMessages(this.sdaForm);
         //console.log('Validating...', messages);
@@ -233,14 +243,15 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }).filter(confirm => confirm === true).subscribe(confirm => {
       this.sda.generalSection.sdrNumber = 'Y';
       this.sda.hasSDRRequested = true;
-      this.sdaForm.get('generalSectionFormGroup').patchValue({
-        'sdrNumber': 'Y'
-      });
+      this.sdrRequestPending = true;
+      //this.sdaForm.get('generalSectionFormGroup').patchValue({
+      //  'sdrNumber': 'Y'
+      //});
       this.sdaForm.patchValue({ status: this.currentStatus });
       this.sda.statusUpdatedBy = this.lastModifiedBy;
       this.sda.statusUpdatedOn = new Date();
       this.sda.comments = 'SDR Requested';
-      this.saveAlertData();
+      this.saveAlertData(true);
     });
   }
 
@@ -443,10 +454,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveDTESectionDetails = false;
   }
 
-  saveAlertData() {
+  saveAlertData(sdrRequested: boolean = false) {
     const formData = this.sdaForm.getRawValue();
     const generalSectionData = this.flatten(formData.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
+    if (sdrRequested) {
+      generalSectionData.sdrNumber = 'Y';
+    }
     const defectLocationData = this.flatten(formData.defectLocationSectionFormGroup);
     let cpcpSectionData = undefined;
     if (formData.cpcpSectionGroup) {
@@ -537,6 +551,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     const ok = this.sda.id &&
       (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed) &&
       (this.sda.generalSection.sdrNumber === '' || this.sda.generalSection.sdrNumber == null);
+    if (this.sdrRequestPending) {
+      return true;
+    }
 
     return ok;
   }
@@ -588,13 +605,13 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   isCPCPDispositionSectionEditable(): Observable<boolean> {
-    return this.authService.isCPCPTrainedReviewingEngineer().map(ok => {
+    return this.authService.isCPCPTrainedReviewingEngineer().pipe(map(ok => {
       return (ok && !this.readOnly && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
         (this.sda.cpcpSection.corrosionLevel === 2 ||
           this.sda.cpcpSection.corrosionLevel === 3) &&
         (this.currentStatus === Status.Audited ||
           this.currentStatus === Status.Closed));
-    });
+    }));
 
   }
 
@@ -631,6 +648,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       && this.currentStatus === Status.Closed;
   }
 
+  public getImportedDate(): string {
+    const importStatus = _.last(this.sda.history);
+
+    return moment(importStatus.lastModifiedOn).format('MM/DD/YYYY');
+  }
   public hasOriginalVersion(): boolean {
     return this.sda.history.some(s => s.status === Status.Closed) &&
       this.sda.history[0].status !== Status.Closed;

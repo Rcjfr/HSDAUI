@@ -106,9 +106,9 @@ describe('DamageToleranceEvaluationComponent', () => {
     expect(component).toBeTruthy();
     expect(component.formGroup.get('updatedByEmpID').value).toBe('00123456'); //default value
     component.formGroup.get('qcFeedback').setValue('testing');
-    expect(component.formGroup.get('submittedToQC').disabled).toBeFalsy();
+    expect(component.formGroup.get('submitToQC').disabled).toBeFalsy();
     component.formGroup.get('qcFeedback').setValue('');
-    expect(component.formGroup.get('submittedToQC').disabled).toBeTruthy();
+    expect(component.formGroup.get('submitToQC').disabled).toBeTruthy();
   });
   it('should render new dte section', () => {
     component.editable = true;

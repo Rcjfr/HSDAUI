@@ -10,6 +10,7 @@ export interface ISda {
   id?: number;
   historicId?: string;
   workflowInstanceId?: string;
+  source?: number;
   versionID?: number;
   version?: number;
   lastModifiedBy?: string;

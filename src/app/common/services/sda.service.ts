@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '@env/environment';
 import { Helper } from '@app/common/helper';
 import * as models from '@app/common/models';
-import '@app/common/rxjs-extensions';
 import { AuthService } from '@app/common/services/auth.service';
 import { ISdaListResult } from '@app/common/models';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';

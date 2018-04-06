@@ -38,7 +38,8 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       isReviewComplete: [false, []],
       reviewer: ['', [Validators.maxLength(50)]],
       reviewerBadgeNo: ['', [Validators.maxLength(10)]],
-      submittedToQC: [false, []]
+      submittedToQC: [false, []],
+      submitToQC: [false, []]
     });
   }
 
@@ -56,9 +57,9 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup.get('isReviewComplete').valueChanges.filter(v => this.editable).subscribe(val => this.updateReviewComplete(val));
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => {
       if (!val) {
-        this.formGroup.get('submittedToQC').disable();
+        this.formGroup.get('submitToQC').disable();
       } else {
-        this.formGroup.get('submittedToQC').enable();
+        this.formGroup.get('submitToQC').enable();
       }
     });
     this.authService.displayName().take(1).subscribe(u => {
@@ -121,7 +122,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       qcFeedback: '',
       corrosionLevelChangeReasonOtherText: '',
       isWideSpreadCorrosion: undefined,
-      submittedToQC: false,
+      submitToQC: false,
       reviewer: '',
       reviewerBadgeNo: ''
     });
@@ -138,7 +139,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       qcFeedback: undefined,
       corrosionLevelChangeReasonOtherText: undefined,
       isWideSpreadCorrosion: undefined,
-      submittedToQC: false,
+      submitToQC: false,
       reviewer: '',
       reviewerBadgeNo: ''
     });
@@ -176,7 +177,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup.get('isWideSpreadCorrosion').enable();
     this.formGroup.get('qcFeedback').enable();
     this.formGroup.get('engineeringComments').enable();
-    this.formGroup.get('submittedToQC').enable();
+    this.formGroup.get('submitToQC').enable();
 
   }
 
@@ -190,7 +191,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
     this.formGroup.get('isWideSpreadCorrosion').disable();
     this.formGroup.get('qcFeedback').disable();
     this.formGroup.get('engineeringComments').disable();
-    this.formGroup.get('submittedToQC').disable();
+    this.formGroup.get('submitToQC').disable();
   }
 
   updateReviewComplete(reviewComplete: boolean): void {

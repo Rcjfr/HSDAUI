@@ -112,7 +112,10 @@ export class MockAppStateService extends AppStateService {
       sm_user_firstname: 'FirstName',
       sm_user_lastname: 'LastName',
       sm_logout_url: '',
-      sm_login_url: ''
+      sm_login_url: '',
+      sm_session_timeout: 3600,
+      sm_idle_threshold: 600,
+      sm_keepalive_interval: 2400
     }))
   }
   getDTEStatus() {

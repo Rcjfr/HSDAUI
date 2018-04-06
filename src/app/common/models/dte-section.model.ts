@@ -19,6 +19,7 @@ export interface IDTESection {
   comments?: string;
   qcFeedback?: string;
   submittedToQC?: boolean;
+  submitToQC?: boolean;
   updatedByBadgeNo?: string;
   updatedBy?: string;
   updatedDate?: Date;

@@ -9,43 +9,47 @@ import { of } from 'rxjs/observable/of';
 import * as userActions from '@app/common/actions/logged-in-user';
 import * as services from '@app/common/services';
 import * as models from '@app/common/models';
-import '@app/common/rxjs-extensions';
+import { catchError, switchMap, map, tap, delay } from 'rxjs/operators';
 @Injectable()
 export class UserEffects {
 
   @Effect()
   loadUser$: Observable<Action> = this.actions$
     .ofType(userActions.ActionTypes.LOAD_USER)
-    .map((action: userActions.LoadUserAction) => action.payload)
-    .switchMap(() => {
+    .pipe(
+    map((action: userActions.LoadUserAction) => action.payload),
+    switchMap(() => {
       return this.authService.loadLoggedInUser()
-        .map((user: models.IUser) => {
+        .pipe(
+        map((user: models.IUser) => {
           return new userActions.LoadUserCompleteAction(user);
-        })
-        .catch((err) => {
+        }),
+        catchError((err) => {
           return of(new userActions.LoadUserFailAction('Failed to load logged in user'));
-        });
-    });
+        }));
+    }));
 
-  @Effect()
-  logOut$ = this.actions$
-    .ofType(userActions.ActionTypes.LOGOUT)
-    .switchMap(() => this.authService.logOutUrl())
-    .delay(1000)
-    .do(url => {
+  @Effect({ dispatch: false })
+  logOut$ = this.actions$.ofType(userActions.ActionTypes.LOGOUT)
+    .pipe(
+    switchMap(() => this.authService.logOutUrl()),
+    delay(1000),
+    tap((url: string) => {
       this.toastr.warning('User session has timed out. Redirecting to login page...', 'Warning');
       location.href = url;
-    });
+    })
+    );
 
   @Effect()
   showToastrError$ = this.actions$
     .ofType(userActions.ActionTypes.LOAD_USER_FAIL)
-    .map(toPayload)
-    .switchMap((payload: string) => {
+    .pipe(
+    map(toPayload),
+    switchMap((payload: string) => {
       this.toastr.error(payload, 'ERROR');
 
       return of(new userActions.OperationFailedAction());
-    });
+    }));
   constructor(private actions$: Actions,
     private authService: services.AuthService,
     private router: Router,

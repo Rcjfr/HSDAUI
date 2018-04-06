@@ -2,6 +2,7 @@ export interface ISdaListView {
 
   id: string,
   historicId: string,
+  source: number,
   workflowInstanceId: string,
   versionID: number,
   version: number,

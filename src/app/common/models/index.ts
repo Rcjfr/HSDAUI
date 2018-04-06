@@ -13,6 +13,7 @@ export * from './user.model';
 export * from './sda-list-result.model'
 export * from './sda-status.model';
 export * from './status';
+export * from './source';
 export * from './search-data.model';
 export * from './yes-no-both-options.model';
 export * from './dte-attachment.model';

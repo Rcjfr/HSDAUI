@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '@env/environment';
 import { ICheckType } from '@app/common/models/check-type.model';
-import '@app/common/rxjs-extensions';
+
 
 
 @Injectable()

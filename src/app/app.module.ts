@@ -105,7 +105,7 @@ import { environment } from '@env/environment';
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ timeOut: 10000, preventDuplicates: true}),
     ScrollToModule.forRoot(),
     StoreModule.forRoot(reducer),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
