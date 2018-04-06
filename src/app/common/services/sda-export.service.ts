@@ -118,7 +118,7 @@ export class SdaExportService {
                   [
                     { text: `Page ${currentPage} of ${pageCount}`, fontSize: 6, },
 
-                    { fontSize: 6, text: 'Enter form information into WebSceptre and co-mail entire form to 3900 N. Mingo Road / Mail\nDrop 127. In the event of WebSceptre system outage, fax form to Reliability (918) 292-2082 \nor scan and email to reliabilitysdrgroup@aa.com', alignment: 'left' },
+                    { fontSize: 6, text: 'In the event of a system outage, complete the form, scan, and email to reliabilitysdrgroup@aa.com or Co-mail the entire form to 3900 N Mingo Road / Maildrop 127.', alignment: 'left' },
                     { fontSize: 6, text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
                   ]
                 ]

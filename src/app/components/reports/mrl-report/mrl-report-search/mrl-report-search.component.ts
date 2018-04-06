@@ -75,7 +75,7 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
       this.searchCriteria.searchByAircraft = {aircraftNo: this.mrlReportSearchForm.controls.aircraftNo.value};
       this.searchCriteria.searchByDateRange = {dateFrom: this.mrlReportSearchForm.controls.dateFrom.value, dateThrough: this.mrlReportSearchForm.controls.dateThrough.value};
       this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1 , deferralCode: this.mrlReportSearchForm.controls.monStatus.value ? 'MON' : null};
-      this.searchCriteria.searchByStatus = { status: Status.Closed };
+      this.searchCriteria.searchByStatus = { status: [Status.Closed] };
       this.searchCriteria.pageData = this.getDefaultPageData();
       if (isExcel) {
         this.onShowMrlExcel.emit(this.searchCriteria);
