@@ -7,4 +7,5 @@
   statusUpdatedOn: Date;
   status: number;
   statusText: number;
+  comments: string;
 }

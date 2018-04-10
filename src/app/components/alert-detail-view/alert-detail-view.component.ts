@@ -659,6 +659,21 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       this.sda.history[0].status !== Status.Closed;
   }
 
+  public getRejectedDetails(): { comment: string, statusUpdatedOn: Date  } {
+
+    for (let i = 0 ; i < this.sda.history.length; i++) {
+      if ((this.sda.history[i].status === Status.Rejected) && (this.sda.history[i + 1].status !== Status.Rejected)) {
+        const rejectedDetails: { comment: string, statusUpdatedOn: Date  } = {
+          comment: this.sda.history[i].comments,
+          statusUpdatedOn: this.sda.history[i].statusUpdatedOn}
+
+        return rejectedDetails;
+    }
+  }
+
+  return { comment: this.sda.comments, statusUpdatedOn: this.sda.statusUpdatedOn};
+}
+
   public areCommentsRequired(): boolean {
     return this.sdaStatusForm.get('status').value === Status.Rejected ||
       this.sdaStatusForm.get('status').value === Status.Deleted ||

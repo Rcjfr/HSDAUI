@@ -142,7 +142,7 @@ describe('AlertDetailViewComponent', () => {
     component.sda = {
       id: 0, history: [{
         status: 1, versionID: null, statusText: null, statusUpdatedBy: null, statusUpdatedOn: null, version: null, lastModifiedBy: null,
-        lastModifiedOn: null
+        lastModifiedOn: null, comments: null
       }], correctiveActionSection: {},
       generalSection: {}, defectLocationSection: {}, cpcpSection: {}
     };

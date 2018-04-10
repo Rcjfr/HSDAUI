@@ -119,7 +119,7 @@ export class SdaExportService {
                     { text: `Page ${currentPage} of ${pageCount}`, fontSize: 6, },
 
                     { fontSize: 6, text: 'In the event of a system outage, complete the form, scan, and email to reliabilitysdrgroup@aa.com or Co-mail the entire form to 3900 N Mingo Road / Maildrop 127.', alignment: 'left' },
-                    { fontSize: 6, text: 'ME-0308 (00-0703-3-0107)\nR3 10/15', alignment: 'right' }
+                    { fontSize: 6, text: 'ME0308 \nR0 04/18', alignment: 'right' }
                   ]
                 ]
               },
