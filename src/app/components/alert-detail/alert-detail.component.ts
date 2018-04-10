@@ -1,6 +1,15 @@
 import { Component, OnInit, OnDestroy, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName, ValidatorFn, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  FormControlName,
+  ValidatorFn,
+  AbstractControl
+} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import * as models from '@app/common/models';
 import { List } from 'immutable';
@@ -28,14 +37,15 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
   newSdaSubscription: Subscription;
   savedStateSubscription: Subscription;
   loading$ = new BehaviorSubject(true);
-  @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent
-  constructor(private appStateService: AppStateService,
+  @ViewChild(AlertDetailViewComponent) alertDetailView: AlertDetailViewComponent;
+  constructor(
+    private appStateService: AppStateService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
   // @HostListener allows us to also guard against browser refresh, close, etc.
   @HostListener('window:beforeunload')
   canDeactivate(): Observable<boolean> | boolean {
@@ -50,33 +60,38 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         return;
       }
       if (this.currentSdaId === 0 && !this.canDeactivate()) {
-        this.dialogService.addDialog(ConfirmComponent, {
-          title: 'Confirm?',
-          message: 'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
-        }).subscribe((result) => {
-          if (result === true) {
+        this.dialogService
+          .addDialog(ConfirmComponent, {
+            title: 'Confirm?',
+            message:
+              'WARNING: You have unsaved changes. Press Cancel to go back and save these changes, or OK to lose these changes.'
+          })
+          .subscribe(result => {
+            if (result === true) {
+              this.alertDetailView.clearForm();
+              this.loadSda();
+            }
+          });
+      }
+    });
+    this.savedStateSubscription = this.appStateService
+      .getSelectedAlertSavedState()
+      .filter(s => !!s)
+      .subscribe(savedState => {
+        this.toastr.success('SDA Details saved successfully.', 'Success');
+
+        if (savedState.newSda) {
+          setTimeout(() => {
             this.alertDetailView.clearForm();
-            this.loadSda();
-          }
-        });
-      }
-
-    });
-    this.savedStateSubscription = this.appStateService.getSelectedAlertSavedState().filter(s => !!s).subscribe((savedState) => {
-      this.toastr.success('SDA Details saved successfully.', 'Success');
-
-      if (savedState.newSda) {
-        setTimeout(() => {
+            this.router.navigate(['/alerts', savedState.sdaId]);
+          }, 1000);
+        } else {
           this.alertDetailView.clearForm();
-          this.router.navigate(['/alerts', savedState.sdaId])
-        }, 1000);
-      } else {
-        this.alertDetailView.clearForm();
-      }
-    });
+        }
+      });
     Observable.combineLatest(this.route.params, this.route.data).subscribe(params => {
       const id: string = params[0] && params[0]['id'];
-      this.currentSdaVersion = params[0] && params[0]['version'] || 0;
+      this.currentSdaVersion = (params[0] && params[0]['version']) || 0;
       this.isOriginalSda = (params[1][0] && params[1][0]['original']) || false;
       if (id !== 'new') {
         this.currentSdaId = Number.parseInt(id);
@@ -84,9 +99,16 @@ export class AlertDetailComponent implements OnInit, OnDestroy, ComponentCanDeac
         this.currentSdaId = 0;
       }
       this.alertDetailView && this.alertDetailView.clearForm();
-      this.appStateService.loadSda({ sdaId: this.currentSdaId, version: this.currentSdaVersion, original: this.isOriginalSda });
+      this.appStateService.loadSda({
+        sdaId: this.currentSdaId,
+        version: this.currentSdaVersion,
+        original: this.isOriginalSda
+      });
     });
-    this.sda$ = this.appStateService.getSelectedSda().map(d => d.toJS()).do(d => this.alertDetailView && this.alertDetailView.clearForm());
+    this.sda$ = this.appStateService
+      .getSelectedSda()
+      .map(d => d.toJS())
+      .do(d => this.alertDetailView && this.alertDetailView.clearForm());
   }
   loadSda() {
     this.sda$ = this.appStateService.getSelectedSda().map(d => d && d.toJS());

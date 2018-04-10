@@ -9,7 +9,8 @@
     "test": "ng test --browsers PhantomJS",
     "test-cc": "ng test --code-coverage --browsers Chrome",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prettier-watch": "onchange '**/*.ts' -- prettier --write {{changed}}"
   },
   "private": true,
   "dependencies": {
@@ -79,6 +80,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng2-mock-component": "0.0.6",
+    "prettier": "1.11.1",
     "protractor": "~5.1.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",

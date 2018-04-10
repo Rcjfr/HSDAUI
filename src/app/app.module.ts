@@ -105,17 +105,11 @@ import { environment } from '@env/environment';
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
-    ToastrModule.forRoot({ timeOut: 10000, preventDuplicates: true}),
+    ToastrModule.forRoot({ timeOut: 10000, preventDuplicates: true }),
     ScrollToModule.forRoot(),
     StoreModule.forRoot(reducer),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
-    EffectsModule.forRoot([
-      AlertEffects,
-      LookupDataEffects,
-      UserEffects,
-      SavedSearchesEffects
-
-    ]),
+    EffectsModule.forRoot([AlertEffects, LookupDataEffects, UserEffects, SavedSearchesEffects]),
     MomentModule,
     NgIdleKeepaliveModule.forRoot()
   ],
@@ -143,12 +137,7 @@ import { environment } from '@env/environment';
     },
     ConfirmationService
   ],
-  entryComponents: [
-    ConfirmComponent,
-    AlertComponent,
-    ChangeLogModalComponent,
-    PromptDialogComponent
-  ],
+  entryComponents: [ConfirmComponent, AlertComponent, ChangeLogModalComponent, PromptDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

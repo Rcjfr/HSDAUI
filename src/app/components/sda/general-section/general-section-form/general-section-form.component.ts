@@ -59,11 +59,10 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.departments$ = this.appStateService.getDepartments();
 
     this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-    //UNCOMMENT when we have historical time/cycles
-    //const createDateControl = this.generalSectionFormGroup.get('createDate');
-    //createDateControl.valueChanges.subscribe(v => {
-    //  this.populateAircraftInfo(this.noseNumber);
-    //});
+    const createDateControl = this.generalSectionFormGroup.get('createDate');
+    createDateControl.valueChanges.subscribe(v => {
+      this.populateAircraftInfo(this.noseNumber);
+    });
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
     })

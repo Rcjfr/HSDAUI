@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 import { AppStateService } from '@app/common/services';
 import { IBaseLookUp } from '@app/common/models';
 import { Observable } from 'rxjs/Rx';

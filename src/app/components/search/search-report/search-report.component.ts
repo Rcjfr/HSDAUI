@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { IReportOption, ReportOptions } from './options';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 
 @Component({
   selector: 'aa-search-report',

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { IBaseLookUp, IYesNoBoth } from '@app/common/models';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 
 @Component({
   selector: 'aa-search-by-corrosion',

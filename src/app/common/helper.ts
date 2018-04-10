@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 export class Helper {
   public static Deserialize(data: string): any {
     return JSON.parse(data, Helper.ReviveDateTime);

@@ -18,6 +18,7 @@ import * as models from '@app/common/models';
 import { AppStateService, AuthService } from '@app/common/services';
 import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+import { DTEStatus } from '@app/common/models/enumerations';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -122,16 +123,16 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         const durationMonths = <number>durationControl.value;
         const dteStatus = Number(dteStatusControl.value);
         switch (dteStatus) {
-          case 1: //Open
+          case DTEStatus.Open:
             {
               const dt = moment(stage1RTSDate).add(durationMonths, 'month').format('MM/DD/YYYY');
               dteDueDateControl.setValue(dt);
               break;
             }
-          case 2: //Closed
+          case DTEStatus.Closed:
             dteDueDateControl.setValue('Completed');
             break;
-          case 3: //TBD
+          case DTEStatus.TBD:
             dteDueDateControl.setValue('');
             break;
           default:

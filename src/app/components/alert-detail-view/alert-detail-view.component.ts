@@ -15,7 +15,8 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda, Status, Source } from '@app/common/models';
+import { ISda} from '@app/common/models';
+import { Status, Source, CorrosionLevel } from '@app/common/models/enumerations';
 import * as moment from 'moment';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
 import { ValidationMessages } from './alert-detail-view.messages';
@@ -31,7 +32,7 @@ import { CustomValidators } from '@app/common/validators/custom-validators';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { List } from 'immutable';
 import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.component';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 import { map, throttleTime, mapTo } from 'rxjs/operators';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 
@@ -268,7 +269,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         }).filter(confirm => confirm === true).subscribe(confirm => {
           this.confirmDeferralInf(newStatus);
         });
-      } else if (cpcpSectionGroup.get('corrosionLevel').value === 3) {
+      } else if (cpcpSectionGroup.get('corrosionLevel').value === CorrosionLevel.Level3) {
         this.dialogService.addDialog(ConfirmComponent, {
           title: 'Confirm?',
           message: `This is a Level 3 corrosion finding.  Is this correct?`,
@@ -607,8 +608,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   isCPCPDispositionSectionEditable(): Observable<boolean> {
     return this.authService.isCPCPTrainedReviewingEngineer().pipe(map(ok => {
       return (ok && !this.readOnly && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
-        (this.sda.cpcpSection.corrosionLevel === 2 ||
-          this.sda.cpcpSection.corrosionLevel === 3) &&
+        (this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level2 ||
+        this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level3) &&
         (this.currentStatus === Status.Audited ||
           this.currentStatus === Status.Closed));
     }));
@@ -622,7 +623,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     //    this.sda.history.some(s => s.status === Status.Audited || s.status === Status.Closed));
     //});
     return Observable.of(this.sda.cpcpSection.isCPCPRelatedEvent &&
-      (this.sda.cpcpSection.corrosionLevel === 2 || this.sda.cpcpSection.corrosionLevel === 3) &&
+      (this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level2 || this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level3) &&
       (this.currentStatus === Status.Audited || this.currentStatus === Status.Closed));
   }
 

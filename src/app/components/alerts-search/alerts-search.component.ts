@@ -6,7 +6,7 @@ import { SavedSearchStateService } from '@app/common/services/saved-searches-sta
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Subject, Observable } from 'rxjs/Rx';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
 import { AuthService } from '@app/common/services/auth.service';

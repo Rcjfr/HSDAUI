@@ -5,9 +5,9 @@ import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/mode
 import { Observable } from 'rxjs/Observable';
 import { SdaService } from '@app/common/services/sda.service';
 import * as constants from '@app/common/constants';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 import * as moment from 'moment-timezone';
-import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfMake from 'pdfmake/build/pdfmake.min.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { AuthService } from '@app/common/services/auth.service';

@@ -31,7 +31,7 @@
   <p-column field="station" header="Station" [sortable]="true"></p-column>
   <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
   <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>
-  <ng-template pTemplate="paginatorLeft"><!--TODO: Only supported in primeng >5.0.0-->
+  <ng-template pTemplate="paginatorLeft">
     <span *ngIf="dataTable.totalRecords">
       Showing {{dataTable.first+1}} to {{Math.min(dataTable.first+dataTable.rows,dataTable.totalRecords)}} of {{dataTable.totalRecords}}
     </span>

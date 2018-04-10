@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { UtilityService } from '@app/common/services';
 import { IYesNoBoth, IBaseLookUp } from '@app/common/models';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 @Component({
   selector: 'aa-search-by-cpcp-disposition',
   templateUrl: './search-by-cpcp-disposition.component.html',

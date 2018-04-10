@@ -8,30 +8,36 @@ import { AuthGuardService } from '@app/common/services/auth-guard.service';
 import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alerts-dashboard.component';
 const routes: Routes = [
   {
-    path: 'dashboard', component: AlertsDashboardComponent,
+    path: 'dashboard',
+    component: AlertsDashboardComponent,
     children: []
   },
   {
-    path: 'reports', loadChildren: '@app/components/reports/sda-reports.module#SdaReportsModule'
+    path: 'reports',
+    loadChildren: '@app/components/reports/sda-reports.module#SdaReportsModule'
   },
   {
-    path: 'alerts', component: AlertsComponent,
+    path: 'alerts',
+    component: AlertsComponent,
     children: []
   },
   {
-    path: 'alerts/:id', component: AlertDetailComponent,
+    path: 'alerts/:id',
+    component: AlertDetailComponent,
     //resolve: { sda: SdaResolverService },
     canActivate: [AuthGuardService],
     canDeactivate: [PendingChangesGuard],
     children: []
   },
   {
-    path: 'alerts/:id/original', component: AlertDetailComponent,
+    path: 'alerts/:id/original',
+    component: AlertDetailComponent,
     data: [{ original: true }],
     children: []
   },
   {
-    path: 'alerts/:id/version/:version', component: AlertDetailComponent,
+    path: 'alerts/:id/version/:version',
+    component: AlertDetailComponent,
     children: []
   },
   { path: '', redirectTo: 'alerts', pathMatch: 'full' },
@@ -42,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { enableTracing: false })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

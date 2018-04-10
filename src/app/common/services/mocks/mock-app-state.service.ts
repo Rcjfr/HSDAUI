@@ -1,4 +1,4 @@
-import { Status } from '@app/common/models/status';
+import { Status } from '@app/common/models/enumerations';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';

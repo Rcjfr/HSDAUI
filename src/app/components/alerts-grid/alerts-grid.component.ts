@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 import { Subject } from 'rxjs/Rx';
 import { AppStateService, SdaExportService } from '@app/common/services';
@@ -6,15 +6,14 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
-import * as _ from 'lodash';
+import * as _ from 'lodash/lodash.min.js';
 import { ScrollToService } from 'ng2-scroll-to-el';
 import { DataGrid } from 'primeng/datagrid';
-
-
 
 @Component({
   selector: 'aa-alerts-grid',
   templateUrl: './alerts-grid.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit, OnDestroy {
