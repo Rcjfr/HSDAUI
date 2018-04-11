@@ -6,13 +6,16 @@
   </ng-container>
 </h1>
 
-<alert type="danger" *ngIf="currentStatus == Status.Rejected">
-  <strong class="alert-heading">SDA Form Rejected by Reliability on {{formatDate(this.getRejectedDetails().statusUpdatedOn)}}</strong>
-  <p>{{this.getRejectedDetails().comment}}</p>
+<alert type="danger" *ngIf="this.getLastRejectedDetails(); let rejected">
+  <strong class="alert-heading">SDA Form Rejected by Reliability on {{formatDate(rejected.statusUpdatedOn)}} </strong>
+  <p>{{rejected.comments}}</p>
 </alert>
+
 <alert type="danger" *ngIf="sda.source == Source.EMX">
   <strong class="alert-heading">SDA # {{sda.id}} was imported out of EmpowerMX on {{getImportedDate()}}</strong>
 </alert>
+
+
 
 <form novalidate [formGroup]="sdaForm">
   <div class="panel panel-info">

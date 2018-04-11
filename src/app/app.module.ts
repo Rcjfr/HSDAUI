@@ -57,6 +57,7 @@ import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alert
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { environment } from '@env/environment';
+import { AlertsAboutComponent } from '@app/components/alerts-about/alerts-about.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { environment } from '@env/environment';
     AlertDetailViewComponent,
     AlertsSearchComponent,
     AlertsGridComponent,
-    AlertsDashboardComponent
+    AlertsDashboardComponent,
+    AlertsAboutComponent
   ],
   imports: [
     CommonModule,

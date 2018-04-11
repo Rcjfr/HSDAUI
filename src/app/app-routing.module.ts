@@ -6,6 +6,8 @@ import { PendingChangesGuard } from '@app/common/components/pending-changes.guar
 import { SdaResolverService } from '@app/common/resolvers/sda-resolver.service';
 import { AuthGuardService } from '@app/common/services/auth-guard.service';
 import { AlertsDashboardComponent } from '@app/components/alerts-dashboard/alerts-dashboard.component';
+import { AlertsAboutComponent } from '@app/components/alerts-about/alerts-about.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -38,6 +40,11 @@ const routes: Routes = [
   {
     path: 'alerts/:id/version/:version',
     component: AlertDetailComponent,
+    children: []
+  },
+  {
+    path: 'about',
+    component: AlertsAboutComponent,
     children: []
   },
   { path: '', redirectTo: 'alerts', pathMatch: 'full' },
