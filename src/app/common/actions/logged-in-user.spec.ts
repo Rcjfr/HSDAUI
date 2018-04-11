@@ -27,6 +27,7 @@ describe('LoggedInUser Actions', () => {
         sm_user_lastname: 'LastName',
         sm_logout_url: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?originalTarget=http://hsda.dev.techops.aa.com',
         sm_login_url: 'https://smlogin.qtcorpaa.aa.com/login/SMLogout.jsp?TARGET=$SM$http://hsda.dev.techops.aa.com',
+        sm_session_expiry: new Date(),
         sm_session_timeout: 0,
         sm_idle_threshold: 0,
         sm_keepalive_interval: 0,

@@ -12,6 +12,7 @@ import { Keepalive } from '@ng-idle/keepalive';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { AlertComponent } from '@app/common/components/alert/alert.component';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class AuthService {
@@ -87,14 +88,17 @@ export class AuthService {
     });
     this.keepalive.interval(this.keepAliveInterval ); //if user is active, keep the siteminder session alive for every 10 minutes(2/3 of 15 minutes SM Session timeout)
     this.keepalive.request(this.endPointUrl); // access api/users so that the siteminder session gets extended on server as well
-    this.keepalive.onPingResponse.subscribe((renewedUserSession: HttpResponse<any>) => {
+    this.keepalive.onPingResponse.subscribe((renewedUserSession: HttpResponse<IUser>) => {
       if (renewedUserSession.type !== 0 && !renewedUserSession.body) { //TODO:have to monitor this on QA
         this.hasSessionTimedOut = true;
         this.appStateService.logout();
 
         return;
       }
-      console.log('Session extended ', new Date(), renewedUserSession);
+      if (renewedUserSession.body) {
+        this.currentUser$ = of(renewedUserSession.body);
+        console.log(new Date(), 'Session extended till ', renewedUserSession.body.sm_session_expiry);
+      }
     });
     this.idle.watch();
   }
@@ -150,6 +154,9 @@ export class AuthService {
   }
   email(): Observable<string> {
     return this.currentUser$.map(u => u.sm_user_email);
+  }
+  sessionExpiry(): Observable<Date> {
+    return this.currentUser$.map(u => u.sm_session_expiry);
   }
 
   badgeId(): Observable<string> {

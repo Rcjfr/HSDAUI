@@ -16,7 +16,7 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
-import { ISda} from '@app/common/models';
+import { ISda } from '@app/common/models';
 import { Status, Source, CorrosionLevel } from '@app/common/models/enumerations';
 import * as moment from 'moment';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';
@@ -391,7 +391,11 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       } else if (newStatus === Status.Deleted) {
         this.sdaStatusTitle = `Delete SDA (SDA ID:${this.sda.id})`;
       } else if (newStatus === Status.Rejected) {
-        this.sdaStatusTitle = `Reject SDA (SDA ID:${this.sda.id})`;
+        if (this.currentStatus === Status.Rejected) { //this is a case of save after reject
+          this.sdaStatusTitle = `Save SDA (SDA ID:${this.sda.id})`;
+        } else {
+          this.sdaStatusTitle = `Reject SDA (SDA ID:${this.sda.id})`;
+        }
       }
       if (showModal) {
         if (modalTitle) {
@@ -610,7 +614,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return this.authService.isCPCPTrainedReviewingEngineer().pipe(map(ok => {
       return (ok && !this.readOnly && (this.sda.cpcpSection.isCPCPRelatedEvent) &&
         (this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level2 ||
-        this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level3) &&
+          this.sda.cpcpSection.corrosionLevel === CorrosionLevel.Level3) &&
         (this.currentStatus === Status.Audited ||
           this.currentStatus === Status.Closed));
     }));
@@ -673,7 +677,7 @@ if (this.currentStatus === Status.Rejected) {
 }
 
   public areCommentsRequired(): boolean {
-    return this.sdaStatusForm.get('status').value === Status.Rejected ||
+    return (this.sdaStatusForm.get('status').value === Status.Rejected && this.currentStatus !== Status.Rejected) ||
       this.sdaStatusForm.get('status').value === Status.Deleted ||
       (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
   }

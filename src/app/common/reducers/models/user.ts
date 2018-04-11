@@ -12,6 +12,7 @@ export const UserRecordFactory = makeTypedFactory<IUser, IUserRecord>({
   access_token: '',
   sm_logout_url: '',
   sm_login_url: '',
+  sm_session_expiry: new Date(),
   sm_session_timeout: 0,
   sm_idle_threshold: 0,
   sm_keepalive_interval: 0,
