@@ -9,7 +9,8 @@
     "test": "ng test --browsers PhantomJS",
     "test-cc": "ng test --code-coverage --browsers Chrome",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prettier-watch": "onchange '**/*.ts' -- prettier --write {{changed}}"
   },
   "private": true,
   "dependencies": {

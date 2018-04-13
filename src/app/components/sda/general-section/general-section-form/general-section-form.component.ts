@@ -9,6 +9,8 @@ import { AppStateService, AuthService } from '@app/common/services';
 import { Observable, Observer } from 'rxjs/Rx';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
+import * as moment from 'moment';
+import * as _ from 'lodash/lodash.min.js';
 
 @Component({
   selector: 'aa-general-section-form',
@@ -26,7 +28,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   alertCodes$: Observable<models.IBaseLookUp[]>;
   ATACodes$: Observable<models.IATACode[]>;
   disableCreateDate = false;
-  noseNumber = '';
+  updatedNoseNumber: string;
+  updatedCreateDate: Date;
   public today = new Date();
 
 
@@ -61,7 +64,7 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
     const createDateControl = this.generalSectionFormGroup.get('createDate');
     createDateControl.valueChanges.subscribe(v => {
-      this.populateAircraftInfo(this.noseNumber);
+      this.populateAircraftInfo(this.updatedNoseNumber);
     });
     this.stations$ = Observable.create((observer: Observer<string>) => {
       observer.next(this.generalSectionFormGroup.get('station').value);
@@ -76,7 +79,8 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.noseNumber = newSda.generalSection.aircraftNo;
+      this.updatedCreateDate = new Date(newSda.generalSection.createDate)
+      this.updatedNoseNumber = newSda.generalSection.aircraftNo;
       this.generalSectionFormGroup.patchValue(newSda.generalSection);
       this.generalSectionFormGroup.patchValue({ sdaId: newSda.id === 0 ? '' : newSda.id });
       this.generalSectionFormGroup.patchValue({ department: newSda.generalSection.department || '' });
@@ -109,8 +113,12 @@ export class GeneralSectionFormComponent extends BaseFormComponent implements On
     if (this.generalSectionFormGroup.get('createDate').disabled) {
       return;
     }
-    this.noseNumber = noseNumber;
+
+    if ((noseNumber !== this.updatedNoseNumber) ||  (!_.isEqual(this.generalSectionFormGroup.get('createDate').value, this.updatedCreateDate))) {
+      this.updatedNoseNumber = noseNumber;
+      this.updatedCreateDate = this.generalSectionFormGroup.get('createDate').value;
     this.appStateService.loadAircraftInfo(noseNumber, this.generalSectionFormGroup.get('createDate').value);
+    }
   }
 
   confirmEmployeeId(id) {
