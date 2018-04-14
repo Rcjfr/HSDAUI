@@ -96,7 +96,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'IsCorrosionTaskNoCorrect', display: 'Is CPCP Task # correct?', dbField: 'IS_CORRISION_TASK_NO_CORRECT'},
   { key: 'CorrectedCorrosionTaskNo', display: 'Corrected CPCP Task #' , dbField: 'CORRECTED_CORROSION_TASK_NO'},
   { key: 'CorrosionLevelChangeReason', display: 'Reason for level change', dbField: ''},
-  { key: 'CorrosionLevelChangeReasonOtherText', display: 'Reason for level change(Other) - Description', dbField: 'CORROSION_LEVEL_CHANGE_REASON_OTHER_TEXT'},
+  { key: 'CorrosionLevelChangeReasonOtherText', display: 'Reason for level change(Other) - Description', dbField: 'CORROSION_LEVEL_CHANGE_REASON_DESC'},
   { key: 'EngineeringComments', display: 'Engineering Comments' , dbField: 'ENGINEERING_COMMENTS'},
   { key: 'QCFeedback', display: 'QC Feedback(CPCP Disposition)', dbField:  'QC_FEEDBACK'},
   { key: 'IsReviewComplete', display: 'Review Complete(CPCP Disposition)?', dbField: 'IS_REVIEW_COMPLETE'},
