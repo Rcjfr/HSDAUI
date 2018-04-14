@@ -37,10 +37,10 @@ export class CorrectiveActionRepairDescriptionComponent extends BaseFormComponen
     this.repairDescriptions$ = this.appStateService.getRepairDescriptions();
     this.parent.addControl(this.formGroupName, this.correctiveActionRepairDescriptionFormGroup);
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').valueChanges.debounceTime(1000).subscribe(v =>
-      this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(v && Math.round(v))
+      this.correctiveActionRepairDescriptionFormGroup.get('repairHeight').setValue(Math.round(v))
     ));
     this.subscriptions.push(this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').valueChanges.debounceTime(1000).subscribe(v =>
-      this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(v && Math.round(v))
+      this.correctiveActionRepairDescriptionFormGroup.get('repairWidth').setValue(Math.round(v))
     ));
   }
   ngOnChanges(changes: SimpleChanges) {
