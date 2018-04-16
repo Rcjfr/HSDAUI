@@ -114,6 +114,15 @@ export class AlertsSearchComponent implements OnInit {
   searchAlerts(excel: boolean = false) {
     let hasCriteria = false;
     const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
+
+    if (definedSections.hasOwnProperty('reportColumns')) {
+      delete definedSections['reportColumns']
+    }
+
+    if (definedSections.hasOwnProperty('searchByOptions')) {
+      delete definedSections['searchByOptions']
+    }
+
     _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
       //Make sure they're A) defined and B) not an empty array
       const validValues = _.pickBy(_.pickBy(value, _.identity), (x) => {
@@ -123,7 +132,6 @@ export class AlertsSearchComponent implements OnInit {
 
         return true;
       });
-
       if (!_.isEmpty(validValues)) {
         hasCriteria = true;
       }
