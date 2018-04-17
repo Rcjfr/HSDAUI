@@ -660,21 +660,29 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return moment(importStatus.lastModifiedOn).format('MM/DD/YYYY');
   }
   public hasOriginalVersion(): boolean {
-    return this.sda.history.some(s => s.status === Status.Closed) &&
-      this.sda.history[0].status !== Status.Closed;
-  }
 
-  public getLastRejectedDetails (): ISdaStatus {
-if (this.currentStatus === Status.Rejected) {
-    for (let i = 0 ; i < this.sda.history.length; i++) {
-      if ((this.sda.history[i].status === Status.Rejected) && (this.sda.history[i + 1].status !== Status.Rejected)) {
-        return  this.sda.history[i];
+    for (let i = 0; i < this.sda.history.length; i++) {
+      //Any SDA which is ever reopened, will have an original version
+      if ((this.sda.history[i].status === Status.Open) &&
+        (this.sda.history[i + 1] && this.sda.history[i + 1].status === Status.Closed)) {
+        return true;
+      }
     }
-  }
-}
 
-  return null;
-}
+    return false;
+  }
+
+  public getLastRejectedDetails(): ISdaStatus {
+    if (this.currentStatus === Status.Rejected) {
+      for (let i = 0; i < this.sda.history.length; i++) {
+        if ((this.sda.history[i].status === Status.Rejected) && (this.sda.history[i + 1].status !== Status.Rejected)) {
+          return this.sda.history[i];
+        }
+      }
+    }
+
+    return null;
+  }
 
   public areCommentsRequired(): boolean {
     return (this.sdaStatusForm.get('status').value === Status.Rejected && this.currentStatus !== Status.Rejected) ||

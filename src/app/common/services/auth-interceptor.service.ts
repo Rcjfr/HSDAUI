@@ -26,6 +26,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           if (event instanceof HttpResponse) {
             //Checking for 200 and empty body because SiteMinder is blocking the POST request
             if (event.status === 302 || !event.body) {
+              authService.hasSessionTimedOut = true;
               this.appStateService.logout();
 
               return;
@@ -43,6 +44,7 @@ export class AuthInterceptorService implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             //"Unexpected token < in JSON at position 0"[this happens when SM redirects an AJAX call to SM login page]
             if (err.status === 302 || err.status === 200 || err.status === 0) {
+              authService.hasSessionTimedOut = true;
               this.appStateService.logout();
 
               return;

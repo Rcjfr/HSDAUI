@@ -343,11 +343,11 @@ export class SdaExportService {
               columns: [
                 this.getLabel('Defect Size:(in inches)', 100),
                 this.getLabel('Length: '),
-                this.getFieldValue(sda.length.toFixed(2), 30),
+                this.getFieldValue(sda.length, 30),
                 this.getLabel('Width: '),
-                this.getFieldValue(sda.width.toFixed(2), 30),
+                this.getFieldValue(sda.width, 30),
                 this.getLabel('Depth: '),
-                this.getFieldValue(sda.depth.toFixed(2), 30)
+                this.getFieldValue(sda.depth, 30)
               ]
               , style: 'regular'
             }
@@ -611,8 +611,8 @@ export class SdaExportService {
     content.table.body.push([
       { ...this.getLabel('Approximate External Doubler Repair Dimensions'), colSpan: 2 },
       {},
-      this.getLableFieldValue('Height(in inches):', sda.repairHeight ? sda.repairHeight.toFixed(2) : ' '),
-      this.getLableFieldValue('Width(in inches):', sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ', 60)
+      this.getLableFieldValue('Height(in inches):', sda.repairHeight ? sda.repairHeight : ' '),
+      this.getLableFieldValue('Width(in inches):', sda.repairWidth ? sda.repairWidth : ' ', 60)
     ]);
 
     //}
@@ -810,9 +810,9 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Height(in inches):'),
-            this.getFieldValue(sda.repairHeight ? sda.repairHeight.toFixed(2) : ' '),
+            this.getFieldValue(sda.repairHeight ? sda.repairHeight : ' '),
             this.getLabel('Width(in inches):'),
-            this.getFieldValue(sda.repairWidth ? sda.repairWidth.toFixed(2) : ' ')
+            this.getFieldValue(sda.repairWidth ? sda.repairWidth : ' ')
           ],
 
         ]
