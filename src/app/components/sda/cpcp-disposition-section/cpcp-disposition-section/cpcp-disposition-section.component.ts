@@ -163,7 +163,7 @@ export class CpcpDispositionSectionComponent extends BaseFormComponent implement
       this.formGroup.get('reviewer').disable();
       this.formGroup.get('reviewerBadgeNo').disable();
       this.formGroup.get('reviewer').reset('Review not required');
-      this.formGroup.get('reviewerBadgeNo').reset('Review not required');
+      this.formGroup.get('reviewerBadgeNo').reset('N/A');
     }
   }
 
