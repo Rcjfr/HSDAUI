@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
@@ -19,6 +19,7 @@ import { AppStateService, AuthService } from '@app/common/services';
 import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
 import { DTEStatus } from '@app/common/models/enumerations';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -31,6 +32,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   dteStatus$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
+  @ViewChild('uploadEl') uploadElRef: ElementRef
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 5 * 1024 * 1024 });
   displayName: string;
   createNumberMask = createNumberMask;
@@ -49,7 +51,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     allowLeadingZeroes: false
   });
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService) {
     super('damageToleranceEvaluationGroup', authService);
     this.formGroup = this.fb.group({
       dteStatus: ['', [Validators.required]],
@@ -93,11 +95,19 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.get('submitToQC').enable();
       }
     });
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
+    this.uploader.onAfterAddingFile = (fileItem) => {
+      const arr = this.getAttachments();
+      if (arr.controls.some((fg: FormGroup) => fg.controls.attachmentName.value.toLowerCase() === fileItem.file.name.toLowerCase())) {
+        this.toastrService.error('Attachment with same name already exists.', 'Error');
+        this.uploader.removeFromQueue(fileItem);
+
+        return;
+      };
+      fileItem.withCredentials = false;
       this.appStateService.uploadAttachment();
     };
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+      this.uploader.removeFromQueue(item);
       this.appStateService.uploadAttachmentFail('Error during attachment upload.Please try again.');
     };
     this.uploader.onCompleteItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
@@ -107,6 +117,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         arr.push(this.initAttachment(item.file.name, item.file.size, responseData[0]));
         this.appStateService.uploadAttachmentComplete();
       }
+      this.uploadElRef.nativeElement.value = '';
     };
     this.parent.addControl(this.formGroupName, this.formGroup);
     const dteStatusControl = this.formGroup.get('dteStatus');

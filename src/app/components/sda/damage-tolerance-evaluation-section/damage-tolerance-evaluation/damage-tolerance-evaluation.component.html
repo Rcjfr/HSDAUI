@@ -191,7 +191,7 @@
       </table>
       <div>
         <label class="btn btn-primary btn-file" *ngIf="editable" [tabindex]="125">
-          Add Attachment <input type="file" ng2FileSelect [uploader]="uploader" style="display: none;">
+          Add Attachment <input type="file" #uploadEl ng2FileSelect [uploader]="uploader" style="display: none;">
         </label>
       </div>
 
