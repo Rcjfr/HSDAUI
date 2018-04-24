@@ -36,6 +36,7 @@ import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.co
 import * as _ from 'lodash/lodash.min.js';
 import { map, throttleTime, mapTo } from 'rxjs/operators';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { Helper } from '@app/common/helper';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -524,7 +525,118 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       sdaDetail.dteSection.updatedDate = this.lastModifiedOn;
     }
 
-    this.appStateService.saveSda(sdaDetail);
+
+    if (this.IsSDADirty(sdaDetail)) {
+         this.appStateService.saveSda(sdaDetail);
+    } else {
+      this.toastr.error('No new changes have been made to the form.', 'Error');
+    }
+  }
+
+  IsSDADirty(sdaDetails: ISda): boolean {
+    // Checking Status Chnage
+    if (!_.isEqual(this.sda.status, sdaDetails.status)) {
+      return true;
+     }
+
+    //  checking SDR
+    if ( sdaDetails.hasSDRRequested ) {
+      return true;
+    }
+    if (this.sdaForm.dirty) {
+    let newSdaDetail: any = _.cloneDeep(sdaDetails);
+    let oldSdaDetail: any = _.cloneDeep(this.sda);
+    //updating new Object with dates and removing null
+    newSdaDetail.generalSection.createDate = newSdaDetail.generalSection.createDate ? moment(newSdaDetail.generalSection.createDate).format('YYYY-MM-DD') : '';
+    if (newSdaDetail.dteSection) {
+      newSdaDetail.dteSection.stage1RTSDate = newSdaDetail.dteSection.stage1RTSDate ? moment(newSdaDetail.dteSection.stage1RTSDate).format('YYYY-MM-DD') : '';
+      newSdaDetail.dteSection.stage2Date = newSdaDetail.dteSection.stage2Date ? moment(newSdaDetail.dteSection.stage2Date).format('YYYY-MM-DD') : '';
+      newSdaDetail.dteSection.stage3Date = newSdaDetail.dteSection.stage3Date ? moment(newSdaDetail.dteSection.stage3Date).format('YYYY-MM-DD') : '';
+    }
+    //This is required because some of the fields like esmReference, routineNo, sdrNumber come as null
+    newSdaDetail = Helper.RemoveNulls(newSdaDetail);
+
+    //updating old Object with dates and removing null
+    oldSdaDetail.generalSection.createDate = oldSdaDetail.generalSection.createDate ? moment(oldSdaDetail.generalSection.createDate).format('YYYY-MM-DD') : '';
+    if (oldSdaDetail.dteSection) {
+        oldSdaDetail.dteSection.stage1RTSDate = oldSdaDetail.dteSection.stage1RTSDate ? moment(oldSdaDetail.dteSection.stage1RTSDate).format('YYYY-MM-DD') : '';
+        oldSdaDetail.dteSection.stage2Date = oldSdaDetail.dteSection.stage2Date ? moment(oldSdaDetail.dteSection.stage2Date).format('YYYY-MM-DD') : '';
+        oldSdaDetail.dteSection.stage3Date = oldSdaDetail.dteSection.stage3Date ? moment(oldSdaDetail.dteSection.stage3Date).format('YYYY-MM-DD') : '';
+      }
+    oldSdaDetail = Helper.RemoveNulls(oldSdaDetail);
+
+// Checking general Section Matches
+
+     if (!this.isEqual(oldSdaDetail.generalSection, newSdaDetail.generalSection, ['versionID', 'sdaId'] )) {
+      return true;
+    }
+
+// Checking cpcpSection Matches
+    if (!this.isEqual(oldSdaDetail.cpcpSection, newSdaDetail.cpcpSection,
+      [ 'versionID', 'status', 'environment', 'galleySpill', 'blockedDrain', 'chemicalSpill',
+        'wetInsulationBlanket', 'missingFloorBoardTape', 'hardwareNotInstalled', 'poorSealingPractices',
+        'missingCorrosionInhibitor', 'damageOther' ])) {
+
+      return true;
+     }
+
+// Checking defect Location Section Matches
+      if (!this.isEqual(oldSdaDetail.defectLocationSection, newSdaDetail.defectLocationSection, ['versionID'] )) {
+      return true;
+     }
+// Checking corrective Action Section Section Matches
+      if (!this.isEqual(oldSdaDetail.correctiveActionSection, newSdaDetail.correctiveActionSection, [
+        'versionID', 'completedOn', 'completedBy', 'completedDate'
+      ])) {
+
+        return true;
+     }
+
+// Checking cpcp Disposition Section
+//Below conition is for DTE Section when saves we get cpcpDispositionSection as null
+     if ((newSdaDetail.cpcpDispositionSection == null) && (oldSdaDetail.cpcpDispositionSection != null)) {
+         newSdaDetail.cpcpDispositionSection = oldSdaDetail.cpcpDispositionSection;
+     }
+     if (!this.isEqual(oldSdaDetail.cpcpDispositionSection, newSdaDetail.cpcpDispositionSection, ['versionID' ] )) {
+        return true;
+     }
+
+// Checking dte Section
+//Below conition is for CPCP disposition Section when saves we get cpcpDispositionSection as null
+     if ((newSdaDetail.dteSection == null) && (oldSdaDetail.dteSection != null)) {
+      newSdaDetail.dteSection = oldSdaDetail.dteSection;
+     }
+     if (oldSdaDetail.dteSection && newSdaDetail.dteSection) {
+       // it will be fixed with adding of attchmentid
+        // this.deleteArayObjectID(oldSdaDetail.dteSection.attachments, 'attachmentID');
+        // this.deleteArayObjectID(newSdaDetail.dteSection.attachments, 'attachmentID')
+        this.deleteArayObjectID(oldSdaDetail.dteSection.thresholdItems, 'thresholdItemID');
+        this.deleteArayObjectID(newSdaDetail.dteSection.thresholdItems, 'thresholdItemID');
+        this.deleteArayObjectID(oldSdaDetail.dteSection.monitorItems, 'monitorItemID');
+        this.deleteArayObjectID(newSdaDetail.dteSection.monitorItems, 'monitorItemID')
+    }
+
+     if (!this.isEqual(oldSdaDetail.dteSection, newSdaDetail.dteSection,
+        ['versionID', 'updatedByEmpID', 'updatedByName', 'updatedDate' ] )) {
+
+          return true;
+     }
+    }
+
+    return false;
+  }
+
+  deleteArayObjectID(arrayObject: Array<any>, deleteID: string ) {
+    if ((arrayObject) && (arrayObject.length >= 1)) {
+      arrayObject.forEach( value => {
+        delete value[deleteID];
+      })
+    }
+  }
+
+  isEqual(obj1: Object, obj2: Object, ignore: Array<string> ) {
+
+    return _.isEqual(_.omit(obj1, ignore ), _.omit(obj2, ignore))
   }
 
   logErrors(group: FormGroup | FormArray) {

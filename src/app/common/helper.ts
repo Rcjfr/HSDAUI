@@ -13,15 +13,21 @@ export class Helper {
     }
     if (typeof key === 'string' && ((key === 'createDate'))) {
       const date = new Date(moment(value).valueOf());
-
+      if (value) {
       return date;
+      }
     }
     if (typeof key === 'string' && ((key === 'dueDate'))) {
+      if (value) {
       return value;
+      }
     }
 
     if (typeof key === 'string' && ((key.indexOf('Date') > -1))) {
+      console.log(key);
+      if (value) {
       return new Date(moment.utc(value).valueOf());
+      }
     }
 
     return value;
