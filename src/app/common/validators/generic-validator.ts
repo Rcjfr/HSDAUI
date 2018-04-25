@@ -1,4 +1,4 @@
-﻿import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 
 export const Expressions = {
   Alphanumerics: '[a-zA-Z0-9]+',
@@ -64,7 +64,7 @@ export class GenericValidator {
             messages[controlKey]['message'] = '';
           } else if (c instanceof FormArray) {
 
-          }else {
+          } else {
             messages[controlKey] = '';
           }
           if ((this._formSubmitted || (c instanceof FormGroup) || (c.dirty || c.touched)) && c.errors) {

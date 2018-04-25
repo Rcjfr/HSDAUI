@@ -114,7 +114,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       if (status === 200) {
         const arr = this.getAttachments();
         const responseData = JSON.parse(response);
-        arr.push(this.initAttachment(item.file.name, item.file.size, responseData[0]));
+        arr.push(this.initAttachment(item.file.name, item.file.size, responseData[0], 0));
         this.appStateService.uploadAttachmentComplete();
       }
       this.uploadElRef.nativeElement.value = '';
@@ -173,7 +173,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems));
         const arr = new FormArray([]);
         for (const attachment of newSda.dteSection.attachments) {
-          arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath));
+          arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
         }
         this.formGroup.setControl('attachments', arr);
       } else {
@@ -201,9 +201,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     }
   }
 
-  initAttachment(fileName: string, fileSize: number, filePath: string) {
+  initAttachment(fileName: string, fileSize: number, filePath: string, attachmentID: number) {
     return this.fb.group({
-      attachmentID: [0, [Validators.maxLength(50)]],
+      attachmentID: [attachmentID, [Validators.maxLength(50)]],
       attachmentName: [fileName, [Validators.maxLength(50)]],
       attachmentSize: [fileSize, [Validators.maxLength(50)]],
       attachmentPath: [filePath, [Validators.maxLength(50)]]

@@ -25,7 +25,7 @@ import {ILazyLoadEvent} from '@app/common/models/lazy-load-event.model';
   styleUrls: ['./mrl-report-search.component.less']
 })
 export class MrlReportSearchComponent implements OnInit, OnDestroy {
-  searchCriteria: ISearchCriteria= {};
+  searchCriteria: ISearchCriteria = {};
 
     //Default paging options
     defaultPageSize = 10000;

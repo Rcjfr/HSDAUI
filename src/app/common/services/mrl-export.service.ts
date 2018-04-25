@@ -118,10 +118,10 @@ export class MrlExportService {
  return final.subscribe((result => {
     dd.content = [result];
     this.pdf.createPdf(dd).download('MrlReport.pdf');
-  }), function(error){
+  }), function(error) {
     console.log(error);
     },
-  function(){ });
+  function() { });
   }
 
   getSdaPdf(searchResult: models.ISdaListResult): Observable<any> {
