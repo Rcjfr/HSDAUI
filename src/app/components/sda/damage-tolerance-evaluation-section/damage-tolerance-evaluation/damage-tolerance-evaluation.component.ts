@@ -100,6 +100,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       if (arr.controls.some((fg: FormGroup) => fg.controls.attachmentName.value.toLowerCase() === fileItem.file.name.toLowerCase())) {
         this.toastrService.error('Attachment with same name already exists.', 'Error');
         this.uploader.removeFromQueue(fileItem);
+        this.uploadElRef.nativeElement.value = '';
 
         return;
       };
