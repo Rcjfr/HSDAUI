@@ -68,7 +68,7 @@ export class SearchByCorrosionComponent implements OnInit, OnChanges {
     const corrosionType = this.corrosionForm.controls.corrosionType;
     if (corrosionType) {
       //If they select "Other" we need to display an extra textbox for the description
-      if (corrosionType.value.indexOf(5) >= 0) {
+      if (corrosionType.value.indexOf(99) >= 0) {
         this.hideCorrosionTypeOther = false;
 
         return;

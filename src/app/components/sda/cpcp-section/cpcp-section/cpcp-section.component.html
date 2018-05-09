@@ -19,7 +19,7 @@
     <div class="col-sm-6" [class.has-error]="displayMessage.isWideSpreadCorrosion">
       <div class="row form-group">
         <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
-        <div class="col-sm-8">  
+        <div class="col-sm-8">
           <aac-radio-container label="Yes">
             <input type="radio" [value]="true" tabindex="43" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
           </aac-radio-container>
@@ -86,9 +86,9 @@
 
     </div>
     <div class="col-sm-5">
-      <div [hidden]="formGroup.get('corrosionType').value !='5' " [class.has-error]="displayMessage.corrosionTypeOtherText">
-        <aac-field-container label="Description:" [required]="formGroup.get('corrosionType').value ==='5'" [message]="displayMessage.corrosionTypeOtherText">
-          <textarea type="text" tabindex='48'cols="40" rows="5" class="form-control" [required]="formGroup.get('corrosionType').value ==='5'" formControlName="corrosionTypeOtherText"></textarea>
+      <div [hidden]="formGroup.get('corrosionType').value !='99' " [class.has-error]="displayMessage.corrosionTypeOtherText">
+        <aac-field-container label="Description:" [required]="formGroup.get('corrosionType').value ==='99'" [message]="displayMessage.corrosionTypeOtherText">
+          <textarea type="text" tabindex='48'cols="40" rows="5" class="form-control" [required]="formGroup.get('corrosionType').value ==='99'" formControlName="corrosionTypeOtherText"></textarea>
         </aac-field-container>
       </div>
     </div>
