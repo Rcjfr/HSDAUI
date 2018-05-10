@@ -37,7 +37,8 @@ export class ScheduledMaintenanceSectionComponent extends BaseFormComponent impl
     this.checkTypes$ = this.appStateService.getFleetCheckTypes();
   }
   IsCheckTypeOther(): boolean {
-    return this.formGroup.get('checkType').value === 99
+
+    return Number(this.formGroup.get('checkType').value) === 99
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
