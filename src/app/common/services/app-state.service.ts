@@ -107,6 +107,14 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
+  getDTERepairStatus(): Observable<IBaseLookUp[]> {
+    return this.store.select(fromRoot.getDTERepairStatus);
+  }
+
+  getDTEComponentType(): Observable<IBaseLookUp[]> {
+    return this.store.select(fromRoot.getDTEComponentType);
+  }
+
   getAircraftInfo(): Observable<IAircraftInfoRecord> {
     return this.store.select(fromRoot.getAircraftInfo);
   }

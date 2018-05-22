@@ -78,49 +78,49 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="pull-right hidden-print">
-        <a class="btn btn-default btn-lg" [routerLink]="['/alerts']" tabindex="144">Cancel</a>
-        <button type="button" class="btn btn-primary btn-lg" *ngIf="sda.id" tabindex="145" title="Export as PDF" (click)="exportPdf(sda.id)"><i class="fa fa-file-pdf-o"></i> Convert to PDF</button>
+        <a class="btn btn-default btn-lg" [routerLink]="['/alerts']" tabindex="179">Cancel</a>
+        <button type="button" class="btn btn-primary btn-lg" *ngIf="sda.id" tabindex="180" title="Export as PDF" (click)="exportPdf(sda.id)"><i class="fa fa-file-pdf-o"></i> Convert to PDF</button>
 
-        <a class="btn btn-default btn-lg" *ngIf="hasOriginalVersion()" tabindex="146" [routerLink]="['/alerts',sda.id,'original']">View Original</a>
-        <a class="btn btn-default btn-lg" *ngIf="original" tabindex="147" [routerLink]="['/alerts',sda.id]">View Current</a>
+        <a class="btn btn-default btn-lg" *ngIf="hasOriginalVersion()" tabindex="181" [routerLink]="['/alerts',sda.id,'original']">View Original</a>
+        <a class="btn btn-default btn-lg" *ngIf="original" tabindex="182" [routerLink]="['/alerts',sda.id]">View Current</a>
         <!--<button type="button" class="btn btn-default btn-lg" tabindex="114" (click)="location.back()">Cancel</button>-->
         <ng-container *ngIf="!readOnly">
 
           <ng-container *ngIf="authService.isQCInspector() | async">
             <!--QC Analyst Actions-->
-            <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="148" (click)="onReset.emit()">Reset</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="confirmInformation(Status.Complete)" tabindex="149">Complete SDA</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="150">Save SDA Details</button>
+            <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="183" (click)="onReset.emit()">Reset</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="confirmInformation(Status.Complete)" tabindex="184">Complete SDA</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="185">Save SDA Details</button>
           </ng-container>
           <ng-container *ngIf="authService.isQCManager() | async">
             <!--QC Manager/Supervisor Actions-->
-            <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="151" (click)="onReset.emit()">Reset</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="confirmInformation(Status.Complete)" tabindex="152">Complete SDA</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="153">Save SDA Details</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="154">Complete Audit</button>
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Complete || currentStatus == Status.Audited || currentStatus == Status.Closed)" (click)="saveAlert(Status.Open)" tabindex="155">Reopen SDA</button>
+            <button type="button" class="btn btn-default btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" tabindex="186" (click)="onReset.emit()">Reset</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Open || currentStatus == Status.Rejected)" (click)="confirmInformation(Status.Complete)" tabindex="187">Complete SDA</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Open || currentStatus == Status.Rejected" (click)="saveAlert(currentStatus)" tabindex="188">Save SDA Details</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Complete" (click)="saveAlert(Status.Audited)" tabindex="189">Complete Audit</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="(currentStatus == Status.Complete || currentStatus == Status.Audited || currentStatus == Status.Closed)" (click)="saveAlert(Status.Open)" tabindex="190">Reopen SDA</button>
           </ng-container>
           <ng-container *ngIf="authService.isReliabilityAnalyst() | async">
             <!--Reliability Analyst Actions-->
-            <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed)" [disabled]="!canRequestSdr()" (click)="requestSdrNumber()" tabindex="156">Require SDR</button>
-            <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="157">Reject SDA</button>
-            <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="158">Accept SDA</button>
+            <button type="submit" class="btn btn-primary btn-lg" *ngIf="sda.id && (this.currentStatus !== Status.Deleted && this.currentStatus !== Status.Closed)" [disabled]="!canRequestSdr()" (click)="requestSdrNumber()" tabindex="191">Require SDR</button>
+            <button type="submit" class="btn btn-danger btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Rejected)" tabindex="192">Reject SDA</button>
+            <button type="submit" class="btn btn-success btn-lg" *ngIf="currentStatus == Status.Audited" (click)="saveAlert(Status.Closed)" tabindex="193">Accept SDA</button>
             <!--<button type="submit" class="btn btn-primary btn-lg" *ngIf="currentStatus == Status.Closed" (click)="saveAlert(Status.Open)" tabindex="159">Reopen SDA</button>-->
           </ng-container>
           <ng-container *ngIf="authService.isCPCPTrainedReviewingEngineer() | async">
             <!--CPCP Engineer Actions-->
-            <button type="submit" *ngIf="isCPCPDispositionSectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveCPCPDispositionSection()" tabindex="160">Save CPCP Disposition Details</button>
+            <button type="submit" *ngIf="isCPCPDispositionSectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveCPCPDispositionSection()" tabindex="194">Save CPCP Disposition Details</button>
           </ng-container>
           <ng-container *ngIf="authService.isComplianceEngineer() | async">
             <!--Compliance Engg/Liasion Engg Actions-->
-            <button type="submit" *ngIf="isDTESectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveDTESection()" tabindex="161">Save DTE Section Details</button>
+            <button type="submit" *ngIf="isDTESectionEditable() | async" class="btn btn-primary btn-lg" (click)="saveDTESection()" tabindex="195">Save DTE Section Details</button>
           </ng-container>
           <ng-container *ngIf="canArchiveSda() | async">
-            <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="162">Delete SDA</button>
+            <button type="submit" *ngIf="sda.id" class="btn btn-primary btn-lg" (click)="saveAlert(Status.Deleted)" tabindex="196">Delete SDA</button>
           </ng-container>
 
           <ng-container>
-            <button type="submit" *ngIf="sda.history.length >1" class="btn btn-primary btn-lg" (click)="completeChangeLog()" tabindex="163">View Full Change Log</button>
+            <button type="submit" *ngIf="sda.history.length >1" class="btn btn-primary btn-lg" (click)="completeChangeLog()" tabindex="197">View Full Change Log</button>
           </ng-container>
         </ng-container>
       </div>

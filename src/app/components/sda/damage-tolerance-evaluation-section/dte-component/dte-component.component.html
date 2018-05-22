@@ -1,0 +1,63 @@
+<div class="panel panel-default"  [formGroup]="formGroup" >
+    <div class="panel-heading">
+      Component Details
+    </div>
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-sm-4">
+
+                <aac-field-container label="Component Type:" >
+                    <select class="form-control" tabindex='115' formControlName="componentType">
+                      <option value="">Select Component Type</option>
+                      <option *ngFor="let ct of componentType$ | async" [value]="ct.id">{{ct.description}}</option>
+                    </select>
+                </aac-field-container>
+            </div>
+            <div class="col-sm-4">
+                    <aac-field-container label="Control Order #:" [message]="displayMessage.controlOrderNumber">
+                      <input class="form-control" formControlName="controlOrderNumber" tabindex="116">
+                    </aac-field-container>
+            </div>
+            <div class="col-sm-4">
+                <aac-field-container label="AAID:" [message]="displayMessage.componentAAID">
+                  <input class="form-control" formControlName="componentAAID" tabindex="117">
+                </aac-field-container>
+              </div>
+        </div>
+        <div class="row">
+
+              <div class="col-sm-4">
+                <aac-field-container label="Component S/N:" [message]="displayMessage.componentSerialNumber">
+                  <input class="form-control" formControlName="componentSerialNumber" tabindex="118">
+                </aac-field-container>
+
+                </div>
+                <div class="col-sm-4">
+                    <aac-field-container label="RSPAM:" [message]="displayMessage.componentRspam">
+                      <input class="form-control" formControlName="componentRspam" tabindex="119">
+                    </aac-field-container>
+                  </div>
+
+                <div class="col-sm-4">
+                  <aac-field-container label="MPN:" [message]="displayMessage.componentMpn">
+                    <input class="form-control" formControlName="componentMpn" tabindex="120">
+                  </aac-field-container>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-4">
+                      <aac-field-container label="Hours:" [message]="displayMessage.componentHours">
+                        <input class="form-control" formControlName="componentHours" tabindex="121">
+                      </aac-field-container>
+                    </div>
+
+                  <div class="col-sm-4">
+                      <aac-field-container label="Cycles:" [message]="displayMessage.componentCycles">
+                        <input class="form-control" formControlName="componentCycles" tabindex="122">
+                      </aac-field-container>
+                    </div>
+                    <div class="col-sm-4">
+                      </div>
+                </div>
+    </div>
+  </div>

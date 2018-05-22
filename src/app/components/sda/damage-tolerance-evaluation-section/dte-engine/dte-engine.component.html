@@ -1,0 +1,74 @@
+<div class="panel panel-default"  [formGroup]="formGroup" >
+    <div class="panel-heading">
+      Engine Details
+    </div>
+    <div class="panel-body" >
+        <div class="row">
+            <div class="col-sm-4">
+                  <div>
+                    <aac-radio-container label="On Wing">
+                      <input type="radio" [value]="'1'" tabindex="123" formControlName="onOffWing" />
+                    </aac-radio-container>
+                    <aac-radio-container label="Off Wing">
+                      <input type="radio" [value]="'2'" tabindex="124" formControlName="onOffWing" />
+                    </aac-radio-container>
+                  </div>
+            </div>
+            <div class="col-sm-4">
+              <aac-field-container label="Rack #:" [message]="displayMessage.rack">
+                <input class="form-control" formControlName="rack" tabindex="125">
+              </aac-field-container>
+            </div>
+            <div class="col-sm-4">
+                <aac-field-container label="RSPAM:" [message]="displayMessage.engRspam">
+                  <input class="form-control" formControlName="engRspam" tabindex="126">
+                </aac-field-container>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="row form-group">
+                      <label class="col-sm-4 control-label">Eng Psn:</label>
+                      <div class="col-sm-8">
+                        <aac-radio-container label="Left">
+                          <input type="radio" [value]="'1'" tabindex="127" formControlName="engPsn" />
+                        </aac-radio-container>
+                        <aac-radio-container label="Right">
+                          <input type="radio" [value]="'2'" tabindex="128" formControlName="engPsn" />
+                        </aac-radio-container>
+                      </div>
+                    </div>
+                </div>
+
+              <div class="col-sm-4">
+                <aac-field-container label="Cycles(CSI):" [message]="displayMessage.engCycles">
+                  <input class="form-control" formControlName="engCycles" tabindex="129">
+                </aac-field-container>
+              </div>
+              <div class="col-sm-4">
+                <aac-field-container label="Hours(TSI):" [message]="displayMessage.engHours">
+                  <input class="form-control" formControlName="engHours" tabindex="130">
+                </aac-field-container>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-sm-4">
+                  <aac-field-container label="Engine S/N:" [message]="displayMessage.engSn">
+                    <input class="form-control" formControlName="engSn" tabindex="131">
+                  </aac-field-container>
+                </div>
+
+               <div class="col-sm-4">
+                    <aac-field-container label="MPN:" [message]="displayMessage.engMpn">
+                      <input class="form-control" formControlName="engMpn" tabindex="132">
+                    </aac-field-container>
+                  </div>
+
+              </div>
+    </div>
+  </div>

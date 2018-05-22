@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { InjectionToken, SimpleChange } from '@angular/core';
+import { InjectionToken, SimpleChange,  NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { FormControlsModule } from '@app/common/components/form-controls.module';
 import { AppStateService, AuthService } from '@app/common/services';
@@ -20,6 +20,8 @@ import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolera
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
+import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
 import { ConfirmationService } from 'primeng/api';
 
 describe('DamageToleranceEvaluationComponent', () => {
@@ -68,17 +70,22 @@ describe('DamageToleranceEvaluationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, DialogService, AuthService,
         ToastrService, ConfirmationService],
       declarations: [DamageToleranceEvaluationComponent,
         DteMonitorItemsArrayComponent,
         DteThresholdItemsArrayComponent,
         DteThresholdItemComponent,
-        DteMonitorItemComponent],
+        DteMonitorItemComponent,
+        DteEngineComponent,
+        DteComponentComponent
+      ],
       imports: [
         ReactiveFormsModule, FormsModule, FormControlsModule, ToastrModule.forRoot(), NgPipesModule,
         NKDatetimeModule, TextMaskModule, FileUploadModule, HttpModule, RouterTestingModule, NgIdleKeepaliveModule.forRoot(), HttpClientTestingModule
       ]
+
     })
       .compileComponents();
   }));

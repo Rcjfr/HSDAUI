@@ -20,5 +20,8 @@ alertCodes: [],
   repairInspectionStatus: [],
   ataCodes: [],
   checkTypes: [],
-  sdaStatus: []
+  sdaStatus: [],
+  dteRepairStatus: [],
+  dteComponentType: []
+
 });

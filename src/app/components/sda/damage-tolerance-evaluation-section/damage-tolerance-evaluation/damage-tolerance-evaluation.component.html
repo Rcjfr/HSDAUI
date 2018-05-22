@@ -106,15 +106,111 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <aac-field-container label="ESM Sub/Item #:" [message]="displayMessage.esmSubItemNumber">
         <input class="form-control" formControlName="esmSubItemNumber" tabindex="100">
       </aac-field-container>
     </div>
+
+    <div class="col-sm-4">
+        <aac-field-container label="Reg #:" [message]="displayMessage.regNumber">
+          <input class="form-control" formControlName="regNumber" tabindex="101">
+        </aac-field-container>
+      </div>
+      <div class="col-sm-4">
+         <aac-field-container label="Repair Date:" [attr.for]="repairDate.idDatePicker">
+            <datetime [timepicker]="false" [tabindex]="102" [readonly]="formGroup.get('repairDate').disabled?true:null" #repairDate formControlName="repairDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+          </aac-field-container>
+      </div>
+
   </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <aac-field-container label="Airline Code:" [message]="displayMessage.airlineCode">
+        <input class="form-control" formControlName="airlineCode" tabindex="103">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="Cmb Number:" [message]="displayMessage.cmbNumber">
+        <input class="form-control" formControlName="cmbNumber" tabindex="104">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="Component For Aircraft:" [message]="displayMessage.compForAircraft">
+        <input class="form-control" formControlName="compForAircraft" tabindex="105">
+      </aac-field-container>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <aac-field-container label="Repair Removed Date:" [attr.for]="removedByDate.idDatePicker">
+        <datetime [timepicker]="false" [tabindex]="106" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="ECO/ESO/MRB #:" [message]="displayMessage.mrbNumber">
+        <input class="form-control" formControlName="mrbNumber" tabindex="107">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="MRT #:" [message]="displayMessage.mrtNumber">
+        <input class="form-control" formControlName="mrtNumber" tabindex="108">
+      </aac-field-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <aac-field-container label="Removed By MRT#:" [message]="displayMessage.removedByMrt">
+        <input class="form-control" formControlName="removedByMrt" tabindex="109">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+        <aac-field-container label="Status:" >
+            <select class="form-control" tabindex='110' formControlName="status">
+              <option value="">Select Status</option>
+              <option *ngFor="let stat of status$ | async" [value]="stat.id">{{stat.description}}</option>
+            </select>
+        </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="zone:" [message]="displayMessage.zone">
+        <input class="form-control" formControlName="zone" tabindex="111">
+      </aac-field-container>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <aac-field-container label="Location of Repair:" [message]="displayMessage.repairLocation">
+        <input class="form-control" formControlName="repairLocation" tabindex="112">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="MRO Documents:" [message]="displayMessage.mroDocuments">
+        <input class="form-control" formControlName="mroDocuments" tabindex="113">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
+        <input class="form-control" formControlName="legacyEA" tabindex="114">
+      </aac-field-container>
+    </div>
+  </div>
+
+
+
+
   <div class="row">
     <div class="col-sm-12">
       <div class="panel-group">
+          <aa-dte-component [parent]="formGroup" [sda]="sda"
+          [errorMessages]="displayMessage"></aa-dte-component>
+          <aa-dte-engine [parent]="formGroup" [sda]="sda"
+          [errorMessages]="displayMessage"></aa-dte-engine>
         <aa-dte-threshold-items-array formArrayName="thresholdItems"
                                       [editable]="editable"
                                       [errorMessages]="displayMessage?.thresholdItems"
@@ -131,12 +227,12 @@
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="DTE Comments:" [message]="displayMessage.comments">
-        <textarea class="form-control" tabindex="121" rows="5" cols="50" formControlName="comments"></textarea>
+        <textarea class="form-control" tabindex="155" rows="5" cols="50" formControlName="comments"></textarea>
       </aac-field-container>
     </div>
     <div class="col-sm-6">
       <aac-field-container label="QC Feedback:" [message]="displayMessage.qcFeedback">
-        <textarea class="form-control" rows="5" cols="50" tabindex="122" formControlName="qcFeedback"></textarea>
+        <textarea class="form-control" rows="5" cols="50" tabindex="156" formControlName="qcFeedback"></textarea>
       </aac-field-container>
       <!-- <aac-checkbox-container label="Submit to QC">
         <input type="checkbox" tabindex="124" formControlName="submittedToQC" />
@@ -146,14 +242,14 @@
   <div class="row form-group">
     <div class="col-sm-6">
       <aac-checkbox-container label="Submit to QC">
-        <input type="checkbox" tabindex="123" formControlName="submitToQC" />
+        <input type="checkbox" tabindex="157" formControlName="submitToQC" />
       </aac-checkbox-container>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true"  labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
-        <select class="form-control" tabindex='124' formControlName="dteStatus">
+        <select class="form-control" tabindex='158' formControlName="dteStatus">
           <option value="">Select DTE Status </option>
           <option *ngFor="let ac of dteStatus$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -190,7 +286,7 @@
         </tbody>
       </table>
       <div>
-        <label class="btn btn-primary btn-file" *ngIf="editable" [tabindex]="125">
+        <label class="btn btn-primary btn-file" *ngIf="editable" [tabindex]="159">
           Add Attachment <input type="file" #uploadEl ng2FileSelect [uploader]="uploader" style="display: none;">
         </label>
       </div>
@@ -203,11 +299,11 @@
       <aac-field-container class="col-sm-12 padding-0" labelGridColumnWidth="3" fieldGridColumnWidth="9" label="Major Repair Updated By:" [message]="displayMessage.updatedBy">
         <div class="padding-0" >
           <div class="col-sm-3 padding-0">
-            <input type="text" class="form-control" tabindex="126" formControlName="updatedByEmpID" placeholder="Employee ID">
+            <input type="text" class="form-control" tabindex="160" formControlName="updatedByEmpID" placeholder="Employee ID">
           </div>
           <div class="col-sm-2 padding-0 width-20">_</div>
           <div class="col-sm-7 padding-0">
-            <input type="text" class="form-control" tabindex="127"  placeholder="Last Name, First Name" formControlName="updatedByName">
+            <input type="text" class="form-control" tabindex="161"  placeholder="Last Name, First Name" formControlName="updatedByName">
           </div>
         </div>
       </aac-field-container>
@@ -215,12 +311,12 @@
 
     <div class="col-sm-3 padding-0">
       <aac-field-container label="Major Repair Updated Date:" labelGridColumnWidth="5" fieldGridColumnWidth="7" [attr.for]="updatedDate.idDatePicker" [message]="displayMessage.updatedDate">
-        <datetime [timepicker]="false" [readonly]="true" [tabindex]="128" #updatedDate formControlName="updatedDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [readonly]="true" [tabindex]="162" #updatedDate formControlName="updatedDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-sm-3">
         <aac-field-container label="DTE Due Date:" [message]="displayMessage.dueDate">
-            <input class="form-control" formControlName="dueDate" tabindex="129">
+            <input class="form-control" formControlName="dueDate" tabindex="163">
           </aac-field-container>
     </div>
 

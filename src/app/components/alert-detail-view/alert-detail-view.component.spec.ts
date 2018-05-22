@@ -65,6 +65,9 @@ import { ConfirmComponent } from '@app/common/components/confirm/confirm.compone
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { ConfirmationService } from 'primeng/api';
+import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
+import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
+
 describe('AlertDetailViewComponent', () => {
   let component: AlertDetailViewComponent;
   let fixture: ComponentFixture<AlertDetailViewComponent>;
@@ -110,7 +113,9 @@ describe('AlertDetailViewComponent', () => {
         DteThresholdItemComponent,
         DteMonitorItemComponent,
         CorrectiveActionChapComponent,
-        ConfirmComponent
+        ConfirmComponent,
+        DteEngineComponent,
+        DteComponentComponent
       ],
       imports: [
         RouterTestingModule,

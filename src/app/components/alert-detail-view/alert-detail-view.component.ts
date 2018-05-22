@@ -196,6 +196,16 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     return result;
   }
 
+  flattenChild(parentObject, childObjectName) {
+    for (const p in parentObject[childObjectName]) {
+      if (parentObject[childObjectName].hasOwnProperty(p)) {
+        parentObject[p] = parentObject[childObjectName][p]
+      }
+    }
+    delete parentObject[childObjectName];
+
+    return  parentObject;
+  }
   hideStatusModal() {
     this.statusModal.hide();
   }
@@ -518,6 +528,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     sdaDetail.dteSection = null;
     if (this.saveDTESectionDetails) {
       sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
+      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteComponentGroup')
+      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteEngineGroup')
       sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.inspectionInterval && t.inspectionMethod && t.inspectionThreshold);
       sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
       sdaDetail.dteSection.updatedByBadgeNo = this.statusUpdatedBy;
@@ -552,8 +564,10 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       newSdaDetail.dteSection.stage1RTSDate = newSdaDetail.dteSection.stage1RTSDate ? moment(newSdaDetail.dteSection.stage1RTSDate).format('YYYY-MM-DD') : '';
       newSdaDetail.dteSection.stage2Date = newSdaDetail.dteSection.stage2Date ? moment(newSdaDetail.dteSection.stage2Date).format('YYYY-MM-DD') : '';
       newSdaDetail.dteSection.stage3Date = newSdaDetail.dteSection.stage3Date ? moment(newSdaDetail.dteSection.stage3Date).format('YYYY-MM-DD') : '';
+      newSdaDetail.dteSection.removedByDate = newSdaDetail.dteSection.removedByDate ? moment(newSdaDetail.dteSection.removedByDate).format('YYYY-MM-DD') : '';
+      newSdaDetail.dteSection.repairDate = newSdaDetail.dteSection.repairDate ? moment(newSdaDetail.dteSection.repairDate).format('YYYY-MM-DD') : '';
     }
-    //This is required because some of the fields like esmReference, routineNo, sdrNumber come as null
+     //This is required because some of the fields like esmReference, routineNo, sdrNumber come as null
     newSdaDetail = Helper.RemoveNulls(newSdaDetail);
 
     //updating old Object with dates and removing null
@@ -562,6 +576,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
         oldSdaDetail.dteSection.stage1RTSDate = oldSdaDetail.dteSection.stage1RTSDate ? moment(oldSdaDetail.dteSection.stage1RTSDate).format('YYYY-MM-DD') : '';
         oldSdaDetail.dteSection.stage2Date = oldSdaDetail.dteSection.stage2Date ? moment(oldSdaDetail.dteSection.stage2Date).format('YYYY-MM-DD') : '';
         oldSdaDetail.dteSection.stage3Date = oldSdaDetail.dteSection.stage3Date ? moment(oldSdaDetail.dteSection.stage3Date).format('YYYY-MM-DD') : '';
+        oldSdaDetail.dteSection.removedByDate = oldSdaDetail.dteSection.removedByDate ? moment(oldSdaDetail.dteSection.removedByDate).format('YYYY-MM-DD') : '';
+        oldSdaDetail.dteSection.repairDate = oldSdaDetail.dteSection.repairDate ? moment(oldSdaDetail.dteSection.repairDate).format('YYYY-MM-DD') : '';
       }
     oldSdaDetail = Helper.RemoveNulls(oldSdaDetail);
 

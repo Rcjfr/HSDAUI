@@ -18,8 +18,11 @@ import * as models from '@app/common/models';
 import { AppStateService, AuthService } from '@app/common/services';
 import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
+import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
 import { DTEStatus } from '@app/common/models/enumerations';
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -31,6 +34,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   @Input() editable = false;
 
   dteStatus$: Observable<models.IBaseLookUp[]>;
+  status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 5 * 1024 * 1024 });
@@ -77,14 +81,28 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       dueDate: new FormControl({ value: '', disabled: true }),
       thresholdItems: DteThresholdItemsArrayComponent.buildItems([{}]),
       monitorItems: DteMonitorItemsArrayComponent.buildItems([{}]),
-      attachments: this.fb.array([])
-
+      attachments: this.fb.array([]),
+      regNumber: ['', [Validators.maxLength(10)]],
+      repairDate: [undefined, []],
+      airlineCode: ['', [Validators.maxLength(3)]],
+      cmbNumber: ['', [Validators.maxLength(25)]],
+      compForAircraft: ['', [Validators.maxLength(10)]],
+      removedByDate: [undefined, []],
+      mrbNumber: ['', [Validators.maxLength(50)]],
+      mrtNumber: [{ value: '', disabled: true }, [Validators.maxLength(15)]],
+      removedByMrt: [{ value: '', disabled: true }, [Validators.maxLength(150)]],
+      status: ['', [Validators.maxLength(1)]],
+      zone: ['', [Validators.maxLength(50)]],
+      repairLocation: ['', [Validators.maxLength(100)]],
+      mroDocuments: ['', [Validators.maxLength(150)]],
+      legacyEA: ['', [Validators.maxLength(100)]],
     });
   }
 
   ngOnInit() {
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
+    this.status$  = this.appStateService.getDTERepairStatus();
     this.authService.auditDisplayName().take(1).subscribe(u => {
       this.displayName = u;
     });
@@ -190,9 +208,31 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           totalShipTime: newSda.generalSection.totalShipTime,
           cycles: newSda.generalSection.cycles,
           submitToQC: false,
-          updatedByName: '',
-          updatedByEmpID: '',
-          updatedDate: { value: undefined, disabled: true }
+          updatedByName: { value: '', disabled: true },
+          updatedByEmpID: { value: '', disabled: true },
+          updatedDate: { value: undefined, disabled: true },
+          isFatigueCritical: undefined,
+          srNumber: '',
+          rdasNumber: '',
+          etdNumber: '',
+          esmSubItemNumber: '',
+          comments: '',
+          qcFeedback: '',
+          submittedToQC: false,
+          regNumber: '',
+          repairDate: undefined,
+          airlineCode: '',
+          cmbNumber: '',
+          compForAircraft: '',
+          removedByDate: undefined,
+          mrbNumber: '',
+          mrtNumber: '',
+          removedByMrt: '',
+          status: '',
+          zone: '',
+          repairLocation: '',
+          mroDocuments: '',
+          legacyEA: '',
         });
       }
       this.formGroup.markAsPristine();

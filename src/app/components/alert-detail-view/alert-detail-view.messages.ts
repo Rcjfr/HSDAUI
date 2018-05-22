@@ -476,7 +476,46 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     esmSubItemNumber: {
       maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
     },
-    thresholdItems: {
+    regNumber: {
+      maxlength: 'Reg # must not be more than 10 characters.'
+    },
+    airlineCode: {
+      maxlength: 'Airline Code must not be more than 3 characters.'
+    },
+    cmbNumber: {
+      maxlength: 'Cmb Number Code must not be more than 25 characters.'
+    },
+    compForAircraft: {
+      maxlength: 'Component For Aircraft must not be more than 10 characters.'
+    },
+    mrbNumber: {
+      maxlength: 'MRB # must not be more than 50 characters.'
+    },
+
+    mrtNumber: {
+      maxlength: 'MRT # must not be more than 15 characters.'
+    },
+
+    removedByMrt: {
+      maxlength: 'Removed By MRT # must not be more than 150 characters.'
+    },
+
+    zone: {
+      maxlength: 'Zone must not be more than 50 characters.'
+    },
+
+    repairLocation: {
+      maxlength: 'Location of Repair must not be more than 100 characters.'
+    },
+
+    mroDocuments: {
+      maxlength: 'MRO Documents must not be more than 150 characters.'
+    },
+
+    legacyEA: {
+      maxlength: 'Legacy EA must not be more than 100 characters.'
+    },
+     thresholdItems: {
       inspectionThreshold: {
         required: 'Inspection Threshold is required.',
         maxlength: 'Inspection Threshold must not be more than 50 characters.'
@@ -490,6 +529,49 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
+    'dteComponentGroup': {
+      controlOrderNumber: {
+        maxlength: 'Control Order # must not be more than 50 characters.'
+      },
+      componentAAID: {
+        maxlength: 'AAID must not be more than 10 characters.'
+      },
+      componentSerialNumber: {
+        maxlength: 'Component S/N must not be more than 25 characters.'
+      },
+      componentRspam: {
+        maxlength: 'RSPAM must not be more than 25 characters.'
+      },
+      componentMpn: {
+        maxlength: 'MPN must not be more than 25 characters.'
+      },
+      componentHours: {
+        maxlength: 'Hours must not be more than 10 characters.'
+      },
+      componentCycles: {
+        maxlength: 'Cycles must not be more than 10 characters.'
+      }
+    },
+    'dteEngineGroup': {
+      rack: {
+        maxlength: 'Rack # must not be more than 50 characters.'
+      },
+      engCycles: {
+        maxlength: 'Cycles(CSI) must not be more than 10 characters.'
+      },
+      engHours: {
+        maxlength: 'Hours(TSI) must not be more than 10 characters.'
+      },
+      engRspam: {
+        maxlength: 'RSPAM must not be more than 25 characters.'
+      },
+      engSn: {
+        maxlength: 'Engine S/N must not be more than 25 characters.'
+      },
+      engMpn: {
+        maxlength: 'MPN must not be more than 25 characters.'
+      }
+   },
     monitorItems: {
       monitorItemDescription: {
         required: 'FMR/Logpage/Mon is required.',

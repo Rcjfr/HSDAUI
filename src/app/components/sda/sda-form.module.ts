@@ -66,6 +66,8 @@ import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolera
 import { RepairDetailsSectionComponent } from '@app/components/sda/repair-details-section/repair-details-section/repair-details-section.component';
 //Current Status Section
 import { CurrentStatusSectionComponent } from '@app/components/sda/current-status-section/current-status-section/current-status-section.component';
+import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
+import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
 
 
 
@@ -103,7 +105,9 @@ import { CurrentStatusSectionComponent } from '@app/components/sda/current-statu
     RepairDetailsSectionComponent,
     CurrentStatusSectionComponent,
     CpcpDispositionSectionComponent,
-    DamageToleranceEvaluationComponent
+    DamageToleranceEvaluationComponent,
+    DteComponentComponent,
+    DteEngineComponent,
   ],
   declarations: [
     GeneralSectionFormComponent,
@@ -130,7 +134,9 @@ import { CurrentStatusSectionComponent } from '@app/components/sda/current-statu
     DteThresholdItemComponent,
     DteThresholdItemsArrayComponent,
     DteMonitorItemComponent,
-    DteMonitorItemsArrayComponent
+    DteMonitorItemsArrayComponent,
+    DteComponentComponent,
+    DteEngineComponent
   ],
   providers: []
 })

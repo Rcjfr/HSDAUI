@@ -71,6 +71,8 @@ export const getReasonsForChange = createSelector(getLookupDataState, fromLookup
 export const getRepairInspectionStatus = createSelector(getLookupDataState, fromLookupData.getRepairInspectionStatus);
 export const getDTEStatus = createSelector(getLookupDataState, fromLookupData.getDTEStatus);
 export const getSdaStatus = createSelector(getLookupDataState, fromLookupData.getSdaStatus);
+export const getDTERepairStatus = createSelector(getLookupDataState, fromLookupData.getDTERepairStatus);
+export const getDTEComponentType = createSelector(getLookupDataState, fromLookupData.getDTEComponentType);
 
 
 export const getUser = createSelector(getUserDataState, fromLoggedInUser.getUser);

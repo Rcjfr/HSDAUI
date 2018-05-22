@@ -137,6 +137,14 @@ export class MockAppStateService extends AppStateService {
     return Observable.of(SearchCriteriaRecordFactory());
   }
 
+  getDTERepairStatus() {
+    return Observable.of([]);
+  }
+
+  getDTEComponentType() {
+    return Observable.of([]);
+  }
+
   getNewSdaStatus() {
     return Observable.of(<Status>{});
   }

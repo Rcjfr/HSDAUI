@@ -79,3 +79,5 @@ export const getReasonsForChange = (state: State) => state.lookupData.corrosionL
 export const getDTEStatus = (state: State) => state.lookupData.dteStatus;
 export const getRepairInspectionStatus = (state: State) => state.lookupData.repairInspectionStatus;
 export const getSdaStatus = (state: State) => state.lookupData.sdaStatus;
+export const getDTERepairStatus = (state: State) => state.lookupData.dteRepairStatus;
+export const getDTEComponentType = (state: State) => state.lookupData.dteComponentType;

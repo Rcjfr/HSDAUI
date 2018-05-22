@@ -27,4 +27,34 @@ export interface IDTESection {
   attachments?: IDTEAttachment[];
   thresholdItems?: IDTEThresholdItem[];
   monitorItems?: IDTEMonitorItem[];
+  regNumber?: string;
+  repairDate?: Date;
+  airlineCode?: string;
+  cmbNumber?: string;
+  compForAircraft?: string;
+  removedByDate?: Date;
+  mrbNumber?: string;
+  mrtNumber?: string;
+  removedByMrt?: string;
+  status?: number;
+  zone?: string;
+  repairLocation?: string;
+  mroDocuments?: string;
+  legacyEA?: string;
+  componentType?: number;
+  controlOrderNumber?: string,
+  componentAAID?: string,
+  componentSerialNumber?: string,
+  componentRspam?: string,
+  componentMpn?: string,
+  componentHours?: string,
+  componentCycles?: string
+  onOffWing?: string;
+  rack?: string;
+  engPsn?: string;
+  engCycles?: string;
+  engHours?: string;
+  engRspam?: string;
+  engSn?: string;
+  engMpn?: string;
 }

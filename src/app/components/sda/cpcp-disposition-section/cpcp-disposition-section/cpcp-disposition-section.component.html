@@ -2,7 +2,7 @@
   <div class="row form-group">
     <div class="col-sm-6">
       <aac-checkbox-container label="Non-CPCP">
-        <input type="checkbox" tabindex="130" formControlName="isNonCPCPRelatedEvent" />
+        <input type="checkbox" tabindex="164" formControlName="isNonCPCPRelatedEvent" />
       </aac-checkbox-container>
 
     </div>
@@ -14,10 +14,10 @@
           <label class="col-sm-4 control-label">Is CPCP Task # correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="131" [required]="isReviewComplete()" formControlName="isCorrosionTaskNoCorrect" />
+              <input type="radio" [value]="true" tabindex="165" [required]="isReviewComplete()" formControlName="isCorrosionTaskNoCorrect" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="131" [required]="isReviewComplete()" formControlName="isCorrosionTaskNoCorrect" />
+              <input type="radio" [value]="false" tabindex="165" [required]="isReviewComplete()" formControlName="isCorrosionTaskNoCorrect" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isCorrosionTaskNoCorrect" class="error">{{displayMessage.isCorrosionTaskNoCorrect}}</div>
           </div>
@@ -25,7 +25,7 @@
       </div>
       <div class="col-sm-8">
         <aac-field-container [required]="!isNonCPCPRelatedEvent() && isReviewComplete()" label="Corrected CPCP Task #:" [message]="displayMessage.correctedCorrosionTaskNo">
-          <input type="text" tabindex='132' [required]="isReviewComplete() && !isCorrosionTaskNoCorrect()" class="form-control" formControlName="correctedCorrosionTaskNo">
+          <input type="text" tabindex='166' [required]="isReviewComplete() && !isCorrosionTaskNoCorrect()" class="form-control" formControlName="correctedCorrosionTaskNo">
         </aac-field-container>
       </div>
     </div>
@@ -36,10 +36,10 @@
           <label class="col-sm-4 control-label">Is Corrosion Level correct?<span class="req" *ngIf="!isNonCPCPRelatedEvent() && isReviewComplete()">*</span></label>
           <div class="col-sm-8">
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="133" [required]="isReviewComplete()"  formControlName="isCorrosionLevelCorrect" />
+              <input type="radio" [value]="true" tabindex="167" [required]="isReviewComplete()"  formControlName="isCorrosionLevelCorrect" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="133" [required]="isReviewComplete()" formControlName="isCorrosionLevelCorrect" />
+              <input type="radio" [value]="false" tabindex="167" [required]="isReviewComplete()" formControlName="isCorrosionLevelCorrect" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isCorrosionLevelCorrect" class="error">{{displayMessage.isCorrosionLevelCorrect}}</div>
           </div>
@@ -49,10 +49,10 @@
           <div class="col-sm-8">
 
             <aac-radio-container label="Yes">
-              <input type="radio" [value]="true" tabindex="134" [required]="isReviewComplete()" formControlName="isWideSpreadCorrosion" />
+              <input type="radio" [value]="true" tabindex="168" [required]="isReviewComplete()" formControlName="isWideSpreadCorrosion" />
             </aac-radio-container>
             <aac-radio-container label="No">
-              <input type="radio" [value]="false" tabindex="134" [required]="isReviewComplete()" formControlName="isWideSpreadCorrosion" />
+              <input type="radio" [value]="false" tabindex="169" [required]="isReviewComplete()" formControlName="isWideSpreadCorrosion" />
             </aac-radio-container>
             <div *ngIf="displayMessage.isWideSpreadCorrosion" class="error">{{displayMessage.isWideSpreadCorrosion}}</div>
           </div>
@@ -66,7 +66,7 @@
           <div class="row form-group">
             <div class="col-sm-12">
               <aac-radio-container *ngFor="let ac of corrosionLevels$ | async" [label]="ac.description">
-                <input type="radio" [value]="ac.id" tabindex="135" [required]="isReviewComplete()" formControlName="correctedCorrosionLevel" />
+                <input type="radio" [value]="ac.id" tabindex="170" [required]="isReviewComplete()" formControlName="correctedCorrosionLevel" />
               </aac-radio-container>
 
             </div>
@@ -81,7 +81,7 @@
 
             <div class="col-sm-12">
               <aac-radio-container *ngFor="let ac of reasons$ | async" [label]="ac.description">
-                <input type="radio" [value]="ac.id" tabindex="136" [required]="isReviewComplete() && isCorrosionLevelCorrect() === false"
+                <input type="radio" [value]="ac.id" tabindex="171" [required]="isReviewComplete() && isCorrosionLevelCorrect() === false"
 				formControlName="corrosionLevelChangeReason" />
               </aac-radio-container>
               <div *ngIf="displayMessage.corrosionLevelChangeReason" class="error">{{displayMessage.corrosionLevelChangeReason}}</div>
@@ -91,7 +91,7 @@
           <div class="row form-group" *ngIf="formGroup.get('corrosionLevelChangeReason').value == 5">
             <div class="col-sm-12">
 
-              <textarea tabindex='137' [required]="formGroup.get('corrosionLevelChangeReason').value == 5 && isReviewComplete()" cols="40" rows="5" class="form-control" formControlName="corrosionLevelChangeReasonOtherText">
+              <textarea tabindex='172' [required]="formGroup.get('corrosionLevelChangeReason').value == 5 && isReviewComplete()" cols="40" rows="5" class="form-control" formControlName="corrosionLevelChangeReasonOtherText">
                   </textarea>
 
               <div *ngIf="displayMessage.corrosionLevelChangeReasonOtherText" class="error">{{displayMessage.corrosionLevelChangeReasonOtherText}}</div>
@@ -106,7 +106,7 @@
         <aac-field-container label="Engineering Comments:"
                              helptext="(Comments need to be 500 characters or less)"
                              [message]="displayMessage.engineeringComments">
-          <textarea tabindex='138' cols="40" rows="5" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" class="form-control" formControlName="engineeringComments">
+          <textarea tabindex='173' cols="40" rows="5" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" class="form-control" formControlName="engineeringComments">
         </textarea>
         </aac-field-container>
       </div>
@@ -114,7 +114,7 @@
         <aac-field-container label="QC Feedback:"
                              helptext="(Comments need to be 500 characters or less)"
                              [message]="displayMessage.qcFeedback">
-          <textarea tabindex='139' cols="40" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" rows="5" class="form-control" formControlName="qcFeedback">
+          <textarea tabindex='174' cols="40" [required]="(isCorrosionTaskNoCorrect() === false || isCorrosionLevelCorrect() === false) && isReviewComplete()" rows="5" class="form-control" formControlName="qcFeedback">
         </textarea>
         </aac-field-container>
       </div>
@@ -123,14 +123,14 @@
   <div class="row form-group">
     <div class="col-sm-6">
       <aac-checkbox-container label="Submit to QC">
-        <input type="checkbox" tabindex="140" formControlName="submitToQC" />
+        <input type="checkbox" tabindex="175" formControlName="submitToQC" />
       </aac-checkbox-container>
     </div>
   </div>
   <div class="row form-group">
     <div class="col-sm-2">
       <aac-checkbox-container label="Review Complete">
-        <input type="checkbox" tabindex="141" formControlName="isReviewComplete" />
+        <input type="checkbox" tabindex="176" formControlName="isReviewComplete" />
       </aac-checkbox-container>
     </div>
     <div class="col-sm-10">
@@ -139,11 +139,11 @@
 
         <div >
             <div class="col-sm-4 padding-0">
-              <input type="text" tabindex='142' class="form-control" placeholder="Employee ID" [required]="isReviewComplete()" formControlName="reviewerBadgeNo">
+              <input type="text" tabindex='177' class="form-control" placeholder="Employee ID" [required]="isReviewComplete()" formControlName="reviewerBadgeNo">
              </div>
              <div class="col-sm-1 padding-0 width-20">_</div>
              <div class="col-sm-7 padding-0">
-              <input type="text" tabindex='143' class="form-control"  placeholder="Last Name, First Name" [required]="isReviewComplete()" formControlName="reviewer" >
+              <input type="text" tabindex='178' class="form-control"  placeholder="Last Name, First Name" [required]="isReviewComplete()" formControlName="reviewer" >
             </div>
           </div>
       </aac-field-container>

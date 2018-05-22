@@ -6,7 +6,7 @@
     </select>
   </aac-field-container>
 <div [hidden]="!IsCheckTypeOther()" [class.has-error]="displayMessage.checkTypeOtherText" >
-  <aac-field-container label="Description:" [required]="IsCheckTypeOther()" [message]="displayMessage.checkTypeOtherText">
+  <aac-field-container label="Other Description:" [required]="IsCheckTypeOther()" [message]="displayMessage.checkTypeOtherText">
     <textarea type="text" tabindex='19'cols="40" rows="5" class="form-control" [required]="IsCheckTypeOther()" formControlName="checkTypeOtherText"></textarea>
   </aac-field-container>
 </div>

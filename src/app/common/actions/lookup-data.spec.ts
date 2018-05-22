@@ -178,6 +178,18 @@ describe('LookUpData Actions', () => {
             'id': 1,
             'description': '2C Interval'
           }
+        ],
+        'dteRepairStatus' : [
+          {
+            'id': 1,
+            'description': 'Active'
+          }
+        ],
+        'dteComponentType' : [
+          {
+            'id': 1,
+            'description': 'Attachment'
+          }
         ]
       };
       const action = new lookupDataActions.LoadLookupDataCompleteAction(lookupData);
