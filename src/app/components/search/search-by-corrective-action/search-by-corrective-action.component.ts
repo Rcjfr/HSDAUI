@@ -5,7 +5,7 @@ import { List } from 'immutable';
 import * as models from '@app/common/models';
 import { AppStateService, UtilityService } from '@app/common/services';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'aa-search-by-corrective-action',

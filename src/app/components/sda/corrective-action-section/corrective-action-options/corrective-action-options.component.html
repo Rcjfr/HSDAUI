@@ -20,7 +20,7 @@
   </div>
 
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('repairType').value ==2">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <aa-modified-part-description [parent]="correctiveActionOptionFormGroup" [sda]="sda"
                                     [errorMessages]="displayMessage">
       </aa-modified-part-description>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="row form-group" *ngIf="correctiveActionOptionFormGroup.get('repairType').value == 1">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <aa-defective-part-description [parent]="correctiveActionOptionFormGroup" [sda]="sda"
                                      [errorMessages]="displayMessage">
       </aa-defective-part-description>

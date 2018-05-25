@@ -91,11 +91,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         },
         'routineNo': {
           pattern: 'Routine # must contain only alphanumerics.',
-          maxlength: 'Routine # must not be more than 50 characters.'
+          maxlength: 'Routine # must not be more than 150 characters.'
         },
         'nonRoutineNo': {
           pattern: 'Non-Routine # must contain only alphanumerics.',
-          maxlength: 'Non-Routine # must not be more than 50 characters.'
+          maxlength: 'Non-Routine # must not be more than 150 characters.'
         },
         'esmReference': {
           maxlength: 'ESM Reference # must not be more than 50 characters.'
@@ -465,7 +465,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       required: 'Stage 1 Duration is required.'
     },
     srNumber: {
-      maxlength: 'SR # must not be more than 25 characters.'
+      maxlength: 'SR # must not be more than 50 characters.'
     },
     rdasNumber: {
       maxlength: 'RDAS # must not be more than 25 characters.'
@@ -474,7 +474,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'ETD # must not be more than 25 characters.'
     },
     esmSubItemNumber: {
-      maxlength: 'ESM Sub/Item # must not be more than 25 characters.'
+      maxlength: 'ESM Sub/Item # must not be more than 50 characters.'
     },
     regNumber: {
       maxlength: 'Reg # must not be more than 10 characters.'

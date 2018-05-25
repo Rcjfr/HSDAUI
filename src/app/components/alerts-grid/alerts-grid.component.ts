@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import { ScrollToService } from 'ng2-scroll-to-el';
 import { DataGrid } from 'primeng/datagrid';
 

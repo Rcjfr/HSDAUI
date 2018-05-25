@@ -6,7 +6,7 @@ import * as models from '@app/common/models';
 import { AppStateService } from '@app/common/services';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { decimalsNumberMask } from '@app/common/masks';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as moment from 'moment';
 

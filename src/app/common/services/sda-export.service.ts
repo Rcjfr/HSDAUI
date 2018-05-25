@@ -5,36 +5,24 @@ import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/mode
 import { Observable } from 'rxjs/Observable';
 import { SdaService } from '@app/common/services/sda.service';
 import * as constants from '@app/common/constants';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import * as moment from 'moment-timezone';
-import * as pdfMake from 'pdfmake/build/pdfmake.min.js';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions, pdfMakeStatic } from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { AuthService } from '@app/common/services/auth.service';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 //https://github.com/bpampuch/pdfmake/issues/948#issuecomment-293542550
 //https://github.com/bpampuch/pdfmake/issues/948
 //http://dataurl.net/#dataurlmaker
 /*tslint:disable:max-line-length*/
-pdfMake.vfs['Fontello.ttf'] = constants.FontelloTTF;
 
-pdfMake.fonts = {
-  Roboto: {
-    normal: 'Roboto-Regular.ttf',
-    bold: 'Roboto-Medium.ttf',
-    italics: 'Roboto-Italic.ttf',
-    bolditalics: 'Roboto-MediumItalic.ttf'
-  },
-  Fontello: {
-    normal: 'Fontello.ttf',
-    bold: 'Fontello.ttf',
-    italics: 'Fontello.ttf',
-    bolditalics: 'Fontello.ttf'
-  }
-}
+
+
 @Injectable()
 export class SdaExportService {
-  pdf: any;
+  pdf: pdfMakeStatic;
   CST = 'America/Chicago';
   isQCPersonnel = false;
   icon_check_empty = '';
@@ -44,6 +32,24 @@ export class SdaExportService {
   new_line = '\n';
   constructor(private sdaService: SdaService, private authService: AuthService) {
     this.pdf = pdfMake;
+    this.pdf.vfs = pdfFonts.pdfMake.vfs;
+    this.pdf.vfs['Fontello.ttf'] = constants.FontelloTTF;
+    this.pdf.fonts = {
+      Roboto: {
+        normal: 'Roboto-Regular.ttf',
+        bold: 'Roboto-Medium.ttf',
+        italics: 'Roboto-Italic.ttf',
+        bolditalics: 'Roboto-MediumItalic.ttf'
+      },
+      Fontello: {
+        normal: 'Fontello.ttf',
+        bold: 'Fontello.ttf',
+        italics: 'Fontello.ttf',
+        bolditalics: 'Fontello.ttf'
+      }
+    };
+
+
     authService.hasAnyRole([authService.HSDA_End_Users,
     authService.Reliability_Analyst,
     authService.CPCP_Trained_Reviewing_Engineer,
@@ -53,7 +59,7 @@ export class SdaExportService {
     ]).take(1).subscribe(u => this.isQCPersonnel = !u);
   }
   exportSda(sdas: number[]): Observable<any> {
-    const dd = {
+    const dd: TDocumentDefinitions = {
       info: {
         title: 'Structural Defect Alert',
         author: 'American Airlines',

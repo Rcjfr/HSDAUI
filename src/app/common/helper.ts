@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 export class Helper {
   public static Deserialize(data: string): any {
     return JSON.parse(data, Helper.ReviveDateTime);
@@ -56,4 +56,13 @@ public static RemoveNulls(criteriaObj: Object) {
   return criteriaObject;
 
   }
+  public static IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
+}
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, SimpleChanges, OnChanges } from
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { UtilityService } from '@app/common/services';
 import { IYesNoBoth } from '@app/common/models';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import * as models from '@app/common/models';
 import { Observable } from 'rxjs/Observable';
 

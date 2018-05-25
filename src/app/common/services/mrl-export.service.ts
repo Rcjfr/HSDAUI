@@ -5,12 +5,11 @@ import { ILookupData, ISdaListView, IBaseLookUp, Status } from '@app/common/mode
 import { Observable } from 'rxjs/Observable';
 import * as constants from '@app/common/constants';
 import * as moment from 'moment-timezone';
-import * as pdfMake from 'pdfmake/build/pdfmake.min.js';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import {TDocumentDefinitions, pdfMakeStatic } from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as models from '@app/common/models';
 
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 //https://github.com/bpampuch/pdfmake/issues/948#issuecomment-293542550
 //https://github.com/bpampuch/pdfmake/issues/948
 //http://dataurl.net/#dataurlmaker
@@ -18,13 +17,14 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable()
 export class MrlExportService {
-  pdf: any;
+  pdf: pdfMakeStatic;
   CST = 'America/Chicago';
   constructor() {
     this.pdf = pdfMake;
+    this.pdf.vfs = pdfFonts.pdfMake.vfs;
   }
   exportMrlPdf(searchResult: models.ISdaListResult): any {
-    const dd = {
+    const dd: TDocumentDefinitions = {
       info: {
         title: 'Major Repair List',
         author: 'American Airlines',

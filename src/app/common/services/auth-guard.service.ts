@@ -6,7 +6,7 @@ import {
 
 import { AuthService } from '@app/common/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {

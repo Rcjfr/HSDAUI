@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { List } from 'immutable';
 import * as models from '@app/common/models';
 import { FormGroup, FormControl } from '@angular/forms';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import { decimalsNumberMask } from '@app/common/masks';
 
 @Component({

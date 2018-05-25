@@ -33,7 +33,7 @@ import { CustomValidators } from '@app/common/validators/custom-validators';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { List } from 'immutable';
 import { ChangeLogModalComponent } from '../change-log-modal/change-log-modal.component';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import { map, throttleTime, mapTo } from 'rxjs/operators';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { Helper } from '@app/common/helper';
@@ -783,9 +783,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   }
 
   public getImportedDate(): string {
-    const importStatus = _.last(this.sda.history);
-
-    return moment(importStatus.lastModifiedOn).format('MM/DD/YYYY');
+    return moment(this.sda.importDate).format('MM/DD/YYYY');
   }
   public hasOriginalVersion(): boolean {
 

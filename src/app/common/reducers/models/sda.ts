@@ -6,6 +6,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
   historicId: '',
   workflowInstanceId: '00000000-0000-0000-0000-000000000000',
   source: 1,
+  importDate: null,
   versionID: 0,
   version: 1,
   lastModifiedBy: '',

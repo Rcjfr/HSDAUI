@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
 import { AppStateService } from '@app/common/services';
 import { IBaseLookUp } from '@app/common/models';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'aa-search-by-status',
   templateUrl: './search-by-status.component.html',

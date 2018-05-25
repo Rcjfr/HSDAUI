@@ -12,7 +12,6 @@ import { Expressions } from '@app/common/validators/generic-validator';
 
 
 import * as moment from 'moment';
-import { Observable } from 'rxjs/Rx';
 import { List } from 'immutable';
 import * as models from '@app/common/models';
 import { AppStateService, AuthService } from '@app/common/services';
@@ -22,6 +21,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
 import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
 import { DTEStatus } from '@app/common/models/enumerations';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -67,10 +67,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       stage1Duration: [6, [Validators.required]],
       stage2Date: [undefined, []],
       stage3Date: [undefined, []],
-      srNumber: ['', [Validators.maxLength(25)]],
+      srNumber: ['', [Validators.maxLength(50)]],
       rdasNumber: ['', [Validators.maxLength(25)]],
       etdNumber: ['', [Validators.maxLength(25)]],
-      esmSubItemNumber: ['', [Validators.maxLength(25)]],
+      esmSubItemNumber: ['', [Validators.maxLength(50)]],
       comments: ['', [Validators.maxLength(500)]],
       qcFeedback: ['', [Validators.maxLength(250)]],
       submittedToQC: [false, []],

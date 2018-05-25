@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { IUser } from '@app/common/models/user.model';
-import { Observable } from 'rxjs/Rx';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { environment } from '@env/environment';
 import { Router } from '@angular/router';
@@ -9,10 +8,11 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
-import { ConfirmationService } from 'primeng/api';
+// import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { AlertComponent } from '@app/common/components/alert/alert.component';
 import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +36,7 @@ export class AuthService {
   constructor(private http: Http, private appStateService: AppStateService,
     private router: Router, private toastr: ToastrService,
     private idle: Idle, private keepalive: Keepalive,
-    private confirmationService: ConfirmationService,
+    // private confirmationService: ConfirmationService,
     private dialogService: DialogService
   ) {
     this.currentUser$ = this.appStateService.getUser()

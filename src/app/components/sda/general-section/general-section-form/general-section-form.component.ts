@@ -6,11 +6,12 @@ import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { List } from 'immutable';
 import * as models from '@app/common/models';
 import { AppStateService, AuthService } from '@app/common/services';
-import { Observable, Observer } from 'rxjs/Rx';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import * as moment from 'moment';
-import * as _ from 'lodash/lodash.min.js';
+import * as _ from 'lodash';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Component({
   selector: 'aa-general-section-form',
