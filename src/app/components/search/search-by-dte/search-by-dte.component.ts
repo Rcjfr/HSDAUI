@@ -49,7 +49,39 @@ export class SearchByDteComponent implements OnInit , OnChanges {
     updatedDateTo: new FormControl(),
     dueDateFrom: new FormControl(),
     dueDateTo: new FormControl(),
-    dueDateCompleted: new FormControl()
+    dueDateCompleted: new FormControl(),
+    regNumber: new FormControl(),
+    repairDateFrom: new FormControl(),
+    repairDateTo: new FormControl(),
+    airlineCode: new FormControl(),
+    cmbNumber: new FormControl(),
+    compForAircraft: new FormControl(),
+    removedByDateFrom: new FormControl(),
+    removedByDateTo: new FormControl(),
+    mrbNumber: new FormControl(),
+    mrtNumber: new FormControl(),
+    removedByMrt: new FormControl(),
+    status: new FormControl(),
+    zone: new FormControl(),
+    repairLocation: new FormControl(),
+    mroDocuments: new FormControl(),
+    legacyEA: new FormControl(),
+    componentType: new FormControl(),
+    controlOrderNumber: new FormControl(),
+    componentAAID: new FormControl(),
+    componentSerialNumber: new FormControl(),
+    componentRspam: new FormControl(),
+    componentMpn: new FormControl(),
+    componentHours: new FormControl(),
+    componentCycles: new FormControl(),
+    onOffWing: new FormControl(),
+    rack: new FormControl(),
+    engPsn: new FormControl(),
+    engCycles: new FormControl(),
+    engHours: new FormControl(),
+    engRspam: new FormControl(),
+    engSn: new FormControl(),
+    engMpn: new FormControl()
   })
 
   dteStatus: string[] = [];
@@ -57,6 +89,10 @@ export class SearchByDteComponent implements OnInit , OnChanges {
   dteStatus$: Observable<models.IBaseLookUp[]>;
   repInspStatus$: Observable<models.IBaseLookUp[]>;
   durationData$: Observable<models.IBaseLookUp[]>;
+  engPsn$: Observable<models.IBaseLookUp[]>;
+  onOffWing$: Observable<models.IBaseLookUp[]>;
+  componentType$: Observable<models.IBaseLookUp[]>;
+  status$: Observable<models.IBaseLookUp[]>;
 
   decimalsNumberMask = decimalsNumberMask;
   public numberMask = createNumberMask({
@@ -71,7 +107,11 @@ export class SearchByDteComponent implements OnInit , OnChanges {
 
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repInspStatus$ = this.appStateService.getRepairInspectionStatus();
+    this.componentType$ = this.appStateService.getDTEComponentType();
+    this.status$  = this.appStateService.getDTERepairStatus();
     this.durationData$ = Observable.of([{ id: 6, description: '6' }, { id: 12, description: '12' }, { id: 18, description: '18' }, { id: 24, description: '24' }]);
+    this.onOffWing$ = Observable.of([{ id: 1, description: 'On', key: '1' }, { id: 2, description: 'Off', key: '2' }]);
+    this.engPsn$ = Observable.of([{ id: 1, description: 'Left', key: '1' }, { id: 2, description: 'Right', key: '2' }]);
     this.dteForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
       form.dteStatus = _.compact(form.dteStatus);
@@ -102,6 +142,20 @@ export class SearchByDteComponent implements OnInit , OnChanges {
       }
       if (form && form.updatedDateTo) {
         form.updatedDateTo = moment(form.updatedDateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.repairDateFrom) {
+        form.repairDateFrom = moment(form.repairDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.repairDateTo) {
+        form.repairDateTo = moment(form.repairDateTo).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+
+      if (form && form.removedByDateFrom) {
+        form.removedByDateFrom = moment(form.removedByDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
+      }
+      if (form && form.removedByDateTo) {
+        form.removedByDateTo = moment(form.removedByDateTo).format('YYYY-MM-DD') + 'T00:00:00';
       }
 
       if (form && form.dueDateFrom) {
@@ -179,6 +233,32 @@ export class SearchByDteComponent implements OnInit , OnChanges {
         } else {
           changes.criteria.currentValue.searchByDTE.updatedDateTo = undefined;
         }
+        ///Repair Date
+
+        if (changes.criteria.currentValue.searchByDTE.repairDateFrom) {
+          changes.criteria.currentValue.searchByDTE.repairDateFrom = new Date(changes.criteria.currentValue.searchByDTE.repairDateFrom);
+        } else {
+          changes.criteria.currentValue.searchByDTE.repairDateFrom = undefined;
+        }
+
+        if (changes.criteria.currentValue.searchByDTE.repairDateTo) {
+          changes.criteria.currentValue.searchByDTE.repairDateTo = new Date(changes.criteria.currentValue.searchByDTE.repairDateTo);
+        } else {
+          changes.criteria.currentValue.searchByDTE.repairDateTo = undefined;
+        }
+
+        if (changes.criteria.currentValue.searchByDTE.removedByDateFrom) {
+          changes.criteria.currentValue.searchByDTE.removedByDateFrom = new Date(changes.criteria.currentValue.searchByDTE.removedByDateFrom);
+        } else {
+          changes.criteria.currentValue.searchByDTE.removedByDateFrom = undefined;
+        }
+
+        if (changes.criteria.currentValue.searchByDTE.removedByDateTo) {
+          changes.criteria.currentValue.searchByDTE.removedByDateTo = new Date(changes.criteria.currentValue.searchByDTE.removedByDateTo);
+        } else {
+          changes.criteria.currentValue.searchByDTE.removedByDateTo = undefined;
+        }
+
         //Due Date
 
         if (changes.criteria.currentValue.searchByDTE.dueDateFrom) {

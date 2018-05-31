@@ -103,8 +103,8 @@ export class CheckboxListComponent implements
     // get value from text area
     const newValue: number = parseInt(event.target.value, 10);
     const checked = event.target.checked;
-    const item: any = this.source.find(d => d[this.valueField] === newValue);
-    const existing = this.data.find(d => d[this.valueField] === newValue);
+    const item: any = this.source.find(d => parseInt(d[this.valueField], 10) === newValue);
+    const existing = this.data.find(d => parseInt(d[this.valueField], 10) === newValue);
 
 
     if (existing) {

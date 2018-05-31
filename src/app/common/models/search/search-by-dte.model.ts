@@ -30,4 +30,36 @@ export interface ISearchByDTE {
   dueDateFrom?: any;
   dueDateTo?: any;
   dueDateCompleted?: any;
+  regNumber?: string;
+  repairDateFrom?: Date;
+  repairDateto?: Date;
+  airlineCode?: string;
+  cmbNumber?: string;
+  compForAircraft?: string;
+  removedByDateFrom?: Date;
+  removedByDateTo?: Date;
+  mrbNumber?: string;
+  mrtNumber?: string;
+  removedByMrt?: string;
+  status?: number;
+  zone?: string;
+  repairLocation?: string;
+  mroDocuments?: string;
+  legacyEA?: string;
+  componentType?: number;
+  controlOrderNumber?: string,
+  componentAAID?: string,
+  componentSerialNumber?: string,
+  componentRspam?: string,
+  componentMpn?: string,
+  componentHours?: string,
+  componentCycles?: string
+  onOffWing?: string;
+  rack?: string;
+  engPsn?: string;
+  engCycles?: string;
+  engHours?: string;
+  engRspam?: string;
+  engSn?: string;
+  engMpn?: string;
 }
