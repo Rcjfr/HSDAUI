@@ -17,9 +17,7 @@ export class CorrectiveActionOptionsComponent extends BaseFormComponent implemen
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('correctiveActionOptionFormGroup', authService);
     this.correctiveActionOptionFormGroup = this.fb.group({
-      repairType: ['', []],
-      modifiedpartDescription: ['', [, Validators.maxLength(30)]],
-      defectivePartDescription: ['', [, Validators.maxLength(30)]]
+      repairType: ['', []]
     });
   }
   ngOnChanges(changes: SimpleChanges) {
