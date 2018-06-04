@@ -4,6 +4,7 @@ export interface IGeneralSection {
   station?: string;
   department?: number;
   aircraftNo?: string;
+  aircraftRegistrationNo?: string;
   manufacturer?: string;
   model?: string;
   serialNo?: string;

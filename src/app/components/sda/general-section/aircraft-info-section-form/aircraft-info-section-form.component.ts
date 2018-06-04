@@ -24,6 +24,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
   set aircraftInfo(info: IAircraftInfo) {
     if (this.formGroup && info) {
       this.formGroup.get('aircraftNo').setValue(info.noseNumber);
+      this.formGroup.get('aircraftRegistrationNo').setValue(info.registrationNumber);
       this.formGroup.get('manufacturer').setValue(info.manufacturer);
       this.formGroup.get('model').setValue(info.model);
       this.formGroup.get('serialNo').setValue(info.serialNo);
@@ -60,6 +61,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     super('aircraftInfoSectionFormGroup', authService);
     this.formGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
+      aircraftRegistrationNo: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(Expressions.Alphanumerics)]],
       manufacturer: ['', [Validators.required, Validators.maxLength(100)]],
       model: ['', [Validators.required, Validators.maxLength(15)]],
       serialNo: ['', [Validators.required, Validators.maxLength(10)]],

@@ -46,6 +46,7 @@ describe('Alerts Effect', () => {
       (_aircraftService) => {
         const mockData: IAircraftInfo[] = [{
           'noseNumber': 'A330',
+          'registrationNumber': 'TEST',
           'cycles': '912',
           'fleet': '912',
           'manufacturer': 'Airbus',
@@ -80,6 +81,7 @@ describe('Alerts Effect', () => {
       (_aircraftService) => {
         const mockResponse = {
           'noseNumber': 'A330',
+          'registrationNumber': 'TEST',
           'cycles': '912',
           'fleet': '912',
           'manufacturer': 'Airbus',
@@ -102,6 +104,7 @@ describe('Alerts Effect', () => {
       (_aircraftService) => {
         const mockResponse = {
           'noseNumber': 'A330',
+          'registrationNumber': '',
           'cycles': '',
           'fleet': '',
           'manufacturer': '',

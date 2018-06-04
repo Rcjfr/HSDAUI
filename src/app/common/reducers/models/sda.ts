@@ -20,6 +20,7 @@ export const SdaFactory = makeTypedFactory<ISda, ISdaRecord>({
     station: null,
     department: null,
     aircraftNo: null,
+    aircraftRegistrationNo: null,
     manufacturer: null,
     model: null,
     serialNo: null,

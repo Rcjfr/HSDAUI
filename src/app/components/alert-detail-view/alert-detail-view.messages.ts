@@ -46,6 +46,11 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         pattern: 'Aircraft Nose # must be alphanumeric.',
         maxlength: 'Aircraft Nose # must not be more than 5 characters.'
       },
+      'aircraftRegistrationNo': {
+        required: 'Aircraft Registration # is required.',
+        pattern: 'Aircraft Registration # must be alphanumeric.',
+        maxlength: 'Aircraft Registration # must not be more than 50 characters.'
+      },
       'manufacturer': {
         required: 'Manufacturer is required.',
         pattern: 'Manufacturer must be alphanumeric.',

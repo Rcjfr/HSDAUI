@@ -17,6 +17,7 @@ export const ReportOptions: IReportOption[] = [
 
   { key: 'Department', display: 'Department', dbField: 'MNTNC_DEPT_DESC' },
   { key: 'AircraftNo', display: 'Nose Number', dbField: 'AIRCRFT_NBR' },
+  { key: 'AircraftRegistrationNo', display: 'Registartion Number', dbField: 'AIRCRFT_REG_NBR' },
   { key: 'Manufacturer', display: 'Manufacturer', dbField: 'AIRCRFT_MFCTR' },
   { key: 'Model', display: 'Model', dbField: 'AIRCRFT_MDL_SRS' },
   { key: 'SerialNo', display: 'Serial #', dbField: 'AIRCRFT_SRL_NBR' },

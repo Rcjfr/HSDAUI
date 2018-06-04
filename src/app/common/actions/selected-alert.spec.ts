@@ -29,6 +29,7 @@ describe('Saved Searches Actions', () => {
 
       const action = new selectedAlertActions.LoadNoseNumbersCompleteAction([{
         'noseNumber': '3ML',
+        'registrationNumber': 'TEST',
         'manufacturer': 'BOEING',
         'model': '738A',
         'serialNo': '31215',
@@ -62,6 +63,7 @@ describe('Saved Searches Actions', () => {
 
       const action = new selectedAlertActions.LoadAircraftInfoCompleteAction({
         'noseNumber': '3ML',
+        'registrationNumber': 'TEST',
         'manufacturer': 'BOEING',
         'model': '738A',
         'serialNo': '31215',

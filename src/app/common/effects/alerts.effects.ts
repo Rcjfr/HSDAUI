@@ -55,6 +55,7 @@ export class AlertEffects {
             new selectedAlert.LoadAircraftInfoCompleteAction(
               {
                 noseNumber: payLoad.noseNumber,
+                registrationNumber: '',
                 cycles: '', fleet: '', manufacturer: '',
                 model: '', serialNo: '', totalShipTime: ''
               })]);
@@ -311,7 +312,7 @@ export class AlertEffects {
           return of(new selectedAlert.DownloadAttachmentFailAction('Failed to download attachment.Please try again after sometime or contact Administrator.'));
         }));
     })
-  );
+    );
   @Effect()
   showToastrError$ = this.actions$
     .ofType(selectedAlert.ActionTypes.LOAD_AIRCRAFT_INFO_FAIL,

@@ -29,6 +29,7 @@ describe('selectedAlertReducer', () => {
   };
   const aircraftInfo = AircraftInfoFactory({
     noseNumber: 'A330',
+    registrationNumber: 'TEST',
     model: 'A330',
     manufacturer: 'Airbus',
     serialNo: '1234',
@@ -69,11 +70,11 @@ describe('selectedAlertReducer', () => {
       fromSelectedAlert.stateFactory(initialState),
       new selectedAlert.LoadNoseNumbersCompleteAction([
         {
-          noseNumber: 'A330', cycles: '', fleet: '',
+          noseNumber: 'A330', registrationNumber: 'TEST', cycles: '', fleet: '',
           manufacturer: '', model: '', serialNo: '', totalShipTime: ''
         },
         {
-          noseNumber: 'A319', cycles: '', fleet: '',
+          noseNumber: 'A319', registrationNumber: 'TEST', cycles: '', fleet: '',
           manufacturer: '', model: '', serialNo: '', totalShipTime: ''
         }]));
     expect(state.loading).toEqual(false);

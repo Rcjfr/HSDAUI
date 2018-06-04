@@ -288,8 +288,8 @@ export class SdaExportService {
             this.getLableFieldValue('MIC #: ', sda.micNo, 103, 30)
           ],
           [
-            this.getLabel('AC Model/Series:'),
-            this.getFieldValue(sda.model),
+            this.getLableFieldValue('AC Model/Series:', sda.model, 50, 60),
+            this.getLableFieldValue('Regn #:', sda.aircraftRegistrationNo, 130, 30),
             {
               text: [
                 { text: sda.defectDiscoveredDuring === 'S' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },

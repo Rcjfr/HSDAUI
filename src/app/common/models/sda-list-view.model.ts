@@ -18,6 +18,7 @@ export interface ISdaListView {
   department: number,
   departmentDesc: string,
   aircraftNo: string,
+  aircraftRegistrationNo: string;
   manufacturer: string,
   model: string,
   serialNo: string,

@@ -19,27 +19,30 @@
     </div>
     <!--<input type="text" class="form-control" autocomplete="off" tabindex='6' formControlName="aircraftNo"/>-->
   </aac-field-container>
+  <aac-field-container required="true" label="Aircraft Registration #:" [message]="displayMessage.aircraftRegistrationNo">
+    <input type="text" tabindex='7' readonly class="form-control" formControlName="aircraftRegistrationNo">
+  </aac-field-container>
   <aac-field-container required="true" label="Aircraft Manufacturer:" [message]="displayMessage.manufacturer">
-    <input type="text" tabindex='7' readonly class="form-control" formControlName="manufacturer">
+    <input type="text" tabindex='8' readonly class="form-control" formControlName="manufacturer">
   </aac-field-container>
 
   <aac-field-container required="true" label="Aircraft Model/Series:" [message]="displayMessage.model">
-    <input type="text" tabindex='8' readonly class="form-control" formControlName="model">
+    <input type="text" tabindex='9' readonly class="form-control" formControlName="model">
   </aac-field-container>
 
   <aac-field-container required="true" label="Serial #:" [message]="displayMessage.serialNo">
-    <input type="text" tabindex='9' readonly class="form-control" formControlName="serialNo">
+    <input type="text" tabindex='10' readonly class="form-control" formControlName="serialNo">
   </aac-field-container>
 
   <aac-field-container required="true" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
-    <input type="text" tabindex='10' readonly class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
+    <input type="text" tabindex='11' readonly class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
   </aac-field-container>
 
   <aac-field-container required="true" label="Cycles:" [message]="displayMessage.cycles">
-    <input type="text" tabindex='11' readonly class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
+    <input type="text" tabindex='12' readonly class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
   </aac-field-container>
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
-    <input type="text" tabindex='12' readonly class="form-control" formControlName="fleet">
+    <input type="text" tabindex='13' readonly class="form-control" formControlName="fleet">
   </aac-field-container>
 
 </div>

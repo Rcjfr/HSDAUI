@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ export class SearchByAircraftComponent implements OnInit, OnChanges {
 
   aircraftForm = new FormGroup({
     aircraftNo: new FormControl(),
+    aircraftRegistrationNo: new FormControl(),
     manufacturer: new FormControl(),
     model: new FormControl(),
     serialNo: new FormControl()
