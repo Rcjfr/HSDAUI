@@ -27,7 +27,7 @@ export interface IDTESection {
   attachments?: IDTEAttachment[];
   thresholdItems?: IDTEThresholdItem[];
   monitorItems?: IDTEMonitorItem[];
-  regNumber?: string;
+  taskCardNo?: string;
   repairDate?: Date;
   airlineCode?: string;
   cmbNumber?: string;

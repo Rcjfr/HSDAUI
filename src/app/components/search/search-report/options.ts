@@ -125,7 +125,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEQCFeedback', display: 'QC Feedback(DTE)' , dbField: 'DTE_QC_FEEDBACK'},
   { key: 'DTESubmittedToQC', display: 'Submitted to QC(DTE)?' , dbField: 'DTE_SUBMITTED_TO_QC'},
 //
-  { key: 'RegNumber', display: 'Reg #' , dbField: 'REG_NUMBER'},
+  { key: 'taskCardNo', display: 'Task Card #' , dbField: 'TASK_CARD_NO'},
   { key: 'RepairDate', display: 'Repair Date' , dbField: 'REPAIR_DATE', format: 'M/d/yyyy hh:mm:ss'},
   { key: 'AirlineCode', display: 'Airline Code' , dbField: 'AIRLINE_CODE'},
   { key: 'CmbNumber', display: 'Cmb Number' , dbField: 'CMB_NUMBER'},

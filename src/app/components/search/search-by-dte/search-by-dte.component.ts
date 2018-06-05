@@ -50,7 +50,7 @@ export class SearchByDteComponent implements OnInit , OnChanges {
     dueDateFrom: new FormControl(),
     dueDateTo: new FormControl(),
     dueDateCompleted: new FormControl(),
-    regNumber: new FormControl(),
+    taskCardNo: new FormControl(),
     repairDateFrom: new FormControl(),
     repairDateTo: new FormControl(),
     airlineCode: new FormControl(),

@@ -481,14 +481,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     esmSubItemNumber: {
       maxlength: 'ESM Sub/Item # must not be more than 50 characters.'
     },
-    regNumber: {
-      maxlength: 'Reg # must not be more than 10 characters.'
+    taskCardNo: {
+      maxlength: 'Task Card # must not be more than 150 characters.'
     },
     airlineCode: {
       maxlength: 'Airline Code must not be more than 3 characters.'
     },
     cmbNumber: {
-      maxlength: 'Cmb Number Code must not be more than 25 characters.'
+      maxlength: 'CMB Number Code must not be more than 25 characters.'
     },
     compForAircraft: {
       maxlength: 'Component For Aircraft must not be more than 10 characters.'
@@ -551,10 +551,10 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'MPN must not be more than 25 characters.'
       },
       componentHours: {
-        maxlength: 'Hours must not be more than 10 characters.'
+        maxlength: 'Comp Hours must not be more than 10 characters.'
       },
       componentCycles: {
-        maxlength: 'Cycles must not be more than 10 characters.'
+        maxlength: 'Comp Cycles must not be more than 10 characters.'
       }
     },
     'dteEngineGroup': {

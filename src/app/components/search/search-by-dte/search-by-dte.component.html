@@ -217,8 +217,8 @@
 
     <div class="row">
       <div class="col-md-6">
-        <aac-field-container label="Reg #:">
-          <input type="text" tabindex='126' class="form-control" formControlName="regNumber">
+        <aac-field-container label="Task Card #:">
+          <input type="text" tabindex='126' class="form-control" formControlName="taskCardNo">
         </aac-field-container>
       </div>
       <div class="col-md-6">
@@ -246,7 +246,7 @@
 
       <div class="row">
         <div class="col-md-6">
-          <aac-field-container label="Cmb Number:" >
+          <aac-field-container label="CMB Number:" >
             <input type="text" class="form-control" formControlName="cmbNumber">
           </aac-field-container>
         </div>
@@ -375,7 +375,26 @@
                 </aac-field-container>
               </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <aac-field-container label="Comp Hours:">
+                      <input class="form-control" formControlName="componentHours" tabindex="146">
+                    </aac-field-container>
+                  </div>
+
+                <div class="col-sm-4">
+                    <aac-field-container label="Comp Cycles:">
+                      <input class="form-control" formControlName="componentCycles" tabindex="146">
+                    </aac-field-container>
+                  </div>
+                  <div class="col-sm-4">
+                    </div>
+              </div>
     </div>
+
+
 
   </div>
 

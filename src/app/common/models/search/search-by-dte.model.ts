@@ -30,7 +30,7 @@ export interface ISearchByDTE {
   dueDateFrom?: any;
   dueDateTo?: any;
   dueDateCompleted?: any;
-  regNumber?: string;
+  taskCardNo?: string;
   repairDateFrom?: Date;
   repairDateto?: Date;
   airlineCode?: string;
