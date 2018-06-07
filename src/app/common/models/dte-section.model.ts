@@ -34,8 +34,8 @@ export interface IDTESection {
   compForAircraft?: string;
   removedByDate?: Date;
   mrbNumber?: string;
-  mrtNumber?: string;
-  removedByMrt?: string;
+  mrtNumber?: number;
+  removedByMrt?: number;
   status?: number;
   zone?: string;
   repairLocation?: string;

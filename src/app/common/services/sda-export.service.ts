@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
@@ -931,6 +932,56 @@ export class SdaExportService {
             this.getLabel('ESM Sub/Item #:'),
             this.getFieldValue(sda.esmSubItemNumber)
           ],
+
+          [
+            this.getLabel('Task Card #:'),
+            this.getFieldValue(sda.taskCardNo),
+            this.getLabel('Repair Date:'),
+            this.getFieldValue(sda.repairDate ? moment.utc(sda.repairDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
+          ],
+
+          [
+            this.getLabel('Airline Code:'),
+            this.getFieldValue(sda.airlineCode),
+            this.getLabel('CMB Number:'),
+            this.getFieldValue(sda.cmbNumber)
+          ],
+          [
+            this.getLabel('Component For Aircraft:'),
+            this.getFieldValue(sda.compForAircraft),
+            this.getLabel('Repair Removed Date:'),
+            this.getFieldValue(sda.removedByDate ? moment.utc(sda.removedByDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
+          ],
+          [
+            this.getLabel('ECO/ESO/MRB #:'),
+            this.getFieldValue(sda.mrbNumber),
+            this.getLabel('MRT #:'),
+            this.getFieldValue(sda.mrtNumber)
+          ],
+          [
+            this.getLabel('Removed By MRT #:'),
+            this.getFieldValue(sda.removedByMrt),
+            this.getLabel('Status:'),
+            this.getFieldValue(sda.dteRepairStatusDesc)
+          ],
+          [
+            this.getLabel('Zone:'),
+            this.getFieldValue(sda.zone),
+            this.getLabel('Location of Repair:'),
+            this.getFieldValue(sda.repairLocation),
+          ],
+          [
+            this.getLabel('MRO Documents:'),
+            this.getFieldValue(sda.mroDocuments),
+            this.getLabel('Legacy EA:'),
+            this.getFieldValue(sda.legacyEA)
+          ],
+          [
+            this.getDTEComponentDetailContent(sda)
+          ],
+          [
+            this.getDTEEngineDetailContent(sda)
+          ],
           [
             this.getDTEThresholdsConent(sda)
           ],
@@ -984,6 +1035,80 @@ export class SdaExportService {
     return content;
   }
 
+   getDTEComponentDetailContent(sda: ISdaListView) {
+    const content = {
+      colSpan: 4,
+      //layout: 'noBorders',
+      table: {
+        style: 'regular',
+        widths: ['33%', '34%', '33%'],
+        headerRows: 1,
+        body: [
+          [
+              { text: 'Component Details', colSpan: 3, style: 'regular', fillColor: '#C0C0C0' }, {}, {}
+          ],
+          [
+            this.getLableFieldValueNoLine('Component Type:', sda.componentTypeDesc, 120, 50),
+            this.getLableFieldValueNoLine('Control Order #:', sda.controlOrderNumber, 120, 50),
+            this.getLableFieldValueNoLine('AAID:', sda.componentAAID, 120, 50)
+         ],
+         [
+         this.getLableFieldValueNoLine('Component S/N:', sda.componentSerialNumber, 120, 50),
+         this.getLableFieldValueNoLine('RSPAM:', sda.componentRspam, 120, 50),
+         this.getLableFieldValueNoLine('MPN:', sda.componentMpn, 120, 50)
+        ],
+        [
+         this.getLableFieldValueNoLine('Comp Hours:', sda.componentHours, 120, 50),
+         this.getLableFieldValueNoLine('Comp Cycles:', sda.componentCycles, 120, 50),
+        {}
+        ],
+      ]
+      }
+    };
+
+    return content;
+
+  }
+
+  getDTEEngineDetailContent(sda: ISdaListView) {
+    const content = {
+      colSpan: 4,
+      //layout: 'noBorders',
+      table: {
+        style: 'regular',
+        widths: ['33%', '34%', '33%'],
+        headerRows: 1,
+        body: [
+          [
+              { text: 'Engine Details', colSpan: 3, style: 'regular', fillColor: '#C0C0C0' }, {}, {}
+          ],
+          [
+             { text: this.getBooleanContent(sda.onOffWing === '1' ? true : sda.onOffWing === '2' ? false : null  , 'On Wing', 'Off Wing'), style: 'regular'},
+            this.getLableFieldValueNoLine('Rack #:', sda.rack, 120, 50),
+            this.getLableFieldValueNoLine('RSPAM:', sda.engRspam, 120, 50)
+         ],
+         [
+         { text: [this.getLabel('Eng Psn:'), ' ', {
+            text: this.getBooleanContent(sda.engPsn === '1' ? true : sda.engPsn === '2' ? false : null , 'Left', 'Right'), style: 'regular'
+          }], style: 'regular'
+        },
+         this.getLableFieldValueNoLine('Cycles(CSI):', sda.engCycles, 120, 50),
+         this.getLableFieldValueNoLine('Hours(TSI):', sda.engHours, 120, 50)
+        ],
+        [
+         this.getLableFieldValueNoLine('Engine S/N:', sda.engSn, 120, 50),
+         this.getLableFieldValueNoLine('MPN:', sda.engMpn, 120, 50),
+        {}
+        ],
+      ]
+      }
+    };
+
+    return content;
+
+  }
+
+
   getDTEThresholdsConent(sda: ISdaListView) {
     const content = {
       colSpan: 4,
@@ -1001,11 +1126,11 @@ export class SdaExportService {
             { text: 'Inspection Interval', style: 'regular' },
             { text: 'Inspection Method', style: 'regular' }
           ],
-          ['1.', { text: sda.dteInspectionThreshold1 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval1 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod1 || '', style: 'fieldValue' }],
-          ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval2 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod2 || '', style: 'fieldValue' }],
-          ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval3 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod3 || '', style: 'fieldValue' }],
-          ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval4 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod4 || '', style: 'fieldValue' }],
-          ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'fieldValue' }, { text: sda.dteInspectionInterval5 || '', style: 'fieldValue' }, { text: sda.dteInspectionMethod5 || '', style: 'fieldValue' }],
+          ['1.', { text: sda.dteInspectionThreshold1 || '', style: 'regular' }, { text: sda.dteInspectionInterval1 || '', style: 'regular' }, { text: sda.dteInspectionMethod1 || '', style: 'regular' }],
+          ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'regular' }, { text: sda.dteInspectionInterval2 || '', style: 'regular' }, { text: sda.dteInspectionMethod2 || '', style: 'regular' }],
+          ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'regular' }, { text: sda.dteInspectionInterval3 || '', style: 'regular' }, { text: sda.dteInspectionMethod3 || '', style: 'regular' }],
+          ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'regular' }, { text: sda.dteInspectionInterval4 || '', style: 'regular' }, { text: sda.dteInspectionMethod4 || '', style: 'regular' }],
+          ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'regular' }, { text: sda.dteInspectionInterval5 || '', style: 'regular' }, { text: sda.dteInspectionMethod5 || '', style: 'regular' }],
         ]
       }
     };
@@ -1030,11 +1155,11 @@ export class SdaExportService {
           [
             '', { text: 'FMR/Logpage/MON', style: 'regular' }
           ],
-          ['1.', { text: sda.dteMonitorItem1 || '', style: 'fieldValue' }],
-          ['2.', { text: sda.dteMonitorItem2 || '', style: 'fieldValue' }],
-          ['3.', { text: sda.dteMonitorItem3 || '', style: 'fieldValue' }],
-          ['4.', { text: sda.dteMonitorItem4 || '', style: 'fieldValue' }],
-          ['5.', { text: sda.dteMonitorItem5 || '', style: 'fieldValue' }],
+          ['1.', { text: sda.dteMonitorItem1 || '', style: 'regular' }],
+          ['2.', { text: sda.dteMonitorItem2 || '', style: 'regular' }],
+          ['3.', { text: sda.dteMonitorItem3 || '', style: 'regular' }],
+          ['4.', { text: sda.dteMonitorItem4 || '', style: 'regular' }],
+          ['5.', { text: sda.dteMonitorItem5 || '', style: 'regular' }],
         ]
       }
     };
@@ -1051,13 +1176,13 @@ export class SdaExportService {
     return content;
   }
 
-  getBooleanContent(val: boolean) {
+  getBooleanContent(val: boolean,  YesText: string = 'Yes' , NoText: string = 'No') {
     return [
       { text: val === true ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-      { text: ' Yes' },
+      { text: ' ' + YesText },
       ' ',
       { text: val === false ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
-      { text: ' No' }
+      { text: ' ' + NoText }
     ]
   }
 
@@ -1073,7 +1198,7 @@ export class SdaExportService {
     ]
   }
 
-  getLableFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0, ) {
+  getLableFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0 ) {
     return {
       columns: [
         this.getLabel(label, labelLength),
@@ -1086,6 +1211,20 @@ export class SdaExportService {
       ]
     };
   }
+
+  getLableFieldValueNoLine(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0 ) {
+    return {
+      columns: [
+        this.getLabel(label, labelLength),
+        {
+          stack: [
+            { text: val || ' ', style: 'regular' },
+          ]
+        }
+      ]
+    };
+  }
+
 
   getIconFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0, ) {
     return {
