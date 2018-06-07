@@ -11307,41 +11307,6 @@ ul.dropdown-menu {
   margin-right: 4px;
   margin-bottom: 2px;
 }
-/*Golden Days*/
-.icon-warning:before {
-  font-family: American Icons;
-  font-size: 14px;
-  color: #D14904;
-  content: "\e03e";
-}
-
-.icon-info:before {
-  font-family: American Icons;
-  font-size: 14px;
-  color: #008712;
-  content: "\e03c";
-}
-
-.icon-info {
-  color: #008712;
-}
-
-.icon-error:before {
-  font-family: American Icons;
-  font-size: 14px;
-  color: #c30019;
-  content: "\e03d";
-}
-
-.goldendays-employee-details {
-  padding-left: 0px;
-  padding-right: 0px;
-  font-size: 18px;
-  line-height: 20px;
-  font-family: AmericanSans Light;
-  color: #00467F;
-}
-
 .spinner-overlay {
   height: 100%;
   width: 100%;
