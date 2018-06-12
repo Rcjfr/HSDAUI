@@ -131,74 +131,71 @@
         <input class="form-control" formControlName="airlineCode" tabindex="103">
       </aac-field-container>
     </div>
-    <div class="col-sm-4">
-      <aac-field-container label="CMB Number:" [message]="displayMessage.cmbNumber">
-        <input class="form-control" formControlName="cmbNumber" tabindex="104">
-      </aac-field-container>
-    </div>
-    <div class="col-sm-4">
-      <aac-field-container label="Component For Aircraft:" [message]="displayMessage.compForAircraft">
-        <input class="form-control" formControlName="compForAircraft" tabindex="105">
-      </aac-field-container>
-    </div>
-  </div>
 
-
-  <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="Repair Removed Date:" [attr.for]="removedByDate.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="106" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="104" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     <div class="col-sm-4">
       <aac-field-container label="ECO/ESO/MRB #:" [message]="displayMessage.mrbNumber">
-        <input class="form-control" formControlName="mrbNumber" tabindex="107">
+        <input class="form-control" formControlName="mrbNumber" tabindex="105">
       </aac-field-container>
     </div>
-    <div class="col-sm-4">
-      <aac-field-container label="MRT #:" [message]="displayMessage.mrtNumber">
-        <input class="form-control" formControlName="mrtNumber" tabindex="108">
-      </aac-field-container>
-    </div>
+
   </div>
 
+
   <div class="row">
+
+    <div class="col-sm-4">
+      <aac-field-container label="MRT #:" [message]="displayMessage.mrtNumber">
+        <input class="form-control" formControlName="mrtNumber" tabindex="106">
+      </aac-field-container>
+    </div>
+
     <div class="col-sm-4">
       <aac-field-container label="Removed By MRT #:" [message]="displayMessage.removedByMrt">
-        <input class="form-control" formControlName="removedByMrt" tabindex="109">
+        <input class="form-control" formControlName="removedByMrt" tabindex="107">
       </aac-field-container>
     </div>
     <div class="col-sm-4">
         <aac-field-container label="Status:" >
-            <select class="form-control" tabindex='110' formControlName="status">
+            <select class="form-control" tabindex='108' formControlName="status">
               <option value="">Select Status</option>
               <option *ngFor="let stat of status$ | async" [value]="stat.id">{{stat.description}}</option>
             </select>
         </aac-field-container>
     </div>
+  </div>
+
+  <div class="row">
+
     <div class="col-sm-4">
       <aac-field-container label="Zone:" [message]="displayMessage.zone">
-        <input class="form-control" formControlName="zone" tabindex="111">
+        <input class="form-control" formControlName="zone" tabindex="109">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="Location of Repair:" [message]="displayMessage.repairLocation">
+        <input class="form-control" formControlName="repairLocation" tabindex="110">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="MRO Documents:" [message]="displayMessage.mroDocuments">
+        <input class="form-control" formControlName="mroDocuments" tabindex="111">
       </aac-field-container>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-4">
-      <aac-field-container label="Location of Repair:" [message]="displayMessage.repairLocation">
-        <input class="form-control" formControlName="repairLocation" tabindex="112">
-      </aac-field-container>
-    </div>
-    <div class="col-sm-4">
-      <aac-field-container label="MRO Documents:" [message]="displayMessage.mroDocuments">
-        <input class="form-control" formControlName="mroDocuments" tabindex="113">
-      </aac-field-container>
-    </div>
-    <div class="col-sm-4">
       <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
-        <input class="form-control" formControlName="legacyEA" tabindex="114">
+        <input class="form-control" formControlName="legacyEA" tabindex="112">
       </aac-field-container>
     </div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"></div>
   </div>
 
 

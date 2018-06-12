@@ -290,7 +290,7 @@ export class SdaExportService {
           ],
           [
             this.getLableFieldValue('AC Model/Series:', sda.model, 50, 60),
-            this.getLableFieldValue('Regn #:', sda.aircraftRegistrationNo, 130, 30),
+            this.getLableFieldValue('Serial #:', sda.serialNo, 130, 30),
             {
               text: [
                 { text: sda.defectDiscoveredDuring === 'S' ? this.icon_dot_circled : this.icon_circle_empty, style: 'icon' },
@@ -299,8 +299,8 @@ export class SdaExportService {
             }, {}
           ],
           [
-            this.getLabel('Serial #:'),
-            this.getFieldValue(sda.serialNo),
+            this.getLabel('Aircraft Registration #:'),
+            this.getFieldValue(sda.aircraftRegistrationNo),
             this.getLableFieldValue('Check Type:', sda.checkTypeDesc, 78, 55),
             this.getLableFieldValue('ESM Reference #:', sda.esmReference, 68, 65)
           ],
@@ -943,12 +943,6 @@ export class SdaExportService {
           [
             this.getLabel('Airline Code:'),
             this.getFieldValue(sda.airlineCode),
-            this.getLabel('CMB Number:'),
-            this.getFieldValue(sda.cmbNumber)
-          ],
-          [
-            this.getLabel('Component For Aircraft:'),
-            this.getFieldValue(sda.compForAircraft),
             this.getLabel('Repair Removed Date:'),
             this.getFieldValue(sda.removedByDate ? moment.utc(sda.removedByDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
           ],
@@ -1054,14 +1048,18 @@ export class SdaExportService {
          ],
          [
          this.getLableFieldValueNoLine('Component S/N:', sda.componentSerialNumber, 120, 50),
-         this.getLableFieldValueNoLine('RSPAM:', sda.componentRspam, 120, 50),
-         this.getLableFieldValueNoLine('MPN:', sda.componentMpn, 120, 50)
+         this.getLableFieldValueNoLine('CMB Number:', sda.cmbNumber, 120, 50),
+         this.getLableFieldValueNoLine('Component For Aircraft:', sda.compForAircraft, 120, 50),
         ],
         [
-         this.getLableFieldValueNoLine('Comp Hours:', sda.componentHours, 120, 50),
-         this.getLableFieldValueNoLine('Comp Cycles:', sda.componentCycles, 120, 50),
-        {}
+          this.getLableFieldValueNoLine('RSPAM:', sda.componentRspam, 120, 50),
+         this.getLableFieldValueNoLine('MPN:', sda.componentMpn, 120, 50),
+         this.getLableFieldValueNoLine('Comp Hours:', sda.componentHours, 120, 50)
         ],
+        [
+        this.getLableFieldValueNoLine('Comp Cycles:', sda.componentCycles, 120, 50),
+        {}, {}
+        ]
       ]
       }
     };

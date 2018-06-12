@@ -244,28 +244,16 @@
       </div>
     </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <aac-field-container label="CMB Number:" >
-            <input type="text" class="form-control" formControlName="cmbNumber">
-          </aac-field-container>
-        </div>
-        <div class="col-md-6">
-          <aac-field-container label="Component For Aircraft:">
-            <input type="text" tabindex='130' class="form-control" formControlName="compForAircraft">
-          </aac-field-container>
-        </div>
-       </div>
        <div class="row">
         <div class="col-md-6">
           <aac-field-container label="Repair Removed Date From:" >
-            <datetime [timepicker]="false" #removedByDate [tabindex]='131' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
+            <datetime [timepicker]="false" #removedByDate [tabindex]='130' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
                       formControlName="removedByDateFrom"></datetime>
           </aac-field-container>
         </div>
         <div class="col-md-6">
             <aac-field-container label="Repair Removed Date To:" >
-              <datetime [timepicker]="false" #removedByDate [tabindex]='132' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
+              <datetime [timepicker]="false" #removedByDate [tabindex]='131' [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"
                         formControlName="removedByDateTo"></datetime>
             </aac-field-container>
           </div>
@@ -274,12 +262,12 @@
     <div class="row">
       <div class="col-md-6">
         <aac-field-container label="ECO/ESO/MRB #:">
-          <input type="text" tabindex='133' class="form-control" formControlName="mrbNumber">
+          <input type="text" tabindex='132' class="form-control" formControlName="mrbNumber">
         </aac-field-container>
       </div>
       <div class="col-md-6">
             <aac-field-container label="MRT #:">
-              <input type="text" tabindex='134' class="form-control" formControlName="mrtNumber">
+              <input type="text" tabindex='133' class="form-control" formControlName="mrtNumber">
             </aac-field-container>
           </div>
     </div>
@@ -287,12 +275,12 @@
     <div class="row">
       <div class="col-md-6">
         <aac-field-container label="Removed By MRT #:">
-          <input type="text" tabindex='135' class="form-control" formControlName="mrbNumber">
+          <input type="text" tabindex='134' class="form-control" formControlName="mrbNumber">
         </aac-field-container>
       </div>
       <div class="col-md-6">
       <aac-field-container label="Status:">
-          <select class="form-control" multiple tabindex='136' formControlName="status">
+          <select class="form-control" multiple tabindex='135' formControlName="status">
             <option value=""> </option>
             <option *ngFor="let option of status$ | async" [value]="option.id">{{option.description}}</option>
 
@@ -305,12 +293,12 @@
     <div class="row">
       <div class="col-md-6">
         <aac-field-container label="Zone:">
-          <input type="text" tabindex='137' class="form-control" formControlName="zone">
+          <input type="text" tabindex='136' class="form-control" formControlName="zone">
         </aac-field-container>
       </div>
       <div class="col-md-6">
         <aac-field-container label="Location of Repair:">
-          <input type="text" tabindex='138' class="form-control" formControlName="repairLocation">
+          <input type="text" tabindex='137' class="form-control" formControlName="repairLocation">
         </aac-field-container>
       </div>
     </div>
@@ -319,12 +307,12 @@
     <div class="row">
       <div class="col-md-6">
         <aac-field-container label="MRO Documents:">
-          <input type="text" tabindex='139' class="form-control" formControlName="mroDocuments">
+          <input type="text" tabindex='138' class="form-control" formControlName="mroDocuments">
         </aac-field-container>
       </div>
       <div class="col-md-6">
         <aac-field-container label="Legacy EA:">
-          <input type="text" tabindex='140' class="form-control" formControlName="legacyEA">
+          <input type="text" tabindex='139' class="form-control" formControlName="legacyEA">
         </aac-field-container>
       </div>
     </div>
@@ -336,7 +324,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <aac-field-container label="Component Type:">
-                    <select class="form-control" multiple tabindex='141' formControlName="componentType">
+                    <select class="form-control" multiple tabindex='140' formControlName="componentType">
                         <option value=""> </option>
                       <option *ngFor="let option of componentType$ | async" [value]="option.id">{{option.description}}</option>
 
@@ -345,12 +333,12 @@
             </div>
             <div class="col-sm-4">
                     <aac-field-container label="Control Order #:" >
-                      <input class="form-control" formControlName="controlOrderNumber" tabindex="142">
+                      <input class="form-control" formControlName="controlOrderNumber" tabindex="141">
                     </aac-field-container>
             </div>
             <div class="col-sm-4">
                 <aac-field-container label="AAID:" >
-                  <input class="form-control" formControlName="componentAAID" tabindex="143">
+                  <input class="form-control" formControlName="componentAAID" tabindex="142">
                 </aac-field-container>
              </div>
         </div>
@@ -359,10 +347,23 @@
 
             <div class="col-sm-4">
               <aac-field-container label="Component S/N:" >
-                <input class="form-control" formControlName="componentSerialNumber" tabindex="144">
+                <input class="form-control" formControlName="componentSerialNumber" tabindex="143">
               </aac-field-container>
 
               </div>
+              <div class="col-sm-4">
+                  <aac-field-container label="CMB Number:" >
+                      <input type="text" class="form-control" formControlName="cmbNumber" tabindex="144" >
+                    </aac-field-container>
+              </div>
+
+              <div class="col-sm-4">
+                  <aac-field-container label="Component For Aircraft:">
+                      <input type="text" tabindex='145' class="form-control" formControlName="compForAircraft">
+                    </aac-field-container>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-sm-4">
                   <aac-field-container label="RSPAM:" >
                     <input class="form-control" formControlName="componentRspam" tabindex="145">
@@ -374,24 +375,24 @@
                   <input class="form-control" formControlName="componentMpn" tabindex="146">
                 </aac-field-container>
               </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-sm-4">
+              <div class="col-sm-4">
                     <aac-field-container label="Comp Hours:">
                       <input class="form-control" formControlName="componentHours" tabindex="146">
                     </aac-field-container>
-                  </div>
-
+               </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-4">
                     <aac-field-container label="Comp Cycles:">
                       <input class="form-control" formControlName="componentCycles" tabindex="146">
                     </aac-field-container>
-                  </div>
-                  <div class="col-sm-4">
-                    </div>
-              </div>
+                </div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                </div>
+
+            </div>
     </div>
 
 

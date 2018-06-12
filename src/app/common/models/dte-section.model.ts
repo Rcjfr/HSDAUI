@@ -30,8 +30,6 @@ export interface IDTESection {
   taskCardNo?: string;
   repairDate?: Date;
   airlineCode?: string;
-  cmbNumber?: string;
-  compForAircraft?: string;
   removedByDate?: Date;
   mrbNumber?: string;
   mrtNumber?: number;
@@ -45,6 +43,8 @@ export interface IDTESection {
   controlOrderNumber?: string,
   componentAAID?: string,
   componentSerialNumber?: string,
+  cmbNumber?: string;
+  compForAircraft?: string;
   componentRspam?: string,
   componentMpn?: string,
   componentHours?: string,

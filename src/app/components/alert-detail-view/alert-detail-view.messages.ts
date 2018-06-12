@@ -487,12 +487,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     airlineCode: {
       maxlength: 'Airline Code must not be more than 3 characters.'
     },
-    cmbNumber: {
-      maxlength: 'CMB Number Code must not be more than 25 characters.'
-    },
-    compForAircraft: {
-      maxlength: 'Component For Aircraft must not be more than 10 characters.'
-    },
     mrbNumber: {
       maxlength: 'MRB # must not be more than 50 characters.'
     },
@@ -543,6 +537,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       },
       componentSerialNumber: {
         maxlength: 'Component S/N must not be more than 25 characters.'
+      },
+      cmbNumber: {
+        maxlength: 'CMB Number Code must not be more than 25 characters.'
+      },
+      compForAircraft: {
+        maxlength: 'Component For Aircraft must not be more than 10 characters.'
       },
       componentRspam: {
         maxlength: 'RSPAM must not be more than 25 characters.'

@@ -34,8 +34,6 @@ export interface ISearchByDTE {
   repairDateFrom?: Date;
   repairDateto?: Date;
   airlineCode?: string;
-  cmbNumber?: string;
-  compForAircraft?: string;
   removedByDateFrom?: Date;
   removedByDateTo?: Date;
   mrbNumber?: string;
@@ -50,6 +48,8 @@ export interface ISearchByDTE {
   controlOrderNumber?: string,
   componentAAID?: string,
   componentSerialNumber?: string,
+  cmbNumber?: string;
+  compForAircraft?: string;
   componentRspam?: string,
   componentMpn?: string,
   componentHours?: string,
