@@ -923,7 +923,7 @@ export class SdaExportService {
           [
             this.getLabel('SR #:'),
             this.getFieldValue(sda.srNumber),
-            this.getLabel('RDAS #:'),
+            this.getLabel('Dossier #:'),
             this.getFieldValue(sda.rdasNumber)
           ],
           [

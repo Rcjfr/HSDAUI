@@ -473,7 +473,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'SR # must not be more than 50 characters.'
     },
     rdasNumber: {
-      maxlength: 'RDAS # must not be more than 25 characters.'
+      maxlength: 'Dossier # must not be more than 25 characters.'
     },
     etdNumber: {
       maxlength: 'ETD # must not be more than 25 characters.'

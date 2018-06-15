@@ -115,7 +115,7 @@ export const ReportOptions: IReportOption[] = [
   { key: 'Stage2Date', display: 'Stage 2 Approval Date', dbField: 'STAGE2_DATE', format: 'M/d/yyyy' },
   { key: 'Stage3Date', display: 'Stage 3 Approval Date', dbField: 'STAGE3_DATE', format: 'M/d/yyyy' },
   { key: 'SRNumber', display: 'SR #', dbField: 'SR_NUMBER' },
-  { key: 'RDASNumber', display: 'RDAS #', dbField: 'RDAS_NUMBER' },
+  { key: 'RDASNumber', display: 'Dossier #', dbField: 'RDAS_NUMBER' },
   { key: 'ETDNumber', display: 'ETD #' , dbField: 'ETD_NUMBER' },
   { key: 'ESMSubItemNumber', display: 'ESM Sub/Item #' , dbField: 'ESM_SUB_ITEM_NUMBER' },
   { key: 'DTEComments', display: 'Comments(DTE)' , dbField: 'DTE_COMMENTS' },
