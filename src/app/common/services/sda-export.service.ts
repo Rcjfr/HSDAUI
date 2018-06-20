@@ -1252,7 +1252,7 @@ export class SdaExportService {
       columns: [
         {
           stack: [
-            { text: val || ' ', style: 'regular' },
+            { text: val !== null ? val : '', style: 'regular' },
             this.getLine(maxLength)
           ]
         }
