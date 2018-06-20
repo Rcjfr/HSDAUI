@@ -35,11 +35,11 @@
   </aac-field-container>
 
   <aac-field-container required="true" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
-    <input type="text" tabindex='11' readonly class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
+    <input type="text" tabindex='11' readonly class="form-control" formControlName="totalShipTime">
   </aac-field-container>
 
   <aac-field-container required="true" label="Cycles:" [message]="displayMessage.cycles">
-    <input type="text" tabindex='12' readonly class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
+    <input type="text" tabindex='12' readonly class="form-control" formControlName="cycles">
   </aac-field-container>
   <aac-field-container required="true" label="Fleet:" [message]="displayMessage.fleet">
     <input type="text" tabindex='13' readonly class="form-control" formControlName="fleet">

@@ -7,11 +7,13 @@
     {
       "root": "src",
       "outDir": "dist",
+      "serviceWorker": true,
       "assets": [
         "assets",
         "favicon.ico",
         "web.config",
-        "web.dev.config"
+        "web.dev.config",
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",

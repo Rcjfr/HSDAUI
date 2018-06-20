@@ -6,6 +6,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgPipesModule } from 'ng-pipes';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -113,7 +114,8 @@ import { AlertsAboutComponent } from '@app/components/alerts-about/alerts-about.
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
     EffectsModule.forRoot([AlertEffects, LookupDataEffects, UserEffects, SavedSearchesEffects]),
     MomentModule,
-    NgIdleKeepaliveModule.forRoot()
+    NgIdleKeepaliveModule.forRoot(),
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
   ],
   providers: [
     services.AuthService,
