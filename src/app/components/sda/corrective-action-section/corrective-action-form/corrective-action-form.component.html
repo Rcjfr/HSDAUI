@@ -17,8 +17,8 @@
   <div class="row form-group">
     <div [hidden]="!isDeferred()">
       <div class="col-sm-6">
-        <aac-field-container label="Enter SCEPTRE Deferral Code:"
-                             helptext="(MON, SAD, ROB, etc)"
+        <aac-field-container label="Enter Deferral Code:"
+                             helptext="(MON, SAD, ROB, FMR, etc)"
                              [required]="isDeferred()"
                              [message]="displayMessage.deferralCode">
           <input type="text" tabindex='62' class="form-control" [required]="isDeferred()" formControlName="deferralCode">

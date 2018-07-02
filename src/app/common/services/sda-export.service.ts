@@ -556,7 +556,7 @@ export class SdaExportService {
               text: this.getBooleanContent(sda.isDeferred),
               style: 'regular'
             },
-            this.getLableFieldValue('SCEPTRE Deferral Code:', sda.deferralCode),
+            this.getLableFieldValue('Deferral Code:', sda.deferralCode),
             this.getLableFieldValue('Deferral #:', sda.deferralNo, 65)
           ],
           [

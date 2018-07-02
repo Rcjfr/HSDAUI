@@ -73,7 +73,7 @@ export const ReportOptions: IReportOption[] = [
 
   //Corrective Action
   { key: 'IsDeferred', display: 'Deferred', dbField: 'IS_DEFERRED' },
-  { key: 'DeferralCode', display: 'SCEPTRE Deferral Code', dbField: 'DEFERRAL_CODE' },
+  { key: 'DeferralCode', display: 'Deferral Code', dbField: 'DEFERRAL_CODE' },
   { key: 'DeferralNo', display: 'Deferral #' , dbField: 'DEFERRAL_NO'},
   { key: 'RepairType', display: 'Corrective Action Repair Type', dbField: 'REPAIR_TYPE_DESC' },
   { key: 'DefectivePartDescription', display: 'Defective Part Description', dbField: 'DEFECTIVE_PART_DESCRIPTION' },
