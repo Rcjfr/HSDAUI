@@ -11,7 +11,14 @@ export class Helper {
 
       return date;
     }
-    if (typeof key === 'string' && ((key === 'createDate'))) {
+    if (typeof key === 'string' && (
+      (key === 'createDate') ||
+      (key === 'stage1RTSDate') ||
+      (key === 'stage2Date') ||
+      (key === 'stage3Date') ||
+      (key === 'repairDate') ||
+      (key === 'removedByDate')
+      )) {
       const date = new Date(moment(value).valueOf());
       if (value) {
       return date;
