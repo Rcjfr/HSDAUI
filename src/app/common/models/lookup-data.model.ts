@@ -21,5 +21,6 @@ export interface ILookupData {
   sdaStatus: IBaseLookUp[];
   dteRepairStatus: IBaseLookUp[];
   dteComponentType: IBaseLookUp[];
+  fleet: IBaseLookUp[];
 }
 

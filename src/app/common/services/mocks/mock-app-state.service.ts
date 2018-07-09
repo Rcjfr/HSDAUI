@@ -133,6 +133,10 @@ export class MockAppStateService extends AppStateService {
   getRepairInspectionStatus() {
     return Observable.of([]);
   }
+
+  getFleet() {
+    return Observable.of([]);
+  }
   getSearchCriteria() {
     return Observable.of(SearchCriteriaRecordFactory());
   }

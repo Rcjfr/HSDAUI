@@ -1,5 +1,6 @@
 export interface ISearchByDTE {
   dteStatus?: any;
+  dteStatusNull?: boolean;
   totalShipTimeFrom?: any;
   totalShipTimeTo?: any;
   cyclesFrom?: any;

@@ -1,6 +1,6 @@
 import { ActionTypes } from './../actions/logged-in-user';
 import { ActionReducer, Action, createSelector } from '@ngrx/store';
-import { IAlert, ISdaListView, Status } from '@app/common/models';
+import { IAlert, ISdaListView, Status, SearchType } from '@app/common/models';
 import { ISdaRecord, SdaFactory } from '@app/common/reducers/models/sda';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
 import { ISearchCriteriaRecord, SearchCriteriaRecordFactory } from '@app/common/reducers/models/search-criteria';
@@ -15,6 +15,7 @@ import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
 
 export interface State {
   loading: boolean;
+  searchType: SearchType;
   noseNumbersLoading: boolean
   loadingText: string;
   savedState: ISavedStateRecord,
@@ -26,12 +27,14 @@ export interface State {
   changeLogs: List<IChangeLog>;
   aircraftInfo: IAircraftInfoRecord;
   sdaListResult: ISdaListResultRecord;
+  reportSearchResult: ISdaListResultRecord;
   searchCriteria: ISearchCriteriaRecord;
 }
 export interface StateRecord extends TypedRecord<StateRecord>, State { }
 
 export const stateFactory = makeTypedFactory<State, StateRecord>({
   loading: false,
+  searchType: SearchType.Regular,
   loadingText: 'Loading',
   savedState: null,
   loadNewSdaCounter: 0,
@@ -43,7 +46,7 @@ export const stateFactory = makeTypedFactory<State, StateRecord>({
   changeLogs: List.of<IChangeLog>(),
   aircraftInfo: AircraftInfoFactory(),
   sdaListResult: SdaListResultFactory(),
-  //mrlSearchResult: SdaListResultFactory(),
+  reportSearchResult: SdaListResultFactory(),
   searchCriteria: SearchCriteriaRecordFactory()
 });
 
@@ -60,6 +63,12 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
     case selectedAlertActions.ActionTypes.LOAD_SDAS:
     case selectedAlertActions.ActionTypes.EXPORT_SDAS:
     case selectedAlertActions.ActionTypes.EXPORT_PDF:
+    case selectedAlertActions.ActionTypes.LOAD_TWD_LIST:
+    case selectedAlertActions.ActionTypes.EXPORT_TWD_EXCEL:
+    case selectedAlertActions.ActionTypes.EXPORT_TWD_PDF:
+    case selectedAlertActions.ActionTypes.EXPORT_MRL_PDF:
+    case selectedAlertActions.ActionTypes.EXPORT_MRL_EXCEL:
+    case selectedAlertActions.ActionTypes.EXPORT_MRR_PDF:
       {
         return state.merge({ loading: true, loadingText: 'Loading' });
       }
@@ -99,6 +108,13 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
         return state.merge({ loading: false, sdaListResult: SdaListResultFactory(act.payload) });
       }
 
+      case selectedAlertActions.ActionTypes.LOAD_TWD_LIST_COMPLETE:
+      {
+        const act = action as selectedAlertActions.LoadTwdListCompleteAction;
+
+        return state.merge({ loading: false, reportSearchResult: SdaListResultFactory(act.payload) });
+      }
+
     case selectedAlertActions.ActionTypes.EXPORT_MRL_PDF_COMPLETE:
       {
         return state.merge({ loading: false });
@@ -108,6 +124,12 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
         return state.merge({ loading: false });
       }
 
+      case selectedAlertActions.ActionTypes.SAVE_SEARCH_TYPE:
+      {
+        const act = action as selectedAlertActions.SaveSearchTypeAction;
+
+        return state.merge({ searchType: act.payload });
+      }
     case selectedAlertActions.ActionTypes.LOAD_AIRCRAFT_INFO_COMPLETE:
       {
         const act = action as selectedAlertActions.LoadAircraftInfoCompleteAction;
@@ -119,6 +141,9 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
     case selectedAlertActions.ActionTypes.DOWNLOAD_ATTACHMENT_COMPLETE:
     case selectedAlertActions.ActionTypes.UPLOAD_ATTACHMENT_COMPLETE:
     case selectedAlertActions.ActionTypes.EXPORT_PDF_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_TWD_EXCEL_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_TWD_PDF_COMPLETE:
+    case selectedAlertActions.ActionTypes.EXPORT_MRR_PDF_COMPLETE:
       {
         return state.merge({ loading: false });
       }
@@ -183,6 +208,8 @@ export const getAircraftInfo = (state: State) => state.aircraftInfo;
 export const getNoseNumbers = (state: State) => state.noseNumbers;
 export const getChangeLog = (state: State) => state.changeLogs;
 export const getSearchCriteria = (state: State) => state.searchCriteria;
+export const getSearchType = (state: State) => state.searchType;
 export const getNewSdaStatus = (state: State) => state.newSdaStatus;
 export const getLoadingText = (state: State) => state.loadingText;
+export const getReportSearchResult = (state: State) => state.reportSearchResult;
 
