@@ -27,8 +27,3 @@ export enum CorrosionLevel {
   Level3 = 3
 }
 
-export enum SearchType {
-  Regular = 1,
-  MRR = 2,
-}
-

@@ -22,7 +22,6 @@ alertCodes: [],
   checkTypes: [],
   sdaStatus: [],
   dteRepairStatus: [],
-  dteComponentType: [],
-  fleet: []
+  dteComponentType: []
 
 });

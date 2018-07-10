@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
 import { AuthService } from '@app/common/services/auth.service';
-import { ISearchData, SearchType } from '@app/common/models';
+import { ISearchData } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
 import { Helper } from '@app/common/helper';
@@ -24,7 +24,6 @@ import * as moment from 'moment';
 })
 export class AlertsSearchComponent implements OnInit {
   @ViewChildren(AccordionPanelComponent) panels: AccordionPanelComponent[];
-  public searchTypes = SearchType;
 
   //Store data
     currentSearchId: number;
@@ -112,7 +111,7 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
-  searchAlerts(excel: boolean = false, searchType: SearchType = SearchType.Regular ) {
+  searchAlerts(excel: boolean = false) {
     let hasCriteria = false;
     const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
 
@@ -144,9 +143,6 @@ export class AlertsSearchComponent implements OnInit {
         message: 'Please input at least one search filter.'
       })
     } else {
-
-      this.appStateService.saveSearchType(searchType);
-
       if (excel) {
         this.appStateService.exportSDA(this.criteria);
       } else {

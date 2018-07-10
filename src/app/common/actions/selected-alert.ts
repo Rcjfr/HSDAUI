@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import * as models from '@app/common/models/index';
-import { ISdaListResult, SearchType } from '@app/common/models';
+import { ISdaListResult } from '@app/common/models';
 import { ISearchCriteria } from '@app/common/models/search/search-criteria.model';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
@@ -29,18 +29,6 @@ export const ActionTypes = {
   EXPORT_MRL_EXCEL: 'Export Major Repair List Excel',
   EXPORT_MRL_EXCEL_COMPLETE: 'Export Major Repair List Excel Complete',
   EXPORT_MRL_EXCEL_FAIL: 'Export Major Repair List Excel Fail',
-
-  LOAD_TWD_LIST: 'Load TWD List',
-  LOAD_TWD_LIST_COMPLETE: 'Load TWD List Complete',
-  LOAD_TWD_LIST_FAIL: 'Load TWD List Fail',
-
-  EXPORT_TWD_EXCEL: 'Export TWD Excel',
-  EXPORT_TWD_EXCEL_COMPLETE: 'Export TWD Excel Complete',
-  EXPORT_TWD_EXCEL_FAIL: 'Export TWD Excel Fail',
-
-  EXPORT_TWD_PDF: 'Export TWD PDF',
-  EXPORT_TWD_PDF_COMPLETE: 'Export TWD PDF Complete',
-  EXPORT_TWD_PDF_FAIL: 'Export TWD PDF Fail',
 
   EXPORT_SDAS: 'Export SDAs',
   EXPORT_SDAS_COMPLETE: 'Export SDAs Complete',
@@ -71,10 +59,6 @@ export const ActionTypes = {
   EXPORT_PDF: 'Export PDF',
   EXPORT_PDF_COMPLETE: 'Export PDF Complete',
   EXPORT_PDF_FAIL: 'Export PDF Fail',
-  SAVE_SEARCH_TYPE: 'Update flag to show grid based on search Type',
-  EXPORT_MRR_PDF: 'Export MRR PDF',
-  EXPORT_MRR_PDF_COMPLETE: 'Export MRR PDF Complete',
-  EXPORT_MRR_PDF_FAIL: 'Export MRR PDF Fail',
 
 };
 
@@ -184,53 +168,6 @@ export class ExportMrlExcelFailAction implements Action {
   constructor(public payload:  any ) { }
 }
 
-export class LoadTwdListAction implements Action {
-  public type = ActionTypes.LOAD_TWD_LIST;
-  constructor(public payload:  any ) { }
-}
-export class LoadTwdListCompleteAction implements Action {
-  public type = ActionTypes.LOAD_TWD_LIST_COMPLETE;
-  constructor(public payload:  any ) { }
-}
-
-export class LoadTwdListFailAction implements Action {
-  public type = ActionTypes.LOAD_TWD_LIST_FAIL;
-  constructor(public payload:  any ) { }
-}
-
-
-export class ExportTwdExcelAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_EXCEL;
-  constructor(public payload:  ISearchCriteria ) { }
-}
-
-export class  ExportTwdExcelCompleteAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_EXCEL_COMPLETE;
-  constructor() { }
-}
-
-export class ExportTwdExcelFailAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_EXCEL_FAIL;
-  constructor(public payload:  any ) { }
-}
-
-
-
-export class ExportTwdPdfAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_PDF;
-  constructor(public payload:  ISearchCriteria ) { }
-}
-
-export class  ExportTwdPdfCompleteAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_PDF_COMPLETE;
-  constructor() { }
-}
-
-export class ExportTwdPdfFailAction implements Action {
-  public type = ActionTypes.EXPORT_TWD_PDF_FAIL;
-  constructor(public payload:  any ) { }
-}
-
 
 export class ExportSdasAction implements Action {
   public type = ActionTypes.EXPORT_SDAS;
@@ -320,27 +257,6 @@ export class ExportPDFFailAction implements Action {
   constructor(public payload: any) { }
 }
 
-export class SaveSearchTypeAction implements Action {
-  public type = ActionTypes.SAVE_SEARCH_TYPE;
-  constructor(public payload: SearchType) { }
-}
-
-export class ExportMrrPDFAction implements Action {
-  public type = ActionTypes.EXPORT_MRR_PDF;
-  constructor(public payload: number[]) { }
-}
-
-export class ExportMrrPDFCompleteAction implements Action {
-  public type = ActionTypes.EXPORT_MRR_PDF_COMPLETE;
-  public payload: any;
-  constructor() { }
-}
-export class ExportMrrPDFFailAction implements Action {
-  public type = ActionTypes.EXPORT_MRR_PDF_FAIL;
-  constructor(public payload: any) { }
-}
-
-
 export type Actions =
   OperationFailedAction |
   LoadNoseNumbersAction |
@@ -381,15 +297,5 @@ export type Actions =
   UploadAttachmentFailAction |
   ExportPDFAction |
   ExportPDFCompleteAction |
-  ExportPDFFailAction |
-  LoadTwdListAction |
-  LoadTwdListCompleteAction|
-  LoadTwdListFailAction|
-  ExportTwdExcelAction |
-  ExportTwdExcelCompleteAction|
-  ExportTwdExcelFailAction|
-  SaveSearchTypeAction|
-  ExportMrrPDFAction|
-  ExportMrrPDFCompleteAction|
-  ExportMrrPDFFailAction
+  ExportPDFFailAction
 ;

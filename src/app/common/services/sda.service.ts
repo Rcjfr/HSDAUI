@@ -49,8 +49,6 @@ export class SdaService {
         'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       });
 
-
-
       return this.http.post(this.endPointUrl + '/search', criteria,
         {
           headers: headers,
@@ -65,7 +63,6 @@ export class SdaService {
         }).mapTo(null);
     }
 
-
     return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
   };
 
@@ -76,27 +73,12 @@ export class SdaService {
       'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
 
-    return this.http.post(this.endPointUrl + '/Reports/MRL/Export', criteria,
+    return this.http.post(this.endPointUrl + '/ExportMrlExcel', criteria,
       {
         headers: headers,
         responseType: 'blob'
       }).do(blob => {
         saveAs(new Blob([blob]), 'MRLReport.xlsx');
-      })
-      .mapTo(null);
-  };
-
-  exportTwdExcel(criteria: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    });
-
-    return this.http.post(this.endPointUrl + '/Reports/TWD/Export', criteria,
-      {
-        headers: headers,
-        responseType: 'blob'
-      }).do(blob => {
-        saveAs(new Blob([blob]), 'TWDReport.xlsx');
       })
       .mapTo(null);
   };

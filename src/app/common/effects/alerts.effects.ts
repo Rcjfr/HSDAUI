@@ -142,69 +142,6 @@ export class AlertEffects {
     );
 
 
-    @Effect()
-    loadTwdList$ = this.actions$
-      .ofType(selectedAlert.ActionTypes.LOAD_TWD_LIST)
-      .pipe(
-      map((action: selectedAlert.LoadTwdListAction) => action.payload ),
-      switchMap((searchCriteria: ISearchCriteria) => {
-        return this.sdaService.searchSda(searchCriteria)
-          .pipe(
-            switchMap((data: models.ISdaListResult) => {
-
-            return of(new selectedAlert.LoadTwdListCompleteAction(data));
-
-          }),
-          catchError((err) => {
-            return of(new selectedAlert.LoadTwdListFailAction('Failed to load TWD data.'));
-          })
-          );
-      })
-      );
-
-      @Effect()
-      exportTwdExcel$ = this.actions$
-        .ofType(selectedAlert.ActionTypes.EXPORT_TWD_EXCEL)
-        .pipe(
-        map((action: selectedAlert.ExportTwdExcelAction) => action.payload),
-        switchMap(searchCriteria => {
-
-          return this.sdaService.exportTwdExcel(searchCriteria)
-            .pipe(
-            map(result => {
-              return new selectedAlert.ExportTwdExcelCompleteAction();
-            }),
-            catchError((err) => {
-
-               return of(new selectedAlert.ExportTwdExcelFailAction('Failed to generate Time When Due Report.'));
-            }));
-        })
-        );
-
-        @Effect()
-        exportTwdPDF$ = this.actions$
-          .ofType(selectedAlert.ActionTypes.EXPORT_TWD_PDF)
-          .pipe(
-          map((action: selectedAlert.ExportTwdExcelAction) => action.payload),
-          switchMap((searchCriteria: ISearchCriteria) => {
-            return this.sdaService.searchSda(searchCriteria)
-              .pipe(
-              switchMap((searchResult: models.ISdaListResult) => {
-                {
-                  this.twdExportService.exportTwdPdf(searchResult);
-
-                  return Observable.from([new selectedAlert.ExportTwdPdfCompleteAction()]);
-                }
-
-              }),
-              catchError((err) => {
-                console.log(err);
-
-                return of(new selectedAlert.ExportTwdPdfFailAction('Failed to generate Time When Due Report'));
-              }));
-          })
-          );
-
   @Effect()
   exportMrlPDF$ = this.actions$
     .ofType(selectedAlert.ActionTypes.EXPORT_MRL_PDF)
@@ -238,6 +175,7 @@ export class AlertEffects {
 
         }),
         catchError((err) => {
+          console.log(err);
 
           return of(new selectedAlert.ExportMrlPdfFailAction('Failed to generate Major Repair List.'));
         }));
@@ -294,33 +232,6 @@ export class AlertEffects {
         }));
     })
     );
-
-
-      @Effect()
-      exportMrrPdf$ = this.actions$.
-        ofType(selectedAlert.ActionTypes.EXPORT_MRR_PDF)
-        .pipe(
-        map((action: selectedAlert.ExportMrrPDFAction) => action.payload),
-             withLatestFrom(this.appStateService.getSearchCriteria()),
-             switchMap(([payload, searchCriteria]) => {
-              const criteria = searchCriteria.toJS();
-              const sdas = payload;
-              criteria.pageData = {
-                first: 0,
-                rows: -1,
-                sortField: 'createDate',
-                sortOrder: -1
-              }
-
-          return  this.mrrExportService.exportMrrPdf(criteria, sdas) //this.mrrExportService.exportMrrPdf(payload)
-            .pipe(
-            map((data: any) => {
-              return new selectedAlert.ExportMrrPDFCompleteAction();
-            }),
-            catchError((err) => {
-              return of(new selectedAlert.ExportMrrPDFFailAction('Failed to export to PDF.Please contact Administrator.'));
-            }));
-        }));
 
   @Effect()
   exportSdas$ = this.actions$
@@ -408,11 +319,7 @@ export class AlertEffects {
     selectedAlert.ActionTypes.LOAD_NOSE_NUMBERS_FAIL,
     selectedAlert.ActionTypes.SAVE_SDA_FAIL,
     selectedAlert.ActionTypes.LOAD_SDAS_FAIL,
-    selectedAlert.ActionTypes.LOAD_TWD_LIST_FAIL,
-    selectedAlert.ActionTypes.EXPORT_TWD_EXCEL_FAIL,
-    selectedAlert.ActionTypes.EXPORT_TWD_PDF_FAIL,
     selectedAlert.ActionTypes.EXPORT_MRL_PDF_FAIL,
-    selectedAlert.ActionTypes.EXPORT_MRR_PDF_FAIL,
     selectedAlert.ActionTypes.EXPORT_MRL_EXCEL_FAIL,
     selectedAlert.ActionTypes.LOAD_CHANGE_LOG_FAIL,
     selectedAlert.ActionTypes.EXPORT_SDAS_FAIL,
@@ -444,8 +351,6 @@ export class AlertEffects {
     private sdaService: services.SdaService,
     private sdaExportService: services.SdaExportService,
     private mrlExportService: services.MrlExportService,
-    private twdExportService: services.TwdExportService,
-    private mrrExportService: services.MrrExportService,
     private changeLogService: services.ChangeLog,
     private appStateService: services.AppStateService,
     private router: Router,

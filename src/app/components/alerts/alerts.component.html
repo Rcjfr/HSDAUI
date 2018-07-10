@@ -2,11 +2,4 @@
   <aac-loading *ngIf="loading$ | async"></aac-loading>
 </div>
 <aa-alerts-search></aa-alerts-search>
-<div *ngIf="searchType === 1">
 <aa-alerts-grid></aa-alerts-grid>
-</div>
-
-<div *ngIf="searchType === 2">
-  <aa-alerts-mrr-grid></aa-alerts-mrr-grid>
-</div>
-

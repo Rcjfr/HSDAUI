@@ -81,4 +81,3 @@ export const getRepairInspectionStatus = (state: State) => state.lookupData.repa
 export const getSdaStatus = (state: State) => state.lookupData.sdaStatus;
 export const getDTERepairStatus = (state: State) => state.lookupData.dteRepairStatus;
 export const getDTEComponentType = (state: State) => state.lookupData.dteComponentType;
-export const getFleet = (state: State) => state.lookupData.fleet;

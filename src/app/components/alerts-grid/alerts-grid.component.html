@@ -1,7 +1,6 @@
 <h1 id='searchResults'>Search Results
 
 </h1>
-
 <p-dataTable #dataTable [value]="(sdaListResult$ | async).records"
              [totalRecords]="(sdaListResult$ | async).totalRecords"
              [lazy]="true"

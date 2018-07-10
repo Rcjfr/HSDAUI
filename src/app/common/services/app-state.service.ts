@@ -5,7 +5,7 @@ import * as fromRoot from '@app/common/reducers';
 import * as selectedAlertActions from '@app/common/actions/selected-alert';
 import * as lookupDataActions from '@app/common/actions/lookup-data';
 import * as userActions from '@app/common/actions/logged-in-user';
-import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent, IChangeLog, IBaseLookUp, IATACode, ICheckType, SearchType } from '@app/common/models';
+import { IStation, ISda, ISavedState, Status, IAircraftInfo, ILazyLoadEvent, IChangeLog, IBaseLookUp, IATACode, ICheckType } from '@app/common/models';
 import { List } from 'immutable';
 import { ILoadSda } from '@app/common/models/payload/load-sda.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
@@ -108,10 +108,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-  getFleet(): Observable<IBaseLookUp[]> {
-    return this.store.select(fromRoot.getFleet);
-  }
-
   getDTERepairStatus(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDTERepairStatus);
   }
@@ -156,14 +152,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getUser);
   }
 
-
-  getTwdList(): Observable<ISdaListResultRecord> {
-    return this.store.select(fromRoot.getReportSearchResult);
-  }
-
-  getSearchType(): Observable<SearchType> {
-    return this.store.select(fromRoot.getSearchType);
-  }
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
@@ -176,10 +164,6 @@ export class AppStateService {
     this.loadNewSdaSubject.next({ load: true });
   }
 
-  saveSearchType(SearchType: SearchType  ): void {
-    this.store.dispatch(new selectedAlertActions.SaveSearchTypeAction(SearchType));
-  }
-
   loadSdaList(pageData: ILazyLoadEvent): void {
     this.store.dispatch(new selectedAlertActions.LoadSdasAction(pageData));
   }
@@ -188,17 +172,6 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.ExportMrlPdfAction(criteria));
   }
 
-  loadTwdList(criteria): void {
-    this.store.dispatch(new selectedAlertActions.LoadTwdListAction(criteria));
-  }
-
-  exportTwdExcel(criteria): void {
-    this.store.dispatch(new selectedAlertActions.ExportTwdExcelAction(criteria));
-  }
-
-  exportTwdPdf(criteria): void {
-    this.store.dispatch(new selectedAlertActions.ExportTwdPdfAction(criteria));
-  }
   exportMRLExcel(criteria): void {
     this.store.dispatch(new selectedAlertActions.ExportMrlExcelAction(criteria));
   }
@@ -294,8 +267,5 @@ export class AppStateService {
   }
   exportPDF(sdas: [number]) {
     this.store.dispatch(new selectedAlertActions.ExportPDFAction(sdas));
-  }
-  exportMrrPDF(sdas: number[]) {
-   this.store.dispatch(new selectedAlertActions.ExportMrrPDFAction(sdas));
   }
 }

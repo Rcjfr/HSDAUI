@@ -59,7 +59,6 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 import { environment } from '@env/environment';
 import { AlertsAboutComponent } from '@app/components/alerts-about/alerts-about.component';
-import { AlertsMrrGridComponent } from '@app/components/alerts-mrr-grid/alerts-mrr-grid.component';
 
 @NgModule({
   declarations: [
@@ -76,8 +75,7 @@ import { AlertsMrrGridComponent } from '@app/components/alerts-mrr-grid/alerts-m
     AlertsSearchComponent,
     AlertsGridComponent,
     AlertsDashboardComponent,
-    AlertsAboutComponent,
-    AlertsMrrGridComponent
+    AlertsAboutComponent
   ],
   imports: [
     CommonModule,
@@ -133,8 +131,6 @@ import { AlertsMrrGridComponent } from '@app/components/alerts-mrr-grid/alerts-m
     services.LookupDataService,
     services.SdaExportService,
     services.MrlExportService,
-    services.MrrExportService,
-    services.TwdExportService,
     services.ChangeLog,
     PendingChangesGuard,
     SdaResolverService,
