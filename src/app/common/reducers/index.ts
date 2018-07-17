@@ -39,7 +39,10 @@ export const getSavedSearchState = (state: AppStore) => state.savedSearches;
 // Level 2
 export const getSelectedSda = createSelector(getSelectedAlertState, fromSelectedAlert.getSelectedSda);
 export const getSdaListResult = createSelector(getSelectedAlertState, fromSelectedAlert.getSdaListResult);
+export const getReportSearchResult = createSelector(getSelectedAlertState, fromSelectedAlert.getReportSearchResult);
+
 export const getSearchCriteria = createSelector(getSelectedAlertState, fromSelectedAlert.getSearchCriteria);
+export const getSearchType = createSelector(getSelectedAlertState, fromSelectedAlert.getSearchType);
 export const getAircraftInfo = createSelector(getSelectedAlertState, fromSelectedAlert.getAircraftInfo);
 export const getSelectedAlertLoading = createSelector(getSelectedAlertState, fromSelectedAlert.getLoading);
 export const getNoseNumbersLoading = createSelector(getSelectedAlertState, fromSelectedAlert.getNoseNumbersLoading);
@@ -73,6 +76,7 @@ export const getDTEStatus = createSelector(getLookupDataState, fromLookupData.ge
 export const getSdaStatus = createSelector(getLookupDataState, fromLookupData.getSdaStatus);
 export const getDTERepairStatus = createSelector(getLookupDataState, fromLookupData.getDTERepairStatus);
 export const getDTEComponentType = createSelector(getLookupDataState, fromLookupData.getDTEComponentType);
+export const getFleet = createSelector(getLookupDataState, fromLookupData.getFleet);
 
 
 export const getUser = createSelector(getUserDataState, fromLoggedInUser.getUser);

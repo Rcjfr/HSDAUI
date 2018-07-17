@@ -1,0 +1,45 @@
+<form novalidate  [formGroup]="twdReportSearchForm">
+  <div class="panel panel-info">
+  <div class="panel-heading">Search</div>
+  <div class="panel-body form-group">
+
+    <div class="row form-group">
+        <div class="col-sm-6">
+          <aac-field-container label="Fleet:">
+            <select tabindex="20" class="form-control" formControlName="fleet">
+              <option value="">Select Fleet</option>
+              <option *ngFor="let d of fleet$ | async" [value]="d.description">{{d.description}}</option>
+            </select>
+          </aac-field-container>
+        </div>
+        <div class="col-sm-6">
+          <ng-template #customAircraftItemTemplate let-model="item" let-index="index">
+            <span><b>{{model.noseNumber}}</b>:{{model.model}}</span>
+          </ng-template>
+        <aac-field-container [required]="true" label="Aircraft Nose #:" [message]="noseValidator()">
+                <input type="text" autocomplete="off" tabindex='3' class="form-control"
+                       [typeahead]="noseNumbers$"
+                       formControlName="aircraftNo"
+                       typeaheadOptionField="noseNumber" [typeaheadItemTemplate]="customAircraftItemTemplate"
+                       typeaheadOptionsLimit="50" typeaheadMinLength="1"
+                       >
+          </aac-field-container>
+
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-12">
+
+            <div class="pull-right hidden-print">
+              <button type="button" (click)="showTwdReport()" class="btn btn-default btn-lg"  class="btn btn-primary"        >View TWD Report</button>
+              <button type="button" (click)="showTwdReport(true, false)" class="btn btn-default btn-lg"  class="btn btn-primary"
+              >Export to Excel</button>
+              <button type="button" (click)="showTwdReport(false, true)" class="btn btn-default btn-lg"  class="btn btn-primary"
+              >Export to Pdf</button>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</form>

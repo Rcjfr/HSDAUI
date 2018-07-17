@@ -190,6 +190,12 @@ describe('LookUpData Actions', () => {
             'id': 1,
             'description': 'Attachment'
           }
+        ],
+        'fleet' : [
+          {
+            'id': 1,
+            'description': 'A319'
+          }
         ]
       };
       const action = new lookupDataActions.LoadLookupDataCompleteAction(lookupData);
