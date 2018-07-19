@@ -16,7 +16,7 @@
           <ng-template #customAircraftItemTemplate let-model="item" let-index="index">
             <span><b>{{model.noseNumber}}</b>:{{model.model}}</span>
           </ng-template>
-        <aac-field-container [required]="true" label="Aircraft Nose #:" [message]="noseValidator()">
+        <aac-field-container label="Aircraft Nose #:" [message]="noseValidator()">
                 <input type="text" autocomplete="off" tabindex='3' class="form-control"
                        [typeahead]="noseNumbers$"
                        formControlName="aircraftNo"

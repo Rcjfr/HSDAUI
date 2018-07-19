@@ -170,13 +170,13 @@ export class MrlExportService {
               { text: listview.ataCode2 || '' ,  style: 'regular' },
               { text: listview.station || '',  style: 'regular' },
               { text: listview.checkTypeDesc || '', style: 'regular' },
-              { text: `L=${listview.length.toFixed(3)}", W=${listview.width.toFixed(3)}", D=${listview.depth.toFixed(4)}", ${listview.damageTypeDesc}`, style: 'regular'  },
+              { text: `L=${listview.length ? listview.length.toFixed(3) : ''}", W=${listview.width ? listview.width.toFixed(3) : ''}", D=${listview.depth ? listview.depth.toFixed(4) : ''}", ${listview.damageTypeDesc || ''}`, style: 'regular'  },
               { text: listview.partDefective || '', style: 'regular' },
               { text: listview.aircraftStation || '', style: 'regular' },
               { text: listview.stringer || '', style: 'regular' },
               { text: listview.waterLine || '', style: 'regular' },
               { text: listview.buttLine || '', style: 'regular' },
-              { text: listview.micNo || listview.nonRoutineNo || listview.routineNo, style: 'regular' },
+              { text: listview.micNo || listview.nonRoutineNo || listview.routineNo || '', style: 'regular' },
               { text: `${listview.deferralCode ? listview.deferralCode + ', ' : '' } ${listview.deferralNo || ''}` , style: 'regular' },
             ],
             [
@@ -222,7 +222,7 @@ getHeaderText(result: models.ISdaListResult ) {
 
 if (result.records.length) {
 
-  const text = `Nose Number: ${result.records[0].aircraftNo}\t\t\t\tSerial Number: ${result.records[0].serialNo}\t\t\t\tManufacturer: ${result.records[0].manufacturer}\t\t\t\tAircraft Model: ${result.records[0].model}\t\t\t\t`
+  const text = `Nose Number: ${result.records[0].aircraftNo || ''}\t\t\t\tSerial Number: ${result.records[0].serialNo || ''}\t\t\t\tManufacturer: ${result.records[0].manufacturer || ''}\t\t\t\tAircraft Model: ${result.records[0].model || ''}\t\t\t\t`
 
   return text
     }

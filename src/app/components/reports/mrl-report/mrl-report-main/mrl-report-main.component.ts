@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ISearchCriteria} from '@app/common/models/search/search-criteria.model';
 import { AppStateService } from '@app/common/services';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'aa-mrl-report-main',
@@ -9,12 +10,12 @@ import { AppStateService } from '@app/common/services';
   styleUrls: ['./mrl-report-main.component.less']
 })
 export class MrlReportMainComponent implements OnInit {
-  loading$: Observable<boolean>;
+  loading$ = new BehaviorSubject(true);
 
   constructor(private appStateService: AppStateService ) { }
 
   ngOnInit() {
-
+    this.appStateService.getSdaLoading().subscribe(d => setTimeout(() => this.loading$.next(d), 0));
   }
 
 
