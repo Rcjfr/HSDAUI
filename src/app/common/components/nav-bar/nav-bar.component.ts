@@ -8,12 +8,11 @@ import { integerNumberMask } from '@app/common/masks';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.less']
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
   @Output() onNewSda = new EventEmitter();
   sdaId: number;
   integerNumberMask = integerNumberMask;
-  constructor(public authService: AuthService, private router: Router) {
-  }
+  constructor(public authService: AuthService, private router: Router) {}
   newSda() {
     this.onNewSda.emit();
 
@@ -25,5 +24,14 @@ export class NavBarComponent {
     }
 
     return false;
+  }
+
+  ngOnInit() {
+    $(document).ready(function() {
+      $('.navbar-collapse a:not(.dropdown)').click(() => {
+        $('.navbar-collapse').css('height', '0');
+        $('.navbar-collapse').removeClass('in');
+      });
+    });
   }
 }
