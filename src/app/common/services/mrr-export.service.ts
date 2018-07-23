@@ -320,13 +320,13 @@ export class MrrExportService {
           ],
           [
             this.getLableFieldValue(`EA:`, sda.engineeringAuthorization, 50, 60),
-            this.getLableFieldValue(`Damage Type:`, sda.damageType, 50, 60),
-            this.getLableFieldValue(`ECO/ESO/MRB #:`, sda.mrbNumber, 50, 65)
+            this.getLableFieldValue(`LAA EA:`, sda.legacyEA, 50, 60),
+            this.getLableFieldValue(`Damage Type:`, sda.damageTypeDesc, 50, 65),
           ],
           [
             this.getLableFieldValue(`Description:`, sda.repairDescriptionTypeDesc || sda.defectivePartDescription || sda.modifiedPartDescription || '', 50, 60),
-            this.getLableFieldValue(`ATA:`, `${sda.ataCode1}-${sda.ataCode2 % 100}`, 50, 60),
-            this.getLableFieldValue(`LAA EA:`, sda.legacyEA, 50, 65),
+            this.getLableFieldValue(`ATA:`, `${sda.ataCode1}-${sda.ataCode2 % 100}` !== `99-99` ? `${sda.ataCode1}-${sda.ataCode2 % 100}` : 'DM' , 50, 60),
+            this.getLableFieldValue(`ECO/ESO/MRB #:`, sda.mrbNumber, 50, 65)
           ],
           [
             this.getLableFieldValue(`Part Nomenclature:`, sda.partDefective, 50, 60),
@@ -374,7 +374,7 @@ export class MrrExportService {
           [
             this.getLableFieldValue(`SR #:`, sda.srNumber, 50, 60),
             this.getLableFieldValue(`RDAS #:`, sda.rdasNumber, 50, 60),
-            this.getLableFieldValue(`ESM Sub/Item #:`, sda.esmSubItemNumber ? 'Yes' : 'No', 50, 65),
+            this.getLableFieldValue(`ESM Sub/Item #:`, sda.esmSubItemNumber , 50, 65),
           ],
           [
              this.getDTEThresholdsConent1(sda)

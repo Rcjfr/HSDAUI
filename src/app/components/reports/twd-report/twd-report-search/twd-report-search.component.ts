@@ -30,9 +30,9 @@ export class TwdReportSearchComponent implements OnInit {
   searchCriteria: ISearchCriteria = {};
   fleet$: Observable<models.IBaseLookUp[]>;
   //Default paging options
-  defaultPageSize = 10000;
+  defaultPageSize = -1;
   defaultSortColumn = 'dueInDays';
-  defaultSortOrder = -1;
+  defaultSortOrder = 1;
 
   twdReportSearchForm: FormGroup;
 formSubmitted: boolean;
@@ -82,15 +82,9 @@ showTwdReport(isExcel = false, isPdf = false) {
 
   this.formSubmitted = true;
   this.markAsDirty(this.twdReportSearchForm);
-  if ( _.isEmpty(this.twdReportSearchForm.controls.aircraftNo.value) && _.isEmpty(this.twdReportSearchForm.controls.fleet.value))  {
-   return this.dialogService.addDialog(ConfirmComponent, {
-      title: 'Search Filters',
-      message: 'Please input at least one search filter.'
-    })}
-
   if (this.twdReportSearchForm.valid) {
     this.searchCriteria.searchByAircraft = {aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value};
-    this.searchCriteria.searchBySda = {fleet: this.twdReportSearchForm.controls.fleet.value};
+    this.searchCriteria.searchBySda = {fleet: `${this.twdReportSearchForm.controls.fleet.value}*` };
     this.searchCriteria.searchByDTE = {dteStatus: [1, 3], dteStatusNull: true };
     this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1};
     this.searchCriteria.pageData = this.getDefaultPageData();

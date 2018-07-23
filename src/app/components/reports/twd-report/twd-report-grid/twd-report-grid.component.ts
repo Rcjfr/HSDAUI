@@ -28,7 +28,7 @@ export class TwdReportGridComponent implements OnInit {
     records: []
   });
    defaultSortColumn = 'dueInDays';
-   defaultSortOrder = -1;
+   defaultSortOrder = 1;
 
   constructor(private appStateService: AppStateService, private scrollToService: ScrollToService
     , private sdaExportService: SdaExportService) { }
@@ -41,7 +41,9 @@ export class TwdReportGridComponent implements OnInit {
         }
       })
       .map(listResult => {
+
         if (listResult) {
+
           return listResult;
         } else {
           return SdaListResultFactory();

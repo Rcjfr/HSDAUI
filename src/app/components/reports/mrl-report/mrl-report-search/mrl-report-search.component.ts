@@ -28,7 +28,7 @@ export class MrlReportSearchComponent implements OnInit, OnDestroy {
   searchCriteria: ISearchCriteria = {};
 
     //Default paging options
-    defaultPageSize = 10000;
+    defaultPageSize = -1;
     defaultSortColumn = 'createDate';
     defaultSortOrder = -1;
 

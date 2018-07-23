@@ -131,7 +131,7 @@ const Table = {
             {
             margin: [5 , 0, 5, 0],
             alignment: 'center',
-            unbreakable: true,
+            unbreakable: false,
             table: {
               headerRows: 1,
               widths: ['13%', '13%', '13%', '13%', '20%', '13%', '15%'],
