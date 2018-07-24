@@ -60,7 +60,10 @@
     <div class="row">
       <div class="col-md-4">
         <aac-field-container label="Fleet:">
-          <input type="text" tabindex='23' formControlName="fleet">
+          <select tabindex="23" class="form-control" formControlName="fleet">
+            <option value="">Select Fleet</option>
+            <option *ngFor="let d of fleet$ | async" [value]="d.description +'*'">{{d.description}}</option>
+          </select>
         </aac-field-container>
       </div>
       <div class="col-md-4">

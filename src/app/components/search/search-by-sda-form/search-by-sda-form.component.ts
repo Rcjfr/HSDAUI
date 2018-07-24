@@ -16,7 +16,7 @@ import { Observer } from 'rxjs/Rx';
 })
 export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() criteria: any;
-
+  fleet$: Observable<models.IBaseLookUp[]>;
   departments$: Observable<models.IBaseLookUp[]>;
   stations$: Observable<models.IStation[]>;
   station: string;
@@ -37,7 +37,7 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
     ataCode1: new FormControl(''),
     ataCode2: new FormControl(''),
     originator: new FormControl(),
-    fleet: new FormControl(),
+    fleet: new FormControl(''),
     checkType: new FormControl('')
   });
 
@@ -58,6 +58,7 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
     this.sdaForm.valueChanges.subscribe(s =>
       this.criteria.searchBySda = s
     )
+    this.fleet$ = this.appStateService.getFleet();
   }
 
   ngOnDestroy(): void {
@@ -84,7 +85,8 @@ export class SearchBySdaFormComponent implements OnInit, OnDestroy, OnChanges {
           department: '',
           ataCode1: '',
           ataCode2: '',
-          checkType: ''
+          checkType: '',
+          fleet: ''
         }, { emitEvent: false });
       }
     }

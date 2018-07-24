@@ -14,6 +14,7 @@ import { TDocumentDefinitions, pdfMakeStatic } from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { AppStateService } from '@app/common/services/app-state.service';
 import { AuthService } from '@app/common/services/auth.service';
+import { RepairDocumentType } from '@app/common/models/enumerations';
 
 
 //https://github.com/bpampuch/pdfmake/issues/948#issuecomment-293542550
@@ -319,7 +320,7 @@ export class MrrExportService {
             this.getLableFieldValue(`Chap/Fig/Repair:`, sda.chapFigRepairText, 50, 65)
           ],
           [
-            this.getLableFieldValue(`EA:`, sda.engineeringAuthorization, 50, 60),
+            this.getLableFieldValue(`EA:`, this.getEA(sda), 50, 60),
             this.getLableFieldValue(`LAA EA:`, sda.legacyEA, 50, 60),
             this.getLableFieldValue(`Damage Type:`, sda.damageTypeDesc, 50, 65),
           ],
@@ -590,6 +591,28 @@ export class MrrExportService {
     }
 
     return { text: label || ' ', style: 'regular' };
+  }
+
+  getEA(sda: ISdaListView) {
+    switch ( sda.repairDocumentType ) {
+      case RepairDocumentType.EA:
+        if (sda.chapFigRepairText !== sda.legacyEA) {
+          return sda.chapFigRepairText;
+        }
+
+        return '';
+
+        case RepairDocumentType.AARDwithSupportingEA:
+        case RepairDocumentType.SRM_with_supporting_EA:
+        if (sda.engineeringAuthorization !== sda.legacyEA) {
+          return sda.engineeringAuthorization;
+        }
+
+        return '';
+
+        default:
+        return ''
+    }
   }
 
 

@@ -6,7 +6,7 @@
     <div class="row form-group">
         <div class="col-sm-6">
           <aac-field-container label="Fleet:">
-            <select tabindex="20" class="form-control" formControlName="fleet">
+            <select tabindex="1" class="form-control" formControlName="fleet">
               <option value="">Select Fleet</option>
               <option *ngFor="let d of fleet$ | async" [value]="d.description">{{d.description}}</option>
             </select>
@@ -17,7 +17,7 @@
             <span><b>{{model.noseNumber}}</b>:{{model.model}}</span>
           </ng-template>
         <aac-field-container label="Aircraft Nose #:" [message]="noseValidator()">
-                <input type="text" autocomplete="off" tabindex='3' class="form-control"
+                <input type="text" autocomplete="off" tabindex='2' class="form-control"
                        [typeahead]="noseNumbers$"
                        formControlName="aircraftNo"
                        typeaheadOptionField="noseNumber" [typeaheadItemTemplate]="customAircraftItemTemplate"
@@ -32,10 +32,10 @@
           <div class="col-md-12">
 
             <div class="pull-right hidden-print">
-              <button type="button" (click)="showTwdReport()" class="btn btn-default btn-lg"  class="btn btn-primary"        >View TWD Report</button>
-              <button type="button" (click)="showTwdReport(true, false)" class="btn btn-default btn-lg"  class="btn btn-primary"
+              <button type="button" (click)="showTwdReport()" class="btn btn-default btn-lg"  class="btn btn-primary"  tabindex='3'      >View TWD Report</button>
+              <button type="button" (click)="showTwdReport(true, false)" class="btn btn-default btn-lg"  class="btn btn-primary" tabindex='4'
               >Export to Excel</button>
-              <button type="button" (click)="showTwdReport(false, true)" class="btn btn-default btn-lg"  class="btn btn-primary"
+              <button type="button" (click)="showTwdReport(false, true)" class="btn btn-default btn-lg"  class="btn btn-primary" tabindex='5'
               >Export to Pdf</button>
           </div>
           </div>
