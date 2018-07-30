@@ -336,7 +336,7 @@ export class MrrExportService {
           ],
           [
             {columns: [
-              this.getLableFieldValue(`Width  :`, sda.repairHeight, 30, 30),
+              this.getLableFieldValue(`Width  :`, sda.repairWidth, 30, 30),
               this.getLableFieldValue(` Height:`, sda.repairHeight, 30, 30),
             ]},
             this.getLableFieldValue(`Externally Visible:`, sda.isExternallyVisible ? 'Yes' : 'No' , 50, 60),
