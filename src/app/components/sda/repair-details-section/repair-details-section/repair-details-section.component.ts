@@ -20,6 +20,7 @@ export class RepairDetailsSectionComponent extends BaseFormComponent implements 
   repairDescriptions$: Observable<models.IBaseLookUp[]>;
   repairDocuments$: Observable<models.IBaseLookUp[]>;
   createNumberMask = createNumberMask;
+  decimalsNumberMask = decimalsNumberMask;
   public numberMask = createNumberMask({
     prefix: '',
     allowDecimal: false,
