@@ -146,13 +146,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       durationControl.valueChanges)
       .mapTo(1).subscribe(v => {
         dteDueDateControl.setValue('');
-        if (stage1RTSDateControl.value == null) { return; }
-        const stage1RTSDate = <Date>stage1RTSDateControl.value;
-        const durationMonths = <number>durationControl.value;
         const dteStatus = Number(dteStatusControl.value);
         switch (dteStatus) {
           case DTEStatus.Open:
             {
+              if (stage1RTSDateControl.value == null) { return; }
+              const stage1RTSDate = <Date>stage1RTSDateControl.value;
+              const durationMonths = <number>durationControl.value;
               const dt = moment(stage1RTSDate).add(durationMonths, 'month').format('MM/DD/YYYY');
               dteDueDateControl.setValue(dt);
               break;
