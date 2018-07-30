@@ -172,7 +172,7 @@ getHeaderText(result: models.ISdaListResult ) {
 
 if (result.records.length) {
 
-  const text = `Fleet: ${result.records[0].fleet}\t\t\t\t\t`
+  const text = `Fleet: ${result.records[0].fleet && result.records[0].fleet.includes('-') ? result.records[0].fleet.split('-')[0] : result.records[0].fleet }\t\t\t\t\t`
 
   return text
     }

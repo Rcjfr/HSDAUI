@@ -563,7 +563,7 @@ export class MrrExportService {
           [
             this.getLableFieldValue(`MRR Update By:`, sda.dteUpdatedBy, 50, 60),
             this.getLableFieldValue(`MRR Update on:`, sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 60),
-            this.getLableFieldValue(`DTE Due Date:`, sda.dueDate ? moment.utc(sda.dueDate).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 60)
+            this.getLableFieldValue(`DTE Due Date:`, sda.dueDate || ' ', 50, 60)
           ],
         ]
       }
