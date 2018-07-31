@@ -228,8 +228,8 @@ export class MrrExportService {
                 { text:  sda.id || '', alignment: 'center', style: 'regular' },
                 { text:  sda.dteRepairStatusDesc || '', alignment: 'center', style: 'regular' },
                 { text:  sda.originator || '', alignment: 'center', style: 'regular' },
-                { text:  sda.createDate ? moment.utc(sda.createDate).tz(this.CST).format('MM/DD/YYYY') : '', alignment: 'center', style: 'regular' },
-                { text:  sda.repairDate ? moment.utc(sda.repairDate).tz(this.CST).format('MM/DD/YYYY') : '', alignment: 'center', style: 'regular' }
+                { text:  sda.createDate ? moment(sda.createDate).format('MM/DD/YYYY') : '', alignment: 'center', style: 'regular' },
+                { text:  sda.repairDate ? moment(sda.repairDate).format('MM/DD/YYYY') : '', alignment: 'center', style: 'regular' }
               ],
             ]
           }
@@ -368,9 +368,9 @@ export class MrrExportService {
             this.getLableFieldValue(`Fatigue Critical:`, sda.isFatigueCritical ? 'Yes' : 'No', 50, 65),
           ],
           [
-            this.getLableFieldValue(`Stage 1/RTS Date:`, sda.stage1RTSDate ? moment.utc(sda.stage1RTSDate).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 60),
-            this.getLableFieldValue(`Stage 2 Date:`, sda.stage2Date ? moment.utc(sda.stage2Date).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 60),
-            this.getLableFieldValue(`Stage 3 Date:`, sda.stage3Date ? moment.utc(sda.stage3Date).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 65),
+            this.getLableFieldValue(`Stage 1/RTS Date:`, sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY')  : ' ', 50, 60),
+            this.getLableFieldValue(`Stage 2 Date:`, sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY')  : ' ', 50, 60),
+            this.getLableFieldValue(`Stage 3 Date:`, sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY')  : ' ', 50, 65),
           ],
           [
             this.getLableFieldValue(`SR #:`, sda.srNumber, 50, 60),
@@ -562,7 +562,7 @@ export class MrrExportService {
         body: [
           [
             this.getLableFieldValue(`MRR Update By:`, sda.dteUpdatedBy, 50, 60),
-            this.getLableFieldValue(`MRR Update on:`, sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY') : ' ', 50, 60),
+            this.getLableFieldValue(`MRR Update on:`, sda.dteUpdatedDate ?  moment(sda.dteUpdatedDate).format('MM/DD/YYYY') : ' ', 50, 60),
             this.getLableFieldValue(`DTE Due Date:`, sda.dueDate || ' ', 50, 60)
           ],
         ]

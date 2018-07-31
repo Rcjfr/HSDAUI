@@ -161,7 +161,7 @@ const Table = {
               {  text: listview.id || '', style: 'regular' },
               {  text: listview.mrtNumber || '',  style: 'regular' },
               {  text: listview.aircraftNo || '' ,  style: 'regular' },
-              {  text: listview.repairDate ? moment.utc(listview.repairDate).tz(this.CST).format('MM/DD/YY') : '', style: 'regular' },
+              {  text: listview.repairDate ? moment(listview.repairDate).format('MM/DD/YY') : '', style: 'regular' },
               {  text: listview.repairDescriptionTypeDesc || listview.defectivePartDescription || listview.modifiedPartDescription || '' ,  style: 'regular' },
               {  text: listview.dueInDays > 0 ? listview.dueInDays : listview.dueInDays != null ? 'Now' : '',  style: 'regular' },
               {  text: listview.repairLocation || '', style: 'regular' },

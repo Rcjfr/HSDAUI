@@ -888,7 +888,7 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Stage 1/RTS Date:'),
-            this.getFieldValue(sda.stage1RTSDate ? moment.utc(sda.stage1RTSDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY') : ' ')
             , {}, {}
           ],
           [
@@ -915,9 +915,9 @@ export class SdaExportService {
           ],
           [
             this.getLabel('Stage 2 Approval Date:'),
-            this.getFieldValue(sda.stage2Date ? moment.utc(sda.stage2Date).tz(this.CST).format('MM/DD/YYYY') : ' '),
+            this.getFieldValue(sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY') : ' '),
             this.getLabel('Stage 3 Approval Date:'),
-            this.getFieldValue(sda.stage3Date ? moment.utc(sda.stage3Date).tz(this.CST).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY') : ' ')
 
           ],
           [
@@ -937,14 +937,14 @@ export class SdaExportService {
             this.getLabel('Task Card #:'),
             this.getFieldValue(sda.taskCardNo),
             this.getLabel('Repair Date:'),
-            this.getFieldValue(sda.repairDate ? moment.utc(sda.repairDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.repairDate ? moment(sda.repairDate).format('MM/DD/YYYY') : ' ')
           ],
 
           [
             this.getLabel('Airline Code:'),
             this.getFieldValue(sda.airlineCode),
             this.getLabel('Repair Removed Date:'),
-            this.getFieldValue(sda.removedByDate ? moment.utc(sda.removedByDate).tz(this.CST).format('MM/DD/YYYY') : ' ')
+            this.getFieldValue(sda.removedByDate ? moment(sda.removedByDate).format('MM/DD/YYYY') : ' ')
           ],
           [
             this.getLabel('ECO/ESO/MRB #:'),
@@ -1014,7 +1014,7 @@ export class SdaExportService {
                     this.getLabel('Major Repair Updated By:'),
                     this.getFieldValue( sda.dteUpdatedByBadgeNo ? `${sda.dteUpdatedByBadgeNo} - ${sda.dteUpdatedBy}` : '', 75),
                     this.getLabel('Major Repair Updated Date:'),
-                    this.getFieldValue(sda.dteUpdatedDate ? moment.utc(sda.dteUpdatedDate).tz(this.CST).format('MM/DD/YYYY hh:mm A') : ' ', 75),
+                    this.getFieldValue(sda.dteUpdatedDate ? moment(sda.dteUpdatedDate).format('MM/DD/YYYY hh:mm A') : ' ', 75),
                     this.getLabel('DTE Due Date:'),
                     this.getFieldValue(sda.dueDate, 75),
                   ]
