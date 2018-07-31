@@ -145,7 +145,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
       .mapTo(1).subscribe(v => {
-        dteDueDateControl.setValue('');
+        //dteDueDateControl.setValue('');
         const dteStatus = Number(dteStatusControl.value);
         switch (dteStatus) {
           case DTEStatus.Open:
