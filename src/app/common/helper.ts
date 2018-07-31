@@ -17,6 +17,7 @@ export class Helper {
       (key === 'stage2Date') ||
       (key === 'stage3Date') ||
       (key === 'repairDate') ||
+      (key === 'updatedDate') ||
       (key === 'removedByDate')
       )) {
       const date = new Date(moment(value).valueOf());
@@ -31,7 +32,6 @@ export class Helper {
     }
 
     if (typeof key === 'string' && ((key.indexOf('Date') > -1))) {
-      console.log(key);
       if (value) {
       return new Date(moment.utc(value).valueOf());
       }
