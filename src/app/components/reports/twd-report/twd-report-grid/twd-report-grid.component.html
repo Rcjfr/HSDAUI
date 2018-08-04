@@ -1,41 +1,42 @@
 <h1 id='searchResults'>Search Results
 
 </h1>
-<p-dataTable #dataTable [value]="(twdListResult$ | async).records"
-             [totalRecords]="(twdListResult$ | async).totalRecords"
-             [lazy]="false"
-             [responsive]="true"
-             [paginator]="false"
-             [sortField]="defaultSortColumn"
-             [sortOrder]="defaultSortOrder"
-             tabindex="162"
-             >
+<ng-container *ngIf="twdListResult$ | async as twdListResult">
+  <p-dataTable #dataTable [value]="twdListResult.records"
+               [totalRecords]="twdListResult.totalRecords"
+               [lazy]="false"
+               [responsive]="true"
+               [paginator]="false"
+               [sortField]="defaultSortColumn"
+               [sortOrder]="defaultSortOrder"
+               tabindex="162">
 
-  <p-column field="id" header="SDA ID" [sortable]="true">
-    <ng-template let-col let-record="rowData" pTemplate="body">
-      <a title='SDA ID' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
-      </ng-template>
-  </p-column>
-  <p-column field="mrtNumber" header="MRT #" [sortable]="true"></p-column>
-  <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>
-  <p-column field="repairDate" header="Repair Date" [sortable]="true">
-    <ng-template let-col let-record="rowData" pTemplate="body">
-      {{record[col.field] | date:'shortDate' }}
-    </ng-template>
-  </p-column>
-  <p-column field="repairDescriptionTypeDesc" [sortable]="false" header="Description" >
-      <ng-template item-width="50%" let-col let-record="rowData" pTemplate="body">
-          {{record.repairDescriptionTypeDesc || record.defectivePartDescription || record.modifiedPartDescription }}
-        </ng-template>
-  </p-column>
-  <p-column field="dueInDays" header="Due in Days" [sortable]="true">
+    <p-column field="id" header="SDA ID" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
-          {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
-        </ng-template>
+        <a title='SDA ID' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+      </ng-template>
+    </p-column>
+    <p-column field="mrtNumber" header="MRT #" [sortable]="true"></p-column>
+    <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>
+    <p-column field="repairDate" header="Repair Date" [sortable]="true">
+      <ng-template let-col let-record="rowData" pTemplate="body">
+        {{record[col.field] | date:'shortDate' }}
+      </ng-template>
+    </p-column>
+    <p-column field="repairDescriptionTypeDesc" [sortable]="false" header="Description">
+      <ng-template item-width="50%" let-col let-record="rowData" pTemplate="body">
+        {{record.repairDescriptionTypeDesc || record.defectivePartDescription || record.modifiedPartDescription }}
+      </ng-template>
+    </p-column>
+    <p-column field="dueInDays" header="Due in Days" [sortable]="true">
+      <ng-template let-col let-record="rowData" pTemplate="body">
+        {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
+      </ng-template>
 
-  </p-column>
-  <p-column field="repairLocation" header="Location" [sortable]="true"></p-column>
-</p-dataTable>
-<div class="row form-group">
+    </p-column>
+    <p-column field="repairLocation" header="Location" [sortable]="true"></p-column>
+  </p-dataTable>
+</ng-container>
+  <div class="row form-group">
 
-</div>
+  </div>

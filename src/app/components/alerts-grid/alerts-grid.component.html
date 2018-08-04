@@ -1,45 +1,46 @@
 <h1 id='searchResults'>Search Results
 
 </h1>
+<ng-container *ngIf="sdaListResult$ | async as sdaListResult">
+  <p-dataTable #dataTable [value]="sdaListResult.records"
+               [totalRecords]="sdaListResult.totalRecords"
+               [lazy]="true"
+               (onLazyLoad)="loadPageOfRecords($event)"
+               [responsive]="true"
+               [rows]="defaultPageSize"
+               [paginator]="true"
+               [rowsPerPageOptions]="[5,10,20,50,100]"
+               [sortField]="defaultSortColumn"
+               [sortOrder]="defaultSortOrder"
+               tabindex="162">
 
-<p-dataTable #dataTable [value]="(sdaListResult$ | async).records"
-             [totalRecords]="(sdaListResult$ | async).totalRecords"
-             [lazy]="true"
-             (onLazyLoad)="loadPageOfRecords($event)"
-             [responsive]="true"
-             [rows]="defaultPageSize"
-             [paginator]="true"
-             [rowsPerPageOptions]="[5,10,20,50,100]"
-             [sortField]="defaultSortColumn"
-             [sortOrder]="defaultSortOrder"
-             tabindex="162"
-             >
-
-  <p-column field="id" header="SDA ID" [sortable]="true">
-    <ng-template let-col let-record="rowData" pTemplate="body">
-      <a title='Export as PDF' href="" (click)="exportPdf(record[col.field])"><i class="fa fa-file-pdf-o"></i></a>
-      <a title='View Current' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
-      <a title='View Original' *ngIf="record.hasOriginal" class="pull-right" [routerLink]="['/alerts', record[col.field],'original']">[Original]</a>
+    <p-column field="id" header="SDA ID" [sortable]="true">
+      <ng-template let-col let-record="rowData" pTemplate="body">
+        <a title='Export as PDF' href="" (click)="exportPdf(record[col.field])"><i class="fa fa-file-pdf-o"></i></a>
+        <a title='View Current' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+        <a title='View Original' *ngIf="record.hasOriginal" class="pull-right" [routerLink]="['/alerts', record[col.field],'original']">[Original]</a>
+      </ng-template>
+    </p-column>
+    <p-column field="aircraftNo" header="Aircraft #" [sortable]="true"></p-column>
+    <p-column field="createDate" header="Create Date" [sortable]="true">
+      <ng-template let-col let-record="rowData" pTemplate="body">
+        {{record[col.field] | date:'shortDate' }}
+      </ng-template>
+    </p-column>
+    <p-column field="statusDesc" header="Form Status" [sortable]="true"></p-column>
+    <p-column field="station" header="Station" [sortable]="true"></p-column>
+    <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
+    <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>
+    <ng-template pTemplate="paginatorLeft">
+      <span *ngIf="dataTable.totalRecords">
+        Showing {{dataTable.first+1}} to {{Math.min(dataTable.first+dataTable.rows,dataTable.totalRecords)}} of {{dataTable.totalRecords}}
+      </span>
     </ng-template>
-  </p-column>
-  <p-column field="aircraftNo" header="Aircraft #" [sortable]="true"></p-column>
-  <p-column field="createDate" header="Create Date" [sortable]="true">
-    <ng-template let-col let-record="rowData" pTemplate="body">
-      {{record[col.field] | date:'shortDate' }}
-    </ng-template>
-  </p-column>
-  <p-column field="statusDesc" header="Form Status" [sortable]="true"></p-column>
-  <p-column field="station" header="Station" [sortable]="true"></p-column>
-  <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
-  <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>
-  <ng-template pTemplate="paginatorLeft">
-    <span *ngIf="dataTable.totalRecords">
-      Showing {{dataTable.first+1}} to {{Math.min(dataTable.first+dataTable.rows,dataTable.totalRecords)}} of {{dataTable.totalRecords}}
-    </span>
-  </ng-template>
 
 
-</p-dataTable>
+  </p-dataTable>
+</ng-container>
+
 <div class="row form-group">
 
 </div>
