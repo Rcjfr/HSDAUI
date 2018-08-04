@@ -83,10 +83,14 @@ showTwdReport(isExcel = false, isPdf = false) {
   this.formSubmitted = true;
   this.markAsDirty(this.twdReportSearchForm);
   if (this.twdReportSearchForm.valid) {
-    this.searchCriteria.searchByAircraft = {aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value};
-    this.searchCriteria.searchBySda = {fleet: `${this.twdReportSearchForm.controls.fleet.value}*` };
-    this.searchCriteria.searchByDTE = {dteStatus: [1, 3], dteStatusNull: true };
-    this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1};
+    if (this.twdReportSearchForm.controls.aircraftNo.value) {
+      this.searchCriteria.searchByAircraft = { aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value };
+    }
+    if (this.twdReportSearchForm.controls.fleet.value) {
+      this.searchCriteria.searchBySda = { fleet: `${this.twdReportSearchForm.controls.fleet.value}*` };
+    }
+    this.searchCriteria.searchByDTE = {dteStatus: [1]};
+    //this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1}; //THIS IS THE DEFAULT FOR ANY SEARCHBYDTE SECTION
     this.searchCriteria.pageData = this.getDefaultPageData();
     if (isExcel) {
       this.onShowTwdExcel.emit(this.searchCriteria);
