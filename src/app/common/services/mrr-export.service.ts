@@ -330,16 +330,16 @@ export class MrrExportService {
             this.getLableFieldValue(`ECO/ESO/MRB #:`, sda.mrbNumber, 50, 65)
           ],
           [
-            this.getLableFieldValue(`Part Nomenclature:`, sda.partDefective, 50, 60),
-            this.getLableFieldValue(`Part Number:`, sda.manufacturerPartNo, 50, 60),
+            this.getLableFieldValue(`Part Nomenclature:`, sda.partDefective || 'N/A', 50, 90),
+            this.getLableFieldValue(`Part Number:`, sda.manufacturerPartNo || 'N/A', 50, 60),
             {}
           ],
           [
             {columns: [
-              this.getLableFieldValue(`Width  :`, sda.repairWidth, 30, 30),
-              this.getLableFieldValue(` Height:`, sda.repairHeight, 30, 30),
+              this.getLableFieldValue(`Width  :`, sda.repairWidth || 'N/A', 30, 30),
+              this.getLableFieldValue(` Height:`, sda.repairHeight || 'N/A', 30, 30),
             ]},
-            this.getLableFieldValue(`Externally Visible:`, sda.isExternallyVisible ? 'Yes' : 'No' , 50, 60),
+            this.getLableFieldValue(`Externally Visible:`, sda.isExternallyVisible ? 'Yes' : 'No' , 50, 90),
             {}
           ]
         ]

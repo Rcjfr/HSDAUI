@@ -14,7 +14,9 @@
 <alert type="danger" *ngIf="sda.source == Source.EMX">
   <strong class="alert-heading">SDA # {{sda.id}} was imported out of EmpowerMX on {{getImportedDate()}}</strong>
 </alert>
-
+<alert type="danger" *ngIf="sda.source == Source.FCXP">
+  <strong class="alert-heading">SDA # {{sda.id}} was imported out of FCXP on {{getImportedDate()}}</strong>
+</alert>
 
 
 <form novalidate [formGroup]="sdaForm">

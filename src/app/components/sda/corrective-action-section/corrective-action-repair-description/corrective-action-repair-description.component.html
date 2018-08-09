@@ -63,12 +63,12 @@
     <div class="row col-sm-12">
       <div class="col-sm-6">
         <aac-field-container label="Height(in inches):" [message]="displayMessage.repairHeight">
-          <input type="text" tabindex='69' class="form-control" id="repairHeight" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="repairHeight">
+          <input type="text" tabindex='69' class="form-control" id="repairHeight" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairHeight">
         </aac-field-container>
       </div>
       <div class="col-sm-6">
         <aac-field-container label="Width(in inches):" [message]="displayMessage.repairWidth">
-          <input type="text" tabindex='70' class="form-control" id="repairWidth" [textMask]="{mask: decimalsNumberMask(3,3)}" formControlName="repairWidth">
+          <input type="text" tabindex='70' class="form-control" id="repairWidth" [textMask]="{mask: decimalsNumberMask(1,3)}" formControlName="repairWidth">
         </aac-field-container>
       </div>
     </div>

@@ -12,7 +12,10 @@ export enum Source {
   EMX = 2,
   ME0308 = 3,
   CPCP = 4,
-  MRT = 5
+  MRT = 5,
+  RELIABILITY_ACCESS_DB = 6,
+  RELIABILITY_ACCESS_DB_ME0308 = 7,
+  FCXP = 8
 }
 
 export enum DTEStatus {

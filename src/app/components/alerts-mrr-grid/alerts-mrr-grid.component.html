@@ -20,7 +20,11 @@
       {{record[col.field]}}
     </ng-template>
   </p-column>
-  <p-column field="mrtNumber" header="MRT #" [sortable]="true"></p-column>
+  <p-column field="mrtNumber" header="MRT #" [sortable]="true">
+    <ng-template let-col let-record="rowData" pTemplate="body">
+      {{(record[col.field] | number:'6.0').replace(',','') }}
+    </ng-template>
+  </p-column>
   <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>
   <p-column field="createDate" header="Date" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
