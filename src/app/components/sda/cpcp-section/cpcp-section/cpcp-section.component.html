@@ -18,7 +18,7 @@
   <div class="row" [hidden]="!isCPCPRelatedEvent()">
     <div class="col-sm-6" [class.has-error]="displayMessage.isWideSpreadCorrosion">
       <div class="row form-group">
-        <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req" *ngIf="areCPCPFieldsRequired()">*</span></label>
+        <label class="col-sm-4 control-label">Widespread Corrosion:<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
             <input type="radio" [value]="true" tabindex="43" [required]="areCPCPFieldsRequired()" formControlName="isWideSpreadCorrosion" />
