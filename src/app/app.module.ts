@@ -116,8 +116,8 @@ import { AlertsMrrGridComponent } from '@app/components/alerts-mrr-grid/alerts-m
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
     EffectsModule.forRoot([AlertEffects, LookupDataEffects, UserEffects, SavedSearchesEffects]),
     MomentModule,
-    NgIdleKeepaliveModule.forRoot(),
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+    NgIdleKeepaliveModule.forRoot()
+    //,environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
   ],
   providers: [
     services.AuthService,
