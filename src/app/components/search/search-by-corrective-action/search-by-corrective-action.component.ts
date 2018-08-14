@@ -68,9 +68,11 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
                     repairArray.removeAt(0);
                 }
                 //Repair Type checkboxes
-                changes.criteria.currentValue.searchByCorrectiveAction.repairType.forEach(element => {
-                    repairArray.push(new FormControl(element));
-                });
+                if (changes.criteria.currentValue.searchByCorrectiveAction.repairType) {
+                  changes.criteria.currentValue.searchByCorrectiveAction.repairType.forEach(element => {
+                      repairArray.push(new FormControl(element));
+                  });
+                }
             } else {
                 this.correctiveActionForm.reset({
                     isDeferred: '',
