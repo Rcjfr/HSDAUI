@@ -310,7 +310,7 @@ export class MrrExportService {
             margin: [1, 1, 1, 1]
           }, {}, {}],
           [
-            this.getLableFieldValue(`Station:`, sda.aircraftStation, 50, 60),
+            this.getLableFieldValue(`Station:`, sda.station, 50, 60),
             this.getLableFieldValue(`Task Card #:`, sda.taskCardNo, 50, 60),
             this.getLableFieldValue(`Non-Routine:`, sda.nonRoutineNo, 50, 65)
           ],
