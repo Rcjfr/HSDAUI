@@ -460,6 +460,9 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     repairInspectionStatus: {
       required: 'Repair Inspection Status is required.'
     },
+    isExistingRepair: {
+      required: 'Repair Type is required.'
+    },
     isFatigueCritical: {
       required: 'Fatigue Critical is required.'
     },

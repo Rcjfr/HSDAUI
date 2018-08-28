@@ -1,6 +1,14 @@
 <div [formGroup]="dteForm">
   <div class="row">
     <div class="col-md-6">
+      <aac-field-container label="Repair:">
+        <aac-boolean-checkbox-list formControlName="isExistingRepair" [tabindex]="98" colClass='col-sm-6' yesLabel='Existing Repair' noLabel='New Repair'>
+        </aac-boolean-checkbox-list>
+      </aac-field-container>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
       <aac-field-container label="DTE Status:">
         <select class="form-control" multiple tabindex='98' formControlName="dteStatus">
           <option value=""> </option>
@@ -186,7 +194,7 @@
     <div class="row">
       <div class="col-md-6">
         <aac-field-container label="Submit to QC:">
-          <aac-boolean-checkbox-list formControlName="submittedToQC" colClass="col-sm-1" [tabindex]="122">
+          <aac-boolean-checkbox-list formControlName="submittedToQC" [tabindex]="122">
           </aac-boolean-checkbox-list>
         </aac-field-container>
       </div>

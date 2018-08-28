@@ -1,5 +1,20 @@
 <div class="panel-body" [formGroup]="formGroup">
-
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="row form-group">
+        <label class="col-sm-4 control-label">Repair:<span class="req">*</span></label>
+        <div class="col-sm-8">
+          <aac-radio-container label="New Repair">
+            <input type="radio" [value]="false" tabindex="88" formControlName="isExistingRepair" />
+          </aac-radio-container>
+          <aac-radio-container label="Existing Repair">
+            <input type="radio" [value]="true" tabindex="88" formControlName="isExistingRepair" />
+          </aac-radio-container>
+          <div *ngIf="displayMessage.isExistingRepair" class="error">{{displayMessage.isExistingRepair}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
@@ -113,15 +128,15 @@
     </div>
 
     <div class="col-sm-4">
-        <aac-field-container label="Task Card #:" [message]="displayMessage.taskCardNo">
-          <input class="form-control" formControlName="taskCardNo" tabindex="101">
-        </aac-field-container>
-      </div>
-      <div class="col-sm-4">
-         <aac-field-container label="Repair Date:" [attr.for]="repairDate.idDatePicker">
-            <datetime [timepicker]="false" [tabindex]="102" [readonly]="formGroup.get('repairDate').disabled?true:null" #repairDate formControlName="repairDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
-          </aac-field-container>
-      </div>
+      <aac-field-container label="Task Card #:" [message]="displayMessage.taskCardNo">
+        <input class="form-control" formControlName="taskCardNo" tabindex="101">
+      </aac-field-container>
+    </div>
+    <div class="col-sm-4">
+      <aac-field-container label="Repair Date:" [attr.for]="repairDate.idDatePicker">
+        <datetime [timepicker]="false" [tabindex]="102" [readonly]="formGroup.get('repairDate').disabled?true:null" #repairDate formControlName="repairDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+      </aac-field-container>
+    </div>
 
   </div>
 
@@ -160,12 +175,12 @@
       </aac-field-container>
     </div>
     <div class="col-sm-4">
-        <aac-field-container label="Status:" >
-            <select class="form-control" tabindex='108' formControlName="status">
-              <option value="">Select Status</option>
-              <option *ngFor="let stat of status$ | async" [value]="stat.id">{{stat.description}}</option>
-            </select>
-        </aac-field-container>
+      <aac-field-container label="Status:">
+        <select class="form-control" tabindex='108' formControlName="status">
+          <option value="">Select Status</option>
+          <option *ngFor="let stat of status$ | async" [value]="stat.id">{{stat.description}}</option>
+        </select>
+      </aac-field-container>
     </div>
   </div>
 
@@ -204,10 +219,10 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="panel-group">
-          <aa-dte-component [parent]="formGroup" [sda]="sda"
-          [errorMessages]="displayMessage"></aa-dte-component>
-          <aa-dte-engine [parent]="formGroup" [sda]="sda"
-          [errorMessages]="displayMessage"></aa-dte-engine>
+        <aa-dte-component [parent]="formGroup" [sda]="sda"
+                          [errorMessages]="displayMessage"></aa-dte-component>
+        <aa-dte-engine [parent]="formGroup" [sda]="sda"
+                       [errorMessages]="displayMessage"></aa-dte-engine>
         <aa-dte-threshold-items-array formArrayName="thresholdItems"
                                       [editable]="editable"
                                       [errorMessages]="displayMessage?.thresholdItems"
@@ -231,7 +246,7 @@
       <aac-field-container label="QC Feedback:" [message]="displayMessage.qcFeedback">
         <textarea class="form-control" rows="5" cols="50" tabindex="156" formControlName="qcFeedback"></textarea>
       </aac-field-container>
-       </div>
+    </div>
   </div>
   <div class="row form-group">
     <div class="col-sm-6">
@@ -242,7 +257,7 @@
   </div>
   <div class="row">
     <div class="col-sm-8">
-      <aac-field-container [required]="true"  labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
+      <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
         <select class="form-control" tabindex='158' formControlName="dteStatus">
           <option value="">Select DTE Status </option>
           <option *ngFor="let ac of dteStatus$ | async" [value]="ac.id">{{ac.description}}</option>
@@ -291,13 +306,13 @@
   <div class="row">
     <div class="col-sm-6 padding-left-0">
       <aac-field-container class="col-sm-12 padding-0" labelGridColumnWidth="3" fieldGridColumnWidth="9" label="Major Repair Updated By:" [message]="displayMessage.updatedBy">
-        <div class="padding-0" >
+        <div class="padding-0">
           <div class="col-sm-3 padding-0">
             <input type="text" class="form-control" tabindex="160" formControlName="updatedByEmpID" placeholder="Employee ID">
           </div>
           <div class="col-sm-2 padding-0 width-20">_</div>
           <div class="col-sm-7 padding-0">
-            <input type="text" class="form-control" tabindex="161"  placeholder="Last Name, First Name" formControlName="updatedByName">
+            <input type="text" class="form-control" tabindex="161" placeholder="Last Name, First Name" formControlName="updatedByName">
           </div>
         </div>
       </aac-field-container>
@@ -309,9 +324,9 @@
       </aac-field-container>
     </div>
     <div class="col-sm-3">
-        <aac-field-container label="DTE Due Date:" [message]="displayMessage.dueDate">
-            <input class="form-control" formControlName="dueDate" tabindex="163">
-          </aac-field-container>
+      <aac-field-container label="DTE Due Date:" [message]="displayMessage.dueDate">
+        <input class="form-control" formControlName="dueDate" tabindex="163">
+      </aac-field-container>
     </div>
 
   </div>

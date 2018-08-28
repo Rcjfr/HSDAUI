@@ -2,6 +2,7 @@ export interface ISdaListView {
 
   id: string,
   historicId: string,
+  importDate: Date,
   source: number,
   workflowInstanceId: string,
   versionID: number,
@@ -115,6 +116,7 @@ export interface ISdaListView {
   dteCycles: number,
   repairInspectionStatus: number,
   repairInspectionStatusDesc: string,
+  isExistingRepair: boolean,
   isFatigueCritical: boolean,
   stage1RTSDate: Date,
   stage1Duration: number,

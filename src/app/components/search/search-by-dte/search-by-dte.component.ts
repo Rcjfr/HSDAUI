@@ -25,6 +25,7 @@ export class SearchByDteComponent implements OnInit , OnChanges {
     cyclesFrom: new FormControl(),
     cyclesTo: new FormControl(),
     repairInspectionStatus: new FormControl(),
+    isExistingRepair: new FormControl(),
     isFatigueCritical: new FormControl(),
     stage1RTSDateFrom: new FormControl(),
     stage1RTSDateTo: new FormControl(),

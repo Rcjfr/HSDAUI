@@ -83,7 +83,7 @@ export class TwdReportSearchComponent implements OnInit {
     this.formSubmitted = true;
     this.markAsDirty(this.twdReportSearchForm);
     if (this.twdReportSearchForm.valid) {
-      this.searchCriteria = { searchByDTE: { dteStatus: [1] } };
+      this.searchCriteria = { searchByDTE: { dteStatus: [1], status: [1], isExistingRepair: [0] } };
       if (this.twdReportSearchForm.controls.aircraftNo.value) {
         this.searchCriteria.searchByAircraft = { aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value };
       }

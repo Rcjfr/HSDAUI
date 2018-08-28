@@ -860,6 +860,13 @@ export class SdaExportService {
             margin: [2, 2, 2, 2]
           }, {}, {}, {}],
           [
+            this.getLabel('Repair:'),
+            {
+              text: this.getBooleanContent(!sda.isExistingRepair, 'New Repair', 'Existing Repair'), style: 'regular'
+            }
+            , '', ''
+          ],
+          [
             this.getLabel('DTE Status:'),
             this.getFieldValue(sda.dteStatusDesc)
             , '', ''

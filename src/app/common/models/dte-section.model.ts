@@ -7,6 +7,7 @@ export interface IDTESection {
   totalShipTime?: number;
   cycles?: number;
   repairInspectionStatus?: number;
+  isExistingRepair?: boolean;
   isFatigueCritical?: boolean;
   stage1RTSDate?: Date;
   stage1Duration?: number;

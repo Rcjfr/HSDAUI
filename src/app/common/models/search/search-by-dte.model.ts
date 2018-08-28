@@ -6,6 +6,7 @@ export interface ISearchByDTE {
   cyclesFrom?: any;
   cyclesTo?: any;
   repairInspectionStatus?: any;
+  isExistingRepair?: any;
   isFatigueCritical?: any;
   stage1RTSDateFrom?: any;
   stage1RTSDateTo?: any;
@@ -40,12 +41,12 @@ export interface ISearchByDTE {
   mrbNumber?: string;
   mrtNumber?: string;
   removedByMrt?: string;
-  status?: number;
+  status?: number[];
   zone?: string;
   repairLocation?: string;
   mroDocuments?: string;
   legacyEA?: string;
-  componentType?: number;
+  componentType?: number[];
   controlOrderNumber?: string,
   componentAAID?: string,
   componentSerialNumber?: string,

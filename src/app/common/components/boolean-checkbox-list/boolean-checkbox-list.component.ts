@@ -26,8 +26,8 @@ export class BooleanCheckboxListComponent implements
   // , Validator
   , OnInit {
   source: Array<any>;
-  @Input() yesLabel
   @Input() tabindex: Number = 0;
+  @Input() colClass = 'col-sm-3';
   private data: Array<number> = [];
   formGroup: FormGroup;
   constructor(private el: ElementRef, private renderer: Renderer) {
@@ -44,6 +44,17 @@ export class BooleanCheckboxListComponent implements
     });
 
   }
+
+  @Input()
+  set yesLabel(val: string) {
+    this.source[0].description = val;
+  }
+
+  @Input()
+  set noLabel(val: string) {
+    this.source[1].description = val;
+  }
+
 
   ngOnInit(): void {
     // to remove the blue border around the control on tab
@@ -73,7 +84,7 @@ export class BooleanCheckboxListComponent implements
   public onTouch() {
     this.propagateTouch();
   }
-  // change events from the textarea
+  // change events from the checkbox list
   private onChange(event) {
 
     // update the form.the control value will be an array of objects selected or an array of integers

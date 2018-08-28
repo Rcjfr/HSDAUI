@@ -58,6 +58,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService) {
     super('damageToleranceEvaluationGroup', authService);
     this.formGroup = this.fb.group({
+      isExistingRepair: [false, [Validators.required]],
       dteStatus: ['', [Validators.required]],
       totalShipTime: ['', [Validators.required, Validators.maxLength(20)]],
       cycles: ['', [Validators.required, Validators.maxLength(20)]],
@@ -209,6 +210,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           updatedByName: { value: '', disabled: true },
           updatedByEmpID: { value: '', disabled: true },
           updatedDate: { value: undefined, disabled: true },
+          isExistingRepair: false,
           isFatigueCritical: undefined,
           srNumber: '',
           rdasNumber: '',
