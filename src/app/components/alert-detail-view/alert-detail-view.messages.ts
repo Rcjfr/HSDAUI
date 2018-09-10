@@ -301,8 +301,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
           required: 'Description is required.'
         },
         'repairDescriptionOtherText': {
-          required: 'EmpowerMX Description is required.',
-          maxlength: 'EmpowerMX Description must not be more than 250 characters.',
+          required: 'Other Description is required.',
+          maxlength: 'Other Description must not be more than 250 characters.',
         },
         'engineeringAuthorization': {
 
