@@ -100,9 +100,13 @@ export class SavedSearchesComponent implements OnInit {
 
   createSavedSearch() {
     if (this.createForm.valid) {
+      const reportColumns = this.criteria.reportColumns;
+      const savedCriteria: any = Helper.RemoveNulls(this.criteria);
+      savedCriteria.reportColumns = reportColumns;
+      const criteriaString = JSON.stringify(savedCriteria);
       const search = {
         badgeNumber: this.badgeNumber,
-        criteria: JSON.stringify(Helper.RemoveNulls(this.criteria)),
+        criteria: criteriaString,
         searchId: 0,
         name: this.createForm.controls.name.value,
         isDefault: this.createForm.controls.isDefault.value

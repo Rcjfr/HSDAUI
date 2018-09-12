@@ -17,7 +17,7 @@ export class Helper {
       (key === 'stage2Date') ||
       (key === 'stage3Date') ||
       (key === 'repairDate') ||
-      (key === 'updatedDate') ||
+      //(key === 'updatedDate') ||
       (key === 'removedByDate')
       )) {
       const date = new Date(moment(value).valueOf());
