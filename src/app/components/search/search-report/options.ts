@@ -154,7 +154,8 @@ export const ReportOptions: IReportOption[] = [
   { key: 'EngHours', display: 'Hours(TSI)' , dbField: 'ENG_HOURS'},
   { key: 'EngRspam', display: 'RSPAM(Engine)' , dbField: 'ENG_RSPAM'},
   { key: 'EngSn', display: 'Engine S/N:' , dbField: 'ENG_SN'},
-  { key: 'EngMpn', display: 'MPN(Engine)' , dbField: 'ENG_MPN'},
+  { key: 'EngMpn', display: 'MPN(Engine)', dbField: 'ENG_MPN' },
+  { key: 'IsExistingRepair', display: 'Existing Repair?', dbField: 'IS_EXISTING_REPAIR' },
 ///
   { key: 'DTEInspectionThreshold1', display: 'Inspection Threshold(1)', dbField: 'DTE_INSPECTION_THRESHOLD1' },
   { key: 'DTEInspectionThreshold2', display: 'Inspection Threshold(2)', dbField: 'DTE_INSPECTION_THRESHOLD2' },

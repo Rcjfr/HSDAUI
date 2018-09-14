@@ -25,10 +25,12 @@
                 <button class="btn btn-primary" type="submit">Go!</button>
               </span>
             </div>
-            <!--<input type="text" class="form-control" placeholder="Search by SDA ID...">-->
           </form>
         </li>
-        <li [routerLinkActive]="['active']"><a [routerLink]="['/dashboard']"><i class="icon-home"></i> Dashboard</a></li>
+        <li>&nbsp;</li>
+        <!--<li [routerLinkActive]="['active']">
+          <a [routerLink]="['/dashboard']"><i class="icon-home"></i> Dashboard</a>
+        </li>-->
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a [routerLink]="['/alerts']">
             <i class="icon-search"></i> Search
