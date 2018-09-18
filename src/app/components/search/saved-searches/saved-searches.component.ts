@@ -100,13 +100,9 @@ export class SavedSearchesComponent implements OnInit {
 
   createSavedSearch() {
     if (this.createForm.valid) {
-      const reportColumns = this.criteria.reportColumns;
-      const savedCriteria: any = Helper.RemoveNulls(this.criteria);
-      savedCriteria.reportColumns = reportColumns;
-      const criteriaString = JSON.stringify(savedCriteria);
       const search = {
         badgeNumber: this.badgeNumber,
-        criteria: criteriaString,
+        criteria: this.getSearchCriteria(),
         searchId: 0,
         name: this.createForm.controls.name.value,
         isDefault: this.createForm.controls.isDefault.value
@@ -114,6 +110,17 @@ export class SavedSearchesComponent implements OnInit {
 
       this.savedSearchStateService.saveSearch(search);
     }
+  }
+
+  getSearchCriteria(): string {
+
+    const reportColumns = this.criteria.reportColumns;
+    const savedCriteria: any = Helper.RemoveNulls(this.criteria);
+    savedCriteria.reportColumns = reportColumns;
+    const criteriaString = JSON.stringify(savedCriteria);
+
+    return criteriaString;
+
   }
 
   updateSavedSearch() {
@@ -126,7 +133,7 @@ export class SavedSearchesComponent implements OnInit {
       }).filter(confirm => confirm === true).subscribe(confirm => {
         const search = {
           badgeNumber: this.badgeNumber,
-          criteria: JSON.stringify(Helper.RemoveNulls(this.criteria)),
+          criteria: this.getSearchCriteria(),
           searchId: +this.updateForm.controls.selected.value,
           name: name,
           isDefault: this.updateForm.controls.isDefault.value
