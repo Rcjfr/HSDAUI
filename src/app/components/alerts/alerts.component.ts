@@ -5,6 +5,7 @@ import { AppStateService } from '@app/common/services';
 import { List } from 'immutable';
 
 
+
 @Component({
   selector: 'aa-alerts',
   templateUrl: './alerts.component.html',
@@ -16,12 +17,11 @@ export class AlertsComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit() {
-
     this.loading$ = Observable.combineLatest(
       this.appStateService.getLookupDataLoading(),
       this.appStateService.getUserLoading(),
-      this.appStateService.getSdaLoading(), (a, b, c) => {
-        return a || b || c;
+      (a, b) => {
+        return a || b;
       });
     this.appStateService.getSearchType().subscribe( (result) => {
         switch (result) {

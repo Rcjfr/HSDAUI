@@ -1,14 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertsAboutComponent } from './alerts-about.component';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('AlertsAboutComponent', () => {
   let component: AlertsAboutComponent;
   let fixture: ComponentFixture<AlertsAboutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlertsAboutComponent ]
+      declarations: [AlertsAboutComponent],
+      imports: [
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   }));

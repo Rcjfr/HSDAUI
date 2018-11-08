@@ -1,22 +1,21 @@
 <h1 class="page-header">
     About
   </h1>
-  <div class="container">
+  <div class="container" *ngIf="appVersion$ | async; let appVersion">
   <div class="row">
        <div class="col-md-2">
        <b>Version:</b>
        </div>
        <div class="col-md-2">
-        1.7.0
+         {{appVersion?.version}}
        </div>
-
   </div>
   <div class="row">
        <div class="col-md-2">
        <b>Last Updated:</b>
        </div>
        <div class="col-md-2">
-          September 24, 2018
+         {{appVersion?.lastUpdated}}
        </div>
   </div>
   <br>
@@ -24,11 +23,11 @@
     <div class="col-md-2">
       <b>Builds:</b>
       <br>
-      HSDA-UI.20180921.2
-      <br>
-      HSDA-API.20180921.4
-      <br>
+      {{appVersion?.uiBuildNo}}
 
+      <br>
+      {{appVersion?.apiBuildNo}}
+      <br>
     </div>
   </div>
   <br>
@@ -36,8 +35,9 @@
   <br>
   <br><br><br><br>
   <div class="row text-left">
-    <b>Please call the Help Desk (ITHD- 480-693-6029) if you have an urgent problem with the website.
-      </b>
+    <b>
+      Please call the Help Desk (ITHD- {{appVersion?.itdContactNo}}) if you have an urgent problem with the website.
+    </b>
   </div>
 </div>
 
