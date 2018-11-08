@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AppStateService } from '@app/common/services';
 import { List } from 'immutable';
-
-
-
+import { delay } from 'rxjs/operators';
 @Component({
   selector: 'aa-alerts',
   templateUrl: './alerts.component.html',
@@ -20,9 +18,10 @@ export class AlertsComponent implements OnInit {
     this.loading$ = Observable.combineLatest(
       this.appStateService.getLookupDataLoading(),
       this.appStateService.getUserLoading(),
-      (a, b) => {
-        return a || b;
-      });
+      this.appStateService.getSelectedAlertLoading(),
+      (a, b, c) => {
+        return a || b || c || false;
+      }).pipe(delay(0)); //https://blog.angular-university.io/angular-debugging/
     this.appStateService.getSearchType().subscribe( (result) => {
         switch (result) {
           case SearchType.MRR:
