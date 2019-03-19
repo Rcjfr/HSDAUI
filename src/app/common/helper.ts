@@ -20,9 +20,10 @@ export class Helper {
       //(key === 'updatedDate') ||
       (key === 'removedByDate')
       )) {
-      const date = new Date(moment(value).valueOf());
       if (value) {
-      return date;
+        const date = new Date(moment(value).valueOf());
+
+        return date;
       }
     }
     if (typeof key === 'string' && ((key === 'dueDate'))) {

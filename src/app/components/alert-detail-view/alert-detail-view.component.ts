@@ -528,9 +528,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     sdaDetail.dteSection = null;
     if (this.saveDTESectionDetails) {
       sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
-      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteComponentGroup')
-      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteEngineGroup')
-      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.inspectionInterval && t.inspectionMethod && t.inspectionThreshold);
+      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteComponentGroup');
+      sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteEngineGroup');
+      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.inspectionInterval || t.inspectionMethod || t.inspectionThreshold);
       sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
       sdaDetail.dteSection.updatedByBadgeNo = this.statusUpdatedBy;
       sdaDetail.dteSection.updatedBy = this.statusUpdatedByName;

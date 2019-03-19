@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ISdaListResultRecord, SdaListResultFactory } from '@app/common/reducers/models/sda-list-result';
 import * as _ from 'lodash';
 import { ScrollToService } from 'ng2-scroll-to-el';
-import { DataGrid } from 'primeng/datagrid';
+import { DataTable } from 'primeng/datatable';
 
 @Component({
   selector: 'aa-alerts-grid',
@@ -17,22 +17,21 @@ import { DataGrid } from 'primeng/datagrid';
   styleUrls: ['./alerts-grid.component.less']
 })
 export class AlertsGridComponent implements OnInit, OnDestroy {
-  @ViewChild('dataTable') dataTable: DataGrid;
+  @ViewChild('dataTable') dataTable: DataTable;
   sdaListResult$: Observable<ISdaListResultRecord>;
   criteriaSubscription: Subscription;
   Math = Math;
   searchCriteria;
-  sdaListResult = SdaListResultFactory({
-    totalRecords: 0,
-    records: []
-  });
-  skipNextLoad = false;
-
   //Default paging options
   defaultPageSize = 20;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
 
+  sdaListResult = SdaListResultFactory({
+    totalRecords: 0,
+    records: []
+  });
+  skipNextLoad = false;
 
   constructor(private appStateService: AppStateService, private scrollToService: ScrollToService
     , private sdaExportService: SdaExportService) { }
@@ -65,7 +64,11 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
 
           if (hasCriteria) {
             if (this.dataTable) {
-              this.dataTable.rows = this.defaultPageSize;
+              const defaults = this.getDefaultPageData();
+              this.dataTable.first = defaults.first;
+              this.dataTable.rows = defaults.rows;
+              this.dataTable.sortField = defaults.sortField;
+              this.dataTable.sortOrder = defaults.sortOrder;
             }
             this.appStateService.loadSdaList(this.getDefaultPageData());
           }
@@ -83,7 +86,7 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     if (this.skipNextLoad) {
       this.skipNextLoad = false;
     } else {
-    this.appStateService.loadSdaList(this.getPageData(pageData));
+      this.appStateService.loadSdaList(this.getPageData(pageData));
     }
   }
 
