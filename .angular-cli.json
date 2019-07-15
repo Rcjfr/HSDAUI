@@ -13,7 +13,8 @@
         "favicon.ico",
         "web.config",
         "web.dev.config",
-        "manifest.json"
+        "manifest.json",
+        "App_offline.htm"
       ],
       "index": "index.html",
       "main": "main.ts",
