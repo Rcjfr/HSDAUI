@@ -33,7 +33,7 @@
   </p-column>
   <p-column field="" header="Description" [sortable]="false">
     <ng-template let-col let-record="rowData" pTemplate="body">
-    {{record.repairDescriptionTypeDesc || record.defectivePartDescription || record.modifiedPartDescription }}
+      {{(record.repairDescriptionType === 17 ? record.repairDescriptionOtherText : record.repairDescriptionTypeDesc) || record.defectivePartDescription || record.modifiedPartDescription }}
     </ng-template>
   </p-column>
   <p-column field="repairLocation" header="Location" [sortable]="true"></p-column>

@@ -144,7 +144,12 @@ export class AlertsSearchComponent implements OnInit {
         message: 'Please input at least one search filter.'
       })
     } else {
-
+      if (searchType === SearchType.MRR) {
+        if (!this.criteria['searchByCorrectiveAction']) {
+          this.criteria['searchByCorrectiveAction'] = {};
+        }
+        this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
+      }
       this.appStateService.saveSearchType(searchType);
 
       if (excel) {

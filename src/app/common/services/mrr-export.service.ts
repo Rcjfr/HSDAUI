@@ -325,7 +325,7 @@ export class MrrExportService {
             this.getLableFieldValue(`Damage Type:`, sda.damageTypeDesc, 50, 65),
           ],
           [
-            this.getLableFieldValue(`Description:`, (sda.repairDescriptionType === 99 ? sda.repairDescriptionOtherText:sda.repairDescriptionTypeDesc) || sda.defectivePartDescription || sda.modifiedPartDescription || '', 50, 60),
+            this.getLableFieldValue(`Description:`, (sda.repairDescriptionType === 17 ? sda.repairDescriptionOtherText : sda.repairDescriptionTypeDesc) || sda.defectivePartDescription || sda.modifiedPartDescription || '', 50, 60),
             this.getLableFieldValue(`ATA:`, `${sda.ataCode1}-${sda.ataCode2 % 100}` !== `99-99` ? `${sda.ataCode1}-${sda.ataCode2 % 100}` : 'DM' , 50, 60),
             this.getLableFieldValue(`ECO/ESO/MRB #:`, sda.mrbNumber, 50, 65)
           ],
