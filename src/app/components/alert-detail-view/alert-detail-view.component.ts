@@ -796,7 +796,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     }
 
     //to handle historical data from ME0308(specifically cases where the sda was reopened in ME0308 and closed in ME0308)
-    if (this.sda.history.length > 1 && this.sda.history[0].status === Status.Closed) {
+    if ((this.sda.source !== 1 && this.sda.source !== 3) &&  this.sda.history.length > 1 && this.sda.history[0].status === Status.Closed) {
       return true;
     }
 

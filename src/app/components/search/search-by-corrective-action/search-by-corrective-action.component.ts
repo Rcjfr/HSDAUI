@@ -25,6 +25,7 @@ export class SearchByCorrectiveActionComponent implements OnInit, OnChanges {
         majorRepairDescription: new FormControl(),
         completedBy: new FormControl(),
         repairDocumentType: new FormControl(),
+        engineeringAuthorization: new FormControl(),
         isExternallyVisible: new FormControl(''),
         repairHeightFrom: new FormControl(),
         repairHeightTo: new FormControl(),

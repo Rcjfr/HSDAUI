@@ -219,9 +219,9 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="panel-group">
-        <aa-dte-component [parent]="formGroup" [sda]="sda"
+        <aa-dte-component [parent]="formGroup" [sda]="sda" [editable]="editable"
                           [errorMessages]="displayMessage"></aa-dte-component>
-        <aa-dte-engine [parent]="formGroup" [sda]="sda"
+        <aa-dte-engine [parent]="formGroup" [sda]="sda" [editable]="editable"
                        [errorMessages]="displayMessage"></aa-dte-engine>
         <aa-dte-threshold-items-array formArrayName="thresholdItems"
                                       [editable]="editable"

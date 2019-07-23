@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { AppStateService, AuthService } from '@app/common/services';
@@ -12,7 +12,7 @@ import * as models from '@app/common/models';
 })
 export class DteComponentComponent extends BaseFormComponent implements OnInit, OnChanges {
   componentType$: Observable<models.IBaseLookUp[]>;
-
+  @Input() editable = false;
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) {
     super('dteComponentGroup', AuthService );
     this.formGroup = this.fb.group({
@@ -39,6 +39,9 @@ export class DteComponentComponent extends BaseFormComponent implements OnInit, 
       const newSda: models.ISda = changes.sda.currentValue;
       if (newSda.dteSection) {
       this.formGroup.patchValue(newSda.dteSection);
+      }
+      if (!this.editable) {
+        this.formGroup.disable({ emitEvent: false });
       }
     }
   }

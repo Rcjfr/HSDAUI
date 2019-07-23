@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { AuthService } from '@app/common/services';
@@ -10,9 +10,9 @@ import * as models from '@app/common/models';
   styleUrls: ['./dte-engine.component.less']
 })
 export class DteEngineComponent extends BaseFormComponent implements OnInit, OnChanges {
-
-  constructor(private fb: FormBuilder,  AuthService: AuthService) {
-    super('dteEngineGroup', AuthService );
+  @Input() editable = false;
+  constructor(private fb: FormBuilder, AuthService: AuthService) {
+    super('dteEngineGroup', AuthService);
     this.formGroup = this.fb.group({
       onOffWing: ['', []],
       rack: ['', [Validators.maxLength(50)]],
@@ -32,9 +32,12 @@ export class DteEngineComponent extends BaseFormComponent implements OnInit, OnC
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-    if (newSda.dteSection) {
-      this.formGroup.patchValue(newSda.dteSection);
+      if (newSda.dteSection) {
+        this.formGroup.patchValue(newSda.dteSection);
+      }
     }
+    if (!this.editable) {
+      this.formGroup.disable({ emitEvent: false });
     }
   }
 }

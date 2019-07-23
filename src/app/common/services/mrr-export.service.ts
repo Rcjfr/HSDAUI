@@ -315,7 +315,7 @@ export class MrrExportService {
             this.getLableFieldValue(`Non-Routine:`, sda.nonRoutineNo, 50, 65)
           ],
           [
-            this.getLableFieldValue(`Maint Event:`, sda.checkTypeDesc, 50, 60),
+            this.getLableFieldValue(`Maint Event:`, (sda.checkType !== 99 ? sda.checkTypeDesc : sda.checkTypeOtherText), 50, 60),
             this.getLableFieldValue(`Repair Auth:`, sda.repairDocumentTypeDesc, 50, 60),
             this.getLableFieldValue(`Chap/Fig/Repair:`, sda.chapFigRepairText, 50, 65)
           ],
@@ -325,7 +325,7 @@ export class MrrExportService {
             this.getLableFieldValue(`Damage Type:`, sda.damageTypeDesc, 50, 65),
           ],
           [
-            this.getLableFieldValue(`Description:`, sda.repairDescriptionTypeDesc || sda.defectivePartDescription || sda.modifiedPartDescription || '', 50, 60),
+            this.getLableFieldValue(`Description:`, (sda.repairDescriptionType === 99 ? sda.repairDescriptionOtherText:sda.repairDescriptionTypeDesc) || sda.defectivePartDescription || sda.modifiedPartDescription || '', 50, 60),
             this.getLableFieldValue(`ATA:`, `${sda.ataCode1}-${sda.ataCode2 % 100}` !== `99-99` ? `${sda.ataCode1}-${sda.ataCode2 % 100}` : 'DM' , 50, 60),
             this.getLableFieldValue(`ECO/ESO/MRB #:`, sda.mrbNumber, 50, 65)
           ],
