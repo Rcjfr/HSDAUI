@@ -205,7 +205,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           stage2Date: undefined,
           stage3Date: undefined,
           totalShipTime: newSda.generalSection.totalShipTime ? parseFloat(newSda.generalSection.totalShipTime.replace(':', '.')) : '',
-          cycles: newSda.generalSection.cycles ? '' + parseInt(newSda.generalSection.cycles, 10) : '',
+          cycles: newSda.generalSection.cycles ? parseInt(newSda.generalSection.cycles, 10) : '',
           submitToQC: false,
           updatedByName: { value: '', disabled: true },
           updatedByEmpID: { value: '', disabled: true },

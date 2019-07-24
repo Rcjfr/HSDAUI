@@ -132,8 +132,8 @@ describe('DamageToleranceEvaluationComponent', () => {
 
     expect(component.formGroup.get('stage1Duration').value).toBe(6); //default value
     expect(component.formGroup.get('updatedByEmpID').value).toBe(''); //default value
-    expect(component.formGroup.get('totalShipTime').value).toBe('15574.11'); //default value from general section
-    expect(component.formGroup.get('cycles').value).toBe('6207'); //default value from general section
+    expect(component.formGroup.get('totalShipTime').value).toBe(15574.11); //default value from general section
+    expect(component.formGroup.get('cycles').value).toBe(6207); //default value from general section
 
   });
 
