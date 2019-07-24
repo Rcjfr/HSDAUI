@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import * as constants from '@app/common/constants';
 import * as moment from 'moment-timezone';
 import * as pdfMake from 'pdfmake/build/pdfmake';
-import {TDocumentDefinitions, pdfMakeStatic } from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions, pdfMakeStatic } from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import * as models from '@app/common/models';
 
@@ -53,21 +53,21 @@ export class MrlExportService {
                   { text: 'Major Repair List', alignment: 'right', style: 'header' }
                 ],
                 [
-                    {
-                      colSpan: 2,
-                      text: `${this.getHeaderText(searchResult)} Major Repair Count: ${searchResult.records.length}`,
-                      style: 'subheader',
-                    },
+                  {
+                    colSpan: 2,
+                    text: `${this.getHeaderText(searchResult)} Major Repair Count: ${searchResult.records.length}`,
+                    style: 'subheader',
+                  },
                 ]
               ]
             },
-              layout: 'noBorders'
+            layout: 'noBorders'
           }
         ]
       },
       footer: (currentPage, pageCount) => {
         return {
-          margin: [30, 5, 25 , 5],
+          margin: [30, 5, 25, 5],
           columns: [
             {
               table: {
@@ -75,7 +75,7 @@ export class MrlExportService {
 
                 body: [
                   [
-                    { fontSize: 6, text: moment.utc(new Date).tz(this.CST).format('dddd, LL') , alignment: 'left' },
+                    { fontSize: 6, text: moment.utc(new Date).tz(this.CST).format('dddd, LL'), alignment: 'left' },
                     { fontSize: 6, text: '* Any comments after || denotes historical data.', alignment: 'center', bold: true },
                     { text: `Page ${currentPage} of ${pageCount}`, fontSize: 6, alignment: 'right' }
                   ]
@@ -94,7 +94,7 @@ export class MrlExportService {
 
         },
         subheader: {
-          fontSize: 8 ,
+          fontSize: 8,
           bold: true,
           background: '#4682B4',
           color: '#ffffff',
@@ -106,7 +106,7 @@ export class MrlExportService {
           bold: true,
           alignment: 'left'
         },
-          regular: {
+        regular: {
           fontSize: 8,
           alignment: 'left',
         },
@@ -115,119 +115,157 @@ export class MrlExportService {
     const final = this.getSdaPdf(searchResult);
 
 
- return final.subscribe((result => {
-    dd.content = [result];
-    this.pdf.createPdf(dd).download('MrlReport.pdf');
-  }), function(error) {
-    console.log(error);
+    return final.subscribe((result => {
+      dd.content = [result];
+      this.pdf.createPdf(dd).download('MrlReport.pdf');
+    }), function (error) {
+      console.log(error);
     },
-  function() { });
+      function () { });
   }
 
   getSdaPdf(searchResult: models.ISdaListResult): Observable<any> {
 
     const pdfDefinition: Array<any> = [];
 
-    searchResult.records.forEach( (result: ISdaListView, index: number) => {
-     pdfDefinition.push(this.getTableRows(result))
-    } )
+    searchResult.records.forEach((result: ISdaListView, index: number) => {
+      pdfDefinition.push(this.getTableRows(result))
+    })
 
     return Observable.of(pdfDefinition);
 
   }
-  getTableRows(listview: ISdaListView)  {
-   return  {
-        columns: [
+  getTableRows(listview: ISdaListView) {
+    return {
+      columns: [
         {
-        margin: [10 , 0, 10, 0],
-        alignment: 'center',
-        layout: 'noBorders',
-        unbreakable: true,
-        table: {
-          widths: ['5%', '10%', '6%', '5%', '5%', '5%', '10%', '10%', '12%', '8%', '5%', '5%', '7%', '7%'],
-         // heights: 15,
-          body: [
-            [
-              { text: `SDA ID#`, style: 'tableHeader' },
-              { text: `\nSDR #`,  style: 'tableHeader' },
-              { text: `SDA\nDATE`, style: 'tableHeader' },
-              { text: `\nATA`,  style: 'tableHeader' },
-              { text: `\nSTA`,  style: 'tableHeader' },
-              { text: `\nCheck`, style: 'tableHeader' },
-              { text: `Defect \nSize/Type *`, style: 'tableHeader' },
-              { text: `\nPart Name`, style: 'tableHeader' },
-              { text: `\nBody Station`, style: 'tableHeader' },
-              { text: `\nStringer`, style: 'tableHeader' },
-              { text: `Water \nLine`, style: 'tableHeader' },
-              { text: `Butt \nLine`, style: 'tableHeader' },
-              { text: `\nLogPage`, style: 'tableHeader' },
-              { text: `MON \nStatus`, style: 'tableHeader' },
-            ],
-            [
-              { text: listview.id || '', style: 'regular' },
-              { text: listview.sdrNumber || '',  style: 'regular' },
-              { text: listview.completedOn ? moment.utc(listview.completedOn).tz(this.CST).format('MM/DD/YY') : '', style: 'regular' },
-              { text: listview.ataCode2 || '' ,  style: 'regular' },
-              { text: listview.station || '',  style: 'regular' },
-              { text: listview.checkTypeDesc || '', style: 'regular' },
-              { text: `L=${listview.length ? listview.length.toFixed(3) : ''}", W=${listview.width ? listview.width.toFixed(3) : ''}", D=${listview.depth ? listview.depth.toFixed(4) : ''}", ${listview.damageTypeDesc || ''}`, style: 'regular'  },
-              { text: listview.partDefective || '', style: 'regular' },
-              { text: listview.aircraftStation || '', style: 'regular' },
-              { text: listview.stringer || '', style: 'regular' },
-              { text: listview.waterLine || '', style: 'regular' },
-              { text: listview.buttLine || '', style: 'regular' },
-              { text: listview.micNo || listview.nonRoutineNo || listview.routineNo || '', style: 'regular' },
-              { text: `${listview.deferralCode ? listview.deferralCode + ', ' : '' } ${listview.deferralNo || ''}` , style: 'regular' },
-            ],
-            [
-              { colSpan: 14,
-                heights: 1,
-                stack: [
-                  this.getLineDashed(730)
-                ]
-              }
-            ],
-            [
-              { colSpan: 8,
-                text: [{ text: 'Repair Description: ', style: 'tableHeader' },
-                {text: listview.defectivePartDescription || listview.modifiedPartDescription || listview.repairDescriptionTypeDesc || '', style: 'regular' }] , style: 'regular'
-              }, {}, {}, {}, {}, {}, {}, {},
-              { colSpan: 6,
-                text: [{ text: 'Repair Document: ', style: 'tableHeader' },
-                {text: `${listview.repairDocumentTypeDesc ? listview.repairDocumentTypeDesc + ', ' : '' }${listview.chapFigRepairText || ''}`, style: 'regular' }] , style: 'regular'
-              }
-            ],
-            [
-              { colSpan: 14,
-                stack: [
-                  this.getLine(730)
-                ]
-              }
+          margin: [10, 0, 10, 0],
+          alignment: 'center',
+          layout: 'noBorders',
+          unbreakable: true,
+          table: {
+            widths: ['5%', '10%', '6%', '5%', '5%', '5%', '10%', '10%', '12%', '8%', '5%', '5%', '7%', '7%'],
+            // heights: 15,
+            body: [
+              [
+                { text: `SDA ID#`, style: 'tableHeader' },
+                { text: `\nSDR #`, style: 'tableHeader' },
+                { text: `SDA\nDATE`, style: 'tableHeader' },
+                { text: `\nATA`, style: 'tableHeader' },
+                { text: `\nSTA`, style: 'tableHeader' },
+                { text: `\nCheck`, style: 'tableHeader' },
+                { text: `Defect \nSize/Type *`, style: 'tableHeader' },
+                { text: `\nPart Name`, style: 'tableHeader' },
+                { text: `\nBody Station`, style: 'tableHeader' },
+                { text: `\nStringer`, style: 'tableHeader' },
+                { text: `Water \nLine`, style: 'tableHeader' },
+                { text: `Butt \nLine`, style: 'tableHeader' },
+                { text: `\nLogPage`, style: 'tableHeader' },
+                { text: `MON \nStatus`, style: 'tableHeader' },
+              ],
+              [
+                { text: listview.id || '', style: 'regular' },
+                { text: listview.sdrNumber || '', style: 'regular' },
+                {
+                  text: listview.completedOn ? moment.utc(listview.completedOn).tz(this.CST).format('MM/DD/YY') : '',
+                  style: 'regular'
+                },
+                { text: listview.ataCode2 || '', style: 'regular' },
+                { text: listview.station || '', style: 'regular' },
+                {
+                  text: (listview.checkType === 99 ? listview.checkTypeOtherText : listview.checkTypeDesc) || '',
+                  style: 'regular'
+                },
+                {
+                  text: `L=${listview.length ? listview.length.toFixed(3) : ''}", W=${
+                    listview.width ? listview.width.toFixed(3) : ''}", D=${listview.depth
+                      ? listview.depth.toFixed(4)
+                      : ''}", ${listview.damageTypeDesc || ''}`,
+                  style: 'regular'
+                },
+                { text: listview.partDefective || '', style: 'regular' },
+                { text: listview.aircraftStation || '', style: 'regular' },
+                { text: listview.stringer || '', style: 'regular' },
+                { text: listview.waterLine || '', style: 'regular' },
+                { text: listview.buttLine || '', style: 'regular' },
+                { text: listview.micNo || listview.nonRoutineNo || listview.routineNo || '', style: 'regular' },
+                {
+                  text: `${listview.deferralCode ? listview.deferralCode + ', ' : ''} ${listview.deferralNo || ''}`,
+                  style: 'regular'
+                },
+              ],
+              [
+                {
+                  colSpan: 14,
+                  heights: 1,
+                  stack: [
+                    this.getLineDashed(730)
+                  ]
+                }
+              ],
+              [
+                {
+                  colSpan: 14,
+                  text: [
+                    { text: 'Damage Description: ', style: 'tableHeader' },
+                    { text: listview.damageDescription || '', style: 'regular' }
+                  ], style: 'regular'
+                }
+              ],
+              [
+                {
+                  colSpan: 14,
+                  heights: 1,
+                  stack: [
+                    this.getLineDashed(730)
+                  ]
+                }
+              ],
+              [
+                {
+                  colSpan: 8,
+                  text: [{ text: 'Repair Description: ', style: 'tableHeader' },
+                  { text: (listview.repairDescriptionType === 17 ? listview.repairDescriptionOtherText : listview.repairDescriptionTypeDesc) || listview.defectivePartDescription || listview.modifiedPartDescription || '', style: 'regular' }], style: 'regular'
+                }, {}, {}, {}, {}, {}, {}, {},
+                {
+                  colSpan: 6,
+                  text: [{ text: 'Repair Document: ', style: 'tableHeader' },
+                  { text: `${listview.repairDocumentTypeDesc ? listview.repairDocumentTypeDesc + ', ' : ''}${listview.chapFigRepairText || ''}`, style: 'regular' }], style: 'regular'
+                }
+              ],
+              [
+                {
+                  colSpan: 14,
+                  stack: [
+                    this.getLine(730)
+                  ]
+                }
+              ]
             ]
-          ]
-        }}]
-      }
-
+          }
+        }]
     }
 
+  }
+
   getLine(maxLength: number) {
-    return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.4 }]}
+    return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.4 }] }
   }
 
   getLineDashed(maxLength: number) {
-    return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.3, dash: { length: 5, space: 1 }  }]}
+    return { canvas: [{ type: 'line', x1: 0, y1: 3, x2: maxLength, y2: 3, lineWidth: 0.3, dash: { length: 5, space: 1 } }] }
   }
 
-getHeaderText(result: models.ISdaListResult ) {
+  getHeaderText(result: models.ISdaListResult) {
 
-if (result.records.length) {
+    if (result.records.length) {
 
-  const text = `Nose Number: ${result.records[0].aircraftNo || ''}\t\t\t\tSerial Number: ${result.records[0].serialNo || ''}\t\t\t\tManufacturer: ${result.records[0].manufacturer || ''}\t\t\t\tAircraft Model: ${result.records[0].model || ''}\t\t\t\t`
+      const text = `Nose Number: ${result.records[0].aircraftNo || ''}\t\t\t\tSerial Number: ${result.records[0].serialNo || ''}\t\t\t\tManufacturer: ${result.records[0].manufacturer || ''}\t\t\t\tAircraft Model: ${result.records[0].model || ''}\t\t\t\t`
 
-  return text
+      return text
     }
 
     return '';
-}
+  }
 
 }
