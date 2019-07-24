@@ -304,15 +304,15 @@ export class AlertEffects {
              withLatestFrom(this.appStateService.getSearchCriteria()),
              switchMap(([payload, searchCriteria]) => {
               const criteria = searchCriteria.toJS();
-              const sdas = payload;
+              const sdas = payload.sdaIds;
               criteria.pageData = {
                 first: 0,
                 rows: -1,
-                sortField: 'createDate',
-                sortOrder: -1
+                sortField: payload.pageData.sortField || 'createDate',
+                sortOrder: payload.pageData.sortOrder || -1
               }
 
-          return  this.mrrExportService.exportMrrPdf(criteria, sdas) //this.mrrExportService.exportMrrPdf(payload)
+          return  this.mrrExportService.exportMrrPdf(criteria, sdas)
             .pipe(
             map((data: any) => {
               return new selectedAlert.ExportMrrPDFCompleteAction();

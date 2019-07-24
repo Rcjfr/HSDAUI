@@ -31,7 +31,7 @@ export class AlertsMrrGridComponent implements OnInit, OnDestroy {
   defaultPageSize = 20;
   defaultSortColumn = 'createDate';
   defaultSortOrder = -1;
-
+  currentPageData: ILazyLoadEvent;
 
   constructor(private appStateService: AppStateService, private scrollToService: ScrollToService
     , private sdaExportService: SdaExportService) { }
@@ -82,7 +82,7 @@ export class AlertsMrrGridComponent implements OnInit, OnDestroy {
     if (this.skipNextLoad) {
       this.skipNextLoad = false;
     } else {
-    this.appStateService.loadSdaList(this.getPageData(pageData));
+      this.appStateService.loadSdaList(this.getPageData(pageData));
     }
   }
 
@@ -90,6 +90,7 @@ export class AlertsMrrGridComponent implements OnInit, OnDestroy {
     if (!pageData) {
       return this.getDefaultPageData();
     }
+    this.currentPageData = pageData;
 
     return pageData;
   }
@@ -103,8 +104,8 @@ export class AlertsMrrGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  exportPdf(sdaId: number[]): boolean {
-    this.appStateService.exportMrrPDF( sdaId || [] );
+  exportPdf(sdaIds: number[]): boolean {
+    this.appStateService.exportMrrPDF(sdaIds || [], this.currentPageData);
 
     return false;
   }

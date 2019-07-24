@@ -327,7 +327,7 @@ export class SaveSearchTypeAction implements Action {
 
 export class ExportMrrPDFAction implements Action {
   public type = ActionTypes.EXPORT_MRR_PDF;
-  constructor(public payload: number[]) { }
+  constructor(public payload: { sdaIds: number[], pageData: models.ILazyLoadEvent }) { }
 }
 
 export class ExportMrrPDFCompleteAction implements Action {

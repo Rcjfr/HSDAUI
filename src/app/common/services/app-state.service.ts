@@ -295,7 +295,7 @@ export class AppStateService {
   exportPDF(sdas: [number]) {
     this.store.dispatch(new selectedAlertActions.ExportPDFAction(sdas));
   }
-  exportMrrPDF(sdas: number[]) {
-   this.store.dispatch(new selectedAlertActions.ExportMrrPDFAction(sdas));
+  exportMrrPDF(sdas: number[], pageData: ILazyLoadEvent) {
+    this.store.dispatch(new selectedAlertActions.ExportMrrPDFAction({ sdaIds: sdas, pageData }));
   }
 }
