@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 import { PromptDialogComponent } from '@app/components/prompt-dialog/prompt-dialog.component';
 import { List } from 'immutable';
 import { AuthService } from '@app/common/services/auth.service';
-import { ISearchData, SearchType } from '@app/common/models';
+import { ISearchData, SearchType, Status } from '@app/common/models';
 import { ISavedSearch } from '@app/common/models/saved-search.model';
 import { SelectItem } from 'primeng/components/common/selectitem';
 import { Helper } from '@app/common/helper';
@@ -149,6 +149,8 @@ export class AlertsSearchComponent implements OnInit {
           this.criteria['searchByCorrectiveAction'] = {};
         }
         this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
+        // In case of MRR, Look for only Closed status(ignore any other status user selects) 
+        this.criteria['searchByStatus'] = { status: [Status.Closed] };
       }
       this.appStateService.saveSearchType(searchType);
 
