@@ -149,7 +149,7 @@ export class AlertsSearchComponent implements OnInit {
           this.criteria['searchByCorrectiveAction'] = {};
         }
         this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
-        // In case of MRR, Look for only Closed status(ignore any other status user selects) 
+        // In case of MRR, Look for only Closed status(ignore any other status user selects)
         this.criteria['searchByStatus'] = { status: [Status.Closed] };
       }
       this.appStateService.saveSearchType(searchType);
