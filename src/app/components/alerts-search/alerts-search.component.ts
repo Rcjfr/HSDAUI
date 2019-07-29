@@ -124,6 +124,15 @@ export class AlertsSearchComponent implements OnInit {
       delete definedSections['searchByOptions']
     }
 
+    if (searchType === SearchType.MRR) {
+      if (!this.criteria['searchByCorrectiveAction']) {
+        this.criteria['searchByCorrectiveAction'] = {};
+      }
+      this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
+      // In case of MRR, Look for only Closed status(ignore any other status user selects)
+      this.criteria['searchByStatus'] = { status: [Status.Closed] };
+    }
+
     _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
       //Make sure they're A) defined and B) not an empty array
       const validValues = _.pickBy(_.pickBy(value, _.identity), (x) => {
@@ -144,14 +153,6 @@ export class AlertsSearchComponent implements OnInit {
         message: 'Please input at least one search filter.'
       })
     } else {
-      if (searchType === SearchType.MRR) {
-        if (!this.criteria['searchByCorrectiveAction']) {
-          this.criteria['searchByCorrectiveAction'] = {};
-        }
-        this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
-        // In case of MRR, Look for only Closed status(ignore any other status user selects)
-        this.criteria['searchByStatus'] = { status: [Status.Closed] };
-      }
       this.appStateService.saveSearchType(searchType);
 
       if (excel) {
