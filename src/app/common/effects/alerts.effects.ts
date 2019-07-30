@@ -125,9 +125,18 @@ export class AlertEffects {
     .pipe(
     map((action: selectedAlert.LoadSdasAction) => action.payload),
     withLatestFrom(this.appStateService.getSearchCriteria()),
-    switchMap(([payload, searchCriteria]) => {
+    withLatestFrom(this.appStateService.getSearchType()),
+    switchMap(([[payload, searchCriteria], searchType]) => {
       const criteria = searchCriteria.toJS();
       criteria.pageData = payload;
+      if (searchType === models.SearchType.MRR) {
+        if (!criteria['searchByCorrectiveAction']) {
+          criteria['searchByCorrectiveAction'] = {};
+        }
+        criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
+        // In case of MRR, Look for only Closed status(ignore any other status user selects)
+        criteria['searchByStatus'] = { status: [models.Status.Closed] };
+      }
 
       return this.sdaService.searchSda(criteria)
         .pipe(

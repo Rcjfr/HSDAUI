@@ -124,29 +124,23 @@ export class AlertsSearchComponent implements OnInit {
       delete definedSections['searchByOptions']
     }
 
-    if (searchType === SearchType.MRR) {
-      if (!this.criteria['searchByCorrectiveAction']) {
-        this.criteria['searchByCorrectiveAction'] = {};
-      }
-      this.criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
-      // In case of MRR, Look for only Closed status(ignore any other status user selects)
-      this.criteria['searchByStatus'] = { status: [Status.Closed] };
-    }
+    if (searchType !== SearchType.MRR) {
+      _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
+        //Make sure they're A) defined and B) not an empty array
+        const validValues = _.pickBy(_.pickBy(value, _.identity), (x) => {
+          if (Array.isArray(x)) {
+            return x.length > 0;
+          }
 
-    _.forIn(definedSections, (value, key) => {  //Iterate over all sub-properties of that section (dateFrom, dateThrough, etc)
-      //Make sure they're A) defined and B) not an empty array
-      const validValues = _.pickBy(_.pickBy(value, _.identity), (x) => {
-        if (Array.isArray(x)) {
-          return x.length > 0;
+          return true;
+        });
+        if (!_.isEmpty(validValues)) {
+          hasCriteria = true;
         }
-
-        return true;
       });
-      if (!_.isEmpty(validValues)) {
-        hasCriteria = true;
-      }
-    });
-
+    } else {
+      hasCriteria = true; //MRR Search always has a default criteria as isMajorRepair=true and status=closed
+    }
     if (!hasCriteria) {
       this.dialogService.addDialog(ConfirmComponent, {
         title: 'Search Filters',

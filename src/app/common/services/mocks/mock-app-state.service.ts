@@ -137,6 +137,9 @@ export class MockAppStateService extends AppStateService {
   getFleet() {
     return Observable.of([]);
   }
+  getSearchType(): Observable<models.SearchType> {
+    return Observable.of(models.SearchType.Regular);
+  }
   getSearchCriteria() {
     return Observable.of(SearchCriteriaRecordFactory());
   }
