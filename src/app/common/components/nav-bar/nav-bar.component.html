@@ -17,7 +17,8 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li>
+          
+        <li *ngIf="!(authService.isFaaInspector()| async)">
           <form class="navbar-form navbar-right" (submit)="viewSda()">
             <div class="input-group">
               <input type="text" class="form-control" name="sdaId" [textMask]="{mask: integerNumberMask()}" placeholder="Search by SDA ID..." [(ngModel)]="sdaId">
@@ -31,17 +32,17 @@
         <!--<li [routerLinkActive]="['active']">
           <a [routerLink]="['/dashboard']"><i class="icon-home"></i> Dashboard</a>
         </li>-->
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="!(authService.isFaaInspector()| async)">
           <a [routerLink]="['/alerts']">
             <i class="icon-search"></i> Search
           </a>
         </li>
-        <li>
+        <li *ngIf="!(authService.isFaaInspector()| async)">
           <a href="" (click)="newSda()">
             <i class="icon-add"></i> New SDA
           </a>
         </li>
-        <li [routerLinkActive]="['active']">
+        <li [routerLinkActive]="['active']" *ngIf="!(authService.isFaaInspector()| async)">
           <a class="btn-secondary dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="glyphicon-file"></i> Reports
           </a>
@@ -54,6 +55,7 @@
             </ul>
           </div>
         </li>
+        
         <li>
           <a href="#">
             <i class="icon-help"></i> Help

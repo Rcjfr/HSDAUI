@@ -15,4 +15,5 @@ export interface ISearchCriteria {
   reportColumns?: search.IReportColumn[];
   searchBySda?: search.ISearchBySda;
   searchByStatus?: search.ISearchByStatus;
+  searchFaa?: search.ISearchFaa;
 }

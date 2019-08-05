@@ -45,3 +45,4 @@ karma-test-results.trx
 # System Files
 .DS_Store
 Thumbs.db
+/HSDAUI.sln.DotSettings.user

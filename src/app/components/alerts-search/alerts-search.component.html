@@ -1,120 +1,129 @@
-<h1 class="page-header" style="padding-bottom:20px;">Saved Searches</h1>
+<ng-container *ngIf="!(authService.isFaaInspector()| async)">
+  <h1 class="page-header" style="padding-bottom:20px;">Saved Searches</h1>
+  <aa-saved-searches [(criteria)]="criteria" [currentSearchId]="currentSearchId" [badgeNumber]="badgeNumber" (onSearch)="runSavedSearch($event)" (onSearchChange)="updateFilters($event)"></aa-saved-searches>
+ </ng-container>
+  <h1 class="page-header">
+    Search Filters
+    <h5 class="pull-right">
+      <a href="" (click)="expandCollapseAll(true)" tabindex="11">Expand All</a>
+      <a href="" (click)="expandCollapseAll(false)" tabindex="12">Collapse All</a>
+    </h5>
+  </h1>
+  <form novalidate (submit)="searchAlerts()">
+    <accordion>
+      <accordion-group #dateRangeGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Create Date Range
+            <i class="pull-right float-xs-right" tabindex="13" [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-date-range [(criteria)]="criteria"></aa-search-by-date-range>
+        </accordion-group>
+        <accordion-group #sdaFormGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by SDA Form
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-sda-form [(criteria)]="criteria"></aa-search-by-sda-form>
+        </accordion-group>
+        <accordion-group #aircraftGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Aircraft
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-aircraft [(criteria)]="criteria"></aa-search-by-aircraft>
+        </accordion-group>
+        <accordion-group #maintenanceGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Maintenance Type
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-maintenance [(criteria)]="criteria"></aa-search-by-maintenance>
+        </accordion-group>
+        <accordion-group #corrosionGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Corrosion
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-corrosion [(criteria)]="criteria"></aa-search-by-corrosion>
+        </accordion-group>
+        <accordion-group #cpcpDispositionGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by CPCP Disposition
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-cpcp-disposition [(criteria)]="criteria"></aa-search-by-cpcp-disposition>
+        </accordion-group>
+        <accordion-group #defectGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Defect/Damage
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-defect [(criteria)]="criteria"></aa-search-by-defect>
+        </accordion-group>
+        <accordion-group #correctiveGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Corrective Action
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': correctiveGroup?.isOpen, 'icon-add': !correctiveGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-corrective-action [(criteria)]="criteria"></aa-search-by-corrective-action>
+        </accordion-group>
+        <accordion-group #statusGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Status
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-status [(criteria)]="criteria"></aa-search-by-status>
+        </accordion-group>
+        <accordion-group #partGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by Part
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': partGroup?.isOpen, 'icon-add': !partGroup?.isOpen}"></i>
+          </div>
+          <aa-search-by-part [(criteria)]="criteria"></aa-search-by-part>
+        </accordion-group>
+        <accordion-group #optionGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search Options
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
+          </div>
+          <aa-search-options [(criteria)]="criteria"></aa-search-options>
+        </accordion-group>
 
-<aa-saved-searches [(criteria)]="criteria"  [currentSearchId]="currentSearchId" [badgeNumber]="badgeNumber" (onSearch)="runSavedSearch($event)" (onSearchChange)="updateFilters($event)"></aa-saved-searches>
+        <accordion-group #dteGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Search by DTE
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dteGroup?.isOpen, 'icon-add': !dteGroup?.isOpen}"></i>
+          </div>
 
-<h1 class="page-header">Search Filters
-  <h5 class="pull-right">
-    <a href="" (click)="expandCollapseAll(true)" tabindex="11" >Expland All</a>
-    <a href="" (click)="expandCollapseAll(false)" tabindex="12" >Collapse All</a>
-  </h5>
-</h1>
-<form novalidate (submit)="searchAlerts()">
-  <accordion>
-    <accordion-group #dateRangeGroup panelClass="panel-default search-panel" >
-      <div accordion-heading>
-        Search by Create Date Range
-        <i class="pull-right float-xs-right" tabindex="13"  [ngClass]="{'icon-remove': dateRangeGroup?.isOpen, 'icon-add': !dateRangeGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-date-range [(criteria)]="criteria"></aa-search-by-date-range>
-    </accordion-group>
-    <accordion-group #sdaFormGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by SDA Form
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': sdaFormGroup?.isOpen, 'icon-add': !sdaFormGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-sda-form [(criteria)]="criteria"></aa-search-by-sda-form>
-    </accordion-group>
-    <accordion-group #aircraftGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Aircraft
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': aircraftGroup?.isOpen, 'icon-add': !aircraftGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-aircraft [(criteria)]="criteria"></aa-search-by-aircraft>
-    </accordion-group>
-    <accordion-group #maintenanceGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Maintenance Type
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': maintenanceGroup?.isOpen, 'icon-add': !maintenanceGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-maintenance [(criteria)]="criteria"></aa-search-by-maintenance>
-    </accordion-group>
-    <accordion-group #corrosionGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Corrosion
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': corrosionGroup?.isOpen, 'icon-add': !corrosionGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-corrosion [(criteria)]="criteria"></aa-search-by-corrosion>
-    </accordion-group>
-    <accordion-group #cpcpDispositionGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by CPCP Disposition
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': cpcpDispositionGroup?.isOpen, 'icon-add': !cpcpDispositionGroup?.isOpen}"></i>
-      </div>
-       <aa-search-by-cpcp-disposition [(criteria)]="criteria"></aa-search-by-cpcp-disposition>
-    </accordion-group>
-    <accordion-group #defectGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Defect/Damage
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': defectGroup?.isOpen, 'icon-add': !defectGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-defect [(criteria)]="criteria"></aa-search-by-defect>
-    </accordion-group>
-    <accordion-group #correctiveGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Corrective Action
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': correctiveGroup?.isOpen, 'icon-add': !correctiveGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-corrective-action [(criteria)]="criteria"></aa-search-by-corrective-action>
-    </accordion-group>
-    <accordion-group #statusGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Status
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': statusGroup?.isOpen, 'icon-add': !statusGroup?.isOpen}"></i>
-      </div>
-       <aa-search-by-status [(criteria)]="criteria"></aa-search-by-status>
-    </accordion-group>
-    <accordion-group #partGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search by Part
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': partGroup?.isOpen, 'icon-add': !partGroup?.isOpen}"></i>
-      </div>
-      <aa-search-by-part [(criteria)]="criteria"></aa-search-by-part>
-    </accordion-group>
-    <accordion-group #optionGroup panelClass="panel-default search-panel">
-      <div accordion-heading>
-        Search Options
-        <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': optionGroup?.isOpen, 'icon-add': !optionGroup?.isOpen}"></i>
-      </div>
-      <aa-search-options [(criteria)]="criteria"></aa-search-options>
-    </accordion-group>
+          <aa-search-by-dte [(criteria)]="criteria"></aa-search-by-dte>
+        </accordion-group>
 
-  <accordion-group #dteGroup panelClass="panel-default search-panel">
-    <div accordion-heading>
-      Search by DTE
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': dteGroup?.isOpen, 'icon-add': !dteGroup?.isOpen}"></i>
+        <accordion-group #reportGroup panelClass="panel-default search-panel" *ngIf="!(authService.isFaaInspector()| async)">
+          <div accordion-heading>
+            Report Options
+            <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': reportGroup?.isOpen, 'icon-add': !reportGroup?.isOpen}"></i>
+          </div>
+          <aa-search-report [(criteria)]="criteria"></aa-search-report>
+        </accordion-group>
+      
+      <accordion-group #faaGroup panelClass="panel-default search-panel" *ngIf="authService.isFaaInspector()| async" is-open="open">
+        <div accordion-heading>
+          FAA Search
+          <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': faaGroup?.isOpen, 'icon-add': !faaGroup?.isOpen}"></i>
+        </div>
+        <aa-search-faa [(criteria)]="criteria"></aa-search-faa>
+      </accordion-group>
+    </accordion>
+
+
+    <div class="row form-group">
+      <div class="col-sm-12">
+        <div class="pull-right">
+          <button type="button" class="btn btn-default" tabindex="159" (click)="clearFilters()">Clear Filters</button>
+          <button type="button" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR)">Major Repairs Report</button>
+          <button type="button" class="btn btn-primary" tabindex="161" (click)="searchAlerts(true)" [disabled]="authService.isFaaInspector()| async"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
+          <button type="submit" class="btn btn-primary" tabindex="162" [disabled]="authService.isFaaInspector()| async">Search</button>
+        </div>
+      </div>
     </div>
-
-      <aa-search-by-dte [(criteria)]="criteria"></aa-search-by-dte>
-  </accordion-group>
-
-  <accordion-group #reportGroup panelClass="panel-default search-panel">
-    <div accordion-heading>
-      Report Options
-      <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': reportGroup?.isOpen, 'icon-add': !reportGroup?.isOpen}"></i>
-    </div>
-    <aa-search-report [(criteria)]="criteria"></aa-search-report>
-  </accordion-group>
-  </accordion>
-
-
-  <div class="row form-group">
-    <div class="col-sm-12">
-      <div class="pull-right">
-        <button type="button" class="btn btn-default" tabindex="159" (click)="clearFilters()">Clear Filters</button>
-        <button type="button" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR)">Major Repairs Report</button>
-        <button type="button" class="btn btn-primary" tabindex="161" (click)="searchAlerts(true)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
-        <button type="submit" class="btn btn-primary" tabindex="162" >Search</button>
-      </div>
-    </div>
-  </div>
-</form>
+  </form>

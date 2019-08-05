@@ -27,6 +27,7 @@ export class AuthService {
   readonly Compliance_Engineer = 'Compliance_Engineer';
   readonly Compliance_Engineering_Analyst = 'Compliance_Engineering_Analyst';
   readonly Compliance_Engineering_Manager = 'Compliance_Engineering_Manager';
+  readonly FAA_Inspector = 'FAA_Inspector';
   public hasSessionTimedOut = false;
   sessionTimeOut = 3600;
   idleThreshold = 600;
@@ -217,5 +218,9 @@ export class AuthService {
 
   isComplianceEngineer(): Observable<boolean> {
     return this.hasAnyRole([this.Compliance_Engineer, this.Compliance_Engineering_Analyst, this.Compliance_Engineering_Manager]);
+  }
+
+  isFaaInspector(): Observable<boolean> {
+    return this.hasAnyRole([this.FAA_Inspector]);
   }
 }

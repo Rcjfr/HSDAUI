@@ -22,6 +22,7 @@ import { SearchReportComponent } from '@app/components/search/search-report/sear
 import { SearchOptionsComponent } from '@app/components/search/search-options/search-options.component';
 import { SavedSearchesComponent } from '@app/components/search/saved-searches/saved-searches.component';
 import { SearchByDteComponent } from '@app/components/search/search-by-dte/search-by-dte.component';
+import { SearchFaaComponent } from '@app/components/search/search-faa/search-faa.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { SearchByDteComponent } from '@app/components/search/search-by-dte/searc
     SearchReportComponent,
     SearchOptionsComponent,
     SavedSearchesComponent,
-    SearchByDteComponent
+    SearchByDteComponent,
+    SearchFaaComponent
   ],
   declarations: [
     SearchByDateRangeComponent,
@@ -69,7 +71,8 @@ import { SearchByDteComponent } from '@app/components/search/search-by-dte/searc
     SearchReportComponent,
     SearchOptionsComponent,
     SavedSearchesComponent,
-    SearchByDteComponent
+    SearchByDteComponent,
+    SearchFaaComponent
   ],
   providers: []
 })
