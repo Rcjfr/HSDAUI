@@ -36,7 +36,7 @@ export class AlertsSearchComponent implements OnInit {
     private appStateService: AppStateService,
     private savedSearchStateService: SavedSearchStateService,
     private dialogService: DialogService,
-    private authService: AuthService
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
