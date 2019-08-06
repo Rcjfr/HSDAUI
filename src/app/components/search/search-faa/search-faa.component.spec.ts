@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TabsModule } from 'ngx-bootstrap';
 import { SearchFaaComponent } from './search-faa.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormControlsModule } from '@app/common/components/form-controls.module';
+import { MockAuthService } from '@app/common/services/mocks/mock-auth-service';
+import { AuthService } from '@app/common/services';
 
 
 describe('SearchFaaComponent', () => {
@@ -15,8 +17,10 @@ describe('SearchFaaComponent', () => {
       imports: [
         ReactiveFormsModule,
         FormsModule,
-        FormControlsModule
+        FormControlsModule,
+        TabsModule.forRoot()
       ],
+      providers: [{provide: AuthService, useClass: MockAuthService}]
     })
     .compileComponents();
   }));

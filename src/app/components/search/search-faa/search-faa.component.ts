@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChange
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import * as models from '@app/common/models';
+import { AuthService } from '@app/common/services/auth.service';
+
 
 @Component({
   selector: 'aa-search-faa',
@@ -15,7 +17,7 @@ export class SearchFaaComponent implements OnInit {
     sdaId: new FormControl(),
     sdrNumber: new FormControl()
   });
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
     this.faaForm.valueChanges.subscribe(s => {
