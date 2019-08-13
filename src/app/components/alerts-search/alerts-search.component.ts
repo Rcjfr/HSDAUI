@@ -181,8 +181,8 @@ export class AlertsSearchComponent implements OnInit {
       searchByPart: undefined,
       searchByOptions: undefined,
       searchByDTE: undefined,
-      reportColumns: undefined
-    };
+      reportColumns: undefined,
+      searchFaa: undefined };
   }
 
   updateFilters(criteria) {

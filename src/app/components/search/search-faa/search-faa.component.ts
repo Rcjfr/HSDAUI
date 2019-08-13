@@ -10,7 +10,7 @@ import { AuthService } from '@app/common/services/auth.service';
   templateUrl: './search-faa.component.html',
   styleUrls: ['./search-faa.component.less']
 })
-export class SearchFaaComponent implements OnInit {
+export class SearchFaaComponent implements OnInit, OnChanges {
   @Input() criteria: any;
   faaForm = new FormGroup({
     aircraftNo: new FormControl(),
@@ -28,6 +28,11 @@ export class SearchFaaComponent implements OnInit {
         id: s.sdaId,
         sdrNumber: s.sdrNumber
       };
+      this.criteria.searchFaa = s;
      });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.faaForm.reset();
   }
 }

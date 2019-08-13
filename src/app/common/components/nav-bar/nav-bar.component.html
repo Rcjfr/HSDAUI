@@ -32,7 +32,7 @@
         <!--<li [routerLinkActive]="['active']">
           <a [routerLink]="['/dashboard']"><i class="icon-home"></i> Dashboard</a>
         </li>-->
-        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" *ngIf="!(authService.isFaaInspector()| async)">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a [routerLink]="['/alerts']">
             <i class="icon-search"></i> Search
           </a>
