@@ -600,7 +600,7 @@ export class SdaExportService {
                 { text: 'Repaired (Describe)', width: 175 },
                 {
                   stack: [
-                    this.getLabel(sda.repairDescriptionTypeDesc),
+                    this.getLabel(sda.repairDescriptionType === 17 ? sda.repairDescriptionOtherText : sda.repairDescriptionTypeDesc),
                     this.getLine(385)
                   ]
                 }
