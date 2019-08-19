@@ -120,9 +120,9 @@
       <div class="col-sm-12">
         <div class="pull-right">
           <button type="button" class="btn btn-default" tabindex="159" (click)="clearFilters()">Clear Filters</button>
-          <button type="button" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR)">Major Repairs Report</button>
-          <button type="button" class="btn btn-primary" tabindex="161" (click)="searchAlerts(true)" [disabled]="authService.isFaaInspector()| async"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
-          <button type="submit" class="btn btn-primary" tabindex="162" [disabled]="authService.isFaaInspector()| async">Search</button>
+          <button type="{{!(authService.isFaaInspector()| async) ?'button':'submit'}}" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR)">Major Repairs Report</button>
+          <button type="button" class="btn btn-primary" tabindex="161" (click)="searchAlerts(true)" *ngIf="!(authService.isFaaInspector()| async)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
+          <button type="submit" class="btn btn-primary" tabindex="162" *ngIf="!(authService.isFaaInspector()| async)">Search</button>
         </div>
       </div>
     </div>
