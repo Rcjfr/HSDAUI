@@ -191,7 +191,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
         const arr = new FormArray([]);
         for (const attachment of newSda.dteSection.attachments) {
-          arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
+          if (attachment && attachment.attachmentName) {
+            arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
+          }
         }
         this.formGroup.setControl('attachments', arr);
       } else {
