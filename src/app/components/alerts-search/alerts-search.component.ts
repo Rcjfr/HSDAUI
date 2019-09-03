@@ -139,7 +139,7 @@ export class AlertsSearchComponent implements OnInit {
         }
       });
     } else {
-    hasCriteria = (this.criteria.searchFaa.aircraftNo || this.criteria.searchFaa.sdaId || this.criteria.searchFaa.sdrNumber);
+    hasCriteria = this.criteria.searchFaa && (this.criteria.searchFaa.aircraftNo || this.criteria.searchFaa.sdaId || this.criteria.searchFaa.sdrNumber);
       //hasCriteria = true; //MRR Search always has a default criteria as isMajorRepair=true and status=closed
     }
     if (!hasCriteria) {

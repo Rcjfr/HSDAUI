@@ -37,6 +37,7 @@ import * as _ from 'lodash';
 import { map, throttleTime, mapTo } from 'rxjs/operators';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { Helper } from '@app/common/helper';
+import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 
 @Component({
   selector: 'aa-alert-detail-view',
@@ -822,7 +823,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
   }
 
-  public exportPdf(sdaId: number): void {
-    this.appStateService.exportPDF([sdaId]);
+  public exportPdf(pageData: ILazyLoadEvent): void {
+    this.appStateService.exportPDF(pageData);
   }
 }

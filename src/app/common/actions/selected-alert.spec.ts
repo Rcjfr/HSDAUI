@@ -200,10 +200,10 @@ describe('Saved Searches Actions', () => {
 
   it('ExportPDFAction should handle EXPORT_PDF action',
     () => {
-      const action = new selectedAlertActions.ExportPDFAction([1234]);
+      const action = new selectedAlertActions.ExportPDFAction({ first: 0, rows: 20, sortField: '', sortOrder: 0 });
 
       expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_PDF);
-      expect(action.payload[0]).toBe(1234);
+      expect(action.payload.first).toBe(0);
     });
 
   it('ExportPDFCompleteAction should handle EXPORT_PDF_COMPLETE action',
