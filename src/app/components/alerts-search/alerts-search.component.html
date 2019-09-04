@@ -106,7 +106,7 @@
           <aa-search-report [(criteria)]="criteria"></aa-search-report>
         </accordion-group>
       
-      <accordion-group #faaGroup panelClass="panel-default search-panel" *ngIf="authService.isFaaInspector()| async" is-open="open">
+      <accordion-group #faaGroup panelClass="panel-default search-panel" *ngIf="authService.isFaaInspector()| async" [isOpen]="true">
         <div accordion-heading>
           FAA Search
           <i class="pull-right float-xs-right" [ngClass]="{'icon-remove': faaGroup?.isOpen, 'icon-add': !faaGroup?.isOpen}"></i>
@@ -120,7 +120,8 @@
       <div class="col-sm-12">
         <div class="pull-right">
           <button type="button" class="btn btn-default" tabindex="159" (click)="clearFilters()">Clear Filters</button>
-          <button type="{{!(authService.isFaaInspector()| async) ?'button':'submit'}}" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR)">Major Repairs Report</button>
+          <button *ngIf="authService.isFaaInspector() | async" type="submit" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR,true)">Major Repairs Report</button>
+          <button *ngIf="!(authService.isFaaInspector() | async)" type="button" class="btn btn-primary" tabindex="160" (click)="searchAlerts(false,searchTypes.MRR,false)">Major Repairs Report</button>
           <button type="button" class="btn btn-primary" tabindex="161" (click)="searchAlerts(true)" *ngIf="!(authService.isFaaInspector()| async)"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
           <button type="submit" class="btn btn-primary" tabindex="162" *ngIf="!(authService.isFaaInspector()| async)">Search</button>
         </div>

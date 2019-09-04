@@ -112,7 +112,7 @@ export class AlertsSearchComponent implements OnInit {
     return false;
   }
 
-  searchAlerts(excel: boolean = false, searchType: SearchType = SearchType.Regular ) {
+  searchAlerts(excel: boolean = false, searchType: SearchType = SearchType.Regular, isFaaInspector = false ) {
     let hasCriteria = false;
     const definedSections = _.pickBy(this.criteria, _.identity);  //Get all defined properties (searchByDateRange, etc)
 
@@ -139,8 +139,10 @@ export class AlertsSearchComponent implements OnInit {
         }
       });
     } else {
-    hasCriteria = this.criteria.searchFaa && (this.criteria.searchFaa.aircraftNo || this.criteria.searchFaa.sdaId || this.criteria.searchFaa.sdrNumber);
-      //hasCriteria = true; //MRR Search always has a default criteria as isMajorRepair=true and status=closed
+      hasCriteria = true; //MRR Search always has a default criteria as isMajorRepair=true and status=closed
+      if (isFaaInspector) {
+        hasCriteria = this.criteria.searchFaa && (this.criteria.searchFaa.aircraftNo || this.criteria.searchFaa.sdaId || this.criteria.searchFaa.sdrNumber);
+      }
     }
     if (!hasCriteria) {
       this.dialogService.addDialog(ConfirmComponent, {
