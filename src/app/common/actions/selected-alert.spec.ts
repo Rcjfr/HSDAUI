@@ -198,12 +198,12 @@ describe('Saved Searches Actions', () => {
       expect(action.payload.pageData).toBeUndefined();
     });
 
-  it('ExportPDFAction should handle EXPORT_PDF action',
+    it('ExportPDFAction should handle EXPORT_PDF action',
     () => {
-      const action = new selectedAlertActions.ExportPDFAction({ first: 0, rows: 20, sortField: '', sortOrder: 0 });
+      const action = new selectedAlertActions.ExportPDFAction([1234]);
 
       expect(action.type).toBe(selectedAlertActions.ActionTypes.EXPORT_PDF);
-      expect(action.payload.first).toBe(0);
+      expect(action.payload[0]).toBe(1234);
     });
 
   it('ExportPDFCompleteAction should handle EXPORT_PDF_COMPLETE action',

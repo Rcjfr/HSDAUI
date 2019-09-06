@@ -307,7 +307,7 @@ export class DownloadAttachmentFailAction implements Action {
 
 export class ExportPDFAction implements Action {
   public type = ActionTypes.EXPORT_PDF;
-  constructor(public payload: models.ILazyLoadEvent) { }
+  constructor(public payload: number[]) { }
 }
 
 export class ExportPDFCompleteAction implements Action {

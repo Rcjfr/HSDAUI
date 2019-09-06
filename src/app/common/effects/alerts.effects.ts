@@ -393,26 +393,13 @@ export class AlertEffects {
     ofType(selectedAlert.ActionTypes.EXPORT_PDF)
     .pipe(
     map((action: selectedAlert.ExportPDFAction) => action.payload),
-    withLatestFrom(this.appStateService.getSearchCriteria()),
-    withLatestFrom(this.appStateService.getSearchType()),
-    switchMap(([[payload, searchCriteria], searchType]) => {
-      const criteria = searchCriteria.toJS();
-      criteria.pageData = payload;
-      if (searchType === models.SearchType.MRR) {
-        if (!criteria['searchByCorrectiveAction']) {
-          criteria['searchByCorrectiveAction'] = {};
-        }
-        criteria['searchByCorrectiveAction']['isMajorRepair'] = 1;
-        // In case of MRR, Look for only Closed status(ignore any other status user selects)
-        criteria['searchByStatus'] = { status: [models.Status.Closed] };
-     }
-
-      return this.sdaExportService.exportSda(criteria)
-         .pipe(
+    switchMap((payload: number[]) => {
+      return this.sdaExportService.exportSda(payload)
+        .pipe(
         map((data: any) => {
-         return new selectedAlert.ExportPDFCompleteAction();
-         }),
-         catchError((err) => {
+          return new selectedAlert.ExportPDFCompleteAction();
+        }),
+        catchError((err) => {
           return of(new selectedAlert.ExportPDFFailAction('Failed to export to PDF.Please contact Administrator.'));
         }));
     }));

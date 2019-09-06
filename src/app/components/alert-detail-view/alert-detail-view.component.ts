@@ -823,7 +823,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       (this.sdaStatusForm.get('status').value === Status.Open && this.currentStatus !== Status.Open);
   }
 
-  public exportPdf(pageData: ILazyLoadEvent): void {
-    this.appStateService.exportPDF(pageData);
+  public exportPdf(sdaId: number): void {
+    this.appStateService.exportPDF([sdaId]);
   }
 }

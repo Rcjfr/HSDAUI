@@ -107,8 +107,8 @@ export class AlertsGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  exportPdf(pageData: ILazyLoadEvent): boolean {
-    this.appStateService.exportPDF(this.getPageData(pageData));
+  exportPdf(sdaId: number): boolean {
+    this.appStateService.exportPDF([sdaId]);
 
     return false;
   }

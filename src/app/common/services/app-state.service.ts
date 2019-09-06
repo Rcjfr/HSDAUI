@@ -292,8 +292,8 @@ export class AppStateService {
   downloadAttachment(sdaid: number, attachmentPath: string, attachmentName: string) {
     this.store.dispatch(new selectedAlertActions.DownloadAttachmentAction({ sdaId: sdaid, attachmentPath: attachmentPath, attachmentName: attachmentName }));
   }
-  exportPDF(pageData: ILazyLoadEvent) {
-    this.store.dispatch(new selectedAlertActions.ExportPDFAction(pageData));
+  exportPDF(sdas: [number]) {
+    this.store.dispatch(new selectedAlertActions.ExportPDFAction(sdas));
   }
   exportMrrPDF(sdas: number[], pageData: ILazyLoadEvent) {
     this.store.dispatch(new selectedAlertActions.ExportMrrPDFAction({ sdaIds: sdas, pageData }));
