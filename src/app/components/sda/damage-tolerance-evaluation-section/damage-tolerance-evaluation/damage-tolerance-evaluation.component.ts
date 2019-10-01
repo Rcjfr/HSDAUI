@@ -37,7 +37,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
-  public uploader = new FileUploader({ autoUpload: true, maxFileSize: 5 * 1024 * 1024 });
+  public uploader = new FileUploader({ autoUpload: true, maxFileSize: 10 * 1024 * 1024 });
   displayName: string;
   createNumberMask = createNumberMask;
   public hsdaApiBaseUrl = environment.hsdaApiBaseUrl;
