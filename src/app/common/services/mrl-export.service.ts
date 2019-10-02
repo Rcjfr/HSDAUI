@@ -167,7 +167,7 @@ export class MrlExportService {
                 { text: listview.id || '', style: 'regular' },
                 { text: listview.sdrNumber || '', style: 'regular' },
                 {
-                  text: listview.completedOn ? moment.utc(listview.completedOn).tz(this.CST).format('MM/DD/YY') : '',
+                  text: listview.createDate ? moment(listview.createDate).tz(this.CST).format('MM/DD/YY') : '',
                   style: 'regular'
                 },
                 { text: listview.ataCode2 || '', style: 'regular' },
