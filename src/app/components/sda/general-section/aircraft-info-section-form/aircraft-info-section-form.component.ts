@@ -61,7 +61,7 @@ export class AircraftInfoSectionFormComponent extends BaseFormComponent implemen
     super('aircraftInfoSectionFormGroup', authService);
     this.formGroup = this.fb.group({
       aircraftNo: ['', [Validators.required, Validators.maxLength(5), Validators.pattern(Expressions.Alphanumerics)]],
-      aircraftRegistrationNo: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(Expressions.Alphanumerics)]],
+      aircraftRegistrationNo: ['', [Validators.required, Validators.maxLength(50)]],
       manufacturer: ['', [Validators.required, Validators.maxLength(100)]],
       model: ['', [Validators.required, Validators.maxLength(15)]],
       serialNo: ['', [Validators.required, Validators.maxLength(10)]],
