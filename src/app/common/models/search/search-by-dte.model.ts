@@ -64,4 +64,8 @@ export interface ISearchByDTE {
   engRspam?: string;
   engSn?: string;
   engMpn?: string;
+  ataCode1Dte?: number;
+  ataCode1DteDesc?: string;
+  ataCode2Dte?: number;
+  ataCode2DteDesc?: string;
 }

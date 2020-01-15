@@ -188,5 +188,9 @@ export interface ISdaListView {
   dueInDays: number,
   hasOriginal: boolean,
   completedBy: string,
-  completedOn: Date
+  completedOn: Date,
+  ataCode1Dte: number,
+  ataCode1DteDesc: string,
+  ataCode2Dte: number,
+  ataCode2DteDesc: string,
 }

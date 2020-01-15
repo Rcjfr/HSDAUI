@@ -156,6 +156,8 @@ export const ReportOptions: IReportOption[] = [
   { key: 'EngSn', display: 'Engine S/N:' , dbField: 'ENG_SN'},
   { key: 'EngMpn', display: 'MPN(Engine)', dbField: 'ENG_MPN' },
   { key: 'IsExistingRepair', display: 'Existing Repair?', dbField: 'IS_EXISTING_REPAIR' },
+  { key: 'AtaCode1Dte', display: 'ATA Code 1', dbField: 'ATA_CHAPTR_DESC' },
+  { key: 'AtaCode2Dte', display: 'ATA Code 2', dbField: 'ATA_DESC_TXT' },
 ///
   { key: 'DTEInspectionThreshold1', display: 'Inspection Threshold(1)', dbField: 'DTE_INSPECTION_THRESHOLD1' },
   { key: 'DTEInspectionThreshold2', display: 'Inspection Threshold(2)', dbField: 'DTE_INSPECTION_THRESHOLD2' },

@@ -116,7 +116,7 @@ describe('DamageToleranceEvaluationComponent', () => {
     expect(component.formGroup.get('submitToQC').disabled).toBeFalsy();
     component.formGroup.get('qcFeedback').setValue('');
     expect(component.formGroup.get('submitToQC').disabled).toBeTruthy();
-  });
+   });
   it('should render new dte section', () => {
     component.editable = true;
     component.ngOnChanges({
@@ -157,7 +157,6 @@ describe('DamageToleranceEvaluationComponent', () => {
     component.formGroup.get('dteStatus').setValue(2); //Closed
     fixture.detectChanges();
     expect(component.formGroup.get('dueDate').value).toBe('Completed');
-
     component.formGroup.get('dteStatus').setValue(3); //TBD
     fixture.detectChanges();
     expect(component.formGroup.get('dueDate').value).toBe('');
@@ -169,8 +168,16 @@ describe('DamageToleranceEvaluationComponent', () => {
     component.formGroup.get('dteStatus').setValue('');
     fixture.detectChanges();
     expect(component.formGroup.get('dueDate').value).toBe('');
-
-
   });
-
+//   it('should get ATA Codes from service', () => {
+//     //Example to use spyOn
+//     //const service: AppStateService = TestBed.get(AppStateService);
+//     //component.ATACodes$
+//     //spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
+//     //fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
+//   component.ATACodes$.subscribe(a => {
+//     console.log(a);
+//           expect(a.length).toBe(1);
+//     });
+// });
 });

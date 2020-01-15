@@ -22,6 +22,8 @@ import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluat
 import { DTEStatus } from '@app/common/models/enumerations';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
+import { FilterByPipe } from 'ng-pipes';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -32,6 +34,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;
+  ATACodes$: Observable<models.IATACode[]>;
+  ATACodes: models.IATACode[];
+  ataCodes2: models.IATACode[];
+  pipe = new FilterByPipe();
+  ataSubscription: Subscription;
 
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
@@ -95,10 +102,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       repairLocation: ['', [Validators.maxLength(100)]],
       mroDocuments: ['', [Validators.maxLength(150)]],
       legacyEA: ['', [Validators.maxLength(100)]],
+      ataCode1Dte: ['', []],
+      ataCode2Dte: ['', []],
     });
   }
 
   ngOnInit() {
+    this.ataSubscription = this.appStateService.getATACodes()
+    .subscribe(data => this.ATACodes = data);
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
     this.status$  = this.appStateService.getDTERepairStatus();
@@ -196,6 +207,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           }
         }
         this.formGroup.setControl('attachments', arr);
+      //   //Ata Codes
+      //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
+      //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
+
+      //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
+      //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
+      //   }
+      // }
       } else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
@@ -236,7 +255,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         });
       }
       this.formGroup.markAsPristine();
-    }
+        }
     if (!this.editable) {
       this.formGroup.disable({ emitEvent: false });
     }
@@ -274,5 +293,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   getAttachments(): FormArray {
     return <FormArray>this.formGroup.get('attachments');
+  }
+
+  onAlertCode1Change(alertCode1: string) {
+    this.loadAtaCodes2(alertCode1);
+    this.formGroup.controls['ataCode2Dte'].setValue('');
+  }
+
+  loadAtaCodes2(alertCode1: string) {
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
   }
 }

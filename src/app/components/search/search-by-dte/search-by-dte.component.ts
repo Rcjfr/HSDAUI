@@ -9,6 +9,8 @@ import { decimalsNumberMask } from '@app/common/masks';
 import * as _ from 'lodash';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as moment from 'moment';
+import { FilterByPipe } from 'ng-pipes';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'aa-search-by-dte',
@@ -17,6 +19,11 @@ import * as moment from 'moment';
 })
 export class SearchByDteComponent implements OnInit , OnChanges {
   @Input() criteria: any;
+  ATACodes$: Observable<models.IATACode[]>;
+  ATACodes: models.IATACode[];
+  ataCodes2: models.IATACode[];
+  pipe = new FilterByPipe();
+  ataSubscription: Subscription;
 
   dteForm = new FormGroup({
     dteStatus: new FormControl(),
@@ -82,7 +89,9 @@ export class SearchByDteComponent implements OnInit , OnChanges {
     engHours: new FormControl(),
     engRspam: new FormControl(),
     engSn: new FormControl(),
-    engMpn: new FormControl()
+    engMpn: new FormControl(),
+    ataCode1Dte: new FormControl(''),
+    ataCode2Dte: new FormControl(''),
   })
 
   dteStatus: string[] = [];
@@ -105,6 +114,8 @@ export class SearchByDteComponent implements OnInit , OnChanges {
   constructor(private appStateService: AppStateService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.ataSubscription = this.appStateService.getATACodes()
+    .subscribe(data => this.ATACodes = data);
 
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repInspStatus$ = this.appStateService.getRepairInspectionStatus();
@@ -273,6 +284,14 @@ export class SearchByDteComponent implements OnInit , OnChanges {
         } else {
           changes.criteria.currentValue.searchByDTE.dueDateTo = undefined;
         }
+        //Ata Codes
+        if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
+          this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
+
+          if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
+            this.dteForm.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
+          }
+        }
 
 
         this.dteForm.patchValue(changes.criteria.currentValue.searchByDTE, { emitEvent: false });
@@ -280,6 +299,15 @@ export class SearchByDteComponent implements OnInit , OnChanges {
         this.dteForm.reset({}, { emitEvent: false });
       }
     }
+  }
+
+  onAlertCode1Change(alertCode1: string) {
+    this.loadAtaCodes2(alertCode1);
+    this.dteForm.controls['ataCode2Dte'].setValue('');
+  }
+
+  loadAtaCodes2(alertCode1: string) {
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
   }
 
 }
