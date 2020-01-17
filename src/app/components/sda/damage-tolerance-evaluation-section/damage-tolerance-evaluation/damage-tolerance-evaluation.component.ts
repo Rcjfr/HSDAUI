@@ -108,8 +108,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
 
   ngOnInit() {
-    this.ataSubscription = this.appStateService.getATACodes()
-    .subscribe(data => this.ATACodes = data);
+    this.ATACodes$ = this.appStateService.getATACodes();
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
     this.status$  = this.appStateService.getDTERepairStatus();
@@ -207,14 +206,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           }
         }
         this.formGroup.setControl('attachments', arr);
-      //   //Ata Codes
-      //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
+      // //   //Ata Codes
+      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
+      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
 
-      //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      //   }
-      // }
+      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
+      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
+      // //   }
+      // // }
       } else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));

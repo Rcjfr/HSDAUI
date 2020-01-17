@@ -214,22 +214,10 @@
   </div>
 <div class="row">
   <div class="col-sm-4">
-    <aac-field-container label="ATA Code 1:">
-      <select tabindex="113" (change)='onAlertCode1Change($event.target.value)' class="form-control" formControlName="ataCode1Dte">
-    <option value="">Select ATA Code 1</option>
-    <option *ngFor="let ac of (ATACodes | uniq:'primaryCode')" [value]="ac.primaryCode">{{ac.primaryCode}} - {{ac.primaryCodeDescription}}</option>
-  </select>
-    </aac-field-container>
-    <aac-field-container label="ATA Code 2:">
-      <select tabindex="114" class="form-control" formControlName="ataCode2Dte">
-    <option value="">Select ATA Code 2</option>
-    <option *ngFor="let ac of ataCodes2" [value]="ac.secondaryId">{{ac.secondaryCode}} {{ac.secondaryCodeDescription}}</option>
-  </select>
-    </aac-field-container>
+    <aa-ata-code [parent]="formGroup" [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
+    </aa-ata-code>
   </div>
 </div>
-
-
 
   <div class="row">
     <div class="col-sm-12">
