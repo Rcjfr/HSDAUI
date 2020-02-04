@@ -48,7 +48,10 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <aa-ata-code [parent]="generalSectionFormGroup" [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
+      <aa-ata-code [parent]="generalSectionFormGroup" 
+      [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async"
+      ATACode1Label="ATA Code 1:" ATACode2Label="ATA Code 2:"
+      >
       </aa-ata-code>
     </div>
   </div>

@@ -35,8 +35,9 @@ import { Subscription } from 'rxjs/Subscription';
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
   @Input() editable = false;
   ATACodes$: Observable<models.IATACode[]>;
-  ATACodes: models.IATACode[];
-  ataCodes2: models.IATACode[];
+  ATACodesDte: models.IATACode[];
+  ataCodes2Dte: models.IATACode[];
+  alertCodes$: Observable<models.IBaseLookUp[]>;
   pipe = new FilterByPipe();
   ataSubscription: Subscription;
 
@@ -108,6 +109,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
 
   ngOnInit() {
+    this.alertCodes$ = this.appStateService.getAlertCodes();
     this.ATACodes$ = this.appStateService.getATACodes();
     this.dteStatus$ = this.appStateService.getDTEStatus();
     this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
@@ -294,12 +296,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     return <FormArray>this.formGroup.get('attachments');
   }
 
-  onAlertCode1Change(alertCode1: string) {
-    this.loadAtaCodes2(alertCode1);
-    this.formGroup.controls['ataCode2Dte'].setValue('');
-  }
+  // onAlertCode1Change(alertCode1: string) {
+  //   this.loadAtaCodes2(alertCode1);
+  //   this.formGroup.controls['ataCode2Dte'].setValue('');
+  // }
 
-  loadAtaCodes2(alertCode1: string) {
-    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], alertCode1);
-  }
+  // loadAtaCodes2(alertCode1: string) {
+  //   this.ataCodes2Dte = <models.IATACode[]>this.pipe.transform(this.ATACodesDte, ['primaryCode'], alertCode1);
+  // }
 }

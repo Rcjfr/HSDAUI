@@ -457,6 +457,14 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       pattern: 'Cycles must be numeric.',
       maxlength: 'Cycles must not be more than 20 numbers.'
     },
+    'ataCodesSectionFormGroup': {
+      'ataCode1': {
+        required: 'ATA Code 1 is required.'
+      },
+      'ataCode2': {
+        required: 'ATA Code 2 is required.'
+      }
+    },
     repairInspectionStatus: {
       required: 'Repair Inspection Status is required.'
     },

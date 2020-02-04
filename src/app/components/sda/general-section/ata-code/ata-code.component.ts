@@ -14,13 +14,17 @@ import { AuthService } from '@app/common/services';
 })
 export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() ATACodes: models.IATACode[];
-  ataCodes2: models.IATACode[];
+  @Input() ATACode1Label = 'ATA Code 1';
+  @Input() ATACode2Label = 'ATA Code 2';
+  @Input() SectionName = 'generalSection';
+  @Input() IsRequired = true;
+   ataCodes2: models.IATACode[];
   pipe = new FilterByPipe();
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('ataCodesSectionFormGroup', authService);
     this.formGroup = this.fb.group({
-      ataCode1: ['', Validators.required],
-      ataCode2: ['', Validators.required]
+    ataCode1: ['', this.IsRequired ? [Validators.required] : []],
+    ataCode2: ['', this.IsRequired ? [Validators.required] : []]
     });
   }
 
@@ -31,9 +35,10 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      this.getAlertCode2s(String(newSda.generalSection.ataCode1 || ''));
-      this.formGroup.patchValue({ ataCode1: newSda.generalSection.ataCode1 || '' });
-      this.formGroup.patchValue({ ataCode2: newSda.generalSection.ataCode2 || '' });
+      const section = newSda[this.SectionName];
+      this.getAlertCode2s(String(section && section.ataCode1 || ''));
+      this.formGroup.patchValue({ ataCode1: section && section.ataCode1 || '' });
+      this.formGroup.patchValue({ ataCode2: section && section.ataCode2 || '' });
     }
   }
   ngOnDestroy() {

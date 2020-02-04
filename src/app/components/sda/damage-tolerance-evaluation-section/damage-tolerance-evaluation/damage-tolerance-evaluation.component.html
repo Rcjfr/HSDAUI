@@ -214,8 +214,13 @@
   </div>
 <div class="row">
   <div class="col-sm-4">
-    <aa-ata-code [parent]="formGroup" [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async">
-    </aa-ata-code>
+    <aa-ata-code [parent]="formGroup" 
+      [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async"
+      ATACode1Label="ATA Code 1(DTE):" ATACode2Label="ATA Code 2(DTE):"
+      [IsRequired]="false"
+      SectionName="dteSection"
+      >
+      </aa-ata-code>
   </div>
 </div>
 
