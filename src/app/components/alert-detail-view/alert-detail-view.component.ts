@@ -460,6 +460,20 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.sdaForm.patchValue({ status: this.currentStatus });
     this.sda.statusUpdatedBy = `${this.statusUpdatedBy} - ${this.statusUpdatedByName}`;
     this.sda.statusUpdatedOn = new Date();
+    const formData = this.sdaForm.getRawValue();
+    const sdaDetail: ISda = Object.assign({}, this.sda,
+      {
+        lastModifiedBy: this.lastModifiedBy,
+        lastModifiedOn: this.lastModifiedOn,
+
+        status: this.sdaForm.get('status').value,
+      }
+    );
+    sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
+         if ((formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode1 === '' &&
+        formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode2 === '' )) {
+     this.sdaForm.get('damageToleranceEvaluationGroup.ataCodesSectionFormGroup').patchValue({ 'ataCode1' : '0' , 'ataCode2' : '00' });
+    }
     this.sda.comments = 'Update Damage Tolerance Evaluation Details';
     this.validateSdaForm();
     if (!this.sdaForm.get('damageToleranceEvaluationGroup').valid) {
@@ -537,7 +551,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       sdaDetail.dteSection.updatedByBadgeNo = this.statusUpdatedBy;
       sdaDetail.dteSection.updatedBy = this.statusUpdatedByName;
       sdaDetail.dteSection.updatedDate = this.lastModifiedOn;
+            if (!(formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode1 === '' &&
+           formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode2 === '' )) {
+     sdaDetail.dteSection.ataCode1Dte = Number(formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode1);
+     sdaDetail.dteSection.ataCode2Dte = Number(formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode2);
     }
+  }
 
 
     if (this.IsSDADirty(sdaDetail)) {

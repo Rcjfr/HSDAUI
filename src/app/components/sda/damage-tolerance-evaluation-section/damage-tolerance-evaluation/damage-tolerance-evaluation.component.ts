@@ -103,8 +103,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       repairLocation: ['', [Validators.maxLength(100)]],
       mroDocuments: ['', [Validators.maxLength(150)]],
       legacyEA: ['', [Validators.maxLength(100)]],
-      ataCode1Dte: ['', []],
-      ataCode2Dte: ['', []],
+      // ataCode1: ['', []],
+      // ataCode2: ['', []],
     });
   }
 
