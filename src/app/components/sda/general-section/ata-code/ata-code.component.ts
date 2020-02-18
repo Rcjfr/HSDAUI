@@ -16,9 +16,10 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   @Input() ATACodes: models.IATACode[];
   @Input() ATACode1Label = 'ATA Code 1';
   @Input() ATACode2Label = 'ATA Code 2';
-  @Input() SectionName = 'generalSection';
+  @Input() sectionname: string;
   @Input() IsRequired = true;
    ataCodes2: models.IATACode[];
+   ataCodes2Dte: models.IATACode[];
   pipe = new FilterByPipe();
   constructor(private fb: FormBuilder, authService: AuthService) {
     super('ataCodesSectionFormGroup', authService);
@@ -35,10 +36,18 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
-      const section = newSda[this.SectionName];
-      this.getAlertCode2s(String(section && section.ataCode1 || ''));
-      this.formGroup.patchValue({ ataCode1: section && section.ataCode1 || '' });
-      this.formGroup.patchValue({ ataCode2: section && section.ataCode2 || '' });
+       if (this.sectionname === 'generalSection') {
+        const section = newSda[this.sectionname];
+        this.getAlertCode2s(String(section && section.ataCode1 || ''));
+        this.formGroup.patchValue({ ataCode1: section && section.ataCode1 || '' });
+        this.formGroup.patchValue({ ataCode2: section && section.ataCode2 || '' });
+     }
+       if (this.sectionname === 'dteSection') {
+        const section = newSda[this.sectionname];
+        this.getAlertCode2sDte(String(section && section.ataCode1Dte || ''));
+        this.formGroup.patchValue({ ataCode1: section && section.ataCode1Dte || '' });
+        this.formGroup.patchValue({ ataCode2: section && section.ataCode2Dte || '' });
+     }
     }
   }
   ngOnDestroy() {
@@ -50,5 +59,12 @@ export class AtaCodeComponent extends BaseFormComponent implements OnInit, OnDes
     this.formGroup.get('ataCode2').markAsPristine();
     this.formGroup.get('ataCode2').markAsUntouched();
     this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], ataCode1 || '', true);
+  }
+
+  getAlertCode2sDte(ataCode1Dte: string) {
+    this.formGroup.get('ataCode2').setValue('');
+    this.formGroup.get('ataCode2').markAsPristine();
+    this.formGroup.get('ataCode2').markAsUntouched();
+    this.ataCodes2 = <models.IATACode[]>this.pipe.transform(this.ATACodes, ['primaryCode'], ataCode1Dte || '', true);
   }
 }
