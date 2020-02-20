@@ -979,7 +979,7 @@ export class SdaExportService {
           ],
           [
             this.getLabel('ATA Code1(DTE):'),
-            this.getFieldValue(sda.ataCode1Dte !== null ? `${sda.ataCode1Dte} - ${sda.ataCode1Desc}` : ''),
+            this.getFieldValue(sda.ataCode1Dte !== null ? `${sda.ataCode1Dte} - ${sda.ataCode1DteDesc}` : ''),
             this.getLabel('ATA Code2(DTE:'),
             this.getFieldValue(sda.ataCode2Dte !== null ? `${sda.ataCode2Dte} - ${sda.ataCode2DteDesc}` : '' )
           ],
