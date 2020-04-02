@@ -462,7 +462,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         //required: 'ATA Code 1 is required.'
       },
       'ataCode2': {
-        required: 'ATA Code 2 is required.'
+        //required: 'ATA Code 2 is required.'
       }
     },
     repairInspectionStatus: {
