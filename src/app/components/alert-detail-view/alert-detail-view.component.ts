@@ -470,6 +470,9 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       }
     );
     sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
+    if ((formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode1 !== '' && formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode2 === '' )) {
+      this.sdaForm.get('damageToleranceEvaluationGroup.ataCodesSectionFormGroup').patchValue({ 'ataCode2' : '00' });
+    }
          if ((formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode1 === '' &&
         formData.damageToleranceEvaluationGroup.ataCodesSectionFormGroup.ataCode2 === '' )) {
      this.sdaForm.get('damageToleranceEvaluationGroup.ataCodesSectionFormGroup').patchValue({ 'ataCode1' : '0' , 'ataCode2' : '00' });
