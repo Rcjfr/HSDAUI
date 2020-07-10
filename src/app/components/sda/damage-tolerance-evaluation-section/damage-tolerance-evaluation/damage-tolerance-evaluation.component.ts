@@ -45,7 +45,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
-  public uploader = new FileUploader({ autoUpload: true, maxFileSize: 10 * 1024 * 1024 });
+  public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
   displayName: string;
   createNumberMask = createNumberMask;
   public hsdaApiBaseUrl = environment.hsdaApiBaseUrl;
@@ -124,6 +124,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.get('submitToQC').enable();
       }
     });
+    this.uploader.onWhenAddingFileFailed = (item) => {
+      if (item.size > 50 * 1024 * 1024) {
+        this.toastrService.error('Attachment is too big. Max limit is 50 MB.', 'Error');
+        this.uploadElRef.nativeElement.value = '';
+
+        return;
+        };
+     };
     this.uploader.onAfterAddingFile = (fileItem) => {
       const arr = this.getAttachments();
       if (arr.controls.some((fg: FormGroup) => fg.controls.attachmentName.value.toLowerCase() === fileItem.file.name.toLowerCase())) {
