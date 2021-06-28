@@ -16,10 +16,16 @@ import { MockAppStateService } from '@app/common/services/mocks/mock-app-state.s
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';
 import { DamageToleranceEvaluationComponent } from './damage-tolerance-evaluation.component';
-import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
-import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
+import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+
+import { DteInspectionItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-inspection-item/dte-inspection-item.component';
+import { DteInspectionItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-inspection-items-array/dte-inspection-items-array.component';
+
 import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
+import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
+
 import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
 import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
 import { ConfirmationService } from 'primeng/api';
@@ -30,13 +36,24 @@ describe('DamageToleranceEvaluationComponent', () => {
   const sda1 = {
     dteSection: {
       attachments: [],
+      
       monitorItems: [
         {
           monitorItemID: 3,
           monitorItemDescription: 'm'
         }
       ],
-      thresholdItems: [
+      
+      thresholditems: [
+        {
+          thresholdItemID: 3,
+          inspectionThreshold: 'tt',
+          inspectionInterval: 'ti',
+          inspectionMethod: 'tim'
+        }
+      ],
+
+      inspectionitems: [
         {
           thresholdItemID: 3,
           inspectionThreshold: 'it',
@@ -44,6 +61,7 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
+      
       versionID: 759,
       dteStatus: 1,
       totalShipTime: '15574.11',
@@ -74,10 +92,12 @@ describe('DamageToleranceEvaluationComponent', () => {
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, DialogService, AuthService,
         ToastrService, ConfirmationService],
       declarations: [DamageToleranceEvaluationComponent,
+        DteMonitorItemComponent,        
         DteMonitorItemsArrayComponent,
-        DteThresholdItemsArrayComponent,
+        DteInspectionItemComponent,
+        DteInspectionItemsArrayComponent,
         DteThresholdItemComponent,
-        DteMonitorItemComponent,
+        DteThresholdItemsArrayComponent,       
         DteEngineComponent,
         DteComponentComponent
       ],

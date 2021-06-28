@@ -17,6 +17,8 @@ export * from './yes-no-both-options.model';
 export * from './dte-attachment.model';
 export * from './dte-monitor-item.model';
 export * from './dte-threshold-item.model';
+export * from './dte-inspection-item.model';
+
 export * from './dte-section.model';
 export * from './lookup-data.model';
 export * from './lazy-load-event.model';

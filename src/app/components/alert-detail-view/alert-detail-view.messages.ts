@@ -525,7 +525,8 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
     legacyEA: {
       maxlength: 'Legacy EA must not be more than 100 characters.'
     },
-     thresholdItems: {
+
+     inspectionitems: {
       inspectionThreshold: {
         required: 'Inspection Threshold is required.',
         maxlength: 'Inspection Threshold must not be more than 50 characters.'
@@ -539,6 +540,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
+    
     'dteComponentGroup': {
       controlOrderNumber: {
         maxlength: 'Control Order # must not be more than 50 characters.'
