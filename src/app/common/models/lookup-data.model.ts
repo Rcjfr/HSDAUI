@@ -11,6 +11,7 @@ export interface ILookupData {
   departments: IBaseLookUp[];
   detectionMethods: IBaseLookUp[];
   dteStatus: IBaseLookUp[];
+  dteInspectionTimeSpan: IBaseLookUp[];
   floorBoardConditions: IBaseLookUp[];
   corrosionLevelChangeReasons: IBaseLookUp[];
   repairDescriptionTypes: IBaseLookUp[];
