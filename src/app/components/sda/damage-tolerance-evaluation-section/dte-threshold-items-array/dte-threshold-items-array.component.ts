@@ -45,8 +45,6 @@ export class DteThresholdItemsArrayComponent implements OnInit {
     if (this.itemsFormArray.controls.length < 5) {
       this.itemsFormArray.push(DteThresholdItemComponent.initThreshold({}));
     }
-
-
      return false;
   }
 

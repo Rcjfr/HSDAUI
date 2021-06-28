@@ -37,6 +37,7 @@ export class DteThresholdItemComponent implements OnInit {
       wolt: new FormControl(val.wolt, [Validators.maxLength(50)]),
 
     });
+ 
   }
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) { }
 
