@@ -26,67 +26,66 @@ export class DteThresholdItemsArrayComponent implements OnInit {
   @Output() onDatePicked = new EventEmitter<any>();
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
 
-
-  public pickDate(date: any): void {this.onDatePicked.emit(date);
-}
-
   static buildItems(items: IDTEThresholdItem[]) {
-    const fa = new FormArray(items.map(item => DteThresholdItemComponent.initThreshold(item)),ArrayValidators.maxLength(5));
+    const fa = new FormArray(items.map(item => DteThresholdItemComponent.initThreshold(item)), ArrayValidators.maxLength(5));
 
     return fa;
   }
 
+  public pickDate(date: any): void {this.onDatePicked.emit(date);
+}
+
   constructor(private dialogService: DialogService) { }
 
-  ngOnInit() {   
+  ngOnInit() {
   }
 
   addThresholdItem() {
     if (this.itemsFormArray.controls.length < 5) {
       this.itemsFormArray.push(DteThresholdItemComponent.initThreshold({}));
     }
-    return false;
+
+
+     return false;
   }
 
   deleteThresholdItem(index: number) {
-   
+
     this.dialogService.addDialog(ConfirmComponent, {title: 'Confirm?', message: 'Are you sure you want to delete this threshold item?'})
-    .subscribe((isConfirmed) => {if (isConfirmed) {this.itemsFormArray.removeAt(index);} });
+    .subscribe((isConfirmed) => {if (isConfirmed) {this.itemsFormArray.removeAt(index); } });
 
     return false;
   }
 
-  trackCheck(index:number)
-  {   
- 
-    var a = 0 ;
+  trackCheck(index: number) {
+
+    let a = 0 ;
 
     // (<any>Object).values(this.itemsFormArray.controls).forEach(control =>
     //    { control.patchValue([ {isActiveTracking: true}, {ThresholdTFC: "999999999999999"} ]) }
-       
+
     //    );
 
 
-    (<any>threshold).values(this.itemsFormArray.controls).forEach(control =>
-        { 
-        this.itemsFormArray.controls[index].patchValue([ {ThresholdTFC: "000000000000000000" } ]);
+    (<any>threshold).values(this.itemsFormArray.controls).forEach(control => {
+        this.itemsFormArray.controls[index].patchValue([ {ThresholdTFC: '000000000000000000' } ]);
         }
-        
+
         );
 
-    for (var threshold of this.itemsFormArray.value)
+    for (const threshold of this.itemsFormArray.value)
      {
-        this.itemsFormArray.patchValue([ {ThresholdTFC: "999999999999999"} ]);
+        this.itemsFormArray.patchValue([ {ThresholdTFC: '999999999999999'} ]);
         this.itemsFormArray.patchValue([ {IsActiveTracking: false} ]);
-        this.itemsFormArray.patchValue([ {ThresholdTFH: "11111111111111"} ]);
-        // this.itemsFormArray.controls[a].patchValue([ {IsActiveTracking: false} ]);   
-        
+        this.itemsFormArray.patchValue([ {ThresholdTFH: '11111111111111'} ]);
+        // this.itemsFormArray.controls[a].patchValue([ {IsActiveTracking: false} ]);
+
       a++;
 
-    }     
-   
-   
+    }
+
+
   }
- 
+
 }
 

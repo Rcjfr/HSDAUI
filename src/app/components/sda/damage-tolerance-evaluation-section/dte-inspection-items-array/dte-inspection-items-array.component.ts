@@ -23,7 +23,7 @@ export class DteInspectionItemsArrayComponent implements OnInit {
   @Input() public itemsFormArray = new FormArray([]);
 
   static buildItems(items: IDTEInspectionItem[]) {
-    const fa = new FormArray(items.map(item => DteInspectionItemComponent.initInspection(item)),ArrayValidators.maxLength(5));
+    const fa = new FormArray(items.map(item => DteInspectionItemComponent.initInspection(item)), ArrayValidators.maxLength(5));
 
     return fa;
   }

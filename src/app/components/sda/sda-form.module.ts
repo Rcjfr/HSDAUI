@@ -113,7 +113,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     DamageToleranceEvaluationComponent,
     DteComponentComponent,
     DteEngineComponent
-    
+
   ],
   declarations: [
     GeneralSectionFormComponent,

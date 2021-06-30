@@ -13,7 +13,7 @@ import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControl
   selector: 'aa-dte-inspection-item',
   templateUrl: './dte-inspection-item.component.html',
   styleUrls: ['./dte-inspection-item.component.less']
- 
+
 })
 
 export class DteInspectionItemComponent implements OnInit {
@@ -25,28 +25,28 @@ export class DteInspectionItemComponent implements OnInit {
 
   DTEIspectionTimeSpan$: Observable<models.IBaseLookUp[]>;
 
- 
+
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
-     
+
       inspectionThresholdTFH: new FormControl(val.inspectionThresholdTFH, [Validators.maxLength(50)]),
       inspectionThresholdTFC: new FormControl(val.inspectionThresholdTFC, [Validators.maxLength(50)]),
-      inspectionThresholdSpanID: new FormControl(val.inspectionThresholdSpanID, [Validators.maxLength(50)]), 
+      inspectionThresholdSpanID: new FormControl(val.inspectionThresholdSpanID, [Validators.maxLength(50)]),
       inspectionIntervalTFC: new FormControl(val.inspectionIntervalTFC, [Validators.maxLength(50)]),
       inspectionIntervalTFH: new FormControl(val.inspectionIntervalTFH, [Validators.maxLength(50)]),
       inspectionIntervalSpanID: new FormControl(val.inspectionIntervalSpanID, [Validators.maxLength(50)]),
       inspectionMethod: new FormControl(val.inspectionMethod, [Validators.maxLength(50)]),
-      
+
     });
   }
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) {
-   
+
    }
 
   ngOnInit() { }
- 
+
   remove() {
     this.removed.emit(this.index);
 

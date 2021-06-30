@@ -541,7 +541,7 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
-    
+
     'dteComponentGroup': {
       controlOrderNumber: {
         maxlength: 'Control Order # must not be more than 50 characters.'

@@ -5,6 +5,5 @@ export interface IDTEThresholdItem {
     ThresholdTFH?: string;
     ThresholdDate?: Date;
     ThresholdStage1Duration?: number;
-    WOL?:number;   
+    WOL?: number;
   }
-  

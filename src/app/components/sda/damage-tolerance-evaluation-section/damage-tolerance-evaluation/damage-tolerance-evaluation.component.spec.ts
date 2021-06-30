@@ -37,14 +37,14 @@ describe('DamageToleranceEvaluationComponent', () => {
   const sda1 = {
     dteSection: {
       attachments: [],
-      
+
       monitorItems: [
         {
           monitorItemID: 3,
           monitorItemDescription: 'm'
         }
       ],
-      
+
       thresholditems: [
         {
           thresholdItemID: 3,
@@ -62,7 +62,7 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
-      
+
       versionID: 759,
       dteStatus: 1,
       totalShipTime: '15574.11',
@@ -93,12 +93,12 @@ describe('DamageToleranceEvaluationComponent', () => {
       providers: [{ provide: AppStateService, useClass: MockAppStateService }, DialogService, AuthService,
         ToastrService, ConfirmationService],
       declarations: [DamageToleranceEvaluationComponent,
-        DteMonitorItemComponent,        
+        DteMonitorItemComponent,
         DteMonitorItemsArrayComponent,
         DteInspectionItemComponent,
         DteInspectionItemsArrayComponent,
         DteThresholdItemComponent,
-        DteThresholdItemsArrayComponent,       
+        DteThresholdItemsArrayComponent,
         DteEngineComponent,
         DteComponentComponent
       ],
