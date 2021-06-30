@@ -59,30 +59,30 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
   trackCheck(index: number) {
 
-    let a = 0 ;
+    //let a = 0 ;
 
-    // (<any>Object).values(this.itemsFormArray.controls).forEach(control =>
-    //    { control.patchValue([ {isActiveTracking: true}, {ThresholdTFC: "999999999999999"} ]) }
+    //  (<any>Object).values(this.itemsFormArray.controls).forEach(control =>
+    //     { control.patchValue([ {isActiveTracking: true}, {ThresholdTFC: "999999999999999"} ]) }
 
-    //    );
+    //     );
 
 
-    (<any>threshold).values(this.itemsFormArray.controls).forEach(control => {
-        this.itemsFormArray.controls[index].patchValue([ {ThresholdTFC: '000000000000000000' } ]);
-        }
+    // (<any>threshold).values(this.itemsFormArray.controls).forEach(control => {
+    //     this.itemsFormArray.controls[index].patchValue([ {ThresholdTFC: '000000000000000000' } ]);
+    //     }
 
-        );
+    //     );
 
-    for (const threshold of this.itemsFormArray.value)
-     {
-        this.itemsFormArray.patchValue([ {ThresholdTFC: '999999999999999'} ]);
-        this.itemsFormArray.patchValue([ {IsActiveTracking: false} ]);
-        this.itemsFormArray.patchValue([ {ThresholdTFH: '11111111111111'} ]);
-        // this.itemsFormArray.controls[a].patchValue([ {IsActiveTracking: false} ]);
+    // for (const threshold of this.itemsFormArray.value)
+    //  {
+    //     this.itemsFormArray.patchValue([ {ThresholdTFC: '999999999999999'} ]);
+    //     this.itemsFormArray.patchValue([ {IsActiveTracking: false} ]);
+    //     this.itemsFormArray.patchValue([ {ThresholdTFH: '11111111111111'} ]);
+    //      this.itemsFormArray.controls[a].patchValue([ {IsActiveTracking: false} ]);
 
-      a++;
+    //   a++;
 
-    }
+    // }
 
 
   }
