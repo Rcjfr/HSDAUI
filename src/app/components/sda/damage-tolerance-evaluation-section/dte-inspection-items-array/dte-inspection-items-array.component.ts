@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';

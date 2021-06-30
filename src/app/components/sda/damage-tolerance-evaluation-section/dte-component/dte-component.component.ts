@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit, SimpleChanges, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { BaseFormComponent } from '@app/components/sda/base-form.component';

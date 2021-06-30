@@ -8,7 +8,6 @@ export interface IDTEInspectionItem {
   inspectionIntervalTFH?: string;
   inspectionIntervalTFC?: string;
   inspectionIntervalSpanID?: string;
-  inspectionMethod?: string;
- 
+  inspectionMethod?: string; 
 }
 

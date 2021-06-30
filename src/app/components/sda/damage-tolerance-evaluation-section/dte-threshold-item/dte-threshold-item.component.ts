@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { IDTEThresholdItem } from '@app/common/models';
 import * as models from '@app/common/models';
@@ -5,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 import { AppStateService, AuthService } from '@app/common/services';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dte-threshold-items-array.component';
-
 @Component({
   selector: 'aa-dte-threshold-item',
   templateUrl: './dte-threshold-item.component.html',

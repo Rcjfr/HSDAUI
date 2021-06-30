@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Defines all of the validation messages for the form.
 
 export const ValidationMessages: { [key: string]: { [key: string]: any } } = {

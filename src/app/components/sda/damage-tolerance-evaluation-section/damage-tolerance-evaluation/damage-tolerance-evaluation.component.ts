@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
@@ -159,7 +161,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.uploadElRef.nativeElement.value = '';
 
         return;
-        };
+        }
      };
     
      this.uploader.onAfterAddingFile = (fileItem) => {
@@ -170,7 +172,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.uploadElRef.nativeElement.value = '';
 
         return;
-      };
+      }
       fileItem.withCredentials = false;
       this.appStateService.uploadAttachment();
     };
@@ -355,7 +357,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
     
 
-  populateTWD(index : number) {
+  populateTWD() {
   
    
     //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
@@ -368,7 +370,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
     this.trackLast = false;
           
-    for (var threshold of this.viewThresholds.itemsFormArray.value)
+    for (const threshold of this.viewThresholds.itemsFormArray.value)
      {    
              
       if (threshold.IsActiveTracking == true)

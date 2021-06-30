@@ -5,12 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {DatePipe} from '@angular/common';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgPipesModule } from 'ng-pipes';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ScrollToModule } from 'ng2-scroll-to-el';
+
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { AccordionModule, TypeaheadModule, TabsModule, ModalModule, AlertModule } from 'ngx-bootstrap';
