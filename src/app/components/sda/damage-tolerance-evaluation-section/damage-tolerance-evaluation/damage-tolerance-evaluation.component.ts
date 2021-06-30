@@ -414,9 +414,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
     this.trackLast = false;
 
-    for (const threshold of this.viewThresholds.itemsFormArray.value)
-     {
-
+    for (const threshold of this.viewThresholds.itemsFormArray.value) {
 
       if (threshold.IsActiveTracking === true) {
 
@@ -442,8 +440,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     }
 
 
+
   }
 
+}
 
  //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
     //this.appStateService.loadAircraftInfo('775', new Date());
@@ -511,5 +511,5 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   //   this.ataCodes2Dte = <models.IATACode[]>this.pipe.transform(this.ATACodesDte, ['primaryCode'], alertCode1);
   // }
 
-
 }
+
