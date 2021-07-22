@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -57,8 +58,13 @@ import { CpcpDispositionSectionComponent } from '@app/components/sda/cpcp-dispos
 
 // Damage Tolerance Evaluation Section
 import { DamageToleranceEvaluationComponent } from '@app/components/sda/damage-tolerance-evaluation-section/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
+
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
+
+import { DteInspectionItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-inspection-item/dte-inspection-item.component';
+import { DteInspectionItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-inspection-items-array/dte-inspection-items-array.component';
+
 import { DteMonitorItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-item/dte-monitor-item.component';
 import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-monitor-items-array/dte-monitor-items-array.component';
 
@@ -68,7 +74,6 @@ import { RepairDetailsSectionComponent } from '@app/components/sda/repair-detail
 import { CurrentStatusSectionComponent } from '@app/components/sda/current-status-section/current-status-section/current-status-section.component';
 import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
 import { DteComponentComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-component/dte-component.component';
-
 
 
 @NgModule({
@@ -107,7 +112,8 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     CpcpDispositionSectionComponent,
     DamageToleranceEvaluationComponent,
     DteComponentComponent,
-    DteEngineComponent,
+    DteEngineComponent
+
   ],
   declarations: [
     GeneralSectionFormComponent,
@@ -133,10 +139,13 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     DamageToleranceEvaluationComponent,
     DteThresholdItemComponent,
     DteThresholdItemsArrayComponent,
+    DteInspectionItemComponent,
+    DteInspectionItemsArrayComponent,
     DteMonitorItemComponent,
     DteMonitorItemsArrayComponent,
     DteComponentComponent,
     DteEngineComponent
+
   ],
   providers: []
 })

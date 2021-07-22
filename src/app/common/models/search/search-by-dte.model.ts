@@ -19,9 +19,9 @@ export interface ISearchByDTE {
   rdasNumber?: any;
   etdNumber?: any;
   esmSubItemNumber?: any;
-  inspectionThreshold?: any;
-  inspectionInterval?: any;
-  inspectionMethod?: any;
+  // inspectionThreshold?: any;
+  // inspectionInterval?: any;
+  // inspectionMethod?: any;
   monitorItemDescription?: any;
   comments?: any;
   qcFeedback?: any;

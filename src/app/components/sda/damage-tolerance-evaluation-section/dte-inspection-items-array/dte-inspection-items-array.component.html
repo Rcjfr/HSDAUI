@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  
+ <div class="panel-heading">DTE Inspections
+
+ <span class="pull-right">
+      <a href="#" *ngIf="editable && itemsFormArray.controls.length<5" (click)="addInspectionItem()">Add Another Inspection Item</a>
+      <p class="text-danger" *ngIf="editable && itemsFormArray.controls.length==5">Maximum of 5 items are allowed.</p>
+ </span>
+
+ <div class="panel-body">
+
+    <aa-dte-inspection-item *ngFor="let item of itemsFormArray.controls; let i=index"
+                           [index]="i"
+                           [item]="item"
+                           [message]="errorMessages && errorMessages[i]"
+                           [editable]="editable" (removed)="deleteInspectionItem($event)">
+    </aa-dte-inspection-item>
+
+ </div>
+
+</div>
+
+

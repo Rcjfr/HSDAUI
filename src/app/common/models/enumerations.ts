@@ -24,6 +24,13 @@ export enum DTEStatus {
   TBD = 3
 }
 
+export enum DTEIspectionTimeSpan {
+  Days = 1,
+  Months = 2,
+  Years = 3
+}
+
+
 export enum CorrosionLevel {
   Level1 = 1,
   Level2 = 2,

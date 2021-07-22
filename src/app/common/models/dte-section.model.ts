@@ -1,5 +1,6 @@
 import { IDTEAttachment } from './dte-attachment.model';
 import { IDTEMonitorItem } from './dte-monitor-item.model';
+import { IDTEInspectionItem } from './dte-inspection-item.model';
 import { IDTEThresholdItem } from './dte-threshold-item.model';
 export interface IDTESection {
   versionID?: number;
@@ -27,6 +28,7 @@ export interface IDTESection {
   dueDate?: string
   attachments?: IDTEAttachment[];
   thresholdItems?: IDTEThresholdItem[];
+  inspectionItems?: IDTEInspectionItem[];
   monitorItems?: IDTEMonitorItem[];
   taskCardNo?: string;
   repairDate?: Date;
