@@ -58,7 +58,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
 
   @ViewChild('uploadEl') uploadElRef: ElementRef
-
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
 
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
@@ -355,7 +354,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
 
     //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-    this.appStateService.loadAircraftInfo('775', new Date());
+    //this.formGroup.get('aircraftInfo$');
+    // this.appStateService.loadAircraftInfo('207', new Date());
 
 
     this.formGroup.get('FHcountDown').reset();
