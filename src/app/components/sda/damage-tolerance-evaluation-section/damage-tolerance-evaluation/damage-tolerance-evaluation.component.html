@@ -240,12 +240,16 @@
                                        [errorMessages]="displayMessage?.thresholdItems" 
                                        [itemsFormArray]="formGroup.get('thresholdItems')"> 
         </aa-dte-threshold-items-array>
+
+        
         
         <aa-dte-inspection-items-array formArrayName="inspectionItems" 
                                        [editable]="editable" 
                                        [errorMessages]="displayMessage?.inspectionItems" 
                                        [itemsFormArray]="formGroup.get('inspectionItems')"> 
-        </aa-dte-inspection-items-array>  
+        </aa-dte-inspection-items-array> 
+        
+        <!-- <input type="checkbox" [formControlName]="inspectionItems.index"> -->
         
           <!-- TWD -->
         <div class="row">
@@ -262,8 +266,25 @@
    
 
            <div class="panel-body">
- 
+
+            <div class="row">
+     
             <div class="col-sm-3">
+              <aac-field-container label="Current FH:" >
+               <input class="form-control"  formControlName="currentFH" tabindex='89'>
+              </aac-field-container>
+             </div>
+
+             <div class="col-sm-3">
+              <aac-field-container label="Current FC:">
+               <input class="form-control" formControlName="currentFC" tabindex='90' >
+              </aac-field-container>
+             </div>
+            </div>
+            
+            <div class="row">
+            
+          <div class="col-sm-3">
              <aac-field-container label="FH remaining:" >
               <input class="form-control"  formControlName="FHcountDown" tabindex='89'>
              </aac-field-container>

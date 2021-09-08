@@ -11,6 +11,7 @@ import { IDTEThresholdItem } from '@app/common/models';
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { ArrayValidators } from '@app/common/validators/array-validators';
 import { ngControlStatusHost } from '@angular/forms/src/directives/ng_control_status';
+import { ColdObservable } from 'rxjs/testing/ColdObservable';
 
 @Component({
   selector: 'aa-dte-threshold-items-array',
@@ -57,33 +58,11 @@ export class DteThresholdItemsArrayComponent implements OnInit {
     return false;
   }
 
-  trackCheck(index: number) {
-
-    //let a = 0 ;
-
-    //  (<any>Object).values(this.itemsFormArray.controls).forEach(control =>
-    //     { control.patchValue([ {isActiveTracking: true}, {ThresholdTFC: "999999999999999"} ]) }
-
-    //     );
-
-
-    // (<any>threshold).values(this.itemsFormArray.controls).forEach(control => {
-    //     this.itemsFormArray.controls[index].patchValue([ {ThresholdTFC: '000000000000000000' } ]);
-    //     }
-
-    //     );
-
-    // for (const threshold of this.itemsFormArray.value)
-    //  {
-    //     this.itemsFormArray.patchValue([ {ThresholdTFC: '999999999999999'} ]);
-    //     this.itemsFormArray.patchValue([ {IsActiveTracking: false} ]);
-    //     this.itemsFormArray.patchValue([ {ThresholdTFH: '11111111111111'} ]);
-    //      this.itemsFormArray.controls[a].patchValue([ {IsActiveTracking: false} ]);
-
-    //   a++;
-
-    // }
-
+  trackCheck(trackindex: number) {
+      this.itemsFormArray.controls.forEach((element, index) => {
+      if (index != trackindex) 
+       element.get('IsActiveTracking').setValue(false);
+     });
 
   }
 
