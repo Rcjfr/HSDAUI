@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActionTypes } from './../actions/logged-in-user';
 import { ActionReducer, Action, createSelector } from '@ngrx/store';
 import { IAlert, ISdaListView, Status, SearchType } from '@app/common/models';
@@ -194,7 +196,7 @@ export function reducer(state: StateRecord = makeInitialState(), action: selecte
       return state;
     }
   }
-};
+}
 
 // Selector Functions
 export const getSelectedSda = (state: State) => state.sda;
