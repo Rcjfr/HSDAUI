@@ -1,12 +1,21 @@
-<!-- INSPECTION THRESHOLD -->
-
 <div class="panel-body">
+ 
+ <div class="panel panel-default">
+ 
+   <div class="panel-body">
 
-  
-<div class="panel panel-default">
-  <div class="panel-body">
+    <!-- INSPECTION THRESHOLD -->
+    <div class="row" [formGroup]="item" >
 
-<div class="row" [formGroup]="item" >
+
+  <div class="col-sm-12">
+
+    <span class="pull-right">
+      <a href="#" *ngIf="editable" (click)="remove()">Delete</a>
+    </span>
+
+   
+  </div>
 
   <div class="col-sm-1">
     <h4>{{index+1}}.</h4>
@@ -18,43 +27,46 @@
   </div>
 
   <div class="col-sm-2">
-    <aac-field-container label="TFH" >
+    <aac-field-container label="TFH:" >
       <input class="form-control" formControlName="inspectionThresholdTFH" [tabindex]="133+3*index+3">
     </aac-field-container>
   </div>
 
   <div class="col-sm-2">
-    <aac-field-container label="TFC" >
+    <aac-field-container label="TFC:" >
       <input class="form-control" formControlName="inspectionThresholdTFC" [tabindex]="133+3*index+2">
     </aac-field-container>
   </div>
-  
+
   <div class="col-sm-2">
-    <aac-field-container label="or">
+    <aac-field-container label="or" >
+      <input class="form-control" formControlName="inspectionThresholdTS" [tabindex]="133+3*index+2">
+    </aac-field-container>
+  </div>
+   
+  <div class="col-sm-2">
+    <aac-field-container>
       <select class="form-control" [tabindex]="133+3*index+3" formControlName="inspectionThresholdSpanID">
         <option value=""></option>
         <option value="1">Days</option>
         <option value="2">Months</option>
         <option value="3">Years</option>
-         <!-- <option *ngFor="let ts of inspectionThresholdSpanID$ | async" [value]="ts.id">{{ts.description}}</option> -->
       </select>
     </aac-field-container>
   </div>
 
-  <div class="col-sm-3">
+  <div class="col-sm-2">
    <aac-field-container label="Inspection Method:">
    <input class="form-control" formControlName="inspectionMethod" [tabindex]="133+3*index+3">
    </aac-field-container>
   </div>
 
-  <div class="col-sm-1">
-   <a href="#" *ngIf="editable" (click)="remove()">Delete</a>
-  </div>
-</div>
 
 
-<!-- INSPECTION INTERVAL -->
-<div class="row" [formGroup]="item">
+    </div>
+
+   <!-- INSPECTION INTERVAL -->
+   <div class="row" [formGroup]="item">
 
   <div class="col-sm-1">
   </div>
@@ -77,26 +89,29 @@
   </div>
 
   <div class="col-sm-2">
-    <aac-field-container label="or">
+    <aac-field-container  label="or">
+      <input class="form-control" formControlName="inspectionIntervalTS" [tabindex]="133+3*index+2">
+    </aac-field-container>
+  </div>
+
+  <div class="col-sm-2">
+    <aac-field-container>
       <select class="form-control" [tabindex]="133+3*index+3" formControlName="inspectionIntervalSpanID">
         <option value=""></option>
         <option value="1">Days</option>
         <option value="2">Months</option>
         <option value="3">Years</option>
-
-        <!-- <option *ngFor="let ts of inspectionIntervalSpanID$ | async" [value]="ts.id">{{ts.description}}</option> -->
       </select>
     </aac-field-container>
   </div>
 
 
 
-</div>
-</div>
-</div>
+   </div>
 
+  </div>
 
-
+ </div>
 
 </div>
 

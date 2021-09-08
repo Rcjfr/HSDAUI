@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Action } from '@ngrx/store';
 import * as models from '@app/common/models/index';
 import { ISdaListResult, SearchType } from '@app/common/models';
@@ -81,7 +84,7 @@ export const ActionTypes = {
 export class OperationFailedAction implements Action {
   public type = ActionTypes.OPERATION_FAILED;
   public payload: any
-  constructor() { }
+  constructor() {}
 }
 
 export class LoadNoseNumbersAction implements Action {

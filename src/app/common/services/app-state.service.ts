@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@app/common/store/app-store';
@@ -238,7 +241,7 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.LoadChangeLogAction(changelog));
   }
 
-  loadNoseNumbers(filter: string = '') {
+  loadNoseNumbers(filter = '') {
     this.store.dispatch(new selectedAlertActions.LoadNoseNumbersAction(filter));
   }
 
