@@ -32,7 +32,7 @@ export class DteInspectionItemComponent implements OnInit {
 
       inspectionThresholdTFH: new FormControl(val.inspectionThresholdTFH, [Validators.maxLength(50)]),
       inspectionThresholdTFC: new FormControl(val.inspectionThresholdTFC, [Validators.maxLength(50)]),
-      inspectionThresholdTS: new FormControl(val.inspectionThresholdTS, [Validators.maxLength(50)]),   
+      inspectionThresholdTS: new FormControl(val.inspectionThresholdTS, [Validators.maxLength(50)]),
       inspectionThresholdSpanID: new FormControl(val.inspectionThresholdSpanID, [Validators.maxLength(50)]),
       inspectionIntervalTFC: new FormControl(val.inspectionIntervalTFC, [Validators.maxLength(50)]),
       inspectionIntervalTFH: new FormControl(val.inspectionIntervalTFH, [Validators.maxLength(50)]),

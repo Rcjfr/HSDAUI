@@ -364,43 +364,29 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   populateTWD() {
 
-    //this.aircraftInfo$ = this.appStateService.getCurrentTimeandCycles('3AB', new Date());
-   
-    // this.general$ = Observable.create((observer: Observer<string>) => {
-    //   observer.next(this.gs.formGroup.get('station').value);
-    
-   //this.general$.subscribe(event => event.aircraftNo);
-
-   //this.ac = this.viewAircraftInfo.aircraftInfo;
-   //this.g = this.viewgeneral.generalSectionFormGroup.controls;
-   //const a = this.viewAircraftInfo.formGroup.get('aircraftNo');    
-    
-    // this.aircraftInfo$.subscribe(event => console.log(event));
-    //console.log(this.a);
- 
-    //this.aircraftInfo$.subscribe(ac => this.formGroup.get('currentFH').setValue(ac.noseNumber));
-    this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-    this.appStateService.loadAircraftInfo('7AB', new Date());
-    //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber)); 
-      
-    //this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-
-
-    
-    //this.aircraftInfo$.subscribe(event => event.noseNumber);  
-    //console.log(this.aircraftInfo$.subscribe(event => event.noseNumber.valueOf));
-    
+  //this.aircraftInfo$ = this.appStateService.getCurrentTimeandCycles('3AB', new Date());
+  // this.general$ = Observable.create((observer: Observer<string>) => {
+  //observer.next(this.gs.formGroup.get('station').value);
+  //this.general$.subscribe(event => event.aircraftNo);
+  //this.ac = this.viewAircraftInfo.aircraftInfo;
+  //this.g = this.viewgeneral.generalSectionFormGroup.controls;
+  //const a = this.viewAircraftInfo.formGroup.get('aircraftNo');
+  // this.aircraftInfo$.subscribe(event => console.log(event));
+  //console.log(this.a);
+  //this.aircraftInfo$.subscribe(ac => this.formGroup.get('currentFH').setValue(ac.noseNumber));
+   this.aircraftInfo$ = this.appStateService.getAircraftInfo();
+   this.appStateService.loadAircraftInfo('7AB', new Date());
+  //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber));
+  //this.aircraftInfo$ = this.appStateService.getAircraftInfo();
+  //this.aircraftInfo$.subscribe(event => event.noseNumber);
+  //console.log(this.aircraftInfo$.subscribe(event => event.noseNumber.valueOf));
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
     this.formGroup.get('dueDate').reset();
-
-    this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFH').setValue(event.totalShipTime));  
+    this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFH').setValue(event.totalShipTime));
     this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFC').setValue(event.cycles));
-   
     this.trackLast = false;
-     
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
-
       if (threshold.IsActiveTracking === true) {
 
            //Date calculations
