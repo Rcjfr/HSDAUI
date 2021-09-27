@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Component, ElementRef, ViewChild, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { GenericValidator, Expressions } from '@app/common/validators/generic-validator';

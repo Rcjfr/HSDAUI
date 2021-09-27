@@ -21,8 +21,8 @@
     <h4>{{index+1}}.</h4>
   </div>
 
-  <div class="col-sm-1">
-    <aac-field-container label="Inspection Threshold:" >
+  <div class="col-sm-1" >
+    <aac-field-container  label="Inspection Threshold:" >
     </aac-field-container>
   </div>
 
@@ -38,15 +38,16 @@
     </aac-field-container>
   </div>
 
-  <div class="col-sm-2">
+  <!-- <div class="col-sm-2" >
     <aac-field-container label="or" >
       <input class="form-control" formControlName="inspectionThresholdTS" [tabindex]="133+3*index+2">
     </aac-field-container>
-  </div>
+  </div> -->
    
-  <div class="col-sm-2">
-    <aac-field-container>
-      <select class="form-control" [tabindex]="133+3*index+3" formControlName="inspectionThresholdSpanID">
+  <div class="col-sm-3">
+    <aac-field-container  label="or">
+      <input class="form-control" style="width:40%; float:left" formControlName="inspectionThresholdTS" [tabindex]="133+3*index+2">
+      <select class="form-control" style="width:50%; float:right" [tabindex]="133+3*index+3" formControlName="inspectionThresholdSpanID">
         <option value=""></option>
         <option value="1">Days</option>
         <option value="2">Months</option>
@@ -88,15 +89,16 @@
     </aac-field-container>
   </div>
 
-  <div class="col-sm-2">
+  <!-- <div class="col-sm-2">
     <aac-field-container  label="or">
       <input class="form-control" formControlName="inspectionIntervalTS" [tabindex]="133+3*index+2">
     </aac-field-container>
-  </div>
+  </div> -->
 
-  <div class="col-sm-2">
-    <aac-field-container>
-      <select class="form-control" [tabindex]="133+3*index+3" formControlName="inspectionIntervalSpanID">
+  <div class="col-sm-3">
+    <aac-field-container  label="or">
+      <input class="form-control" style="width:40%; float:left" formControlName="inspectionIntervalTS" [tabindex]="133+3*index+2">
+      <select class="form-control" style="width:50%; float:right" [tabindex]="133+3*index+3" formControlName="inspectionIntervalSpanID">
         <option value=""></option>
         <option value="1">Days</option>
         <option value="2">Months</option>
