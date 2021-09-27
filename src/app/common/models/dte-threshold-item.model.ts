@@ -1,8 +1,8 @@
 export interface IDTEThresholdItem {
     thresholdItemID?: number;
     IsActiveTracking?: string;
-    ThresholdTFC?: string;
-    ThresholdTFH?: string;
+    thresholdTFC?: string;
+    thresholdTFH?: string;
     ThresholdDate?: Date;
     ThresholdStage1Duration?: number;
     WOL?: number;

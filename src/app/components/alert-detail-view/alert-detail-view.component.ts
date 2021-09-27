@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ISdaStatus } from '@app/common/models/sda-status.model';
 import { ILoadChangeLog } from '@app/common/models/payload/change-log.model';
 import { IChangeLog } from '@app/common/models/change-log.model';
@@ -558,7 +560,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
       sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteComponentGroup');
       sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteEngineGroup');
-      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.ThresholdTFC || t.ThresholdTFH || t.ThresholdDate || t.ThresholdStage1Duration);
+      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.thresholdTFC || t.thresholdTFH || t.ThresholdDate || t.ThresholdStage1Duration);
       sdaDetail.dteSection.inspectionItems = sdaDetail.dteSection.inspectionItems.filter(t => t.inspectionInterval || t.inspectionMethod || t.inspectionThreshold);
       sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
       sdaDetail.dteSection.attachments = sdaDetail.dteSection.attachments.filter(t => t.attachmentName);
