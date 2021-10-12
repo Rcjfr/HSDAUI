@@ -18,7 +18,7 @@
         <div class="col-sm-3">
         
           <aac-checkbox-container label="Track this Threshold" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
-            <input type="checkbox" tabindex="164" formControlName="IsActiveTracking" (click)="track()">
+            <input type="checkbox" tabindex="164" formControlName="isActiveTracking" (click)="track()">
           </aac-checkbox-container>     
         
         </div> 
@@ -59,14 +59,14 @@
       
        <aac-field-container 
        label="or" 
-       [attr.for]="ThresholdDate.idDatePicker" 
+       [attr.for]="thresholdDate.idDatePicker" 
        (click)="clearThresholdRadio()"
        required="false">
     
       <datetime [timepicker]="false" 
-                #ThresholdDate 
+                #thresholdDate 
                 [tabindex]='3' 
-                formControlName="ThresholdDate" 
+                formControlName="thresholdDate" 
                 [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}">
       </datetime>
 
