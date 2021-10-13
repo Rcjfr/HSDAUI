@@ -61,7 +61,7 @@ export class DteThresholdItemsArrayComponent implements OnInit {
   trackCheck(trackindex: number) {
       this.itemsFormArray.controls.forEach((element, index) => {
       if (index !== trackindex) {
-             element.get('IsActiveTracking').setValue(false); }
+             element.get('isActiveTracking').setValue(false); }
      });
 
   }

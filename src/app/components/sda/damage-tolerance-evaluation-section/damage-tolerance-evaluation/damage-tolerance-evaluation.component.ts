@@ -387,11 +387,11 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFC').setValue(event.cycles));
     this.trackLast = false;
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
-      if (threshold.IsActiveTracking === true) {
+      if (threshold.isActiveTracking === true) {
 
            //Date calculations
-           if (threshold.ThresholdDate > '') {
-            this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.ThresholdDate, 'MM/dd/yyyy')); }
+           if (threshold.thresholdDate > '') {
+            this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy')); }
 
           if (threshold.ThresholdStage1Duration > '') {
             this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.ThresholdStage1Duration, 'month').format('MM/DD/YYYY')); }

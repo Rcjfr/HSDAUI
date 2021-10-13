@@ -28,10 +28,10 @@ export class DteThresholdItemComponent implements OnInit {
 
     return new FormGroup({
 
-      IsActiveTracking: new FormControl(val.IsActiveTracking, [Validators.maxLength(50)]),
+      isActiveTracking: new FormControl(val.isActiveTracking, [Validators.maxLength(50)]),
       thresholdTFC: new FormControl(val.thresholdTFC, [Validators.maxLength(50)]),
       thresholdTFH: new FormControl(val.thresholdTFH, [Validators.maxLength(50)]),
-      ThresholdDate: new FormControl(val.ThresholdDate, [Validators.maxLength(50)]),
+      thresholdDate: new FormControl(val.thresholdDate, [Validators.maxLength(50)]),
       ThresholdStage1Duration: new FormControl(val.ThresholdStage1Duration, [Validators.maxLength(50)]),
       WOL: new FormControl(val.WOL, [Validators.maxLength(50)]),
 
@@ -61,14 +61,14 @@ export class DteThresholdItemComponent implements OnInit {
    if (this.item.get('ThresholdStage1Duration')) {
       this.item.get('thresholdTFC').reset();
       this.item.get('thresholdTFH').reset();
-      this.item.get('ThresholdDate').reset();
+      this.item.get('thresholdDate').reset();
     }
 
   }
 
   clearThresholdRadio() {
 
-    if (this.item.get('thresholdTFC') || this.item.get('thresholdTFH') || this.item.get('ThresholdDate')) {
+    if (this.item.get('thresholdTFC') || this.item.get('thresholdTFH') || this.item.get('thresholdDate')) {
       this.item.get('ThresholdStage1Duration').reset();
     }
 
