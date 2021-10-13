@@ -403,7 +403,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
            if (threshold.ThresholdTFC > '') {
             this.formGroup.get('FCcountDown').setValue((threshold.ThresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
-          if (threshold.WOL === true) {
+          if (threshold.wol === true) {
             {this.trackLast = true; }
 
           }
