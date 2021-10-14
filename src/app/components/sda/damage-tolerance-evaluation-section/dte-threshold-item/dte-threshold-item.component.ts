@@ -58,7 +58,7 @@ export class DteThresholdItemComponent implements OnInit {
 
   clearThresholdInput() {
 
-   if (this.item.get('ThresholdStage1Duration')) {
+   if (this.item.get('thresholdStage1Duration')) {
       this.item.get('thresholdTFC').reset();
       this.item.get('thresholdTFH').reset();
       this.item.get('thresholdDate').reset();
@@ -69,7 +69,7 @@ export class DteThresholdItemComponent implements OnInit {
   clearThresholdRadio() {
 
     if (this.item.get('thresholdTFC') || this.item.get('thresholdTFH') || this.item.get('thresholdDate')) {
-      this.item.get('ThresholdStage1Duration').reset();
+      this.item.get('thresholdStage1Duration').reset();
     }
 
   }
