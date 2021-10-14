@@ -393,17 +393,17 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
            if (threshold.thresholdDate > '') {
             this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy')); }
 
-          if (threshold.ThresholdStage1Duration > '') {
-            this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.ThresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
+          if (threshold.thresholdStage1Duration > '') {
+            this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
 
            // Flight Hours and Cycles Calculations
-          if (threshold.ThresholdTFH > '') {
-            this.formGroup.get('FHcountDown').setValue( ( threshold.ThresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
+          if (threshold.thresholdTFH > '') {
+            this.formGroup.get('FHcountDown').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
 
-           if (threshold.ThresholdTFC > '') {
-            this.formGroup.get('FCcountDown').setValue((threshold.ThresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
+           if (threshold.thresholdTFC > '') {
+            this.formGroup.get('FCcountDown').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
-          if (threshold.WOL === true) {
+          if (threshold.wol === true) {
             {this.trackLast = true; }
 
           }

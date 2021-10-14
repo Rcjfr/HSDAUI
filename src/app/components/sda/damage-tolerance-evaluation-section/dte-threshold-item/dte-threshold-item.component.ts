@@ -32,8 +32,8 @@ export class DteThresholdItemComponent implements OnInit {
       thresholdTFC: new FormControl(val.thresholdTFC, [Validators.maxLength(50)]),
       thresholdTFH: new FormControl(val.thresholdTFH, [Validators.maxLength(50)]),
       thresholdDate: new FormControl(val.thresholdDate, [Validators.maxLength(50)]),
-      ThresholdStage1Duration: new FormControl(val.ThresholdStage1Duration, [Validators.maxLength(50)]),
-      WOL: new FormControl(val.WOL, [Validators.maxLength(50)]),
+      thresholdStage1Duration: new FormControl(val.thresholdStage1Duration, [Validators.maxLength(50)]),
+      wol: new FormControl(val.wol, [Validators.maxLength(50)]),
 
     });
 
@@ -58,7 +58,7 @@ export class DteThresholdItemComponent implements OnInit {
 
   clearThresholdInput() {
 
-   if (this.item.get('ThresholdStage1Duration')) {
+   if (this.item.get('thresholdStage1Duration')) {
       this.item.get('thresholdTFC').reset();
       this.item.get('thresholdTFH').reset();
       this.item.get('thresholdDate').reset();
@@ -69,7 +69,7 @@ export class DteThresholdItemComponent implements OnInit {
   clearThresholdRadio() {
 
     if (this.item.get('thresholdTFC') || this.item.get('thresholdTFH') || this.item.get('thresholdDate')) {
-      this.item.get('ThresholdStage1Duration').reset();
+      this.item.get('thresholdStage1Duration').reset();
     }
 
   }

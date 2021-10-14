@@ -26,7 +26,7 @@
         <div class="col-sm-7">
         
           <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
-            <input type="checkbox" tabindex="164" formControlName="WOL" >
+            <input type="checkbox" tabindex="164" formControlName="wol" >
           </aac-checkbox-container>     
         
         </div> 
@@ -86,19 +86,19 @@
       
        <div class="col-sm-2" >
         <aac-radio-container label="6 Months" *ngIf="index < 1">
-         <input type="radio" [value]="6" tabindex="94"  formControlName="ThresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="6" tabindex="94"  formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
             
        <div class="col-sm-2" >
         <aac-radio-container label="12 Months" *ngIf="index < 1">
-         <input type="radio" [value]="12" tabindex="94" formControlName="ThresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="12" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
             
        <div class="col-sm-2" >
         <aac-radio-container label="24 Months" *ngIf="index < 1">
-         <input type="radio" [value]="24" tabindex="94" formControlName="ThresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="24" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
        
