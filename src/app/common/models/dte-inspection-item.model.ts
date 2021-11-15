@@ -3,13 +3,14 @@ export interface IDTEInspectionItem {
   inspectionThreshold?: string;
   inspectionThresholdTFH?: string;
   inspectionThresholdTFC?: string;
-  inspectionThresholdTS?: string;
-  inspectionThresholdSpanID?: string;
+  inspectionThresholdSpan?: number;
+  inspectionThresholdSpanDesc?: string;
   inspectionInterval?: string;
   inspectionIntervalTFH?: string;
   inspectionIntervalTFC?: string;
-  inspectionIntervalTS?: string;
-  inspectionIntervalSpanID?: string;
+  inspectionIntervalSpan?: number;
+  inspectionIntervalSpanDesc?: string;
   inspectionMethod?: string;
+  woli?: boolean;
 }
 

@@ -6,6 +6,7 @@ import { RadioContainerComponent } from './radio-container/radio-container.compo
 import { CheckboxListComponent } from './checkbox-list/checkbox-list.component';
 import { BooleanCheckboxListComponent } from './boolean-checkbox-list/boolean-checkbox-list.component';
 import { FieldContainerComponent } from './field-container/field-container.component';
+import { DTEFieldContainerComponent } from './dte-field-container/dte-field-container.component';
 import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   exports: [
     FieldContainerComponent,
+    DTEFieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
     CheckboxListComponent,
@@ -24,6 +26,7 @@ import { LoadingComponent } from './loading/loading.component';
   ],
   declarations: [
     FieldContainerComponent,
+    DTEFieldContainerComponent,
     CheckboxContainerComponent,
     RadioContainerComponent,
     CheckboxListComponent,

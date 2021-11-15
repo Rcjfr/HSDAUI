@@ -33,7 +33,7 @@ export class DteThresholdItemComponent implements OnInit {
       thresholdTFH: new FormControl(val.thresholdTFH, [Validators.maxLength(50)]),
       thresholdDate: new FormControl(val.thresholdDate, [Validators.maxLength(50)]),
       thresholdStage1Duration: new FormControl(val.thresholdStage1Duration, [Validators.maxLength(50)]),
-      wol: new FormControl(val.wol, [Validators.maxLength(50)]),
+      wolt: new FormControl(val.wolt, [Validators.maxLength(50)]),
 
     });
 

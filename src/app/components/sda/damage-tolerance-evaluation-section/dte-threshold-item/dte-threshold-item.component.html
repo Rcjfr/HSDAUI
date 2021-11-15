@@ -1,13 +1,7 @@
-<!-- <div class="panel panel-default">
-
-  <div class="panel-heading">DTE Threshold 
-  </div> -->
-
   <div class="panel-body">
 
     <div class="panel panel-default">
       <div class="panel-body">
-
      
     <div class="row" [formGroup]="item" >
       
@@ -26,7 +20,7 @@
         <div class="col-sm-7">
         
           <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
-            <input type="checkbox" tabindex="164" formControlName="wol" >
+            <input type="checkbox" tabindex="164" formControlName="wolt" >
           </aac-checkbox-container>     
         
         </div> 
@@ -36,7 +30,6 @@
        </div>       
       
     </div>
-
     
     <div class="row" [formGroup]="item" >
 
@@ -44,35 +37,29 @@
       </div> 
 
       <div class="col-sm-2">
-        <aac-field-container label="TFH">
+        <aac-dte-field-container label="TFH or">
           <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()">
-        </aac-field-container>
+        </aac-dte-field-container>
       </div>
 
-      <div class="col-sm-2" >
-       <aac-field-container label="TFC">
+      <div class="col-sm-3" >
+       <aac-dte-field-container label="TFC or">
         <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" >
-       </aac-field-container>
-     </div>
+       </aac-dte-field-container>
+      </div>
+ 
+      <div class="col-sm-3" >
     
-     <div class="col-sm-3 padding-0">
-      
-       <aac-field-container 
-       label="or" 
-       [attr.for]="thresholdDate.idDatePicker" 
-       (click)="clearThresholdRadio()"
-       required="false">
+       <datetime [timepicker]="false" 
+                 #thresholdDate 
+                 [tabindex]='3' 
+                 formControlName="thresholdDate" 
+                 [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"
+                 [attr.for]="thresholdDate.idDatePicker" 
+                (click)="clearThresholdRadio()">
+       </datetime>
     
-      <datetime [timepicker]="false" 
-                #thresholdDate 
-                [tabindex]='3' 
-                formControlName="thresholdDate" 
-                [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}">
-      </datetime>
-
-     </aac-field-container>
-    
-    </div>
+      </div>
 
  
     </div>
@@ -108,7 +95,6 @@
    
   </div>
 
-  <!--</div> -->
 
 
 

@@ -30,8 +30,8 @@ import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-i
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
 // import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
-// import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
-// import { IGeneralSection } from '@app/common/models/general-section.model';
+//import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
+//import { IGeneralSection } from '@app/common/models/general-section.model';
 // import { getSelectedAlertLoading } from '@app/common/reducers';
 
 @Component({
@@ -57,7 +57,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ataSubscription: Subscription;
 
   aircraftInfo$: Observable<models.IAircraftInfo>;
-  aircraftInfo1$: Observable<models.IAircraftInfo>;
+  // aircraftInfo1$: Observable<models.IAircraftInfo>;
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
@@ -66,7 +66,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
   // @ViewChild(AircraftInfoSectionFormComponent) viewAircraftInfo: AircraftInfoSectionFormComponent;
-  // @ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent
+  //@ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
 
   displayName: string;
@@ -92,7 +92,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   trackLast: boolean;
   activeTrack: boolean;
   // ac:IAircraftInfo;
-  // g:IGeneralSection;
+  //g:IGeneralSection;
   // a:string;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
@@ -364,10 +364,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   populateTWD() {
 
-  //this.aircraftInfo$ = this.appStateService.getCurrentTimeandCycles('3AB', new Date());
-  // this.general$ = Observable.create((observer: Observer<string>) => {
+  //this.aircraftInfo$ = this.appStateService.getCurrentTimeandCycles('');
+  //this.general$ = Observable.create((observer: Observer<string>) => {
   //observer.next(this.gs.formGroup.get('station').value);
-  //this.general$.subscribe(event => event.aircraftNo);
   //this.ac = this.viewAircraftInfo.aircraftInfo;
   //this.g = this.viewgeneral.generalSectionFormGroup.controls;
   //const a = this.viewAircraftInfo.formGroup.get('aircraftNo');
@@ -376,7 +375,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   //this.aircraftInfo$.subscribe(ac => this.formGroup.get('currentFH').setValue(ac.noseNumber));
    this.aircraftInfo$ = this.appStateService.getAircraftInfo();
    this.appStateService.loadAircraftInfo('7AB', new Date());
-  //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber));
+   //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber));
   //this.aircraftInfo$ = this.appStateService.getAircraftInfo();
   //this.aircraftInfo$.subscribe(event => event.noseNumber);
   //console.log(this.aircraftInfo$.subscribe(event => event.noseNumber.valueOf));
@@ -403,7 +402,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
            if (threshold.thresholdTFC > '') {
             this.formGroup.get('FCcountDown').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
-          if (threshold.wol === true) {
+          if (threshold.wolt === true) {
             {this.trackLast = true; }
 
           }
