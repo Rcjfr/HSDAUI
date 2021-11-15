@@ -23,22 +23,22 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
 
-  DTEIspectionTimeSpan$: Observable<models.IBaseLookUp[]>;
-
-
+  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
+  
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
 
       inspectionThresholdTFH: new FormControl(val.inspectionThresholdTFH, [Validators.maxLength(50)]),
       inspectionThresholdTFC: new FormControl(val.inspectionThresholdTFC, [Validators.maxLength(50)]),
-      inspectionThresholdTS: new FormControl(val.inspectionThresholdTS, [Validators.maxLength(50)]),
-      inspectionThresholdSpanID: new FormControl(val.inspectionThresholdSpanID, [Validators.maxLength(50)]),
+      inspectionThresholdSpan: new FormControl(val.inspectionThresholdSpan),
+      inspectionThresholdSpanDesc: new FormControl(val.inspectionThresholdSpanDesc),
       inspectionIntervalTFC: new FormControl(val.inspectionIntervalTFC, [Validators.maxLength(50)]),
       inspectionIntervalTFH: new FormControl(val.inspectionIntervalTFH, [Validators.maxLength(50)]),
-      inspectionIntervalTS: new FormControl(val.inspectionIntervalTS, [Validators.maxLength(50)]),
-      inspectionIntervalSpanID: new FormControl(val.inspectionIntervalSpanID, [Validators.maxLength(50)]),
+      inspectionIntervalSpan: new FormControl(val.inspectionIntervalSpan),
+      inspectionIntervalSpanDesc: new FormControl(val.inspectionIntervalSpanDesc),
       inspectionMethod: new FormControl(val.inspectionMethod, [Validators.maxLength(50)]),
+      woli: new FormControl(val.woli, [Validators.maxLength(50)]),
 
     });
   }
@@ -47,7 +47,11 @@ export class DteInspectionItemComponent implements OnInit {
 
    }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+    this.inspectionTimeSpanDesc$ = this.appStateService.getInspectionTimeSpanDesc();
+
+  }
 
   remove() {
     this.removed.emit(this.index);
