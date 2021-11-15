@@ -229,7 +229,7 @@ export const ReportOptions: IReportOption[] = [
   // { key: 'DTEInspectionMethod2', display: 'Inspection Method(2)' , dbField: 'DTE_INSPECTION_METHOD2'},
   // { key: 'DTEInspectionMethod3', display: 'Inspection Method(3)' , dbField: 'DTE_INSPECTION_METHOD3'},
   // { key: 'DTEInspectionMethod4', display: 'Inspection Method(4)', dbField: 'DTE_INSPECTION_METHOD4' },
-  // { key: 'DTEInspectionMethod5', display: 'Inspection Method(5)' , dbField: 'DTE_INSPECTION_METHOD5'},  
+  // { key: 'DTEInspectionMethod5', display: 'Inspection Method(5)' , dbField: 'DTE_INSPECTION_METHOD5'},
   { key: 'DTEMonitorItem1', display: 'FMR/Logpage/MON(1)' , dbField: 'DTE_MONITOR_ITEM1' },
   { key: 'DTEMonitorItem2', display: 'FMR/Logpage/MON(2)', dbField: 'DTE_MONITOR_ITEM2' },
   { key: 'DTEMonitorItem3', display: 'FMR/Logpage/MON(3)' , dbField: 'DTE_MONITOR_ITEM2'},
