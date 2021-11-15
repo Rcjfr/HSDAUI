@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 let identifier = 0;
 @Component({
-  selector: 'dte-field-container',
+  selector: 'aac-dte-field-container',
   templateUrl: './dte-field-container.component.html',
   styleUrls: ['./dte-field-container.component.less'],
 })
