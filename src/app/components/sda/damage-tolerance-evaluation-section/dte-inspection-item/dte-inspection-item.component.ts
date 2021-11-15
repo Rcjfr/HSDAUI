@@ -24,7 +24,6 @@ export class DteInspectionItemComponent implements OnInit {
   @Output() public removed = new EventEmitter<number>();
 
   inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
-  
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
@@ -48,14 +47,11 @@ export class DteInspectionItemComponent implements OnInit {
    }
 
   ngOnInit() { 
-    
     this.inspectionTimeSpanDesc$ = this.appStateService.getInspectionTimeSpanDesc();
-
   }
 
   remove() {
     this.removed.emit(this.index);
-
     return false;
   }
 }

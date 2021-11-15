@@ -373,15 +373,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   // this.aircraftInfo$.subscribe(event => console.log(event));
   //console.log(this.a);
   //this.aircraftInfo$.subscribe(ac => this.formGroup.get('currentFH').setValue(ac.noseNumber));
-   
-  this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-  this.appStateService.loadAircraftInfo('7AB', new Date());
-  
+   this.aircraftInfo$ = this.appStateService.getAircraftInfo();
+   this.appStateService.loadAircraftInfo('7AB', new Date());
    //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber));
   //this.aircraftInfo$ = this.appStateService.getAircraftInfo();
   //this.aircraftInfo$.subscribe(event => event.noseNumber);
   //console.log(this.aircraftInfo$.subscribe(event => event.noseNumber.valueOf));
-  
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
     this.formGroup.get('dueDate').reset();
