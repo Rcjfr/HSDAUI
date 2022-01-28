@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ISdaStatus } from '@app/common/models/sda-status.model';
@@ -223,7 +225,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.statusModal.hide();
   }
 
-  saveAlert(newStatus: number, showModal: boolean = true, modalTitle: string = null) {
+  saveAlert(newStatus: number, showModal = true, modalTitle: string = null) {
     //this.sda.status = newStatus;
     this.sdaForm.patchValue({ status: newStatus });
     this.appStateService.setNewSdaStatus(newStatus);
@@ -501,7 +503,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
     this.saveDTESectionDetails = false;
   }
 
-  saveAlertData(sdrRequested: boolean = false) {
+  saveAlertData(sdrRequested = false) {
     const formData = this.sdaForm.getRawValue();
     const generalSectionData = this.flatten(formData.generalSectionFormGroup);
     generalSectionData.createDate = moment(generalSectionData.createDate).format('YYYY-MM-DD');
@@ -560,8 +562,8 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       sdaDetail.dteSection = formData.damageToleranceEvaluationGroup;
       sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteComponentGroup');
       sdaDetail.dteSection = this.flattenChild(sdaDetail.dteSection, 'dteEngineGroup');
-      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.thresholdTFC || t.thresholdTFH || t.thresholdDate || t.thresholdStage1Duration);
-      sdaDetail.dteSection.inspectionItems = sdaDetail.dteSection.inspectionItems.filter(t => t.inspectionInterval || t.inspectionMethod || t.inspectionThreshold);
+      sdaDetail.dteSection.thresholdItems = sdaDetail.dteSection.thresholdItems.filter(t => t.isActiveTracking  || t.wolt || t.thresholdTFC || t.thresholdTFH || t.thresholdDate || t.thresholdStage1Duration);
+      sdaDetail.dteSection.inspectionItems = sdaDetail.dteSection.inspectionItems.filter(t => t.inspectionIntervalTFC || t.inspectionIntervalTFH || t.inspectionThresholdTFC || t.inspectionThresholdTFH || t.inspectionIntervalSpan || t.inspectionThresholdSpan || t.woli ||t.inspectionMethod);
       sdaDetail.dteSection.monitorItems = sdaDetail.dteSection.monitorItems.filter(t => t.monitorItemDescription);
       sdaDetail.dteSection.attachments = sdaDetail.dteSection.attachments.filter(t => t.attachmentName);
       sdaDetail.dteSection.updatedByBadgeNo = this.statusUpdatedBy;

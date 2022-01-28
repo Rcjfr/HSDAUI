@@ -78,7 +78,7 @@ export class TwdReportSearchComponent implements OnInit {
   }
 
 
-  showTwdReport(isExcel = false, isPdf = false) {
+  showTwdReport(isExcel = false, isPdf = false, isView=false) {
 
     this.formSubmitted = true;
     this.markAsDirty(this.twdReportSearchForm);
@@ -96,7 +96,7 @@ export class TwdReportSearchComponent implements OnInit {
         this.onShowTwdExcel.emit(this.searchCriteria);
       } else if (isPdf) {
         this.onShowTwdPdf.emit(this.searchCriteria);
-      } else {
+      } else if (isView) {
         this.onShowTwd.emit(this.searchCriteria);
       }
     }

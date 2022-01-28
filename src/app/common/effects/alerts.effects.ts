@@ -157,7 +157,8 @@ export class AlertEffects {
       .pipe(
       map((action: selectedAlert.LoadTwdListAction) => action.payload ),
       switchMap((searchCriteria: ISearchCriteria) => {
-        return this.sdaService.searchSda(searchCriteria)
+        //return this.sdaService.searchSda(searchCriteria)
+        return this.sdaService.viewTWD(searchCriteria)
           .pipe(
             switchMap((data: models.ISdaListResult) => {
 

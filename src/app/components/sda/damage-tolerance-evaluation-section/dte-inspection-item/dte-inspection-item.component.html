@@ -54,7 +54,9 @@
       <aac-field-container>
       <input class="form-control" style="width:40%; float:left" formControlName="inspectionThresholdSpan" [tabindex]="133+3*index+2">
       <select class="form-control" style="width:50%; float:right" [tabindex]="133+3*index+3" formControlName="inspectionThresholdSpanDesc">
-       <option *ngFor="let ts of inspectionTimeSpanDesc$ | async" [value]="ts.id">{{ts.description}}</option>
+       <option value="1" selected>Days</option>
+       <option value="2" selected>Months</option>
+       <option value="3" selected>Years</option>
       </select>
      </aac-field-container>
     </div>
@@ -94,7 +96,9 @@
     <aac-field-container >
       <input class="form-control" style="width:40%; float:left" formControlName="inspectionIntervalSpan" [tabindex]="133+3*index+2">
       <select class="form-control" style="width:50%; float:right" [tabindex]="133+3*index+3" formControlName="inspectionIntervalSpanDesc">
-        <option *ngFor="let ts of inspectionTimeSpanDesc$ | async" [value]="ts.id">{{ts.description}}</option>
+        <option value="1" selected>Days</option>
+        <option value="2" selected>Months</option>
+        <option value="3" selected>Years</option>
       </select>
     </aac-field-container>
    </div>
