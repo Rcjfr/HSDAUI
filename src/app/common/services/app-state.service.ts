@@ -111,11 +111,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-  getInspectionTimeSpanDesc(): Observable<IBaseLookUp[]> {
-    return this.store.select(fromRoot.getInspectionTimeSpanDesc);
-  }
-
-
   getFleet(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getFleet);
   }
@@ -241,13 +236,6 @@ export class AppStateService {
     if (!noseNumber) { return; }
     this.store.dispatch(new selectedAlertActions.LoadAircraftInfoAction({ noseNumber: noseNumber, flightDate: flightDate }));
   }
-
-
-  getCurrentTimeandCycles(): Observable<IAircraftInfoRecord> {
-    return this.store.select(fromRoot.getAircraftInfo);
-  }
-
-
 
   loadChangelog(changelog: ILoadChangeLog) {
     this.store.dispatch(new selectedAlertActions.LoadChangeLogAction(changelog));

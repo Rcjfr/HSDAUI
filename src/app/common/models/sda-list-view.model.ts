@@ -200,7 +200,6 @@ export interface ISdaListView {
   dueInDays: number,
   dueInCycles: number,
   dueInHours: number,
-
   hasOriginal: boolean,
   completedBy: string,
   completedOn: Date,

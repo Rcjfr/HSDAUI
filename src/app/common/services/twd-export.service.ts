@@ -146,7 +146,7 @@ const Table = {
                   { text: `Due In Cycles`, style: 'tableHeader' },
                   { text: `Due In Hours`, style: 'tableHeader' },
                   { text: `Location`, style: 'tableHeader' },
-                  { text: `Repair Inspecton Status`, style: 'tableHeader' }
+                  { text: `Repair Inspecton Status`, style: 'tableHeader' }                  
                 ]
               ]}}]};
 
@@ -160,18 +160,19 @@ const Table = {
 
   }
   getTableRows(listview: ISdaListView)  {
-     return     [
-              {  text: listview.id || '', style: 'regular' },
-              // {  text: listview.mrtNumber || '',  style: 'regular' },
-              {  text: listview.aircraftNo || '' ,  style: 'regular' },
-              {  text: listview.repairDate ? moment(listview.repairDate).format('MM/DD/YY') : '', style: 'regular' },
-              {  text: listview.repairDescriptionTypeDesc || listview.defectivePartDescription || listview.modifiedPartDescription || '' ,  style: 'regular' },
-              {  text: listview.dueInDays > 0 ? listview.dueInDays : listview.dueInDays != null ? 'Now' : '',  style: 'regular' },
-              {  text: listview.dueInCycles > 0 ? listview.dueInCycles : listview.dueInCycles != null ? 'Now' : '',  style: 'regular' },
-              {  text: listview.dueInHours > 0 ? listview.dueInHours : listview.dueInHours != null ? 'Now' : '',  style: 'regular' },
-              {  text: listview.repairLocation || '', style: 'regular' },
-              // {  text: listview.repairInspectionStatusDesc || '', style: 'regular' }
-            ]
+   return     [
+
+                {  text: listview.id || '', style: 'regular' },
+                // {  text: listview.mrtNumber || '',  style: 'regular' },
+                {  text: listview.aircraftNo || '' ,  style: 'regular' },
+                {  text: listview.repairDate ? moment(listview.repairDate).format('MM/DD/YY') : '', style: 'regular' },
+                {  text: listview.repairDescriptionTypeDesc || listview.defectivePartDescription || listview.modifiedPartDescription || '' ,  style: 'regular' },
+                {  text: listview.dueInDays > 0 ? listview.dueInDays : listview.dueInDays != null ? 'Now' : '',  style: 'regular' },
+                {  text: listview.dueInCycles > 0 ? listview.dueInCycles : listview.dueInCycles != null ? 'Now' : '',  style: 'regular' },
+                {  text: listview.dueInHours > 0 ? listview.dueInHours : listview.dueInHours != null ? 'Now' : '',  style: 'regular' },
+                {  text: listview.repairLocation || '', style: 'regular' },
+                // {  text: listview.repairInspectionStatusDesc || '', style: 'regular' } 
+              ]
     }
 
 getHeaderText(result: models.ISdaListResult ) {

@@ -33,11 +33,9 @@ import { PreciseLocationGroupComponent } from '@app/components/sda/defect-locati
 
 // CPCP Section
 
-
 import { CpcpSectionComponent } from '@app/components/sda/cpcp-section/cpcp-section/cpcp-section.component';
 import { CauseOfDamageGroupComponent } from '@app/components/sda/cpcp-section/cause-of-damage-group/cause-of-damage-group.component';
 import { CauseOfDamageDescriptionComponent } from '@app/components/sda/cpcp-section/cause-of-damage-description/cause-of-damage-description.component';
-
 
 // Corrective Action Section
 
