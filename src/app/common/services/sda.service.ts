@@ -99,21 +99,21 @@ export class SdaService {
       .mapTo(null);
   }
 
-  viewTWD(criteria: any): Observable<ISdaListResult> {
-    let hasSearchCriteria = false;
-    for (const propertyName in criteria) {
-      if (typeof criteria[propertyName] !== 'undefined' &&
-        propertyName.indexOf('search') > -1) {
-        hasSearchCriteria = true;
-        break;
-      }
-    }
-    if (!hasSearchCriteria) {
-      return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
-    }
-    return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
+  // viewTWD(criteria: any): Observable<ISdaListResult> {
+  //   let hasSearchCriteria = false;
+  //   for (const propertyName in criteria) {
+  //     if (typeof criteria[propertyName] !== 'undefined' &&
+  //       propertyName.indexOf('search') > -1) {
+  //       hasSearchCriteria = true;
+  //       break;
+  //     }
+  //   }
+  //   if (!hasSearchCriteria) {
+  //     return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
+  //   }
+  //   return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
     
-  }
+  // }
 
   
   viewTWD(criteria: any): Observable<ISdaListResult> {
