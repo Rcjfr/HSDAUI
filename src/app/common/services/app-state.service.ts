@@ -166,7 +166,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getSearchType);
   }
 
-
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));
