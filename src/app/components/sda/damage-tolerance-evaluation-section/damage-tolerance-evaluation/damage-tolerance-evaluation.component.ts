@@ -24,8 +24,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, Observer } from 'rxjs/Rx';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
-//import _ = require('lodash');
-import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq } from 'lodash';
+import _ = require('lodash');
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
@@ -35,13 +34,13 @@ import { DatePipe } from '@angular/common';
   templateUrl: './damage-tolerance-evaluation.component.html',
   styleUrls: ['./damage-tolerance-evaluation.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
+  
 })
 
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
-
+    
   @Input() editable = false;
-
+  
   updatedNoseNumber: string;
   updatedCreateDate: Date;
   ATACodes$: Observable<models.IATACode[]>;
@@ -49,22 +48,23 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ataCodes2Dte: models.IATACode[];
   alertCodes$: Observable<models.IBaseLookUp[]>;
   pipe = new DatePipe('en-US');
+  
   ataSubscription: Subscription;
+
   aircraftInfo$: Observable<models.IAircraftInfo>;
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
-  acSection$: Observable<models.IAlert>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
+   
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
-
+ 
   displayName: string;
   createNumberMask = createNumberMask;
-
+  
   public hsdaApiBaseUrl = environment.hsdaApiBaseUrl;
-
+ 
   public decimalNumberMask = createNumberMask({
     prefix: '',
     allowDecimal: true,
@@ -72,18 +72,18 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     decimalLimit: 2,
     requireDecimal: false
   });
-
+ 
   public numberMask = createNumberMask({
     prefix: '',
     allowDecimal: false,
     includeThousandsSeparator: false,
     allowLeadingZeroes: false
   });
-
+ 
   trackLast: boolean;
-  activeTrack: boolean;
+  activeTrack:boolean;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService,private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
      this.formGroup = this.fb.group({
       isExistingRepair: [false, [Validators.required]],
@@ -125,7 +125,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       legacyEA: ['', [Validators.maxLength(100)]],
       dueDate: new FormControl({ value: '', disabled: true }),
       dueCycles: new FormControl({ value: '', disabled: true }),
-      dueHours: new FormControl({ value: '', disabled: true }),
+      dueHours: new FormControl({ value: '', disabled: true }),    
       FHcountDown: new FormControl({value: '', disabled: true }),
       FCcountDown: new FormControl({value: '', disabled: true }),
       currentFH: new FormControl({value: '', disabled: true }),
@@ -136,23 +136,25 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
   }
 
-  ngOnInit() {
+  ngOnInit() 
+    {
      this.alertCodes$ = this.appStateService.getAlertCodes();
      this.ATACodes$ = this.appStateService.getATACodes();
      this.dteStatus$ = this.appStateService.getDTEStatus();
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
-     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
+     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u; 
     });
-
-    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
+        
+    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => 
+     {
       if (!val) {
         this.formGroup.get('submitToQC').disable();
       } else {
         this.formGroup.get('submitToQC').enable();
       }
      });
-
+    
     this.uploader.onWhenAddingFileFailed = (item) => {
       if (item.size > 50 * 1024 * 1024) {
         this.toastrService.error('Attachment is too big. Max limit is 50 MB.', 'Error');
@@ -161,7 +163,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         return;
         }
      };
-
+    
      this.uploader.onAfterAddingFile = (fileItem) => {
       const arr = this.getAttachments();
       if (arr.controls.some((fg: FormGroup) => fg.controls.attachmentName.value.toLowerCase() === fileItem.file.name.toLowerCase())) {
@@ -174,12 +176,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       fileItem.withCredentials = false;
       this.appStateService.uploadAttachment();
     };
-
+   
     this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       this.uploader.removeFromQueue(item);
       this.appStateService.uploadAttachmentFail('Error during attachment upload.Please try again.');
     };
-
+  
     this.uploader.onCompleteItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
       if (status === 200) {
         const arr = this.getAttachments();
@@ -189,19 +191,20 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       }
       this.uploadElRef.nativeElement.value = '';
     };
-
+   
     this.parent.addControl(this.formGroupName, this.formGroup);
-
+  
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
     const durationControl = this.formGroup.get('stage1Duration');
     const dteDueDateControl = this.formGroup.get('dueDate');
-
+   
     Observable.merge(dteStatusControl.valueChanges,
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
       .mapTo(1).subscribe(v => {
-       const dteStatus = Number(dteStatusControl.value);
+        //dteDueDateControl.setValue('');
+        const dteStatus = Number(dteStatusControl.value);
         switch (dteStatus) {
           case DTEStatus.Open:
             {
@@ -224,7 +227,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
       });
   }
-
+  
   ngOnChanges(changes: SimpleChanges) {
     if (changes.sda) {
       const newSda: models.ISda = changes.sda.currentValue;
@@ -236,22 +239,18 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           dteStatus: newSda.dteSection.dteStatus,
           repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
         });
-
+       
         if (newSda.dteSection.updatedBy) {
           this.formGroup.patchValue({
             updatedByEmpID: newSda.dteSection.updatedByBadgeNo,
             updatedByName: newSda.dteSection.updatedBy
           });
         }
-
+      
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems.length > 0 ? newSda.dteSection.thresholdItems : [{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems(newSda.dteSection.inspectionItems.length > 0 ? newSda.dteSection.inspectionItems : [{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
-
-        // this.populateTWD();
-
         const arr = new FormArray([]);
-
         for (const attachment of newSda.dteSection.attachments) {
           if (attachment && attachment.attachmentName) {
             arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
@@ -266,10 +265,16 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
       // //   }
       // // }
-      } else {
+      } 
+      
+      else 
+      
+      {
+       
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
+       
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
@@ -348,15 +353,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     return <FormArray>this.formGroup.get('attachments');
   }
 
-
   populateTWD() {
+
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
     this.formGroup.get('dueDate').reset();
     this.formGroup.get('dueCycles').reset();
     this.formGroup.get('dueHours').reset();
-
-
     this.trackLast = false;
     
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
@@ -373,18 +376,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           if (threshold.thresholdTFH > '') {
             this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
 
-           if (threshold.thresholdTFC > '') {
+          if (threshold.thresholdTFC > '') {
             this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
           if (threshold.wolt === true) {
             {this.trackLast = true; }
 
           }
-
     }
-
-
-
   }
 
 }
@@ -399,4 +398,3 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   // }
 
 }
-
