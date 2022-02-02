@@ -76,7 +76,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getChangeLog);
   }
 
-
   getDamageTypes(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getDamageTypes);
   }
@@ -159,7 +158,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getUser);
   }
 
-
   getTwdList(): Observable<ISdaListResultRecord> {
     return this.store.select(fromRoot.getReportSearchResult);
   }
@@ -167,7 +165,6 @@ export class AppStateService {
   getSearchType(): Observable<SearchType> {
     return this.store.select(fromRoot.getSearchType);
   }
-
 
   //Dispatch Actions
   saveSda(sda: ISda): void {
@@ -226,7 +223,6 @@ export class AppStateService {
     this.store.dispatch(new selectedAlertActions.UploadAttachmentFailAction(message));
   }
 
-
   loadSda(payload: number | ILoadSda): void {
     const pl = typeof payload === 'number' ? { sdaId: payload, version: 0, original: false } : payload;
     this.store.dispatch(new selectedAlertActions.LoadSdaAction(pl));
@@ -244,8 +240,6 @@ export class AppStateService {
   loadNoseNumbers(filter = '') {
     this.store.dispatch(new selectedAlertActions.LoadNoseNumbersAction(filter));
   }
-
-
 
   loadFleetCheckTypes(fleet: string) {
     this.store.dispatch(new lookupDataActions.LoadFleetCheckTypesAction(fleet));
