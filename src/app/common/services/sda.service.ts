@@ -116,6 +116,23 @@ export class SdaService {
     
   }
 
+  
+  viewTWD(criteria: any): Observable<ISdaListResult> {
+    let hasSearchCriteria = false;
+    for (const propertyName in criteria) {
+      if (typeof criteria[propertyName] !== 'undefined' &&
+        propertyName.indexOf('search') > -1) {
+        hasSearchCriteria = true;
+        break;
+      }
+    }
+    if (!hasSearchCriteria) {
+      return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
+    }
+    return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
+    
+  }
+
   getSda(payload: ILoadSda): Observable<models.ISda> {
     let url = `${this.endPointUrl}/${payload.sdaId}`;
     if (payload.original) {
