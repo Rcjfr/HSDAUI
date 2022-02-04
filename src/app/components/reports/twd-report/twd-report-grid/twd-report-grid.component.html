@@ -16,6 +16,7 @@
         <a title='SDA ID' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
       </ng-template>
     </p-column>
+
     <!-- <p-column field="mrtNumber" header="MRT #" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{((record[col.field] | number:'6.0') || '').replace(',','') }}
