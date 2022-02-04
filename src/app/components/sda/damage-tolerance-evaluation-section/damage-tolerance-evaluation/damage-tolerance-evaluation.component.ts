@@ -254,14 +254,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           }
         }
         this.formGroup.setControl('attachments', arr);
-      // //   //Ata Codes
-      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
 
-      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      // //   }
-      // // }
       } 
       
       else 
