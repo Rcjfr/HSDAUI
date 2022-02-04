@@ -57,7 +57,7 @@ export function reducer(state: StateRecord = makeInitialState(), action: lookupD
       return state;
     }
   }
-};
+}
 
 // Selector Functions
 export const getAlertCodes = (state: State) => state.lookupData.alertCodes;
