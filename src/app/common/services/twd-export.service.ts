@@ -137,7 +137,7 @@ const Table = {
             unbreakable: false,
             table: {
               headerRows: 1,
-              widths: ['10%', '10%', '12%', '12%', '12%', '12%', '15%','20%'],
+              widths: ['10%', '10%', '12%', '12%', '12%', '12%', '15%', '20%'],
               body: [
                 [
                   { text: `SDA ID#`, style: 'tableHeader' },
