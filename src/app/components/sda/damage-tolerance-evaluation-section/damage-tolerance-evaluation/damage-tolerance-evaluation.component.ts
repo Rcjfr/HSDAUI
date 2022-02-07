@@ -246,9 +246,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
             arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
           }
         }
-        this.formGroup.setControl('attachments', arr); 
-      }  
-      else {
+        this.formGroup.setControl('attachments', arr);
+      } else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
@@ -288,7 +287,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           mroDocuments: '',
           legacyEA: '',
         });
-           }  
+           }
        this.formGroup.markAsPristine();
       }
 
