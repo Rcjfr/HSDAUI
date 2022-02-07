@@ -1,4 +1,3 @@
-
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { IDTEInspectionItem } from '@app/common/models';
 import * as models from '@app/common/models';
@@ -19,7 +18,8 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public message: any;
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
- 
+
+  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
