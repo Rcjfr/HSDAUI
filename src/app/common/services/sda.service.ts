@@ -111,7 +111,7 @@ export class SdaService {
     if (!hasSearchCriteria) {
       return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
     }
-    
+
     return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
   }
 

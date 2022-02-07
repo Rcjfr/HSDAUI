@@ -80,7 +80,7 @@ export class TwdReportSearchComponent implements OnInit {
   }
 
 
-  showTwdReport(isExcel = false, isPdf = false, isView=false) {
+  showTwdReport(isExcel = false, isPdf = false, isView = false) {
 
     this.formSubmitted = true;
     this.markAsDirty(this.twdReportSearchForm);
@@ -91,7 +91,7 @@ export class TwdReportSearchComponent implements OnInit {
       if (this.twdReportSearchForm.controls.aircraftNo.value) {
         this.searchCriteria.searchByAircraft = { aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value };
       }
-  
+
       if (this.twdReportSearchForm.controls.fleet.value) {
         this.searchCriteria.searchBySda = { fleet: `${this.twdReportSearchForm.controls.fleet.value}*` };
       }
