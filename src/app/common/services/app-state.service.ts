@@ -110,10 +110,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-  getInspectionTimeSpanDesc(): Observable<IBaseLookUp[]> {
-    return this.store.select(fromRoot.getInspectionTimeSpanDesc);
-  }
-
 
   getFleet(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getFleet);

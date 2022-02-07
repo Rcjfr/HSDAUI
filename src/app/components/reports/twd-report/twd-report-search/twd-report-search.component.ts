@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
