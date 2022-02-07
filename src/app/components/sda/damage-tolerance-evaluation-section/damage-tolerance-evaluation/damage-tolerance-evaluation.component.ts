@@ -81,9 +81,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   });
  
   trackLast: boolean;
-  activeTrack:boolean;
+  activeTrack: boolean;
 
-  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService,private cd: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
      this.formGroup = this.fb.group({
       isExistingRepair: [false, [Validators.required]],
@@ -125,7 +125,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       legacyEA: ['', [Validators.maxLength(100)]],
       dueDate: new FormControl({ value: '', disabled: true }),
       dueCycles: new FormControl({ value: '', disabled: true }),
-      dueHours: new FormControl({ value: '', disabled: true }),    
+      dueHours: new FormControl({ value: '', disabled: true }),
       FHcountDown: new FormControl({value: '', disabled: true }),
       FCcountDown: new FormControl({value: '', disabled: true }),
       currentFH: new FormControl({value: '', disabled: true }),
@@ -136,17 +136,16 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
   }
 
-  ngOnInit() 
-    {
+  ngOnInit()   {
      this.alertCodes$ = this.appStateService.getAlertCodes();
      this.ATACodes$ = this.appStateService.getATACodes();
      this.dteStatus$ = this.appStateService.getDTEStatus();
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
-     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u; 
+     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
     });
-        
-    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val => 
+   
+    this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>
      {
       if (!val) {
         this.formGroup.get('submitToQC').disable();
@@ -198,7 +197,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
     const durationControl = this.formGroup.get('stage1Duration');
     const dteDueDateControl = this.formGroup.get('dueDate');
-   
     Observable.merge(dteStatusControl.valueChanges,
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
@@ -264,9 +262,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       // // }
       } 
       
-      else 
-      
-      {
+      else {
        
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
