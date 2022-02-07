@@ -196,7 +196,7 @@ export interface ISdaListView {
   dteInspectionInterval3: string,
   dteInspectionInterval4: string,
   dteInspectionInterval5: string,
-  
+
   dueInDays: number,
   dueInCycles: number,
   dueInHours: number,

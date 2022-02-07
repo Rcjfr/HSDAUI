@@ -65,7 +65,7 @@ export class SdaService {
 
 
     return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
-    
+
   }
 
   exportMrlExcel(criteria: any): Observable<any> {
@@ -99,7 +99,6 @@ export class SdaService {
       .mapTo(null);
   }
 
-  
   viewTWD(criteria: any): Observable<ISdaListResult> {
     let hasSearchCriteria = false;
     for (const propertyName in criteria) {
@@ -112,8 +111,8 @@ export class SdaService {
     if (!hasSearchCriteria) {
       return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
     }
-    return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
     
+    return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
   }
 
   getSda(payload: ILoadSda): Observable<models.ISda> {

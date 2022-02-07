@@ -19,7 +19,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      250 //Changed this from 190
+      350 //Changed this from 190
     ],
     "member-access": false,
     "member-ordering": [

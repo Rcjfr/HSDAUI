@@ -157,6 +157,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       if (item.size > 50 * 1024 * 1024) {
         this.toastrService.error('Attachment is too big. Max limit is 50 MB.', 'Error');
         this.uploadElRef.nativeElement.value = '';
+
         return;
         }
      };
@@ -167,6 +168,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.toastrService.error('Attachment with same name already exists.', 'Error');
         this.uploader.removeFromQueue(fileItem);
         this.uploadElRef.nativeElement.value = '';
+
         return;
       }
       fileItem.withCredentials = false;
@@ -229,16 +231,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
       if (newSda.dteSection) {
         this.formGroup.patchValue(newSda.dteSection);
-        this.formGroup.patchValue({
-          dteStatus: newSda.dteSection.dteStatus,
-          repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
-        });
+        this.formGroup.patchValue({dteStatus: newSda.dteSection.dteStatus, repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''});
 
         if (newSda.dteSection.updatedBy) {
-          this.formGroup.patchValue({
-            updatedByEmpID: newSda.dteSection.updatedByBadgeNo,
-            updatedByName: newSda.dteSection.updatedBy
-          });
+          this.formGroup.patchValue({updatedByEmpID: newSda.dteSection.updatedByBadgeNo, updatedByName: newSda.dteSection.updatedBy});
         }
 
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems.length > 0 ? newSda.dteSection.thresholdItems : [{}]));
@@ -251,15 +247,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           }
         }
         this.formGroup.setControl('attachments', arr);
-      // //   //Ata Codes
-      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
 
-      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      // //   }
-      // // }
-      } 
+      }
       else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
@@ -303,8 +292,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       }
        this.formGroup.markAsPristine();
       }
-        if (!this.editable) {
-      this.formGroup.disable({ emitEvent: false });
+
+    if (!this.editable) {
+         this.formGroup.disable({ emitEvent: false });
     }
   }
 
@@ -334,6 +324,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   downloadAttachment(sdaid: number, attachmentPath: string, attachmentName: string) {
     this.appStateService.downloadAttachment(sdaid, attachmentPath, attachmentName);
+
     return false;
   }
 
