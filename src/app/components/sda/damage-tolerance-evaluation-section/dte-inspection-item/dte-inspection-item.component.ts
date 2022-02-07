@@ -43,7 +43,6 @@ export class DteInspectionItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.inspectionTimeSpanDesc$ = this.appStateService.getInspectionTimeSpanDesc();
   }
 
   remove() {
