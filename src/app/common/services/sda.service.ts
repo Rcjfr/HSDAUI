@@ -26,9 +26,9 @@ export class SdaService {
       return this.http.post(`${this.endPointUrl}`, sda, { responseType: 'text' })
         .map((result) => Helper.Deserialize(result));
     }
-  };
+  }
 
-  searchSda(criteria: any, exportToExcel: boolean = false): Observable<ISdaListResult> {
+  searchSda(criteria: any, exportToExcel = false): Observable<ISdaListResult> {
     let hasSearchCriteria = false;
     for (const propertyName in criteria) {
       if (typeof criteria[propertyName] !== 'undefined' &&
@@ -49,8 +49,6 @@ export class SdaService {
         'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       });
 
-
-
       return this.http.post(this.endPointUrl + '/search', criteria,
         {
           headers: headers,
@@ -67,8 +65,8 @@ export class SdaService {
 
 
     return this.http.post<ISdaListResult>(this.endPointUrl + '/search', criteria);
-  };
 
+  }
 
   exportMrlExcel(criteria: any): Observable<any> {
 
@@ -84,7 +82,7 @@ export class SdaService {
         saveAs(new Blob([blob]), 'MRLReport.xlsx');
       })
       .mapTo(null);
-  };
+  }
 
   exportTwdExcel(criteria: any): Observable<any> {
     const headers = new HttpHeaders({
@@ -99,7 +97,23 @@ export class SdaService {
         saveAs(new Blob([blob]), 'TWDReport.xlsx');
       })
       .mapTo(null);
-  };
+  }
+
+  viewTWD(criteria: any): Observable<ISdaListResult> {
+    let hasSearchCriteria = false;
+    for (const propertyName in criteria) {
+      if (typeof criteria[propertyName] !== 'undefined' &&
+        propertyName.indexOf('search') > -1) {
+        hasSearchCriteria = true;
+        break;
+      }
+    }
+    if (!hasSearchCriteria) {
+      return of({ records: [], totalRecords: 0 }).delay(1); //TODO: without the delay its failing.need to revisit
+    }
+
+    return this.http.post<ISdaListResult>(this.endPointUrl + '/Reports/TWD/View', criteria);
+  }
 
   getSda(payload: ILoadSda): Observable<models.ISda> {
     let url = `${this.endPointUrl}/${payload.sdaId}`;
@@ -112,7 +126,7 @@ export class SdaService {
 
     return this.http.get(url, { responseType: 'text' })
       .map((result) => Helper.Deserialize(result));
-  };
+  }
 
   exportSda(id: number): Observable<models.ISdaListView> {
     return this.http.get<models.ISdaListView>(`${this.endPointUrl}/${id}/export`);

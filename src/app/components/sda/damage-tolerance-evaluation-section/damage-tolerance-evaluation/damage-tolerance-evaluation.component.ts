@@ -25,14 +25,9 @@ import { Observable, Observer } from 'rxjs/Rx';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
 //import _ = require('lodash');
-import { find, pull, filter, times, constant, debounce, set, get, keyBy, reduce, cloneDeep, sortedUniq } from 'lodash';
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
-// import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
-//import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
-//import { IGeneralSection } from '@app/common/models/general-section.model';
-// import { getSelectedAlertLoading } from '@app/common/reducers';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -57,16 +52,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ataSubscription: Subscription;
 
   aircraftInfo$: Observable<models.IAircraftInfo>;
-  // aircraftInfo1$: Observable<models.IAircraftInfo>;
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  acSection$: Observable<models.IAlert>;
-
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
-  // @ViewChild(AircraftInfoSectionFormComponent) viewAircraftInfo: AircraftInfoSectionFormComponent;
-  //@ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent
+
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
 
   displayName: string;
@@ -91,9 +82,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   trackLast: boolean;
   activeTrack: boolean;
-  // ac:IAircraftInfo;
-  //g:IGeneralSection;
-  // a:string;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
@@ -136,6 +124,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       mroDocuments: ['', [Validators.maxLength(150)]],
       legacyEA: ['', [Validators.maxLength(100)]],
       dueDate: new FormControl({ value: '', disabled: true }),
+      dueCycles: new FormControl({ value: '', disabled: true }),
+      dueHours: new FormControl({ value: '', disabled: true }),
       FHcountDown: new FormControl({value: '', disabled: true }),
       FCcountDown: new FormControl({value: '', disabled: true }),
       currentFH: new FormControl({value: '', disabled: true }),
@@ -146,15 +136,13 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     });
   }
 
-  ngOnInit() {
+  ngOnInit()   {
      this.alertCodes$ = this.appStateService.getAlertCodes();
      this.ATACodes$ = this.appStateService.getATACodes();
      this.dteStatus$ = this.appStateService.getDTEStatus();
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
      this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
-     this.populateTWD();
-
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -203,12 +191,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     };
 
     this.parent.addControl(this.formGroupName, this.formGroup);
-
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
     const durationControl = this.formGroup.get('stage1Duration');
     const dteDueDateControl = this.formGroup.get('dueDate');
-
     Observable.merge(dteStatusControl.valueChanges,
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
@@ -245,44 +231,27 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
       if (newSda.dteSection) {
         this.formGroup.patchValue(newSda.dteSection);
-        this.formGroup.patchValue({
-          dteStatus: newSda.dteSection.dteStatus,
-          repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''
-        });
+        this.formGroup.patchValue({dteStatus: newSda.dteSection.dteStatus, repairInspectionStatus: newSda.dteSection.repairInspectionStatus || ''});
 
         if (newSda.dteSection.updatedBy) {
-          this.formGroup.patchValue({
-            updatedByEmpID: newSda.dteSection.updatedByBadgeNo,
-            updatedByName: newSda.dteSection.updatedBy
-          });
+          this.formGroup.patchValue({updatedByEmpID: newSda.dteSection.updatedByBadgeNo, updatedByName: newSda.dteSection.updatedBy});
         }
 
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems.length > 0 ? newSda.dteSection.thresholdItems : [{}]));
-
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems(newSda.dteSection.inspectionItems.length > 0 ? newSda.dteSection.inspectionItems : [{}]));
-
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
-
         const arr = new FormArray([]);
-
         for (const attachment of newSda.dteSection.attachments) {
           if (attachment && attachment.attachmentName) {
             arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
           }
         }
         this.formGroup.setControl('attachments', arr);
-      // //   //Ata Codes
-      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
-
-      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      // //   }
-      // // }
       } else {
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
+
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
@@ -318,12 +287,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           mroDocuments: '',
           legacyEA: '',
         });
-      }
-      this.formGroup.markAsPristine();
+           }
+       this.formGroup.markAsPristine();
       }
 
-        if (!this.editable) {
-      this.formGroup.disable({ emitEvent: false });
+    if (!this.editable) {
+         this.formGroup.disable({ emitEvent: false });
     }
   }
 
@@ -361,30 +330,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     return <FormArray>this.formGroup.get('attachments');
   }
 
-
   populateTWD() {
-
-  //this.aircraftInfo$ = this.appStateService.getCurrentTimeandCycles('');
-  //this.general$ = Observable.create((observer: Observer<string>) => {
-  //observer.next(this.gs.formGroup.get('station').value);
-  //this.ac = this.viewAircraftInfo.aircraftInfo;
-  //this.g = this.viewgeneral.generalSectionFormGroup.controls;
-  //const a = this.viewAircraftInfo.formGroup.get('aircraftNo');
-  // this.aircraftInfo$.subscribe(event => console.log(event));
-  //console.log(this.a);
-  //this.aircraftInfo$.subscribe(ac => this.formGroup.get('currentFH').setValue(ac.noseNumber));
-   this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-   this.appStateService.loadAircraftInfo('7AB', new Date());
-   //this.aircraftInfo1$.subscribe(event => this.formGroup.get('FCcountDown').setValue(event.noseNumber));
-  //this.aircraftInfo$ = this.appStateService.getAircraftInfo();
-  //this.aircraftInfo$.subscribe(event => event.noseNumber);
-  //console.log(this.aircraftInfo$.subscribe(event => event.noseNumber.valueOf));
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
     this.formGroup.get('dueDate').reset();
-    this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFH').setValue(event.totalShipTime));
-    this.aircraftInfo$.subscribe(event => this.formGroup.get('currentFC').setValue(event.cycles));
+    this.formGroup.get('dueCycles').reset();
+    this.formGroup.get('dueHours').reset();
     this.trackLast = false;
+
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
       if (threshold.isActiveTracking === true) {
 
@@ -397,24 +350,19 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
            // Flight Hours and Cycles Calculations
           if (threshold.thresholdTFH > '') {
-            this.formGroup.get('FHcountDown').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
+            this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
 
-           if (threshold.thresholdTFC > '') {
-            this.formGroup.get('FCcountDown').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
+          if (threshold.thresholdTFC > '') {
+            this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
           if (threshold.wolt === true) {
             {this.trackLast = true; }
 
           }
-
     }
-
-
-
   }
 
 }
-
   // onAlertCode1Change(alertCode1: string) {
   //   this.loadAtaCodes2(alertCode1);
   //   this.formGroup.controls['ataCode2Dte'].setValue('');
@@ -423,6 +371,4 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   // loadAtaCodes2(alertCode1: string) {
   //   this.ataCodes2Dte = <models.IATACode[]>this.pipe.transform(this.ATACodesDte, ['primaryCode'], alertCode1);
   // }
-
 }
-

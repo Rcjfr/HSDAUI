@@ -149,8 +149,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Depth must be 3X4.',
       pattern: 'Depth can be till 3X3 and must be 3X4 and numeric.'
     },
-
-
     'preciseLocationGroup': {
       aleasttwo: 'At least two of the fields (Station, Stringer, WL, BL) are required.',
       'aircraftStation': {
@@ -541,7 +539,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
-
     'dteComponentGroup': {
       controlOrderNumber: {
         maxlength: 'Control Order # must not be more than 50 characters.'

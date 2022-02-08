@@ -1,5 +1,5 @@
 export interface IDTEInspectionItem {
-  thresholdItemID?: number;
+  inspectionItemID?: number;
   inspectionThreshold?: string;
   inspectionThresholdTFH?: string;
   inspectionThresholdTFC?: string;

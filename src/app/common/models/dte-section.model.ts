@@ -26,6 +26,10 @@ export interface IDTESection {
   updatedBy?: string;
   updatedDate?: Date;
   dueDate?: string
+  dueCycles?: string
+  dueHours?: string
+  currentFH?: string
+  currentFC?: string
   attachments?: IDTEAttachment[];
   thresholdItems?: IDTEThresholdItem[];
   inspectionItems?: IDTEInspectionItem[];

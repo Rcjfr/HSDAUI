@@ -16,39 +16,51 @@
         <a title='SDA ID' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
       </ng-template>
     </p-column>
+
     <!-- <p-column field="mrtNumber" header="MRT #" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{((record[col.field] | number:'6.0') || '').replace(',','') }}
       </ng-template>
     </p-column> -->
+   
     <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>
-    <p-column field="repairDate" header="Repair Date" [sortable]="true">
+    
+    <!-- <p-column field="repairDate" header="Repair Date" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{record[col.field] | date:'shortDate' }}
       </ng-template>
     </p-column>
+    -->
     <p-column field="repairDescriptionTypeDesc" [sortable]="false" header="Description">
       <ng-template item-width="50%" let-col let-record="rowData" pTemplate="body">
         {{record.repairDescriptionTypeDesc || record.defectivePartDescription || record.modifiedPartDescription }}
       </ng-template>
     </p-column>
+   
     <p-column field="dueInDays" header="Due in Days" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
       </ng-template>
     </p-column>
-    <p-column field="dueInCycless" header="Due in Cycles" [sortable]="true">
+   
+    <p-column field="dueInCycles" header="Due in Cycles" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
       </ng-template>
     </p-column>
+   
     <p-column field="dueInHours" header="Due in Hours" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
         {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
       </ng-template>
     </p-column>    
+  
     <p-column field="repairLocation" header="Location" [sortable]="true"></p-column>
+
+    <p-column field="repairInspectionStatusDesc" header="Repair Inspection Status" [sortable]="true"></p-column>
+  
   </p-dataTable>
+
 </ng-container>
   <div class="row form-group">
 

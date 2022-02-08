@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
@@ -78,25 +80,30 @@ export class TwdReportSearchComponent implements OnInit {
   }
 
 
-  showTwdReport(isExcel = false, isPdf = false) {
+  showTwdReport(isExcel = false, isPdf = false, isView = false) {
 
     this.formSubmitted = true;
     this.markAsDirty(this.twdReportSearchForm);
+
     if (this.twdReportSearchForm.valid) {
       this.searchCriteria = { searchByDTE: { dteStatus: [1], status: [1], isExistingRepair: [0] } };
+
       if (this.twdReportSearchForm.controls.aircraftNo.value) {
         this.searchCriteria.searchByAircraft = { aircraftNo: this.twdReportSearchForm.controls.aircraftNo.value };
       }
+
       if (this.twdReportSearchForm.controls.fleet.value) {
         this.searchCriteria.searchBySda = { fleet: `${this.twdReportSearchForm.controls.fleet.value}*` };
       }
       //this.searchCriteria.searchByCorrectiveAction = { isMajorRepair: 1}; //THIS IS THE DEFAULT FOR ANY SEARCHBYDTE SECTION
+
       this.searchCriteria.pageData = this.getDefaultPageData();
+
       if (isExcel) {
         this.onShowTwdExcel.emit(this.searchCriteria);
       } else if (isPdf) {
         this.onShowTwdPdf.emit(this.searchCriteria);
-      } else {
+      } else if (isView) {
         this.onShowTwd.emit(this.searchCriteria);
       }
     }

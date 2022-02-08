@@ -239,9 +239,7 @@
                                        [editable]="editable" 
                                        [errorMessages]="displayMessage?.thresholdItems" 
                                        [itemsFormArray]="formGroup.get('thresholdItems')"> 
-        </aa-dte-threshold-items-array>
-
-        
+        </aa-dte-threshold-items-array>        
         
         <aa-dte-inspection-items-array formArrayName="inspectionItems" 
                                        [editable]="editable" 
@@ -286,13 +284,13 @@
             
           <div class="col-sm-3">
              <aac-field-container label="FH remaining:" >
-              <input class="form-control"  formControlName="FHcountDown" tabindex='89'>
+              <input class="form-control"  formControlName="dueHours" tabindex='89'>
              </aac-field-container>
             </div>
 
             <div class="col-sm-3">
              <aac-field-container label="FC remaining:">
-              <input class="form-control" formControlName="FCcountDown" tabindex='90' >
+              <input class="form-control" formControlName="dueCycles" tabindex='90' >
              </aac-field-container>
             </div>
 
@@ -307,8 +305,7 @@
             </div>
   
            </div>
-
-  
+ 
    
           </div>
  

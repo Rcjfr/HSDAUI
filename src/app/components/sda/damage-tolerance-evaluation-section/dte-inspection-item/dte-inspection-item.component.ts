@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { IDTEInspectionItem } from '@app/common/models';
 import * as models from '@app/common/models';
@@ -47,7 +46,6 @@ export class DteInspectionItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.inspectionTimeSpanDesc$ = this.appStateService.getInspectionTimeSpanDesc();
   }
 
   remove() {
