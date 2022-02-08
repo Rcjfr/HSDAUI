@@ -58,14 +58,29 @@ import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   getCurrentSdaIdSubscription: Subscription;
+<<<<<<< HEAD
   
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   @Input() sda: ISda;
   @Input() readOnly: boolean;
   @Input() original: boolean;
   @Input() loading: boolean;
+<<<<<<< HEAD
   
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   @Output() onReset = new EventEmitter();
+<<<<<<< HEAD
   
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   currentSdaId: number;
   lastModifiedBy: string;
   statusUpdatedByName: string;
@@ -74,7 +89,12 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   statusUpdatedOn: Date = this.lastModifiedOn;
   saveCPCPSectionDetails = false;
   saveDTESectionDetails = false;
+<<<<<<< HEAD
   
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   public Status = Status; // to make it available in template
   public Source = Source; // to make it available in template
   public currentStatus: number;

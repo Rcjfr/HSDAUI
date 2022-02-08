@@ -37,7 +37,12 @@ describe('DamageToleranceEvaluationComponent', () => {
   const sda1 = {
     dteSection: {
       attachments: [],
+<<<<<<< HEAD
       
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
       monitorItems: [
         {
           monitorItemID: 3,
@@ -62,6 +67,21 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
+<<<<<<< HEAD
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+      versionID: 759,
+      dteStatus: 1,
+      totalShipTime: '15574.11',
+      cycles: '6207',
+      repairInspectionStatus: null,
+=======
+      versionID: 759,
+      dteStatus: 1,
+      totalShipTime: '15574.11',
+      cycles: '6207',
+      repairInspectionStatus: null,
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
       isFatigueCritical: true,
       stage1RTSDate: new Date(),
       stage1Duration: 6,

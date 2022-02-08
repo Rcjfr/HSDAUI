@@ -26,7 +26,12 @@ export class DteThresholdItemComponent implements OnInit {
   @Output() public tracked = new EventEmitter<number>();
  
   static initThreshold(val: IDTEThresholdItem): FormGroup {
+<<<<<<< HEAD
     
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
     return new FormGroup({
 
       isActiveTracking: new FormControl(val.isActiveTracking, [Validators.maxLength(50)]),
@@ -37,7 +42,12 @@ export class DteThresholdItemComponent implements OnInit {
       wolt: new FormControl(val.wolt, [Validators.maxLength(50)]),
 
     });
+<<<<<<< HEAD
  
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   }
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) { }
 
