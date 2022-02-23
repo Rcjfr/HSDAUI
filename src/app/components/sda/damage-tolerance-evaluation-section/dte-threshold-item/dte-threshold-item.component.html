@@ -12,7 +12,7 @@
         <div class="col-sm-3">
         
           <aac-checkbox-container label="Track this Threshold" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
-            <input type="checkbox" tabindex="164" formControlName="isActiveTracking" (click)="track()">
+            <input type="checkbox" tabindex="123" formControlName="isActiveTracking" (click)="track()">
           </aac-checkbox-container>     
         
         </div> 
@@ -20,7 +20,7 @@
         <div class="col-sm-7">
         
           <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
-            <input type="checkbox" tabindex="164" formControlName="wolt" >
+            <input type="checkbox" tabindex="124" formControlName="wolt" >
           </aac-checkbox-container>     
         
         </div> 
@@ -38,13 +38,13 @@
 
       <div class="col-sm-2">
         <aac-dte-field-container label="TFH or">
-          <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()">
+          <input class="form-control" formControlName="thresholdTFH" [tabindex]="125" (click)="clearThresholdRadio()">
         </aac-dte-field-container>
       </div>
 
       <div class="col-sm-3" >
        <aac-dte-field-container label="TFC or">
-        <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" >
+        <input class="form-control" formControlName="thresholdTFC" [tabindex]="126" (click)="clearThresholdRadio()" >
        </aac-dte-field-container>
       </div>
  
@@ -52,7 +52,7 @@
     
        <datetime [timepicker]="false" 
                  #thresholdDate 
-                 [tabindex]='3' 
+                 [tabindex]='127' 
                  formControlName="thresholdDate" 
                  [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"
                  [attr.for]="thresholdDate.idDatePicker" 
@@ -73,19 +73,19 @@
       
        <div class="col-sm-2" >
         <aac-radio-container label="6 Months" *ngIf="index < 1">
-         <input type="radio" [value]="6" tabindex="94"  formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="6" tabindex="129"  formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
             
        <div class="col-sm-2" >
         <aac-radio-container label="12 Months" *ngIf="index < 1">
-         <input type="radio" [value]="12" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="12" tabindex="128" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
             
        <div class="col-sm-2" >
         <aac-radio-container label="24 Months" *ngIf="index < 1">
-         <input type="radio" [value]="24" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+         <input type="radio" [value]="24" tabindex="128" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
         </aac-radio-container>
        </div>
        
