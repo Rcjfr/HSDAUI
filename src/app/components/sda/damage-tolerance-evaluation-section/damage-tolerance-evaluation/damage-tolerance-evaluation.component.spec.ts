@@ -37,6 +37,7 @@ describe('DamageToleranceEvaluationComponent', () => {
   const sda1 = {
     dteSection: {
       attachments: [],
+      
       monitorItems: [
         {
           monitorItemID: 3,
@@ -61,6 +62,7 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
+      
       versionID: 759,
       dteStatus: 1,
       totalShipTime: '15574.11',
@@ -97,106 +99,5 @@ describe('DamageToleranceEvaluationComponent', () => {
         DteInspectionItemsArrayComponent,
         DteThresholdItemComponent,
         DteThresholdItemsArrayComponent,
-        DteEngineComponent,
-        DteComponentComponent
-      ],
-      imports: [
-        ReactiveFormsModule, FormsModule, FormControlsModule, ToastrModule.forRoot(), NgPipesModule,
-        NKDatetimeModule, TextMaskModule, FileUploadModule, HttpModule, RouterTestingModule, NgIdleKeepaliveModule.forRoot(), HttpClientTestingModule
-      ]
-
-    })
-      .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DamageToleranceEvaluationComponent);
-    component = fixture.componentInstance;
-    component.sda = {};
-    component.editable = true;
-    component.parent = new FormGroup({});
-    component.errorMessages = {};
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should render existing dte section', () => {
-    component.editable = true;
-    component.ngOnChanges({
-      sda: new SimpleChange(null, sda1, true)
-    });
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
-    expect(component.formGroup.get('updatedByEmpID').value).toBe('00123456'); //default value
-    component.formGroup.get('qcFeedback').setValue('testing');
-    expect(component.formGroup.get('submitToQC').disabled).toBeFalsy();
-    component.formGroup.get('qcFeedback').setValue('');
-    expect(component.formGroup.get('submitToQC').disabled).toBeTruthy();
-   });
-  it('should render new dte section', () => {
-    component.editable = true;
-    component.ngOnChanges({
-      sda: new SimpleChange(null, {
-        generalSection: {
-          totalShipTime: '15574.11',
-          cycles: '6207'
-        }
-      }, true)
-    });
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
-
-    expect(component.formGroup.get('stage1Duration').value).toBe(6); //default value
-    expect(component.formGroup.get('updatedByEmpID').value).toBe(''); //default value
-    expect(component.formGroup.get('totalShipTime').value).toBe(15574.11); //default value from general section
-    expect(component.formGroup.get('cycles').value).toBe(6207); //default value from general section
-
-  });
-
-  it('should render existing dte section in readonly mode', () => {
-    component.editable = false;
-    fixture.detectChanges();
-    component.ngOnChanges({});
-    component.formGroup.updateValueAndValidity();
-    expect(component.formGroup.disabled).toBeTruthy();
-  });
-
-  it('should calculate dte duedate automatically', () => {
-
-    component.formGroup.get('stage1RTSDate').setValue(new Date(2017, 9, 1));
-    component.formGroup.get('stage1Duration').setValue(6);
-
-    component.formGroup.get('dteStatus').setValue(1); //Open
-    fixture.detectChanges();
-    expect(component.formGroup.get('dueDate').value).toBe('04/01/2018');
-
-    component.formGroup.get('dteStatus').setValue(2); //Closed
-    fixture.detectChanges();
-    expect(component.formGroup.get('dueDate').value).toBe('Completed');
-    component.formGroup.get('dteStatus').setValue(3); //TBD
-    fixture.detectChanges();
-    expect(component.formGroup.get('dueDate').value).toBe('');
-
-    component.formGroup.get('stage1RTSDate').setValue(null);
-    fixture.detectChanges();
-    expect(component.formGroup.get('dueDate').value).toBe('');
-
-    component.formGroup.get('dteStatus').setValue('');
-    fixture.detectChanges();
-    expect(component.formGroup.get('dueDate').value).toBe('');
-  });
-//   it('should get ATA Codes from service', () => {
-//     //Example to use spyOn
-//     //const service: AppStateService = TestBed.get(AppStateService);
-//     //component.ATACodes$
-//     //spyOn(service, 'getATACodes').and.returnValue(Observable.of(mockResponse));
-//     //fixture.detectChanges(); // move from the beforEach to here for spyOn to work as detectChanges will invoke ngOnInit
-//   component.ATACodes$.subscribe(a => {
-//     console.log(a);
-//           expect(a.length).toBe(1);
-//     });
-// });
-});
+        DteMonitorItemComponent,
+        DteThresholdItemsArrayComponent,       

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppStateService, AuthService } from '@app/common/services';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dte-threshold-items-array.component';
+
 @Component({
   selector: 'aa-dte-threshold-item',
   templateUrl: './dte-threshold-item.component.html',
@@ -20,11 +21,12 @@ export class DteThresholdItemComponent implements OnInit {
   @Input() public index: number;
   @Input() public message: any;
   @Input() public item = new FormGroup({});
-
+  
   @Output() public removed = new EventEmitter<number>();
   @Output() public tracked = new EventEmitter<number>();
-
+ 
   static initThreshold(val: IDTEThresholdItem): FormGroup {
+    
     return new FormGroup({
 
       isActiveTracking: new FormControl(val.isActiveTracking, [Validators.maxLength(50)]),

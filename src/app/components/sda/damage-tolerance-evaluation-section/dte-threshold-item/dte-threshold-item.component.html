@@ -95,6 +95,12 @@
    
   </div>
 
-
-
-
+  <div class="col-sm-3">
+    <aac-field-container label="Inspection Interval:" [message]="message?.inspectionInterval">
+      <input class="form-control" formControlName="inspectionInterval" [tabindex]="133+3*index+2">
+    </aac-field-container>
+  </div>
+    <aac-field-container label="Inspection Method:" [message]="message?.inspectionMethod">
+      <input class="form-control" formControlName="inspectionMethod" [tabindex]="133+3*index+3">
+    </aac-field-container>
+  </div>
