@@ -1,17 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-<<<<<<< HEAD
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
-/* eslint-disable @typescript-eslint/no-empty-function */
-=======
->>>>>>> 566015ad (Merged PR 64253: conflict resolution)
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { IDTEInspectionItem } from '@app/common/models';
 import * as models from '@app/common/models';
