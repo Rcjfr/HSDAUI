@@ -49,7 +49,6 @@ export class DteInspectionItemComponent implements OnInit {
 
   remove() {
     this.removed.emit(this.index);
-
     return false;
   }
 }
