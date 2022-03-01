@@ -20,7 +20,7 @@ export class DteThresholdItemComponent implements OnInit {
   @Input() public index: number;
   @Input() public message: any;
   @Input() public item = new FormGroup({});
-  
+
   @Output() public removed = new EventEmitter<number>();
   @Output() public tracked = new EventEmitter<number>();
 
