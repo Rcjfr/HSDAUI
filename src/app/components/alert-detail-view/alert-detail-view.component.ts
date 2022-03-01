@@ -1,13 +1,11 @@
-<<<<<<< HEAD
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-prototype-builtins */
-||||||| parent of 46cc2ac9 (TWD Report)
-=======
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-prototype-builtins */
->>>>>>> 46cc2ac9 (TWD Report)
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* tslint:disable-next-line:max-line-length */
