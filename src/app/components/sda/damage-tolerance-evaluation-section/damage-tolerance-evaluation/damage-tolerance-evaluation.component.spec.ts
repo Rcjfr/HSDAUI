@@ -98,4 +98,4 @@ describe('DamageToleranceEvaluationComponent', () => {
         DteThresholdItemComponent,
         DteThresholdItemsArrayComponent,
         DteMonitorItemComponent,
-        DteThresholdItemsArrayComponent,       
+        DteThresholdItemsArrayComponent
