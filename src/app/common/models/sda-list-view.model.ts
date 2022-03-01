@@ -172,11 +172,13 @@ export interface ISdaListView {
   dteMonitorItem3: string,
   dteMonitorItem4: string,
   dteMonitorItem5: string,
+
   dteThreshold1: string,
   dteThreshold2: string,
   dteThreshold3: string,
   dteThreshold4: string,
   dteThreshold5: string,
+
   dteInspectionThreshold1: string,
   dteInspectionThreshold2: string,
   dteInspectionThreshold3: string,
@@ -194,10 +196,11 @@ export interface ISdaListView {
   dteInspectionInterval3: string,
   dteInspectionInterval4: string,
   dteInspectionInterval5: string,
-
+  
   dueInDays: number,
   dueInCycles: number,
   dueInHours: number,
+
   hasOriginal: boolean,
   completedBy: string,
   completedOn: Date,

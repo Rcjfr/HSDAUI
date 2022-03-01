@@ -28,8 +28,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
-import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
-import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -50,18 +48,16 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ataCodes2Dte: models.IATACode[];
   alertCodes$: Observable<models.IBaseLookUp[]>;
   pipe = new DatePipe('en-US');
-
   ataSubscription: Subscription;
-
   aircraftInfo$: Observable<models.IAircraftInfo>;
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-   
+  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
+  acSection$: Observable<models.IAlert>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
-  @ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent;
-  @ViewChild(AircraftInfoSectionFormComponent) viewaircraft: AircraftInfoSectionFormComponent;
+ 
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
 
   displayName: string;
@@ -86,7 +82,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   trackLast: boolean;
   activeTrack: boolean;
-  
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
      this.formGroup = this.fb.group({
@@ -146,9 +141,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.dteStatus$ = this.appStateService.getDTEStatus();
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
-     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
-     //  this.populateTWD();
-
+     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;    
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -251,6 +244,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems(newSda.dteSection.inspectionItems.length > 0 ? newSda.dteSection.inspectionItems : [{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
 
+        // this.populateTWD();
+
         const arr = new FormArray([]);
 
         for (const attachment of newSda.dteSection.attachments) {
@@ -348,6 +343,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.formGroup.get('dueCycles').reset();
     this.formGroup.get('dueHours').reset();
     this.trackLast = false;
+    
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
       if (threshold.isActiveTracking === true) {
 
@@ -360,10 +356,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
            // Flight Hours and Cycles Calculations
           if (threshold.thresholdTFH > '') {
-            this.formGroup.get('FHcountDown').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
+            this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
 
            if (threshold.thresholdTFC > '') {
-            this.formGroup.get('FCcountDown').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
+            this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
           if (threshold.wolt === true) {
             {this.trackLast = true; }
