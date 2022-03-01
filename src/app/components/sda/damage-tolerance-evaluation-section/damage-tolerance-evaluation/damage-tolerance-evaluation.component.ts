@@ -126,22 +126,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       mroDocuments: ['', [Validators.maxLength(150)]],
       legacyEA: ['', [Validators.maxLength(100)]],
       dueDate: new FormControl({ value: '', disabled: true }),
-<<<<<<< HEAD
       dueCycles: new FormControl({ value: '', disabled: true }),
       dueHours: new FormControl({ value: '', disabled: true }),
       FHcountDown: new FormControl({value: '', disabled: true }),
       FCcountDown: new FormControl({value: '', disabled: true }),
       currentFH: new FormControl({value: '', disabled: true }),
       currentFC: new FormControl({value: '', disabled: true })
-||||||| parent of 25aa6db8 (DTE\TWD Linting correctins)
-      FHcountDown: new FormControl([{ value: '', disabled: true }]),
-      FCcountDown: new FormControl([{ value: '', disabled: true }, [Validators.maxLength(15)]])
-          
-=======
-      FHcountDown: new FormControl([{ value: '', disabled: true }]),
-      FCcountDown: new FormControl([{ value: '', disabled: true }, [Validators.maxLength(15)]])
-
->>>>>>> 25aa6db8 (DTE\TWD Linting correctins)
 
       // ataCode1: ['', []],
       // ataCode2: ['', []],
@@ -254,20 +244,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         if (newSda.dteSection.updatedBy) {
           this.formGroup.patchValue({updatedByEmpID: newSda.dteSection.updatedByBadgeNo, updatedByName: newSda.dteSection.updatedBy});
         }
-<<<<<<< HEAD
-||||||| parent of 25aa6db8 (DTE\TWD Linting correctins)
-      
-=======
-
->>>>>>> 25aa6db8 (DTE\TWD Linting correctins)
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems.length > 0 ? newSda.dteSection.thresholdItems : [{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems(newSda.dteSection.inspectionItems.length > 0 ? newSda.dteSection.inspectionItems : [{}]));
-<<<<<<< HEAD
-||||||| parent of 25aa6db8 (DTE\TWD Linting correctins)
-        
-=======
-
->>>>>>> 25aa6db8 (DTE\TWD Linting correctins)
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
 
         const arr = new FormArray([]);
@@ -278,34 +256,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           }
         }
         this.formGroup.setControl('attachments', arr);
-<<<<<<< HEAD
       } else {
-||||||| parent of 25aa6db8 (DTE\TWD Linting correctins)
-      // //   //Ata Codes
-      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
-
-      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      // //   }
-      // // }
-      } 
-      
-      else 
-      
-      {
-       
-=======
-      // //   //Ata Codes
-      // //  if (changes.criteria.currentValue.searchByDTE.ataCode1Dte) {
-      // //   this.loadAtaCodes2(changes.criteria.currentValue.searchByDTE.ataCode1Dte);
-
-      // //   if (changes.criteria.currentValue.searchByDTE.ataCode2Dte) {
-      // //     this.formGroup.patchValue({ ataCode2Dte: changes.criteria.currentValue.searchByDTE.ataCode2Dte }, { emitEvent: false });
-      // //   }
-      // // }
-      } else {
->>>>>>> 25aa6db8 (DTE\TWD Linting correctins)
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
@@ -347,22 +298,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
            }
        this.formGroup.markAsPristine();
       }
-<<<<<<< HEAD
 
     if (!this.editable) {
          this.formGroup.disable({ emitEvent: false });
-||||||| parent of 25aa6db8 (DTE\TWD Linting correctins)
-      this.formGroup.markAsPristine();
-        }
-    if (!this.editable) {
-      this.formGroup.disable({ emitEvent: false });
-=======
-      this.formGroup.markAsPristine();
-      }
-
-        if (!this.editable) {
-      this.formGroup.disable({ emitEvent: false });
->>>>>>> 25aa6db8 (DTE\TWD Linting correctins)
     }
   }
 
@@ -399,75 +337,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   getAttachments(): FormArray {
     return <FormArray>this.formGroup.get('attachments');
   }
-
-
-  populateTWD() {
-
-
-    //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-    this.appStateService.loadAircraftInfo('775', new Date());
-
-
-    this.formGroup.get('FHcountDown').reset();
-    this.formGroup.get('FCcountDown').reset();
-    this.formGroup.get('dueDate').reset();
-
-    this.trackLast = false;
-
-    for (const threshold of this.viewThresholds.itemsFormArray.value) {
-
-      if (threshold.IsActiveTracking === true) {
-
-           //Date calculations
-           if (threshold.ThresholdDate > '') {
-            this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.ThresholdDate, 'MM/dd/yyyy')); }
-
-          if (threshold.ThresholdStage1Duration > '') {
-            this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.ThresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
-
-           // Flight Hours and Cycles Calculations
-          if (threshold.ThresholdTFH > '') {
-            this.formGroup.get('FHcountDown').setValue((threshold.ThresholdTFH - this.formGroup.get('totalShipTime').value).toFixed()); }
-
-           if (threshold.ThresholdTFC > '') {
-            this.formGroup.get('FCcountDown').setValue((threshold.ThresholdTFC - this.formGroup.get('cycles').value).toFixed()); }
-
-          if (threshold.WOL === true) {
-            {this.trackLast = true; }
-
-          }
-
-    }
-
-
-
-  }
-
-}
-
- //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
-    //this.appStateService.loadAircraftInfo('775', new Date());
-
-    //this.formGroup.get('aircraftInfo$');
-
-    //this.aircraftInfo$ = Observable.create( (observer: Observer<string>) => {observer.next(this.formGroup.get('aircraftNo').value);} )
-
-    //this.formGroup.get('thresholdItems[1].ThresholdTFH').setValue('100');
-
-    //this.formGroup.get('currenttotalShipTime').setValue(this.formGroup.get('totalShipTime').value);
-    //this.formGroup.get('currentcycles').setValue(this.formGroup.get('cycles').value);
-
-   // this.formGroup.get('currenttotalShipTime').setValue(this.formGroup.get('DteInspectionItemComponent[1]'));
-      //this.chviewChild.message = 'Changed value of View Child';
-    //this.cd.detectChanges();
-
-
-
-    //this.formGroup.get(this.aircraftInfo$.first).setValue(this.formGroup.get('totalShipTime'));
-    //this.formGroup.get('currenttotalShipTime').setValue(this.formGroup.get('totalShipTime').value);
-    //this.formGroup.get('currentcycles').setValue(this.formGroup.get('cycles').value);
-
-
 
   populateTWD() {
     this.formGroup.get('FHcountDown').reset();
