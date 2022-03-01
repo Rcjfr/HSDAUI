@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -29,7 +28,6 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
 
-  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
