@@ -28,6 +28,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
+import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
+import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
 // import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
 // import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
 // import { IGeneralSection } from '@app/common/models/general-section.model';
@@ -56,16 +58,15 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   ataSubscription: Subscription;
 
   aircraftInfo$: Observable<models.IAircraftInfo>;
-  aircraftInfo1$: Observable<models.IAircraftInfo>;
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  acSection$: Observable<models.IAlert>;
-
+  //acSection$: Observable<models.IAlert>;
+  
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
-  // @ViewChild(AircraftInfoSectionFormComponent) viewAircraftInfo: AircraftInfoSectionFormComponent;
-  // @ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent
+  @ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent;
+  @ViewChild(AircraftInfoSectionFormComponent) viewaircraft: AircraftInfoSectionFormComponent;
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
 
   displayName: string;
@@ -90,10 +91,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   trackLast: boolean;
   activeTrack: boolean;
-  // ac:IAircraftInfo;
-  // g:IGeneralSection;
-  // a:string;
-
+  
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
      this.formGroup = this.fb.group({
@@ -154,7 +152,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
      this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
-     this.populateTWD();
+     //  this.populateTWD();
 
     });
 
@@ -366,11 +364,11 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
             this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
 
            // Flight Hours and Cycles Calculations
-          if (threshold.ThresholdTFH > '') {
-            this.formGroup.get('FHcountDown').setValue( ( threshold.ThresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
+          if (threshold.thresholdTFH > '') {
+            this.formGroup.get('FHcountDown').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
 
-           if (threshold.ThresholdTFC > '') {
-            this.formGroup.get('FCcountDown').setValue((threshold.ThresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
+           if (threshold.thresholdTFC > '') {
+            this.formGroup.get('FCcountDown').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
 
           if (threshold.wolt === true) {
             {this.trackLast = true; }
