@@ -77,13 +77,13 @@
 
     <div class="col-sm-4">
       <aac-field-container label="Stage 2 Approval Date:" [attr.for]="stage2Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="94" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="95" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>  
 
     <div class="col-sm-4">
       <aac-field-container label="Stage 3 Approval Date:" [attr.for]="stage3Date.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="95" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="96" [readonly]="formGroup.get('stage3Date').disabled?true:null" #stage3Date formControlName="stage3Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
 
@@ -93,19 +93,19 @@
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="SR #:" [message]="displayMessage.srNumber">
-        <input class="form-control" formControlName="srNumber" tabindex="96">
+        <input class="form-control" formControlName="srNumber" tabindex="97">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Dossier #:" [message]="displayMessage.rdasNumber">
-        <input class="form-control" formControlName="rdasNumber" tabindex="97">
+        <input class="form-control" formControlName="rdasNumber" tabindex="98">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="ETD #:" [message]="displayMessage.etdNumber">
-        <input class="form-control" formControlName="etdNumber" tabindex="98">
+        <input class="form-control" formControlName="etdNumber" tabindex="99">
       </aac-field-container>
     </div>
 
@@ -116,19 +116,19 @@
 
     <div class="col-sm-4">
       <aac-field-container label="ESM Sub/Item #:" [message]="displayMessage.esmSubItemNumber">
-        <input class="form-control" formControlName="esmSubItemNumber" tabindex="99">
+        <input class="form-control" formControlName="esmSubItemNumber" tabindex="100">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Task Card #:" [message]="displayMessage.taskCardNo">
-        <input class="form-control" formControlName="taskCardNo" tabindex="100">
+        <input class="form-control" formControlName="taskCardNo" tabindex="101">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Repair Date:" [attr.for]="repairDate.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="101" [readonly]="formGroup.get('repairDate').disabled?true:null" #repairDate formControlName="repairDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="102" [readonly]="formGroup.get('repairDate').disabled?true:null" #repairDate formControlName="repairDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
 
@@ -139,19 +139,19 @@
 
     <div class="col-sm-4">
       <aac-field-container label="Airline Code:" [message]="displayMessage.airlineCode">
-        <input class="form-control" formControlName="airlineCode" tabindex="102">
+        <input class="form-control" formControlName="airlineCode" tabindex="103">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Repair Removed Date:" [attr.for]="removedByDate.idDatePicker">
-        <datetime [timepicker]="false" [tabindex]="103" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]="104" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
     
     <div class="col-sm-4">
       <aac-field-container label="ECO/ESO/MRB #:" [message]="displayMessage.mrbNumber">
-        <input class="form-control" formControlName="mrbNumber" tabindex="104">
+        <input class="form-control" formControlName="mrbNumber" tabindex="105">
       </aac-field-container>
     </div>
 
@@ -162,19 +162,19 @@
 
     <div class="col-sm-4">
       <aac-field-container label="MRT #:" [message]="displayMessage.mrtNumber">
-        <input class="form-control" formControlName="mrtNumber" tabindex="105">
+        <input class="form-control" formControlName="mrtNumber" tabindex="106">
       </aac-field-container>
     </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Removed By Record #:" [message]="displayMessage.removedByMrt">
-        <input class="form-control" formControlName="removedByMrt" tabindex="106">
+        <input class="form-control" formControlName="removedByMrt" tabindex="107">
       </aac-field-container>
     </div>
     
     <div class="col-sm-4">
       <aac-field-container label="Status:">
-        <select class="form-control" tabindex='107' formControlName="status">
+        <select class="form-control" tabindex='108' formControlName="status">
           <option value="">Select Status</option>
           <option *ngFor="let stat of status$ | async" [value]="stat.id">{{stat.description}}</option>
         </select>
@@ -187,17 +187,17 @@
 
     <div class="col-sm-4">
       <aac-field-container label="Zone:" [message]="displayMessage.zone">
-        <input class="form-control" formControlName="zone" tabindex="108">
+        <input class="form-control" formControlName="zone" tabindex="109">
       </aac-field-container>
     </div>
     <div class="col-sm-4">
       <aac-field-container label="Location of Repair:" [message]="displayMessage.repairLocation">
-        <input class="form-control" formControlName="repairLocation" tabindex="109">
+        <input class="form-control" formControlName="repairLocation" tabindex="110">
       </aac-field-container>
     </div>
     <div class="col-sm-4">
       <aac-field-container label="MRO Documents:" [message]="displayMessage.mroDocuments">
-        <input class="form-control" formControlName="mroDocuments" tabindex="110">
+        <input class="form-control" formControlName="mroDocuments" tabindex="111">
       </aac-field-container>
     </div>
   </div>
@@ -206,7 +206,7 @@
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
-        <input class="form-control" formControlName="legacyEA" tabindex="111">
+        <input class="form-control" formControlName="legacyEA" tabindex="112">
       </aac-field-container>
     </div>
     <div class="col-sm-4"></div>
@@ -269,13 +269,13 @@
      
             <div class="col-sm-3">
               <aac-field-container label="Current FH:" >
-               <input class="form-control"  formControlName="currentFH" tabindex='112'>
+               <input class="form-control"  formControlName="currentFH" tabindex='89'>
               </aac-field-container>
              </div>
 
              <div class="col-sm-3">
               <aac-field-container label="Current FC:">
-               <input class="form-control" formControlName="currentFC" tabindex='113' >
+               <input class="form-control" formControlName="currentFC" tabindex='90' >
               </aac-field-container>
              </div>
             </div>
@@ -284,19 +284,19 @@
             
           <div class="col-sm-3">
              <aac-field-container label="FH remaining:" >
-              <input class="form-control"  formControlName="dueHours" tabindex='114'>
+              <input class="form-control"  formControlName="dueHours" tabindex='89'>
              </aac-field-container>
             </div>
 
             <div class="col-sm-3">
              <aac-field-container label="FC remaining:">
-              <input class="form-control" formControlName="dueCycles" tabindex='115' >
+              <input class="form-control" formControlName="dueCycles" tabindex='90' >
              </aac-field-container>
             </div>
 
             <div class="col-sm-4">
              <aac-field-container label="DTE Due Date:">
-              <input class="form-control" formControlName="dueDate" tabindex="116">
+              <input class="form-control" formControlName="dueDate" tabindex="163">
              </aac-field-container>
             </div>  
 

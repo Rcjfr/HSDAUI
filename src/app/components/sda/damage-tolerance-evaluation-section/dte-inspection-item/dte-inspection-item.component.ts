@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-empty-function */
-
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { IDTEInspectionItem } from '@app/common/models';
 import * as models from '@app/common/models';
@@ -28,6 +22,7 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
 
+  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
