@@ -30,10 +30,6 @@ import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspectio
 import { DatePipe } from '@angular/common';
 import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
 import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
-// import { AircraftInfoSectionFormComponent } from '../../general-section/aircraft-info-section-form/aircraft-info-section-form.component';
-// import { GeneralSectionFormComponent } from '../../general-section/general-section-form/general-section-form.component';
-// import { IGeneralSection } from '@app/common/models/general-section.model';
-// import { getSelectedAlertLoading } from '@app/common/reducers';
 
 @Component({
   selector: 'aa-damage-tolerance-evaluation',
@@ -61,8 +57,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  //acSection$: Observable<models.IAlert>;
-  
+   
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
   @ViewChild(GeneralSectionFormComponent) viewgeneral: GeneralSectionFormComponent;
