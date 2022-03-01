@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+||||||| parent of f473c126 (conflict resolution)
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
+=======
+>>>>>>> f473c126 (conflict resolution)
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { IDTEInspectionItem } from '@app/common/models';
 import * as models from '@app/common/models';

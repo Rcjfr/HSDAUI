@@ -62,11 +62,14 @@ import { ISdaListView, ILazyLoadEvent } from '@app/common/models';
 })
 export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDestroy, OnChanges {
   getCurrentSdaIdSubscription: Subscription;
+  
   @Input() sda: ISda;
   @Input() readOnly: boolean;
   @Input() original: boolean;
   @Input() loading: boolean;
+  
   @Output() onReset = new EventEmitter();
+  
   currentSdaId: number;
   lastModifiedBy: string;
   statusUpdatedByName: string;
@@ -75,6 +78,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
   statusUpdatedOn: Date = this.lastModifiedOn;
   saveCPCPSectionDetails = false;
   saveDTESectionDetails = false;
+  
   public Status = Status; // to make it available in template
   public Source = Source; // to make it available in template
   public currentStatus: number;
