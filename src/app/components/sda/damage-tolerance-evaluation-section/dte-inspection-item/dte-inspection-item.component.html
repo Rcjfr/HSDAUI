@@ -1,178 +1,98 @@
-<!-- INSPECTION THRESHOLD -->
 <div class="panel-body">
- 
+
   <div class="panel panel-default">
-  
-   <div class="panel-body">
- 
-     <!-- INSPECTION THRESHOLD -->
-     <div class="row" [formGroup]="item" >
-      <div class="col-sm-12">
-       <span class="pull-right">
-       <a href="#" *ngIf="editable" (click)="remove()">Delete</a>
-       </span>
-      </div>
-     </div>
-    
-     <div class="row" [formGroup]="item" >
-      <div class="col-sm-1">
-       <h4>{{index+1}}.</h4>
-      </div>
- 
-      <div class="col-sm-7">
-       <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1">
-        <input type="checkbox" tabindex="129" formControlName="woli">
-       </aac-checkbox-container>     
-      </div> 
-     </div>
- 
-     <div class="row" [formGroup]="item" >
- 
-      <div class="col-sm-1"  >
-      </div>
- 
-     <div class="col-sm-1" >
-      <aac-field-container  label="Inspection Threshold:" >
-      </aac-field-container>
-     </div>
- 
-     <div class="col-sm-2" >
-      <aac-dte-field-container label="TFH or"> 
-       <input class="form-control" formControlName="inspectionThresholdTFH" [tabindex]="130">
-      </aac-dte-field-container>
-     </div>
- 
-     <div class="col-sm-2">
-      <aac-dte-field-container label="TFC or">  
-       <input class="form-control" formControlName="inspectionThresholdTFC" [tabindex]="131">
-      </aac-dte-field-container>
- 
-     </div>
+    <div class="panel-body">
    
- 
-     <div class="col-sm-3" >     
-      <aac-field-container>
-       <input class="form-control" style="width:40%; float:left" formControlName="inspectionThresholdSpan" [tabindex]="132">
-       <select class="form-control" style="width:50%; float:right" [tabindex]="133" formControlName="inspectionThresholdSpanDesc">
-        <option value="1" selected>Days</option>
-        <option value="2" selected>Months</option>
-        <option value="3" selected>Years</option>
-       </select>
-      </aac-field-container>
-     </div>
- 
-     <div class="col-sm-3">
-      <aac-field-container label="Inspection Method:">
-       <input class="form-control" formControlName="inspectionMethod" [tabindex]="134">
-      </aac-field-container>
-     </div>
- 
-    </div>
- 
-    <!-- INSPECTION INTERVAL-->
-    <div class="row" [formGroup]="item">
- 
+  <div class="row" [formGroup]="item" >
+    
+      <div class="col-sm-1">
+        <h4>{{index+1}}.</h4>
+      </div> 
+      
+      <div class="col-sm-3">
+      
+        <aac-checkbox-container label="Track this Threshold" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
+          <input type="checkbox" tabindex="164" formControlName="isActiveTracking" (click)="track()">
+        </aac-checkbox-container>     
+      
+      </div> 
+
+      <div class="col-sm-7">
+      
+        <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
+          <input type="checkbox" tabindex="164" formControlName="wolt" >
+        </aac-checkbox-container>     
+      
+      </div> 
+
      <div class="col-sm-1">
-     </div>
- 
-     <div class="col-sm-1">
-     <aac-field-container label="Inspection Interval:" [message]="message?.inspectionInterval">
-     </aac-field-container>
-     </div>
- 
-     <div class="col-sm-2">
-     <aac-dte-field-container label="FH or">
-       <input class="form-control" formControlName="inspectionIntervalTFH" [tabindex]="135">
-     </aac-dte-field-container>
-     </div>
- 
-     <div class="col-sm-2">
-     <aac-dte-field-container label="FC or" >
-       <input class="form-control" formControlName="inspectionIntervalTFC" [tabindex]="136">
-     </aac-dte-field-container>
-     </div>
- 
-     <div class="col-sm-3">
-     <aac-field-container >
-       <input class="form-control" style="width:40%; float:left" formControlName="inspectionIntervalSpan" [tabindex]="137">
-       <select class="form-control" style="width:50%; float:right" [tabindex]="138" formControlName="inspectionIntervalSpanDesc">
-        <option value="1" selected>Days</option>
-        <option value="2" selected>Months</option>
-        <option value="3" selected>Years</option>
-      </select>
-    </aac-field-container>
+      <a href="#" *ngIf="editable" (click)="remove()">Delete</a>
+     </div>       
+    
   </div>
-
-  <div class="col-sm-3">
-   <aac-field-container label="Inspection Method:" >
-   <input class="form-control" formControlName="inspectionMethod" [tabindex]="133+3*index+3">
-   </aac-field-container>
-  </div>
-
-    </div>
-
-   </div>
-
-   <!-- INSPECTION INTERVAL -->
-   <div class="row" [formGroup]="item">
-
-    <div class="col-sm-1">
-    </div>
-
-    <div class="col-sm-1">
-    <aac-field-container label="Inspection Interval:" [message]="message?.inspectionInterval">
-    </aac-field-container>
-    </div>
-
-    <div class="col-sm-2">
-    <aac-dte-field-container label="FH or" >
-      <input class="form-control" formControlName="inspectionIntervalTFH" [tabindex]="133+3*index+3">
-    </aac-dte-field-container>
-    </div>
-
-    <div class="col-sm-2">
-    <aac-dte-field-container label="FC or" >
-      <input class="form-control" formControlName="inspectionIntervalTFC" [tabindex]="133+3*index+2">
-    </aac-dte-field-container>
-    </div>
-
-    <div class="col-sm-3">
-    <aac-field-container >
-      <input class="form-control" style="width:40%; float:left" formControlName="inspectionIntervalSpan" [tabindex]="133+3*index+2">
-      <select class="form-control" style="width:50%; float:right" [tabindex]="133+3*index+3" formControlName="inspectionIntervalSpanDesc">
-        <option value="1" selected>Days</option>
-        <option value="2" selected>Months</option>
-        <option value="3" selected>Years</option>
-      </select>
-    </aac-field-container>
-   </div>
   
+  <div class="row" [formGroup]="item" >
+
+    <div class="col-sm-1">
+    </div> 
+
+    <div class="col-sm-2">
+      <aac-dte-field-container label="TFH or">
+        <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()">
+      </aac-dte-field-container>
+    </div>
+
+    <div class="col-sm-3" >
+     <aac-dte-field-container label="TFC or">
+      <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" >
+     </aac-dte-field-container>
+    </div>
+
+    <div class="col-sm-3" >
+  
+     <datetime [timepicker]="false" 
+               #thresholdDate 
+               [tabindex]='3' 
+               formControlName="thresholdDate" 
+               [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"
+               [attr.for]="thresholdDate.idDatePicker" 
+              (click)="clearThresholdRadio()">
+     </datetime>
+  
+    </div>
+
+
   </div>
-<<<<<<< Updated upstream
- 
+
+  <div class="row" [formGroup]="item" >
+
+      <div class="col-sm-1">
+      </div> 
+   
+      <label class="col-sm-2 control-label" labelGridColumnWidth="1" *ngIf="index < 1">Stage 1 Duration</label>
+    
+     <div class="col-sm-2" >
+      <aac-radio-container label="6 Months" *ngIf="index < 1">
+       <input type="radio" [value]="6" tabindex="94"  formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+      </aac-radio-container>
+     </div>
+          
+     <div class="col-sm-2" >
+      <aac-radio-container label="12 Months" *ngIf="index < 1">
+       <input type="radio" [value]="12" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+      </aac-radio-container>
+     </div>
+          
+     <div class="col-sm-2" >
+      <aac-radio-container label="24 Months" *ngIf="index < 1">
+       <input type="radio" [value]="24" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
+      </aac-radio-container>
+     </div>
+     
   </div>
-||||||| constructed merge base
+  </div>
+</div>
  
- </div>
-
+     
 </div>
-=======
 
-
-
-</div>
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
- </div>
-||||||| constructed merge base
-=======
-<hr>
-
-<<<<<<< HEAD
->>>>>>> Stashed changes
-||||||| parent of 9cb2a600 (conflict)
- </div>
-=======
- </div>
->>>>>>> 9cb2a600 (conflict)

@@ -62,12 +62,6 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
-      
-      versionID: 759,
-      dteStatus: 1,
-      totalShipTime: '15574.11',
-      cycles: '6207',
-      repairInspectionStatus: null,
       isFatigueCritical: true,
       stage1RTSDate: new Date(),
       stage1Duration: 6,

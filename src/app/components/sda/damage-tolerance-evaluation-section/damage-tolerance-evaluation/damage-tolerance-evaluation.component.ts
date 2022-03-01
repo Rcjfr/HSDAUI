@@ -53,10 +53,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   dteStatus$: Observable<models.IBaseLookUp[]>;
   status$: Observable<models.IBaseLookUp[]>;
   repairInspectionStatus$: Observable<models.IBaseLookUp[]>;
-  
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
-
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
   displayName: string;
   createNumberMask = createNumberMask;
@@ -76,7 +74,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   });
  
   trackLast: boolean;
-  activeTrack:boolean;
+  activeTrack: boolean;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
     super('damageToleranceEvaluationGroup', authService);
@@ -183,12 +181,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       this.uploadElRef.nativeElement.value = '';
     };
     this.parent.addControl(this.formGroupName, this.formGroup);
-  
     const dteStatusControl = this.formGroup.get('dteStatus');
     const stage1RTSDateControl = this.formGroup.get('stage1RTSDate');
     const durationControl = this.formGroup.get('stage1Duration');
     const dteDueDateControl = this.formGroup.get('dueDate');
-   
     Observable.merge(dteStatusControl.valueChanges,
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
@@ -232,9 +228,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems(newSda.dteSection.thresholdItems.length > 0 ? newSda.dteSection.thresholdItems : [{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems(newSda.dteSection.inspectionItems.length > 0 ? newSda.dteSection.inspectionItems : [{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems(newSda.dteSection.monitorItems.length > 0 ? newSda.dteSection.monitorItems : [{}]));
-        
         const arr = new FormArray([]);
-       
         for (const attachment of newSda.dteSection.attachments) {
           if (attachment && attachment.attachmentName) {
             arr.push(this.initAttachment(attachment.attachmentName, attachment.attachmentSize, attachment.attachmentPath, attachment.attachmentID));
@@ -245,6 +239,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
+
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
@@ -322,8 +317,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   getAttachments(): FormArray {
     return <FormArray>this.formGroup.get('attachments');
   }
-  
-
   populateTWD() {
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
@@ -365,6 +358,4 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   // loadAtaCodes2(alertCode1: string) {
   //   this.ataCodes2Dte = <models.IATACode[]>this.pipe.transform(this.ATACodesDte, ['primaryCode'], alertCode1);
   // }
-
-
 }
