@@ -13,7 +13,12 @@ alertCodes: [],
   departments: [],
   detectionMethods: [],
   dteStatus: [],
+<<<<<<< HEAD
   dteInspectionTimeSpan: [],
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+  inspectionTimeSpanDesc: [],
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
   floorBoardConditions: [],
   corrosionLevelChangeReasons: [],
   repairDescriptionTypes: [],

@@ -539,7 +539,12 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         maxlength: 'Inspection Method must not be more than 50 characters.'
       }
     },
+<<<<<<< HEAD
     
+||||||| parent of 566015ad (Merged PR 64253: conflict resolution)
+
+=======
+>>>>>>> 566015ad (Merged PR 64253: conflict resolution)
     'dteComponentGroup': {
       controlOrderNumber: {
         maxlength: 'Control Order # must not be more than 50 characters.'
