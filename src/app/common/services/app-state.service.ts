@@ -110,7 +110,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-
   getFleet(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getFleet);
   }
@@ -166,6 +165,8 @@ export class AppStateService {
   getSearchType(): Observable<SearchType> {
     return this.store.select(fromRoot.getSearchType);
   }
+
+
   //Dispatch Actions
   saveSda(sda: ISda): void {
     this.store.dispatch(new selectedAlertActions.SaveSdaAction(sda));

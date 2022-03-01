@@ -77,7 +77,7 @@ export const getRepairDocuments = (state: State) => state.lookupData.repairDocum
 export const getRepairDescriptions = (state: State) => state.lookupData.repairDescriptionTypes;
 export const getReasonsForChange = (state: State) => state.lookupData.corrosionLevelChangeReasons;
 export const getDTEStatus = (state: State) => state.lookupData.dteStatus;
-export const getDTEInspectionTimeSpan = (state: State) => state.lookupData.dteInspectionTimeSpan;
+export const getInspectionTimeSpanDesc = (state: State) => state.lookupData.inspectionTimeSpanDesc;
 export const getRepairInspectionStatus = (state: State) => state.lookupData.repairInspectionStatus;
 export const getSdaStatus = (state: State) => state.lookupData.sdaStatus;
 export const getDTERepairStatus = (state: State) => state.lookupData.dteRepairStatus;

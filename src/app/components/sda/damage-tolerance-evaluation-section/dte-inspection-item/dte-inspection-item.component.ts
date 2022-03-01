@@ -22,7 +22,6 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
 
-  inspectionTimeSpanDesc$: Observable<models.IBaseLookUp[]>;
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
