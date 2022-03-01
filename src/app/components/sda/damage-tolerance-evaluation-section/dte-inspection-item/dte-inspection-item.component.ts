@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -28,7 +27,6 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public message: any;
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
- 
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({
