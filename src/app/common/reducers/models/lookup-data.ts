@@ -1,26 +1,28 @@
-import { IBaseLookUp } from './base-lookup.model';
-import { ICheckType } from './check-type.model';
-import { IATACode } from './ata-code.model';
+import { TypedRecord, makeTypedFactory } from 'typed-immutable-record';
+import {ILookupData} from '@app/common/models';
 
-export interface ILookupData {
-  alertCodes: IBaseLookUp[];
-  causeOfDamages: IBaseLookUp[];
-  corrosionLevels: IBaseLookUp[];
-  corrosionTypes: IBaseLookUp[];
-  damageTypes: IBaseLookUp[];
-  departments: IBaseLookUp[];
-  detectionMethods: IBaseLookUp[];
-  dteStatus: IBaseLookUp[];
-  floorBoardConditions: IBaseLookUp[];
-  corrosionLevelChangeReasons: IBaseLookUp[];
-  repairDescriptionTypes: IBaseLookUp[];
-  repairDocumentTypes: IBaseLookUp[];
-  repairInspectionStatus: IBaseLookUp[];
-  ataCodes: IATACode[];
-  checkTypes: ICheckType[];
-  sdaStatus: IBaseLookUp[];
-  dteRepairStatus: IBaseLookUp[];
-  dteComponentType: IBaseLookUp[];
-  fleet: IBaseLookUp[];
-}
+export interface LookupDataRecord extends TypedRecord<LookupDataRecord>, ILookupData { }
 
+export const LookupDataFactory = makeTypedFactory<ILookupData, LookupDataRecord>(
+  {
+alertCodes: [],
+  causeOfDamages: [],
+  corrosionLevels: [],
+  corrosionTypes: [],
+  damageTypes: [],
+  departments: [],
+  detectionMethods: [],
+  dteStatus: [],
+  floorBoardConditions: [],
+  corrosionLevelChangeReasons: [],
+  repairDescriptionTypes: [],
+  repairDocumentTypes: [],
+  repairInspectionStatus: [],
+  ataCodes: [],
+  checkTypes: [],
+  sdaStatus: [],
+  dteRepairStatus: [],
+  dteComponentType: [],
+  fleet: []
+
+});
