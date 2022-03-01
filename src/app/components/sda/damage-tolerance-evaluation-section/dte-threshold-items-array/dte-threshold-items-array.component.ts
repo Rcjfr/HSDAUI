@@ -46,7 +46,6 @@ export class DteThresholdItemsArrayComponent implements OnInit {
       this.itemsFormArray.push(DteThresholdItemComponent.initThreshold({}));
     }
 
-
      return false;
   }
 

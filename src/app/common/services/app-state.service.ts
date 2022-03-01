@@ -110,7 +110,6 @@ export class AppStateService {
     return this.store.select(fromRoot.getRepairInspectionStatus);
   }
 
-
   getFleet(): Observable<IBaseLookUp[]> {
     return this.store.select(fromRoot.getFleet);
   }
