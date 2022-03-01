@@ -20,12 +20,11 @@ export class DteThresholdItemComponent implements OnInit {
   @Input() public index: number;
   @Input() public message: any;
   @Input() public item = new FormGroup({});
-
+  
   @Output() public removed = new EventEmitter<number>();
   @Output() public tracked = new EventEmitter<number>();
 
   static initThreshold(val: IDTEThresholdItem): FormGroup {
-
     return new FormGroup({
 
       isActiveTracking: new FormControl(val.isActiveTracking, [Validators.maxLength(50)]),
@@ -36,7 +35,6 @@ export class DteThresholdItemComponent implements OnInit {
       wolt: new FormControl(val.wolt, [Validators.maxLength(50)]),
 
     });
-
   }
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) { }
 
