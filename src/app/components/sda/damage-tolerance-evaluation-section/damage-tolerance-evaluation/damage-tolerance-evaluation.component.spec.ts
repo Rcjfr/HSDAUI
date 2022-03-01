@@ -37,6 +37,7 @@ describe('DamageToleranceEvaluationComponent', () => {
   const sda1 = {
     dteSection: {
       attachments: [],
+      
       monitorItems: [
         {
           monitorItemID: 3,
@@ -61,6 +62,7 @@ describe('DamageToleranceEvaluationComponent', () => {
           inspectionMethod: 'im'
         }
       ],
+      
       versionID: 759,
       dteStatus: 1,
       totalShipTime: '15574.11',
