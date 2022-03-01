@@ -355,7 +355,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.formGroup.get('dueCycles').reset();
     this.formGroup.get('dueHours').reset();
     this.trackLast = false;
-     
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
       if (threshold.isActiveTracking === true) {
 
