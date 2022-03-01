@@ -21,7 +21,7 @@ export class DteInspectionItemComponent implements OnInit {
   @Input() public message: any;
   @Input() public item = new FormGroup({});
   @Output() public removed = new EventEmitter<number>();
-
+ 
   static initInspection(val: IDTEInspectionItem): FormGroup {
 
     return new FormGroup({

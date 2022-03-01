@@ -57,7 +57,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   acSection$: Observable<models.IAlert>;
   @ViewChild('uploadEl') uploadElRef: ElementRef
   @ViewChild(DteThresholdItemsArrayComponent) viewThresholds: DteThresholdItemsArrayComponent;
- 
   public uploader = new FileUploader({ autoUpload: true, maxFileSize: 50 * 1024 * 1024 });
 
   displayName: string;
@@ -141,7 +140,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.dteStatus$ = this.appStateService.getDTEStatus();
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
-     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;    
+     this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -200,8 +199,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       stage1RTSDateControl.valueChanges,
       durationControl.valueChanges)
       .mapTo(1).subscribe(v => {
-        //dteDueDateControl.setValue('');
-        const dteStatus = Number(dteStatusControl.value);
+       const dteStatus = Number(dteStatusControl.value);
         switch (dteStatus) {
           case DTEStatus.Open:
             {
@@ -342,6 +340,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     this.formGroup.get('dueDate').reset();
     this.formGroup.get('dueCycles').reset();
     this.formGroup.get('dueHours').reset();
+
+
     this.trackLast = false;
     
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
