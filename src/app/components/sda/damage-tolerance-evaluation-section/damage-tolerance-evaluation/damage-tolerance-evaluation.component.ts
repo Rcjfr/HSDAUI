@@ -340,7 +340,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
     
 
-  populateTWD(index : number) {
+  populateTWD() {
   
    
     //this.aircraftInfo$ = this.appStateService.getAircraftInfo().skip(1);
@@ -353,7 +353,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
     this.trackLast = false;
           
-    for (var threshold of this.viewThresholds.itemsFormArray.value)
+    for (const threshold of this.viewThresholds.itemsFormArray.value)
      {    
              
       if (threshold.IsActiveTracking == true)
