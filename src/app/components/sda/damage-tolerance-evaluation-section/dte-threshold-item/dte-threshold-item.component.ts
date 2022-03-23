@@ -27,12 +27,12 @@ export class DteThresholdItemComponent implements OnInit {
   static initThreshold(val: IDTEThresholdItem): FormGroup {
     return new FormGroup({
 
-      isActiveTracking: new FormControl(val.isActiveTracking, [Validators.maxLength(50)]),
-      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.maxLength(50)]),
-      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.maxLength(50)]),
-      thresholdDate: new FormControl(val.thresholdDate, [Validators.maxLength(50)]),
-      thresholdStage1Duration: new FormControl(val.thresholdStage1Duration, [Validators.maxLength(50)]),
-      wolt: new FormControl(val.wolt, [Validators.maxLength(50)]),
+      isActiveTracking: new FormControl(val.isActiveTracking),
+      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.pattern('^[0-9]*$')]),
+      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.pattern('^[0-9]*$')]),
+      thresholdDate: new FormControl(val.thresholdDate),
+      thresholdStage1Duration: new FormControl(val.thresholdStage1Duration),
+      wolt: new FormControl(val.wolt),
 
     });
   }

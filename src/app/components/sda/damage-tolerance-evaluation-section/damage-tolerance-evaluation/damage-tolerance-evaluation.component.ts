@@ -212,7 +212,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
               break;
             }
           case DTEStatus.Closed:
-            dteDueDateControl.setValue('Completed');
+            // dteDueDateControl.setValue('Completed');
             break;
           case DTEStatus.TBD:
             dteDueDateControl.setValue('');
@@ -342,7 +342,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       if (threshold.isActiveTracking === true) {
 
            //Date calculations
-           if (threshold.thresholdDate > '') {
+          if (threshold.thresholdDate > '') {
             this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy')); }
 
           if (threshold.thresholdStage1Duration > '') {

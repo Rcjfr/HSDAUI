@@ -127,7 +127,7 @@ export class SearchByDteComponent implements OnInit , OnChanges {
     this.dteForm.valueChanges.subscribe(form => {
       //Remove any empty selections from the multi-select dropdowns
       form.dteStatus = _.compact(form.dteStatus);
-      form.repairInspectionStatus = _.compact(form.repairInspectionStatus);
+      // form.repairInspectionStatus = _.compact(form.repairInspectionStatus);
       if (form && form.stage1RTSDateFrom) {
         form.stage1RTSDateFrom = moment(form.stage1RTSDateFrom).format('YYYY-MM-DD') + 'T00:00:00';
       }

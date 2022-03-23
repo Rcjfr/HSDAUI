@@ -45,13 +45,13 @@
    
     <p-column field="dueInCycles" header="Due in Cycles" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
-        {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
+        {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? '' :''  }}
       </ng-template>
     </p-column>
    
     <p-column field="dueInHours" header="Due in Hours" [sortable]="true">
       <ng-template let-col let-record="rowData" pTemplate="body">
-        {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? 'Now' :''  }}
+        {{ record[col.field]>0 ? record[col.field]: record[col.field] !== null ? '' :''  }}
       </ng-template>
     </p-column>    
   
