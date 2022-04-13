@@ -179,7 +179,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEThresholdC5', display: 'Threshold 5 FC', dbField: 'DTE_THRESHOLD_C5'},
   { key: 'DTEThresholdDate5', display: 'Threshold 5 Date', dbField: 'DTE_THRESHOLD_DATE5'},
   { key: 'DTEThresholdStage1Duration5', display: 'Threshold 5 Stage 1 Duration', dbField: 'DTE_THRESHOLD_STAGE1_DURATION5'},
- 
   { key: 'DTEInspectionThresholdTFH1', display: 'Inspection 1 Threshold TFH', dbField: 'DTE_INSPECTION_THRESHOLD_H1'},
   { key: 'DTEInspectionThresholdTFC1', display: 'Inspection 1 Threshold TFC', dbField: 'DTE_INSPECTION_THRESHOLD_C1'},
   { key: 'DTEInspectionThresholdSpan1', display: 'Inspection 1 Threshold Time Span', dbField: 'DTE_THRESHOLD_SPAN1'},
@@ -188,7 +187,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEInspectionIntervalSpan1', display: 'Inspection 1 Interval Time Span', dbField: 'DTE_INTERVAL_SPAN1'},
   { key: 'DTEInspectionMethod1', display: 'Inspection 1 Method', dbField: 'DTE_INSPECTION_METHOD1'},
   { key: 'WOLI1', display: 'Inspection 1 WOL?', dbField: 'WOLI1'},
- 
   { key: 'DTEInspectionThresholdTFH2', display: 'Inspection 2 Threshold TFH', dbField: 'DTE_INSPECTION_THRESHOLD_H2'},
   { key: 'DTEInspectionThresholdTFC2', display: 'Inspection 2 Threshold TFC', dbField: 'DTE_INSPECTION_THRESHOLD_C2'},
   { key: 'DTEInspectionThresholdSpan2', display: 'Inspection 2 Threshold Time Span', dbField: 'DTE_THRESHOLD_SPAN2'},
@@ -197,7 +195,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEInspectionIntervalSpan2', display: 'Inspection 2 Interval Time Span', dbField: 'DTE_INTERVAL_SPAN2'},
   { key: 'DTEInspectionMethod2', display: 'Inspection 2 Method', dbField: 'DTE_INSPECTION_METHOD2'},
   { key: 'WOLI2', display: 'Inspection 2 WOL?', dbField: 'WOLI2'},
- 
   { key: 'DTEInspectionThresholdTFH3', display: 'Inspection 3 Threshold TFH', dbField: 'DTE_INSPECTION_THRESHOLD_H3'},
   { key: 'DTEInspectionThresholdTFC3', display: 'Inspection 3 Threshold TFC', dbField: 'DTE_INSPECTION_THRESHOLD_C3'},
   { key: 'DTEInspectionThresholdSpan3', display: 'Inspection 3 Threshold Time Span', dbField: 'DTE_THRESHOLD_SPAN3'},
@@ -206,7 +203,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEInspectionIntervalSpan3', display: 'Inspection 3 Interval Time Span', dbField: 'DTE_INTERVAL_SPAN3'},
   { key: 'DTEInspectionMethod3', display: 'Inspection 3 Method', dbField: 'DTE_INSPECTION_METHOD3'},
   { key: 'WOLI3', display: 'Inspection 3 WOL?', dbField: 'WOLI3'},
- 
   { key: 'DTEInspectionThresholdTFH4', display: 'Inspection 4 Threshold TFH', dbField: 'DTE_INSPECTION_THRESHOLD_H4'},
   { key: 'DTEInspectionThresholdTFC4', display: 'Inspection 4 Threshold TFC', dbField: 'DTE_INSPECTION_THRESHOLD_C4'},
   { key: 'DTEInspectionThresholdSpan4', display: 'Inspection 4 Threshold Time Span', dbField: 'DTE_THRESHOLD_SPAN4'},
@@ -215,7 +211,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEInspectionIntervalSpan4', display: 'Inspection 4 Interval Time Span', dbField: 'DTE_INTERVAL_SPAN4'},
   { key: 'DTEInspectionMethod4', display: 'Inspection 4 Method', dbField: 'DTE_INSPECTION_METHOD4'},
   { key: 'WOLI4', display: 'Inspection 4 WOL?', dbField: 'WOLI4'},
- 
   { key: 'DTEInspectionThresholdTFH5', display: 'Inspection 5 Threshold TFH', dbField: 'DTE_INSPECTION_THRESHOLD_H5'},
   { key: 'DTEInspectionThresholdTFC5', display: 'Inspection 5 Threshold TFC', dbField: 'DTE_INSPECTION_THRESHOLD_C5'},
   { key: 'DTEInspectionThresholdSpan5', display: 'Inspection 5 Threshold Time Span', dbField: 'DTE_THRESHOLD_SPAN5'},
@@ -224,7 +219,6 @@ export const ReportOptions: IReportOption[] = [
   { key: 'DTEInspectionIntervalSpan5', display: 'Inspection 5 Interval Time Span', dbField: 'DTE_INTERVAL_SPAN5'},
   { key: 'DTEInspectionMethod5', display: 'Inspection 5 Method', dbField: 'DTE_INSPECTION_METHOD5'},
   { key: 'WOLI5', display: 'Inspection 5 WOL?', dbField: 'WOLI5'},
- 
   { key: 'DTEMonitorItem1', display: 'FMR/Logpage/MON(1)' , dbField: 'DTE_MONITOR_ITEM1' },
   { key: 'DTEMonitorItem2', display: 'FMR/Logpage/MON(2)', dbField: 'DTE_MONITOR_ITEM2' },
   { key: 'DTEMonitorItem3', display: 'FMR/Logpage/MON(3)' , dbField: 'DTE_MONITOR_ITEM2'},

@@ -222,7 +222,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         }
 
       });
-  
+
     this.populateTWD();
 
   }
