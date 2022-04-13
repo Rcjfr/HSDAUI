@@ -205,14 +205,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           case DTEStatus.Open:
             {
               if (stage1RTSDateControl.value == null) { return; }
-              const stage1RTSDate = <Date>stage1RTSDateControl.value;
-              const durationMonths = <number>durationControl.value;
-              const dt = moment(stage1RTSDate).add(durationMonths, 'month').format('MM/DD/YYYY');
-              dteDueDateControl.setValue(dt);
+              //const stage1RTSDate = <Date>stage1RTSDateControl.value;
+              //const durationMonths = <number>durationControl.value;
+              //const dt = moment(stage1RTSDate).add(durationMonths, 'month').format('MM/DD/YYYY');
+              //dteDueDateControl.setValue(dt);
               break;
             }
           case DTEStatus.Closed:
-            // dteDueDateControl.setValue('Completed');
+            dteDueDateControl.setValue('Completed');
             break;
           case DTEStatus.TBD:
             dteDueDateControl.setValue('');
@@ -222,6 +222,9 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         }
 
       });
+  
+    this.populateTWD();
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -345,7 +348,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           if (threshold.thresholdDate > '') {
             this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy')); }
 
-          if (threshold.thresholdStage1Duration > '') {
+          if (threshold.thresholdStage1Duration != null) {
             this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
 
            // Flight Hours and Cycles Calculations
