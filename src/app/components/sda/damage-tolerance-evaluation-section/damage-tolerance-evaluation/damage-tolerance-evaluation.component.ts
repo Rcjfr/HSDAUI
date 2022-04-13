@@ -212,7 +212,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
               break;
             }
           case DTEStatus.Closed:
-            dteDueDateControl.setValue('Completed');
+            // dteDueDateControl.setValue('Completed');
             break;
           case DTEStatus.TBD:
             dteDueDateControl.setValue('');
