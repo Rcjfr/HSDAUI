@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { AppStateService, AuthService } from '@app/common/services';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { DteThresholdItemsArrayComponent } from '../dte-threshold-items-array/dte-threshold-items-array.component';
+import { Expressions } from '@app/common/validators/generic-validator';
 @Component({
   selector: 'aa-dte-threshold-item',
   templateUrl: './dte-threshold-item.component.html',
@@ -28,13 +29,12 @@ export class DteThresholdItemComponent implements OnInit {
     return new FormGroup({
 
       isActiveTracking: new FormControl(val.isActiveTracking),
-      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.pattern('^[0-9]*$')]),
-      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.pattern('^[0-9]*$')]),
+      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.pattern(Expressions.Numerics)]),
+      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.pattern(Expressions.Numerics)]),
       thresholdDate: new FormControl(val.thresholdDate),
       thresholdStage1Duration: new FormControl(val.thresholdStage1Duration),
       wolt: new FormControl(val.wolt),
-
-    });
+     });
   }
   constructor(private fb: FormBuilder, private appStateService: AppStateService, AuthService: AuthService) { }
 

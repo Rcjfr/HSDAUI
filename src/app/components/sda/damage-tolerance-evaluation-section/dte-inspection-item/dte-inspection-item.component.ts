@@ -36,7 +36,7 @@ export class DteInspectionItemComponent implements OnInit {
       inspectionIntervalSpan: new FormControl(val.inspectionIntervalSpan),
       inspectionIntervalSpanDesc: new FormControl(val.inspectionIntervalSpanDesc),
       inspectionMethod: new FormControl(val.inspectionMethod, [Validators.maxLength(50)]),
-      woli: new FormControl(val.woli, [Validators.maxLength(50)]),
+      woli: new FormControl(val.woli),
 
     });
   }
