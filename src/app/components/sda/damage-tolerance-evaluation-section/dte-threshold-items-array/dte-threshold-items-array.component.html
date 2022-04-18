@@ -12,7 +12,7 @@
      <aa-dte-threshold-item *ngFor="let item of itemsFormArray.controls; let i=index"
                             [index]="i"
                             [item]="item"
-                            [message]="errorMessages && errorMessages[i]"
+                            [message]="errorMessages && errorMessages[i] && errorMessages[i]?.thresholdTFC || errorMessages && errorMessages[i] && errorMessages[i]?.thresholdTFH"
                             [editable]="editable" (removed)="deleteThresholdItem($event)" (tracked)="trackCheck($event)">
      </aa-dte-threshold-item>
  

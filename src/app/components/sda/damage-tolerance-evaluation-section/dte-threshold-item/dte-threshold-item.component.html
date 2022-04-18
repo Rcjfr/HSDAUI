@@ -37,13 +37,13 @@
     </div> 
 
     <div class="col-sm-3">
-      <aac-dte-field-container label="TFH or" helptext="(Numeric only)">
+      <aac-dte-field-container label="TFH or" [message]="message">
         <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()">
       </aac-dte-field-container>
     </div>
 
     <div class="col-sm-3" >
-     <aac-dte-field-container label="TFC or" helptext="(Numeric only)">
+     <aac-dte-field-container label="TFC or" [message]="message">
       <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" >
      </aac-dte-field-container>
     </div>
