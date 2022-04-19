@@ -130,9 +130,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
       FCcountDown: new FormControl({value: '', disabled: true }),
       currentFH: new FormControl({value: '', disabled: true }),
       currentFC: new FormControl({value: '', disabled: true })
-
-      // ataCode1: ['', []],
-      // ataCode2: ['', []],
     });
   }
 
@@ -143,6 +140,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
      this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
+     this.populateTWD();
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -334,12 +332,12 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
 
   populateTWD() {
-    this.formGroup.get('FHcountDown').reset();
-    this.formGroup.get('FCcountDown').reset();
-    this.formGroup.get('dueDate').reset();
-    this.formGroup.get('dueCycles').reset();
-    this.formGroup.get('dueHours').reset();
-    this.trackLast = false;
+    // this.formGroup.get('FHcountDown').reset();
+    // this.formGroup.get('FCcountDown').reset();
+    // this.formGroup.get('dueDate').reset();
+    // this.formGroup.get('dueCycles').reset();
+    // this.formGroup.get('dueHours').reset();
+    // this.trackLast = false;
 
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
       if (threshold.isActiveTracking === true) {
@@ -366,12 +364,5 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
 
 }
-  // onAlertCode1Change(alertCode1: string) {
-  //   this.loadAtaCodes2(alertCode1);
-  //   this.formGroup.controls['ataCode2Dte'].setValue('');
-  // }
 
-  // loadAtaCodes2(alertCode1: string) {
-  //   this.ataCodes2Dte = <models.IATACode[]>this.pipe.transform(this.ATACodesDte, ['primaryCode'], alertCode1);
-  // }
 }

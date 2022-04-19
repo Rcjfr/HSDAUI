@@ -525,20 +525,6 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
       maxlength: 'Legacy EA must not be more than 100 characters.'
     },
 
-     inspectionitems: {
-      inspectionThreshold: {
-        required: 'Inspection Threshold is required.',
-        maxlength: 'Inspection Threshold must not be more than 50 characters.'
-      },
-      inspectionInterval: {
-        required: 'Inspection Interval is required.',
-        maxlength: 'Inspection Interval must not be more than 50 characters.'
-      },
-      inspectionMethod: {
-        required: 'Inspection Method is required.',
-        maxlength: 'Inspection Method must not be more than 50 characters.'
-      }
-    },
     'dteComponentGroup': {
       controlOrderNumber: {
         maxlength: 'Control Order # must not be more than 50 characters.'
@@ -593,6 +579,29 @@ export const ValidationMessages: { [key: string]: { [key: string]: any } } = {
         required: 'FMR/Logpage/Mon is required.',
         maxlength: 'FMR/Logpage/Mon must not be more than 25 characters.'
       }
+    },
+    inspectionitems: {
+      inspectionThreshold: {
+        required: 'Inspection Threshold is required.',
+        maxlength: 'Inspection Threshold must not be more than 50 characters.'
+      },
+      inspectionInterval: {
+        required: 'Inspection Interval is required.',
+        maxlength: 'Inspection Interval must not be more than 50 characters.'
+      },
+      inspectionMethod: {
+        required: 'Inspection Method is required.',
+        maxlength: 'Inspection Method must not be more than 50 characters.'
+      }
+    },
+
+    thresholdItems: {
+      thresholdTFH: {
+        pattern: 'Must be numeric or blank.',
+      },
+      thresholdTFC: {
+        pattern: 'Must be numeric or blank.',
+      },
     },
     comments: {
       maxlength: 'DTE Comments must not be more than 500 characters.'

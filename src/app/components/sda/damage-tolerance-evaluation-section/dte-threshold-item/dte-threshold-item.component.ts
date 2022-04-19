@@ -29,8 +29,8 @@ export class DteThresholdItemComponent implements OnInit {
     return new FormGroup({
 
       isActiveTracking: new FormControl(val.isActiveTracking),
-      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.pattern(Expressions.Numerics)]),
-      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.pattern(Expressions.Numerics)]),
+      thresholdTFC: new FormControl(val.thresholdTFC, [Validators.pattern('[0-9 ]+')]),
+      thresholdTFH: new FormControl(val.thresholdTFH, [Validators.pattern('[0-9 ]+')]),
       thresholdDate: new FormControl(val.thresholdDate),
       thresholdStage1Duration: new FormControl(val.thresholdStage1Duration),
       wolt: new FormControl(val.wolt),
