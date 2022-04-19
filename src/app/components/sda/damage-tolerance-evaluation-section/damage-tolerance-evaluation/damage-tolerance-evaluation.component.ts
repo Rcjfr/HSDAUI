@@ -221,6 +221,8 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
       });
 
+    this.populateTWD();
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
