@@ -167,117 +167,96 @@ export interface ISdaListView {
   dueDate: string,
   dteqcFeedback: string,
   dteSubmittedToQC: boolean,
-  
   dteMonitorItem1: string,
   dteMonitorItem2: string,
   dteMonitorItem3: string,
   dteMonitorItem4: string,
   dteMonitorItem5: string,
-
   dteThresholdC1: string,
   dteThresholdC2: string,
   dteThresholdC3: string,
   dteThresholdC4: string,
   dteThresholdC5: string,
-
   dteThresholdH1: string,
   dteThresholdH2: string,
   dteThresholdH3: string,
   dteThresholdH4: string,
   dteThresholdH5: string,
-
   dteThresholdDate1: Date,
   dteThresholdDate2: Date,
   dteThresholdDate3: Date,
   dteThresholdDate4: Date,
   dteThresholdDate5: Date,
-
   dteThresholdStage1Duration1: number;
   dteThresholdStage1Duration2: number;
   dteThresholdStage1Duration3: number;
   dteThresholdStage1Duration4: number;
   dteThresholdStage1Duration5: number;
-
   dteInspectionThresholdTFH1: string,
   dteInspectionThresholdTFH2: string,
   dteInspectionThresholdTFH3: string,
   dteInspectionThresholdTFH4: string,
   dteInspectionThresholdTFH5: string,
-
   dteInspectionThresholdTFC1: string,
   dteInspectionThresholdTFC2: string,
   dteInspectionThresholdTFC3: string,
   dteInspectionThresholdTFC4: string,
   dteInspectionThresholdTFC5: string,
-
   dteInspectionThresholdSpan1: string,
   dteInspectionThresholdSpan2: string,
   dteInspectionThresholdSpan3: string,
   dteInspectionThresholdSpan4: string,
   dteInspectionThresholdSpan5: string,
-
   dteThresholdTimeSpanDesc1: string,
   dteThresholdTimeSpanDesc2: string,
   dteThresholdTimeSpanDesc3: string,
   dteThresholdTimeSpanDesc4: string,
   dteThresholdTimeSpanDesc5: string,
-
   dteInspectionIntervalTFH1: string,
   dteInspectionIntervalTFH2: string,
   dteInspectionIntervalTFH3: string,
   dteInspectionIntervalTFH4: string,
   dteInspectionIntervalTFH5: string,
-
   dteInspectionIntervalTFC1: string,
   dteInspectionIntervalTFC2: string,
   dteInspectionIntervalTFC3: string,
   dteInspectionIntervalTFC4: string,
   dteInspectionIntervalTFC5: string,
-
   dteInspectionIntervalSpan1: string,
   dteInspectionIntervalSpan2: string,
   dteInspectionIntervalSpan3: string,
   dteInspectionIntervalSpan4: string,
   dteInspectionIntervalSpan5: string,
-  
   dteIntervalTimeSpanDesc1: string,
   dteIntervalTimeSpanDesc2: string,
   dteIntervalTimeSpanDesc3: string,
   dteIntervalTimeSpanDesc4: string,
   dteIntervalTimeSpanDesc5: string,
-
   dteInspectionMethod1: string,
   dteInspectionMethod2: string,
   dteInspectionMethod3: string,
   dteInspectionMethod4: string,
   dteInspectionMethod5: string,
-
-
-
   //  dteThreshold1: string,
   //  dteThreshold2: string,
   //  dteThreshold3: string,
   //  dteThreshold4: string,
   //  dteThreshold5: string,
- 
   //  dteInspectionThreshold1: string,
   //  dteInspectionThreshold2: string,
   //  dteInspectionThreshold3: string,
   //  dteInspectionThreshold4: string,
   //  dteInspectionThreshold5: string,
- 
   //  dteInspectionMethod1: string,
   //  dteInspectionMethod2: string,
   //  dteInspectionMethod3: string,
   //  dteInspectionMethod4: string,
   //  dteInspectionMethod5: string,
-
   //  dteInspectionInterval1: string,
   //  dteInspectionInterval2: string,
   //  dteInspectionInterval3: string,
   //  dteInspectionInterval4: string,
   //  dteInspectionInterval5: string,
-
   dueInDays: number,
   dueInCycles: number,
   dueInHours: number,

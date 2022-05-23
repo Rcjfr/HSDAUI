@@ -528,7 +528,6 @@ export class SdaExportService {
               }, colSpan: 4
             }, '', '', ''
           ],
-
         ]
       }
     };
