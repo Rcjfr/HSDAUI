@@ -1129,20 +1129,18 @@ export class SdaExportService {
         widths: ['10%', '30%', '30%', '30%'],
         headerRows: 2,
         body: [
-          [
-            { text: 'DTE Thresholds', colSpan: 4, style: 'regular', fillColor: '#C0C0C0' }, '', '', ''
-          ],
-          [
-            '', { text: 'Inspection Threshold', style: 'regular' },
-            { text: 'Inspection Interval', style: 'regular' },
-            { text: 'Inspection Method', style: 'regular' }
-          ],
-          ['1.', { text: sda.dteInspectionThreshold1 || '', style: 'regular' }, { text: sda.dteInspectionInterval1 || '', style: 'regular' }, { text: sda.dteInspectionMethod1 || '', style: 'regular' }],
-          ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'regular' }, { text: sda.dteInspectionInterval2 || '', style: 'regular' }, { text: sda.dteInspectionMethod2 || '', style: 'regular' }],
-          ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'regular' }, { text: sda.dteInspectionInterval3 || '', style: 'regular' }, { text: sda.dteInspectionMethod3 || '', style: 'regular' }],
-          ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'regular' }, { text: sda.dteInspectionInterval4 || '', style: 'regular' }, { text: sda.dteInspectionMethod4 || '', style: 'regular' }],
-          ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'regular' }, { text: sda.dteInspectionInterval5 || '', style: 'regular' }, { text: sda.dteInspectionMethod5 || '', style: 'regular' }],
-        ]
+          //[ { text: 'DTE Thresholds', colSpan: 4, style: 'regular', fillColor: '#C0C0C0' }, '', '', ''],['', { text: 'Inspection Threshold', style: 'regular' },{ text: 'Inspection Interval', style: 'regular' },{ text: 'Inspection Method', style: 'regular' } ], ['1.', { text: sda.dteThresholdH1 }],
+          // ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'regular' }, { text: sda.dteInspectionInterval2 || '', style: 'regular' }, { text: sda.dteInspectionMethod2 || '', style: 'regular' }],
+          // ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'regular' }, { text: sda.dteInspectionInterval3 || '', style: 'regular' }, { text: sda.dteInspectionMethod3 || '', style: 'regular' }],
+          // ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'regular' }, { text: sda.dteInspectionInterval4 || '', style: 'regular' }, { text: sda.dteInspectionMethod4 || '', style: 'regular' }],
+          // ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'regular' }, { text: sda.dteInspectionInterval5 || '', style: 'regular' }, { text: sda.dteInspectionMethod5 || '', style: 'regular' }],
+
+        //   ['1.', { text: sda.dteInspectionThreshold1 || '', style: 'regular' }, { text: sda.dteInspectionInterval1 || '', style: 'regular' }, { text: sda.dteInspectionMethod1 || '', style: 'regular' }],
+        //   ['2.', { text: sda.dteInspectionThreshold2 || '', style: 'regular' }, { text: sda.dteInspectionInterval2 || '', style: 'regular' }, { text: sda.dteInspectionMethod2 || '', style: 'regular' }],
+        //   ['3.', { text: sda.dteInspectionThreshold3 || '', style: 'regular' }, { text: sda.dteInspectionInterval3 || '', style: 'regular' }, { text: sda.dteInspectionMethod3 || '', style: 'regular' }],
+        //   ['4.', { text: sda.dteInspectionThreshold4 || '', style: 'regular' }, { text: sda.dteInspectionInterval4 || '', style: 'regular' }, { text: sda.dteInspectionMethod4 || '', style: 'regular' }],
+        //   ['5.', { text: sda.dteInspectionThreshold5 || '', style: 'regular' }, { text: sda.dteInspectionInterval5 || '', style: 'regular' }, { text: sda.dteInspectionMethod5 || '', style: 'regular' }],
+          ]
       }
     };
 
