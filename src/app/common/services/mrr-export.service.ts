@@ -457,7 +457,7 @@ export class MrrExportService {
       }
     };
 
-    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular',colSpan: 11} , {} , {} , {} , {} , {} , {} , {} , {} , {} , {} ])
+    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular' , colSpan: 11} , {} , {} , {} , {} , {} , {} , {} , {} , {} , {} ] )
 
     if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1) {
       content.table.body.push([
