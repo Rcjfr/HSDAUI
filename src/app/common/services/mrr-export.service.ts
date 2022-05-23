@@ -422,19 +422,19 @@ export class MrrExportService {
      content.table.body.push([{ text: 'DTE Thresholds', style: 'regular'}, {}, {}])
 
     if (sda.dteThresholdH1 || sda.dteThresholdC1 || sda.dteThresholdDate1 || sda.dteThresholdStage1Duration1) {
-      content.table.body.push( [ this.getLableFieldValue('1. TFH:', sda.dteThresholdH1 != null ? sda.dteThresholdH1 : ' ',50 ,40), this.getLableFieldValue('TFC:', sda.dteThresholdC1 != null ? sda.dteThresholdC1 : ' ' ,50 ,40), this.getLableFieldValue('Date:', sda.dteThresholdDate1 != null ? this.pipe.transform(sda.dteThresholdDate1, 'MM-dd-yyyy') : '' ,50 ,60) ] )
+      content.table.body.push( [ this.getLableFieldValue('1. TFH:', sda.dteThresholdH1 != null ? sda.dteThresholdH1 : ' ', 50 , 40), this.getLableFieldValue('TFC:', sda.dteThresholdC1 != null ? sda.dteThresholdC1 : ' ' , 50 , 40), this.getLableFieldValue('Date:', sda.dteThresholdDate1 != null ? this.pipe.transform(sda.dteThresholdDate1, 'MM-dd-yyyy') : '' , 50 , 60) ] )
     }
     if (sda.dteThresholdH2 || sda.dteThresholdC2 || sda.dteThresholdDate2) {
-      content.table.body.push([this.getLableFieldValue('2. TFH:', sda.dteThresholdH2, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC2, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate2, 'MM-dd-yyyy') ,50 ,60)])
+      content.table.body.push([this.getLableFieldValue('2. TFH:', sda.dteThresholdH2, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC2, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate2, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH3 || sda.dteThresholdC3 || sda.dteThresholdDate3) {
-      content.table.body.push([this.getLableFieldValue('3. TFH:', sda.dteThresholdH3, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC3, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate3, 'MM-dd-yyyy') ,50 ,60)])
+      content.table.body.push([this.getLableFieldValue('3. TFH:', sda.dteThresholdH3, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC3, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate3, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH4 || sda.dteThresholdC4 || sda.dteThresholdDate4) {
-      content.table.body.push([this.getLableFieldValue('4. TFH:', sda.dteThresholdH4, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC4, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate4, 'MM-dd-yyyy') ,50 ,60)])
+      content.table.body.push([this.getLableFieldValue('4. TFH:', sda.dteThresholdH4, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC4, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate4, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH5 || sda.dteThresholdC5 || sda.dteThresholdDate5) {
-      content.table.body.push([this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') ,50 ,60)])
+      content.table.body.push([this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') , 50 , 60)])
     }
 
     if (content.table.body.length === 0) {
@@ -457,37 +457,37 @@ export class MrrExportService {
       }
     };
 
-    content.table.body.push([{ text: 'DTE Inspections', style: 'regular',colSpan: 11},{},{},{},{},{},{},{},{},{},{}])
+    content.table.body.push([{ text: 'DTE Inspections', style: 'regular',colSpan: 11}, {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
 
     if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1) {
       content.table.body.push([
         {text: '1.', style: 'regular'},
         {text: 'THRESHOLD -', style: 'regular'},
-        this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH1 != null ?  sda.dteInspectionThresholdTFH1 : '' ,10 ,20),
-        this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC1 != null ?  sda.dteInspectionThresholdTFC1 : '' ,10 ,20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan1 != null ?  sda.dteInspectionThresholdSpan1 : '' ,10 ,20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteThresholdTimeSpanDesc1) ,10 ,8),
+        this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH1 != null ?  sda.dteInspectionThresholdTFH1 : ' ' , 10 , 20),
+        this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC1 != null ?  sda.dteInspectionThresholdTFC1 : ' ' , 10 , 20),
+        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan1 != null ?  sda.dteInspectionThresholdSpan1 : ' ' , 10 , 20),
+        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteThresholdTimeSpanDesc1) , 10 , 8),
         {text: 'INTERVAL -', style: 'regular'},
-        this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH1 != null ?  sda.dteInspectionIntervalTFH1 : '' ,10 ,20),
-        this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC1 != null ?  sda.dteInspectionIntervalTFC1 : '' ,10 ,20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan1 != null ?  sda.dteInspectionIntervalSpan1 : '' ,10 ,20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc1) ,10 ,8)
+        this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH1 != null ?  sda.dteInspectionIntervalTFH1 : ' ' , 10 , 20),
+        this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC1 != null ?  sda.dteInspectionIntervalTFC1 : ' ' , 10 , 20),
+        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan1 != null ?  sda.dteInspectionIntervalSpan1 : ' ' , 10 , 20),
+        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteIntervalTimeSpanDesc1) , 10 , 8)
       ])
-      content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod1, 50, 75),{} ,{} ,{} ,{} ,{} ,{} ,{} ,{} ,{} ,{}])
+      content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod1, 50, 75), {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
     if (sda.dteInspectionThresholdTFH2 || sda.dteInspectionThresholdTFC2 || sda.dteThresholdTimeSpanDesc2 || sda.dteInspectionIntervalTFH2 || sda.dteInspectionIntervalTFC2 || sda.dteIntervalTimeSpanDesc2 || sda.dteInspectionMethod2) {
       content.table.body.push([
         {text: '2.', style: 'regular'},
         {text: 'THRESHOLD -', style: 'regular'},
-        this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH2 != null ?  sda.dteInspectionThresholdTFH2 : '' ,10 ,20),
-        this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC2 != null ?  sda.dteInspectionThresholdTFC2 : '' ,10 ,20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan2 != null ?  sda.dteInspectionThresholdSpan2 : '' ,10 ,20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteThresholdTimeSpanDesc2) ,10 ,8),
+        this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH2 != null ?  sda.dteInspectionThresholdTFH2 : ' ' , 10 , 20),
+        this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC2 != null ?  sda.dteInspectionThresholdTFC2 : ' ' , 10 , 20),
+        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan2 != null ?  sda.dteInspectionThresholdSpan2 : ' ' , 10 , 20),
+        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteThresholdTimeSpanDesc2) ,10 ,8),
         {text: 'INTERVAL -', style: 'regular'},
-        this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH2 != null ?  sda.dteInspectionIntervalTFH2 : '' ,10 ,20),
-        this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC2 != null ?  sda.dteInspectionIntervalTFC2 : '' ,10 ,20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan2 != null ?  sda.dteInspectionIntervalSpan2 : '', 10 ,20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc2) ,10 ,8)
+        this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH2 != null ?  sda.dteInspectionIntervalTFH2 : ' ' , 10 , 20),
+        this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC2 != null ?  sda.dteInspectionIntervalTFC2 : ' ' , 10 , 20),
+        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan2 != null ?  sda.dteInspectionIntervalSpan2 : ' ', 10 , 20),
+        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteIntervalTimeSpanDesc2) , 10 , 8)
       ])
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod2, 50, 75),{} ,{} ,{} ,{} ,{} ,{} ,{} ,{} ,{} ,{}])
     }
