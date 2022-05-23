@@ -22,14 +22,10 @@ import { AuthService } from '@app/common/services/auth.service';
 import { RepairDocumentType } from '@app/common/models/enumerations';
 import {DatePipe} from '@angular/common';
 
-
 //https://github.com/bpampuch/pdfmake/issues/948#issuecomment-293542550
 //https://github.com/bpampuch/pdfmake/issues/948
 //http://dataurl.net/#dataurlmaker
 /*tslint:disable:max-line-length*/
-
-
-
 @Injectable()
 export class MrrExportService {
   pdf: pdfMakeStatic;
@@ -440,39 +436,6 @@ export class MrrExportService {
     if (sda.dteThresholdH5 || sda.dteThresholdC5 || sda.dteThresholdDate5) {
       content.table.body.push([this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') ,50 ,60)])
     }
-    // if (sda.dteInspectionThreshold1 || sda.dteInspectionInterval1 || sda.dteInspectionMethod1 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold1:', sda.dteInspectionThreshold1, 50, 60), this.getLableFieldValue('Repeat Interval1:', sda.dteInspectionInterval1, 50, 60), this.getLableFieldValue('Inspection Method1:', sda.dteInspectionMethod1, 50, 65)])
-    // }
-
-    // if (sda.dteInspectionThreshold2 || sda.dteInspectionInterval2 || sda.dteInspectionMethod2 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold2:', sda.dteInspectionThreshold2, 50, 60), this.getLableFieldValue('Repeat Interval2:', sda.dteInspectionInterval2, 50, 60), this.getLableFieldValue('Inspection Method2:', sda.dteInspectionMethod2, 50, 60)])
-    // }
-
-    // if (sda.dteInspectionThreshold3 || sda.dteInspectionInterval3 || sda.dteInspectionMethod3 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold3:', sda.dteInspectionThreshold3, 50, 60), this.getLableFieldValue('Repeat Interval3:', sda.dteInspectionInterval3, 50, 60), this.getLableFieldValue('Inspection Method3:', sda.dteInspectionMethod3, 50, 60)])
-    // }
-
-    // if (sda.dteInspectionThreshold4 || sda.dteInspectionInterval4 || sda.dteInspectionMethod4 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold4:', sda.dteInspectionThreshold4, 50, 60), this.getLableFieldValue('Repeat Interval4:', sda.dteInspectionInterval4, 50, 60), this.getLableFieldValue('Inspection Method4:', sda.dteInspectionMethod4, 50, 60)])
-    // }
-
-    // if (sda.dteInspectionThreshold5 || sda.dteInspectionInterval5 || sda.dteInspectionMethod5 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold5:', sda.dteInspectionThreshold5, 50, 60), this.getLableFieldValue('Repeat Interval5:', sda.dteInspectionInterval5, 50, 60), this.getLableFieldValue('Inspection Method5:', sda.dteInspectionMethod5, 50, 60)])
-    // }
-
-    // if (sda.dteInspectionThreshold1 || sda.dteInspectionInterval1 || sda.dteInspectionMethod1 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold1:', sda.dteInspectionThreshold1, 50, 60), this.getLableFieldValue('Repeat Interval1:', sda.dteInspectionInterval1, 50, 60), this.getLableFieldValue('Inspection Method1:', sda.dteInspectionMethod1, 50, 65)])
-    // }
-    // if (sda.dteInspectionThreshold2 || sda.dteInspectionInterval2 || sda.dteInspectionMethod2 ) {
-    //   content.table.body.push([
-    //     this.getLableFieldValue('Threshold2:', sda.dteInspectionThreshold2, 50, 60), this.getLableFieldValue('Repeat Interval2:', sda.dteInspectionInterval2, 50, 60), this.getLableFieldValue('Inspection Method2:', sda.dteInspectionMethod2, 50, 60)])
-    // }
 
     if (content.table.body.length === 0) {
       content.table.body.push([{}, {}, {}])
