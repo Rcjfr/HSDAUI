@@ -425,16 +425,16 @@ export class MrrExportService {
       content.table.body.push( [ this.getLableFieldValue('1. TFH:', sda.dteThresholdH1 != null ? sda.dteThresholdH1 : ' ', 50 , 40), this.getLableFieldValue('TFC:', sda.dteThresholdC1 != null ? sda.dteThresholdC1 : ' ' , 50 , 40), this.getLableFieldValue('Date:', sda.dteThresholdDate1 != null ? this.pipe.transform(sda.dteThresholdDate1, 'MM-dd-yyyy') : '' , 50 , 60) ] )
     }
     if (sda.dteThresholdH2 || sda.dteThresholdC2 || sda.dteThresholdDate2) {
-      content.table.body.push([this.getLableFieldValue('2. TFH:', sda.dteThresholdH2, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC2, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate2, 'MM-dd-yyyy') , 50 , 60)])
+      content.table.body.push( [ this.getLableFieldValue('2. TFH:', sda.dteThresholdH2, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC2, 50, 40), this.getLableFieldValue('Date:', this.pipe.transform(sda.dteThresholdDate2, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH3 || sda.dteThresholdC3 || sda.dteThresholdDate3) {
-      content.table.body.push([this.getLableFieldValue('3. TFH:', sda.dteThresholdH3, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC3, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate3, 'MM-dd-yyyy') , 50 , 60)])
+      content.table.body.push( [ this.getLableFieldValue('3. TFH:', sda.dteThresholdH3, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC3, 50, 40), this.getLableFieldValue('Date:', this.pipe.transform(sda.dteThresholdDate3, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH4 || sda.dteThresholdC4 || sda.dteThresholdDate4) {
-      content.table.body.push([this.getLableFieldValue('4. TFH:', sda.dteThresholdH4, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC4, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate4, 'MM-dd-yyyy') , 50 , 60)])
+      content.table.body.push( [ this.getLableFieldValue('4. TFH:', sda.dteThresholdH4, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC4, 50, 40), this.getLableFieldValue('Date:', this.pipe.transform(sda.dteThresholdDate4, 'MM-dd-yyyy') , 50 , 60)])
     }
     if (sda.dteThresholdH5 || sda.dteThresholdC5 || sda.dteThresholdDate5) {
-      content.table.body.push([this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') , 50 , 60)])
+      content.table.body.push( [ this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:', this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') , 50 , 60)])
     }
 
     if (content.table.body.length === 0) {
