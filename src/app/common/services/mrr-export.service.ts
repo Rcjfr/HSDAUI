@@ -435,7 +435,6 @@ export class MrrExportService {
     if (sda.dteThresholdH5 || sda.dteThresholdC5 || sda.dteThresholdDate5) {
       content.table.body.push([this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:',this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') , 50, 60)])
     }
- 
     // if (sda.dteInspectionThreshold1 || sda.dteInspectionInterval1 || sda.dteInspectionMethod1 ) {
     //   content.table.body.push([
     //     this.getLableFieldValue('Threshold1:', sda.dteInspectionThreshold1, 50, 60), this.getLableFieldValue('Repeat Interval1:', sda.dteInspectionInterval1, 50, 60), this.getLableFieldValue('Inspection Method1:', sda.dteInspectionMethod1, 50, 65)])
@@ -493,7 +492,6 @@ export class MrrExportService {
     content.table.body.push([{ text: 'DTE Inspections', style: 'regular',colSpan: 11},{},{},{},{},{},{},{},{},{},{}])
 
     if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1) {
-              
       content.table.body.push([
         {text: '1.', style: 'regular'},
         {text: 'THRESHOLD -', style: 'regular'},
@@ -507,11 +505,8 @@ export class MrrExportService {
         this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan1 != null?  sda.dteInspectionIntervalSpan1 : '', 10, 20),
         this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc1), 10, 8)
       ])
-
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod1, 50, 75),{},{},{},{},{},{},{},{},{},{}])
-     
     }
-
     if (sda.dteInspectionThresholdTFH2 || sda.dteInspectionThresholdTFC2 || sda.dteThresholdTimeSpanDesc2 || sda.dteInspectionIntervalTFH2 || sda.dteInspectionIntervalTFC2 || sda.dteIntervalTimeSpanDesc2 || sda.dteInspectionMethod2) {
       content.table.body.push([
         {text: '2.', style: 'regular'},
@@ -526,11 +521,8 @@ export class MrrExportService {
         this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan2 != null?  sda.dteInspectionIntervalSpan2 : '', 10, 20),
         this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc2), 10, 8)        
       ])
-
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod2, 50, 75),{},{},{},{},{},{},{},{},{},{}])
-     
-    }   
-    
+    }
     if (sda.dteInspectionThresholdTFH3 || sda.dteInspectionThresholdTFC3 || sda.dteThresholdTimeSpanDesc3 || sda.dteInspectionIntervalTFH3 || sda.dteInspectionIntervalTFC3 || sda.dteIntervalTimeSpanDesc3 || sda.dteInspectionMethod3) {
       content.table.body.push([
         {text: '3.', style: 'regular'},
@@ -545,11 +537,8 @@ export class MrrExportService {
         this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan3 != null?  sda.dteInspectionIntervalSpan3 : '', 10, 20),
         this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc3), 10, 8)
       ])
-
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod3, 50, 75),{},{},{},{},{},{},{},{},{},{}])
-     
     }
-    
     if (sda.dteInspectionThresholdTFH4 || sda.dteInspectionThresholdTFC4 || sda.dteThresholdTimeSpanDesc4 || sda.dteInspectionIntervalTFH4 || sda.dteInspectionIntervalTFC4 || sda.dteIntervalTimeSpanDesc4 || sda.dteInspectionMethod4) {
       content.table.body.push([
         {text: '4.', style: 'regular'},
@@ -564,11 +553,8 @@ export class MrrExportService {
         this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan4 != null?  sda.dteInspectionIntervalSpan4 : '', 10, 20),
         this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc4), 10, 8)
       ])
-
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod4, 50, 75),{},{},{},{},{},{},{},{},{},{}])
-     
     }    
-
     if (sda.dteInspectionThresholdTFH5 || sda.dteInspectionThresholdTFC5 || sda.dteThresholdTimeSpanDesc5 || sda.dteInspectionIntervalTFH5 || sda.dteInspectionIntervalTFC5 || sda.dteIntervalTimeSpanDesc5 || sda.dteInspectionMethod5) {
       content.table.body.push([
         {text: '5.', style: 'regular'},
@@ -583,17 +569,12 @@ export class MrrExportService {
         this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan5 != null?  sda.dteInspectionIntervalSpan5 : '', 10, 20),
         this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc5), 10, 8)
       ])
-
       content.table.body.push([this.getLableFieldValue('Inspection Method:',sda.dteInspectionMethod5, 50, 75),{},{},{},{},{},{},{},{},{},{}])
-     
     }
-
     if (content.table.body.length === 0) {
       content.table.body.push([{}, {}, {}, {} ,{}, {}, {}, {}, {}, {}, {}])
     }
-
     return content;
-
   }
 
   getDTEThresholdsConent(sda: ISdaListView) {
@@ -742,21 +723,12 @@ export class MrrExportService {
   }
 
   getSpanDesc(spanDesc: string) {
-    if (spanDesc == '1')
-        return 'Days' ;
-
-    if (spanDesc == '2')
-        return 'Months' ;
-
-    if (spanDesc == '3')
-        return 'Years' ;        
-
+    if (spanDesc === '1'){
+        return 'Days';}
+    if (spanDesc === '2'){
+        return 'Months';}
+    if (spanDesc === '3'){
+        return 'Years';}        
    } 
  
   }
-
-
-
-
-
-
