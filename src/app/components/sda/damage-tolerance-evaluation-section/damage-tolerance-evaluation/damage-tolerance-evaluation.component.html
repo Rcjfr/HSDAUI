@@ -1,6 +1,6 @@
 <div class="panel-body" [formGroup]="formGroup">
 
-  <!-- New Repair/Existing Repair Radio --> 
+  <!-- New Repair/Existing Repair Radio -->
   <div class="row">
     <div class="col-sm-6">
       <div class="row form-group">
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <!-- Ship Time --> 
+  <!-- Ship Time -->
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
@@ -26,8 +26,8 @@
       </aac-field-container>
     </div>
   </div>
-  
-  <!-- Cycles --> 
+
+  <!-- Cycles -->
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Cycles:" [message]="displayMessage.cycles">
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <!-- Repair Inspection Status --> 
+  <!-- Repair Inspection Status -->
   <div class="row form-group">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Repair Insp. Status:" [message]="displayMessage.repairInspectionStatus">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
- <!-- Critical Fatigue --> 
+ <!-- Critical Fatigue -->
   <div class="row">
     <div class="col-sm-6">
       <div class="row form-group">
@@ -65,10 +65,10 @@
       </div>
     </div>
   </div>
- 
-  <!-- Stage Dates --> 
+
+  <!-- Stage Dates -->
   <div class="row">
-   
+
     <div class="col-sm-4">
       <aac-field-container [required]="true" label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
         <datetime [timepicker]="false" [tabindex]='93' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
@@ -79,7 +79,7 @@
       <aac-field-container label="Stage 2 Approval Date:" [attr.for]="stage2Date.idDatePicker">
         <datetime [timepicker]="false" [tabindex]="95" [readonly]="formGroup.get('stage2Date').disabled?true:null" #stage2Date formControlName="stage2Date" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
-    </div>  
+    </div>
 
     <div class="col-sm-4">
       <aac-field-container label="Stage 3 Approval Date:" [attr.for]="stage3Date.idDatePicker">
@@ -87,9 +87,9 @@
       </aac-field-container>
     </div>
 
-  </div> 
-  
-  <!-- SDR Number --> 
+  </div>
+
+  <!-- SDR Number -->
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="SR #:" [message]="displayMessage.srNumber">
@@ -110,8 +110,8 @@
     </div>
 
   </div>
-  
-  <!-- ESM, Task Card, Repair Date --> 
+
+  <!-- ESM, Task Card, Repair Date -->
   <div class="row">
 
     <div class="col-sm-4">
@@ -134,7 +134,7 @@
 
   </div>
 
-  <!-- QC Comments and Feedback --> 
+  <!-- QC Comments and Feedback -->
   <div class="row">
 
     <div class="col-sm-4">
@@ -148,7 +148,7 @@
         <datetime [timepicker]="false" [tabindex]="104" [readonly]="formGroup.get('removedByDate').disabled?true:null" #removedByDate formControlName="removedByDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
-    
+
     <div class="col-sm-4">
       <aac-field-container label="ECO/ESO/MRB #:" [message]="displayMessage.mrbNumber">
         <input class="form-control" formControlName="mrbNumber" tabindex="105">
@@ -156,7 +156,7 @@
     </div>
 
   </div>
- 
+
   <!-- MRT, Removed By, Status -->
   <div class="row">
 
@@ -171,7 +171,7 @@
         <input class="form-control" formControlName="removedByMrt" tabindex="107">
       </aac-field-container>
     </div>
-    
+
     <div class="col-sm-4">
       <aac-field-container label="Status:">
         <select class="form-control" tabindex='108' formControlName="status">
@@ -182,7 +182,7 @@
     </div>
   </div>
 
-  <!-- Zone, Loction, MRO --> 
+  <!-- Zone, Loction, MRO -->
   <div class="row">
 
     <div class="col-sm-4">
@@ -202,7 +202,7 @@
     </div>
   </div>
 
-  <!-- Legacy EA --> 
+  <!-- Legacy EA -->
   <div class="row">
     <div class="col-sm-4">
       <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
@@ -213,11 +213,11 @@
     <div class="col-sm-4"></div>
   </div>
 
-  <!-- ATA Codes --> 
+  <!-- ATA Codes -->
   <div class="row">
 
   <div class="col-sm-4">
-    <aa-ata-code [parent]="formGroup" 
+    <aa-ata-code [parent]="formGroup"
       [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async"
       ATACode1Label="ATA Code 1(DTE):" ATACode2Label="ATA Code 2(DTE):"
       [IsRequired]="false"
@@ -226,34 +226,35 @@
     </div>
   </div>
 
-  <!-- CHILD COMPONENTS..  Component, Threshold, Inspections, Monitors CHILD ..COMPONENTS--> 
+  <!-- CHILD COMPONENTS..  Component, Threshold, Inspections, Monitors CHILD ..COMPONENTS-->
   <div class="row">
     <div class="col-sm-12">
-      
+
       <div class="panel-group">
-        
+
         <aa-dte-component [parent]="formGroup" [sda]="sda" [editable]="editable" [errorMessages]="displayMessage">
         </aa-dte-component>
-        
-        <aa-dte-threshold-items-array formArrayName="thresholdItems" 
-                                       [editable]="editable" 
-                                       [errorMessages]="displayMessage?.thresholdItems" 
-                                       [itemsFormArray]="formGroup.get('thresholdItems')"> 
-        </aa-dte-threshold-items-array>        
-        
-        <aa-dte-inspection-items-array formArrayName="inspectionItems" 
-                                       [editable]="editable" 
-                                       [errorMessages]="displayMessage?.inspectionItems" 
-                                       [itemsFormArray]="formGroup.get('inspectionItems')"> 
-        </aa-dte-inspection-items-array> 
-        
+
+        <aa-dte-threshold-items-array formArrayName="thresholdItems"
+                                       [editable]="editable"
+                                       [errorMessages]="displayMessage?.thresholdItems"
+                                       [itemsFormArray]="formGroup.get('thresholdItems')"
+                                       (updateTWD) = "populateTWD()">
+        </aa-dte-threshold-items-array>
+
+        <aa-dte-inspection-items-array formArrayName="inspectionItems"
+                                       [editable]="editable"
+                                       [errorMessages]="displayMessage?.inspectionItems"
+                                       [itemsFormArray]="formGroup.get('inspectionItems')">
+        </aa-dte-inspection-items-array>
+
         <!-- <input type="checkbox" [formControlName]="inspectionItems.index"> -->
-        
+
           <!-- TWD -->
         <div class="row">
-     
+
          <div class="col-sm-12">
-          
+
           <div class="panel panel-default">
 
           <div class="panel-heading">Time When Due
@@ -261,12 +262,12 @@
             <div class="text-danger">
               <p *ngIf="trackLast"><strong>use whichever occurs last</strong></p>
              </div>
-   
+
 
            <div class="panel-body">
 
             <div class="row">
-     
+
             <div class="col-sm-3">
               <aac-field-container label="Current FH:" >
                <input class="form-control"  formControlName="currentFH" tabindex='89'>
@@ -279,9 +280,9 @@
               </aac-field-container>
              </div>
             </div>
-            
+
             <div class="row">
-            
+
           <div class="col-sm-3">
              <aac-field-container label="FH remaining:" >
               <input class="form-control"  formControlName="dueHours" tabindex='89'>
@@ -298,21 +299,21 @@
              <aac-field-container label="DTE Due Date:">
               <input class="form-control" formControlName="dueDate" tabindex="163">
              </aac-field-container>
-            </div>  
+            </div>
 
             <div class="col-sm-2">
              <button type="button" class="btn btn-danger btn-xs"  (click)="populateTWD()"> <span class="glyphicon glyphicon-random"></span>  Calculate TWD</button>
             </div>
-  
+
            </div>
- 
-   
+
+
           </div>
- 
-         </div> 
 
          </div>
-      
+
+         </div>
+
         </div>
 
 
@@ -322,14 +323,14 @@
                                     [errorMessages]="displayMessage?.monitorItems"
                                     [itemsFormArray]="formGroup.get('monitorItems')">
         </aa-dte-monitor-items-array>
-      
+
       </div>
-    
+
     </div>
-  
+
   </div>
 
-  <!-- QC Comments and Feedback -->  
+  <!-- QC Comments and Feedback -->
   <div class="row">
     <div class="col-sm-6">
       <aac-field-container label="DTE Comments:" [message]="displayMessage.comments">
@@ -343,7 +344,7 @@
     </div>
   </div>
 
-  <!-- QC Submit --> 
+  <!-- QC Submit -->
   <div class="row form-group">
     <div class="col-sm-6">
       <aac-checkbox-container label="Submit to QC">
@@ -352,7 +353,7 @@
     </div>
   </div>
 
-  <!-- DTE Status -->   
+  <!-- DTE Status -->
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="DTE Status:" [message]="displayMessage.dteStatus">
@@ -364,7 +365,7 @@
     </div>
   </div>
 
-  <!-- Attachments --> 
+  <!-- Attachments -->
   <div class="row form-group">
     <div class="col-sm-12">
       <h3>Attachments:</h3>
@@ -402,26 +403,26 @@
     </div>
   </div>
 
-  <!-- Major Repair Updates -->  
+  <!-- Major Repair Updates -->
   <div class="row">
 
-    <!-- Major Repair Updated By -->    
+    <!-- Major Repair Updated By -->
     <div class="col-sm-6 padding-left-0">
-    
+
       <aac-field-container class="col-sm-12 padding-0" labelGridColumnWidth="3" fieldGridColumnWidth="9" label="Major Repair Updated By:" [message]="displayMessage.updatedBy">
         <div class="padding-0">
           <div class="col-sm-3 padding-0">
             <input type="text" class="form-control" tabindex="160" formControlName="updatedByEmpID" placeholder="Employee ID">
           </div>
-         
+
           <div class="col-sm-2 padding-0 width-20">_</div>
-          
+
           <div class="col-sm-7 padding-0">
             <input type="text" class="form-control" tabindex="161" placeholder="Last Name, First Name" formControlName="updatedByName">
           </div>
         </div>
       </aac-field-container>
-   
+
     </div>
 
     <!-- Major Repair Update Date -->
@@ -430,7 +431,7 @@
         <datetime [timepicker]="false" [readonly]="true" [tabindex]="162" #updatedDate formControlName="updatedDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
- 
+
   </div>
 
 

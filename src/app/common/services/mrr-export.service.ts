@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-trailing-spaces */
+/* eslint-disable */
 import { switchMap } from 'rxjs/operators';
 import { ISearchCriteria } from './../models/search/search-criteria.model';
 import { Injectable, Output } from '@angular/core';
@@ -539,7 +540,7 @@ export class MrrExportService {
       ])
       content.table.body.push( [ this.getLableFieldValue('Inspection Method:' , sda.dteInspectionMethod5, 50, 75) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
-    if (content.table.body.length === 0) {
+    if (content.table.body.length == 0) {
       content.table.body.push([{}, {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
 
@@ -691,13 +692,13 @@ export class MrrExportService {
   }
 
   getSpanDesc(spanDesc: string) {
-    if (spanDesc === '1') {
+    if (spanDesc == '1') {
         return 'Days';
       }
-    if (spanDesc === '2') {
+    if (spanDesc == '2') {
         return 'Months';
       }
-    if (spanDesc === '3') {
+    if (spanDesc == '3') {
         return 'Years';
       }
    }

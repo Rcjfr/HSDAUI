@@ -2,63 +2,64 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-   
+
   <div class="row" [formGroup]="item" >
-    
+
       <div class="col-sm-1">
         <h4>{{index+1}}.</h4>
-      </div> 
-      
+      </div>
+
       <div class="col-sm-3">
-      
+
         <aac-checkbox-container label="Track this Threshold" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
           <input type="checkbox" tabindex="164" formControlName="isActiveTracking" (click)="track()">
-        </aac-checkbox-container>     
-      
-      </div> 
+        </aac-checkbox-container>
+
+      </div>
 
       <div class="col-sm-7">
-      
+
         <aac-checkbox-container label="use whichever occurs last" labelGridColumnWidth="1" fieldGridColumnWidth="1" >
           <input type="checkbox" tabindex="164" formControlName="wolt" >
-        </aac-checkbox-container>     
-      
-      </div> 
+        </aac-checkbox-container>
+
+      </div>
 
      <div class="col-sm-1">
       <a href="#" *ngIf="editable" (click)="remove()">Delete</a>
-     </div>       
-    
+     </div>
+
   </div>
-  
+
   <div class="row" [formGroup]="item" >
 
     <div class="col-sm-1">
-    </div> 
+    </div>
 
     <div class="col-sm-3">
       <aac-dte-field-container label="TFH or" [message]="message">
-        <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()">
+        <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()" (focusout)="track()" >
       </aac-dte-field-container>
     </div>
 
     <div class="col-sm-3" >
      <aac-dte-field-container label="TFC or" [message]="message">
-      <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" >
+      <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" (focusout)="track()">
      </aac-dte-field-container>
     </div>
 
     <div class="col-sm-3" >
-  
-     <datetime [timepicker]="false" 
-               #thresholdDate 
-               [tabindex]='3' 
-               formControlName="thresholdDate" 
+
+     <datetime [timepicker]="false"
+               #thresholdDate
+               [tabindex]='3'
+               formControlName="thresholdDate"
                [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"
-               [attr.for]="thresholdDate.idDatePicker" 
-              (click)="clearThresholdRadio()">
+               [attr.for]="thresholdDate.idDatePicker"
+               (click)="clearThresholdRadio()"
+               (focusout)="track()">
      </datetime>
-  
+
     </div>
 
 
@@ -67,32 +68,32 @@
   <div class="row" [formGroup]="item" >
 
       <div class="col-sm-1">
-      </div> 
-   
+      </div>
+
       <label class="col-sm-2 control-label" labelGridColumnWidth="1" *ngIf="index < 1">Stage 1 Duration</label>
-    
+
      <div class="col-sm-2" >
       <aac-radio-container label="6 Months" *ngIf="index < 1">
        <input type="radio" [value]="6" tabindex="94"  formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
       </aac-radio-container>
      </div>
-          
+
      <div class="col-sm-2" >
       <aac-radio-container label="12 Months" *ngIf="index < 1">
        <input type="radio" [value]="12" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
       </aac-radio-container>
      </div>
-          
+
      <div class="col-sm-2" >
       <aac-radio-container label="24 Months" *ngIf="index < 1">
        <input type="radio" [value]="24" tabindex="94" formControlName="thresholdStage1Duration" (click)="clearThresholdInput()" />
       </aac-radio-container>
      </div>
-     
+
   </div>
   </div>
 </div>
- 
+
 </div>
 
 
