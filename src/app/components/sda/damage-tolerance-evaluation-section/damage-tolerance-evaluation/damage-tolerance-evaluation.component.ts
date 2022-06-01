@@ -340,24 +340,24 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
 
-      if (threshold.isActiveTracking === true)
-      {
+      if (threshold.isActiveTracking === true) {
            //Date calculations
-          if (threshold.thresholdDate > '')
+          if (threshold.thresholdDate > '') {
             this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy'));
-
-          if (threshold.thresholdStage1Duration != null)
+          }
+          if (threshold.thresholdStage1Duration != null) {
             this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY'));
-
+          }
            // Flight Hours and Cycles Calculations
-          if (threshold.thresholdTFH > '')
+          if (threshold.thresholdTFH > '') {
             this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed());
-
-          if (threshold.thresholdTFC > '')
+          }
+          if (threshold.thresholdTFC > '') {
             this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed());
-
-          if (threshold.wolt === true)
+          }
+          if (threshold.wolt === true) {
             this.trackLast = true;
+          }
         }
       }
 

@@ -33,10 +33,11 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
   static buildItems(items: IDTEThresholdItem[]) {
     const fa = new FormArray(items.map(item => DteThresholdItemComponent.initThreshold(item)), ArrayValidators.maxLength(5));
+
     return fa;
   }
 
-  public pickDate(date: any): void {this.onDatePicked.emit(date);}
+  public pickDate( date: any ) : void { this.onDatePicked.emit(date) ; }
 
   constructor(private dialogService: DialogService) { }
 
@@ -46,13 +47,15 @@ export class DteThresholdItemsArrayComponent implements OnInit {
     if (this.itemsFormArray.controls.length < 5) {
       this.itemsFormArray.push(DteThresholdItemComponent.initThreshold({}));
     }
+
     return false;
   }
 
   deleteThresholdItem(index: number) {
     this.dialogService.addDialog(ConfirmComponent, {title: 'Confirm?', message: 'Are you sure you want to delete this threshold item?'})
      .subscribe((isConfirmed) => {if (isConfirmed) {this.itemsFormArray.removeAt(index); this.trackCheck(index); } });
-    return false;
+
+     return false;
   }
 
   trackCheck(trackindex: number) {
