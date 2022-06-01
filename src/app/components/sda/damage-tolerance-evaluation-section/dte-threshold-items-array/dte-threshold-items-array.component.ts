@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable */
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { ConfirmComponent } from '@app/common/components/confirm/confirm.component';
@@ -58,18 +59,18 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
    this.itemsFormArray.controls.forEach((element, index) => {
 
-    if (index == trackindex)
-    {
+    if (index === trackindex) {
       const currval = element.get('isActiveTracking').value;
 
-      if (currval == true )
-       {element.get('isActiveTracking').setValue(false);}
-      else
-       {element.get('isActiveTracking').setValue(true);}
+      if (currval === true ) {
+        element.get('isActiveTracking').setValue(false);
+      }
+      else {
+        element.get('isActiveTracking').setValue(true);
+      }
     }
 
-    if (index !== trackindex)
-     {
+    if (index !== trackindex) {
        element.get('isActiveTracking').setValue(false);
      }
 

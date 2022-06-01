@@ -44,6 +44,7 @@ export class DteThresholdItemComponent implements OnInit {
 
   remove() {
     this.removed.emit(this.index);
+
      return false;
   }
 
