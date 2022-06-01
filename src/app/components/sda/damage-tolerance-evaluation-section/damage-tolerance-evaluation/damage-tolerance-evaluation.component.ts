@@ -34,8 +34,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './damage-tolerance-evaluation.component.html',
   styleUrls: ['./damage-tolerance-evaluation.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
-
-})
+  })
 
 export class DamageToleranceEvaluationComponent extends BaseFormComponent implements OnInit, OnChanges {
 
@@ -219,9 +218,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
             dteDueDateControl.setValue('');
         }
 
-      });
-
-    this.populateTWD();
+      })
 
   }
 
@@ -252,7 +249,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
-
+        this.populateTWD();
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
@@ -290,6 +287,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         });
            }
        this.formGroup.markAsPristine();
+
       }
 
     if (!this.editable) {
@@ -332,37 +330,38 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   }
 
   populateTWD() {
-    // this.formGroup.get('FHcountDown').reset();
-    // this.formGroup.get('FCcountDown').reset();
-    // this.formGroup.get('dueDate').reset();
-    // this.formGroup.get('dueCycles').reset();
-    // this.formGroup.get('dueHours').reset();
-    // this.trackLast = false;
+
+    this.formGroup.get('FHcountDown').reset();
+    this.formGroup.get('FCcountDown').reset();
+    this.formGroup.get('dueDate').reset();
+    this.formGroup.get('dueCycles').reset();
+    this.formGroup.get('dueHours').reset();
+    this.trackLast = false;
 
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
-      if (threshold.isActiveTracking === true) {
 
+      if (threshold.isActiveTracking === true) {
            //Date calculations
           if (threshold.thresholdDate > '') {
-            this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy')); }
-
+            this.formGroup.get('dueDate').setValue(this.pipe.transform(threshold.thresholdDate, 'MM/dd/yyyy'));
+          }
           if (threshold.thresholdStage1Duration != null) {
-            this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY')); }
-
+            this.formGroup.get('dueDate').setValue(moment(this.formGroup.get('stage1RTSDate').value).add(threshold.thresholdStage1Duration, 'month').format('MM/DD/YYYY'));
+          }
            // Flight Hours and Cycles Calculations
           if (threshold.thresholdTFH > '') {
-            this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed()); }
-
-          if (threshold.thresholdTFC > '') {
-            this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed()); }
-
-          if (threshold.wolt === true) {
-            {this.trackLast = true; }
-
+            this.formGroup.get('dueHours').setValue( ( threshold.thresholdTFH - this.formGroup.get('currentFH').value ).toFixed());
           }
+          if (threshold.thresholdTFC > '') {
+            this.formGroup.get('dueCycles').setValue((threshold.thresholdTFC - this.formGroup.get('currentFC').value).toFixed());
+          }
+          if (threshold.wolt === true) {
+            this.trackLast = true;
+          }
+        }
+      }
+
     }
+
   }
 
-}
-
-}
