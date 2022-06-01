@@ -540,7 +540,7 @@ export class MrrExportService {
       ])
       content.table.body.push( [ this.getLableFieldValue('Inspection Method:' , sda.dteInspectionMethod5, 50, 75) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
-    if (content.table.body.length == 0) {
+    if (content.table.body.length === 0) {
       content.table.body.push([{}, {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
 

@@ -37,7 +37,7 @@ export class DteThresholdItemsArrayComponent implements OnInit {
     return fa;
   }
 
-  public pickDate( date: any ) : void { this.onDatePicked.emit(date) ; }
+  public pickDate( date: any ): void { this.onDatePicked.emit(date) ; }
 
   constructor(private dialogService: DialogService) { }
 
@@ -67,8 +67,7 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
       if (currval === true ) {
         element.get('isActiveTracking').setValue(false);
-      }
-      else {
+      } else {
         element.get('isActiveTracking').setValue(true);
       }
     }
