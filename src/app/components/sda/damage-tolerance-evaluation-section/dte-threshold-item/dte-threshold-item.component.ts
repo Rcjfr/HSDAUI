@@ -24,6 +24,7 @@ export class DteThresholdItemComponent implements OnInit {
 
   @Output() public removed = new EventEmitter<number>();
   @Output() public tracked = new EventEmitter<number>();
+  @Output() public updateTimeWhenDue = new EventEmitter<any>();
 
   static initThreshold(val: IDTEThresholdItem): FormGroup {
     return new FormGroup({
@@ -50,6 +51,10 @@ export class DteThresholdItemComponent implements OnInit {
 
   track() {
     this.tracked.emit(this.index);
+  }
+
+  uTWD() {
+    this.updateTimeWhenDue.emit();
   }
 
   clearThresholdInput() {

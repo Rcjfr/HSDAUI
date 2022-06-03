@@ -41,7 +41,9 @@ export class DteThresholdItemsArrayComponent implements OnInit {
 
   constructor(private dialogService: DialogService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.updateTWD.emit();
+  }
 
   addThresholdItem() {
     if (this.itemsFormArray.controls.length < 5) {
@@ -81,5 +83,10 @@ export class DteThresholdItemsArrayComponent implements OnInit {
     this.updateTWD.emit();
 
   }
+
+  uTWD() {
+    this.updateTWD.emit();
+    }
 }
+
 

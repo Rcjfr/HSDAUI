@@ -38,13 +38,13 @@
 
     <div class="col-sm-3">
       <aac-dte-field-container label="TFH or" [message]="message">
-        <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()" (focusout)="track()" >
+        <input class="form-control" formControlName="thresholdTFH" [tabindex]="133+3*index+3" (click)="clearThresholdRadio()" (focusout)="uTWD()" >
       </aac-dte-field-container>
     </div>
 
     <div class="col-sm-3" >
      <aac-dte-field-container label="TFC or" [message]="message">
-      <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" (focusout)="track()">
+      <input class="form-control" formControlName="thresholdTFC" [tabindex]="133+3*index+2" (click)="clearThresholdRadio()" (focusout)="uTWD()">
      </aac-dte-field-container>
     </div>
 
@@ -57,7 +57,7 @@
                [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true,enableOnReadonly:false,orientation:'bottom'}"
                [attr.for]="thresholdDate.idDatePicker"
                (click)="clearThresholdRadio()"
-               (focusout)="track()">
+               (focusout)="uTWD">
      </datetime>
 
     </div>

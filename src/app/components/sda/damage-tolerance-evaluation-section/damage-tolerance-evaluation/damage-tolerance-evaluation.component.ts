@@ -139,7 +139,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
      this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
-     this.populateTWD();
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -249,7 +248,6 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('thresholdItems', DteThresholdItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
-        this.populateTWD();
         this.formGroup.reset({
           dteStatus: '',
           repairInspectionStatus: '',
