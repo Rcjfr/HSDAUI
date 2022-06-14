@@ -682,6 +682,7 @@ export class MrrExportService {
     return { text: label || ' ', style: 'regular' };
   }
 
+  /* eslint-disable */
   getSpanDesc(spanDesc: string) {
     if (spanDesc == '1') {
         return 'Days';
@@ -693,4 +694,5 @@ export class MrrExportService {
         return 'Years';
       }
    }
+   /* eslint-enable */
   }
