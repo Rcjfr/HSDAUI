@@ -361,7 +361,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           if (threshold.wolt === true) {
             this.trackLast = true;
           }
-          if (this.formGroup.get('currentFH').value === '"missing' && this.formGroup.get('currentFC').value === 'missing' ) {
+          if (this.formGroup.get('currentFH').value === 'missing' && this.formGroup.get('currentFC').value === 'missing' ) {
             this.noOpsSpec = true
           }
 
