@@ -683,17 +683,16 @@ export class MrrExportService {
     return { text: label || ' ', style: 'regular' };
   }
 
-  /* eslint-disable */
   getSpanDesc(spanDesc: string) {
-    if (spanDesc == '1') {
+    if (spanDesc.toString() === '1') {
         return 'Days';
       }
-    if (spanDesc == '2') {
+    if (spanDesc.toString() === '2') {
         return 'Months';
       }
-    if (spanDesc == '3') {
+    if (spanDesc.toString() === '3') {
         return 'Years';
       }
    }
-   /* eslint-enable */
+
   }
