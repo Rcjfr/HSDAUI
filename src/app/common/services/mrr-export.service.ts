@@ -1,9 +1,10 @@
+/* eslint-disable */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-trailing-spaces */
-/* eslint-disable */
+
 import { switchMap } from 'rxjs/operators';
 import { ISearchCriteria } from './../models/search/search-criteria.model';
 import { Injectable, Output } from '@angular/core';
