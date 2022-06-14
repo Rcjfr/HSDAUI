@@ -353,7 +353,7 @@ export class MrrExportService {
 
   getDTESection(sda: ISdaListView) {
     const content = {
-     //layout: 'noBorders',
+    layout: 'noBorders',
       margin: [0, 5, 0, 0],
       table: {
         fontSize: 6,
@@ -452,93 +452,83 @@ export class MrrExportService {
       layout: 'noBorders',
       table: {
         style: 'regular',
-        widths: ['2%', '11%', '12%', '12%', '4%', '9%', '10%', '12%', '12%', '4%', '9%'],
+        widths: ['2%', '9%', '10%', '10%', '12%', '8%', '10%', '10%', '12%', '17%'],
         //colSpan: 5,
         body: [ ]
       }
     };
 
-    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular' , colSpan: 11} , {} , {} , {} , {} , {} , {} , {} , {} , {} , {} ] )
+    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular' , colSpan: 10} , {} , {} , {} , {} , {} , {} , {} , {} , {} ] )
 
     if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1) {
       content.table.body.push([
         {text: '1.', style: 'regular'},
-        {text: 'THRESHOLD -', style: 'regular'},
+        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH1 != null ?  sda.dteInspectionThresholdTFH1 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC1 != null ?  sda.dteInspectionThresholdTFC1 : ' ' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan1 != null ?  sda.dteInspectionThresholdSpan1 : ' ' , 10 , 20),
-        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteThresholdTimeSpanDesc1) , 10 , 8),
-        {text: 'INTERVAL -', style: 'regular'},
+        this.getLableFieldValue('', sda.dteInspectionThresholdSpan1 != null ?  sda.dteInspectionThresholdSpan1 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc1) : ' ' , 10 , 20),
+        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH1 != null ?  sda.dteInspectionIntervalTFH1 : ' ' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC1 != null ?  sda.dteInspectionIntervalTFC1 : ' ' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan1 != null ?  sda.dteInspectionIntervalSpan1 : ' ' , 10 , 20),
-        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteIntervalTimeSpanDesc1) , 10 , 8)
+        this.getLableFieldValue('', sda.dteInspectionIntervalSpan1 != null ?  sda.dteInspectionIntervalSpan1 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc1) : ' ' , 10 , 20),
+        this.getLableFieldValue('', sda.dteInspectionMethod1, 10, 20 )
       ])
-      content.table.body.push( [ this.getLableFieldValue('Inspection Method:', sda.dteInspectionMethod1, 50, 75 ) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {} ] )
-    }
+          }
     if (sda.dteInspectionThresholdTFH2 || sda.dteInspectionThresholdTFC2 || sda.dteThresholdTimeSpanDesc2 || sda.dteInspectionIntervalTFH2 || sda.dteInspectionIntervalTFC2 || sda.dteIntervalTimeSpanDesc2 || sda.dteInspectionMethod2) {
       content.table.body.push([
         {text: '2.', style: 'regular'},
-        {text: 'THRESHOLD -', style: 'regular'},
+        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH2 != null ?  sda.dteInspectionThresholdTFH2 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC2 != null ?  sda.dteInspectionThresholdTFC2 : ' ' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan2 != null ?  sda.dteInspectionThresholdSpan2 : ' ' , 10 , 20),
-        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteThresholdTimeSpanDesc2) , 10 , 8),
-        {text: 'INTERVAL -', style: 'regular'},
+        this.getLableFieldValue('', sda.dteInspectionThresholdSpan2 != null ?  sda.dteInspectionThresholdSpan2 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc2) : ' ' , 10 , 20),
+        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH2 != null ?  sda.dteInspectionIntervalTFH2 : ' ' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC2 != null ?  sda.dteInspectionIntervalTFC2 : ' ' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan2 != null ?  sda.dteInspectionIntervalSpan2 : ' ', 10 , 20),
-        this.getLableFieldValue(' ', this.getSpanDesc(sda.dteIntervalTimeSpanDesc2) , 10 , 8)
+        this.getLableFieldValue('', sda.dteInspectionIntervalSpan2 != null ?  sda.dteInspectionIntervalSpan2 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc2) : ' ' , 10 , 20),
+        this.getLableFieldValue('', sda.dteInspectionMethod2, 10, 20 )
       ])
-      content.table.body.push([this.getLableFieldValue('Inspection Method:', sda.dteInspectionMethod2 , 50 , 75 ), {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
     if (sda.dteInspectionThresholdTFH3 || sda.dteInspectionThresholdTFC3 || sda.dteThresholdTimeSpanDesc3 || sda.dteInspectionIntervalTFH3 || sda.dteInspectionIntervalTFC3 || sda.dteIntervalTimeSpanDesc3 || sda.dteInspectionMethod3) {
       content.table.body.push([
         {text: '3.', style: 'regular'},
-        {text: 'THRESHOLD -', style: 'regular'},
+        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH3 != null ?  sda.dteInspectionThresholdTFH3 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC3 != null ?  sda.dteInspectionThresholdTFC3 : ' ' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan3 != null ?  sda.dteInspectionThresholdSpan3 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteThresholdTimeSpanDesc3) , 10 , 8),
-        {text: 'INTERVAL -', style: 'regular'},
+        this.getLableFieldValue('', sda.dteInspectionThresholdSpan3 != null ?  sda.dteInspectionThresholdSpan3 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc3) : ' ' , 10 , 20),
+        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH3 != null ?  sda.dteInspectionIntervalTFH3 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC3 != null ?  sda.dteInspectionIntervalTFC3 : '' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan3 != null ?  sda.dteInspectionIntervalSpan3 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc3) , 10 , 8)
+        this.getLableFieldValue('', sda.dteInspectionIntervalSpan3 != null ?  sda.dteInspectionIntervalSpan3 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc3) : ' ' , 10 , 20),
+        this.getLableFieldValue('', sda.dteInspectionMethod3, 10, 20 )
       ])
-      content.table.body.push( [ this.getLableFieldValue('Inspection Method:', sda.dteInspectionMethod3 , 50 , 75 ) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
     if (sda.dteInspectionThresholdTFH4 || sda.dteInspectionThresholdTFC4 || sda.dteThresholdTimeSpanDesc4 || sda.dteInspectionIntervalTFH4 || sda.dteInspectionIntervalTFC4 || sda.dteIntervalTimeSpanDesc4 || sda.dteInspectionMethod4) {
       content.table.body.push([
         {text: '4.', style: 'regular'},
-        {text: 'THRESHOLD -', style: 'regular'},
+        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH4 != null ?  sda.dteInspectionThresholdTFH4 : '' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC4 != null ?  sda.dteInspectionThresholdTFC4 : '' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan4 != null ?  sda.dteInspectionThresholdSpan4 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteThresholdTimeSpanDesc4) , 10 , 8),
-        {text: 'INTERVAL -', style: 'regular'},
+        this.getLableFieldValue('', sda.dteInspectionThresholdSpan4 != null ?  sda.dteInspectionThresholdSpan4 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc4) : ' ' , 10 , 20),
+        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH4 != null ?  sda.dteInspectionIntervalTFH4 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC4 != null ?  sda.dteInspectionIntervalTFC4 : '' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan4 != null  ?  sda.dteInspectionIntervalSpan4 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc4) , 10 , 8)
+        this.getLableFieldValue('', sda.dteInspectionIntervalSpan4 != null ?  sda.dteInspectionIntervalSpan4 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc4) : ' ' , 10 , 20),
+        this.getLableFieldValue('', sda.dteInspectionMethod4, 10, 20 )
       ])
-      content.table.body.push( [ this.getLableFieldValue('Inspection Method:' , sda.dteInspectionMethod4, 50, 75) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
     if (sda.dteInspectionThresholdTFH5 || sda.dteInspectionThresholdTFC5 || sda.dteThresholdTimeSpanDesc5 || sda.dteInspectionIntervalTFH5 || sda.dteInspectionIntervalTFC5 || sda.dteIntervalTimeSpanDesc5 || sda.dteInspectionMethod5) {
       content.table.body.push([
         {text: '5.', style: 'regular'},
-        {text: 'THRESHOLD -', style: 'regular'},
+        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH5 != null ?  sda.dteInspectionThresholdTFH5 : '' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC5 != null ?  sda.dteInspectionThresholdTFC5 : '' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionThresholdSpan5 != null ?  sda.dteInspectionThresholdSpan5 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteThresholdTimeSpanDesc5) , 10 , 8),
-        {text: 'INTERVAL -', style: 'regular'},
+        this.getLableFieldValue('', sda.dteInspectionThresholdSpan5 != null ?  sda.dteInspectionThresholdSpan5 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc5) : ' ' , 10 , 20),
+        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH5 != null ?  sda.dteInspectionIntervalTFH5 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC5 != null ?  sda.dteInspectionIntervalTFC5 : '' , 10 , 20),
-        this.getLableFieldValue('Span:', sda.dteInspectionIntervalSpan5 != null ?  sda.dteInspectionIntervalSpan5 : '' , 10 , 20),
-        this.getLableFieldValue('', this.getSpanDesc(sda.dteIntervalTimeSpanDesc5) , 10 , 8)
+        this.getLableFieldValue('', sda.dteInspectionIntervalSpan5 != null ?  sda.dteInspectionIntervalSpan5 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc5) : ' ' , 10 , 20),
+        this.getLableFieldValue('', sda.dteInspectionMethod5, 10, 20 )
       ])
-      content.table.body.push( [ this.getLableFieldValue('Inspection Method:' , sda.dteInspectionMethod5, 50, 75) , {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
     }
     if (content.table.body.length === 0) {
       content.table.body.push([{}, {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
@@ -692,13 +682,13 @@ export class MrrExportService {
   }
 
   getSpanDesc(spanDesc: string) {
-    if (spanDesc === '1') {
+    if (spanDesc == '1') {
         return 'Days';
       }
-    if (spanDesc === '2') {
+    if (spanDesc == '2') {
         return 'Months';
       }
-    if (spanDesc === '3') {
+    if (spanDesc == '3') {
         return 'Years';
       }
    }
