@@ -24,7 +24,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, Observer } from 'rxjs/Rx';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
-//import _ = require('lodash');
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
