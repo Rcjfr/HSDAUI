@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
@@ -360,8 +361,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           if (threshold.wolt === true) {
             this.trackLast = true;
           }
-          if (this.formGroup.get('currentFH').value == "missing" && this.formGroup.get('currentFC').value == "missing" )
-          {
+          if (this.formGroup.get('currentFH').value === '"missing' && this.formGroup.get('currentFC').value === 'missing' ) {
             this.noOpsSpec = true
           }
 
