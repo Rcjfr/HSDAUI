@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormArray, Validators, FormControl, FormBuilder, FormControlName } from '@angular/forms';
 import { FileUploader, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
@@ -24,7 +25,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, Observer } from 'rxjs/Rx';
 import { FilterByPipe } from 'ng-pipes';
 import { Subscription } from 'rxjs/Subscription';
-//import _ = require('lodash');
 import { DteThresholdItemComponent } from '../dte-threshold-item/dte-threshold-item.component';
 import { DteInspectionItemComponent } from '../dte-inspection-item/dte-inspection-item.component';
 import { DatePipe } from '@angular/common';
@@ -80,6 +80,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
   });
 
   trackLast: boolean;
+  noOpsSpec: boolean;
   activeTrack: boolean;
 
   constructor(private fb: FormBuilder, private appStateService: AppStateService, private dialogService: DialogService, authService: AuthService, private toastrService: ToastrService, private cd: ChangeDetectorRef) {
@@ -139,6 +140,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
      this.repairInspectionStatus$ = this.appStateService.getRepairInspectionStatus();
      this.status$  = this.appStateService.getDTERepairStatus();
      this.authService.auditDisplayName().take(1).subscribe(u => {this.displayName = u;
+     this.populateTWD()
     });
 
     this.formGroup.get('qcFeedback').valueChanges.filter(v => this.editable).subscribe(val =>  {
@@ -291,6 +293,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
     if (!this.editable) {
          this.formGroup.disable({ emitEvent: false });
     }
+    this.populateTWD();
   }
 
   initAttachment(fileName: string, fileSize: number, filePath: string, attachmentID: number) {
@@ -329,12 +332,14 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
 
   populateTWD() {
 
+    this.noOpsSpec = false;
+    this.trackLast = false;
+
     this.formGroup.get('FHcountDown').reset();
     this.formGroup.get('FCcountDown').reset();
     this.formGroup.get('dueDate').reset();
     this.formGroup.get('dueCycles').reset();
     this.formGroup.get('dueHours').reset();
-    this.trackLast = false;
 
     for (const threshold of this.viewThresholds.itemsFormArray.value) {
 
@@ -356,6 +361,10 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
           if (threshold.wolt === true) {
             this.trackLast = true;
           }
+          if (this.formGroup.get('currentFH').value === '"missing' && this.formGroup.get('currentFC').value === 'missing' ) {
+            this.noOpsSpec = true
+          }
+
         }
       }
 
