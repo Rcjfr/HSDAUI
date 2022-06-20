@@ -251,7 +251,7 @@ export class DamageToleranceEvaluationComponent extends BaseFormComponent implem
         this.formGroup.setControl('inspectionItems', DteInspectionItemsArrayComponent.buildItems([{}]));
         this.formGroup.setControl('monitorItems', DteMonitorItemsArrayComponent.buildItems([{}]));
         this.formGroup.reset({
-          dteStatus: '',
+          dteStatus: '1',
           repairInspectionStatus: '',
           stage1Duration: 6,
           stage1RTSDate: undefined,

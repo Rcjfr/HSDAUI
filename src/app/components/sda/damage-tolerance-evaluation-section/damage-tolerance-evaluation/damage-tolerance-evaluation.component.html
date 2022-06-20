@@ -7,10 +7,10 @@
         <label class="col-sm-4 control-label">Repair:<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="New Repair">
-            <input type="radio" [value]="false" tabindex="88" formControlName="isExistingRepair" />
+            <input type="radio" [value]="false" tabindex="89" formControlName="isExistingRepair" />
           </aac-radio-container>
           <aac-radio-container label="Existing Repair">
-            <input type="radio" [value]="true" tabindex="88" formControlName="isExistingRepair" />
+            <input type="radio" [value]="true" tabindex="89" formControlName="isExistingRepair" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isExistingRepair" class="error">{{displayMessage.isExistingRepair}}</div>
         </div>
@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Total Ship Time:" [message]="displayMessage.totalShipTime">
-        <input type="text" tabindex='89' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
+        <input type="text" tabindex='90' class="form-control" [textMask]="{mask: decimalNumberMask}" formControlName="totalShipTime">
       </aac-field-container>
     </div>
   </div>
@@ -31,7 +31,7 @@
   <div class="row">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Cycles:" [message]="displayMessage.cycles">
-        <input type="text" tabindex='90' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
+        <input type="text" tabindex='91' class="form-control" [textMask]="{mask: numberMask}" formControlName="cycles">
       </aac-field-container>
     </div>
   </div>
@@ -40,7 +40,7 @@
   <div class="row form-group">
     <div class="col-sm-8">
       <aac-field-container [required]="true" labelGridColumnWidth="3" fieldGridColumnWidth="8" label="Repair Insp. Status:" [message]="displayMessage.repairInspectionStatus">
-        <select class="form-control" tabindex='91' formControlName="repairInspectionStatus">
+        <select class="form-control" tabindex='92' formControlName="repairInspectionStatus">
           <option value="">Select Repair Inspection Status</option>
           <option *ngFor="let ac of repairInspectionStatus$ | async" [value]="ac.id">{{ac.description}}</option>
         </select>
@@ -55,10 +55,10 @@
         <label class="col-sm-4 control-label">Fatigue Critical<span class="req">*</span></label>
         <div class="col-sm-8">
           <aac-radio-container label="Yes">
-            <input type="radio" [value]="true" tabindex="92" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="true" tabindex="93" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <aac-radio-container label="No">
-            <input type="radio" [value]="false" tabindex="92" formControlName="isFatigueCritical" />
+            <input type="radio" [value]="false" tabindex="93" formControlName="isFatigueCritical" />
           </aac-radio-container>
           <div *ngIf="displayMessage.isFatigueCritical" class="error">{{displayMessage.isFatigueCritical}}</div>
         </div>
@@ -71,7 +71,7 @@
 
     <div class="col-sm-4">
       <aac-field-container [required]="true" label="Stage 1/RTS Date:" [attr.for]="stage1RTSDate.idDatePicker" [message]="displayMessage.stage1RTSDate">
-        <datetime [timepicker]="false" [tabindex]='93' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
+        <datetime [timepicker]="false" [tabindex]='94' [readonly]="formGroup.get('stage1RTSDate').disabled?true:null" #stage1RTSDate formControlName="stage1RTSDate" [datepicker]="{ icon: 'glyphicon glyphicon-calendar',autoclose:true }"></datetime>
       </aac-field-container>
     </div>
 
