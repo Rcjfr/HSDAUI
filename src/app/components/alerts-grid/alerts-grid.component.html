@@ -27,8 +27,14 @@
         {{record[col.field] | date:'shortDate' }}
       </ng-template>
     </p-column>
-    <p-column field="statusDesc" header="Form Status" [sortable]="true"></p-column>
+    <p-column field="statusDesc" header="Form Status" [sortable]="true" ></p-column>
     <p-column field="station" header="Station" [sortable]="true"></p-column>
+    <p-column field="" header="Description" [sortable]="false">
+      <ng-template let-col let-record="rowData" pTemplate="body">
+        {{(record.repairDescriptionType === 17 ? record.repairDescriptionOtherText : record.repairDescriptionTypeDesc) || record.defectivePartDescription || record.modifiedPartDescription }}
+      </ng-template>
+    </p-column>
+    <p-column field="repairLocation" header="Location" [sortable]="true"></p-column>
     <p-column field="routineNo" header="Routine #" [sortable]="true"></p-column>
     <p-column field="nonRoutineNo" header="Non-Routine #" [sortable]="true"></p-column>
     <ng-template pTemplate="paginatorLeft">

@@ -17,12 +17,8 @@
   <p-column field="id" header="SDA ID" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
       <a title='Export as PDF' href="" (click)="exportPdf([record[col.field]])"><i class="fa fa-file-pdf-o"></i></a>
-      {{record[col.field]}}
-    </ng-template>
-  </p-column>
-  <p-column field="mrtNumber" header="MRT #" [sortable]="true">
-    <ng-template let-col let-record="rowData" pTemplate="body">
-      {{((record[col.field] | number:'6.0') || '').replace(',','') }}
+      <a title='View Current' [routerLink]="['/alerts', record[col.field]]">{{record[col.field]}}</a>
+      <!-- {{record[col.field]}} -->
     </ng-template>
   </p-column>
   <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>

@@ -182,7 +182,7 @@
     </div>
   </div>
 
-  <!-- Zone, Loction, MRO -->
+  <!-- Zone, Legacy EA, MRO -->
   <div class="row">
 
     <div class="col-sm-4">
@@ -191,9 +191,10 @@
       </aac-field-container>
     </div>
     <div class="col-sm-4">
-      <aac-field-container label="Location of Repair:" [message]="displayMessage.repairLocation">
-        <input class="form-control" formControlName="repairLocation" tabindex="110">
+      <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
+        <input class="form-control" formControlName="legacyEA" tabindex="112">
       </aac-field-container>
+
     </div>
     <div class="col-sm-4">
       <aac-field-container label="MRO Documents:" [message]="displayMessage.mroDocuments">
@@ -202,27 +203,24 @@
     </div>
   </div>
 
-  <!-- Legacy EA -->
-  <div class="row">
-    <div class="col-sm-4">
-      <aac-field-container label="Legacy EA:" [message]="displayMessage.legacyEA">
-        <input class="form-control" formControlName="legacyEA" tabindex="112">
-      </aac-field-container>
+    <!-- ATA Codes -->
+    <div class="row">
+      <div class="col-sm-12">
+        <aa-ata-code-wide [parent]="formGroup"
+          [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async"
+          ATACode1Label="ATA Code 1(DTE):" ATACode2Label="ATA Code 2(DTE):"
+          [IsRequired]="false"
+          sectionname="dteSection">
+        </aa-ata-code-wide>
+        </div>
     </div>
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4"></div>
-  </div>
 
-  <!-- ATA Codes -->
+  <!--Loction  -->
   <div class="row">
-
-  <div class="col-sm-4">
-    <aa-ata-code [parent]="formGroup"
-      [sda]="sda" [errorMessages]="displayMessage" [ATACodes]="ATACodes$ | async"
-      ATACode1Label="ATA Code 1(DTE):" ATACode2Label="ATA Code 2(DTE):"
-      [IsRequired]="false"
-      sectionname="dteSection">
-    </aa-ata-code>
+    <div class="col-sm-8">
+      <aac-field-container label="Location of Repair:" labelGridColumnWidth="2" fieldGridColumnWidth="8" [message]="displayMessage.repairLocation">
+        <input class="form-control" formControlName="repairLocation" tabindex="110">
+      </aac-field-container>
     </div>
   </div>
 
@@ -254,8 +252,6 @@
         <div class="row">
 
          <div class="col-sm-12">
-
-          <div class="panel panel-default">
 
           <div class="panel-heading">Time When Due
 
@@ -315,8 +311,6 @@
 
 
           </div>
-
-         </div>
 
          </div>
 

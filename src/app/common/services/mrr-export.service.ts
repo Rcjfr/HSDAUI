@@ -384,6 +384,31 @@ export class MrrExportService {
             this.getLableFieldValue(`ESM Sub/Item #:`, sda.esmSubItemNumber , 50, 65),
           ],
           [
+          {}, {}, {}
+          ],
+          [
+            this.getLableFieldValue(`Component Type:`, sda.componentTypeDesc, 50, 70),
+            this.getLableFieldValue(`Control Order #:`, sda.controlOrderNumber, 50, 60),
+            this.getLableFieldValue(`AAID:`, sda.componentAAID , 50, 65),
+          ],
+          [
+            this.getLableFieldValue(`Component S/N:`, sda.componentSerialNumber, 50, 60),
+            this.getLableFieldValue(`CMB Number:`, sda.cmbNumber, 50, 60),
+            this.getLableFieldValue(`Component For A/C:`, sda.compForAircraft , 50, 80),
+          ],
+          [
+            this.getLableFieldValue(`RSPAM:`, sda.componentRspam, 50, 60),
+            this.getLableFieldValue(`MPN:`, sda.componentMpn, 50, 60),
+            this.getLableFieldValue(`Comp Hours:`, sda.componentHours , 50, 65),
+          ],
+          [
+            this.getLableFieldValue(`Comp Cycles:`, sda.componentCycles, 50, 60),
+            {}, {}
+          ],
+          [
+            {}, {}, {}
+          ],
+          [
              this.getDTEThresholdsConent1(sda)
           ],
           [

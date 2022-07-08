@@ -7,6 +7,7 @@
     <h5 class="pull-right">
       <a href="" (click)="expandCollapseAll(true)" tabindex="11">Expand All</a>
       <a href="" (click)="expandCollapseAll(false)" tabindex="12">Collapse All</a>
+      <button type="button" class="btn btn-default" tabindex="159" (click)="clearFilters()">Clear Filters</button>
     </h5>
   </h1>
   <form novalidate (submit)="searchAlerts()">
@@ -105,7 +106,7 @@
           </div>
           <aa-search-report [(criteria)]="criteria"></aa-search-report>
         </accordion-group>
-      
+
       <accordion-group #faaGroup panelClass="panel-default search-panel" *ngIf="authService.isFaaInspector()| async" [isOpen]="true">
         <div accordion-heading>
           FAA Search

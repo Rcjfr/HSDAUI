@@ -57,6 +57,8 @@ import { CpcpDispositionSectionComponent } from '@app/components/sda/cpcp-dispos
 // Damage Tolerance Evaluation Section
 import { DamageToleranceEvaluationComponent } from '@app/components/sda/damage-tolerance-evaluation-section/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
 
+import { AtaCodeComponentWide} from './damage-tolerance-evaluation-section/ata-code-wide/ata-code-wide.component';
+
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
 
@@ -68,6 +70,7 @@ import { DteMonitorItemsArrayComponent } from '@app/components/sda/damage-tolera
 
 //Repair Details Section
 import { RepairDetailsSectionComponent } from '@app/components/sda/repair-details-section/repair-details-section/repair-details-section.component';
+
 //Current Status Section
 import { CurrentStatusSectionComponent } from '@app/components/sda/current-status-section/current-status-section/current-status-section.component';
 import { DteEngineComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-engine/dte-engine.component';
@@ -95,6 +98,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
+    AtaCodeComponentWide,
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
@@ -121,6 +125,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
+    AtaCodeComponentWide,
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
@@ -143,7 +148,6 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     DteMonitorItemsArrayComponent,
     DteComponentComponent,
     DteEngineComponent
-
   ],
   providers: []
 })
