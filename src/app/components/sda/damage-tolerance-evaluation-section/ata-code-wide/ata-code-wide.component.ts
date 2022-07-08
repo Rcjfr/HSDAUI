@@ -13,7 +13,7 @@ import { AuthService } from '@app/common/services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AtaCodeComponentWide extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
+export class AtaCodeWideComponent extends BaseFormComponent implements OnInit, OnDestroy, OnChanges {
   @Input() ATACodes: models.IATACode[];
   @Input() ATACode1Label = 'ATA Code 1';
   @Input() ATACode2Label = 'ATA Code 2';

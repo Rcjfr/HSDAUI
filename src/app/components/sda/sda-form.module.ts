@@ -57,7 +57,7 @@ import { CpcpDispositionSectionComponent } from '@app/components/sda/cpcp-dispos
 // Damage Tolerance Evaluation Section
 import { DamageToleranceEvaluationComponent } from '@app/components/sda/damage-tolerance-evaluation-section/damage-tolerance-evaluation/damage-tolerance-evaluation.component';
 
-import { AtaCodeComponentWide} from './damage-tolerance-evaluation-section/ata-code-wide/ata-code-wide.component';
+import { AtaCodeWideComponent} from './damage-tolerance-evaluation-section/ata-code-wide/ata-code-wide.component';
 
 import { DteThresholdItemComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-item/dte-threshold-item.component';
 import { DteThresholdItemsArrayComponent } from '@app/components/sda/damage-tolerance-evaluation-section/dte-threshold-items-array/dte-threshold-items-array.component';
@@ -98,7 +98,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
-    AtaCodeComponentWide,
+    AtaCodeWideComponent,
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
@@ -125,7 +125,7 @@ import { DteComponentComponent } from '@app/components/sda/damage-tolerance-eval
     ScheduledMaintenanceSectionComponent,
     UnscheduledMaintenanceSectionComponent,
     AtaCodeComponent,
-    AtaCodeComponentWide,
+    AtaCodeWideComponent,
     PreciseLocationGroupComponent,
     CpcpSectionComponent,
     CauseOfDamageGroupComponent,
