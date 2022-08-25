@@ -241,6 +241,7 @@ export class MrrExportService {
         },
         this.getAircraftInfo(sda),
         this.getRepairDetails(sda),
+        this.getComponentDetails(sda),
         this.getDTESection(sda),
       );
 
@@ -299,6 +300,41 @@ export class MrrExportService {
   return generalSection;
   }
 
+  getComponentDetails(sda: ISdaListView) {
+    return {
+      //layout: 'noBorders',
+      margin: [0, 3, 0, 0],
+      table: {
+        fontSize: 6,
+        widths: ['33%', '33%', '34%'],
+        headerRows: 1,
+        body: [
+          [{
+            text: 'Component Details',
+            style: 'sectionHeader',
+            colSpan: 3,
+            margin: [1, 1, 1, 1]
+          }, {}, {}],      
+          [
+            this.getLableFieldValue(`Component Type:`, sda.componentTypeDesc, 50, 70),
+            this.getLableFieldValue(`MPN:`, sda.componentMpn, 50, 60),
+            this.getLableFieldValue(`S/N:`, sda.componentSerialNumber, 50, 60),
+          ],
+          [
+            this.getLableFieldValue(`Rotable Part#:`, sda.componentRspam , 50, 65),
+            this.getLableFieldValue(`Comp Hours:`, sda.componentHours , 50, 65),
+            this.getLableFieldValue(`Comp Cycles:`, sda.componentCycles, 50, 60),      
+          ],
+          [
+            this.getLableFieldValue(`For A/C:`, sda.compForAircraft , 50, 80),
+            this.getLableFieldValue(`Control Order #:`, sda.controlOrderNumber, 50, 60),
+            {}
+          ],
+        ]
+      }
+    };
+  }
+
   getRepairDetails(sda: ISdaListView) {
     return {
       //layout: 'noBorders',
@@ -355,7 +391,7 @@ export class MrrExportService {
 
   getDTESection(sda: ISdaListView) {
     const content = {
-    layout: 'noBorders',
+    //layout: 'noBorders',
       margin: [0, 5, 0, 0],
       table: {
         fontSize: 6,
@@ -374,46 +410,23 @@ export class MrrExportService {
             this.getLableFieldValue(`Fatigue Critical:`, sda.isFatigueCritical ? 'Yes' : 'No', 50, 65),
           ],
           [
-            this.getLableFieldValue(`Stage 1/RTS Date:`, sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY')  : ' ', 50, 60),
-            this.getLableFieldValue(`Stage 2 Date:`, sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY')  : ' ', 50, 60),
+            this.getLableFieldValue(`Stage 1/RTS Date:`, sda.stage1RTSDate ? moment(sda.stage1RTSDate).format('MM/DD/YYYY')  : ' ', 50, 70),
+            this.getLableFieldValue(`Stage 2 Date:`, sda.stage2Date ? moment(sda.stage2Date).format('MM/DD/YYYY')  : ' ', 50, 65),
             this.getLableFieldValue(`Stage 3 Date:`, sda.stage3Date ? moment(sda.stage3Date).format('MM/DD/YYYY')  : ' ', 50, 65),
           ],
           [
-            this.getLableFieldValue(`SR #:`, sda.srNumber, 50, 60),
-            this.getLableFieldValue(`RDAS #:`, sda.rdasNumber, 50, 60),
+            this.getLableFieldValue(`Message #:`, sda.srNumber, 50, 60),
+            this.getLableFieldValue(`Approval Document:  `, sda.rdasNumber, 50, 75),
             this.getLableFieldValue(`ESM Sub/Item #:`, sda.esmSubItemNumber , 50, 65),
-          ],
-          [
-          {}, {}, {}
-          ],
-          [
-            this.getLableFieldValue(`Component Type:`, sda.componentTypeDesc, 50, 70),
-            this.getLableFieldValue(`Control Order #:`, sda.controlOrderNumber, 50, 60),
-            this.getLableFieldValue(`AAID:`, sda.componentAAID , 50, 65),
-          ],
-          [
-            this.getLableFieldValue(`Component S/N:`, sda.componentSerialNumber, 50, 60),
-            this.getLableFieldValue(`CMB Number:`, sda.cmbNumber, 50, 60),
-            this.getLableFieldValue(`Component For A/C:`, sda.compForAircraft , 50, 80),
-          ],
-          [
-            this.getLableFieldValue(`RSPAM:`, sda.componentRspam, 50, 60),
-            this.getLableFieldValue(`MPN:`, sda.componentMpn, 50, 60),
-            this.getLableFieldValue(`Comp Hours:`, sda.componentHours , 50, 65),
-          ],
-          [
-            this.getLableFieldValue(`Comp Cycles:`, sda.componentCycles, 50, 60),
-            {}, {}
-          ],
-          [
-            {}, {}, {}
           ],
           [
              this.getDTEThresholdsConent1(sda)
           ],
+
           [
             this.getDTEInspectionsContent1(sda)
           ],
+
           [
             this.getDTEMonitorItemsConent1(sda)
           ],
@@ -431,25 +444,24 @@ export class MrrExportService {
         ]
       }
     };
-
     return content;
   }
 
   getDTEThresholdsConent1(sda: ISdaListView) {
     const content = {
+      fillColor: '#eeeeee',
       colSpan: 3,
-      margin: 0,
-      layout: 'noBorders',
+      margin: [ 0, 10, 0, 10 ],
       table: {
       style: 'regular',
       widths: ['33%', '33%', '34%'],
-      body: [ ]
+       body: [ ],
       }
     };
+  
+     content.table.body.push([{ text: 'DTE Thresholds', style: 'regular', colspan: 3}, {}, {}])
 
-     content.table.body.push([{ text: 'DTE Thresholds', style: 'regular'}, {}, {}])
-
-    if (sda.dteThresholdH1 || sda.dteThresholdC1 || sda.dteThresholdDate1 || sda.dteThresholdStage1Duration1) {
+     if (sda.dteThresholdH1 || sda.dteThresholdC1 || sda.dteThresholdDate1 || sda.dteThresholdStage1Duration1) {
       content.table.body.push( [ this.getLableFieldValue('1. TFH:', sda.dteThresholdH1 != null ? sda.dteThresholdH1 : ' ', 50 , 40), this.getLableFieldValue('TFC:', sda.dteThresholdC1 != null ? sda.dteThresholdC1 : ' ' , 50 , 40), this.getLableFieldValue('Date:', sda.dteThresholdDate1 != null ? this.pipe.transform(sda.dteThresholdDate1, 'MM-dd-yyyy') : '' , 50 , 60) ] )
     }
     if (sda.dteThresholdH2 || sda.dteThresholdC2 || sda.dteThresholdDate2) {
@@ -464,7 +476,6 @@ export class MrrExportService {
     if (sda.dteThresholdH5 || sda.dteThresholdC5 || sda.dteThresholdDate5) {
       content.table.body.push( [ this.getLableFieldValue('5. TFH:', sda.dteThresholdH5, 50, 40), this.getLableFieldValue('TFC:', sda.dteThresholdC5, 50, 40), this.getLableFieldValue('Date:', this.pipe.transform(sda.dteThresholdDate5, 'MM-dd-yyyy') , 50 , 60)])
     }
-
     if (content.table.body.length === 0) {
       content.table.body.push([{}, {}, {}])
     }
@@ -475,90 +486,86 @@ export class MrrExportService {
   getDTEInspectionsContent1(sda: ISdaListView) {
     const content = {
       colSpan: 3,
-      margin: 0,
-      layout: 'noBorders',
+      margin: [ 0, 10, 0, 10 ],
+      //layout: 'noBorders',
       table: {
         style: 'regular',
-        widths: ['2%', '9%', '9%', '9%', '11%', '8%', '9%', '9%', '11%', '23%'],
-        //colSpan: 5,
+        colSpan: 3,
+        widths: ['2%', '9%', '9%', '11%', '9%', '9%', '11%', '30%', '10%'],
         body: [ ]
       }
     };
+     
+    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular' , colSpan: 9} , {} , {} , {} , {} , {} , {} , {} , {} ] )
+    content.table.body.push( [ {} , { text: 'Thresholds' , style: 'regular', colSpan:3 } , {} , {}  , { text: 'Intervals' , style: 'regular' , colSpan:3 } , {} , {} , { text: 'Inspection Method' , style: 'regular', alignment: 'center' } , { text: 'WOL' , style: 'regular', alignment: 'center' } ] )
 
-    content.table.body.push( [ { text: 'DTE Inspections' , style: 'regular' , colSpan: 10} , {} , {} , {} , {} , {} , {} , {} , {} , {} ] )
-
-    if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1) {
+    if (sda.dteInspectionThresholdTFH1 || sda.dteInspectionThresholdTFC1 || sda.dteThresholdTimeSpanDesc1 || sda.dteInspectionIntervalTFH1 || sda.dteInspectionIntervalTFC1 || sda.dteInspectionIntervalSpan1 || sda.dteInspectionMethod1 || sda.wolI1) {
       content.table.body.push([
         {text: '1.', style: 'regular'},
-        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH1 != null ?  sda.dteInspectionThresholdTFH1 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC1 != null ?  sda.dteInspectionThresholdTFC1 : ' ' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionThresholdSpan1 != null ?  sda.dteInspectionThresholdSpan1 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc1) : ' ' , 5 , 10),
-        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH1 != null ?  sda.dteInspectionIntervalTFH1 : ' ' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC1 != null ?  sda.dteInspectionIntervalTFC1 : ' ' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionIntervalSpan1 != null ?  sda.dteInspectionIntervalSpan1 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc1) : ' ' , 5 , 10),
-        this.getLableFieldValue('', sda.dteInspectionMethod1, 10, 20 )
+        this.getLableFieldValue('', sda.dteInspectionMethod1, 50, 20 ),
+        this.getLableFieldValue('', sda.wolI1 ?  'X' : ' ', 20, 20 )
       ])
-          }
-    if (sda.dteInspectionThresholdTFH2 || sda.dteInspectionThresholdTFC2 || sda.dteThresholdTimeSpanDesc2 || sda.dteInspectionIntervalTFH2 || sda.dteInspectionIntervalTFC2 || sda.dteIntervalTimeSpanDesc2 || sda.dteInspectionMethod2) {
+    }
+    if (sda.dteInspectionThresholdTFH2 || sda.dteInspectionThresholdTFC2 || sda.dteThresholdTimeSpanDesc2 || sda.dteInspectionIntervalTFH2 || sda.dteInspectionIntervalTFC2 || sda.dteIntervalTimeSpanDesc2 || sda.dteInspectionMethod2 || sda.wolI2) {
       content.table.body.push([
         {text: '2.', style: 'regular'},
-        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH2 != null ?  sda.dteInspectionThresholdTFH2 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC2 != null ?  sda.dteInspectionThresholdTFC2 : ' ' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionThresholdSpan2 != null ?  sda.dteInspectionThresholdSpan2 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc2) : ' ' , 5 , 10),
-        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH2 != null ?  sda.dteInspectionIntervalTFH2 : ' ' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC2 != null ?  sda.dteInspectionIntervalTFC2 : ' ' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionIntervalSpan2 != null ?  sda.dteInspectionIntervalSpan2 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc2) : ' ' , 5 , 10),
-        this.getLableFieldValue('', sda.dteInspectionMethod2, 10, 20 )
+        this.getLableFieldValue('', sda.dteInspectionMethod2, 10, 20 ),
+        this.getLableFieldValue('', sda.wolI2 ?  'X' : ' ', 10, 20 )      
       ])
     }
-    if (sda.dteInspectionThresholdTFH3 || sda.dteInspectionThresholdTFC3 || sda.dteThresholdTimeSpanDesc3 || sda.dteInspectionIntervalTFH3 || sda.dteInspectionIntervalTFC3 || sda.dteIntervalTimeSpanDesc3 || sda.dteInspectionMethod3) {
+    if (sda.dteInspectionThresholdTFH3 || sda.dteInspectionThresholdTFC3 || sda.dteThresholdTimeSpanDesc3 || sda.dteInspectionIntervalTFH3 || sda.dteInspectionIntervalTFC3 || sda.dteIntervalTimeSpanDesc3 || sda.dteInspectionMethod3  || sda.wolI3) {
       content.table.body.push([
         {text: '3.', style: 'regular'},
-        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH3 != null ?  sda.dteInspectionThresholdTFH3 : ' ' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC3 != null ?  sda.dteInspectionThresholdTFC3 : ' ' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionThresholdSpan3 != null ?  sda.dteInspectionThresholdSpan3 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc3) : ' ' , 5 , 10),
-        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH3 != null ?  sda.dteInspectionIntervalTFH3 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC3 != null ?  sda.dteInspectionIntervalTFC3 : '' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionIntervalSpan3 != null ?  sda.dteInspectionIntervalSpan3 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc3) : ' ' , 5 , 10),
-        this.getLableFieldValue('', sda.dteInspectionMethod3, 10, 20 )
+        this.getLableFieldValue('', sda.dteInspectionMethod3, 10, 20 ),
+        this.getLableFieldValue('', sda.wolI3 ?  'X' : ' ', 10, 20 )       
       ])
     }
-    if (sda.dteInspectionThresholdTFH4 || sda.dteInspectionThresholdTFC4 || sda.dteThresholdTimeSpanDesc4 || sda.dteInspectionIntervalTFH4 || sda.dteInspectionIntervalTFC4 || sda.dteIntervalTimeSpanDesc4 || sda.dteInspectionMethod4) {
+    if (sda.dteInspectionThresholdTFH4 || sda.dteInspectionThresholdTFC4 || sda.dteThresholdTimeSpanDesc4 || sda.dteInspectionIntervalTFH4 || sda.dteInspectionIntervalTFC4 || sda.dteIntervalTimeSpanDesc4 || sda.dteInspectionMethod4  || sda.wolI4) {
       content.table.body.push([
         {text: '4.', style: 'regular'},
-        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH4 != null ?  sda.dteInspectionThresholdTFH4 : '' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC4 != null ?  sda.dteInspectionThresholdTFC4 : '' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionThresholdSpan4 != null ?  sda.dteInspectionThresholdSpan4 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc4) : ' ' , 5 , 10),
-        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH4 != null ?  sda.dteInspectionIntervalTFH4 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC4 != null ?  sda.dteInspectionIntervalTFC4 : '' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionIntervalSpan4 != null ?  sda.dteInspectionIntervalSpan4 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc4) : ' ' , 5 , 10),
-        this.getLableFieldValue('', sda.dteInspectionMethod4, 10, 20 )
+        this.getLableFieldValue('', sda.dteInspectionMethod4, 10, 20 ),
+        this.getLableFieldValue('', sda.wolI4 ?  'X' : ' ', 10, 20 )
       ])
     }
-    if (sda.dteInspectionThresholdTFH5 || sda.dteInspectionThresholdTFC5 || sda.dteThresholdTimeSpanDesc5 || sda.dteInspectionIntervalTFH5 || sda.dteInspectionIntervalTFC5 || sda.dteIntervalTimeSpanDesc5 || sda.dteInspectionMethod5) {
+    if (sda.dteInspectionThresholdTFH5 || sda.dteInspectionThresholdTFC5 || sda.dteThresholdTimeSpanDesc5 || sda.dteInspectionIntervalTFH5 || sda.dteInspectionIntervalTFC5 || sda.dteIntervalTimeSpanDesc5 || sda.dteInspectionMethod5  || sda.wolI5) {
       content.table.body.push([
         {text: '5.', style: 'regular'},
-        {text: 'Threshold -', style: 'regular'},
         this.getLableFieldValue('TFH:', sda.dteInspectionThresholdTFH5 != null ?  sda.dteInspectionThresholdTFH5 : '' , 10 , 20),
         this.getLableFieldValue('TFC:', sda.dteInspectionThresholdTFC5 != null ?  sda.dteInspectionThresholdTFC5 : '' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionThresholdSpan5 != null ?  sda.dteInspectionThresholdSpan5 + ' ' + this.getSpanDesc(sda.dteThresholdTimeSpanDesc5) : ' ' , 5 , 10),
-        {text: 'Interval -', style: 'regular'},
         this.getLableFieldValue('FH:', sda.dteInspectionIntervalTFH5 != null ?  sda.dteInspectionIntervalTFH5 : '' , 10 , 20),
         this.getLableFieldValue('FC:', sda.dteInspectionIntervalTFC5 != null ?  sda.dteInspectionIntervalTFC5 : '' , 10 , 20),
         this.getLableFieldValue('', sda.dteInspectionIntervalSpan5 != null ?  sda.dteInspectionIntervalSpan5 + ' ' + this.getSpanDesc(sda.dteIntervalTimeSpanDesc5) : ' ' , 5 , 10),
-        this.getLableFieldValue('', sda.dteInspectionMethod5, 10, 20 )
+        this.getLableFieldValue('', sda.dteInspectionMethod5, 10, 20 ),
+        this.getLableFieldValue('', sda.wolI5 ?  'X' : ' ', 10, 20 )
       ])
     }
     if (content.table.body.length === 0) {
-      content.table.body.push([{}, {} , {} , {} , {} , {} , {} , {} , {} , {} , {}])
+      content.table.body.push([{}, {} , {} , {} , {} , {} , {} , {} , {} ])
     }
 
     return content;
@@ -610,7 +617,7 @@ export class MrrExportService {
 
     if (sda.dteMonitorItem1 ) {
       content.table.body.push([
-        this.getLableFieldValue('FMR/Logpage/MON1:', sda.dteMonitorItem1, 490, 80)])
+        this.getLableFieldValue('Tracking Document:', sda.dteMonitorItem1, 490, 80)])
     }
     if (sda.dteMonitorItem2 ) {
       content.table.body.push([
@@ -670,6 +677,7 @@ export class MrrExportService {
   getMrrUpdated(sda: ISdaListView) {
     const content = {
       colSpan: 3,
+      layout: 'noBorders',
       margin: 0,
       table: {
         style: 'regular',
@@ -687,6 +695,7 @@ export class MrrExportService {
     return content;
 
   }
+
   getLableFieldValue(label: string, val: number | string, maxLength: number = 68, labelLength: number = 0 ) {
     return {
       columns: [

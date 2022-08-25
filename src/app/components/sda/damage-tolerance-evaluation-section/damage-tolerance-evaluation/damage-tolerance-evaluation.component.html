@@ -92,26 +92,27 @@
   <!-- SDR Number -->
   <div class="row">
     <div class="col-sm-4">
-      <aac-field-container label="SR #:" [message]="displayMessage.srNumber">
+      <aac-field-container label="Message #:" [message]="displayMessage.srNumber">
         <input class="form-control" formControlName="srNumber" tabindex="97">
       </aac-field-container>
     </div>
 
-    <div class="col-sm-4">
-      <aac-field-container label="Dossier #:" [message]="displayMessage.rdasNumber">
+    <div class="col-sm-8">
+      <aac-field-container label="Approval Document:" labelGridColumnWidth="2" fieldGridColumnWidth="10" [message]="displayMessage.rdasNumber">
         <input class="form-control" formControlName="rdasNumber" tabindex="98">
       </aac-field-container>
     </div>
 
-    <div class="col-sm-4">
+    <!-- <div class="col-sm-4">
       <aac-field-container label="ETD #:" [message]="displayMessage.etdNumber">
         <input class="form-control" formControlName="etdNumber" tabindex="99">
       </aac-field-container>
-    </div>
+    </div> -->
 
   </div>
 
   <!-- ESM, Task Card, Repair Date -->
+  
   <div class="row">
 
     <div class="col-sm-4">
@@ -119,6 +120,7 @@
         <input class="form-control" formControlName="esmSubItemNumber" tabindex="100">
       </aac-field-container>
     </div>
+
 
     <div class="col-sm-4">
       <aac-field-container label="Task Card #:" [message]="displayMessage.taskCardNo">
@@ -217,8 +219,8 @@
 
   <!--Loction  -->
   <div class="row">
-    <div class="col-sm-8">
-      <aac-field-container label="Location of Repair:" labelGridColumnWidth="2" fieldGridColumnWidth="8" [message]="displayMessage.repairLocation">
+    <div class="col-sm-12">
+      <aac-field-container label="Location of Repair:" labelGridColumnWidth="1" fieldGridColumnWidth="11" [message]="displayMessage.repairLocation">
         <input class="form-control" formControlName="repairLocation" tabindex="110">
       </aac-field-container>
     </div>
@@ -315,8 +317,6 @@
          </div>
 
         </div>
-
-
 
         <aa-dte-monitor-items-array formArrayName="monitorItems"
                                     [editable]="editable"

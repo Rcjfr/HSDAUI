@@ -21,8 +21,8 @@
       <!-- {{record[col.field]}} -->
     </ng-template>
   </p-column>
-  <p-column field="aircraftNo" header="AC Nose #" [sortable]="true"></p-column>
-  <p-column field="createDate" header="Date" [sortable]="true">
+  <p-column field="aircraftNo" header="Aircraft #" [sortable]="true"></p-column>
+  <p-column field="repairDate" header="Repair Date" [sortable]="true">
     <ng-template let-col let-record="rowData" pTemplate="body">
       {{record[col.field] | date:'shortDate' }}
     </ng-template>

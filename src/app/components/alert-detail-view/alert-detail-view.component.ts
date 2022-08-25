@@ -499,7 +499,7 @@ export class AlertDetailViewComponent implements OnInit, AfterContentInit, OnDes
       return;
     }
     this.saveAlertData();
-    this.saveDTESectionDetails = false;
+    this.saveDTESectionDetails = true;
   }
 
   saveAlertData(sdrRequested = false) {
